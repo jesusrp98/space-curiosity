@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 
-import '../../common_widgets/counter_list_tile.dart';
-import '../../common_widgets/list_items_builder.dart';
-import '../../models/counter.dart';
 import '../../data/database.dart';
+import '../../models/counter.dart';
+import '../../widgets/counter_list_tile.dart';
+import '../../widgets/list_items_builder.dart';
 
 class NewsPage extends StatelessWidget {
   NewsPage({this.database});

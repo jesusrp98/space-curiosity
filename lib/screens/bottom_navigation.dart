@@ -42,11 +42,7 @@ class BottomNavigationState extends State<BottomNavigation> {
     }
   }
 
-  _updateCurrentItem(TabItem item) {
-    setState(() {
-      currentItem = item;
-    });
-  }
+  _updateCurrentItem(TabItem item) => setState(() => currentItem = item);
 
   @override
   Widget build(BuildContext context) {
