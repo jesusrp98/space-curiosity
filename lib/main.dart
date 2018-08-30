@@ -4,6 +4,10 @@ import 'screens/bottom_navigation.dart';
 import 'util/colors.dart';
 import 'util/localization.dart';
 
+import 'screens/tabs/space_x/home_page.dart';
+import 'screens/tabs/nasa/home_page.dart';
+import 'screens/tabs/news.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -22,13 +26,18 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: ScopedModelLocalizations().appTitle,
-      theme: _buildThemeData(),
-      home: BottomNavigation(),
-      localizationsDelegates: [
-        ScopedModelLocalizationsDelegate(),
-      ],
-      debugShowCheckedModeBanner: false,
-    );
+        title: ScopedModelLocalizations().appTitle,
+        theme: _buildThemeData(),
+        home: BottomNavigation(),
+        localizationsDelegates: [
+          ScopedModelLocalizationsDelegate(),
+        ],
+        debugShowCheckedModeBanner: false,
+        routes: <String, WidgetBuilder>{
+          "/home": (BuildContext context) => BottomNavigation(),
+          "/space_x": (BuildContext context) => SpaceXHomePage(),
+          "/nasa": (BuildContext context) => NasaHomePage(),
+          "/news": (BuildContext context) => NewsHomePage(),
+        });
   }
 }

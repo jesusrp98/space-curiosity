@@ -19,7 +19,6 @@ String tabItemName(TabItem tabItem) {
   switch (tabItem) {
     case TabItem.news:
       return "News";
-
     case TabItem.spaceX:
       return "Space X";
     case TabItem.nasa:
@@ -41,7 +40,6 @@ class BottomNavigationState extends State<BottomNavigation> {
       case 0:
         _updateCurrentItem(TabItem.news);
         break;
-
       case 1:
         _updateCurrentItem(TabItem.spaceX);
         break;
@@ -68,9 +66,8 @@ class BottomNavigationState extends State<BottomNavigation> {
       case TabItem.news:
         return ScopedModel<CountersModel>(
           model: CountersModel(stream: stream),
-          child: NewsPage(database: database),
+          child: NewsHomePage(database: database),
         );
-
       case TabItem.spaceX:
         return SpaceXHomePage();
       case TabItem.nasa:
@@ -84,7 +81,6 @@ class BottomNavigationState extends State<BottomNavigation> {
       type: BottomNavigationBarType.fixed,
       items: [
         _buildItem(icon: Icons.description, tabItem: TabItem.news),
-        // _buildItem(icon: Icons.new_releases, tabItem: TabItem.facts),
         _buildItem(icon: Icons.info, tabItem: TabItem.spaceX),
         _buildItem(icon: FontAwesomeIcons.spaceShuttle, tabItem: TabItem.nasa),
       ],

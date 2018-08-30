@@ -6,8 +6,8 @@ import '../../models/counter.dart';
 import '../../widgets/counter_list_tile.dart';
 import '../../widgets/list_items_builder.dart';
 
-class NewsPage extends StatelessWidget {
-  NewsPage({this.database});
+class NewsHomePage extends StatelessWidget {
+  NewsHomePage({this.database});
   final Database database;
 
   void _createCounter() async {
