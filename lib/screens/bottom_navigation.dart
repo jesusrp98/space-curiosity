@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 import 'package:scoped_model/scoped_model.dart';
+import 'space_x/home_page.dart';
 
 import '../models/counter.dart';
 import '../data/database.dart';
@@ -11,6 +12,7 @@ import 'tabs/facts.dart';
 enum TabItem {
   news,
   facts,
+  spaceX,
 }
 
 String tabItemName(TabItem tabItem) {
@@ -19,6 +21,8 @@ String tabItemName(TabItem tabItem) {
       return "News";
     case TabItem.facts:
       return "Facts";
+    case TabItem.spaceX:
+      return "Space X";
   }
   return null;
 }
@@ -38,6 +42,9 @@ class BottomNavigationState extends State<BottomNavigation> {
         break;
       case 1:
         _updateCurrentItem(TabItem.facts);
+        break;
+      case 2:
+        _updateCurrentItem(TabItem.spaceX);
         break;
     }
   }
@@ -66,6 +73,8 @@ class BottomNavigationState extends State<BottomNavigation> {
           model: CountersModel(stream: stream),
           child: FactsPage(database: database),
         );
+      case TabItem.spaceX:
+        return HomePage();
     }
     return Container();
   }
@@ -76,6 +85,7 @@ class BottomNavigationState extends State<BottomNavigation> {
       items: [
         _buildItem(icon: Icons.description, tabItem: TabItem.news),
         _buildItem(icon: Icons.new_releases, tabItem: TabItem.facts),
+        _buildItem(icon: Icons.info, tabItem: TabItem.spaceX),
       ],
       onTap: _onSelectTab,
     );
@@ -98,6 +108,7 @@ class BottomNavigationState extends State<BottomNavigation> {
   }
 
   Color _colorTabMatching({TabItem item}) {
-    return currentItem == item ? Theme.of(context).primaryColor : Colors.grey;
+    // return currentItem == item ? Theme.of(context).primaryColor : Colors.grey;
+    return currentItem == item ? Colors.orange : Colors.grey;
   }
 }

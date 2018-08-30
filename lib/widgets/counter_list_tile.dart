@@ -3,7 +3,12 @@ import 'package:flutter/material.dart';
 import '../data/database.dart';
 
 class CounterListTile extends StatelessWidget {
-  CounterListTile({this.key, this.counter, this.onDecrement, this.onIncrement, this.onDismissed});
+  CounterListTile(
+      {this.key,
+      this.counter,
+      this.onDecrement,
+      this.onIncrement,
+      this.onDismissed});
   final Key key;
   final Counter counter;
   final ValueChanged<Counter> onDecrement;
@@ -53,7 +58,8 @@ class CounterActionButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return CircleAvatar(
       radius: 28.0,
-      backgroundColor: Theme.of(context).primaryColor,
+      // backgroundColor: Theme.of(context).primaryColor,
+      backgroundColor: Colors.orange,
       child: IconButton(
         icon: Icon(iconData, size: 28.0),
         color: Colors.black,

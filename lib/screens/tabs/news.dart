@@ -39,6 +39,7 @@ class NewsPage extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: _createCounter,
+        backgroundColor: Colors.orange,
       ),
     );
   }

@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'screens/bottom_navigation.dart';
 import 'utils/colors.dart';
 
-void main() => runApp(new MyApp());
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-   ThemeData _buildThemeData() => ThemeData(
+  ThemeData _buildThemeData() => ThemeData(
         brightness: Brightness.dark,
         fontFamily: 'ProductSans',
         primaryColor: primaryColor,
@@ -22,8 +22,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Space News!',
-      theme:  _buildThemeData(),
+      theme: _buildThemeData(),
       home: BottomNavigation(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
