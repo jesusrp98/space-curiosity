@@ -2,22 +2,23 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:share/share.dart';
-import 'package:space_news/screens/tabs/nasa/globals.dart' as globals;
+import 'package:url_launcher/url_launcher.dart';
 
-class ImageDetailsPage extends StatefulWidget {
-  @override
-  _ImageDetailsPageState createState() => new _ImageDetailsPageState();
-}
+class ImageDetailsPage extends StatelessWidget {
+  final String title, imageUrl, hdImageUrl, dateCreated, description;
+  ImageDetailsPage(
+      {this.description,
+      this.dateCreated,
+      this.hdImageUrl,
+      this.imageUrl,
+      this.title});
 
-class _ImageDetailsPageState extends State<ImageDetailsPage> {
-  String title = globals.title;
-  String imageUrl = globals.imageurl;
-  String hdImageUrl = globals.hdimageurl;
-  String dateCreated = globals.datecreated;
-  String description = globals.description;
-
-  Future openImage(String image) async {
-    globals.Utility.launchURL(image);
+  Future openImage(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 
   @override
