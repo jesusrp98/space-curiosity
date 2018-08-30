@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../services/database.dart';
+import '../data/database.dart';
 
 class CounterListTile extends StatelessWidget {
   CounterListTile({this.key, this.counter, this.onDecrement, this.onIncrement, this.onDismissed});

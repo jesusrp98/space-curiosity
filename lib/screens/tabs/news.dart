@@ -1,24 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 
-import '../common_widgets/counter_list_tile.dart';
-import '../common_widgets/list_items_builder.dart';
-import '../models/counter.dart';
-import '../services/database.dart';
+import '../../common_widgets/counter_list_tile.dart';
+import '../../common_widgets/list_items_builder.dart';
+import '../../models/counter.dart';
+import '../../data/database.dart';
 
-// class CountersModel extends Model {
-//   CountersModel({Stream<List<Counter>> stream}) {
-//     stream.listen((counters) {
-//       this.counters = counters;
-//       notifyListeners();
-//     });
-//   }
-
-//   List<Counter> counters;
-// }
-
-class ScopedModelPage extends StatelessWidget {
-  ScopedModelPage({this.database});
+class NewsPage extends StatelessWidget {
+  NewsPage({this.database});
   final Database database;
 
   void _createCounter() async {
@@ -43,7 +32,7 @@ class ScopedModelPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Scoped model'),
+        title: Text('News'),
         elevation: 1.0,
       ),
       body: _buildContent(),

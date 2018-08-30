@@ -3,7 +3,7 @@ import 'dart:async';
 
 import 'package:scoped_model/scoped_model.dart';
 
-import '../services/database.dart';
+import '../data/database.dart';
 
 class CountersModel extends Model {
   CountersModel({Stream<List<Counter>> stream}) {

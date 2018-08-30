@@ -4,28 +4,21 @@ import 'package:redux/redux.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import '../models/counter.dart';
-import '../services/database.dart';
-import 'redux_page.dart';
-import 'scoped_model_page.dart';
-
+import '../data/database.dart';
+import 'tabs/news.dart';
+import 'tabs/facts.dart';
 
 enum TabItem {
-  setState,
-  streams,
-  scoped,
-  redux,
+  news,
+  facts,
 }
 
 String tabItemName(TabItem tabItem) {
   switch (tabItem) {
-    case TabItem.setState:
-      return "setState";
-    case TabItem.streams:
-      return "streams";
-    case TabItem.scoped:
-      return "scoped";
-    case TabItem.redux:
-      return "redux";
+    case TabItem.news:
+      return "News";
+    case TabItem.facts:
+      return "Facts";
   }
   return null;
 }
@@ -36,21 +29,15 @@ class BottomNavigation extends StatefulWidget {
 }
 
 class BottomNavigationState extends State<BottomNavigation> {
-  TabItem currentItem = TabItem.setState;
+  TabItem currentItem = TabItem.news;
 
   _onSelectTab(int index) {
     switch (index) {
       case 0:
-        _updateCurrentItem(TabItem.setState);
+        _updateCurrentItem(TabItem.news);
         break;
       case 1:
-        _updateCurrentItem(TabItem.streams);
-        break;
-      case 2:
-        _updateCurrentItem(TabItem.scoped);
-        break;
-      case 3:
-        _updateCurrentItem(TabItem.redux);
+        _updateCurrentItem(TabItem.facts);
         break;
     }
   }
@@ -73,26 +60,15 @@ class BottomNavigationState extends State<BottomNavigation> {
     var database = AppFirestore();
     var stream = database.countersStream();
     switch (currentItem) {
-      case TabItem.setState:
-        // return SetStatePage(database: database, stream: stream);
-      case TabItem.streams:
-        // return StreamsPage(database: database, stream: stream);
-      case TabItem.scoped:
+      case TabItem.news:
         return ScopedModel<CountersModel>(
           model: CountersModel(stream: stream),
-          child: ScopedModelPage(database: database),
+          child: NewsPage(database: database),
         );
-      case TabItem.redux:
-        var middleware = CountersMiddleware(database: database, stream: stream);
-        var store = Store<ReduxModel>(
-          reducer,
-          initialState: ReduxModel(counters: null),
-          middleware: [ middleware ],
-        );
-        middleware.listen(store);
-        return StoreProvider(
-          store: store,
-          child: ReduxPage(),
+      case TabItem.facts:
+        return ScopedModel<CountersModel>(
+          model: CountersModel(stream: stream),
+          child: FactsPage(database: database),
         );
     }
     return Container();
@@ -102,10 +78,8 @@ class BottomNavigationState extends State<BottomNavigation> {
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
       items: [
-        _buildItem(icon: Icons.adjust, tabItem: TabItem.setState),
-        _buildItem(icon: Icons.clear_all, tabItem: TabItem.streams),
-        _buildItem(icon: Icons.arrow_downward, tabItem: TabItem.scoped),
-        _buildItem(icon: Icons.settings_input_component, tabItem: TabItem.redux),
+        _buildItem(icon: Icons.description, tabItem: TabItem.news),
+        _buildItem(icon: Icons.new_releases, tabItem: TabItem.facts),
       ],
       onTap: _onSelectTab,
     );
