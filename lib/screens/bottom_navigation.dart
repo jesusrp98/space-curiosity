@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_redux/flutter_redux.dart';
-import 'package:redux/redux.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'space_x/home_page.dart';
 
-import '../models/counter.dart';
 import '../data/database.dart';
-import 'tabs/news.dart';
+import '../models/counter.dart';
+import 'space_x/home_page.dart';
 import 'tabs/facts.dart';
+import 'tabs/news.dart';
 
 enum TabItem {
   news,

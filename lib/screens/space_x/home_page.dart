@@ -89,6 +89,7 @@ class _HomePageState extends State<HomePage>
             fontFamily: 'ProductSans',
             fontWeight: FontWeight.bold,
           ),
+          isScrollable: true,
           controller: _tabController,
           tabs: _tabs,
         ),

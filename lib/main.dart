@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'screens/bottom_navigation.dart';
 import 'utils/colors.dart';
+import 'utils/localization.dart';
 
 void main() => runApp(MyApp());
 
@@ -21,9 +22,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Space News!',
+      title: ScopedModelLocalizations().appTitle,
       theme: _buildThemeData(),
       home: BottomNavigation(),
+      localizationsDelegates: [
+        ScopedModelLocalizationsDelegate(),
+      ],
       debugShowCheckedModeBanner: false,
     );
   }
