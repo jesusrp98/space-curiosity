@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'screens/bottom_navigation.dart';
-import 'utils/colors.dart';
-import 'utils/localization.dart';
+import 'util/colors.dart';
+import 'util/localization.dart';
 
 void main() => runApp(MyApp());
 

@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 
-import '../../utils/url.dart';
+import '../../../util/url.dart';
 import 'about_page.dart';
 import 'launch_list.dart';
 import 'vehicle_list.dart';
 
 /// HOME PAGE CLASS
 /// Home page of the app.
-class HomePage extends StatefulWidget {
+class SpaceXHomePage extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => _HomePageState();
+  State<StatefulWidget> createState() => _SpaceXHomePageState();
 }
 
-class _HomePageState extends State<HomePage>
+class _SpaceXHomePageState extends State<SpaceXHomePage>
     with SingleTickerProviderStateMixin {
   TabController _tabController;
   List<StatelessWidget> _homeLists = List(_tabs.length);

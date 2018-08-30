@@ -7,8 +7,8 @@ import 'package:http/http.dart' as http;
 import '../models/rockets/capsule_details.dart';
 import '../models/rockets/core_details.dart';
 import '../models/rockets/launchpad_info.dart';
-import '../utils/colors.dart';
-import '../utils/url.dart';
+import '../util/colors.dart';
+import '../util/url.dart';
 import 'row_item.dart';
 
 /// DETAILS DIALOG CLASS

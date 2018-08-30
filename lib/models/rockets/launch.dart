@@ -1,6 +1,6 @@
 import 'package:intl/intl.dart';
 
-import '../../utils/url.dart';
+import '../../util/url.dart';
 import 'rocket.dart';
 
 /// LAUNCH CLASS

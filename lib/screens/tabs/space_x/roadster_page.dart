@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 
-import '../../models/rockets/roadster.dart';
-import '../../utils/colors.dart';
-import '../../widgets/card_page.dart';
-import '../../widgets/head_card_page.dart';
-import '../../widgets/hero_image.dart';
-import '../../widgets/row_item.dart';
+import '../../../models/rockets/roadster.dart';
+import '../../../util/colors.dart';
+import '../../../widgets/card_page.dart';
+import '../../../widgets/head_card_page.dart';
+import '../../../widgets/hero_image.dart';
+import '../../../widgets/row_item.dart';
 
 /// ROADSTER PAGE CLASS
 /// Displays live information about Elon Musk's Tesla Roadster.

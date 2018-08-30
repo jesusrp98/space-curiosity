@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../utils/colors.dart';
+import '../util/colors.dart';
 import 'details_dialog.dart';
 
 /// ROW ITEM CLASS

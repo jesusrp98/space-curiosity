@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 
-import '../../models/rockets/core.dart';
-import '../../models/rockets/launch.dart';
-import '../../models/rockets/rocket.dart';
-import '../../models/rockets/second_stage.dart';
-import '../../utils/colors.dart';
-import '../../widgets/card_page.dart';
-import '../../widgets/details_dialog.dart';
-import '../../widgets/head_card_page.dart';
-import '../../widgets/hero_image.dart';
-import '../../widgets/row_item.dart';
+import '../../../models/rockets/core.dart';
+import '../../../models/rockets/launch.dart';
+import '../../../models/rockets/rocket.dart';
+import '../../../models/rockets/second_stage.dart';
+import '../../../util/colors.dart';
+import '../../../widgets/card_page.dart';
+import '../../../widgets/details_dialog.dart';
+import '../../../widgets/head_card_page.dart';
+import '../../../widgets/hero_image.dart';
+import '../../../widgets/row_item.dart';
 
 /// LAUNCH PAGE CLASS
 /// This class displays all information of a specific launch.

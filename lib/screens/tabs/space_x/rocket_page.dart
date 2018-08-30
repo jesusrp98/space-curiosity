@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 
-import '../../models/rockets/rocket_info.dart';
-import '../../utils/colors.dart';
-import '../../widgets/card_page.dart';
-import '../../widgets/head_card_page.dart';
-import '../../widgets/hero_image.dart';
-import '../../widgets/row_item.dart';
+import '../../../models/rockets/rocket_info.dart';
+import '../../../util/colors.dart';
+import '../../../widgets/card_page.dart';
+import '../../../widgets/head_card_page.dart';
+import '../../../widgets/hero_image.dart';
+import '../../../widgets/row_item.dart';
 
 /// ROCKET PAGE CLASS
 /// This class represent a rocket page. It displays RocketInfo's specs.
