@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/space_news.iml" filepath="$PROJECT_DIR$/space_news.iml" />
-      <module fileurl="file://$PROJECT_DIR$/space_news_android.iml" filepath="$PROJECT_DIR$/space_news_android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/space_news.iml" filepath="$PROJECT_DIR$/.idea/space_news.iml" />
     </modules>
   </component>
 </project>

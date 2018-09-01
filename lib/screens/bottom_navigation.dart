@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:scoped_model/scoped_model.dart';
+import 'package:space_news/screens/tabs/planets.dart';
 
 import '../data/database.dart';
 import '../models/counter.dart';
@@ -10,7 +11,7 @@ import 'tabs/news.dart';
 
 enum TabItem {
   news,
-
+  planets,
   spaceX,
   nasa,
 }
@@ -20,9 +21,11 @@ String tabItemName(TabItem tabItem) {
     case TabItem.news:
       return "News";
     case TabItem.spaceX:
-      return "Space X";
+      return "SpaceX";
     case TabItem.nasa:
       return "NASA";
+    case TabItem.planets:
+      return "Planets";
   }
   return null;
 }
@@ -45,6 +48,9 @@ class BottomNavigationState extends State<BottomNavigation> {
         break;
       case 2:
         _updateCurrentItem(TabItem.nasa);
+        break;
+      case 3:
+        _updateCurrentItem(TabItem.planets);
         break;
     }
   }
@@ -72,6 +78,8 @@ class BottomNavigationState extends State<BottomNavigation> {
         return SpaceXHomePage();
       case TabItem.nasa:
         return NasaHomePage();
+      case TabItem.planets:
+        return PlanetsHomePage();
     }
     return Container();
   }
@@ -83,6 +91,7 @@ class BottomNavigationState extends State<BottomNavigation> {
         _buildItem(icon: Icons.description, tabItem: TabItem.news),
         _buildItem(icon: Icons.info, tabItem: TabItem.spaceX),
         _buildItem(icon: FontAwesomeIcons.spaceShuttle, tabItem: TabItem.nasa),
+        _buildItem(icon: Icons.public, tabItem: TabItem.planets),
       ],
       onTap: _onSelectTab,
     );

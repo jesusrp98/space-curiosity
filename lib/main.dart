@@ -7,6 +7,7 @@ import 'util/localization.dart';
 import 'screens/tabs/space_x/home_page.dart';
 import 'screens/tabs/nasa/home_page.dart';
 import 'screens/tabs/news.dart';
+import 'screens/tabs/planets.dart';
 
 void main() => runApp(MyApp());
 
@@ -38,6 +39,7 @@ class MyApp extends StatelessWidget {
           "/space_x": (BuildContext context) => SpaceXHomePage(),
           "/nasa": (BuildContext context) => NasaHomePage(),
           "/news": (BuildContext context) => NewsHomePage(),
+          "/planets": (BuildContext context) => PlanetsHomePage(),
         });
   }
 }
