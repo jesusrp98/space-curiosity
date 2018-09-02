@@ -1,4 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Planet {
+  final int id;
   final String imageUrl;
   final String name;
   final String description;
@@ -16,9 +19,9 @@ class Planet {
   final num escapeVelocity;
   final num temperature;
   final num pressure;
-  //final Map<String, num> atmosphereComposition;
 
   Planet({
+    this.id,
     this.imageUrl,
     this.name,
     this.description,
@@ -38,8 +41,9 @@ class Planet {
     this.pressure,
   });
 
-  factory Planet.fromJson(Map<String, dynamic> json) {
+  factory Planet.fromJson(DocumentSnapshot json) {
     return Planet(
+      id: json['id'],
       imageUrl: json['imageUrl'],
       name: json['name'],
       description: json['description'],
