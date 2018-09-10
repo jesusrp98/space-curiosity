@@ -1,26 +1,25 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 
 class Planet {
-  final String id;
-  final String imageUrl;
-  final String name;
-  final String description;
-  final num aphelion;
-  final num perihelion;
-  final num period;
-  final num speed;
-  final num inclination;
-  final num radius;
-  final num volume;
-  final num mass;
-  final num density;
-  final num gravity;
-  final num escapeVelocity;
-  final num temperature;
-  final num pressure;
+  final String id, imageUrl, name, description;
+
+  final num aphelion,
+      perihelion,
+      period,
+      speed,
+      inclination,
+      radius,
+      volume,
+      mass,
+      density,
+      gravity,
+      escapeVelocity,
+      temperature,
+      pressure;
 
   Planet({
-    this.id,
+    @required this.id,
     this.imageUrl,
     this.name,
     this.description,

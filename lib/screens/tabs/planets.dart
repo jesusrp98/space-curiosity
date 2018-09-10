@@ -1,55 +1,59 @@
-import 'package:flutter/material.dart';
-
-import 'package:space_news/models/planet.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:space_news/screens/tabs/planet_page.dart';
+import 'package:flutter/material.dart';
+import 'package:native_widgets/native_widgets.dart';
+import 'package:scoped_model/scoped_model.dart';
+
+import '../../models/planets.dart';
+import 'planet_page.dart';
 
 class PlanetsHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('Planets')),
-      body: StreamBuilder(
-        stream: Firestore.instance.collection('planets').snapshots(),
-        builder: (context, snapshot) {
-          switch (snapshot.connectionState) {
-            case ConnectionState.none:
-            case ConnectionState.waiting:
-              return CircularProgressIndicator();
-            default:
-              if (!snapshot.hasError) {
-                final List planets = snapshot.data.documents
-                    .map((document) => Planet.fromJson(document))
-                    .toList();
+    return new ScopedModel<PlanetsModel>(
+      model: PlanetsModel(),
+      child: Scaffold(
+        appBar: AppBar(title: Text('Planets')),
+        body: ScopedModelDescendant<PlanetsModel>(
+            builder: (context, child, model) => FutureBuilder(
+                future: model.loadData(),
+                builder: (BuildContext context, _) {
+                  if (model.planets == null)
+                    return NativeLoadingIndicator(
+                      center: true,
+                      text: Text("Loading..."),
+                    );
 
-                return ListView.builder(
-                  itemCount: planets.length,
-                  itemBuilder: (context, index) =>
-                      _buildListItem(context, planets[index]),
-                );
-              } else
-                return const Text("Couldn't connect to server...");
-          }
-        },
+                  if (model.planets.isEmpty)
+                    return Center(child: Text("No Planets Found"));
+
+                  return ListView.builder(
+                    itemCount: model.planets.length,
+                    itemBuilder: _buildItem,
+                  );
+                })),
       ),
     );
   }
 
-  Widget _buildListItem(BuildContext context, Planet planet) {
+  Widget _buildItem(BuildContext context, int index) {
     return Column(
       children: <Widget>[
-        ListTile(
-          leading: SizedBox(
-            width: 72.0,
-            height: 72.0,
-            child: CachedNetworkImage(imageUrl: planet.imageUrl),
-          ),
-          title: Text(planet.name),
-          subtitle: Text(planet.description),
-          onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => PlanetPage(planet)),
+        ScopedModelDescendant<PlanetsModel>(
+          builder: (context, child, model) => ListTile(
+                leading: SizedBox(
+                  width: 72.0,
+                  height: 72.0,
+                  child: CachedNetworkImage(
+                      imageUrl: model.planets[index].imageUrl),
+                ),
+                title: Text(model.planets[index].name),
+                subtitle: Text(model.planets[index].description),
+                onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              PlanetPage(model.planets[index])),
+                    ),
               ),
         ),
         const Divider(height: 0.0, indent: 104.0)

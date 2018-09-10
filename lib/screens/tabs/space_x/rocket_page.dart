@@ -63,8 +63,7 @@ class RocketPage extends StatelessWidget {
         children: <Widget>[
           Text(
             _rocket.getLaunchTime,
-            style: Theme
-                .of(context)
+            style: Theme.of(context)
                 .textTheme
                 .subhead
                 .copyWith(color: secondaryText),
@@ -72,8 +71,7 @@ class RocketPage extends StatelessWidget {
           const SizedBox(height: 12.0),
           Text(
             'Success rate: ${_rocket.getSuccessRate}',
-            style: Theme
-                .of(context)
+            style: Theme.of(context)
                 .textTheme
                 .subhead
                 .copyWith(color: secondaryText),

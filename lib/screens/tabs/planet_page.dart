@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:space_news/models/planet.dart';
-import 'package:space_news/widgets/row_item.dart';
+
+import '../../models/planet.dart';
+import '../../widgets/row_item.dart';
 
 class PlanetPage extends StatelessWidget {
   final Planet planet;

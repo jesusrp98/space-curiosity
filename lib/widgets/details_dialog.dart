@@ -34,8 +34,7 @@ class DetailsDialog extends StatelessWidget {
         alignment: Alignment.center,
         child: Text(
           title,
-          style: Theme
-              .of(context)
+          style: Theme.of(context)
               .textTheme
               .title
               .copyWith(fontWeight: FontWeight.bold),

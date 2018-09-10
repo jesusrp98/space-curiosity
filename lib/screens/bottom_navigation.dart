@@ -9,12 +9,7 @@ import 'tabs/nasa/home_page.dart';
 import 'tabs/space_x/home_page.dart';
 import 'tabs/news.dart';
 
-enum TabItem {
-  news,
-  planets,
-  spaceX,
-  nasa,
-}
+enum TabItem { news, planets, spaceX, nasa }
 
 String tabItemName(TabItem tabItem) {
   switch (tabItem) {

@@ -47,22 +47,21 @@ class VehicleList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Checks if list is cached
-    if (PageStorage
-            .of(context)
+    if (PageStorage.of(context)
             .readState(context, identifier: ValueKey(_rocketUrl)) ==
         null)
       PageStorage.of(context).writeState(
-            context,
-            fetchVehicles(context),
-            identifier: ValueKey(_rocketUrl),
-          );
+        context,
+        fetchVehicles(context),
+        identifier: ValueKey(_rocketUrl),
+      );
 
     return Center(
       child: FutureBuilder(
         future: PageStorage.of(context).readState(
-              context,
-              identifier: ValueKey(_rocketUrl),
-            ),
+          context,
+          identifier: ValueKey(_rocketUrl),
+        ),
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.none:

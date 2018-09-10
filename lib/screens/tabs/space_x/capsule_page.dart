@@ -59,8 +59,7 @@ class CapsulePage extends StatelessWidget {
         children: <Widget>[
           Text(
             _capsule.subtitle,
-            style: Theme
-                .of(context)
+            style: Theme.of(context)
                 .textTheme
                 .subhead
                 .copyWith(color: secondaryText),
@@ -68,8 +67,7 @@ class CapsulePage extends StatelessWidget {
           const SizedBox(height: 12.0),
           Text(
             _capsule.status,
-            style: Theme
-                .of(context)
+            style: Theme.of(context)
                 .textTheme
                 .subhead
                 .copyWith(color: secondaryText),
