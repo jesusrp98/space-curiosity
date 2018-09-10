@@ -54,6 +54,17 @@ class AddEditPlanetPage extends StatelessWidget {
           actions: <Widget>[
             ScopedModelDescendant<Planet>(
               builder: (context, child, model) => IconButton(
+                    icon: Icon(Icons.delete),
+                    onPressed: planet == null
+                        ? null
+                        : () {
+                            model.removePlanet(planet);
+                            Navigator.pop(context, 'deleted');
+                          },
+                  ),
+            ),
+            ScopedModelDescendant<Planet>(
+              builder: (context, child, model) => IconButton(
                     icon: Icon(Icons.save),
                     onPressed: () {
                       final form = formKey.currentState;

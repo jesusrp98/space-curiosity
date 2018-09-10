@@ -71,6 +71,12 @@ class Planet extends Model {
     );
   }
 
+  void removePlanet(Planet planet) {
+    final DocumentReference document = planetsPath.document(planet.id);
+    document.delete();
+    notifyListeners();
+  }
+
   void addPlanet(Planet planet) {
     final DocumentReference document = planetsPath.document();
     document.setData(<String, dynamic>{
@@ -92,6 +98,7 @@ class Planet extends Model {
       'temperature': planet.temperature,
       'pressure': planet.pressure,
     });
+    notifyListeners();
   }
 
   void editPlanet(Planet planet) {
@@ -114,5 +121,6 @@ class Planet extends Model {
       'temperature': planet.temperature,
       'pressure': planet.pressure,
     });
+    notifyListeners();
   }
 }

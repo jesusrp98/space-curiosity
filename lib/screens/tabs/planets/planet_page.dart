@@ -23,7 +23,12 @@ class PlanetPage extends StatelessWidget {
                     builder: (context) => AddEditPlanetPage(planet),
                     fullscreenDialog: true,
                   ),
-                ),
+                ).then((value) {
+                  if (value != null) {
+                    String _value = value;
+                    if (_value.contains('deleted')) Navigator.pop(context);
+                  }
+                }),
           )
         ],
       ),
@@ -42,7 +47,8 @@ class PlanetPage extends StatelessWidget {
             RowItem.textRow('Mass', planet.mass.toString()),
             RowItem.textRow('Density', planet.density.toString()),
             RowItem.textRow('Gravity', planet.gravity.toString()),
-            RowItem.textRow('Escape velocity', planet.escapeVelocity.toString()),
+            RowItem.textRow(
+                'Escape velocity', planet.escapeVelocity.toString()),
             RowItem.textRow('Tempperature', planet.temperature.toString()),
             RowItem.textRow('Pressure', planet.pressure.toString())
           ],
