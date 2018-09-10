@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:space_news/models/planet.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:space_news/screens/tabs/planet_page.dart';
 
 class PlanetsHomePage extends StatelessWidget {
   @override
@@ -35,9 +37,23 @@ class PlanetsHomePage extends StatelessWidget {
   }
 
   Widget _buildListItem(BuildContext context, Planet planet) {
-    return ListTile(
-      title: Text(planet.name),
-      subtitle: Text(planet.description),
+    return Column(
+      children: <Widget>[
+        ListTile(
+          leading: SizedBox(
+            width: 72.0,
+            height: 72.0,
+            child: CachedNetworkImage(imageUrl: planet.imageUrl),
+          ),
+          title: Text(planet.name),
+          subtitle: Text(planet.description),
+          onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => PlanetPage(planet)),
+              ),
+        ),
+        const Divider(height: 0.0, indent: 104.0)
+      ],
     );
   }
 }

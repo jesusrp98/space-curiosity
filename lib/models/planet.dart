@@ -1,13 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Planet {
-  final int id;
+  final String id;
   final String imageUrl;
   final String name;
   final String description;
   final num aphelion;
   final num perihelion;
-  final String orbit;
   final num period;
   final num speed;
   final num inclination;
@@ -27,7 +26,6 @@ class Planet {
     this.description,
     this.aphelion,
     this.perihelion,
-    this.orbit,
     this.period,
     this.speed,
     this.inclination,
@@ -49,7 +47,6 @@ class Planet {
       description: json['description'],
       aphelion: json['aphelion'],
       perihelion: json['perihelion'],
-      orbit: json['orbit'],
       period: json['period'],
       speed: json['speed'],
       inclination: json['inclination'],

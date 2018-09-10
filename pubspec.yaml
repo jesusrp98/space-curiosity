@@ -28,6 +28,7 @@ dependencies:
   font_awesome_flutter: "^8.0.1"
   get_version: 0.0.5
   native_widgets: ^0.1.1+1
+  cached_network_image: "^0.4.1"
 
   ## Future
   # flutter_cupertino_settings: ^0.0.8
