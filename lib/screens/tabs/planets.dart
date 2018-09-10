@@ -13,24 +13,27 @@ class PlanetsHomePage extends StatelessWidget {
       model: PlanetsModel(),
       child: Scaffold(
         appBar: AppBar(title: Text('Planets')),
-        body: ScopedModelDescendant<PlanetsModel>(
-            builder: (context, child, model) => FutureBuilder(
-                future: model.loadData(),
-                builder: (BuildContext context, _) {
-                  if (model.planets == null)
-                    return NativeLoadingIndicator(
-                      center: true,
-                      text: Text("Loading..."),
+        body: Padding(
+          padding: EdgeInsets.only(top: 20.0),
+          child: ScopedModelDescendant<PlanetsModel>(
+              builder: (context, child, model) => FutureBuilder(
+                  future: model.loadData(),
+                  builder: (BuildContext context, _) {
+                    if (model.planets == null)
+                      return NativeLoadingIndicator(
+                        center: true,
+                        text: Text("Loading..."),
+                      );
+
+                    if (model.planets.isEmpty)
+                      return Center(child: Text("No Planets Found"));
+
+                    return ListView.builder(
+                      itemCount: model.planets.length,
+                      itemBuilder: _buildItem,
                     );
-
-                  if (model.planets.isEmpty)
-                    return Center(child: Text("No Planets Found"));
-
-                  return ListView.builder(
-                    itemCount: model.planets.length,
-                    itemBuilder: _buildItem,
-                  );
-                })),
+                  })),
+        ),
       ),
     );
   }
