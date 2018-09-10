@@ -1,7 +1,12 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:scoped_model/scoped_model.dart';
 
-class Planet {
+import 'planets.dart';
+
+class Planet extends Model {
   final String id, imageUrl, name, description;
 
   final num aphelion,
@@ -38,6 +43,12 @@ class Planet {
     this.pressure,
   });
 
+  Future<Planet> getPlanet(Planet planet) async {
+    final DocumentSnapshot document =
+        await planetsPath.document(planet.id).get();
+    return Planet.fromJson(document);
+  }
+
   factory Planet.fromJson(DocumentSnapshot json) {
     return Planet(
       id: json['id'],
@@ -58,5 +69,50 @@ class Planet {
       temperature: json['temperature'],
       pressure: json['pressure'],
     );
+  }
+
+  void addPlanet(Planet planet) {
+    final DocumentReference document = planetsPath.document();
+    document.setData(<String, dynamic>{
+      'id': document.documentID,
+      'imageUrl': planet.imageUrl,
+      'name': planet.name,
+      'description': planet.description,
+      'aphelion': planet.aphelion,
+      'perihelion': planet.perihelion,
+      'period': planet.period,
+      'speed': planet.speed,
+      'inclination': planet.inclination,
+      'radius': planet.radius,
+      'volume': planet.volume,
+      'mass': planet.mass,
+      'density': planet.density,
+      'gravity': planet.gravity,
+      'escapeVelocity': planet.escapeVelocity,
+      'temperature': planet.temperature,
+      'pressure': planet.pressure,
+    });
+  }
+
+  void editPlanet(Planet planet) {
+    final DocumentReference document = planetsPath.document(planet.id);
+    document.updateData(<String, dynamic>{
+      'imageUrl': planet.imageUrl,
+      'name': planet.name,
+      'description': planet.description,
+      'aphelion': planet.aphelion,
+      'perihelion': planet.perihelion,
+      'period': planet.period,
+      'speed': planet.speed,
+      'inclination': planet.inclination,
+      'radius': planet.radius,
+      'volume': planet.volume,
+      'mass': planet.mass,
+      'density': planet.density,
+      'gravity': planet.gravity,
+      'escapeVelocity': planet.escapeVelocity,
+      'temperature': planet.temperature,
+      'pressure': planet.pressure,
+    });
   }
 }

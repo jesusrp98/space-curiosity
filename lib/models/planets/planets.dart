@@ -5,6 +5,8 @@ import 'package:scoped_model/scoped_model.dart';
 
 import 'planet.dart';
 
+var planetsPath = Firestore.instance.collection('planets');
+
 class PlanetsModel extends Model {
   bool _isLoading = true;
   bool get isLoading => _isLoading;
@@ -16,7 +18,7 @@ class PlanetsModel extends Model {
     _isLoading = true;
     notifyListeners();
     var _snapshot =
-        await Firestore.instance.collection('planets').getDocuments();
+        await planetsPath.getDocuments();
     _planets = _snapshot.documents
         .map((DocumentSnapshot document) => Planet.fromJson(document))
         .toList();
