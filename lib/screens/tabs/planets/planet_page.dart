@@ -27,23 +27,26 @@ class PlanetPage extends StatelessWidget {
           )
         ],
       ),
-      body: Column(
-        children: <Widget>[
-          Text(planet.description),
-          RowItem.textRow('Aphelion', planet.aphelion.toString()),
-          RowItem.textRow('Perihelion', planet.perihelion.toString()),
-          RowItem.textRow('Period', planet.period.toString()),
-          RowItem.textRow('Speed', planet.speed.toString()),
-          RowItem.textRow('Inclination', planet.inclination.toString()),
-          RowItem.textRow('Radius', planet.radius.toString()),
-          RowItem.textRow('Volume', planet.volume.toString()),
-          RowItem.textRow('Mass', planet.mass.toString()),
-          RowItem.textRow('Density', planet.density.toString()),
-          RowItem.textRow('Gravity', planet.gravity.toString()),
-          RowItem.textRow('Escape velocity', planet.escapeVelocity.toString()),
-          RowItem.textRow('Tempperature', planet.temperature.toString()),
-          RowItem.textRow('Pressure', planet.pressure.toString())
-        ],
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: <Widget>[
+            RowItem.textRow('Description', planet.description),
+            RowItem.textRow('Aphelion', planet.aphelion.toString()),
+            RowItem.textRow('Perihelion', planet.perihelion.toString()),
+            RowItem.textRow('Period', planet.period.toString()),
+            RowItem.textRow('Speed', planet.speed.toString()),
+            RowItem.textRow('Inclination', planet.inclination.toString()),
+            RowItem.textRow('Radius', planet.radius.toString()),
+            RowItem.textRow('Volume', planet.volume.toString()),
+            RowItem.textRow('Mass', planet.mass.toString()),
+            RowItem.textRow('Density', planet.density.toString()),
+            RowItem.textRow('Gravity', planet.gravity.toString()),
+            RowItem.textRow('Escape velocity', planet.escapeVelocity.toString()),
+            RowItem.textRow('Tempperature', planet.temperature.toString()),
+            RowItem.textRow('Pressure', planet.pressure.toString())
+          ],
+        ),
       ),
     );
   }

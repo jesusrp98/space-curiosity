@@ -2,12 +2,47 @@ import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import '../../../models/planets/planet.dart';
+import 'dart:async';
 
 class AddEditPlanetPage extends StatelessWidget {
   static String routeName = "/add_planet";
   final Planet planet;
 
   AddEditPlanetPage(this.planet);
+
+  static final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  static final GlobalKey<FormFieldState<String>> nameKey =
+      GlobalKey<FormFieldState<String>>();
+  static final GlobalKey<FormFieldState<String>> descriptionKey =
+      GlobalKey<FormFieldState<String>>();
+  static final GlobalKey<FormFieldState<String>> imageKey =
+      GlobalKey<FormFieldState<String>>();
+  static final GlobalKey<FormFieldState<num>> aphelionKey =
+      GlobalKey<FormFieldState<num>>();
+  static final GlobalKey<FormFieldState<num>> perihelionKey =
+      GlobalKey<FormFieldState<num>>();
+  static final GlobalKey<FormFieldState<num>> periodKey =
+      GlobalKey<FormFieldState<num>>();
+  static final GlobalKey<FormFieldState<num>> speedKey =
+      GlobalKey<FormFieldState<num>>();
+  static final GlobalKey<FormFieldState<num>> inclinationKey =
+      GlobalKey<FormFieldState<num>>();
+  static final GlobalKey<FormFieldState<num>> radiusKey =
+      GlobalKey<FormFieldState<num>>();
+  static final GlobalKey<FormFieldState<num>> volumeKey =
+      GlobalKey<FormFieldState<num>>();
+  static final GlobalKey<FormFieldState<num>> massKey =
+      GlobalKey<FormFieldState<num>>();
+  static final GlobalKey<FormFieldState<num>> densityKey =
+      GlobalKey<FormFieldState<num>>();
+  static final GlobalKey<FormFieldState<num>> gravityKey =
+      GlobalKey<FormFieldState<num>>();
+  static final GlobalKey<FormFieldState<num>> escapeVelocityKey =
+      GlobalKey<FormFieldState<num>>();
+  static final GlobalKey<FormFieldState<num>> temperatureKey =
+      GlobalKey<FormFieldState<num>>();
+  static final GlobalKey<FormFieldState<num>> pressureKey =
+      GlobalKey<FormFieldState<num>>();
 
   @override
   Widget build(BuildContext context) {
@@ -16,97 +51,167 @@ class AddEditPlanetPage extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: Text(planet == null ? "New Planet" : "Edit Planet"),
+          actions: <Widget>[
+            ScopedModelDescendant<Planet>(
+              builder: (context, child, model) => IconButton(
+                    icon: Icon(Icons.save),
+                    onPressed: () {
+                      final form = formKey.currentState;
+                      if (form.validate()) {
+                        var _planet = Planet(
+                          id: planet?.id,
+                          name: nameKey?.currentState?.value ?? '',
+                          description: descriptionKey?.currentState?.value,
+                          imageUrl: imageKey?.currentState?.value,
+                          aphelion: aphelionKey?.currentState?.value,
+                          perihelion: pressureKey?.currentState?.value,
+                          period: periodKey?.currentState?.value,
+                          speed: speedKey?.currentState?.value,
+                          inclination: inclinationKey?.currentState?.value,
+                          radius: radiusKey?.currentState?.value,
+                          volume: volumeKey?.currentState?.value,
+                          mass: massKey?.currentState?.value,
+                          density: densityKey?.currentState?.value,
+                          gravity: gravityKey?.currentState?.value,
+                          escapeVelocity:
+                              escapeVelocityKey?.currentState?.value,
+                          temperature: temperatureKey?.currentState?.value,
+                          pressure: pressureKey?.currentState?.value,
+                        );
+                        planet == null
+                            ? model.addPlanet(_planet)
+                            : model.editPlanet(_planet);
+                        Navigator.pop(context, true);
+                      }
+                    },
+                  ),
+            ),
+          ],
         ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: ScopedModelDescendant<Planet>(
-            builder: (context, child, model) => ListView(
-                  children: <Widget>[
-                    TextFormField(
-                      decoration: InputDecoration(hintText: 'Name'),
-                      initialValue: planet?.name,
-                    ),
-                    TextFormField(
-                      decoration: InputDecoration(hintText: 'Description'),
-                      initialValue: planet?.description,
-                    ),
-                    TextFormField(
-                      decoration: InputDecoration(hintText: 'Aphelion'),
-                      initialValue: planet?.aphelion == null
-                          ? null
-                          : planet?.aphelion.toString(),
-                    ),
-                    TextFormField(
-                      decoration: InputDecoration(hintText: 'Perihelion'),
-                      initialValue: planet?.perihelion == null
-                          ? null
-                          : planet?.perihelion.toString(),
-                    ),
-                    TextFormField(
-                      decoration: InputDecoration(hintText: 'Period'),
-                      initialValue: planet?.period == null
-                          ? null
-                          : planet?.period.toString(),
-                    ),
-                    TextFormField(
-                      decoration: InputDecoration(hintText: 'Speed'),
-                      initialValue:
-                          planet?.speed == null ? null : planet?.speed.toString(),
-                    ),
-                    TextFormField(
-                      decoration: InputDecoration(hintText: 'Inclination'),
-                      initialValue: planet?.inclination == null
-                          ? null
-                          : planet?.inclination.toString(),
-                    ),
-                    TextFormField(
-                      decoration: InputDecoration(hintText: 'Radius'),
-                      initialValue: planet?.radius == null
-                          ? null
-                          : planet?.radius.toString(),
-                    ),
-                    TextFormField(
-                      decoration: InputDecoration(hintText: 'Volume'),
-                      initialValue: planet?.volume == null
-                          ? null
-                          : planet?.volume.toString(),
-                    ),
-                    TextFormField(
-                      decoration: InputDecoration(hintText: 'Mass'),
-                      initialValue:
-                          planet?.mass == null ? null : planet?.mass.toString(),
-                    ),
-                    TextFormField(
-                      decoration: InputDecoration(hintText: 'Density'),
-                      initialValue: planet?.density == null
-                          ? null
-                          : planet?.density.toString(),
-                    ),
-                    TextFormField(
-                      decoration: InputDecoration(hintText: 'Gravity'),
-                      initialValue: planet?.gravity == null
-                          ? null
-                          : planet?.gravity.toString(),
-                    ),
-                    TextFormField(
-                      decoration: InputDecoration(hintText: 'Escape velocity'),
-                      initialValue: planet?.escapeVelocity == null
-                          ? null
-                          : planet?.escapeVelocity.toString(),
-                    ),
-                    TextFormField(
-                      decoration: InputDecoration(hintText: 'Temperature'),
-                      initialValue: planet?.temperature == null
-                          ? null
-                          : planet?.temperature.toString(),
-                    ),
-                    TextFormField(
-                      decoration: InputDecoration(hintText: 'Pressure'),
-                      initialValue: planet?.pressure == null
-                          ? null
-                          : planet?.pressure.toString(),
-                    ),
-                  ],
+            builder: (context, child, model) => Form(
+                  key: formKey,
+                  autovalidate: false,
+                  onWillPop: () {
+                    return Future(() => true);
+                  },
+                  child: ListView(
+                    children: <Widget>[
+                      TextFormField(
+                        key: nameKey,
+                        decoration: InputDecoration(labelText: 'Name'),
+                        initialValue: planet?.name,
+                        validator: (String value) =>
+                            value.isNotEmpty ? null : 'Name Required',
+                      ),
+                      TextFormField(
+                        key: descriptionKey,
+                        decoration: InputDecoration(labelText: 'Description'),
+                        initialValue: planet?.description,
+                      ),
+                      TextFormField(
+                        key: imageKey,
+                        decoration: InputDecoration(labelText: 'Image URL'),
+                        initialValue: planet?.imageUrl,
+                        validator: (String value) =>
+                            value.isNotEmpty ? null : 'Image Required',
+                      ),
+                      TextFormField(
+                        key: aphelionKey,
+                        decoration: InputDecoration(labelText: 'Aphelion'),
+                        initialValue: planet?.aphelion == null
+                            ? null
+                            : planet?.aphelion.toString(),
+                      ),
+                      TextFormField(
+                        key: perihelionKey,
+                        decoration: InputDecoration(labelText: 'Perihelion'),
+                        initialValue: planet?.perihelion == null
+                            ? null
+                            : planet?.perihelion.toString(),
+                      ),
+                      TextFormField(
+                        key: periodKey,
+                        decoration: InputDecoration(labelText: 'Period'),
+                        initialValue: planet?.period == null
+                            ? null
+                            : planet?.period.toString(),
+                      ),
+                      TextFormField(
+                        key: speedKey,
+                        decoration: InputDecoration(labelText: 'Speed'),
+                        initialValue: planet?.speed == null
+                            ? null
+                            : planet?.speed.toString(),
+                      ),
+                      TextFormField(
+                        key: inclinationKey,
+                        decoration: InputDecoration(labelText: 'Inclination'),
+                        initialValue: planet?.inclination == null
+                            ? null
+                            : planet?.inclination.toString(),
+                      ),
+                      TextFormField(
+                        key: radiusKey,
+                        decoration: InputDecoration(labelText: 'Radius'),
+                        initialValue: planet?.radius == null
+                            ? null
+                            : planet?.radius.toString(),
+                      ),
+                      TextFormField(
+                        key: volumeKey,
+                        decoration: InputDecoration(labelText: 'Volume'),
+                        initialValue: planet?.volume == null
+                            ? null
+                            : planet?.volume.toString(),
+                      ),
+                      TextFormField(
+                        key: massKey,
+                        decoration: InputDecoration(labelText: 'Mass'),
+                        initialValue: planet?.mass == null
+                            ? null
+                            : planet?.mass.toString(),
+                      ),
+                      TextFormField(
+                        key: densityKey,
+                        decoration: InputDecoration(labelText: 'Density'),
+                        initialValue: planet?.density == null
+                            ? null
+                            : planet?.density.toString(),
+                      ),
+                      TextFormField(
+                        key: gravityKey,
+                        decoration: InputDecoration(labelText: 'Gravity'),
+                        initialValue: planet?.gravity == null
+                            ? null
+                            : planet?.gravity.toString(),
+                      ),
+                      TextFormField(
+                        key: escapeVelocityKey,
+                        decoration:
+                            InputDecoration(labelText: 'Escape velocity'),
+                        initialValue: planet?.escapeVelocity == null
+                            ? null
+                            : planet?.escapeVelocity.toString(),
+                      ),
+                      TextFormField(
+                        key: temperatureKey,
+                        decoration: InputDecoration(labelText: 'Temperature'),
+                        initialValue: planet?.temperature == null
+                            ? null
+                            : planet?.temperature.toString(),
+                      ),
+                      TextFormField(
+                        key: pressureKey,
+                        decoration: InputDecoration(labelText: 'Pressure'),
+                        initialValue: planet?.pressure == null
+                            ? null
+                            : planet?.pressure.toString(),
+                      ),
+                    ],
+                  ),
                 ),
           ),
         ),

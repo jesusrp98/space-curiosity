@@ -24,7 +24,7 @@ class Planet extends Model {
       pressure;
 
   Planet({
-    @required this.id,
+    this.id,
     this.imageUrl,
     this.name,
     this.description,
