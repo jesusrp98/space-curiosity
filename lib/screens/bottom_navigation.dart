@@ -84,7 +84,7 @@ class BottomNavigationState extends State<BottomNavigation> {
       type: BottomNavigationBarType.fixed,
       items: [
         _buildItem(icon: Icons.description, tabItem: TabItem.news),
-        _buildItem(icon: Icons.info, tabItem: TabItem.spaceX),
+        _buildItem(icon: FontAwesomeIcons.rocket, tabItem: TabItem.spaceX),
         _buildItem(icon: FontAwesomeIcons.spaceShuttle, tabItem: TabItem.nasa),
         _buildItem(icon: Icons.public, tabItem: TabItem.planets),
       ],

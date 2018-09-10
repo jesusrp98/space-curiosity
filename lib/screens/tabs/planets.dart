@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
 
-import '../../models/planets.dart';
+import '../../models/planets/planets.dart';
 import 'planet_page.dart';
 
 class PlanetsHomePage extends StatelessWidget {
