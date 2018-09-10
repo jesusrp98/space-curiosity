@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'package:space_news/screens/tabs/planets.dart';
 
 import '../data/database.dart';
 import '../models/counter.dart';
 import 'tabs/nasa/home_page.dart';
-import 'tabs/space_x/home_page.dart';
 import 'tabs/news.dart';
+import 'tabs/planets/planets.dart';
+import 'tabs/space_x/home_page.dart';
 
 enum TabItem { news, planets, spaceX, nasa }
 

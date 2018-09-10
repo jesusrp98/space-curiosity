@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'screens/bottom_navigation.dart';
 import 'screens/tabs/nasa/home_page.dart';
 import 'screens/tabs/news.dart';
-import 'screens/tabs/planets.dart';
+import 'screens/tabs/planets/add_edit_planet.dart';
+import 'screens/tabs/planets/planets.dart';
 import 'screens/tabs/space_x/home_page.dart';
 import 'util/colors.dart';
 import 'util/localization.dart';
@@ -39,6 +40,7 @@ class MyApp extends StatelessWidget {
           "/nasa": (BuildContext context) => NasaHomePage(),
           "/news": (BuildContext context) => NewsHomePage(),
           "/planets": (BuildContext context) => PlanetsHomePage(),
+          AddEditPlanetPage.routeName: (BuildContext context) => AddEditPlanetPage(null),
         });
   }
 }

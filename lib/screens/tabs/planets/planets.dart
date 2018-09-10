@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
 
-import '../../models/planets/planets.dart';
+import '../../../models/planets/planets.dart';
+import 'add_edit_planet.dart';
 import 'planet_page.dart';
 
 class PlanetsHomePage extends StatelessWidget {
@@ -33,6 +34,16 @@ class PlanetsHomePage extends StatelessWidget {
                       itemBuilder: _buildItem,
                     );
                   })),
+        ),
+        floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.add),
+          onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => AddEditPlanetPage(null),
+                  fullscreenDialog: true,
+                ),
+              ),
         ),
       ),
     );

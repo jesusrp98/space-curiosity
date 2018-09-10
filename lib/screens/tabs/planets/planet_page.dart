@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../models/planets/planet.dart';
-import '../../widgets/row_item.dart';
+import '../../../models/planets/planet.dart';
+import '../../../widgets/row_item.dart';
+import 'add_edit_planet.dart';
 
 class PlanetPage extends StatelessWidget {
   final Planet planet;
@@ -13,6 +14,18 @@ class PlanetPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(planet.name),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.edit),
+            onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => AddEditPlanetPage(planet),
+                    fullscreenDialog: true,
+                  ),
+                ),
+          )
+        ],
       ),
       body: Column(
         children: <Widget>[
