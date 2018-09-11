@@ -18,22 +18,10 @@ class PlanetsModel extends Model {
     _isLoading = true;
     notifyListeners();
     var _snapshot = await planetsPath.getDocuments();
-    _planets = _snapshot.documents
-        .map((DocumentSnapshot document) => CelestialBody.fromJson(document))
-        .toList();
-    for (var planet in _planets) {
-      _snapshot = await planetsPath
-          .document(planet.id)
-          .collection('moons')
-          .getDocuments();
-      planet.moons = _snapshot.documents.map((DocumentSnapshot document) {
-        print("Moon:" + document['name']);
-        return CelestialBody(
-          id: document['id'],
-          name: document['name'],
-        );
-      }).toList();
-    }
+    _planets = _snapshot.documents.map((DocumentSnapshot document) {
+      var _planet = CelestialBody.fromJson(document);
+      return _planet;
+    }).toList();
     _isLoading = false;
     notifyListeners();
   }

@@ -8,13 +8,12 @@ import 'planets.dart';
 enum BodyType { planet, celestialBody }
 
 class CelestialBody extends Model {
-  List<CelestialBody> _moons;
-
-  List<CelestialBody> get moons => _moons;
-
-  set moons(List<CelestialBody> list) {
-    _moons = moons;
-    notifyListeners();
+  Future<List<CelestialBody>> getMoons(String planetID) async {
+    var _snapshot =
+        await planetsPath.document(planetID).collection('moons').getDocuments();
+    return _snapshot.documents
+        .map((DocumentSnapshot doc) => CelestialBody.fromJson(doc))
+        .toList();
   }
 
   final String id, imageUrl, name, description;
@@ -54,7 +53,7 @@ class CelestialBody extends Model {
 
   factory CelestialBody.fromJson(DocumentSnapshot json) {
     return CelestialBody(
-      id: json['id'],
+      id: json.documentID,
       imageUrl: json['imageUrl'],
       name: json['name'],
       description: json['description'],
@@ -83,7 +82,6 @@ class CelestialBody extends Model {
   void addPlanet(CelestialBody celestialBody) {
     final DocumentReference document = planetsPath.document();
     document.setData(<String, dynamic>{
-      'id': document.documentID,
       'imageUrl': celestialBody.imageUrl,
       'name': celestialBody.name,
       'description': celestialBody.description,
@@ -108,7 +106,6 @@ class CelestialBody extends Model {
     final DocumentReference document =
         planetsPath.document(id).collection('moons').document();
     document.setData(<String, dynamic>{
-      'id': document.documentID,
       'imageUrl': celestialBody.imageUrl,
       'name': celestialBody.name,
       'description': celestialBody.description,

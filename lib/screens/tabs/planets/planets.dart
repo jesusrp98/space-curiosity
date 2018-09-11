@@ -52,16 +52,17 @@ class PlanetsHomePage extends StatelessWidget {
     );
   }
 
-  Widget buildMoons(BuildContext context, CelestialBody planet) {
-    if (planet?.moons?.isEmpty ?? true)
+  Widget _buildMoons(
+      BuildContext context, int index, List<CelestialBody> moons) {
+    if (moons == null || moons.isEmpty) {
       return Center(child: Text('No Moons Found'));
-
+    }
     return ListView.builder(
-        itemCount: planet?.moons?.length ?? 0,
+        itemCount: moons.length,
         itemBuilder: (BuildContext context, int index) {
-          return ListTile(
-            title: Text("Name"),
-            subtitle: Text(planet?.moons[index]?.name ?? "No Name Found"),
+          return Text(
+            moons[index].name,
+            textAlign: TextAlign.center,
           );
         });
   }
@@ -88,15 +89,18 @@ class PlanetsHomePage extends StatelessWidget {
                 ),
                 trailing: IconButton(
                   icon: Icon(Icons.arrow_drop_down),
-                  onPressed: () {
+                  onPressed: () async {
+                    var _moons = await model.planets[index]
+                        .getMoons(model.planets[index].id);
                     showModalBottomSheet<void>(
                         context: context,
                         builder: (BuildContext context) {
-                          return Container(
-                              child: Padding(
+                          return SafeArea(
+                              child: Container(
+                                  child: Padding(
                             padding: EdgeInsets.only(bottom: 10.0),
-                            child: buildMoons(context, model.planets[index]),
-                          ));
+                            child: _buildMoons(context, index, _moons),
+                          )));
                         });
                   },
                 ),
