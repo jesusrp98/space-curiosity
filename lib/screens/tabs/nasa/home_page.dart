@@ -2,10 +2,14 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:async_resource/file_resource.dart';
 import 'package:flutter/material.dart';
 import 'package:native_widgets/native_widgets.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../models/daily_image.dart';
+import '../../../util/cache_settings.dart';
 import 'help.dart';
 import 'imagedetails.dart';
 // import 'package:space_news/screens/tabs/nasa/globals.dart' as globals;
@@ -30,13 +34,13 @@ class _NasaHomePageState extends State<NasaHomePage> {
       GlobalKey<RefreshIndicatorState>();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  List data;
   String apiKey = "ecbPd1gAXph1ytyKAEUeu7KRB5xGEx5XOkB7Xoi4";
   int count = 100;
   bool _reverse = false;
   bool isLoaded = false;
   bool isDebug = false;
   int hitCount = 0;
+  List<ImageData> images;
 
   Future<String> getData(String api, String headers) async {
     var requestURL = api;
@@ -67,43 +71,46 @@ class _NasaHomePageState extends State<NasaHomePage> {
     return result;
   }
 
-  Future _getData() async {
+  Future<List<ImageData>> _getData() async {
     isLoaded = false;
-    String result = "";
-    result = "" +
-        await getData('https://api.nasa.gov/planetary/apod?',
-            'api_key=$apiKey&count=$count');
-    // print('Result: $result');
-    if (result.contains('Error')) {
-      result = "" +
-          await getData('https://api.nasa.gov/planetary/apod?',
-              'api_key=$apiKey&count=$count');
-      if (result.contains('Error')) {
-        result = "" +
-            await getData('https://api.nasa.gov/planetary/apod?',
-                'api_key=$apiKey&count=$count');
-      }
+    List<ImageData> _data;
+    try {
+      String _url = 'https://api.nasa.gov/planetary/apod?'
+          'api_key=$apiKey&count=$count';
+      final path = (await getApplicationDocumentsDirectory()).path;
+      final myDataResource = HttpNetworkResource<List<ImageData>>(
+        url: _url,
+        parser: (contents) {
+          List decoded = json.decode(contents.toString());
+          _data = [];
+          for (Map row in decoded) _data.add(ImageData.fromJson(row));
+          return _data;
+        },
+        cache: FileResource(File('$path/nasa_images.json')),
+        maxAge: cacheDuration,
+        strategy: cacheStrategy,
+      );
+      _data = await myDataResource.get();
+    } catch (e) {
+      print("Error Cached DailyImage: $e");
     }
     try {
-      if (result.contains('Error')) {
-        // _scaffoldKey.currentState.showSnackBar(new SnackBar(
-        //     content:Text(
-        //         'Failed fetching images, please refresh and try again.')));
-        showAlertPopup(context, 'Info',
-            'Failed fetching images.\nPlease refresh and try again.');
-      } else {
-        List decoded = json.decode(result);
-        for (var row in decoded) {
-          addNewItem(row);
-        }
-        data = decoded;
+      if (_data == null) {
+        String _response = await getData('https://api.nasa.gov/planetary/apod?',
+            'api_key=$apiKey&count=$count');
+        List decoded = json.decode(_response);
+        _data = [];
+        for (Map row in decoded) _data.add(ImageData.fromJson(row));
       }
-    } catch (ex) {
-      print(ex);
+    } catch (e) {
+      print('Error Creating DailyImage: $e');
     }
+
     showBanner();
     isLoaded = true;
     firstBottom = true;
+
+    return _data;
   }
 
   Future openImage(String url) async {
@@ -113,84 +120,6 @@ class _NasaHomePageState extends State<NasaHomePage> {
       throw 'Could not launch $url';
     }
   }
-
-  void addNewItem(Map row) {
-    String content = row["hdurl"] ?? row["url"] ?? "";
-    _items.add(
-      InkWell(
-        onLongPress: () {
-          String image = row["hdurl"] ?? row["url"];
-          openImage(image);
-        },
-        onTap: () {
-          showFullAd();
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => ImageDetailsPage(
-                    title: row["title"],
-                    dateCreated: row["date"],
-                    imageUrl: row["url"],
-                    hdImageUrl: row["hdurl"],
-                    description: row["explanation"],
-                  ),
-              maintainState: true,
-            ),
-          );
-        },
-        child: Card(
-          elevation: 1.0,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
-            verticalDirection: VerticalDirection.down,
-            children: <Widget>[
-              Center(
-                  child: Text(
-                row["title"],
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14.0),
-                textAlign: TextAlign.center,
-              )),
-              Expanded(
-                child: content.contains('youtube') || content.contains('vimeo')
-                    ? Center(
-                        child: Icon(
-                          Icons.ondemand_video,
-                          size: 60.0,
-                        ),
-                      )
-                    : content.toString().isEmpty || content == null
-                        ? Center(
-                            child: Icon(
-                              Icons.broken_image,
-                              size: 60.0,
-                            ),
-                          )
-                        : Image.network(
-                            content,
-                            height: 65.0,
-                            width: 65.0,
-                            fit: BoxFit.fitHeight,
-                          ),
-              ),
-              Container(
-                height: 10.0,
-              ),
-              Center(
-                  child: Text(
-                row["date"],
-                textAlign: TextAlign.center,
-              )),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  List<Widget> _items = List.generate(0, (index) {
-    return Text("item $index");
-  });
 
   // static final MobileAdTargetingInfo targetingInfo =MobileAdTargetingInfo(
   //   // testDevices: testDevice != null ? <String>[testDevice] : null,
@@ -243,7 +172,7 @@ class _NasaHomePageState extends State<NasaHomePage> {
 
     _getData().then((result) {
       setState(() {
-        print('Data Loaded');
+        images = result;
         // data = newData;
         // _bannerAd ??= createBannerAd();
         // _bannerAd
@@ -263,11 +192,9 @@ class _NasaHomePageState extends State<NasaHomePage> {
   Future<Null> _onRefresh() {
     Completer<Null> completer = Completer<Null>();
 
-    _items.clear();
     _getData().then((result) {
       setState(() {
-        print('Data Loaded');
-        // data = newData;
+        images = result;
         // showInterstitialAd();
       });
     });
@@ -338,41 +265,109 @@ class _NasaHomePageState extends State<NasaHomePage> {
         ));
   }
 
-  @override
-  Widget build(BuildContext context) {
+  Widget _buildItem(BuildContext context, int index) {
+    if (index == count - 1 && firstBottom == true) {
+      // _loadMoreItems();
+      firstBottom = false;
+      showFullAd();
+    }
+
+    String content = images[index]?.hdurl ?? images[index]?.url ?? "";
+    return InkWell(
+      onLongPress: () {
+        openImage(content);
+      },
+      onTap: () {
+        showFullAd();
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ImageDetailsPage(
+                  title: images[index]?.title ?? "No Name Found",
+                  dateCreated: images[index]?.date ?? "No Date Found",
+                  imageUrl: images[index]?.url ?? "",
+                  hdImageUrl: images[index]?.hdurl ?? "",
+                  description: images[index]?.description ?? "",
+                ),
+            maintainState: true,
+          ),
+        );
+      },
+      child: Card(
+        elevation: 1.0,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisSize: MainAxisSize.min,
+          verticalDirection: VerticalDirection.down,
+          children: <Widget>[
+            Center(
+                child: Text(
+              images[index]?.title ?? "",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14.0),
+              textAlign: TextAlign.center,
+            )),
+            Expanded(
+              child: content.contains('youtube') || content.contains('vimeo')
+                  ? Center(
+                      child: Icon(
+                        Icons.ondemand_video,
+                        size: 60.0,
+                      ),
+                    )
+                  : content.toString().isEmpty || content == null
+                      ? Center(
+                          child: Icon(
+                            Icons.broken_image,
+                            size: 60.0,
+                          ),
+                        )
+                      : Image.network(
+                          content,
+                          height: 65.0,
+                          width: 65.0,
+                          fit: BoxFit.fitHeight,
+                        ),
+            ),
+            Container(
+              height: 10.0,
+            ),
+            Center(
+                child: Text(
+              images[index]?.date ?? "",
+              textAlign: TextAlign.center,
+            )),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildList(BuildContext context) {
+    if (images == null) {
+      return NativeLoadingIndicator(text: Text('Loading...'));
+    }
+
+    if (images.isEmpty) {
+      return Center(
+        child: Text('No Images Found'),
+      );
+    }
     double width = MediaQuery.of(context).size.width;
     int axisCount =
         width <= 500.0 ? 2 : width <= 800.0 ? 3 : width <= 1100.0 ? 4 : 5;
-    Widget _list = RefreshIndicator(
-      key: _refreshIndicatorKey,
-      onRefresh: _onRefresh,
-      child: _items.length == 0 && !isLoaded
-          ? Align(
-              child: CircularProgressIndicator(),
-              alignment: FractionalOffset.center,
-            )
-          : _items.length == 0 && isLoaded
-              ? Center(
-                  child: Text('No Images Found'),
-                )
-              : GridView.builder(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: axisCount),
-                  scrollDirection: Axis.vertical,
-                  physics: const AlwaysScrollableScrollPhysics(),
-                  itemCount: _items == null ? 0 : _items.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    // print('Index: $index => Count: $count');
-                    if (index == count - 1 && firstBottom == true) {
-                      // _loadMoreItems();
-                      firstBottom = false;
-                      showFullAd();
-                    }
-                    return _items[index];
-                  },
-                  reverse: _reverse,
-                ),
+    return GridView.builder(
+      gridDelegate:
+          SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: axisCount),
+      scrollDirection: Axis.vertical,
+      physics: const AlwaysScrollableScrollPhysics(),
+      itemCount: images.length,
+      itemBuilder: _buildItem,
+      reverse: _reverse,
     );
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
@@ -396,7 +391,11 @@ class _NasaHomePageState extends State<NasaHomePage> {
         ),
         centerTitle: true,
       ),
-      body: _list,
+      body: RefreshIndicator(
+        key: _refreshIndicatorKey,
+        onRefresh: _onRefresh,
+        child: _buildList(context),
+      ),
     );
   }
 }

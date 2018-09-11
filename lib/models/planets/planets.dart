@@ -26,9 +26,13 @@ class PlanetsModel extends Model {
           .document(planet.id)
           .collection('moons')
           .getDocuments();
-      planet.moons = _snapshot.documents
-          .map((DocumentSnapshot document) => CelestialBody.fromJson(document))
-          .toList();
+      planet.moons = _snapshot.documents.map((DocumentSnapshot document) {
+        print("Moon:" + document['name']);
+        return CelestialBody(
+          id: document['id'],
+          name: document['name'],
+        );
+      }).toList();
     }
     _isLoading = false;
     notifyListeners();
