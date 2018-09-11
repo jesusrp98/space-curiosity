@@ -107,9 +107,22 @@ class AddEditPlanetPage extends StatelessWidget {
                           temperature: temperatureKey?.currentState?.value,
                           pressure: pressureKey?.currentState?.value,
                         );
-                        planet == null
-                            ? model.addPlanet(_planet)
-                            : model.editPlanet(_planet);
+                        switch (type) {
+                          case BodyType.planet:
+                            planet == null
+                                ? model.addPlanet(_planet)
+                                : model.editPlanet(_planet);
+                            break;
+                          case BodyType.celestialBody:
+                            planet == null
+                                ? model.addMoon(id, _planet)
+                                : model.editMoon(id, _planet);
+                            break;
+                          default:
+                            planet == null
+                                ? model.addPlanet(_planet)
+                                : model.editPlanet(_planet);
+                        }
                         Navigator.pop(context, true);
                       }
                     },

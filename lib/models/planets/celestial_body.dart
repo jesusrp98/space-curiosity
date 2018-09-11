@@ -104,8 +104,57 @@ class CelestialBody extends Model {
     notifyListeners();
   }
 
+  void addMoon(String id, CelestialBody celestialBody) {
+    final DocumentReference document =
+        planetsPath.document(id).collection('moons').document();
+    document.setData(<String, dynamic>{
+      'id': document.documentID,
+      'imageUrl': celestialBody.imageUrl,
+      'name': celestialBody.name,
+      'description': celestialBody.description,
+      'aphelion': celestialBody.aphelion,
+      'perihelion': celestialBody.perihelion,
+      'period': celestialBody.period,
+      'speed': celestialBody.speed,
+      'inclination': celestialBody.inclination,
+      'radius': celestialBody.radius,
+      'volume': celestialBody.volume,
+      'mass': celestialBody.mass,
+      'density': celestialBody.density,
+      'gravity': celestialBody.gravity,
+      'escapeVelocity': celestialBody.escapeVelocity,
+      'temperature': celestialBody.temperature,
+      'pressure': celestialBody.pressure,
+    });
+    notifyListeners();
+  }
+
   void editPlanet(CelestialBody celestialBody) {
     final DocumentReference document = planetsPath.document(celestialBody.id);
+    document.updateData(<String, dynamic>{
+      'imageUrl': celestialBody.imageUrl,
+      'name': celestialBody.name,
+      'description': celestialBody.description,
+      'aphelion': celestialBody.aphelion,
+      'perihelion': celestialBody.perihelion,
+      'period': celestialBody.period,
+      'speed': celestialBody.speed,
+      'inclination': celestialBody.inclination,
+      'radius': celestialBody.radius,
+      'volume': celestialBody.volume,
+      'mass': celestialBody.mass,
+      'density': celestialBody.density,
+      'gravity': celestialBody.gravity,
+      'escapeVelocity': celestialBody.escapeVelocity,
+      'temperature': celestialBody.temperature,
+      'pressure': celestialBody.pressure,
+    });
+    notifyListeners();
+  }
+
+  void editMoon(String id, CelestialBody celestialBody) {
+    final DocumentReference document =
+        planetsPath.document(id).collection('moons').document(celestialBody.id);
     document.updateData(<String, dynamic>{
       'imageUrl': celestialBody.imageUrl,
       'name': celestialBody.name,
