@@ -4,6 +4,7 @@ import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import '../../../models/planets/planets.dart';
+import '../../../models/planets/celestial_body.dart';
 import 'add_edit_planet.dart';
 import 'planet_page.dart';
 
@@ -39,13 +40,30 @@ class PlanetsHomePage extends StatelessWidget {
           onPressed: () => Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => AddEditPlanetPage(null),
+                  builder: (context) => AddEditPlanetPage(
+                        null,
+                        type: BodyType.planet,
+                      ),
                   fullscreenDialog: true,
                 ),
               ),
         ),
       ),
     );
+  }
+
+  Widget buildMoons(BuildContext context, CelestialBody planet) {
+    if (planet?.moons?.isEmpty ?? true)
+      return Center(child: Text('No Moons Found'));
+
+    return ListView.builder(
+        itemCount: planet?.moons?.length ?? 0,
+        itemBuilder: (BuildContext context, int index) {
+          return ListTile(
+            title: Text("Name"),
+            subtitle: Text(planet?.moons[index]?.name ?? "No Name Found"),
+          );
+        });
   }
 
   Widget _buildItem(BuildContext context, int index) {
@@ -60,8 +78,28 @@ class PlanetsHomePage extends StatelessWidget {
                   child: CachedNetworkImage(
                       imageUrl: model.planets[index].imageUrl),
                 ),
-                title: Text(model.planets[index].name),
-                subtitle: Text(model.planets[index].description),
+                title: Text(
+                  model.planets[index].name,
+                  maxLines: 1,
+                ),
+                subtitle: Text(
+                  model.planets[index].description,
+                  maxLines: 3,
+                ),
+                trailing: IconButton(
+                  icon: Icon(Icons.arrow_drop_down),
+                  onPressed: () {
+                    showModalBottomSheet<void>(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return Container(
+                              child: Padding(
+                            padding: EdgeInsets.only(bottom: 10.0),
+                            child: buildMoons(context, model.planets[index]),
+                          ));
+                        });
+                  },
+                ),
                 onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(

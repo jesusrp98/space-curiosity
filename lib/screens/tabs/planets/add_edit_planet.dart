@@ -1,14 +1,17 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import '../../../models/planets/celestial_body.dart';
-import 'dart:async';
 
 class AddEditPlanetPage extends StatelessWidget {
   static String routeName = "/add_planet";
   final CelestialBody planet;
+  final BodyType type;
+  final String id;
 
-  AddEditPlanetPage(this.planet);
+  AddEditPlanetPage(this.planet, {this.type, this.id});
 
   static final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   static final GlobalKey<FormFieldState<String>> nameKey =
@@ -44,13 +47,28 @@ class AddEditPlanetPage extends StatelessWidget {
   static final GlobalKey<FormFieldState<num>> pressureKey =
       GlobalKey<FormFieldState<num>>();
 
+  String getTitle() {
+    switch (type) {
+      case BodyType.planet:
+        if (planet == null) return "New Planet";
+        return "Edit Planet";
+        break;
+      case BodyType.celestialBody:
+        if (planet == null) return "New Moon";
+        return "Edit Moon";
+        break;
+      default:
+        return "New Planet";
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return new ScopedModel<CelestialBody>(
-      model: CelestialBody(id: planet?.id),
+      model: CelestialBody(id: type == BodyType.planet ? planet?.id : null),
       child: Scaffold(
         appBar: AppBar(
-          title: Text(planet == null ? "New Planet" : "Edit Planet"),
+          title: Text(getTitle()),
           actions: <Widget>[
             ScopedModelDescendant<CelestialBody>(
               builder: (context, child, model) => IconButton(

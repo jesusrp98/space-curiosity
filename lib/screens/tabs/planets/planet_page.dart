@@ -21,7 +21,10 @@ class PlanetPage extends StatelessWidget {
             onPressed: () => Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => AddEditPlanetPage(planet),
+                    builder: (context) => AddEditPlanetPage(
+                          planet,
+                          type: BodyType.planet,
+                        ),
                     fullscreenDialog: true,
                   ),
                 ).then((value) {
@@ -56,13 +59,18 @@ class PlanetPage extends StatelessWidget {
           ],
         ),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton.extended(
           icon: Icon(Icons.add),
           label: Text("Add Moon"),
           onPressed: () => Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => AddEditPlanetPage(planet),
+                  builder: (context) => AddEditPlanetPage(
+                        null,
+                        id: planet.id,
+                        type: BodyType.celestialBody,
+                      ),
                   fullscreenDialog: true,
                 ),
               ).then((value) {

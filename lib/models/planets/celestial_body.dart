@@ -1,9 +1,22 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import 'planets.dart';
 
+enum BodyType { planet, celestialBody }
+
 class CelestialBody extends Model {
+  List<CelestialBody> _moons;
+
+  List<CelestialBody> get moons => _moons;
+
+  set moons(List<CelestialBody> list) {
+    _moons = moons;
+    notifyListeners();
+  }
+
   final String id, imageUrl, name, description;
   final num aphelion,
       perihelion,
@@ -113,4 +126,7 @@ class CelestialBody extends Model {
     });
     notifyListeners();
   }
+
+  CollectionReference get moonsPath =>
+      planetsPath.document(id).collection('moons');
 }
