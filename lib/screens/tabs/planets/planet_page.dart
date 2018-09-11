@@ -11,6 +11,7 @@ class PlanetPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(planet.moons);
     return Scaffold(
       appBar: AppBar(
         title: Text(planet.name),
@@ -50,7 +51,8 @@ class PlanetPage extends StatelessWidget {
             RowItem.textRow(
                 'Escape velocity', planet.escapeVelocity.toString()),
             RowItem.textRow('Tempperature', planet.temperature.toString()),
-            RowItem.textRow('Pressure', planet.pressure.toString())
+            RowItem.textRow('Pressure', planet.pressure.toString()),
+            RowItem.textRow('Moons', planet.moons.toString())
           ],
         ),
       ),

@@ -1,52 +1,47 @@
-import 'dart:async';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:scoped_model/scoped_model.dart';
+import 'package:space_news/models/planets/celestial_body.dart';
 
-import 'planets.dart';
-
-class Planet extends Model {
-  final String id, imageUrl, name, description;
-
-  final num aphelion,
-      perihelion,
-      period,
-      speed,
-      inclination,
-      radius,
-      volume,
-      mass,
-      density,
-      gravity,
-      escapeVelocity,
-      temperature,
-      pressure;
+class Planet extends CelestialBody {
+  final List<CelestialBody> moons;
 
   Planet({
-    this.id,
-    this.imageUrl,
-    this.name,
-    this.description,
-    this.aphelion,
-    this.perihelion,
-    this.period,
-    this.speed,
-    this.inclination,
-    this.radius,
-    this.volume,
-    this.mass,
-    this.density,
-    this.gravity,
-    this.escapeVelocity,
-    this.temperature,
-    this.pressure,
-  });
-
-  Future<Planet> getPlanet(Planet planet) async {
-    final DocumentSnapshot document =
-        await planetsPath.document(planet.id).get();
-    return Planet.fromJson(document);
-  }
+    id,
+    imageUrl,
+    name,
+    description,
+    aphelion,
+    perihelion,
+    period,
+    speed,
+    inclination,
+    radius,
+    volume,
+    mass,
+    density,
+    gravity,
+    escapeVelocity,
+    temperature,
+    pressure,
+    this.moons,
+  }) : super(
+          id: id,
+          imageUrl: imageUrl,
+          name: name,
+          description: description,
+          aphelion: aphelion,
+          perihelion: perihelion,
+          period: period,
+          speed: speed,
+          inclination: inclination,
+          radius: radius,
+          volume: volume,
+          mass: mass,
+          density: density,
+          gravity: gravity,
+          escapeVelocity: escapeVelocity,
+          temperature: temperature,
+          pressure: pressure,
+        );
 
   factory Planet.fromJson(DocumentSnapshot json) {
     return Planet(
@@ -67,59 +62,9 @@ class Planet extends Model {
       escapeVelocity: json['escapeVelocity'],
       temperature: json['temperature'],
       pressure: json['pressure'],
+      moons: (json['moons'] as List)
+          .map((moon) => CelestialBody.fromJson(moon))
+          .toList(),
     );
-  }
-
-  void removePlanet(Planet planet) {
-    final DocumentReference document = planetsPath.document(planet.id);
-    document.delete();
-    notifyListeners();
-  }
-
-  void addPlanet(Planet planet) {
-    final DocumentReference document = planetsPath.document();
-    document.setData(<String, dynamic>{
-      'id': document.documentID,
-      'imageUrl': planet.imageUrl,
-      'name': planet.name,
-      'description': planet.description,
-      'aphelion': planet.aphelion,
-      'perihelion': planet.perihelion,
-      'period': planet.period,
-      'speed': planet.speed,
-      'inclination': planet.inclination,
-      'radius': planet.radius,
-      'volume': planet.volume,
-      'mass': planet.mass,
-      'density': planet.density,
-      'gravity': planet.gravity,
-      'escapeVelocity': planet.escapeVelocity,
-      'temperature': planet.temperature,
-      'pressure': planet.pressure,
-    });
-    notifyListeners();
-  }
-
-  void editPlanet(Planet planet) {
-    final DocumentReference document = planetsPath.document(planet.id);
-    document.updateData(<String, dynamic>{
-      'imageUrl': planet.imageUrl,
-      'name': planet.name,
-      'description': planet.description,
-      'aphelion': planet.aphelion,
-      'perihelion': planet.perihelion,
-      'period': planet.period,
-      'speed': planet.speed,
-      'inclination': planet.inclination,
-      'radius': planet.radius,
-      'volume': planet.volume,
-      'mass': planet.mass,
-      'density': planet.density,
-      'gravity': planet.gravity,
-      'escapeVelocity': planet.escapeVelocity,
-      'temperature': planet.temperature,
-      'pressure': planet.pressure,
-    });
-    notifyListeners();
   }
 }
