@@ -5,37 +5,52 @@
     
     
       
-      <testcase classname="fastlane.lanes" name="0: update_fastlane" time="0.197375">
+      <testcase classname="fastlane.lanes" name="0: update_fastlane" time="0.132739">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="1: Switch to android beta lane" time="0.001127">
+      <testcase classname="fastlane.lanes" name="1: Switch to ios prepare lane" time="0.006983">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="2: Switch to android prepare lane" time="0.00089">
+      <testcase classname="fastlane.lanes" name="2: flutter packages get" time="2.964662">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="3: flutter packages get" time="2.96838">
+      <testcase classname="fastlane.lanes" name="3: flutter clean" time="1.244326">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="4: flutter clean" time="2.079534">
+      <testcase classname="fastlane.lanes" name="4: increment_build_number" time="1.266476">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="5: increment_version_code" time="0.025799">
+      <testcase classname="fastlane.lanes" name="5: flutter build ios" time="107.260955">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="6: flutter build apk" time="39.658162">
+      <testcase classname="fastlane.lanes" name="6: build_ios_app" time="217.554998">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="7: changelog_from_git_commits" time="0.070147">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="8: upload_to_testflight" time="117.88479">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="9: add_git_tag" time="0.035141">
         
       </testcase>
     
