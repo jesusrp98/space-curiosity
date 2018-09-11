@@ -5,7 +5,62 @@
     
     
       
-      <testcase classname="fastlane.lanes" name="0: update_fastlane" time="0.110423">
+      <testcase classname="fastlane.lanes" name="00: update_fastlane" time="0.138947">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="01: Switch to ios prepare lane" time="0.001099">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="02: flutter packages get" time="3.019154">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="03: flutter clean" time="1.802651">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="04: increment_build_number" time="1.62714">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="05: flutter build ios" time="114.982638">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="06: Switch to ios beta_badge lane" time="0.035294">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="07: add_badge" time="2.566078">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="08: build_ios_app" time="283.163331">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="09: changelog_from_git_commits" time="0.030587">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="10: upload_to_testflight" time="126.988042">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="11: add_git_tag" time="0.031055">
         
       </testcase>
     
