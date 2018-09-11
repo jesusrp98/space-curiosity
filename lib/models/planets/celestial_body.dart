@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:scoped_model/scoped_model.dart';
-import 'planets.dart';
 
-class CelestialBody extends Model {
+import 'planet.dart';
+
+class CelestialBody extends Planet {
   final String id, imageUrl, name, description;
 
   final num aphelion,
@@ -59,58 +59,5 @@ class CelestialBody extends Model {
       temperature: json['temperature'],
       pressure: json['pressure'],
     );
-  }
-
-  void removePlanet(CelestialBody celestialBody) {
-    final DocumentReference document = planetsPath.document(celestialBody.id);
-    document.delete();
-    notifyListeners();
-  }
-
-  void addPlanet(CelestialBody celestialBody) {
-    final DocumentReference document = planetsPath.document();
-    document.setData(<String, dynamic>{
-      'id': document.documentID,
-      'imageUrl': celestialBody.imageUrl,
-      'name': celestialBody.name,
-      'description': celestialBody.description,
-      'aphelion': celestialBody.aphelion,
-      'perihelion': celestialBody.perihelion,
-      'period': celestialBody.period,
-      'speed': celestialBody.speed,
-      'inclination': celestialBody.inclination,
-      'radius': celestialBody.radius,
-      'volume': celestialBody.volume,
-      'mass': celestialBody.mass,
-      'density': celestialBody.density,
-      'gravity': celestialBody.gravity,
-      'escapeVelocity': celestialBody.escapeVelocity,
-      'temperature': celestialBody.temperature,
-      'pressure': celestialBody.pressure,
-    });
-    notifyListeners();
-  }
-
-  void editPlanet(CelestialBody celestialBody) {
-    final DocumentReference document = planetsPath.document(celestialBody.id);
-    document.updateData(<String, dynamic>{
-      'imageUrl': celestialBody.imageUrl,
-      'name': celestialBody.name,
-      'description': celestialBody.description,
-      'aphelion': celestialBody.aphelion,
-      'perihelion': celestialBody.perihelion,
-      'period': celestialBody.period,
-      'speed': celestialBody.speed,
-      'inclination': celestialBody.inclination,
-      'radius': celestialBody.radius,
-      'volume': celestialBody.volume,
-      'mass': celestialBody.mass,
-      'density': celestialBody.density,
-      'gravity': celestialBody.gravity,
-      'escapeVelocity': celestialBody.escapeVelocity,
-      'temperature': celestialBody.temperature,
-      'pressure': celestialBody.pressure,
-    });
-    notifyListeners();
   }
 }

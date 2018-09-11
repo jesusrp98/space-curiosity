@@ -1,47 +1,46 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:space_news/models/planets/celestial_body.dart';
+import 'package:scoped_model/scoped_model.dart';
 
-class Planet extends CelestialBody {
+import 'celestial_body.dart';
+import 'planets.dart';
+
+class Planet extends Model {
+  final String id, imageUrl, name, description;
   final List<CelestialBody> moons;
+  final num aphelion,
+      perihelion,
+      period,
+      speed,
+      inclination,
+      radius,
+      volume,
+      mass,
+      density,
+      gravity,
+      escapeVelocity,
+      temperature,
+      pressure;
 
   Planet({
-    id,
-    imageUrl,
-    name,
-    description,
-    aphelion,
-    perihelion,
-    period,
-    speed,
-    inclination,
-    radius,
-    volume,
-    mass,
-    density,
-    gravity,
-    escapeVelocity,
-    temperature,
-    pressure,
+    this.id,
+    this.imageUrl,
+    this.name,
+    this.description,
+    this.aphelion,
+    this.perihelion,
+    this.period,
+    this.speed,
+    this.inclination,
+    this.radius,
+    this.volume,
+    this.mass,
+    this.density,
+    this.gravity,
+    this.escapeVelocity,
+    this.temperature,
+    this.pressure,
     this.moons,
-  }) : super(
-          id: id,
-          imageUrl: imageUrl,
-          name: name,
-          description: description,
-          aphelion: aphelion,
-          perihelion: perihelion,
-          period: period,
-          speed: speed,
-          inclination: inclination,
-          radius: radius,
-          volume: volume,
-          mass: mass,
-          density: density,
-          gravity: gravity,
-          escapeVelocity: escapeVelocity,
-          temperature: temperature,
-          pressure: pressure,
-        );
+  });
 
   factory Planet.fromJson(DocumentSnapshot json) {
     return Planet(
@@ -66,5 +65,58 @@ class Planet extends CelestialBody {
           .map((moon) => CelestialBody.fromJson(moon))
           .toList(),
     );
+  }
+
+  void removePlanet(Planet planet) {
+    final DocumentReference document = planetsPath.document(planet.id);
+    document.delete();
+    notifyListeners();
+  }
+
+  void addPlanet(Planet celestialBody) {
+    final DocumentReference document = planetsPath.document();
+    document.setData(<String, dynamic>{
+      'id': document.documentID,
+      'imageUrl': celestialBody.imageUrl,
+      'name': celestialBody.name,
+      'description': celestialBody.description,
+      'aphelion': celestialBody.aphelion,
+      'perihelion': celestialBody.perihelion,
+      'period': celestialBody.period,
+      'speed': celestialBody.speed,
+      'inclination': celestialBody.inclination,
+      'radius': celestialBody.radius,
+      'volume': celestialBody.volume,
+      'mass': celestialBody.mass,
+      'density': celestialBody.density,
+      'gravity': celestialBody.gravity,
+      'escapeVelocity': celestialBody.escapeVelocity,
+      'temperature': celestialBody.temperature,
+      'pressure': celestialBody.pressure,
+    });
+    notifyListeners();
+  }
+
+  void editPlanet(Planet celestialBody) {
+    final DocumentReference document = planetsPath.document(celestialBody.id);
+    document.updateData(<String, dynamic>{
+      'imageUrl': celestialBody.imageUrl,
+      'name': celestialBody.name,
+      'description': celestialBody.description,
+      'aphelion': celestialBody.aphelion,
+      'perihelion': celestialBody.perihelion,
+      'period': celestialBody.period,
+      'speed': celestialBody.speed,
+      'inclination': celestialBody.inclination,
+      'radius': celestialBody.radius,
+      'volume': celestialBody.volume,
+      'mass': celestialBody.mass,
+      'density': celestialBody.density,
+      'gravity': celestialBody.gravity,
+      'escapeVelocity': celestialBody.escapeVelocity,
+      'temperature': celestialBody.temperature,
+      'pressure': celestialBody.pressure,
+    });
+    notifyListeners();
   }
 }
