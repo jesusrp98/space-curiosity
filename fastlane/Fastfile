@@ -1,0 +1,239 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+update_fastlane(nightly: true)
+
+# You can either generate the build number on commits or increment by 1
+# version: 0.0.1+1 in pubspec.yaml
+# Change to false if not setup for project level version and build number
+# true: generated build number off of commits in Git Repo
+# false: increments build number
+# Android Lane Need to Install: https://github.com/Jems22/fastlane-plugin-increment_version_code
+# To Change with |options|:
+# bundle exec fastlane beta flutter_version:true
+flutterVersion = false
+
+app_name = "Space Curiosity" #{app_name}
+project_path = "/Users/rodydavis/Documents/Github/space_news" #{project_path}
+username = "irody@icloud.com" #{username} // Apple ID
+crashlytics_api_key = "7b6e65598f9f3ff267857e217d9259361f4d2e82"
+crashlytics_build_secret = "d6479a065e0f2079111ca9cee3ad617be951721d02a221d16a61353912846d96"
+slack_url = "https://hooks.slack.com/services/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"
+build_number = 0
+changelog = ""
+
+# At the Project root you can run:
+# 1. fastlane beta
+# 2. fastlane release
+
+desc "Deploy a new version to the Google Play Beta and TestFlight"
+lane :beta do |options|
+  if options[:flutter_version]
+    flutterVersion = true
+  end
+  self.runner.current_platform = :android
+  beta
+  self.runner.current_platform = :ios
+  beta
+end
+
+desc "Deploy a new version to the Google Play and the App Store"
+lane :release do |options|
+  if options[:flutter_version]
+    flutterVersion = true
+  end
+  ensure_git_status_clean
+  changelog = prompt(
+    text: "Changelog: ",
+    multi_line_end_keyword: "END"
+  )
+  self.runner.current_platform = :android
+  release
+  self.runner.current_platform = :ios
+  release
+end
+
+lane :build do |options|
+  if options[:flutter_version]
+    flutterVersion = true
+  end
+  self.runner.current_platform = :android
+  prepare
+  self.runner.current_platform = :ios
+  prepare
+end
+
+# default_platform(:android)
+
+platform :android do
+  desc "Add Badge to Launcher Icon"
+  lane :beta_badge do |options|
+    Dir.chdir "#{project_path}/android" do
+      if options[:hide]
+        add_badge(no_badge: true, glob: "/android/app/src/main/res/mipmap-*/ic_launcher.png",)
+      else
+        add_badge(dark: true, glob: "/android/app/src/main/res/mipmap-*/ic_launcher.png",)
+      end
+    end
+  end
+
+  desc "Prepare and archive app"
+  lane :prepare  do |options|
+    Dir.chdir ".." do
+      sh("flutter", "packages", "get")
+      sh("flutter", "clean")
+      if flutterVersion == true
+        build_number = number_of_commits(all: true)
+        sh("flutter", "build", "apk", "--build-number=#{build_number}")
+      else # Just Increment Build Number
+        Dir.chdir "#{project_path}/android" do
+          build_number = increment_version_code
+        end
+        sh("flutter", "build", "apk")
+      end
+    end
+    beta_badge(hide: options[:release])
+  end
+
+  desc "Deploy a new version to the Google Play Beta"
+  lane :beta do
+    prepare(release: false)
+    # crashlytics(
+    #   # crashlytics_path: "#{project_path}/ios/Pods/Crashlytics/", # path to your Crashlytics submit binary.
+    #   api_token: crashlytics_api_key,
+    #   build_secret: crashlytics_build_secret,
+    #   apk_path: "#{project_path}/build/app/outputs/apk/release/app-release.apk",
+    #   notes: changelog_from_git_commits,
+    # )
+    upload_to_play_store(
+      track: 'beta',
+      apk: "#{project_path}/build/app/outputs/apk/release/app-release.apk",
+      skip_upload_screenshots: true,
+      skip_upload_images: true)
+    # slack(
+    #   message: "Unify Mobile (#{build_number}): Android sent to beta",
+    #   slack_url: slack_url,
+    # )
+    add_git_tag(build_number: build_number)
+  end
+
+  desc "Deploy a new version to the Google Play Production"
+  lane :release do
+    prepare(release: true)
+    upload_to_play_store(
+      track: 'production',
+      apk: "#{project_path}/build/app/outputs/apk/release/app-release.apk",
+      skip_upload_screenshots: true,
+      skip_upload_images: true,
+    )
+    # slack(
+    #   message: "Unify Mobile (#{build_number}): Android sent to production",
+    #   slack_url: slack_url,
+    # )
+    add_git_tag(build_number: build_number)
+  end
+end
+
+platform :ios do
+  desc "Capture Screenshots"
+  lane :screenshots do
+    # sh "cd /Users/Shared/CrossMedia/Projects/MyUnifyMobile && flutter build ios"
+    #SNAPSHOT_FORCE_DELETE=1 fastlane snapshot reset_simulators && fastlane snapshot --number_of_retries 3
+    # reset_simulators
+    # sh "xcrun simctl erase all"
+    capture_ios_screenshots(
+      workspace: "#{project_path}/ios/Runner.xcworkspace",
+      erase_simulator: true,
+      concurrent_simulators: false,
+      number_of_retries: 1
+    )
+    # frame_screenshots(white: true)
+    upload_to_app_store
+    # slack(
+    #   message: "Unify Mobile (#{build_number}): Successfully captured new screenshots for iOS",
+    #   slack_url: slack_url,
+    # )
+  end
+
+  desc "Add Badge to App Icon"
+  lane :beta_badge do |options|
+    Dir.chdir "#{project_path}/ios" do
+      if options[:hide]
+        add_badge(no_badge: true)
+        # sh 'git checkout -- <path>/Assets.xcassets/'
+      else
+        add_badge(dark: true)
+      end
+    end
+  end
+
+  desc "Prepare and archive app"
+  lane :prepare  do |options|
+    Dir.chdir ".." do
+      sh("flutter", "packages", "get")
+      sh("flutter", "clean")
+      if flutterVersion == true
+        build_number = number_of_commits(all: true)
+        sh("flutter", "build", "ios", "--build-number=#{build_number}")
+      else # Just Increment Build Number
+        Dir.chdir "#{project_path}/ios" do
+          build_number = increment_build_number(xcodeproj: "#{project_path}/ios/Runner.xcodeproj")
+        end
+        sh("flutter", "build", "ios")
+      end
+    end
+    beta_badge(hide: options[:release])
+    build_ios_app(workspace: "#{project_path}/ios/Runner.xcworkspace", scheme: "Runner")
+  end
+
+  desc "Push a new beta build to TestFlight"
+  lane :beta do
+    prepare(release: false)
+    # crashlytics(
+    #   crashlytics_path: "#{project_path}/ios/Pods/Crashlytics/",
+    #   api_token: crashlytics_api_key,
+    #   build_secret: crashlytics_build_secret,
+    #   ipa_path: "#{project_path}/Runner.ipa",
+    #   notes: changelog_from_git_commits,
+    # )
+    upload_to_testflight(
+      skip_waiting_for_build_processing: true,
+      ipa: "#{project_path}/Runner.ipa",
+      username: username,
+      changelog: changelog_from_git_commits,
+    )
+    # slack(
+    #   message: "Unify Mobile: iOS sent to beta",
+    #   slack_url: slack_url,
+    # )
+    add_git_tag(build_number: build_number)
+  end
+
+  desc "Push a new release build to the App Store"
+  lane :release do
+    prepare(release: true)
+    upload_to_app_store(
+      submit_for_review: true,
+      automatic_release: true,
+      skip_screenshots: true,
+      force: true,
+      ipa: "#{project_path}/Runner.ipa",
+      username: username,
+    )
+    # slack(
+    #   message: "Unify Mobile (#{build_number}): iOS sent to production",
+    #   slack_url: slack_url,
+    # )
+    add_git_tag(build_number: build_number)
+  end
+end

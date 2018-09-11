@@ -61,5 +61,12 @@ post_install do |installer|
     target.build_configurations.each do |config|
       config.build_settings['ENABLE_BITCODE'] = 'NO'
     end
+    plist_buddy = "/usr/libexec/PlistBuddy"
+    plist = "Pods/Target Support Files/#{target}/Info.plist"
+
+    puts "Add armv7 to #{target} to make it pass iTC verification."
+
+    `#{plist_buddy} -c "Add UIRequiredDeviceCapabilities array" "#{plist}"`
+    `#{plist_buddy} -c "Add UIRequiredDeviceCapabilities:0 string armv7" "#{plist}"`
   end
 end
