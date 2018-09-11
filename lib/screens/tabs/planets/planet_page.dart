@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
-import '../../../models/planets/planet.dart';
+import '../../../models/planets/celestial_body.dart';
 import '../../../widgets/row_item.dart';
 import 'add_edit_planet.dart';
 
 class PlanetPage extends StatelessWidget {
-  final Planet planet;
+  final CelestialBody planet;
 
   PlanetPage(this.planet);
 
   @override
   Widget build(BuildContext context) {
-    print(planet.moons);
+    // print(planet.moons);
     return Scaffold(
       appBar: AppBar(
         title: Text(planet.name),
@@ -30,7 +30,7 @@ class PlanetPage extends StatelessWidget {
                     if (_value.contains('deleted')) Navigator.pop(context);
                   }
                 }),
-          )
+          ),
         ],
       ),
       body: Padding(
@@ -52,10 +52,25 @@ class PlanetPage extends StatelessWidget {
                 'Escape velocity', planet.escapeVelocity.toString()),
             RowItem.textRow('Tempperature', planet.temperature.toString()),
             RowItem.textRow('Pressure', planet.pressure.toString()),
-            RowItem.textRow('Moons', planet.moons.toString())
+            // RowItem.textRow('Moons', planet.moons.toString())
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton.extended(
+          icon: Icon(Icons.add),
+          label: Text("Add Moon"),
+          onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => AddEditPlanetPage(planet),
+                  fullscreenDialog: true,
+                ),
+              ).then((value) {
+                if (value != null) {
+                  String _value = value;
+                  if (_value.contains('deleted')) Navigator.pop(context);
+                }
+              })),
     );
   }
 }

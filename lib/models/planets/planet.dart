@@ -4,7 +4,7 @@ import 'celestial_body.dart';
 
 class Planet extends CelestialBody {
   final String id, imageUrl, name, description;
-  final List<CelestialBody> moons;
+  // final List<CelestialBody> moons;
   final num aphelion,
       perihelion,
       period,
@@ -37,7 +37,7 @@ class Planet extends CelestialBody {
     this.escapeVelocity,
     this.temperature,
     this.pressure,
-    this.moons,
+    // this.moons,
   });
 
   factory Planet.fromJson(DocumentSnapshot json) {
@@ -59,9 +59,9 @@ class Planet extends CelestialBody {
       escapeVelocity: json['escapeVelocity'],
       temperature: json['temperature'],
       pressure: json['pressure'],
-      moons: (json['moons'] as List)
-          .map((moon) => CelestialBody.fromJson(moon))
-          .toList(),
+      // moons: (json['moons'] as List)
+      //     .map((moon) => CelestialBody.fromJson(moon))
+      //     .toList(),
     );
   }
 }

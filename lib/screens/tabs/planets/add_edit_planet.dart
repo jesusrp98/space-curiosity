@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 
-import '../../../models/planets/planet.dart';
+import '../../../models/planets/celestial_body.dart';
 import 'dart:async';
 
 class AddEditPlanetPage extends StatelessWidget {
   static String routeName = "/add_planet";
-  final Planet planet;
+  final CelestialBody planet;
 
   AddEditPlanetPage(this.planet);
 
@@ -46,13 +46,13 @@ class AddEditPlanetPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new ScopedModel<Planet>(
-      model: Planet(id: planet?.id),
+    return new ScopedModel<CelestialBody>(
+      model: CelestialBody(id: planet?.id),
       child: Scaffold(
         appBar: AppBar(
           title: Text(planet == null ? "New Planet" : "Edit Planet"),
           actions: <Widget>[
-            ScopedModelDescendant<Planet>(
+            ScopedModelDescendant<CelestialBody>(
               builder: (context, child, model) => IconButton(
                     icon: Icon(Icons.delete),
                     onPressed: planet == null
@@ -63,13 +63,13 @@ class AddEditPlanetPage extends StatelessWidget {
                           },
                   ),
             ),
-            ScopedModelDescendant<Planet>(
+            ScopedModelDescendant<CelestialBody>(
               builder: (context, child, model) => IconButton(
                     icon: Icon(Icons.save),
                     onPressed: () {
                       final form = formKey.currentState;
                       if (form.validate()) {
-                        var _planet = Planet(
+                        var _planet = CelestialBody(
                           id: planet?.id,
                           name: nameKey?.currentState?.value ?? '',
                           description: descriptionKey?.currentState?.value,
@@ -101,7 +101,7 @@ class AddEditPlanetPage extends StatelessWidget {
         ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: ScopedModelDescendant<Planet>(
+          child: ScopedModelDescendant<CelestialBody>(
             builder: (context, child, model) => Form(
                   key: formKey,
                   autovalidate: false,
