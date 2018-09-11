@@ -102,7 +102,7 @@ platform :android do
         sh("flutter", "build", "apk")
       end
     end
-    beta_badge(hide: options[:release])
+    # beta_badge(hide: options[:release])
   end
 
   desc "Deploy a new version to the Google Play Beta"
@@ -192,7 +192,7 @@ platform :ios do
         sh("flutter", "build", "ios")
       end
     end
-    beta_badge(hide: options[:release])
+    # beta_badge(hide: options[:release])
     build_ios_app(workspace: "#{project_path}/ios/Runner.xcworkspace", scheme: "Runner")
   end
 

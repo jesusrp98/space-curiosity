@@ -5,62 +5,39 @@
     
     
       
-      <testcase classname="fastlane.lanes" name="00: update_fastlane" time="0.138947">
+      <testcase classname="fastlane.lanes" name="0: update_fastlane" time="0.162884">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="01: Switch to ios prepare lane" time="0.001099">
+      <testcase classname="fastlane.lanes" name="1: Switch to ios prepare lane" time="0.001175">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="02: flutter packages get" time="3.019154">
+      <testcase classname="fastlane.lanes" name="2: flutter packages get" time="2.11762">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="03: flutter clean" time="1.802651">
+      <testcase classname="fastlane.lanes" name="3: flutter clean" time="1.243687">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="04: increment_build_number" time="1.62714">
+      <testcase classname="fastlane.lanes" name="4: increment_build_number" time="1.395233">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="05: flutter build ios" time="114.982638">
+      <testcase classname="fastlane.lanes" name="5: flutter build ios" time="89.574486">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="06: Switch to ios beta_badge lane" time="0.035294">
+      <testcase classname="fastlane.lanes" name="6: build_ios_app" time="217.340703">
         
-      </testcase>
-    
-      
-      <testcase classname="fastlane.lanes" name="07: add_badge" time="2.566078">
-        
-      </testcase>
-    
-      
-      <testcase classname="fastlane.lanes" name="08: build_ios_app" time="283.163331">
-        
-      </testcase>
-    
-      
-      <testcase classname="fastlane.lanes" name="09: changelog_from_git_commits" time="0.030587">
-        
-      </testcase>
-    
-      
-      <testcase classname="fastlane.lanes" name="10: upload_to_testflight" time="126.988042">
-        
-      </testcase>
-    
-      
-      <testcase classname="fastlane.lanes" name="11: add_git_tag" time="0.031055">
+          <failure message="/Library/Ruby/Gems/2.3.0/gems/fastlane-2.103.1/fastlane/lib/fastlane/actions/actions_helper.rb:48:in `execute_action'&#10;/Library/Ruby/Gems/2.3.0/gems/fastlane-2.103.1/fastlane/lib/fastlane/runner.rb:232:in `block in execute_action'&#10;/Library/Ruby/Gems/2.3.0/gems/fastlane-2.103.1/fastlane/lib/fastlane/runner.rb:227:in `chdir'&#10;/Library/Ruby/Gems/2.3.0/gems/fastlane-2.103.1/fastlane/lib/fastlane/runner.rb:227:in `execute_action'&#10;/Library/Ruby/Gems/2.3.0/gems/fastlane-2.103.1/fastlane/lib/fastlane/runner.rb:157:in `trigger_action_by_name'&#10;/Library/Ruby/Gems/2.3.0/gems/fastlane-2.103.1/fastlane/lib/fastlane/fast_file.rb:149:in `method_missing'&#10;Fastfile:196:in `block (2 levels) in parsing_binding'&#10;/Library/Ruby/Gems/2.3.0/gems/fastlane-2.103.1/fastlane/lib/fastlane/lane.rb:33:in `call'&#10;/Library/Ruby/Gems/2.3.0/gems/fastlane-2.103.1/fastlane/lib/fastlane/runner.rb:204:in `try_switch_to_lane'&#10;/Library/Ruby/Gems/2.3.0/gems/fastlane-2.103.1/fastlane/lib/fastlane/runner.rb:146:in `trigger_action_by_name'&#10;/Library/Ruby/Gems/2.3.0/gems/fastlane-2.103.1/fastlane/lib/fastlane/fast_file.rb:149:in `method_missing'&#10;Fastfile:201:in `block (2 levels) in parsing_binding'&#10;/Library/Ruby/Gems/2.3.0/gems/fastlane-2.103.1/fastlane/lib/fastlane/lane.rb:33:in `call'&#10;/Library/Ruby/Gems/2.3.0/gems/fastlane-2.103.1/fastlane/lib/fastlane/runner.rb:49:in `block in execute'&#10;/Library/Ruby/Gems/2.3.0/gems/fastlane-2.103.1/fastlane/lib/fastlane/runner.rb:45:in `chdir'&#10;/Library/Ruby/Gems/2.3.0/gems/fastlane-2.103.1/fastlane/lib/fastlane/runner.rb:45:in `execute'&#10;/Library/Ruby/Gems/2.3.0/gems/fastlane-2.103.1/fastlane/lib/fastlane/lane_manager.rb:56:in `cruise_lane'&#10;/Library/Ruby/Gems/2.3.0/gems/fastlane-2.103.1/fastlane/lib/fastlane/command_line_handler.rb:36:in `handle'&#10;/Library/Ruby/Gems/2.3.0/gems/fastlane-2.103.1/fastlane/lib/fastlane/commands_generator.rb:108:in `block (2 levels) in run'&#10;/Library/Ruby/Gems/2.3.0/gems/commander-fastlane-4.4.6/lib/commander/command.rb:178:in `call'&#10;/Library/Ruby/Gems/2.3.0/gems/commander-fastlane-4.4.6/lib/commander/command.rb:153:in `run'&#10;/Library/Ruby/Gems/2.3.0/gems/commander-fastlane-4.4.6/lib/commander/runner.rb:476:in `run_active_command'&#10;/Library/Ruby/Gems/2.3.0/gems/fastlane-2.103.1/fastlane_core/lib/fastlane_core/ui/fastlane_runner.rb:74:in `run!'&#10;/Library/Ruby/Gems/2.3.0/gems/commander-fastlane-4.4.6/lib/commander/delegates.rb:15:in `run!'&#10;/Library/Ruby/Gems/2.3.0/gems/fastlane-2.103.1/fastlane/lib/fastlane/commands_generator.rb:333:in `run'&#10;/Library/Ruby/Gems/2.3.0/gems/fastlane-2.103.1/fastlane/lib/fastlane/commands_generator.rb:41:in `start'&#10;/Library/Ruby/Gems/2.3.0/gems/fastlane-2.103.1/fastlane/lib/fastlane/cli_tools_distributor.rb:108:in `take_off'&#10;/Library/Ruby/Gems/2.3.0/gems/fastlane-2.103.1/bin/fastlane:20:in `&lt;top (required)&gt;'&#10;/Library/Ruby/Gems/2.3.0/bin/fastlane:22:in `load'&#10;/Library/Ruby/Gems/2.3.0/bin/fastlane:22:in `&lt;top (required)&gt;'&#10;/Library/Ruby/Gems/2.3.0/gems/bundler-1.16.3/lib/bundler/cli/exec.rb:74:in `load'&#10;/Library/Ruby/Gems/2.3.0/gems/bundler-1.16.3/lib/bundler/cli/exec.rb:74:in `kernel_load'&#10;/Library/Ruby/Gems/2.3.0/gems/bundler-1.16.3/lib/bundler/cli/exec.rb:28:in `run'&#10;/Library/Ruby/Gems/2.3.0/gems/bundler-1.16.3/lib/bundler/cli.rb:424:in `exec'&#10;/Library/Ruby/Gems/2.3.0/gems/bundler-1.16.3/lib/bundler/vendor/thor/lib/thor/command.rb:27:in `run'&#10;/Library/Ruby/Gems/2.3.0/gems/bundler-1.16.3/lib/bundler/vendor/thor/lib/thor/invocation.rb:126:in `invoke_command'&#10;/Library/Ruby/Gems/2.3.0/gems/bundler-1.16.3/lib/bundler/vendor/thor/lib/thor.rb:387:in `dispatch'&#10;/Library/Ruby/Gems/2.3.0/gems/bundler-1.16.3/lib/bundler/cli.rb:27:in `dispatch'&#10;/Library/Ruby/Gems/2.3.0/gems/bundler-1.16.3/lib/bundler/vendor/thor/lib/thor/base.rb:466:in `start'&#10;/Library/Ruby/Gems/2.3.0/gems/bundler-1.16.3/lib/bundler/cli.rb:18:in `start'&#10;/Library/Ruby/Gems/2.3.0/gems/bundler-1.16.3/exe/bundle:30:in `block in &lt;top (required)&gt;'&#10;/Library/Ruby/Gems/2.3.0/gems/bundler-1.16.3/lib/bundler/friendly_errors.rb:124:in `with_friendly_errors'&#10;/Library/Ruby/Gems/2.3.0/gems/bundler-1.16.3/exe/bundle:22:in `&lt;top (required)&gt;'&#10;/usr/local/bin/bundle:23:in `load'&#10;/usr/local/bin/bundle:23:in `&lt;main&gt;'&#10;&#10;Error packaging up the application" />
         
       </testcase>
     
