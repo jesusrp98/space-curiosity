@@ -3,42 +3,45 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'celestial_body.dart';
 
 class Planet extends CelestialBody {
-  final String id, imageUrl, name, description;
-  // final List<CelestialBody> moons;
-  final num aphelion,
-      perihelion,
-      period,
-      speed,
-      inclination,
-      radius,
-      volume,
-      mass,
-      density,
-      gravity,
-      escapeVelocity,
-      temperature,
-      pressure;
+  final List<CelestialBody> moons;
 
   Planet({
-    this.id,
-    this.imageUrl,
-    this.name,
-    this.description,
-    this.aphelion,
-    this.perihelion,
-    this.period,
-    this.speed,
-    this.inclination,
-    this.radius,
-    this.volume,
-    this.mass,
-    this.density,
-    this.gravity,
-    this.escapeVelocity,
-    this.temperature,
-    this.pressure,
-    // this.moons,
-  });
+    id,
+    imageUrl,
+    name,
+    description,
+    aphelion,
+    perihelion,
+    period,
+    speed,
+    inclination,
+    radius,
+    volume,
+    mass,
+    density,
+    gravity,
+    escapeVelocity,
+    temperature,
+    pressure,
+    this.moons,
+  }) : super(
+          id: id,
+          imageUrl: imageUrl,
+          name: name,
+          description: description,
+          aphelion: aphelion,
+          perihelion: perihelion,
+          period: period,
+          speed: speed,
+          inclination: inclination,
+          radius: radius,
+          volume: volume,
+          mass: mass,
+          density: density,
+          gravity: gravity,
+          escapeVelocity: escapeVelocity,
+          temperature: temperature,
+        );
 
   factory Planet.fromJson(DocumentSnapshot json) {
     return Planet(

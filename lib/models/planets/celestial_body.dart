@@ -5,7 +5,6 @@ import 'planets.dart';
 
 class CelestialBody extends Model {
   final String id, imageUrl, name, description;
-
   final num aphelion,
       perihelion,
       period,
