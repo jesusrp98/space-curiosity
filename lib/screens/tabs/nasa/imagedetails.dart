@@ -22,7 +22,7 @@ class ImageDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String _message =
-        'Nasa Image: ${image?.title},\n\nDescription: ${image?.description}\n\nImage: ${image?.hdurl}';
+        'Nasa Image: ${image?.title},\n\nDescription: ${image?.description}\n\n${image?.hdurl}';
     return Scaffold(
       appBar: new AppBar(
         title: new Text(

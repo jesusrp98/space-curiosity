@@ -82,7 +82,7 @@ class _NasaHomePageState extends State<NasaHomePage> {
           // backgroundColor: Colors.white,
           actions: <Widget>[
             IconButton(
-              icon: Icon(Icons.info),
+              icon: Icon(Icons.info_outline),
               onPressed: goToAbout,
             ),
           ],
@@ -97,7 +97,7 @@ class _NasaHomePageState extends State<NasaHomePage> {
                 key: _refreshIndicatorKey,
                 onRefresh: () => _onRefresh(model),
                 child: StreamBuilder(
-                  stream: model.fetchImages(count).asStream(),
+                  stream: model.fetchImages(count).asStream().distinct(),
                   builder: (BuildContext context, _) {
                     if (model.images == null)
                       return NativeLoadingIndicator(
@@ -125,7 +125,7 @@ class _NasaHomePageState extends State<NasaHomePage> {
                         String content = model.images[index]?.hdurl ??
                             model.images[index]?.url ??
                             "";
-                        var _currentImage = getImagePreview(content);
+
                         return InkWell(
                           onTap: () {
                             Navigator.push(context,
@@ -150,7 +150,7 @@ class _NasaHomePageState extends State<NasaHomePage> {
                               ),
                               child: Hero(
                                 tag: model.images[index].id,
-                                child: _currentImage,
+                                child: Image.network(content),
                               ),
                               footer: Text(
                                 model.images[index]?.date ?? "",
