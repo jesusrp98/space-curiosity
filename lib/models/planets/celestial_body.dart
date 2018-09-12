@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import 'planets.dart';
@@ -17,7 +18,8 @@ class CelestialBody extends Model {
   }
 
   final String id, imageUrl, name, description;
-  final num aphelion,
+  final num population,
+      aphelion,
       perihelion,
       period,
       speed,
@@ -36,6 +38,7 @@ class CelestialBody extends Model {
     this.imageUrl,
     this.name,
     this.description,
+    this.population,
     this.aphelion,
     this.perihelion,
     this.period,
@@ -57,6 +60,7 @@ class CelestialBody extends Model {
       imageUrl: json['imageUrl'],
       name: json['name'],
       description: json['description'],
+      population: json['population'],
       aphelion: json['aphelion'],
       perihelion: json['perihelion'],
       period: json['period'],
@@ -175,4 +179,43 @@ class CelestialBody extends Model {
 
   CollectionReference get moonsPath =>
       planetsPath.document(id).collection('moons');
+
+  String get getPopulation =>
+      'Population: ${NumberFormat.decimalPattern().format(population)}';
+
+  String get getAphelion =>
+      '${NumberFormat.decimalPattern().format(aphelion)} ua';
+
+  String get getPerihelion =>
+      '${NumberFormat.decimalPattern().format(perihelion)} ua';
+
+  String get getPeriod =>
+      '${NumberFormat.decimalPattern().format(period)} days';
+
+  String get getSpeed => '${NumberFormat.decimalPattern().format(speed)} km/s';
+
+  String get getInclination =>
+      '${NumberFormat.decimalPattern().format(inclination)}°';
+
+  String get getRadius => '${NumberFormat.decimalPattern().format(radius)} km';
+
+  String get getVolume =>
+      '${NumberFormat.scientificPattern().format(volume)} km³';
+
+  String get getMass => '${NumberFormat.scientificPattern().format(mass)} kg';
+
+  String get getDensity =>
+      '${NumberFormat.decimalPattern().format(density)} g/cm³';
+
+  String get getGravity =>
+      '${NumberFormat.decimalPattern().format(gravity)} m/s²';
+
+  String get getEscapeVelocity =>
+      '${NumberFormat.decimalPattern().format(escapeVelocity)} km/s';
+
+  String get getTemperature =>
+      '${NumberFormat.decimalPattern().format(temperature)} K';
+
+  String get getPressure =>
+      '${NumberFormat.decimalPattern().format(pressure)} Pa';
 }
