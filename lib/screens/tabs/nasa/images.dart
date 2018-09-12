@@ -7,6 +7,7 @@ import 'package:scoped_model/scoped_model.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../models/daily_image.dart';
+import '../../../widgets/hero_image.dart';
 import 'help.dart';
 import 'imagedetails.dart';
 
@@ -137,6 +138,7 @@ class _NasaHomePageState extends State<NasaHomePage> {
 
                     if (model.images.isEmpty)
                       return Center(child: Text("No Images Found"));
+
                     double width = MediaQuery.of(context).size.width;
                     int axisCount = width <= 500.0
                         ? 2
@@ -154,55 +156,32 @@ class _NasaHomePageState extends State<NasaHomePage> {
                         String content = model.images[index]?.hdurl ??
                             model.images[index]?.url ??
                             "";
-                        return InkWell(
-                          onLongPress: () {
-                            openImage(content);
-                          },
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => ImageDetailsPage(
-                                      title: model.images[index]?.title,
-                                      dateCreated: model.images[index]?.date,
-                                      imageUrl: model.images[index]?.url ?? "",
-                                      hdImageUrl:
-                                          model.images[index]?.hdurl ?? "",
-                                      description:
-                                          model.images[index]?.description ??
-                                              "",
-                                    ),
-                                maintainState: true,
-                              ),
-                            );
-                          },
-                          child: Card(
-                            elevation: 1.0,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              mainAxisSize: MainAxisSize.min,
-                              verticalDirection: VerticalDirection.down,
-                              children: <Widget>[
-                                Text(
-                                  model.images[index]?.title ?? "",
-                                  maxLines: 1,
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 14.0),
-                                  textAlign: TextAlign.center,
-                                ),
-                                Expanded(
-                                  child: getImagePreview(content),
-                                ),
-                                Container(
-                                  height: 10.0,
-                                ),
-                                Text(
-                                  model.images[index]?.date ?? "",
-                                  textAlign: TextAlign.center,
-                                ),
-                              ],
-                            ),
+                        return GridTile(
+                          header: Text(
+                            model.images[index]?.title ?? "",
+                            maxLines: 1,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 14.0),
+                            textAlign: TextAlign.center,
+                          ),
+                          child: HeroImage().buildHero(
+                            context: context,
+                            url: content,
+                            tag: model.images[index].id,
+                            title: model.images[index].title,
+                            // onClick: () => Navigator.push(
+                            //       context,
+                            //       MaterialPageRoute(
+                            //         builder: (context) => ImageDetailsPage(
+                            //               image: model.images[index],
+                            //             ),
+                            //         maintainState: true,
+                            //       ),
+                            //     ),
+                          ),
+                          footer: Text(
+                            model.images[index]?.date ?? "",
+                            textAlign: TextAlign.center,
                           ),
                         );
                       },

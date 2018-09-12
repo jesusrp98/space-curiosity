@@ -8,6 +8,7 @@ import 'package:scoped_model/scoped_model.dart';
 
 import '../services/api.dart';
 import '../util/cache_settings.dart';
+import 'package:uuid/uuid.dart';
 import '../util/keys.dart';
 
 class NasaImages extends Model {
@@ -64,8 +65,9 @@ class NasaImages extends Model {
 }
 
 class ImageData {
-  final String title, date, url, hdurl, description;
+  final String id, title, date, url, hdurl, description;
   ImageData({
+    this.id,
     this.date,
     this.description,
     this.hdurl,
@@ -74,7 +76,9 @@ class ImageData {
   });
 
   factory ImageData.fromJson(Map json) {
+    var uuid = new Uuid();
     return ImageData(
+      id: uuid.v4(),
       title: json['title'] ?? "No Name Found",
       date: json['date'],
       description: json['explanation'],

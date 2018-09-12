@@ -29,6 +29,7 @@ dependencies:
   font_awesome_flutter: "^8.0.1"
   get_version: 0.0.5
   native_widgets: ^0.1.1+1
+  uuid: ^1.0.3
 
    ## Offline
   flutter_offline: ^0.1.0

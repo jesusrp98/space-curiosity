@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'models/planets/celestial_body.dart';
 import 'screens/bottom_navigation.dart';
-import 'screens/tabs/nasa/home_page.dart';
+import 'screens/tabs/nasa/images.dart';
 import 'screens/tabs/news.dart';
 import 'screens/tabs/planets/add_edit_planet.dart';
 import 'screens/tabs/planets/planets.dart';

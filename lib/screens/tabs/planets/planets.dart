@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'package:space_news/widgets/head_card_page.dart';
-import 'package:space_news/widgets/hero_image.dart';
-import 'package:space_news/widgets/list_cell.dart';
-import 'package:space_news/widgets/row_item.dart';
 
-import '../../../models/planets/planets.dart';
 import '../../../models/planets/celestial_body.dart';
+import '../../../models/planets/planets.dart';
+import '../../../widgets/hero_image.dart';
+import '../../../widgets/list_cell.dart';
 import 'add_edit_planet.dart';
 import 'planet_page.dart';
 
