@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
@@ -154,29 +155,32 @@ class _NasaHomePageState extends State<NasaHomePage> {
                               children: <Widget>[
                                 Text(
                                   model.images[index]?.title ?? "",
+                                  maxLines: 1,
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 14.0),
                                   textAlign: TextAlign.center,
                                 ),
-                                content.contains('youtube') ||
-                                        content.contains('vimeo')
-                                    ? Icon(
-                                        Icons.ondemand_video,
-                                        size: 60.0,
-                                      )
-                                    : content.toString().isEmpty ||
-                                            content == null
-                                        ? Icon(
-                                            Icons.broken_image,
-                                            size: 60.0,
-                                          )
-                                        : Image.network(
-                                            content,
-                                            height: 65.0,
-                                            width: 65.0,
-                                            fit: BoxFit.fitHeight,
-                                          ),
+                                Expanded(
+                                  child: content.contains('youtube') ||
+                                          content.contains('vimeo')
+                                      ? Icon(
+                                          Icons.ondemand_video,
+                                          size: 60.0,
+                                        )
+                                      : content.toString().isEmpty ||
+                                              content == null
+                                          ? Icon(
+                                              Icons.broken_image,
+                                              size: 60.0,
+                                            )
+                                          : CachedNetworkImage(
+                                              imageUrl: content,
+                                              height: 65.0,
+                                              width: 65.0,
+                                              fit: BoxFit.fitHeight,
+                                            ),
+                                ),
                                 Container(
                                   height: 10.0,
                                 ),

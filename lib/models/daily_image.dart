@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:async_resource/file_resource.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:scoped_model/scoped_model.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 import '../services/api.dart';
 import '../util/cache_settings.dart';
@@ -16,24 +17,28 @@ class NasaImages extends Model {
 
   Future fetchImages(int count) async {
     List<ImageData> _newImages;
-    // try {
-    //   String _url = 'https://api.nasa.gov/planetary/apod?'
-    //       'api_key=$apiKey&count=$count';
-    //   final path = (await getApplicationDocumentsDirectory()).path;
-    //   final myDataResource = HttpNetworkResource<List<ImageData>>(
-    //     url: _url,
-    //     parser: (contents) {
-    //       List decoded = json.decode(contents.toString());
-    //       for (Map row in decoded) _newImages.add(ImageData.fromJson(row));
-    //     },
-    //     cache: FileResource(File('$path/nasa_images.json')),
-    //     maxAge: cacheDuration,
-    //     strategy: cacheStrategy,
-    //   );
-    //   _newImages = await myDataResource.get();
-    // } catch (e) {
-    //   print("Error Cached DailyImage: $e");
-    // }
+    try {
+      String _url = 'https://api.nasa.gov/planetary/apod?'
+          'api_key=$apiKey&count=$count';
+      final path = (await getApplicationDocumentsDirectory()).path;
+      final myDataResource = HttpNetworkResource<List<ImageData>>(
+        url: _url,
+        parser: (contents) {
+          List decoded = json.decode(contents);
+          _newImages = [];
+          for (Map row in decoded) {
+            var _image = ImageData.fromJson(row);
+            if (_image != null) _newImages.add(_image);
+          }
+        },
+        cache: FileResource(File('$path/nasa_images.json')),
+        maxAge: cacheDuration,
+        strategy: cacheStrategy,
+      );
+      _images = await myDataResource.get();
+    } catch (e) {
+      print("Error Cached DailyImage: $e");
+    }
     try {
       if (_newImages == null) {
         String _response = await getData('https://api.nasa.gov/planetary/apod?',
@@ -46,8 +51,9 @@ class NasaImages extends Model {
     } catch (e) {
       print('Error Creating DailyImage: $e');
     }
-    _images = _newImages;
+    if (_newImages == null) _newImages = [];
     notifyListeners();
+    _images = _newImages;
   }
 }
 
