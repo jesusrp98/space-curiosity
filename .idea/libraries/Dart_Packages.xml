@@ -345,6 +345,13 @@
             </list>
           </value>
         </entry>
+        <entry key="petitparser">
+          <value>
+            <list>
+              <option value="$USER_HOME$/.flutter-sdk/.pub-cache/hosted/pub.dartlang.org/petitparser-2.0.0/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="plugin">
           <value>
             <list>
@@ -569,6 +576,20 @@
             </list>
           </value>
         </entry>
+        <entry key="webfeed">
+          <value>
+            <list>
+              <option value="$USER_HOME$/.flutter-sdk/.pub-cache/hosted/pub.dartlang.org/webfeed-0.2.3/lib" />
+            </list>
+          </value>
+        </entry>
+        <entry key="xml">
+          <value>
+            <list>
+              <option value="$USER_HOME$/.flutter-sdk/.pub-cache/hosted/pub.dartlang.org/xml-3.2.0/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="yaml">
           <value>
             <list>
@@ -626,6 +647,7 @@
       <root url="file://$USER_HOME$/.flutter-sdk/.pub-cache/hosted/pub.dartlang.org/package_resolver-1.0.4/lib" />
       <root url="file://$USER_HOME$/.flutter-sdk/.pub-cache/hosted/pub.dartlang.org/path-1.6.2/lib" />
       <root url="file://$USER_HOME$/.flutter-sdk/.pub-cache/hosted/pub.dartlang.org/path_provider-0.4.1/lib" />
+      <root url="file://$USER_HOME$/.flutter-sdk/.pub-cache/hosted/pub.dartlang.org/petitparser-2.0.0/lib" />
       <root url="file://$USER_HOME$/.flutter-sdk/.pub-cache/hosted/pub.dartlang.org/plugin-0.2.0+3/lib" />
       <root url="file://$USER_HOME$/.flutter-sdk/.pub-cache/hosted/pub.dartlang.org/pool-1.3.6/lib" />
       <root url="file://$USER_HOME$/.flutter-sdk/.pub-cache/hosted/pub.dartlang.org/pub_semver-1.4.2/lib" />
@@ -657,6 +679,8 @@
       <root url="file://$USER_HOME$/.flutter-sdk/.pub-cache/hosted/pub.dartlang.org/vm_service_client-0.2.6/lib" />
       <root url="file://$USER_HOME$/.flutter-sdk/.pub-cache/hosted/pub.dartlang.org/watcher-0.9.7+10/lib" />
       <root url="file://$USER_HOME$/.flutter-sdk/.pub-cache/hosted/pub.dartlang.org/web_socket_channel-1.0.9/lib" />
+      <root url="file://$USER_HOME$/.flutter-sdk/.pub-cache/hosted/pub.dartlang.org/webfeed-0.2.3/lib" />
+      <root url="file://$USER_HOME$/.flutter-sdk/.pub-cache/hosted/pub.dartlang.org/xml-3.2.0/lib" />
       <root url="file://$USER_HOME$/.flutter-sdk/.pub-cache/hosted/pub.dartlang.org/yaml-2.1.15/lib" />
       <root url="file://$USER_HOME$/.flutter-sdk/bin/cache/pkg/sky_engine/lib" />
       <root url="file://$USER_HOME$/.flutter-sdk/packages/flutter/lib" />

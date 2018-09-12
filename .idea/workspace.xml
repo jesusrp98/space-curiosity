@@ -3,9 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="114d35c3-137d-4590-933b-dafef0c88d87" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/tabs/planets/planets.dart" afterPath="$PROJECT_DIR$/lib/screens/tabs/planets/planets.dart" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/tabs/planets/planet_page.dart" afterPath="$PROJECT_DIR$/lib/screens/tabs/planets/planet_page.dart" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -16,63 +15,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="planet_page.dart" pinned="false" current-in-tab="false">
+      <file leaf-file-name="planet_page.dart" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/screens/tabs/planets/planet_page.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1044">
-              <caret line="62" column="58" lean-forward="false" selection-start-line="62" selection-start-column="58" selection-end-line="62" selection-end-column="58" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="planets.dart" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/lib/screens/tabs/planets/planets.dart">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-783">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="hero_image.dart" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/widgets/hero_image.dart">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="648">
-              <caret line="70" column="19" lean-forward="false" selection-start-line="70" selection-start-column="17" selection-end-line="70" selection-end-column="19" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="vehicle_list.dart" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/screens/tabs/space_x/vehicle_list.dart">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="711">
-              <caret line="108" column="0" lean-forward="false" selection-start-line="108" selection-start-column="0" selection-end-line="112" selection-end-column="45" />
-              <folding>
-                <element signature="e#0#20#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="list_cell.dart" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/widgets/list_cell.dart">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="396">
-              <caret line="24" column="45" lean-forward="false" selection-start-line="24" selection-start-column="43" selection-end-line="24" selection-end-column="45" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="planets.dart" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/models/planets/planets.dart">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="72">
-              <caret line="9" column="34" lean-forward="false" selection-start-line="9" selection-start-column="34" selection-end-line="9" selection-end-column="34" />
+            <state relative-caret-position="387">
+              <caret line="102" column="20" lean-forward="false" selection-start-line="102" selection-start-column="20" selection-end-line="102" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -81,8 +28,18 @@
       <file leaf-file-name="celestial_body.dart" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/models/planets/celestial_body.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
-              <caret line="18" column="46" lean-forward="false" selection-start-line="18" selection-start-column="46" selection-end-line="18" selection-end-column="46" />
+            <state relative-caret-position="1107">
+              <caret line="176" column="51" lean-forward="false" selection-start-line="176" selection-start-column="51" selection-end-line="176" selection-end-column="51" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="planets.dart" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/screens/tabs/planets/planets.dart">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="594">
+              <caret line="75" column="25" lean-forward="false" selection-start-line="75" selection-start-column="25" selection-end-line="80" selection-end-column="18" />
               <folding />
             </state>
           </provider>
@@ -124,12 +81,12 @@
         <option value="$PROJECT_DIR$/lib/models/planet.dart" />
         <option value="$PROJECT_DIR$/lib/screens/tabs/planets.dart" />
         <option value="$PROJECT_DIR$/lib/models/planets/moon.dart" />
-        <option value="$PROJECT_DIR$/lib/screens/tabs/planets/planet_page.dart" />
         <option value="$PROJECT_DIR$/lib/models/planets/planet.dart" />
-        <option value="$PROJECT_DIR$/lib/models/planets/celestial_body.dart" />
         <option value="$PROJECT_DIR$/lib/widgets/list_cell.dart" />
         <option value="$PROJECT_DIR$/lib/widgets/hero_image.dart" />
         <option value="$PROJECT_DIR$/lib/screens/tabs/planets/planets.dart" />
+        <option value="$PROJECT_DIR$/lib/models/planets/celestial_body.dart" />
+        <option value="$PROJECT_DIR$/lib/screens/tabs/planets/planet_page.dart" />
       </list>
     </option>
   </component>
@@ -208,12 +165,6 @@
               <item name="screens" type="462c0819:PsiDirectoryNode" />
               <item name="tabs" type="462c0819:PsiDirectoryNode" />
               <item name="space_x" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="space-curiosity" type="b2602c69:ProjectViewProjectNode" />
-              <item name="space-curiosity" type="462c0819:PsiDirectoryNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
-              <item name="widgets" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -443,9 +394,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#39#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -472,9 +421,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#39#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -552,9 +499,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#39#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -615,16 +560,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/screens/tabs/space_x/launch_page.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1548">
-          <caret line="43" column="22" lean-forward="false" selection-start-line="43" selection-start-column="22" selection-end-line="43" selection-end-column="22" />
-          <folding>
-            <element signature="e#0#39#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/screens/tabs/planet_page.dart" />
     <entry file="file://$PROJECT_DIR$/lib/models/planet.dart" />
     <entry file="file://$PROJECT_DIR$/lib/screens/tabs/planets.dart" />
@@ -632,9 +567,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#39#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -655,22 +588,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/models/planets/planet.dart" />
-    <entry file="file://$PROJECT_DIR$/lib/screens/tabs/planets/planet_page.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1044">
-          <caret line="62" column="58" lean-forward="false" selection-start-line="62" selection-start-column="58" selection-end-line="62" selection-end-column="58" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/models/planets/celestial_body.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="18" column="46" lean-forward="false" selection-start-line="18" selection-start-column="46" selection-end-line="18" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/widgets/list_cell.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="396">
@@ -705,10 +622,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/lib/screens/tabs/space_x/launch_page.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="86" column="0" lean-forward="true" selection-start-line="86" selection-start-column="0" selection-end-line="144" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/lib/screens/tabs/planets/planets.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-783">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="594">
+          <caret line="75" column="25" lean-forward="false" selection-start-line="75" selection-start-column="25" selection-end-line="80" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/models/planets/celestial_body.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1107">
+          <caret line="176" column="51" lean-forward="false" selection-start-line="176" selection-start-column="51" selection-end-line="176" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/screens/tabs/planets/planet_page.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="387">
+          <caret line="102" column="20" lean-forward="false" selection-start-line="102" selection-start-column="20" selection-end-line="102" selection-end-column="20" />
           <folding />
         </state>
       </provider>
