@@ -1,6 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:share/share.dart';
-import 'dart:async';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../models/daily_image.dart';
