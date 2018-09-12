@@ -5,52 +5,57 @@
     
     
       
-      <testcase classname="fastlane.lanes" name="0: update_fastlane" time="0.132739">
+      <testcase classname="fastlane.lanes" name="00: update_fastlane" time="0.170489">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="1: Switch to ios prepare lane" time="0.006983">
+      <testcase classname="fastlane.lanes" name="01: Switch to ios prepare lane" time="0.001544">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="2: flutter packages get" time="2.964662">
+      <testcase classname="fastlane.lanes" name="02: xcodebuild -sdk &quot;${TARGET_SDK}&quot; -xcconfig &quot;${CONFIG_FILE_PATH}&quot;  -configuration Release clean" time="2.49748">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="3: flutter clean" time="1.244326">
+      <testcase classname="fastlane.lanes" name="03: flutter packages get" time="3.338733">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="4: increment_build_number" time="1.266476">
+      <testcase classname="fastlane.lanes" name="04: flutter clean" time="1.617197">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="5: flutter build ios" time="107.260955">
+      <testcase classname="fastlane.lanes" name="05: increment_build_number" time="1.583229">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="6: build_ios_app" time="217.554998">
+      <testcase classname="fastlane.lanes" name="06: flutter build ios" time="109.044771">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="7: changelog_from_git_commits" time="0.070147">
+      <testcase classname="fastlane.lanes" name="07: build_ios_app" time="232.178343">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="8: upload_to_testflight" time="117.88479">
+      <testcase classname="fastlane.lanes" name="08: changelog_from_git_commits" time="0.085163">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="9: add_git_tag" time="0.035141">
+      <testcase classname="fastlane.lanes" name="09: upload_to_testflight" time="100.32335">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="10: add_git_tag" time="0.024686">
         
       </testcase>
     

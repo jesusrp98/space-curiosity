@@ -5,7 +5,6 @@ import 'dart:io';
 import 'package:async_resource/file_resource.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 
 import '../services/api.dart';
 import '../util/cache_settings.dart';
@@ -15,12 +14,12 @@ class NasaImages extends Model {
   List<ImageData> _images;
   List<ImageData> get images => _images;
 
-  NasaImages({Stream<List<ImageData>> stream}) {
-    stream.listen((newImages) {
-      this._images = newImages;
-      notifyListeners();
-    });
-  }
+  // NasaImages({Stream<List<ImageData>> stream}) {
+  //   stream.listen((newImages) {
+  //     this._images = newImages;
+  //     notifyListeners();
+  //   });
+  // }
 
   Future fetchImages(int count) async {
     List<ImageData> _newImages;
