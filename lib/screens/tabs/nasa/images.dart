@@ -169,6 +169,7 @@ class _NasaHomePageState extends State<NasaHomePage> {
                             url: content,
                             tag: model.images[index].id,
                             title: model.images[index].title,
+                            size: 50.0,
                             // onClick: () => Navigator.push(
                             //       context,
                             //       MaterialPageRoute(
