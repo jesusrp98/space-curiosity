@@ -340,6 +340,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.4.1"
+  petitparser:
+    dependency: transitive
+    description:
+      name: petitparser
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0"
   plugin:
     dependency: transitive
     description:
@@ -562,6 +569,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.9"
+  webfeed:
+    dependency: "direct main"
+    description:
+      name: webfeed
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.3"
+  xml:
+    dependency: transitive
+    description:
+      name: xml
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.2.0"
   yaml:
     dependency: transitive
     description:
@@ -570,5 +591,5 @@ packages:
     source: hosted
     version: "2.1.15"
 sdks:
-  dart: ">=2.0.0-dev.68.0 <3.0.0"
+  dart: ">=2.0.0-dev.69.0 <3.0.0"
   flutter: ">=0.2.4 <2.0.0"
