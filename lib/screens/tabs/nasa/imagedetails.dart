@@ -47,33 +47,35 @@ class ImageDetailsPage extends StatelessWidget {
         ],
         centerTitle: true,
       ),
-      body: new ListView(
-        shrinkWrap: true,
-        padding: const EdgeInsets.all(20.0),
-        children: <Widget>[
-          new Text(
-            image?.title,
-            style: Theme.of(context).textTheme.display1,
-          ),
-          Container(height: 4.0),
-          InkWell(
-            child: Hero(
-              tag: image.id,
-              child: Image.network(currentImage),
+      body: SafeArea(
+        child: new ListView(
+          shrinkWrap: true,
+          padding: const EdgeInsets.all(20.0),
+          children: <Widget>[
+            new Text(
+              image?.title,
+              style: Theme.of(context).textTheme.display1,
             ),
-            onTap: () => openImage(currentImage),
-          ),
-          Container(height: 4.0),
-          new Text(
-            image?.description,
-            style: Theme.of(context).textTheme.body1,
-          ),
-          Container(height: 4.0),
-          new Text(
-            image?.date,
-            style: new TextStyle(fontSize: 10.0),
-          ),
-        ],
+            Container(height: 4.0),
+            InkWell(
+              child: Hero(
+                tag: image.id,
+                child: Image.network(currentImage),
+              ),
+              onTap: () => openImage(currentImage),
+            ),
+            Container(height: 4.0),
+            new Text(
+              image?.description,
+              style: Theme.of(context).textTheme.body1,
+            ),
+            Container(height: 4.0),
+            new Text(
+              image?.date,
+              style: new TextStyle(fontSize: 10.0),
+            ),
+          ],
+        ),
       ),
     );
   }

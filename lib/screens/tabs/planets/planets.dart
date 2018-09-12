@@ -80,9 +80,11 @@ class PlanetsHomePage extends StatelessWidget {
         child: Text('No Moons Found'),
       ));
 
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: _moons,
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: _moons,
+      ),
     );
   }
 

@@ -40,40 +40,44 @@ class PlanetPage extends StatelessWidget {
           ),
         ],
       ),
-      body: Scrollbar(
-        child: ListView(children: <Widget>[
-          Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Column(children: <Widget>[
-              _headCard(context),
-              const SizedBox(height: 8.0),
-              _detailsCard(context),
-            ]),
-          )
-        ]),
+      body: SafeArea(
+        child: Scrollbar(
+          child: ListView(children: <Widget>[
+            Padding(
+              padding: EdgeInsets.all(16.0),
+              child: Column(children: <Widget>[
+                _headCard(context),
+                const SizedBox(height: 8.0),
+                _detailsCard(context),
+              ]),
+            )
+          ]),
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: FloatingActionButton.extended(
-        icon: Icon(Icons.add),
-        label: Text("Add Moon"),
-        onPressed: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => AddEditPlanetPage(
-                      null,
-                      id: planet.id,
-                      type: BodyType.celestialBody,
-                    ),
-                fullscreenDialog: true,
+      floatingActionButton: SafeArea(
+        child: FloatingActionButton.extended(
+          icon: Icon(Icons.add),
+          label: Text("Add Moon"),
+          onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => AddEditPlanetPage(
+                        null,
+                        id: planet.id,
+                        type: BodyType.celestialBody,
+                      ),
+                  fullscreenDialog: true,
+                ),
+              ).then(
+                (value) {
+                  if (value != null) {
+                    String _value = value;
+                    if (_value.contains('deleted')) Navigator.pop(context);
+                  }
+                },
               ),
-            ).then(
-              (value) {
-                if (value != null) {
-                  String _value = value;
-                  if (_value.contains('deleted')) Navigator.pop(context);
-                }
-              },
-            ),
+        ),
       ),
     );
   }
