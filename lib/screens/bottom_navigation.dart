@@ -62,13 +62,10 @@ class BottomNavigationState extends State<BottomNavigation> {
 
   Widget _buildBody() {
     var database = AppFirestore();
-    var stream = database.countersStream();
+    // var stream = database.countersStream();
     switch (currentItem) {
       case TabItem.news:
-        return ScopedModel<CountersModel>(
-          model: CountersModel(stream: stream),
-          child: NewsHomePage(database: database),
-        );
+        return NewsHomePage();
       case TabItem.spaceX:
         return SpaceXHomePage();
       case TabItem.nasa:

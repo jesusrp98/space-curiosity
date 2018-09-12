@@ -17,6 +17,7 @@ dependencies:
   cupertino_icons: ^0.1.2
   scoped_model: 0.3.0
   redux: 3.0.0
+  webfeed: ^0.2.3
   flutter_redux: 0.5.1
   http: 0.11.3+17
   intl: "^0.15.6"
