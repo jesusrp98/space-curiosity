@@ -15,6 +15,13 @@ class NasaImages extends Model {
   List<ImageData> _images;
   List<ImageData> get images => _images;
 
+  NasaImages({Stream<List<ImageData>> stream}) {
+    stream.listen((newImages) {
+      this._images = newImages;
+      notifyListeners();
+    });
+  }
+
   Future fetchImages(int count) async {
     List<ImageData> _newImages;
     try {
