@@ -92,7 +92,7 @@ class PlanetPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            "I'm a subtitle",
+            planet.getPopulation,
             style: Theme.of(context)
                 .textTheme
                 .subhead
@@ -100,7 +100,7 @@ class PlanetPage extends StatelessWidget {
           ),
           const SizedBox(height: 12.0),
           Text(
-            "Me too!",
+            "I'm a subtitle!",
             style: Theme.of(context)
                 .textTheme
                 .subhead
@@ -114,31 +114,31 @@ class PlanetPage extends StatelessWidget {
 
   Widget _detailsCard(BuildContext context) {
     return CardPage(title: 'DETAILS', body: <Widget>[
-      RowItem.textRow('Aphelion', planet.aphelion.toString()),
+      RowItem.textRow('Aphelion', planet.getAphelion),
       const SizedBox(height: 8.0),
-      RowItem.textRow('Perihelion', planet.perihelion.toString()),
+      RowItem.textRow('Perihelion', planet.getPerihelion),
       const SizedBox(height: 8.0),
-      RowItem.textRow('Period', planet.period.toString()),
+      RowItem.textRow('Period', planet.getPeriod),
       const SizedBox(height: 8.0),
-      RowItem.textRow('Speed', planet.speed.toString()),
+      RowItem.textRow('Speed', planet.getSpeed),
       const SizedBox(height: 8.0),
-      RowItem.textRow('Inclination', planet.inclination.toString()),
+      RowItem.textRow('Inclination', planet.getInclination),
       const SizedBox(height: 8.0),
-      RowItem.textRow('Radius', planet.radius.toString()),
+      RowItem.textRow('Radius', planet.getRadius),
       const SizedBox(height: 8.0),
-      RowItem.textRow('Volume', planet.volume.toString()),
+      RowItem.textRow('Volume', planet.getVolume),
       const SizedBox(height: 8.0),
-      RowItem.textRow('Mass', planet.mass.toString()),
+      RowItem.textRow('Mass', planet.getMass),
       const SizedBox(height: 8.0),
-      RowItem.textRow('Density', planet.density.toString()),
+      RowItem.textRow('Density', planet.getDensity),
       const SizedBox(height: 8.0),
-      RowItem.textRow('Gravity', planet.gravity.toString()),
+      RowItem.textRow('Gravity', planet.getGravity),
       const SizedBox(height: 8.0),
-      RowItem.textRow('Escape velocity', planet.escapeVelocity.toString()),
+      RowItem.textRow('Escape velocity', planet.getEscapeVelocity),
       const SizedBox(height: 8.0),
-      RowItem.textRow('Tempperature', planet.temperature.toString()),
+      RowItem.textRow('Temperature', planet.getTemperature),
       const SizedBox(height: 8.0),
-      RowItem.textRow('Pressure', planet.pressure.toString()),
+      RowItem.textRow('Pressure', planet.getPressure),
     ]);
   }
 }
