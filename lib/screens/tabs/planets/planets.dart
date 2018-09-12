@@ -61,58 +61,23 @@ class PlanetsHomePage extends StatelessWidget {
       return Center(child: Text('No Moons Found'));
     }
     return ListView.builder(
-      padding: const EdgeInsets.all(16.0),
+      // padding: const EdgeInsets.all(16.0),
       itemCount: moons.length,
       itemBuilder: (BuildContext context, int index) {
         final CelestialBody moon = moons[index];
-        return InkWell(
+        return ListCell(
+          leading: HeroImage().buildHero(
+            context: context,
+            url: moon.imageUrl,
+            tag: moon.id,
+            title: moon.name,
+          ),
+          title: moon.name,
+          subtitle: moon.description,
           onTap: () => Navigator.push(
                 context,
-                MaterialPageRoute(
-                  builder: (context) => PlanetPage(moon),
-                  fullscreenDialog: true,
-                ),
+                MaterialPageRoute(builder: (context) => PlanetPage(moon)),
               ),
-          child: HeadCardPage(
-            image: HeroImage().buildHero(
-              size: 116.0,
-              context: context,
-              url: moon.imageUrl,
-              tag: moon.id,
-              title: moon.name,
-            ),
-            title: moon.name,
-            subtitle: Column(
-              children: <Widget>[
-                RowItem.textRow('Aphelion', moon.getAphelion),
-                const SizedBox(height: 8.0),
-                RowItem.textRow('Perihelion', moon.getPerihelion),
-                const SizedBox(height: 8.0),
-                RowItem.textRow('Period', moon.getPeriod),
-                const SizedBox(height: 8.0),
-                RowItem.textRow('Speed', moon.getSpeed),
-                const SizedBox(height: 8.0),
-                RowItem.textRow('Inclination', moon.getInclination),
-                const SizedBox(height: 8.0),
-                RowItem.textRow('Radius', moon.getRadius),
-                const SizedBox(height: 8.0),
-                RowItem.textRow('Volume', moon.getVolume),
-                const SizedBox(height: 8.0),
-                RowItem.textRow('Mass', moon.getMass),
-                const SizedBox(height: 8.0),
-                RowItem.textRow('Density', moon.getDensity),
-                const SizedBox(height: 8.0),
-                RowItem.textRow('Gravity', moon.getGravity),
-                const SizedBox(height: 8.0),
-                RowItem.textRow('Escape velocity', moon.getEscapeVelocity),
-                const SizedBox(height: 8.0),
-                RowItem.textRow('Temperature', moon.getTemperature),
-                const SizedBox(height: 8.0),
-                RowItem.textRow('Pressure', moon.getPressure),
-              ],
-            ),
-            details: moon.description,
-          ),
         );
       },
     );
