@@ -72,6 +72,36 @@ class _NasaHomePageState extends State<NasaHomePage> {
         ));
   }
 
+  Widget getImagePreview(String url) {
+    var _url = Uri.tryParse(url.trim());
+    if (_url == null)
+      return Icon(
+        Icons.image_aspect_ratio,
+        size: 60.0,
+      );
+
+    switch (_url.toString()) {
+      case 'youtube':
+      case 'vimeo':
+        return Icon(
+          Icons.ondemand_video,
+          size: 60.0,
+        );
+        break;
+      default:
+        return CachedNetworkImage(
+          imageUrl: _url.toString().trim(),
+          height: 65.0,
+          width: 65.0,
+          fit: BoxFit.fitHeight,
+          errorWidget: Icon(
+            Icons.broken_image,
+            size: 60.0,
+          ),
+        );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return new ScopedModel<NasaImages>(
@@ -96,8 +126,8 @@ class _NasaHomePageState extends State<NasaHomePage> {
           builder: (context, child, model) => RefreshIndicator(
                 key: _refreshIndicatorKey,
                 onRefresh: () => _onRefresh(model),
-                child: FutureBuilder(
-                  future: model.fetchImages(count),
+                child: StreamBuilder(
+                  stream: model.fetchImages(count).asStream(),
                   builder: (BuildContext context, _) {
                     if (model.images == null)
                       return NativeLoadingIndicator(
@@ -162,24 +192,7 @@ class _NasaHomePageState extends State<NasaHomePage> {
                                   textAlign: TextAlign.center,
                                 ),
                                 Expanded(
-                                  child: content.contains('youtube') ||
-                                          content.contains('vimeo')
-                                      ? Icon(
-                                          Icons.ondemand_video,
-                                          size: 60.0,
-                                        )
-                                      : content.toString().isEmpty ||
-                                              content == null
-                                          ? Icon(
-                                              Icons.broken_image,
-                                              size: 60.0,
-                                            )
-                                          : CachedNetworkImage(
-                                              imageUrl: content,
-                                              height: 65.0,
-                                              width: 65.0,
-                                              fit: BoxFit.fitHeight,
-                                            ),
+                                  child: getImagePreview(content),
                                 ),
                                 Container(
                                   height: 10.0,
