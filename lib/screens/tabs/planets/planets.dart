@@ -57,15 +57,10 @@ class PlanetsHomePage extends StatelessWidget {
 
   Widget _buildMoons(
       BuildContext context, int index, List<CelestialBody> moons) {
-    if (moons == null || moons.isEmpty) {
-      return Center(child: Text('No Moons Found'));
-    }
-    return ListView.builder(
-      // padding: const EdgeInsets.all(16.0),
-      itemCount: moons.length,
-      itemBuilder: (BuildContext context, int index) {
-        final CelestialBody moon = moons[index];
-        return ListCell(
+    List<Widget> _moons = [];
+    for (var moon in moons)
+      _moons.add(
+        ListCell(
           leading: HeroImage().buildHero(
             context: context,
             url: moon.imageUrl,
@@ -78,8 +73,18 @@ class PlanetsHomePage extends StatelessWidget {
                 context,
                 MaterialPageRoute(builder: (context) => PlanetPage(moon)),
               ),
-        );
-      },
+        ),
+      );
+
+    if (_moons.isEmpty)
+      _moons.add(Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Text('No Moons Found'),
+      ));
+
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: _moons,
     );
   }
 
