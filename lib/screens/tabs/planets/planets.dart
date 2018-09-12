@@ -1,7 +1,8 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
+import 'package:space_news/widgets/hero_image.dart';
+import 'package:space_news/widgets/list_cell.dart';
 
 import '../../../models/planets/planets.dart';
 import '../../../models/planets/celestial_body.dart';
@@ -71,37 +72,33 @@ class PlanetsHomePage extends StatelessWidget {
     return Column(
       children: <Widget>[
         ScopedModelDescendant<PlanetsModel>(
-          builder: (context, child, model) => ListTile(
-                contentPadding: const EdgeInsets.all(16.0),
-                leading: SizedBox(
-                  width: 72.0,
-                  height: 72.0,
-                  child: CachedNetworkImage(
-                      imageUrl: model.planets[index].imageUrl),
+          builder: (context, child, model) => ListCell(
+                leading: HeroImage().buildHero(
+                  context: context,
+                  url: model.planets[index].imageUrl,
+                  tag: model.planets[index].id,
+                  title: model.planets[index].name,
                 ),
-                title: Text(
-                  model.planets[index].name,
-                  maxLines: 1,
-                ),
-                subtitle: Text(
-                  model.planets[index].description,
-                  maxLines: 3,
-                ),
+                title: model.planets[index].name,
+                subtitle: model.planets[index].description,
                 trailing: IconButton(
                   icon: Icon(Icons.arrow_drop_down),
                   onPressed: () async {
                     var _moons = await model.planets[index]
                         .getMoons(model.planets[index].id);
                     showModalBottomSheet<void>(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return SafeArea(
-                              child: Container(
-                                  child: Padding(
-                            padding: EdgeInsets.only(bottom: 10.0),
-                            child: _buildMoons(context, index, _moons),
-                          )));
-                        });
+                      context: context,
+                      builder: (BuildContext context) {
+                        return SafeArea(
+                          child: Container(
+                            child: Padding(
+                              padding: EdgeInsets.only(bottom: 10.0),
+                              child: _buildMoons(context, index, _moons),
+                            ),
+                          ),
+                        );
+                      },
+                    );
                   },
                 ),
                 onTap: () => Navigator.push(

@@ -23,6 +23,13 @@
             </list>
           </value>
         </entry>
+        <entry key="async_resource">
+          <value>
+            <list>
+              <option value="$USER_HOME$/.flutter-sdk/.pub-cache/hosted/pub.dartlang.org/async_resource-0.1.2/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="boolean_selector">
           <value>
             <list>
@@ -55,6 +62,13 @@
           <value>
             <list>
               <option value="$USER_HOME$/.flutter-sdk/.pub-cache/hosted/pub.dartlang.org/collection-1.14.11/lib" />
+            </list>
+          </value>
+        </entry>
+        <entry key="connectivity">
+          <value>
+            <list>
+              <option value="$USER_HOME$/.flutter-sdk/.pub-cache/hosted/pub.dartlang.org/connectivity-0.3.1/lib" />
             </list>
           </value>
         </entry>
@@ -125,6 +139,13 @@
           <value>
             <list>
               <option value="$USER_HOME$/.flutter-sdk/.pub-cache/hosted/pub.dartlang.org/flutter_cache_manager-0.1.2/lib" />
+            </list>
+          </value>
+        </entry>
+        <entry key="flutter_offline">
+          <value>
+            <list>
+              <option value="$USER_HOME$/.flutter-sdk/.pub-cache/hosted/pub.dartlang.org/flutter_offline-0.1.0/lib" />
             </list>
           </value>
         </entry>
@@ -366,6 +387,13 @@
             </list>
           </value>
         </entry>
+        <entry key="service_worker">
+          <value>
+            <list>
+              <option value="$USER_HOME$/.flutter-sdk/.pub-cache/hosted/pub.dartlang.org/service_worker-0.2.3/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="share">
           <value>
             <list>
@@ -377,6 +405,13 @@
           <value>
             <list>
               <option value="$USER_HOME$/.flutter-sdk/.pub-cache/hosted/pub.dartlang.org/shared_preferences-0.4.2/lib" />
+            </list>
+          </value>
+        </entry>
+        <entry key="shared_prefs_resource">
+          <value>
+            <list>
+              <option value="$USER_HOME$/.flutter-sdk/.pub-cache/hosted/pub.dartlang.org/shared_prefs_resource-0.0.1/lib" />
             </list>
           </value>
         </entry>
@@ -547,11 +582,13 @@
       <root url="file://$USER_HOME$/.flutter-sdk/.pub-cache/hosted/pub.dartlang.org/analyzer-0.32.4/lib" />
       <root url="file://$USER_HOME$/.flutter-sdk/.pub-cache/hosted/pub.dartlang.org/args-1.5.0/lib" />
       <root url="file://$USER_HOME$/.flutter-sdk/.pub-cache/hosted/pub.dartlang.org/async-2.0.8/lib" />
+      <root url="file://$USER_HOME$/.flutter-sdk/.pub-cache/hosted/pub.dartlang.org/async_resource-0.1.2/lib" />
       <root url="file://$USER_HOME$/.flutter-sdk/.pub-cache/hosted/pub.dartlang.org/boolean_selector-1.0.4/lib" />
       <root url="file://$USER_HOME$/.flutter-sdk/.pub-cache/hosted/pub.dartlang.org/cached_network_image-0.4.2/lib" />
       <root url="file://$USER_HOME$/.flutter-sdk/.pub-cache/hosted/pub.dartlang.org/charcode-1.1.2/lib" />
       <root url="file://$USER_HOME$/.flutter-sdk/.pub-cache/hosted/pub.dartlang.org/cloud_firestore-0.7.3/lib" />
       <root url="file://$USER_HOME$/.flutter-sdk/.pub-cache/hosted/pub.dartlang.org/collection-1.14.11/lib" />
+      <root url="file://$USER_HOME$/.flutter-sdk/.pub-cache/hosted/pub.dartlang.org/connectivity-0.3.1/lib" />
       <root url="file://$USER_HOME$/.flutter-sdk/.pub-cache/hosted/pub.dartlang.org/convert-2.0.2/lib" />
       <root url="file://$USER_HOME$/.flutter-sdk/.pub-cache/hosted/pub.dartlang.org/crypto-2.0.6/lib" />
       <root url="file://$USER_HOME$/.flutter-sdk/.pub-cache/hosted/pub.dartlang.org/csslib-0.14.5/lib" />
@@ -561,6 +598,7 @@
       <root url="file://$USER_HOME$/.flutter-sdk/.pub-cache/hosted/pub.dartlang.org/firebase_core-0.2.5/lib" />
       <root url="file://$USER_HOME$/.flutter-sdk/.pub-cache/hosted/pub.dartlang.org/firebase_database-0.4.6/lib" />
       <root url="file://$USER_HOME$/.flutter-sdk/.pub-cache/hosted/pub.dartlang.org/flutter_cache_manager-0.1.2/lib" />
+      <root url="file://$USER_HOME$/.flutter-sdk/.pub-cache/hosted/pub.dartlang.org/flutter_offline-0.1.0/lib" />
       <root url="file://$USER_HOME$/.flutter-sdk/.pub-cache/hosted/pub.dartlang.org/flutter_redux-0.5.1/lib" />
       <root url="file://$USER_HOME$/.flutter-sdk/.pub-cache/hosted/pub.dartlang.org/flutter_web_browser-0.9.0+1/lib" />
       <root url="file://$USER_HOME$/.flutter-sdk/.pub-cache/hosted/pub.dartlang.org/font_awesome_flutter-8.0.1/lib" />
@@ -594,8 +632,10 @@
       <root url="file://$USER_HOME$/.flutter-sdk/.pub-cache/hosted/pub.dartlang.org/quiver-2.0.0+1/lib" />
       <root url="file://$USER_HOME$/.flutter-sdk/.pub-cache/hosted/pub.dartlang.org/redux-3.0.0/lib" />
       <root url="file://$USER_HOME$/.flutter-sdk/.pub-cache/hosted/pub.dartlang.org/scoped_model-0.3.0/lib" />
+      <root url="file://$USER_HOME$/.flutter-sdk/.pub-cache/hosted/pub.dartlang.org/service_worker-0.2.3/lib" />
       <root url="file://$USER_HOME$/.flutter-sdk/.pub-cache/hosted/pub.dartlang.org/share-0.4.0/lib" />
       <root url="file://$USER_HOME$/.flutter-sdk/.pub-cache/hosted/pub.dartlang.org/shared_preferences-0.4.2/lib" />
+      <root url="file://$USER_HOME$/.flutter-sdk/.pub-cache/hosted/pub.dartlang.org/shared_prefs_resource-0.0.1/lib" />
       <root url="file://$USER_HOME$/.flutter-sdk/.pub-cache/hosted/pub.dartlang.org/shelf-0.7.3+3/lib" />
       <root url="file://$USER_HOME$/.flutter-sdk/.pub-cache/hosted/pub.dartlang.org/shelf_packages_handler-1.0.4/lib" />
       <root url="file://$USER_HOME$/.flutter-sdk/.pub-cache/hosted/pub.dartlang.org/shelf_static-0.2.8/lib" />
