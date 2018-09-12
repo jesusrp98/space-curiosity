@@ -1,13 +1,12 @@
 import 'dart:async';
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../models/daily_image.dart';
-import '../../../widgets/hero_image.dart';
+import '../../../widgets/cached_image.dart';
 import 'help.dart';
 import 'imagedetails.dart';
 
@@ -73,36 +72,6 @@ class _NasaHomePageState extends State<NasaHomePage> {
         ));
   }
 
-  Widget getImagePreview(String url) {
-    var _url = Uri.tryParse(url.trim());
-    if (_url == null)
-      return Icon(
-        Icons.image_aspect_ratio,
-        size: 60.0,
-      );
-
-    switch (_url.toString()) {
-      case 'youtube':
-      case 'vimeo':
-        return Icon(
-          Icons.ondemand_video,
-          size: 60.0,
-        );
-        break;
-      default:
-        return CachedNetworkImage(
-          imageUrl: _url.toString().trim(),
-          height: 65.0,
-          width: 65.0,
-          fit: BoxFit.fitHeight,
-          errorWidget: Icon(
-            Icons.broken_image,
-            size: 60.0,
-          ),
-        );
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return new ScopedModel<NasaImages>(
@@ -156,33 +125,38 @@ class _NasaHomePageState extends State<NasaHomePage> {
                         String content = model.images[index]?.hdurl ??
                             model.images[index]?.url ??
                             "";
-                        return GridTile(
-                          header: Text(
-                            model.images[index]?.title ?? "",
-                            maxLines: 1,
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 14.0),
-                            textAlign: TextAlign.center,
-                          ),
-                          child: HeroImage().buildHero(
-                            context: context,
-                            url: content,
-                            tag: model.images[index].id,
-                            title: model.images[index].title,
-                            size: 50.0,
-                            // onClick: () => Navigator.push(
-                            //       context,
-                            //       MaterialPageRoute(
-                            //         builder: (context) => ImageDetailsPage(
-                            //               image: model.images[index],
-                            //             ),
-                            //         maintainState: true,
-                            //       ),
-                            //     ),
-                          ),
-                          footer: Text(
-                            model.images[index]?.date ?? "",
-                            textAlign: TextAlign.center,
+                        var _currentImage = getImagePreview(content);
+                        return InkWell(
+                          onTap: () {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (_) {
+                              return ImageDetailsPage(
+                                image: model.images[index],
+                                currentImage: content,
+                              );
+                            }));
+                          },
+                          onLongPress: () => openImage(content),
+                          child: Padding(
+                            padding: const EdgeInsets.all(1.0),
+                            child: GridTile(
+                              header: Text(
+                                model.images[index]?.title ?? "",
+                                maxLines: 1,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 14.0),
+                                textAlign: TextAlign.center,
+                              ),
+                              child: Hero(
+                                tag: model.images[index].id,
+                                child: _currentImage,
+                              ),
+                              footer: Text(
+                                model.images[index]?.date ?? "",
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
                           ),
                         );
                       },

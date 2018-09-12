@@ -28,6 +28,7 @@ dependencies:
   device_info: "^0.2.0"
   font_awesome_flutter: "^8.0.1"
   get_version: 0.0.5
+  flutter_sms: ^0.0.3
   native_widgets: ^0.1.1+1
   uuid: ^1.0.3
 
