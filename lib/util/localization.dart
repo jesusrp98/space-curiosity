@@ -8,7 +8,7 @@ class ScopedModelLocalizations {
         context, ScopedModelLocalizations);
   }
 
-  String get appTitle => "Space News!";
+  String get appTitle => "Space Curiosity";
 }
 
 class ScopedModelLocalizationsDelegate

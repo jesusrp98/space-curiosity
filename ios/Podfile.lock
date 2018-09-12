@@ -78,6 +78,8 @@ PODS:
     - FirebaseCore (~> 5.1)
     - GoogleUtilities/Environment (~> 5.2)
   - Flutter (1.0.0)
+  - flutter_sms (0.0.1):
+    - Flutter
   - flutter_web_browser (0.0.1):
     - Flutter
   - get_version (0.0.1):
@@ -153,6 +155,7 @@ DEPENDENCIES:
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
   - firebase_database (from `.symlinks/plugins/firebase_database/ios`)
   - Flutter (from `.symlinks/flutter/ios`)
+  - flutter_sms (from `.symlinks/plugins/flutter_sms/ios`)
   - flutter_web_browser (from `.symlinks/plugins/flutter_web_browser/ios`)
   - get_version (from `.symlinks/plugins/get_version/ios`)
   - package_info (from `.symlinks/plugins/package_info/ios`)
@@ -199,6 +202,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/firebase_database/ios"
   Flutter:
     :path: ".symlinks/flutter/ios"
+  flutter_sms:
+    :path: ".symlinks/plugins/flutter_sms/ios"
   flutter_web_browser:
     :path: ".symlinks/plugins/flutter_web_browser/ios"
   get_version:
@@ -231,6 +236,7 @@ SPEC CHECKSUMS:
   FirebaseFirestore: 7eec93809ad61e7ebe303089c5cc5efa63424b72
   FirebaseInstanceID: ea5af6920d0a4a29b40459d055bebe4a6c1333c4
   Flutter: 9d0fac939486c9aba2809b7982dfdbb47a7b0296
+  flutter_sms: fe8c88d249cd328d355a63032400ba0c9477630e
   flutter_web_browser: 6a716fdf08f528f7c527eeae1fef13680172bb81
   get_version: a59b7bd8fbf7543739bd853218b6685899419d05
   GoogleAppMeasurement: f7507b39b70ad0bd80b3d81518b2f43868974307
