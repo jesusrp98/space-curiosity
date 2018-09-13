@@ -11,13 +11,13 @@ enum TabItem { news, planets, spaceX, nasa }
 String tabItemName(TabItem tabItem) {
   switch (tabItem) {
     case TabItem.news:
-      return "News";
+      return 'News';
     case TabItem.spaceX:
-      return "SpaceX";
+      return 'SpaceX';
     case TabItem.nasa:
-      return "NASA";
+      return 'NASA';
     case TabItem.planets:
-      return "Planets";
+      return 'Planets';
   }
   return null;
 }
@@ -91,18 +91,18 @@ class BottomNavigationState extends State<BottomNavigation> {
     return BottomNavigationBarItem(
       icon: Icon(
         icon,
-        color: _colorTabMatching(item: tabItem),
+        color: _colorTabMatching(tabItem),
       ),
       title: Text(
         text,
         style: TextStyle(
-          color: _colorTabMatching(item: tabItem),
+          color: _colorTabMatching(tabItem),
         ),
       ),
     );
   }
 
-  Color _colorTabMatching({TabItem item}) {
+  Color _colorTabMatching(TabItem item) {
     // return currentItem == item ? Theme.of(context).primaryColor : Colors.grey;
     return currentItem == item ? Colors.orange : Colors.grey;
   }

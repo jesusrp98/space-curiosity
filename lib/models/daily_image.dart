@@ -79,7 +79,7 @@ class ImageData {
     var uuid = new Uuid();
     return ImageData(
       id: uuid.v4(),
-      title: json['title'] ?? "No Name Found",
+      title: json['title'] ?? 'No Name Found',
       date: json['date'],
       description: json['explanation'],
       hdurl: json['hdurl'],

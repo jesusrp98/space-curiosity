@@ -10,7 +10,7 @@ class NewsHomePage extends StatelessWidget {
     var client = new http.Client();
     // RSS feed
     var response =
-        await client.get("https://www.nasa.gov/rss/dyn/breaking_news.rss");
+        await client.get('https://www.nasa.gov/rss/dyn/breaking_news.rss');
     var channel = new RssFeed.parse(response.body);
     return channel;
   }
@@ -33,12 +33,12 @@ class NewsHomePage extends StatelessWidget {
         if (feed.connectionState == ConnectionState.waiting)
           return NativeLoadingIndicator(
             center: true,
-            text: Text("Loading..."),
+            text: Text('Loading...'),
           );
 
         if (feed.connectionState == ConnectionState.done) {
           if (feed.data.items.isEmpty)
-            return Center(child: Text("No Feed Found"));
+            return Center(child: Text('No Feed Found'));
 
           return ListView.builder(
             itemCount: feed.data.items.length,

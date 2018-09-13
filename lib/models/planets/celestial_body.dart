@@ -9,11 +9,11 @@ import 'planets.dart';
 enum BodyType { planet, celestialBody }
 
 class CelestialBody extends Model {
-  Future<List<CelestialBody>> getMoons(String planetID) async {
+  Future<List<CelestialBody>> getMoons(String id) async {
     var _snapshot =
-        await planetsPath.document(planetID).collection('moons').getDocuments();
+        await planetsPath.document(id).collection('moons').getDocuments();
     return _snapshot.documents
-        .map((DocumentSnapshot doc) => CelestialBody.fromJson(doc))
+        .map((document) => CelestialBody.fromJson(document))
         .toList();
   }
 

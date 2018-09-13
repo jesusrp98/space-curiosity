@@ -70,10 +70,11 @@ class PlanetsHomePage extends StatelessWidget {
           onTap: () => Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => PlanetPage(
-                          planet: moon,
-                          type: BodyType.celestialBody,
-                        )),
+                  builder: (context) => PlanetPage(
+                        planet: moon,
+                        type: BodyType.celestialBody,
+                      ),
+                ),
               ),
         ),
       );

@@ -156,6 +156,13 @@
             </list>
           </value>
         </entry>
+        <entry key="flutter_sms">
+          <value>
+            <list>
+              <option value="$USER_HOME$/.flutter-sdk/.pub-cache/hosted/pub.dartlang.org/flutter_sms-0.0.3/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="flutter_test">
           <value>
             <list>
@@ -621,6 +628,7 @@
       <root url="file://$USER_HOME$/.flutter-sdk/.pub-cache/hosted/pub.dartlang.org/flutter_cache_manager-0.1.2/lib" />
       <root url="file://$USER_HOME$/.flutter-sdk/.pub-cache/hosted/pub.dartlang.org/flutter_offline-0.1.0/lib" />
       <root url="file://$USER_HOME$/.flutter-sdk/.pub-cache/hosted/pub.dartlang.org/flutter_redux-0.5.1/lib" />
+      <root url="file://$USER_HOME$/.flutter-sdk/.pub-cache/hosted/pub.dartlang.org/flutter_sms-0.0.3/lib" />
       <root url="file://$USER_HOME$/.flutter-sdk/.pub-cache/hosted/pub.dartlang.org/flutter_web_browser-0.9.0+1/lib" />
       <root url="file://$USER_HOME$/.flutter-sdk/.pub-cache/hosted/pub.dartlang.org/font_awesome_flutter-8.0.1/lib" />
       <root url="file://$USER_HOME$/.flutter-sdk/.pub-cache/hosted/pub.dartlang.org/front_end-0.1.4/lib" />

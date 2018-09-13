@@ -17,11 +17,13 @@ class PlanetsModel extends Model {
   Future loadData() async {
     _isLoading = true;
     notifyListeners();
+
     var _snapshot = await planetsPath.getDocuments();
     _planets = _snapshot.documents.map((DocumentSnapshot document) {
       var _planet = CelestialBody.fromJson(document);
       return _planet;
     }).toList();
+
     _isLoading = false;
     notifyListeners();
   }
