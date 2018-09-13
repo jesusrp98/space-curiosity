@@ -136,123 +136,124 @@ class AddEditPlanetPage extends StatelessWidget {
             builder: (context, child, model) => Form(
                   key: formKey,
                   autovalidate: false,
-                  onWillPop: () {
-                    return Future(() => true);
-                  },
-                  child: ListView(
-                    children: <Widget>[
-                      TextFormField(
-                        key: nameKey,
-                        decoration: InputDecoration(labelText: 'Name'),
-                        initialValue: planet?.name,
-                        validator: (String value) =>
-                            value.isNotEmpty ? null : 'Name Required',
-                      ),
-                      TextFormField(
-                        key: descriptionKey,
-                        decoration: InputDecoration(labelText: 'Description'),
-                        initialValue: planet?.description,
-                      ),
-                      TextFormField(
-                        key: imageKey,
-                        decoration: InputDecoration(labelText: 'Image URL'),
-                        initialValue: planet?.imageUrl,
-                        validator: (String value) =>
-                            value.isNotEmpty ? null : 'Image Required',
-                      ),
-                      TextFormField(
-                        key: aphelionKey,
-                        decoration: InputDecoration(labelText: 'Aphelion'),
-                        initialValue: planet?.aphelion == null
-                            ? null
-                            : planet?.aphelion.toString(),
-                      ),
-                      TextFormField(
-                        key: perihelionKey,
-                        decoration: InputDecoration(labelText: 'Perihelion'),
-                        initialValue: planet?.perihelion == null
-                            ? null
-                            : planet?.perihelion.toString(),
-                      ),
-                      TextFormField(
-                        key: periodKey,
-                        decoration: InputDecoration(labelText: 'Period'),
-                        initialValue: planet?.period == null
-                            ? null
-                            : planet?.period.toString(),
-                      ),
-                      TextFormField(
-                        key: speedKey,
-                        decoration: InputDecoration(labelText: 'Speed'),
-                        initialValue: planet?.speed == null
-                            ? null
-                            : planet?.speed.toString(),
-                      ),
-                      TextFormField(
-                        key: inclinationKey,
-                        decoration: InputDecoration(labelText: 'Inclination'),
-                        initialValue: planet?.inclination == null
-                            ? null
-                            : planet?.inclination.toString(),
-                      ),
-                      TextFormField(
-                        key: radiusKey,
-                        decoration: InputDecoration(labelText: 'Radius'),
-                        initialValue: planet?.radius == null
-                            ? null
-                            : planet?.radius.toString(),
-                      ),
-                      TextFormField(
-                        key: volumeKey,
-                        decoration: InputDecoration(labelText: 'Volume'),
-                        initialValue: planet?.volume == null
-                            ? null
-                            : planet?.volume.toString(),
-                      ),
-                      TextFormField(
-                        key: massKey,
-                        decoration: InputDecoration(labelText: 'Mass'),
-                        initialValue: planet?.mass == null
-                            ? null
-                            : planet?.mass.toString(),
-                      ),
-                      TextFormField(
-                        key: densityKey,
-                        decoration: InputDecoration(labelText: 'Density'),
-                        initialValue: planet?.density == null
-                            ? null
-                            : planet?.density.toString(),
-                      ),
-                      TextFormField(
-                        key: gravityKey,
-                        decoration: InputDecoration(labelText: 'Gravity'),
-                        initialValue: planet?.gravity == null
-                            ? null
-                            : planet?.gravity.toString(),
-                      ),
-                      TextFormField(
-                        key: escapeVelocityKey,
-                        decoration:
-                            InputDecoration(labelText: 'Escape velocity'),
-                        initialValue: planet?.escapeVelocity == null
-                            ? null
-                            : planet?.escapeVelocity.toString(),
-                      ),
-                      TextFormField(
-                        key: temperatureKey,
-                        decoration: InputDecoration(labelText: 'Temperature'),
-                        initialValue: planet?.temperature == null
-                            ? null
-                            : planet?.temperature.toString(),
-                      ),
-                      TextFormField(
-                        key: pressureKey,
-                        decoration: InputDecoration(labelText: 'Pressure'),
-                        initialValue: planet?.pressure == null
-                            ? null
-                            : planet?.pressure.toString(),
-                      ),
-                    ],
+                  onWillPop: () => Future(() => true),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        TextFormField(
+                          key: nameKey,
+                          decoration: InputDecoration(labelText: 'Name'),
+                          initialValue: planet?.name,
+                          validator: (String value) =>
+                              value.isNotEmpty ? null : 'Name Required',
+                        ),
+                        TextFormField(
+                          key: descriptionKey,
+                          decoration: InputDecoration(labelText: 'Description'),
+                          initialValue: planet?.description,
+                        ),
+                        TextFormField(
+                          key: imageKey,
+                          decoration: InputDecoration(labelText: 'Image URL'),
+                          initialValue: planet?.imageUrl,
+                          validator: (String value) =>
+                              value.isNotEmpty ? null : 'Image Required',
+                        ),
+                        TextFormField(
+                          key: aphelionKey,
+                          decoration: InputDecoration(labelText: 'Aphelion'),
+                          initialValue: planet?.aphelion == null
+                              ? null
+                              : planet?.aphelion.toString(),
+                        ),
+                        TextFormField(
+                          key: perihelionKey,
+                          decoration: InputDecoration(labelText: 'Perihelion'),
+                          initialValue: planet?.perihelion == null
+                              ? null
+                              : planet?.perihelion.toString(),
+                        ),
+                        TextFormField(
+                          key: periodKey,
+                          decoration: InputDecoration(labelText: 'Period'),
+                          initialValue: planet?.period == null
+                              ? null
+                              : planet?.period.toString(),
+                        ),
+                        TextFormField(
+                          key: speedKey,
+                          decoration: InputDecoration(labelText: 'Speed'),
+                          initialValue: planet?.speed == null
+                              ? null
+                              : planet?.speed.toString(),
+                        ),
+                        TextFormField(
+                          key: inclinationKey,
+                          decoration: InputDecoration(labelText: 'Inclination'),
+                          initialValue: planet?.inclination == null
+                              ? null
+                              : planet?.inclination.toString(),
+                        ),
+                        TextFormField(
+                          key: radiusKey,
+                          decoration: InputDecoration(labelText: 'Radius'),
+                          initialValue: planet?.radius == null
+                              ? null
+                              : planet?.radius.toString(),
+                        ),
+                        TextFormField(
+                          key: volumeKey,
+                          decoration: InputDecoration(labelText: 'Volume'),
+                          initialValue: planet?.volume == null
+                              ? null
+                              : planet?.volume.toString(),
+                        ),
+                        TextFormField(
+                          key: massKey,
+                          decoration: InputDecoration(labelText: 'Mass'),
+                          initialValue: planet?.mass == null
+                              ? null
+                              : planet?.mass.toString(),
+                        ),
+                        TextFormField(
+                          key: densityKey,
+                          decoration: InputDecoration(labelText: 'Density'),
+                          initialValue: planet?.density == null
+                              ? null
+                              : planet?.density.toString(),
+                        ),
+                        TextFormField(
+                          key: gravityKey,
+                          decoration: InputDecoration(labelText: 'Gravity'),
+                          initialValue: planet?.gravity == null
+                              ? null
+                              : planet?.gravity.toString(),
+                        ),
+                        TextFormField(
+                          key: escapeVelocityKey,
+                          decoration:
+                              InputDecoration(labelText: 'Escape velocity'),
+                          initialValue: planet?.escapeVelocity == null
+                              ? null
+                              : planet?.escapeVelocity.toString(),
+                        ),
+                        TextFormField(
+                          key: temperatureKey,
+                          decoration: InputDecoration(labelText: 'Temperature'),
+                          initialValue: planet?.temperature == null
+                              ? null
+                              : planet?.temperature.toString(),
+                        ),
+                        TextFormField(
+                          key: pressureKey,
+                          decoration: InputDecoration(labelText: 'Pressure'),
+                          initialValue: planet?.pressure == null
+                              ? null
+                              : planet?.pressure.toString(),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
           ),
