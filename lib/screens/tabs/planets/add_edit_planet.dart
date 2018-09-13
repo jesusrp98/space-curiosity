@@ -11,7 +11,7 @@ class AddEditPlanetPage extends StatelessWidget {
   final BodyType type;
   final String id;
 
-  AddEditPlanetPage(this.planet, {this.type, this.id});
+  AddEditPlanetPage(this.planet, {@required this.type, this.id});
 
   static final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   static final GlobalKey<FormFieldState<String>> nameKey =

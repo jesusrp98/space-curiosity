@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../data/database.dart';
 import 'tabs/nasa/home_page.dart';
 import 'tabs/news.dart';
 import 'tabs/planets/planets.dart';
@@ -59,7 +58,7 @@ class BottomNavigationState extends State<BottomNavigation> {
   }
 
   Widget _buildBody() {
-    var database = AppFirestore();
+    // var database = AppFirestore();
     // var stream = database.countersStream();
     switch (currentItem) {
       case TabItem.news:

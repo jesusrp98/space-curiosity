@@ -10,8 +10,9 @@ import 'add_edit_planet.dart';
 
 class PlanetPage extends StatelessWidget {
   final CelestialBody planet;
+  final BodyType type;
 
-  PlanetPage(this.planet);
+  PlanetPage({this.planet, this.type});
 
   @override
   Widget build(BuildContext context) {
@@ -21,13 +22,34 @@ class PlanetPage extends StatelessWidget {
         title: Text(planet.name),
         actions: <Widget>[
           IconButton(
+            icon: Icon(Icons.add),
+            onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => AddEditPlanetPage(
+                          null,
+                          id: planet.id,
+                          type: BodyType.celestialBody,
+                        ),
+                    fullscreenDialog: true,
+                  ),
+                ).then(
+                  (value) {
+                    if (value != null) {
+                      String _value = value;
+                      if (_value.contains('deleted')) Navigator.pop(context);
+                    }
+                  },
+                ),
+          ),
+          IconButton(
             icon: Icon(Icons.edit),
             onPressed: () => Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) => AddEditPlanetPage(
                           planet,
-                          type: BodyType.planet,
+                          type: type,
                         ),
                     fullscreenDialog: true,
                   ),
@@ -52,31 +74,6 @@ class PlanetPage extends StatelessWidget {
               ]),
             )
           ]),
-        ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: SafeArea(
-        child: FloatingActionButton.extended(
-          icon: Icon(Icons.add),
-          label: Text("Add Moon"),
-          onPressed: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => AddEditPlanetPage(
-                        null,
-                        id: planet.id,
-                        type: BodyType.celestialBody,
-                      ),
-                  fullscreenDialog: true,
-                ),
-              ).then(
-                (value) {
-                  if (value != null) {
-                    String _value = value;
-                    if (_value.contains('deleted')) Navigator.pop(context);
-                  }
-                },
-              ),
         ),
       ),
     );

@@ -17,8 +17,8 @@ class PlanetsHomePage extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(title: Text('Planets')),
         body: ScopedModelDescendant<PlanetsModel>(
-          builder: (context, child, model) => FutureBuilder(
-                future: model.loadData(),
+          builder: (context, child, model) => StreamBuilder(
+                stream: model.loadData().asStream().distinct(),
                 builder: (BuildContext context, _) {
                   if (model.planets == null)
                     return NativeLoadingIndicator(
@@ -69,15 +69,20 @@ class PlanetsHomePage extends StatelessWidget {
           subtitle: moon.description,
           onTap: () => Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => PlanetPage(moon)),
+                MaterialPageRoute(
+                    builder: (context) => PlanetPage(
+                          planet: moon,
+                          type: BodyType.celestialBody,
+                        )),
               ),
         ),
       );
 
     if (_moons.isEmpty)
-      _moons.add(Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text('No Moons Found'),
+      _moons.add(ListTile(
+        contentPadding: const EdgeInsets.all(8.0),
+        leading: Icon(Icons.info),
+        title: Text('No Moons Found'),
       ));
 
     return SingleChildScrollView(
@@ -121,8 +126,10 @@ class PlanetsHomePage extends StatelessWidget {
                 onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) =>
-                              PlanetPage(model.planets[index])),
+                          builder: (context) => PlanetPage(
+                                planet: model.planets[index],
+                                type: BodyType.planet,
+                              )),
                     ),
               ),
         ),
