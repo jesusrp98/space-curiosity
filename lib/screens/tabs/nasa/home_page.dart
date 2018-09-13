@@ -51,24 +51,20 @@ class _NasaHomePageState extends State<NasaHomePage> {
       showDialog<T>(
         context: context,
         barrierDismissible: false,
-        builder: (BuildContext context) => child,
+        builder: (BuildContext context) => NativeDialog(
+              title: title,
+              content: detail,
+              actions: <NativeDialogAction>[
+                NativeDialogAction(
+                    text: 'OK',
+                    isDestructive: false,
+                    onPressed: () {
+                      Navigator.pop(context);
+                    }),
+              ],
+            ),
       );
     }
-
-    return showDemoDialog<Null>(
-        context: context,
-        child: NativeDialog(
-          title: title,
-          content: detail,
-          actions: <NativeDialogAction>[
-            NativeDialogAction(
-                text: 'OK',
-                isDestructive: false,
-                onPressed: () {
-                  Navigator.pop(context);
-                }),
-          ],
-        ));
   }
 
   @override

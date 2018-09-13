@@ -37,11 +37,11 @@ class NewsHomePage extends StatelessWidget {
           );
 
         if (feed.connectionState == ConnectionState.done) {
-          if (feed.data.items.isEmpty)
+          if (feed.data?.items == null || feed.data.items.isEmpty)
             return Center(child: Text('No Feed Found'));
 
           return ListView.builder(
-            itemCount: feed.data.items.length,
+            itemCount: feed.data.items.length ?? 0,
             itemBuilder: (BuildContext context, int index) {
               return ListTile(
                 title: Text(feed.data.items[index].title),
