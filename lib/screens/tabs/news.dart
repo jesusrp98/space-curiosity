@@ -6,6 +6,19 @@ import 'package:native_widgets/native_widgets.dart';
 import 'package:webfeed/webfeed.dart';
 
 class NewsHomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Breaking News'),
+        elevation: 1.0,
+      ),
+      body: NewsList(),
+    );
+  }
+}
+
+class NewsList extends StatelessWidget {
   Future<RssFeed> getFeed() async {
     var client = new http.Client();
     // RSS feed
@@ -17,16 +30,6 @@ class NewsHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Breaking News'),
-        elevation: 1.0,
-      ),
-      body: _buildContent(context),
-    );
-  }
-
-  Widget _buildContent(BuildContext context) {
     return FutureBuilder(
       future: getFeed(),
       builder: (BuildContext context, AsyncSnapshot<RssFeed> feed) {
