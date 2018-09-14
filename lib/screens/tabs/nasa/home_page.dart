@@ -45,9 +45,14 @@ class NasaHomePage extends StatelessWidget {
   }
 }
 
-class ImagesList extends StatelessWidget {
+class ImagesList extends StatefulWidget {
   final NasaImages model;
   ImagesList({this.model});
+  @override
+  State<StatefulWidget> createState() => _ImagesListState();
+}
+
+class _ImagesListState extends State<ImagesList> {
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
       GlobalKey<RefreshIndicatorState>();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -97,17 +102,17 @@ class ImagesList extends StatelessWidget {
   Widget build(BuildContext context) {
     return RefreshIndicator(
       key: _refreshIndicatorKey,
-      onRefresh: () => _onRefresh(model),
+      onRefresh: () => _onRefresh(widget.model),
       child: StreamBuilder(
-        stream: model.fetchImages(count).asStream().distinct(),
+        stream: widget.model.fetchImages(count).asStream().distinct(),
         builder: (BuildContext context, _) {
-          if (model.images == null)
+          if (widget.model.images == null)
             return NativeLoadingIndicator(
               center: true,
               text: Text("Loading..."),
             );
 
-          if (model.images.isEmpty)
+          if (widget.model.images.isEmpty)
             return Center(child: Text("No Images Found"));
 
           double width = MediaQuery.of(context).size.width;
@@ -116,21 +121,22 @@ class ImagesList extends StatelessWidget {
           return GridView.builder(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: axisCount),
-            itemCount: model.images.length,
+            itemCount: widget.model.images.length,
             itemBuilder: (BuildContext context, int index) {
               if (index == count - 1) {
                 count += 100;
-                model.fetchImages(count);
+                widget.model.fetchImages(count);
               }
 
-              String content =
-                  model.images[index]?.hdurl ?? model.images[index]?.url ?? "";
+              String content = widget.model.images[index]?.hdurl ??
+                  widget.model.images[index]?.url ??
+                  "";
 
               return InkWell(
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (_) {
                     return ImageDetailsPage(
-                      image: model.images[index],
+                      image: widget.model.images[index],
                       currentImage: content,
                     );
                   }));
@@ -140,18 +146,18 @@ class ImagesList extends StatelessWidget {
                   padding: const EdgeInsets.all(1.0),
                   child: GridTile(
                     header: Text(
-                      model.images[index]?.title ?? "",
+                      widget.model.images[index]?.title ?? "",
                       maxLines: 1,
                       style: TextStyle(
                           fontWeight: FontWeight.bold, fontSize: 14.0),
                       textAlign: TextAlign.center,
                     ),
                     child: Hero(
-                      tag: model.images[index].id,
+                      tag: widget.model.images[index].id,
                       child: Image.network(content),
                     ),
                     footer: Text(
-                      model.images[index]?.date ?? "",
+                      widget.model.images[index]?.date ?? "",
                       textAlign: TextAlign.center,
                     ),
                   ),
