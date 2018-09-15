@@ -16,7 +16,6 @@ class PlanetPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // print(planet.moons);
     return Scaffold(
       appBar: AppBar(
         title: Text(planet.name),
@@ -123,7 +122,7 @@ class PlanetPage extends StatelessWidget {
       const SizedBox(height: 8.0),
       RowItem.textRow('Speed', planet.getSpeed),
       const SizedBox(height: 8.0),
-      RowItem.textRow('Inclination', planet.getInclination),
+      RowItem.textRow('Obliquity', planet.getObliquity),
       const SizedBox(height: 8.0),
       RowItem.textRow('Radius', planet.getRadius),
       const SizedBox(height: 8.0),

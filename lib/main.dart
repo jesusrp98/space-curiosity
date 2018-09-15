@@ -28,24 +28,22 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: ScopedModelLocalizations().appTitle,
-        theme: _buildThemeData(),
-        home: BottomNavigation(),
-        localizationsDelegates: [
-          ScopedModelLocalizationsDelegate(),
-        ],
-        debugShowCheckedModeBanner: false,
-        routes: <String, WidgetBuilder>{
-          "/home": (BuildContext context) => BottomNavigation(),
-          "/space_x": (BuildContext context) => SpaceXHomePage(),
-          "/nasa": (BuildContext context) => NasaHomePage(),
-          "/news": (BuildContext context) => NewsHomePage(),
-          "/planets": (BuildContext context) => PlanetsHomePage(),
-          AddEditPlanetPage.routeName: (BuildContext context) =>
-              AddEditPlanetPage(
-                null,
-                type: BodyType.planet,
-              ),
-        });
+      title: ScopedModelLocalizations().appTitle,
+      theme: _buildThemeData(),
+      home: BottomNavigation(),
+      localizationsDelegates: [ScopedModelLocalizationsDelegate()],
+      debugShowCheckedModeBanner: false,
+      routes: <String, WidgetBuilder>{
+        "/home": (_) => BottomNavigation(),
+        "/space_x": (_) => SpaceXHomePage(),
+        "/nasa": (_) => NasaHomePage(),
+        "/news": (_) => NewsHomePage(),
+        "/planets": (_) => PlanetsHomePage(),
+        AddEditPlanetPage.routeName: (_) => AddEditPlanetPage(
+              null,
+              type: BodyType.planet,
+            ),
+      },
+    );
   }
 }

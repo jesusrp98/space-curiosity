@@ -96,7 +96,7 @@ class AddEditPlanetPage extends StatelessWidget {
                           perihelion: pressureKey?.currentState?.value,
                           period: periodKey?.currentState?.value,
                           speed: speedKey?.currentState?.value,
-                          inclination: inclinationKey?.currentState?.value,
+                          obliquity: inclinationKey?.currentState?.value,
                           radius: radiusKey?.currentState?.value,
                           volume: volumeKey?.currentState?.value,
                           mass: massKey?.currentState?.value,
@@ -191,9 +191,9 @@ class AddEditPlanetPage extends StatelessWidget {
                         TextFormField(
                           key: inclinationKey,
                           decoration: InputDecoration(labelText: 'Inclination'),
-                          initialValue: planet?.inclination == null
+                          initialValue: planet?.obliquity == null
                               ? null
-                              : planet?.inclination.toString(),
+                              : planet?.obliquity.toString(),
                         ),
                         TextFormField(
                           key: radiusKey,

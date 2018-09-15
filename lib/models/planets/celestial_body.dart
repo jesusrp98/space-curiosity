@@ -23,7 +23,7 @@ class CelestialBody extends Model {
       perihelion,
       period,
       speed,
-      inclination,
+      obliquity,
       radius,
       volume,
       mass,
@@ -43,7 +43,7 @@ class CelestialBody extends Model {
     this.perihelion,
     this.period,
     this.speed,
-    this.inclination,
+    this.obliquity,
     this.radius,
     this.volume,
     this.mass,
@@ -65,7 +65,7 @@ class CelestialBody extends Model {
       perihelion: json['perihelion'],
       period: json['period'],
       speed: json['speed'],
-      inclination: json['inclination'],
+      obliquity: json['obliquity'],
       radius: json['radius'],
       volume: json['volume'],
       mass: json['mass'],
@@ -93,7 +93,7 @@ class CelestialBody extends Model {
       'perihelion': celestialBody.perihelion,
       'period': celestialBody.period,
       'speed': celestialBody.speed,
-      'inclination': celestialBody.inclination,
+      'obliquity': celestialBody.obliquity,
       'radius': celestialBody.radius,
       'volume': celestialBody.volume,
       'mass': celestialBody.mass,
@@ -117,7 +117,7 @@ class CelestialBody extends Model {
       'perihelion': celestialBody.perihelion,
       'period': celestialBody.period,
       'speed': celestialBody.speed,
-      'inclination': celestialBody.inclination,
+      'obliquity': celestialBody.obliquity,
       'radius': celestialBody.radius,
       'volume': celestialBody.volume,
       'mass': celestialBody.mass,
@@ -140,7 +140,7 @@ class CelestialBody extends Model {
       'perihelion': celestialBody.perihelion,
       'period': celestialBody.period,
       'speed': celestialBody.speed,
-      'inclination': celestialBody.inclination,
+      'obliquity': celestialBody.obliquity,
       'radius': celestialBody.radius,
       'volume': celestialBody.volume,
       'mass': celestialBody.mass,
@@ -164,7 +164,7 @@ class CelestialBody extends Model {
       'perihelion': celestialBody.perihelion,
       'period': celestialBody.period,
       'speed': celestialBody.speed,
-      'inclination': celestialBody.inclination,
+      'obliquity': celestialBody.obliquity,
       'radius': celestialBody.radius,
       'volume': celestialBody.volume,
       'mass': celestialBody.mass,
@@ -194,8 +194,8 @@ class CelestialBody extends Model {
 
   String get getSpeed => '${NumberFormat.decimalPattern().format(speed)} km/s';
 
-  String get getInclination =>
-      '${NumberFormat.decimalPattern().format(inclination)}°';
+  String get getObliquity =>
+      '${NumberFormat.decimalPattern().format(obliquity)}°';
 
   String get getRadius => '${NumberFormat.decimalPattern().format(radius)} km';
 
