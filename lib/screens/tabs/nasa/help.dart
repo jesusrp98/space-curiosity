@@ -22,7 +22,6 @@ class _HelpPageState extends State<HelpPage> {
     initPlatformState();
   }
 
-
   initPlatformState() async {
     String platformVersion;
     try {
@@ -94,7 +93,7 @@ class _HelpPageState extends State<HelpPage> {
               title: const Text('Twitter'),
               subtitle: new Text('@RodyDavis'),
               onTap: () {
-               openLink('https://www.twitter.com/rodydavis');
+                openLink('https://www.twitter.com/rodydavis');
               },
             ),
             new Divider(

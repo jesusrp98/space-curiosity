@@ -99,8 +99,7 @@ class LaunchPage extends StatelessWidget {
         children: <Widget>[
           Text(
             _launch.getLaunchDate,
-            style: Theme
-                .of(context)
+            style: Theme.of(context)
                 .textTheme
                 .subhead
                 .copyWith(color: secondaryText),

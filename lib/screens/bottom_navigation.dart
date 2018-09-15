@@ -1,28 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:scoped_model/scoped_model.dart';
 
-import '../data/database.dart';
-import '../models/counter.dart';
 import 'tabs/nasa/home_page.dart';
-import 'tabs/space_x/home_page.dart';
 import 'tabs/news.dart';
+import 'tabs/planets/planets.dart';
+import 'tabs/space_x/home_page.dart';
 
-enum TabItem {
-  news,
-
-  spaceX,
-  nasa,
-}
+enum TabItem { news, planets, spaceX, nasa }
 
 String tabItemName(TabItem tabItem) {
   switch (tabItem) {
     case TabItem.news:
-      return "News";
+      return 'News';
     case TabItem.spaceX:
-      return "Space X";
+      return 'SpaceX';
     case TabItem.nasa:
-      return "NASA";
+      return 'NASA';
+    case TabItem.planets:
+      return 'Planets';
   }
   return null;
 }
@@ -46,6 +41,9 @@ class BottomNavigationState extends State<BottomNavigation> {
       case 2:
         _updateCurrentItem(TabItem.nasa);
         break;
+      case 3:
+        _updateCurrentItem(TabItem.planets);
+        break;
     }
   }
 
@@ -60,18 +58,17 @@ class BottomNavigationState extends State<BottomNavigation> {
   }
 
   Widget _buildBody() {
-    var database = AppFirestore();
-    var stream = database.countersStream();
+    // var database = AppFirestore();
+    // var stream = database.countersStream();
     switch (currentItem) {
       case TabItem.news:
-        return ScopedModel<CountersModel>(
-          model: CountersModel(stream: stream),
-          child: NewsHomePage(database: database),
-        );
+        return NewsHomePage();
       case TabItem.spaceX:
         return SpaceXHomePage();
       case TabItem.nasa:
         return NasaHomePage();
+      case TabItem.planets:
+        return PlanetsHomePage();
     }
     return Container();
   }
@@ -81,8 +78,9 @@ class BottomNavigationState extends State<BottomNavigation> {
       type: BottomNavigationBarType.fixed,
       items: [
         _buildItem(icon: Icons.description, tabItem: TabItem.news),
-        _buildItem(icon: Icons.info, tabItem: TabItem.spaceX),
+        _buildItem(icon: FontAwesomeIcons.rocket, tabItem: TabItem.spaceX),
         _buildItem(icon: FontAwesomeIcons.spaceShuttle, tabItem: TabItem.nasa),
+        _buildItem(icon: Icons.public, tabItem: TabItem.planets),
       ],
       onTap: _onSelectTab,
     );
@@ -93,18 +91,18 @@ class BottomNavigationState extends State<BottomNavigation> {
     return BottomNavigationBarItem(
       icon: Icon(
         icon,
-        color: _colorTabMatching(item: tabItem),
+        color: _colorTabMatching(tabItem),
       ),
       title: Text(
         text,
         style: TextStyle(
-          color: _colorTabMatching(item: tabItem),
+          color: _colorTabMatching(tabItem),
         ),
       ),
     );
   }
 
-  Color _colorTabMatching({TabItem item}) {
+  Color _colorTabMatching(TabItem item) {
     // return currentItem == item ? Theme.of(context).primaryColor : Colors.grey;
     return currentItem == item ? Colors.orange : Colors.grey;
   }

@@ -28,20 +28,18 @@ class LaunchList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Checks if list is cached
-    if (PageStorage
-            .of(context)
+    if (PageStorage.of(context)
             .readState(context, identifier: ValueKey(_url)) ==
         null)
-      PageStorage
-          .of(context)
+      PageStorage.of(context)
           .writeState(context, fetchPost(), identifier: ValueKey(_url));
 
     return Center(
       child: FutureBuilder<List<Launch>>(
         future: PageStorage.of(context).readState(
-              context,
-              identifier: ValueKey(_url),
-            ),
+          context,
+          identifier: ValueKey(_url),
+        ),
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.none:
