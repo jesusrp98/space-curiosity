@@ -6,6 +6,19 @@ import 'package:native_widgets/native_widgets.dart';
 import 'package:webfeed/webfeed.dart';
 
 class NewsHomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Breaking News'),
+        elevation: 1.0,
+      ),
+      body: NewsList(),
+    );
+  }
+}
+
+class NewsList extends StatelessWidget {
   Future<RssFeed> getFeed() async {
     var client = new http.Client();
     // RSS feed
@@ -17,16 +30,6 @@ class NewsHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Breaking News'),
-        elevation: 1.0,
-      ),
-      body: _buildContent(context),
-    );
-  }
-
-  Widget _buildContent(BuildContext context) {
     return FutureBuilder(
       future: getFeed(),
       builder: (BuildContext context, AsyncSnapshot<RssFeed> feed) {
@@ -37,11 +40,11 @@ class NewsHomePage extends StatelessWidget {
           );
 
         if (feed.connectionState == ConnectionState.done) {
-          if (feed.data.items.isEmpty)
+          if (feed.data?.items == null || feed.data.items.isEmpty)
             return Center(child: Text('No Feed Found'));
 
           return ListView.builder(
-            itemCount: feed.data.items.length,
+            itemCount: feed.data.items.length ?? 0,
             itemBuilder: (BuildContext context, int index) {
               return ListTile(
                 title: Text(feed.data.items[index].title),

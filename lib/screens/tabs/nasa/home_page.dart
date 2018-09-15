@@ -9,12 +9,50 @@ import '../../../models/daily_image.dart';
 import 'help.dart';
 import 'imagedetails.dart';
 
-class NasaHomePage extends StatefulWidget {
+class NasaHomePage extends StatelessWidget {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
-  _NasaHomePageState createState() => _NasaHomePageState();
+  Widget build(BuildContext context) {
+    return new ScopedModel<NasaImages>(
+      model: NasaImages(),
+      child: Scaffold(
+        key: _scaffoldKey,
+        appBar: AppBar(
+          // backgroundColor: Colors.white,
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.info_outline),
+              onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => HelpPage()),
+                  ),
+            ),
+          ],
+          title: const Text(
+            "Daily NASA",
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          centerTitle: true,
+        ),
+        body: SafeArea(
+          child: ScopedModelDescendant<NasaImages>(
+            builder: (context, child, model) => ImagesList(model: model),
+          ),
+        ),
+      ),
+    );
+  }
 }
 
-class _NasaHomePageState extends State<NasaHomePage> {
+class ImagesList extends StatefulWidget {
+  final NasaImages model;
+  ImagesList({this.model});
+  @override
+  State<StatefulWidget> createState() => _ImagesListState();
+}
+
+class _ImagesListState extends State<ImagesList> {
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
       GlobalKey<RefreshIndicatorState>();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -35,13 +73,6 @@ class _NasaHomePageState extends State<NasaHomePage> {
     return completer.future;
   }
 
-  void goToAbout() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => HelpPage()),
-    );
-  }
-
   Future<Null> delay(int milliseconds) {
     return Future.delayed(new Duration(milliseconds: milliseconds));
   }
@@ -51,121 +82,90 @@ class _NasaHomePageState extends State<NasaHomePage> {
       showDialog<T>(
         context: context,
         barrierDismissible: false,
-        builder: (BuildContext context) => child,
+        builder: (BuildContext context) => NativeDialog(
+              title: title,
+              content: detail,
+              actions: <NativeDialogAction>[
+                NativeDialogAction(
+                    text: 'OK',
+                    isDestructive: false,
+                    onPressed: () {
+                      Navigator.pop(context);
+                    }),
+              ],
+            ),
       );
     }
-
-    return showDemoDialog<Null>(
-        context: context,
-        child: NativeDialog(
-          title: title,
-          content: detail,
-          actions: <NativeDialogAction>[
-            NativeDialogAction(
-                text: 'OK',
-                isDestructive: false,
-                onPressed: () {
-                  Navigator.pop(context);
-                }),
-          ],
-        ));
   }
 
   @override
   Widget build(BuildContext context) {
-    return new ScopedModel<NasaImages>(
-      model: NasaImages(),
-      child: Scaffold(
-        key: _scaffoldKey,
-        appBar: AppBar(
-          // backgroundColor: Colors.white,
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(Icons.info_outline),
-              onPressed: goToAbout,
-            ),
-          ],
-          title: const Text(
-            "Daily NASA",
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
-          centerTitle: true,
-        ),
-        body: SafeArea(
-          child: ScopedModelDescendant<NasaImages>(
-            builder: (context, child, model) => RefreshIndicator(
-                  key: _refreshIndicatorKey,
-                  onRefresh: () => _onRefresh(model),
-                  child: StreamBuilder(
-                    stream: model.fetchImages(count).asStream().distinct(),
-                    builder: (BuildContext context, _) {
-                      if (model.images == null)
-                        return NativeLoadingIndicator(
-                          center: true,
-                          text: Text("Loading..."),
-                        );
+    return RefreshIndicator(
+      key: _refreshIndicatorKey,
+      onRefresh: () => _onRefresh(widget.model),
+      child: StreamBuilder(
+        stream: widget.model.fetchImages(count).asStream().distinct(),
+        builder: (BuildContext context, _) {
+          if (widget.model.images == null)
+            return NativeLoadingIndicator(
+              center: true,
+              text: Text("Loading..."),
+            );
 
-                      if (model.images.isEmpty)
-                        return Center(child: Text("No Images Found"));
+          if (widget.model.images.isEmpty)
+            return Center(child: Text("No Images Found"));
 
-                      double width = MediaQuery.of(context).size.width;
-                      int axisCount = width <= 500.0
-                          ? 2
-                          : width <= 800.0 ? 3 : width <= 1100.0 ? 4 : 5;
-                      return GridView.builder(
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: axisCount),
-                        itemCount: model.images.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          if (index == count - 1) {
-                            count += 100;
-                            model.fetchImages(count);
-                          }
+          double width = MediaQuery.of(context).size.width;
+          int axisCount =
+              width <= 500.0 ? 2 : width <= 800.0 ? 3 : width <= 1100.0 ? 4 : 5;
+          return GridView.builder(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: axisCount),
+            itemCount: widget.model.images.length,
+            itemBuilder: (BuildContext context, int index) {
+              if (index == count - 1) {
+                count += 100;
+                widget.model.fetchImages(count);
+              }
 
-                          String content = model.images[index]?.hdurl ??
-                              model.images[index]?.url ??
-                              "";
+              String content = widget.model.images[index]?.hdurl ??
+                  widget.model.images[index]?.url ??
+                  "";
 
-                          return InkWell(
-                            onTap: () {
-                              Navigator.push(context,
-                                  MaterialPageRoute(builder: (_) {
-                                return ImageDetailsPage(
-                                  image: model.images[index],
-                                  currentImage: content,
-                                );
-                              }));
-                            },
-                            onLongPress: () => openImage(content),
-                            child: Padding(
-                              padding: const EdgeInsets.all(1.0),
-                              child: GridTile(
-                                header: Text(
-                                  model.images[index]?.title ?? "",
-                                  maxLines: 1,
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 14.0),
-                                  textAlign: TextAlign.center,
-                                ),
-                                child: Hero(
-                                  tag: model.images[index].id,
-                                  child: Image.network(content),
-                                ),
-                                footer: Text(
-                                  model.images[index]?.date ?? "",
-                                  textAlign: TextAlign.center,
-                                ),
-                              ),
-                            ),
-                          );
-                        },
-                      );
-                    },
+              return InkWell(
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (_) {
+                    return ImageDetailsPage(
+                      image: widget.model.images[index],
+                      currentImage: content,
+                    );
+                  }));
+                },
+                onLongPress: () => openImage(content),
+                child: Padding(
+                  padding: const EdgeInsets.all(1.0),
+                  child: GridTile(
+                    header: Text(
+                      widget.model.images[index]?.title ?? "",
+                      maxLines: 1,
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 14.0),
+                      textAlign: TextAlign.center,
+                    ),
+                    child: Hero(
+                      tag: widget.model.images[index].id,
+                      child: Image.network(content),
+                    ),
+                    footer: Text(
+                      widget.model.images[index]?.date ?? "",
+                      textAlign: TextAlign.center,
+                    ),
                   ),
                 ),
-          ),
-        ),
+              );
+            },
+          );
+        },
       ),
     );
   }
