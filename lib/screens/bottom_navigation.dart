@@ -66,14 +66,13 @@ class BottomNavigationState extends State<BottomNavigation> {
       case TabItem.spaceX:
         return SpaceXHomePage();
       case TabItem.nasa:
-        return  ScopedModel<NasaImages>(
-          model: NasaImages(),
-          child: NasaHomePage());
+          return  ScopedModel<NasaImages>(
+            model: NasaImages(),
+            child: NasaHomePage());
       case TabItem.planets:
-        return ild(BuildContext context) {
-    return new ScopedModel<PlanetsModel>(
-      model: PlanetsModel(),
-      child: PlanetsHomePage());
+        return ScopedModel<PlanetsModel>(
+            model: PlanetsModel(),
+            child: PlanetsHomePage());
     }
     return Container();
   }
