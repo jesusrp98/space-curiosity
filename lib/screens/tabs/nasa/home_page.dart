@@ -11,12 +11,12 @@ import 'imagedetails.dart';
 
 class NasaHomePage extends StatelessWidget {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final NasaImages model;
+  NasaHomePage{(this.model)};
 
   @override
   Widget build(BuildContext context) {
-    return new ScopedModel<NasaImages>(
-      model: NasaImages(),
-      child: Scaffold(
+    return Scaffold(
         key: _scaffoldKey,
         appBar: AppBar(
           // backgroundColor: Colors.white,
@@ -40,7 +40,6 @@ class NasaHomePage extends StatelessWidget {
             builder: (context, child, model) => ImagesList(model: model),
           ),
         ),
-      ),
     );
   }
 }
