@@ -12,42 +12,41 @@ import 'planet_page.dart';
 class PlanetsHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    returnScaffold(
-        appBar: AppBar(title: Text('Planets')),
-        body: ScopedModelDescendant<PlanetsModel>(
-          builder: (context, child, model) => StreamBuilder(
-                stream: model.loadData().asStream().distinct(),
-                builder: (BuildContext context, _) {
-                  if (model.planets == null)
-                    return NativeLoadingIndicator(
-                      center: true,
-                      text: Text("Loading..."),
-                    );
-
-                  if (model.planets.isEmpty)
-                    return Center(child: Text("No Planets Found"));
-
-                  return ListView.builder(
-                    itemCount: model.planets.length,
-                    itemBuilder: _buildItem,
+    return Scaffold(
+      appBar: AppBar(title: Text('Planets')),
+      body: ScopedModelDescendant<PlanetsModel>(
+        builder: (context, child, model) => StreamBuilder(
+              stream: model.loadData().asStream().distinct(),
+              builder: (BuildContext context, _) {
+                if (model.planets == null)
+                  return NativeLoadingIndicator(
+                    center: true,
+                    text: Text("Loading..."),
                   );
-                },
+
+                if (model.planets.isEmpty)
+                  return Center(child: Text("No Planets Found"));
+
+                return ListView.builder(
+                  itemCount: model.planets.length,
+                  itemBuilder: _buildItem,
+                );
+              },
+            ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => AddEditPlanetPage(
+                      null,
+                      type: BodyType.planet,
+                    ),
+                fullscreenDialog: true,
               ),
-        ),
-        floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.add),
-          onPressed: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => AddEditPlanetPage(
-                        null,
-                        type: BodyType.planet,
-                      ),
-                  fullscreenDialog: true,
-                ),
-              ),
-        ),
-      
+            ),
+      ),
     );
   }
 

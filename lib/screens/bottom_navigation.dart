@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:scoped_model/scoped_model.dart';
 
+import '../models/daily_image.dart';
+import '../models/planets/planets.dart';
 import 'tabs/nasa/home_page.dart';
 import 'tabs/news.dart';
 import 'tabs/planets/planets.dart';
@@ -66,13 +69,11 @@ class BottomNavigationState extends State<BottomNavigation> {
       case TabItem.spaceX:
         return SpaceXHomePage();
       case TabItem.nasa:
-          return  ScopedModel<NasaImages>(
-            model: NasaImages(),
-            child: NasaHomePage());
+        return ScopedModel<NasaImages>(
+            model: NasaImages(), child: NasaHomePage());
       case TabItem.planets:
         return ScopedModel<PlanetsModel>(
-            model: PlanetsModel(),
-            child: PlanetsHomePage());
+            model: PlanetsModel(), child: PlanetsHomePage());
     }
     return Container();
   }

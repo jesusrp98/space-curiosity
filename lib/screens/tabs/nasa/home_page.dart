@@ -12,34 +12,34 @@ import 'imagedetails.dart';
 class NasaHomePage extends StatelessWidget {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final NasaImages model;
-  NasaHomePage{(this.model)};
+  NasaHomePage({this.model});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        key: _scaffoldKey,
-        appBar: AppBar(
-          // backgroundColor: Colors.white,
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(Icons.info_outline),
-              onPressed: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => HelpPage()),
-                  ),
-            ),
-          ],
-          title: const Text(
-            "Daily NASA",
-            style: TextStyle(fontWeight: FontWeight.bold),
+      key: _scaffoldKey,
+      appBar: AppBar(
+        // backgroundColor: Colors.white,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.info_outline),
+            onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => HelpPage()),
+                ),
           ),
-          centerTitle: true,
+        ],
+        title: const Text(
+          "Daily NASA",
+          style: TextStyle(fontWeight: FontWeight.bold),
         ),
-        body: SafeArea(
-          child: ScopedModelDescendant<NasaImages>(
-            builder: (context, child, model) => ImagesList(model: model),
-          ),
+        centerTitle: true,
+      ),
+      body: SafeArea(
+        child: ScopedModelDescendant<NasaImages>(
+          builder: (context, child, model) => ImagesList(model: model),
         ),
+      ),
     );
   }
 }
