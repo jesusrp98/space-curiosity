@@ -70,7 +70,10 @@ class BottomNavigationState extends State<BottomNavigation> {
           model: NasaImages(),
           child: NasaHomePage());
       case TabItem.planets:
-        return PlanetsHomePage();
+        return ild(BuildContext context) {
+    return new ScopedModel<PlanetsModel>(
+      model: PlanetsModel(),
+      child: PlanetsHomePage());
     }
     return Container();
   }

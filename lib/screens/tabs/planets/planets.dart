@@ -12,9 +12,7 @@ import 'planet_page.dart';
 class PlanetsHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return new ScopedModel<PlanetsModel>(
-      model: PlanetsModel(),
-      child: Scaffold(
+    returnScaffold(
         appBar: AppBar(title: Text('Planets')),
         body: ScopedModelDescendant<PlanetsModel>(
           builder: (context, child, model) => StreamBuilder(
@@ -49,7 +47,7 @@ class PlanetsHomePage extends StatelessWidget {
                 ),
               ),
         ),
-      ),
+      
     );
   }
 
