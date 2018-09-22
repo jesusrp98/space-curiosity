@@ -48,4 +48,8 @@ class Url {
   static const String spacexGithub = 'https://github.com/r-spacex/SpaceX-API';
   static const String internationalSystem =
       'https://en.wikipedia.org/wiki/International_System_of_Units';
+
+  /// SPACE CURIOSITY STUFF
+
+  static const String launches = 'https://api.spacexdata.com/v2/launches?order=desc';
 }

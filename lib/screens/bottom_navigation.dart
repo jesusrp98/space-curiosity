@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:space_news/screens/tabs/space_x/launches.dart';
 
 import 'tabs/nasa/home_page.dart';
 import 'tabs/news.dart';
@@ -64,7 +65,7 @@ class BottomNavigationState extends State<BottomNavigation> {
       case TabItem.news:
         return NewsHomePage();
       case TabItem.spaceX:
-        return SpaceXHomePage();
+        return Launches();
       case TabItem.nasa:
         return NasaHomePage();
       case TabItem.planets:
