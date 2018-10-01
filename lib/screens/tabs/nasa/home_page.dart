@@ -75,24 +75,22 @@ class _ImagesListState extends State<ImagesList> {
   }
 
   void showAlertPopup(BuildContext context, String title, String detail) async {
-    void showDemoDialog<T>({BuildContext context, Widget child}) {
-      showDialog<T>(
-        context: context,
-        barrierDismissible: false,
-        builder: (BuildContext context) => NativeDialog(
-              title: title,
-              content: detail,
-              actions: <NativeDialogAction>[
-                NativeDialogAction(
-                    text: 'OK',
-                    isDestructive: false,
-                    onPressed: () {
-                      Navigator.pop(context);
-                    }),
-              ],
-            ),
-      );
-    }
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) => NativeDialog(
+            title: title,
+            content: detail,
+            actions: <NativeDialogAction>[
+              NativeDialogAction(
+                  text: 'OK',
+                  isDestructive: false,
+                  onPressed: () {
+                    Navigator.pop(context);
+                  }),
+            ],
+          ),
+    );
   }
 
   @override
