@@ -3,11 +3,11 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import '../models/daily_image.dart';
+import '../models/planets/planets.dart';
 import 'tabs/nasa/home_page.dart';
 import 'tabs/news.dart';
 import 'tabs/planets/planets.dart';
 import 'tabs/space_x/launches.dart';
-import '../models/planets/planets.dart';
 
 enum TabItem { news, planets, spaceX, nasa }
 
