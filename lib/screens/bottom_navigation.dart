@@ -7,6 +7,7 @@ import 'tabs/nasa/home_page.dart';
 import 'tabs/news.dart';
 import 'tabs/planets/planets.dart';
 import 'tabs/space_x/launches.dart';
+import '../models/planets/planets.dart';
 
 enum TabItem { news, planets, spaceX, nasa }
 
@@ -31,13 +32,19 @@ class BottomNavigation extends StatefulWidget {
 
 class BottomNavigationState extends State<BottomNavigation> {
   TabItem currentItem = TabItem.news;
-  final nasaModel = NasaImages();
+  final _nasaModel = NasaImages();
+  final _planetsModel = PlanetsModel();
 
-  // @override
-  // initState() {
-  //   super.initState();
-  //   initPlatformState();
-  // }
+  @override
+  initState() {
+    super.initState();
+    _initPlatformState();
+  }
+
+  void _initPlatformState() async {
+    _nasaModel.fetchImages(100);
+    _planetsModel.loadData();
+  }
 
   _onSelectTab(int index) {
     switch (index) {
@@ -76,11 +83,14 @@ class BottomNavigationState extends State<BottomNavigation> {
         return Launches();
       case TabItem.nasa:
         return ScopedModel<NasaImages>(
-          model: nasaModel,
+          model: _nasaModel,
           child: NasaHomePage(),
         );
       case TabItem.planets:
-        return PlanetsHomePage();
+        return ScopedModel<PlanetsModel>(
+          model: _planetsModel,
+          child: PlanetsHomePage(),
+        );
     }
     return Container();
   }

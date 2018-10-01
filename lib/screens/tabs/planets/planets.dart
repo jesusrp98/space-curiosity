@@ -12,12 +12,10 @@ import 'planet_page.dart';
 class PlanetsHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return new ScopedModel<PlanetsModel>(
-      model: PlanetsModel(),
-      child: Scaffold(
-        appBar: AppBar(title: Text('Planets')),
-        body: ScopedModelDescendant<PlanetsModel>(
-          builder: (context, child, model) => StreamBuilder(
+    return ScopedModelDescendant<PlanetsModel>(
+        builder: (context, child, model) => Scaffold(
+              appBar: AppBar(title: Text('Planets')),
+              body: StreamBuilder(
                 stream: model.loadData().asStream().distinct(),
                 builder: (BuildContext context, _) {
                   if (model.planets == null)
@@ -35,22 +33,20 @@ class PlanetsHomePage extends StatelessWidget {
                   );
                 },
               ),
-        ),
-        floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.add),
-          onPressed: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => AddEditPlanetPage(
-                        null,
-                        type: BodyType.planet,
+              floatingActionButton: FloatingActionButton(
+                child: Icon(Icons.add),
+                onPressed: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => AddEditPlanetPage(
+                              null,
+                              type: BodyType.planet,
+                            ),
+                        fullscreenDialog: true,
                       ),
-                  fullscreenDialog: true,
-                ),
+                    ),
               ),
-        ),
-      ),
-    );
+            ));
   }
 
   Widget _buildMoons(
