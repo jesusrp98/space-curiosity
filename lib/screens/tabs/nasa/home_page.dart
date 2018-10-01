@@ -14,33 +14,30 @@ class NasaHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new ScopedModel<NasaImages>(
-      model: NasaImages(),
-      child: Scaffold(
-        key: _scaffoldKey,
-        appBar: AppBar(
-          // backgroundColor: Colors.white,
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(Icons.info_outline),
-              onPressed: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => HelpPage()),
-                  ),
+    return ScopedModelDescendant<NasaImages>(
+      builder: (context, child, model) => Scaffold(
+            key: _scaffoldKey,
+            appBar: AppBar(
+              // backgroundColor: Colors.white,
+              actions: <Widget>[
+                IconButton(
+                  icon: Icon(Icons.info_outline),
+                  onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => HelpPage()),
+                      ),
+                ),
+              ],
+              title: const Text(
+                "Daily NASA",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              centerTitle: true,
             ),
-          ],
-          title: const Text(
-            "Daily NASA",
-            style: TextStyle(fontWeight: FontWeight.bold),
+            body: SafeArea(
+              child: ImagesList(model: model),
+            ),
           ),
-          centerTitle: true,
-        ),
-        body: SafeArea(
-          child: ScopedModelDescendant<NasaImages>(
-            builder: (context, child, model) => ImagesList(model: model),
-          ),
-        ),
-      ),
     );
   }
 }
