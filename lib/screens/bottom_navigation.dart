@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:scoped_model/scoped_model.dart';
+import 'package:space_news/models/rockets/launches.dart';
 
 import '../models/daily_image.dart';
 import '../models/planets/planets.dart';
@@ -34,6 +35,7 @@ class BottomNavigationState extends State<BottomNavigation> {
   TabItem currentItem = TabItem.news;
   final _nasaModel = NasaImages();
   final _planetsModel = PlanetsModel();
+  final _spacexModel = LaunchesModel();
 
   @override
   initState() {
@@ -44,6 +46,7 @@ class BottomNavigationState extends State<BottomNavigation> {
   void _initPlatformState() async {
     _nasaModel.fetchImages(100);
     _planetsModel.loadData();
+    _spacexModel.loadData();
   }
 
   _onSelectTab(int index) {
@@ -80,7 +83,10 @@ class BottomNavigationState extends State<BottomNavigation> {
       case TabItem.news:
         return NewsHomePage();
       case TabItem.spaceX:
-        return Launches();
+        return ScopedModel<LaunchesModel>(
+          model: _spacexModel,
+          child: Launches(),
+        );
       case TabItem.nasa:
         return ScopedModel<NasaImages>(
           model: _nasaModel,

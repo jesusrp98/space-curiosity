@@ -9,31 +9,30 @@ import 'package:space_news/widgets/list_cell.dart';
 class Launches extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ScopedModel<LaunchesModel>(
-      model: LaunchesModel(),
-      child: Scaffold(
-        appBar: AppBar(title: Text('Launches')),
-        body: ScopedModelDescendant<LaunchesModel>(
-          builder: (context, child, model) => StreamBuilder(
-                stream: model.loadData().asStream().distinct(),
-                builder: (BuildContext context, _) {
-                  if (model.launches == null)
-                    return NativeLoadingIndicator(
-                      center: true,
-                      text: Text("Loading..."),
-                    );
+    return ScopedModelDescendant<LaunchesModel>(
+      builder: (context, child, model) => Scaffold(
+            appBar: AppBar(title: Text('Launches')),
+            body: ScopedModelDescendant<LaunchesModel>(
+              builder: (context, child, model) => StreamBuilder(
+                    stream: model.loadData().asStream().distinct(),
+                    builder: (BuildContext context, _) {
+                      if (model.launches == null)
+                        return NativeLoadingIndicator(
+                          center: true,
+                          text: Text("Loading..."),
+                        );
 
-                  if (model.launches.isEmpty)
-                    return Center(child: Text("No launches Found"));
+                      if (model.launches.isEmpty)
+                        return Center(child: Text("No launches Found"));
 
-                  return ListView.builder(
-                    itemCount: model.launches.length,
-                    itemBuilder: _buildItem,
-                  );
-                },
-              ),
-        ),
-      ),
+                      return ListView.builder(
+                        itemCount: model.launches.length,
+                        itemBuilder: _buildItem,
+                      );
+                    },
+                  ),
+            ),
+          ),
     );
   }
 
