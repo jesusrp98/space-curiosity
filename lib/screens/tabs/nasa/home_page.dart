@@ -14,33 +14,30 @@ class NasaHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new ScopedModel<NasaImages>(
-      model: NasaImages(),
-      child: Scaffold(
-        key: _scaffoldKey,
-        appBar: AppBar(
-          // backgroundColor: Colors.white,
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(Icons.info_outline),
-              onPressed: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => HelpPage()),
-                  ),
+    return ScopedModelDescendant<NasaImages>(
+      builder: (context, child, model) => Scaffold(
+            key: _scaffoldKey,
+            appBar: AppBar(
+              // backgroundColor: Colors.white,
+              actions: <Widget>[
+                IconButton(
+                  icon: Icon(Icons.info_outline),
+                  onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => HelpPage()),
+                      ),
+                ),
+              ],
+              title: const Text(
+                "Daily NASA",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              centerTitle: true,
             ),
-          ],
-          title: const Text(
-            "Daily NASA",
-            style: TextStyle(fontWeight: FontWeight.bold),
+            body: SafeArea(
+              child: ImagesList(model: model),
+            ),
           ),
-          centerTitle: true,
-        ),
-        body: SafeArea(
-          child: ScopedModelDescendant<NasaImages>(
-            builder: (context, child, model) => ImagesList(model: model),
-          ),
-        ),
-      ),
     );
   }
 }
@@ -78,24 +75,22 @@ class _ImagesListState extends State<ImagesList> {
   }
 
   void showAlertPopup(BuildContext context, String title, String detail) async {
-    void showDemoDialog<T>({BuildContext context, Widget child}) {
-      showDialog<T>(
-        context: context,
-        barrierDismissible: false,
-        builder: (BuildContext context) => NativeDialog(
-              title: title,
-              content: detail,
-              actions: <NativeDialogAction>[
-                NativeDialogAction(
-                    text: 'OK',
-                    isDestructive: false,
-                    onPressed: () {
-                      Navigator.pop(context);
-                    }),
-              ],
-            ),
-      );
-    }
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) => NativeDialog(
+            title: title,
+            content: detail,
+            actions: <NativeDialogAction>[
+              NativeDialogAction(
+                  text: 'OK',
+                  isDestructive: false,
+                  onPressed: () {
+                    Navigator.pop(context);
+                  }),
+            ],
+          ),
+    );
   }
 
   @override

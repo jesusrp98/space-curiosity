@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:scoped_model/scoped_model.dart';
+import 'package:space_news/models/rockets/launches.dart';
 
+import '../models/daily_image.dart';
+import '../models/planets/planets.dart';
 import 'tabs/nasa/home_page.dart';
 import 'tabs/news.dart';
 import 'tabs/planets/planets.dart';
-import 'tabs/space_x/home_page.dart';
+import 'tabs/space_x/launches.dart';
 
 enum TabItem { news, planets, spaceX, nasa }
 
@@ -29,6 +33,21 @@ class BottomNavigation extends StatefulWidget {
 
 class BottomNavigationState extends State<BottomNavigation> {
   TabItem currentItem = TabItem.news;
+  final _nasaModel = NasaImages();
+  final _planetsModel = PlanetsModel();
+  final _spacexModel = LaunchesModel();
+
+  @override
+  initState() {
+    super.initState();
+    _initPlatformState();
+  }
+
+  void _initPlatformState() async {
+    _nasaModel.fetchImages(100);
+    _planetsModel.loadData();
+    _spacexModel.loadData();
+  }
 
   _onSelectTab(int index) {
     switch (index) {
@@ -64,11 +83,20 @@ class BottomNavigationState extends State<BottomNavigation> {
       case TabItem.news:
         return NewsHomePage();
       case TabItem.spaceX:
-        return SpaceXHomePage();
+        return ScopedModel<LaunchesModel>(
+          model: _spacexModel,
+          child: Launches(),
+        );
       case TabItem.nasa:
-        return NasaHomePage();
+        return ScopedModel<NasaImages>(
+          model: _nasaModel,
+          child: NasaHomePage(),
+        );
       case TabItem.planets:
-        return PlanetsHomePage();
+        return ScopedModel<PlanetsModel>(
+          model: _planetsModel,
+          child: PlanetsHomePage(),
+        );
     }
     return Container();
   }
