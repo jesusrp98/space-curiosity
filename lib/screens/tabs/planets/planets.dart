@@ -9,7 +9,7 @@ import '../../../widgets/list_cell.dart';
 import 'add_edit_planet.dart';
 import 'planet_page.dart';
 
-class PlanetsHomePage extends StatelessWidget {
+class PlanetsTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScopedModelDescendant<PlanetsModel>(

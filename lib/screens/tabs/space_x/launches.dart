@@ -6,7 +6,7 @@ import 'package:space_news/screens/tabs/space_x/launch_page.dart';
 import 'package:space_news/widgets/hero_image.dart';
 import 'package:space_news/widgets/list_cell.dart';
 
-class Launches extends StatelessWidget {
+class LaunchesTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScopedModelDescendant<LaunchesModel>(
