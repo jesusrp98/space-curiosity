@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
@@ -7,29 +9,46 @@ import 'package:space_news/widgets/hero_image.dart';
 import 'package:space_news/widgets/list_cell.dart';
 
 class LaunchesTab extends StatelessWidget {
+  final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
+      GlobalKey<RefreshIndicatorState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  Future<Null> _onRefresh(LaunchesModel model) {
+    Completer<Null> completer = Completer<Null>();
+    model.refresh().then((_) => completer.complete());
+    return completer.future;
+  }
+
   @override
   Widget build(BuildContext context) {
     return ScopedModelDescendant<LaunchesModel>(
       builder: (context, child, model) => Scaffold(
+            key: _scaffoldKey,
             appBar: AppBar(title: Text('Launches')),
             body: ScopedModelDescendant<LaunchesModel>(
-              builder: (context, child, model) => StreamBuilder(
-                    stream: model.loadData().asStream().distinct(),
-                    builder: (BuildContext context, _) {
-                      if (model.launches == null)
-                        return NativeLoadingIndicator(
-                          center: true,
-                          text: Text("Loading..."),
-                        );
+              builder: (context, child, model) => SafeArea(
+                    child: RefreshIndicator(
+                      key: _refreshIndicatorKey,
+                      onRefresh: () => _onRefresh(model),
+                      child: StreamBuilder(
+                        stream: model.loadData().asStream().distinct(),
+                        builder: (BuildContext context, _) {
+                          if (model.launches == null)
+                            return NativeLoadingIndicator(
+                              center: true,
+                              text: Text("Loading..."),
+                            );
 
-                      if (model.launches.isEmpty)
-                        return Center(child: Text("No launches Found"));
+                          if (model.launches.isEmpty)
+                            return Center(child: Text("No launches Found"));
 
-                      return ListView.builder(
-                        itemCount: model.launches.length,
-                        itemBuilder: _buildItem,
-                      );
-                    },
+                          return ListView.builder(
+                            itemCount: model.launches.length,
+                            itemBuilder: _buildItem,
+                          );
+                        },
+                      ),
+                    ),
                   ),
             ),
           ),
