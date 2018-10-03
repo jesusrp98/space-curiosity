@@ -11,7 +11,7 @@ import '../util/cache_settings.dart';
 import 'package:uuid/uuid.dart';
 import '../util/keys.dart';
 
-class NasaImages extends Model {
+class NasaImagesModel extends Model {
   List<ImageData> _images;
   List<ImageData> get images => _images;
 

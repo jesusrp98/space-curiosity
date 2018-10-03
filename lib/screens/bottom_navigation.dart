@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:scoped_model/scoped_model.dart';
+import 'package:space_news/models/rockets/launches.dart';
 
 import '../models/daily_image.dart';
 import '../models/planets/planets.dart';
@@ -32,8 +33,10 @@ class BottomNavigation extends StatefulWidget {
 
 class BottomNavigationState extends State<BottomNavigation> {
   TabItem currentItem = TabItem.news;
-  final _nasaModel = NasaImages();
+
+  final _nasaModel = NasaImagesModel();
   final _planetsModel = PlanetsModel();
+  final _launchesModel = LaunchesModel();
 
   @override
   initState() {
@@ -44,6 +47,7 @@ class BottomNavigationState extends State<BottomNavigation> {
   void _initPlatformState() async {
     _nasaModel.fetchImages(100);
     _planetsModel.loadData();
+    _launchesModel.loadData();
   }
 
   _onSelectTab(int index) {
@@ -63,7 +67,7 @@ class BottomNavigationState extends State<BottomNavigation> {
     }
   }
 
-  _updateCurrentItem(TabItem item) => setState(() => currentItem = item);
+  void _updateCurrentItem(TabItem item) => setState(() => currentItem = item);
 
   @override
   Widget build(BuildContext context) {
@@ -74,22 +78,23 @@ class BottomNavigationState extends State<BottomNavigation> {
   }
 
   Widget _buildBody() {
-    // var database = AppFirestore();
-    // var stream = database.countersStream();
     switch (currentItem) {
       case TabItem.news:
-        return NewsHomePage();
+        return NewsTab();
       case TabItem.spaceX:
-        return Launches();
+        return ScopedModel<LaunchesModel>(
+          model: _launchesModel,
+          child: LaunchesTab(),
+        );
       case TabItem.nasa:
-        return ScopedModel<NasaImages>(
+        return ScopedModel<NasaImagesModel>(
           model: _nasaModel,
-          child: NasaHomePage(),
+          child: NasaTab(),
         );
       case TabItem.planets:
         return ScopedModel<PlanetsModel>(
           model: _planetsModel,
-          child: PlanetsHomePage(),
+          child: PlanetsTab(),
         );
     }
     return Container();
@@ -98,34 +103,24 @@ class BottomNavigationState extends State<BottomNavigation> {
   Widget _buildBottomNavigationBar() {
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
+      onTap: _onSelectTab,
       items: [
         _buildItem(icon: Icons.description, tabItem: TabItem.news),
         _buildItem(icon: FontAwesomeIcons.rocket, tabItem: TabItem.spaceX),
         _buildItem(icon: FontAwesomeIcons.spaceShuttle, tabItem: TabItem.nasa),
         _buildItem(icon: Icons.public, tabItem: TabItem.planets),
       ],
-      onTap: _onSelectTab,
     );
   }
 
   BottomNavigationBarItem _buildItem({IconData icon, TabItem tabItem}) {
     String text = tabItemName(tabItem);
     return BottomNavigationBarItem(
-      icon: Icon(
-        icon,
-        color: _colorTabMatching(tabItem),
-      ),
-      title: Text(
-        text,
-        style: TextStyle(
-          color: _colorTabMatching(tabItem),
-        ),
-      ),
+      icon: Icon(icon, color: _colorTabMatching(tabItem)),
+      title: Text(text, style: TextStyle(color: _colorTabMatching(tabItem))),
     );
   }
 
-  Color _colorTabMatching(TabItem item) {
-    // return currentItem == item ? Theme.of(context).primaryColor : Colors.grey;
-    return currentItem == item ? Colors.orange : Colors.grey;
-  }
+  Color _colorTabMatching(TabItem item) =>
+      currentItem == item ? Colors.orange : Colors.grey;
 }

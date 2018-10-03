@@ -8,7 +8,7 @@ class ScopedModelLocalizations {
         context, ScopedModelLocalizations);
   }
 
-  String get appTitle => "Space Curiosity";
+  String get appTitle => 'Space Curiosity';
 }
 
 class ScopedModelLocalizationsDelegate
@@ -22,5 +22,5 @@ class ScopedModelLocalizationsDelegate
 
   @override
   bool isSupported(Locale locale) =>
-      locale.languageCode.toLowerCase().contains("en");
+      locale.languageCode.toLowerCase().contains('en');
 }

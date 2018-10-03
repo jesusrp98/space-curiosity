@@ -9,12 +9,12 @@ import '../../../models/daily_image.dart';
 import 'help.dart';
 import 'imagedetails.dart';
 
-class NasaHomePage extends StatelessWidget {
+class NasaTab extends StatelessWidget {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
-    return ScopedModelDescendant<NasaImages>(
+    return ScopedModelDescendant<NasaImagesModel>(
       builder: (context, child, model) => Scaffold(
             key: _scaffoldKey,
             appBar: AppBar(
@@ -43,7 +43,7 @@ class NasaHomePage extends StatelessWidget {
 }
 
 class ImagesList extends StatefulWidget {
-  final NasaImages model;
+  final NasaImagesModel model;
   ImagesList({this.model});
   @override
   State<StatefulWidget> createState() => _ImagesListState();
@@ -64,7 +64,7 @@ class _ImagesListState extends State<ImagesList> {
     }
   }
 
-  Future<Null> _onRefresh(NasaImages model) {
+  Future<Null> _onRefresh(NasaImagesModel model) {
     Completer<Null> completer = Completer<Null>();
     model.fetchImages(count).then((_) => completer.complete());
     return completer.future;
