@@ -45,9 +45,9 @@ dependencies:
   #   git:
   #     url: git://github.com/Norbert515/dynamic_theme.git
 
-dev_dependencies:
-  flutter_test:
-    sdk: flutter
+# dev_dependencies:
+#   flutter_test:
+#     sdk: flutter
 
 flutter:
   fonts:
