@@ -28,6 +28,14 @@ class NasaTab extends StatelessWidget {
     }
   }
 
+  int getAxisCount(BuildContext context) {
+    final _width = MediaQuery.of(context).size.width;
+    if (_width <= 500.0) return 2;
+    if (_width <= 800.0) return 3;
+    if (_width <= 1100.0) return 4;
+    return 5;
+  }
+
   @override
   Widget build(BuildContext context) {
     return ScopedModelDescendant<NasaImagesModel>(
@@ -64,11 +72,8 @@ class NasaTab extends StatelessWidget {
 
                     if (model.images.isEmpty)
                       return Center(child: Text("No Images Found"));
+                    int axisCount = getAxisCount(context);
 
-                    double width = MediaQuery.of(context).size.width;
-                    int axisCount = width <= 500.0
-                        ? 2
-                        : width <= 800.0 ? 3 : width <= 1100.0 ? 4 : 5;
                     return GridView.builder(
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: axisCount),
