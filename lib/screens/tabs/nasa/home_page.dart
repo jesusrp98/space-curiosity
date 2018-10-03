@@ -13,11 +13,10 @@ class NasaTab extends StatelessWidget {
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
       GlobalKey<RefreshIndicatorState>();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  final count = 100;
 
   Future<Null> _onRefresh(NasaImagesModel model) {
     Completer<Null> completer = Completer<Null>();
-    model.fetchImages(count).then((_) => completer.complete());
+    model.refresh().then((_) => completer.complete());
     return completer.future;
   }
 
@@ -55,7 +54,7 @@ class NasaTab extends StatelessWidget {
                 key: _refreshIndicatorKey,
                 onRefresh: () => _onRefresh(model),
                 child: StreamBuilder(
-                  stream: model.fetchImages(count).asStream().distinct(),
+                  stream: model.fetchImages().asStream().distinct(),
                   builder: (BuildContext context, _) {
                     if (model.images == null)
                       return NativeLoadingIndicator(
@@ -75,10 +74,7 @@ class NasaTab extends StatelessWidget {
                           crossAxisCount: axisCount),
                       itemCount: model.images.length,
                       itemBuilder: (BuildContext context, int index) {
-                        if (index == count - 1) {
-                          model.fetchImages(count + 100);
-                        }
-
+                        model.fetchMore();
                         String content = model.images[index]?.hdurl ??
                             model.images[index]?.url ??
                             "";

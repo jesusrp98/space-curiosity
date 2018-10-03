@@ -45,7 +45,7 @@ class BottomNavigationState extends State<BottomNavigation> {
   }
 
   void _initPlatformState() async {
-    _nasaModel.fetchImages(100);
+    _nasaModel.fetchImages();
     _planetsModel.loadData();
     _launchesModel.loadData();
   }
