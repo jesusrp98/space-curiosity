@@ -3,9 +3,10 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../../../models/daily_image.dart';
+import '../../../util/axis_count.dart';
+import '../../../util/open_url.dart';
 import 'help.dart';
 import 'imagedetails.dart';
 
@@ -18,22 +19,6 @@ class NasaTab extends StatelessWidget {
     Completer<Null> completer = Completer<Null>();
     model.refresh().then((_) => completer.complete());
     return completer.future;
-  }
-
-  Future openImage(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
-
-  int getAxisCount(BuildContext context) {
-    final _width = MediaQuery.of(context).size.width;
-    if (_width <= 500.0) return 2;
-    if (_width <= 800.0) return 3;
-    if (_width <= 1100.0) return 4;
-    return 5;
   }
 
   @override
@@ -94,7 +79,7 @@ class NasaTab extends StatelessWidget {
                               );
                             }));
                           },
-                          onLongPress: () => openImage(content),
+                          onLongPress: () => openURL(content),
                           child: Padding(
                             padding: const EdgeInsets.all(1.0),
                             child: GridTile(
