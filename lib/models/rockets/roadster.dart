@@ -1,34 +1,25 @@
-import 'package:intl/intl.dart';
-
 import 'vehicle.dart';
+import 'package:intl/intl.dart';
 
 /// ROADSTER CLASS
 /// This class contains all information available from Elon Musk's Tesla
 /// Roadster, sent to space in the Falcon Heavy Test Flight.
 class Roadster extends Vehicle {
-  final DateTime date;
-  final num launchMass;
   final String orbit;
-  final num apoapsis;
-  final num periapsis;
-  final num inclination;
-  final num longitude;
-  final num period;
-  final num speed;
-  final num earthDistance;
-  final num marsDistance;
+  final num apoapsis,
+      periapsis,
+      inclination,
+      longitude,
+      period,
+      speed,
+      earthDistance,
+      marsDistance;
 
   Roadster({
-    id,
-    name,
-    type,
-    active,
-    height,
-    diameter,
     description,
     url,
-    this.date,
-    this.launchMass,
+    mass,
+    firstFlight,
     this.orbit,
     this.apoapsis,
     this.periapsis,
@@ -39,28 +30,24 @@ class Roadster extends Vehicle {
     this.earthDistance,
     this.marsDistance,
   }) : super(
-          id: id,
-          name: name,
-          type: type,
-          active: active,
-          height: height,
-          diameter: diameter,
+          id: 'roadster',
+          name: 'Tesla Roadster',
+          type: 'roadster',
           description: description,
           url: url,
+          height: 1.127,
+          diameter: 1.873,
+          mass: mass,
+          active: true,
+          firstFlight: firstFlight,
         );
 
   factory Roadster.fromJson(Map<String, dynamic> json) {
     return Roadster(
-      id: 'roadster',
-      name: 'Tesla Roadster',
-      type: 'roadster',
-      active: true,
-      height: 1.127,
-      diameter: 1.873,
       description: json['details'],
       url: json['wikipedia'],
-      date: DateTime.parse(json['launch_date_utc']).toLocal(),
-      launchMass: json['launch_mass_kg'],
+      mass: json['launch_mass_kg'],
+      firstFlight: DateTime.parse(json['launch_date_utc']).toLocal(),
       orbit: json['orbit_type'],
       apoapsis: json['apoapsis_au'],
       periapsis: json['periapsis_au'],
@@ -73,13 +60,10 @@ class Roadster extends Vehicle {
     );
   }
 
-  String get subtitle => "Elon Musk's car";
+  String get subtitle => getDate;
 
   String get getDate =>
-      DateFormat.yMMMMd().addPattern('Hm', '  ·  ').format(date);
-
-  String get getLaunchMass =>
-      '${NumberFormat.decimalPattern().format(launchMass)} kg';
+      'Launched on ${DateFormat.yMMMMd().format(firstFlight)}';
 
   String get getOrbit => '${orbit[0].toUpperCase()}${orbit.substring(1)}';
 

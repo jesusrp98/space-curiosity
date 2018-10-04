@@ -19,16 +19,17 @@ class CapsulePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: const Text('Capsule details'),
-          centerTitle: true,
-          actions: <Widget>[
-            IconButton(
-              icon: const Icon(Icons.public),
-              onPressed: () async => await FlutterWebBrowser.openWebPage(
-                  url: _capsule.url, androidToolbarColor: primaryColor),
-              tooltip: 'Wikipedia article',
-            )
-          ]),
+        title: const Text('Capsule details'),
+        centerTitle: true,
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.public),
+            onPressed: () async => await FlutterWebBrowser.openWebPage(
+                url: _capsule.url, androidToolbarColor: primaryColor),
+            tooltip: 'Wikipedia article',
+          )
+        ],
+      ),
       body: ListView(children: <Widget>[
         Padding(
           padding: const EdgeInsets.all(16.0),
@@ -46,9 +47,9 @@ class CapsulePage extends StatelessWidget {
 
   Widget _capsuleCard(BuildContext context) {
     return HeadCardPage(
-      image: HeroImage().buildHero(
+      image: HeroImage().buildExpandedHero(
         context: context,
-        size: 116.0,
+        size: HeroImage.bigSize,
         url: _capsule.getImageUrl,
         tag: _capsule.id,
         title: _capsule.name,
@@ -58,7 +59,7 @@ class CapsulePage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            _capsule.subtitle,
+            _capsule.firstLaunched,
             style: Theme.of(context)
                 .textTheme
                 .subhead
@@ -66,7 +67,7 @@ class CapsulePage extends StatelessWidget {
           ),
           const SizedBox(height: 12.0),
           Text(
-            _capsule.status,
+            _capsule.capsuleType,
             style: Theme.of(context)
                 .textTheme
                 .subhead
@@ -79,32 +80,43 @@ class CapsulePage extends StatelessWidget {
   }
 
   Widget _specsCard() {
-    return CardPage(title: 'SPECIFICATIONS', body: <Widget>[
-      RowItem.iconRow('Reusable', _capsule.reusable),
-      const SizedBox(height: 12.0),
-      RowItem.textRow('Crew capacity', _capsule.getCrew),
-      const SizedBox(height: 12.0),
-      RowItem.textRow('Launch payload', _capsule.getLaunchMass),
-      const SizedBox(height: 12.0),
-      RowItem.textRow('Return paylaod', _capsule.getReturnMass),
-      const SizedBox(height: 12.0),
-      RowItem.textRow('Height', _capsule.getHeight),
-      const SizedBox(height: 12.0),
-      RowItem.textRow('Diameter', _capsule.getDiameter),
-    ]);
+    return CardPage(
+      title: 'SPECIFICATIONS',
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          RowItem.textRow('Crew capacity', _capsule.getCrew),
+          const SizedBox(height: 12.0),
+          RowItem.iconRow('Reusable', _capsule.reusable),
+          const Divider(height: 24.0),
+          RowItem.textRow('Launch payload', _capsule.getLaunchMass),
+          const SizedBox(height: 12.0),
+          RowItem.textRow('Return paylaod', _capsule.getReturnMass),
+          const Divider(height: 24.0),
+          RowItem.textRow('Height', _capsule.getHeight),
+          const SizedBox(height: 12.0),
+          RowItem.textRow('Diameter', _capsule.getDiameter),
+          const SizedBox(height: 12.0),
+          RowItem.textRow('Dry mass', _capsule.getMass),
+        ],
+      ),
+    );
   }
 
   Widget _thrustersCard() {
     return CardPage(
       title: 'THRUSTERS',
-      body: <Widget>[
-        RowItem.textRow('Thruster systems', _capsule.getThrusters),
-        Column(
-          children: _capsule.thrusters
-              .map((thruster) => _getThruster(thruster))
-              .toList(),
-        )
-      ],
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          RowItem.textRow('Thruster systems', _capsule.getThrusters),
+          Column(
+            children: _capsule.thrusters
+                .map((thruster) => _getThruster(thruster))
+                .toList(),
+          )
+        ],
+      ),
     );
   }
 

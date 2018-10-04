@@ -9,44 +9,45 @@ import '../../../widgets/list_cell.dart';
 import 'add_edit_planet.dart';
 import 'planet_page.dart';
 
-class PlanetsHomePage extends StatelessWidget {
+class PlanetsTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScopedModelDescendant<PlanetsModel>(
-        builder: (context, child, model) => Scaffold(
-              appBar: AppBar(title: Text('Planets')),
-              body: StreamBuilder(
-                stream: model.loadData().asStream().distinct(),
-                builder: (BuildContext context, _) {
-                  if (model.planets == null)
-                    return NativeLoadingIndicator(
-                      center: true,
-                      text: Text("Loading..."),
-                    );
-
-                  if (model.planets.isEmpty)
-                    return Center(child: Text("No Planets Found"));
-
-                  return ListView.builder(
-                    itemCount: model.planets.length,
-                    itemBuilder: _buildItem,
+      builder: (context, child, model) => Scaffold(
+            appBar: AppBar(title: Text('Planets')),
+            body: StreamBuilder(
+              stream: model.loadData().asStream().distinct(),
+              builder: (BuildContext context, _) {
+                if (model.planets == null)
+                  return NativeLoadingIndicator(
+                    center: true,
+                    text: Text("Loading..."),
                   );
-                },
-              ),
-              floatingActionButton: FloatingActionButton(
-                child: Icon(Icons.add),
-                onPressed: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => AddEditPlanetPage(
-                              null,
-                              type: BodyType.planet,
-                            ),
-                        fullscreenDialog: true,
-                      ),
+
+                if (model.planets.isEmpty)
+                  return Center(child: Text("No Planets Found"));
+
+                return ListView.builder(
+                  itemCount: model.planets.length,
+                  itemBuilder: _buildItem,
+                );
+              },
+            ),
+            floatingActionButton: FloatingActionButton(
+              child: Icon(Icons.add),
+              onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => AddEditPlanetPage(
+                            null,
+                            type: BodyType.planet,
+                          ),
+                      fullscreenDialog: true,
                     ),
-              ),
-            ));
+                  ),
+            ),
+          ),
+    );
   }
 
   Widget _buildMoons(
@@ -57,6 +58,7 @@ class PlanetsHomePage extends StatelessWidget {
         ListCell(
           leading: HeroImage().buildHero(
             context: context,
+            size: HeroImage.smallSize,
             url: moon.imageUrl,
             tag: moon.id,
             title: moon.name,
@@ -66,10 +68,8 @@ class PlanetsHomePage extends StatelessWidget {
           onTap: () => Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => PlanetPage(
-                        planet: moon,
-                        type: BodyType.celestialBody,
-                      ),
+                  builder: (context) =>
+                      PlanetPage(planet: moon, type: BodyType.celestialBody),
                 ),
               ),
         ),
@@ -97,6 +97,7 @@ class PlanetsHomePage extends StatelessWidget {
           builder: (context, child, model) => ListCell(
                 leading: HeroImage().buildHero(
                   context: context,
+                  size: HeroImage.smallSize,
                   url: model.planets[index].imageUrl,
                   tag: model.planets[index].id,
                   title: model.planets[index].name,
@@ -123,10 +124,11 @@ class PlanetsHomePage extends StatelessWidget {
                 onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => PlanetPage(
-                                planet: model.planets[index],
-                                type: BodyType.planet,
-                              )),
+                        builder: (context) => PlanetPage(
+                              planet: model.planets[index],
+                              type: BodyType.planet,
+                            ),
+                      ),
                     ),
               ),
         ),

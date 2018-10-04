@@ -4,11 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 Widget getImagePreview(String url) {
   var _url = Uri.tryParse(url.trim());
 
-  if (_url == null)
-    return Icon(
-      Icons.image_aspect_ratio,
-      size: 60.0,
-    );
+  if (_url == null) return Icon(Icons.image_aspect_ratio, size: 60.0);
 
   switch (_url.toString()) {
     case 'youtube':

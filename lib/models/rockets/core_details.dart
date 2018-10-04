@@ -1,61 +1,46 @@
-import 'package:intl/intl.dart';
+import 'vehicle_details.dart';
 
 ///CORE DETAILS CLASS
 /// This class represents a single core used in a SpaceX mission,
 /// with all its details.
-class CoreDetails {
-  final String serial;
-  final int block;
-  final String status;
-  final DateTime firstLaunched;
-  final int landings;
-  final List missions;
-  final String details;
+class CoreDetails extends VehicleDetails {
+  final int block, rtlsLandings, asdsLandings;
 
   CoreDetails({
-    this.serial,
+    serial,
+    status,
+    details,
+    firstLaunched,
+    missions,
     this.block,
-    this.status,
-    this.firstLaunched,
-    this.landings,
-    this.missions,
-    this.details,
-  });
+    this.rtlsLandings,
+    this.asdsLandings,
+  }) : super(
+    serial: serial,
+    status: status,
+    details: details,
+    firstLaunched: firstLaunched,
+    missions: missions,
+  );
 
   factory CoreDetails.fromJson(Map<String, dynamic> json) {
     return CoreDetails(
       serial: json['core_serial'],
-      block: json['block'],
       status: json['status'],
-      firstLaunched: DateTime.parse(json['original_launch']).toLocal(),
-      landings: json['rtls_landings'] + json['asds_landings'],
-      missions: json['missions'],
       details: json['details'],
+      firstLaunched: DateTime.parse(json['original_launch']).toLocal(),
+      missions: json['missions'],
+      block: json['block'],
+      rtlsLandings: json['rtls_landings'],
+      asdsLandings: json['asds_landings'],
     );
   }
 
+  String get getDetails => details ?? 'This core has currently no details.';
+
   String get getBlock => block == null ? 'Unknown' : 'Block $block';
 
-  String get getStatus => '${status[0].toUpperCase()}${status.substring(1)}';
+  String get getRtlsLandings => rtlsLandings.toString();
 
-  String get getFirstLaunched => DateFormat.yMMMM().format(firstLaunched);
-
-  String get getLandings => landings.toString();
-
-  String get getMissions {
-    String allMissions = '';
-    if (missions.isEmpty)
-      return 'No previous missions.';
-    else {
-      missions.forEach(
-        (mission) =>
-            allMissions += mission + ((mission != missions.last) ? ',  ' : '.'),
-      );
-      return allMissions;
-    }
-  }
-
-  String get getLaunches => missions.length.toString();
-
-  String get getDetails => details ?? 'This core has currently no details.';
+  String get getAsdsLandings => asdsLandings.toString();
 }

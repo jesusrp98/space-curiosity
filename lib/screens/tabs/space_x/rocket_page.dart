@@ -19,16 +19,17 @@ class RocketPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: const Text('Rocket details'),
-          centerTitle: true,
-          actions: <Widget>[
-            IconButton(
-              icon: const Icon(Icons.public),
-              onPressed: () async => await FlutterWebBrowser.openWebPage(
-                  url: _rocket.url, androidToolbarColor: primaryColor),
-              tooltip: 'Wikipedia article',
-            )
-          ]),
+        title: const Text('Rocket details'),
+        centerTitle: true,
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.public),
+            onPressed: () async => await FlutterWebBrowser.openWebPage(
+                url: _rocket.url, androidToolbarColor: primaryColor),
+            tooltip: 'Wikipedia article',
+          )
+        ],
+      ),
       body: Scrollbar(
         child: ListView(children: <Widget>[
           Padding(
@@ -50,9 +51,9 @@ class RocketPage extends StatelessWidget {
 
   Widget _rocketCard(BuildContext context) {
     return HeadCardPage(
-      image: HeroImage().buildHero(
+      image: HeroImage().buildExpandedHero(
         context: context,
-        size: 116.0,
+        size: HeroImage.bigSize,
         url: _rocket.getImageUrl,
         tag: _rocket.id,
         title: _rocket.name,
@@ -62,7 +63,7 @@ class RocketPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            _rocket.getLaunchTime,
+            _rocket.subtitle,
             style: Theme.of(context)
                 .textTheme
                 .subhead
@@ -83,27 +84,39 @@ class RocketPage extends StatelessWidget {
   }
 
   Widget _specsCard() {
-    return CardPage(title: 'SPECIFICATIONS', body: <Widget>[
-      RowItem.iconRow('Reusable', _rocket.reusable),
-      const SizedBox(height: 12.0),
-      RowItem.textRow('Launch cost', _rocket.getLaunchCost),
-      const SizedBox(height: 12.0),
-      RowItem.textRow('Rocket stages', _rocket.getStages),
-      const SizedBox(height: 12.0),
-      RowItem.textRow('Height', _rocket.getHeight),
-      const SizedBox(height: 12.0),
-      RowItem.textRow('Diameter', _rocket.getDiameter),
-      const SizedBox(height: 12.0),
-      RowItem.textRow('Total mass', _rocket.getMass),
-    ]);
+    return CardPage(
+      title: 'SPECIFICATIONS',
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          RowItem.textRow('Launch cost', _rocket.getLaunchCost),
+          const SizedBox(height: 12.0),
+          RowItem.textRow('Rocket stages', _rocket.getStages),
+          const SizedBox(height: 12.0),
+          RowItem.iconRow('Reusable', _rocket.reusable),
+          const Divider(height: 24.0),
+          RowItem.textRow('Fairing height', _rocket.fairingHeight),
+          const SizedBox(height: 12.0),
+          RowItem.textRow('Fairing diameter', _rocket.fairingDiameter),
+          const Divider(height: 24.0),
+          RowItem.textRow('Height', _rocket.getHeight),
+          const SizedBox(height: 12.0),
+          RowItem.textRow('Diameter', _rocket.getDiameter),
+          const SizedBox(height: 12.0),
+          RowItem.textRow('Total mass', _rocket.getMass),
+        ],
+      ),
+    );
   }
 
   Widget _payloadsCard() {
     return CardPage(
-      title: 'PAYLOAD CAPACITY',
-      body: _combineList(_rocket.payloadWeights
-          .map((payloadWeight) => _getPayloadWeight(payloadWeight))
-          .toList()),
+      title: 'CAPABILITY',
+      body: Column(
+        children: _combineList(_rocket.payloadWeights
+            .map((payloadWeight) => _getPayloadWeight(payloadWeight))
+            .toList()),
+      ),
     );
   }
 
@@ -117,29 +130,34 @@ class RocketPage extends StatelessWidget {
   List<Widget> _combineList(List<List<Widget>> map) {
     final List<Widget> finalList = List();
 
-    for (List<Widget> list in map)
-      for (Widget widget in list) finalList.add(widget);
+    map.forEach((payloadWeight) => finalList.addAll(payloadWeight));
 
     return finalList..removeLast();
   }
 
   Widget _enginesCard() {
-    return CardPage(title: 'ENGINES', body: <Widget>[
-      RowItem.textRow('Engine model', _rocket.getEngine),
-      const SizedBox(height: 12.0),
-      RowItem.textRow('First stage engines', _rocket.firstStageEngines),
-      const SizedBox(height: 12.0),
-      RowItem.textRow('Second stage engines', _rocket.secondStageEngines),
-      const SizedBox(height: 12.0),
-      RowItem.textRow('Primary fuel', _rocket.getFuel),
-      const SizedBox(height: 12.0),
-      RowItem.textRow('Oxidizer', _rocket.getOxidizer),
-      const SizedBox(height: 12.0),
-      RowItem.textRow('Thrust to weight', _rocket.getThrustToWeight),
-      const SizedBox(height: 12.0),
-      RowItem.textRow('Sea level thrust', _rocket.getEngineThrustSea),
-      const SizedBox(height: 12.0),
-      RowItem.textRow('Vacuum thrust', _rocket.getEngineThrustVacuum),
-    ]);
+    return CardPage(
+      title: 'ENGINES',
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          RowItem.textRow('Engine model', _rocket.getEngine),
+          const SizedBox(height: 12.0),
+          RowItem.textRow('First stage engines', _rocket.firstStageEngines),
+          const SizedBox(height: 12.0),
+          RowItem.textRow('Second stage engines', _rocket.secondStageEngines),
+          const Divider(height: 24.0),
+          RowItem.textRow('Primary fuel', _rocket.getFuel),
+          const SizedBox(height: 12.0),
+          RowItem.textRow('Oxidizer', _rocket.getOxidizer),
+          const Divider(height: 24.0),
+          RowItem.textRow('Thrust to weight', _rocket.getThrustToWeight),
+          const SizedBox(height: 12.0),
+          RowItem.textRow('Sea level thrust', _rocket.getEngineThrustSea),
+          const SizedBox(height: 12.0),
+          RowItem.textRow('Vacuum thrust', _rocket.getEngineThrustVacuum),
+        ],
+      ),
+    );
   }
 }

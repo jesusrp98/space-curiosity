@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:native_widgets/native_widgets.dart';
 import 'package:webfeed/webfeed.dart';
 
-class NewsHomePage extends StatelessWidget {
+class NewsTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

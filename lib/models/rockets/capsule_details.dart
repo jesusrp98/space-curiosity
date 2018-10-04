@@ -1,41 +1,41 @@
-import 'package:intl/intl.dart';
+import 'vehicle_details.dart';
 
 /// CAPSULE DETAILS CLASS
 /// This class represents a real capsule used in a CRS mission,
 /// with all its details.
-class CapsuleDetails {
+class CapsuleDetails extends VehicleDetails {
   final String name;
-  final String serial;
-  final String status;
-  final DateTime firstLaunched;
   final int landings;
-  final String details;
 
   CapsuleDetails({
+    serial,
+    status,
+    details,
+    firstLaunched,
+    missions,
     this.name,
-    this.serial,
-    this.status,
-    this.firstLaunched,
     this.landings,
-    this.details,
-  });
+  }) : super(
+          serial: serial,
+          status: status,
+          details: details,
+          firstLaunched: firstLaunched,
+          missions: missions,
+        );
 
   factory CapsuleDetails.fromJson(Map<String, dynamic> json) {
     return CapsuleDetails(
-      name: json['type'],
       serial: json['capsule_serial'],
       status: json['status'],
-      firstLaunched: DateTime.parse(json['original_launch']).toLocal(),
-      landings: json['landings'],
       details: json['details'],
+      firstLaunched: DateTime.parse(json['original_launch']).toLocal(),
+      missions: json['missions'],
+      name: json['type'],
+      landings: json['landings'],
     );
   }
 
-  String get getStatus => '${status[0].toUpperCase()}${status.substring(1)}';
-
-  String get getFirstLaunched => DateFormat.yMMMM().format(firstLaunched);
+  String get getDetails => details ?? 'This capsule has currently no details.';
 
   String get getLandings => landings.toString();
-
-  String get getDetails => details ?? 'This capsule has currently no details.';
 }

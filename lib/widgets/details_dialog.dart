@@ -16,8 +16,7 @@ import 'row_item.dart';
 class DetailsDialog extends StatelessWidget {
   final int type;
   final Function buildBody;
-  final String id;
-  final String title;
+  final String id, title;
 
   DetailsDialog({
     this.type,
@@ -41,9 +40,7 @@ class DetailsDialog extends StatelessWidget {
         ),
       ),
       children: <Widget>[
-        Container(
-          child: _getBody(future: _getDialogItem(type, id), build: buildBody),
-        ),
+        _getBody(future: _getDialogItem(type, id), build: buildBody),
       ],
     );
   }
@@ -130,7 +127,7 @@ class DetailsDialog extends StatelessWidget {
         const SizedBox(height: 8.0),
         RowItem.textRow('State', launchpad.state),
         const SizedBox(height: 8.0),
-        RowItem.textRow('Coordenates', launchpad.getCoordinates)
+        RowItem.textRow('Coordinates', launchpad.getCoordinates)
       ]),
       details: launchpad.details,
     );
@@ -148,7 +145,9 @@ class DetailsDialog extends StatelessWidget {
         const SizedBox(height: 8.0),
         RowItem.textRow('Launches', core.getLaunches),
         const SizedBox(height: 8.0),
-        RowItem.textRow('Landings', core.getLandings),
+        RowItem.textRow('RTLS landings', core.getRtlsLandings),
+        const SizedBox(height: 8.0),
+        RowItem.textRow('ASDS landings', core.getAsdsLandings),
         const SizedBox(height: 8.0),
         Text(
           core.getMissions,
@@ -170,7 +169,15 @@ class DetailsDialog extends StatelessWidget {
         const SizedBox(height: 8.0),
         RowItem.textRow('First launched', capsule.getFirstLaunched),
         const SizedBox(height: 8.0),
+        RowItem.textRow('Launches', capsule.getLaunches),
+        const SizedBox(height: 8.0),
         RowItem.textRow('Splashings', capsule.getLandings),
+        const SizedBox(height: 8.0),
+        Text(
+          capsule.getMissions,
+          textAlign: TextAlign.center,
+          style: TextStyle(fontSize: 17.0, color: primaryText),
+        ),
       ]),
       details: capsule.getDetails,
     );

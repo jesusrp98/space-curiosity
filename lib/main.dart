@@ -34,11 +34,11 @@ class MyApp extends StatelessWidget {
       localizationsDelegates: [ScopedModelLocalizationsDelegate()],
       debugShowCheckedModeBanner: false,
       routes: <String, WidgetBuilder>{
-        "/home": (_) => BottomNavigation(),
-        "/space_x": (_) => SpaceXHomePage(),
-        "/nasa": (_) => NasaHomePage(),
-        "/news": (_) => NewsHomePage(),
-        "/planets": (_) => PlanetsHomePage(),
+        '/home': (_) => BottomNavigation(),
+        //'/space_x': (_) => SpaceXHomePage(),
+        '/nasa': (_) => NasaTab(),
+        '/news': (_) => NewsTab(),
+        '/planets': (_) => PlanetsTab(),
         AddEditPlanetPage.routeName: (_) => AddEditPlanetPage(
               null,
               type: BodyType.planet,

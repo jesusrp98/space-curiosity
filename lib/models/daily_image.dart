@@ -11,18 +11,25 @@ import '../util/cache_settings.dart';
 import 'package:uuid/uuid.dart';
 import '../util/keys.dart';
 
-class NasaImages extends Model {
+class NasaImagesModel extends Model {
   List<ImageData> _images;
   List<ImageData> get images => _images;
+  int _count = 100;
+  get count => _count;
 
-  // NasaImages({Stream<List<ImageData>> stream}) {
-  //   stream.listen((newImages) {
-  //     this._images = newImages;
-  //     notifyListeners();
-  //   });
-  // }
+  Future fetchMore() async {
+    _count += 100;
+    await fetchImages();
+    notifyListeners();
+  }
 
-  Future fetchImages(int count) async {
+ Future refresh() async {
+    _count = 100;
+    await fetchImages();
+    notifyListeners();
+  }
+
+  Future fetchImages() async {
     List<ImageData> _newImages;
     try {
       String _url = 'https://api.nasa.gov/planetary/apod?'
