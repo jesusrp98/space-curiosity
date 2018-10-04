@@ -7,7 +7,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 class HeroImage {
   static const double _maxSize = 150.0;
   static const Interval _opacityCurve =
-  const Interval(0.0, 0.75, curve: Curves.fastOutSlowIn);
+      const Interval(0.0, 0.75, curve: Curves.fastOutSlowIn);
 
   static const num smallSize = 72.0, bigSize = 112.0;
 
@@ -103,16 +103,16 @@ class HeroImage {
           url: url,
           maxRadius: _maxSize,
           onTap: () => Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => _buildPage(
-                context: context,
-                url: url,
-                tag: tag,
-                title: title,
+                context,
+                MaterialPageRoute(
+                  builder: (context) => _buildPage(
+                        context: context,
+                        url: url,
+                        tag: tag,
+                        title: title,
+                      ),
+                ),
               ),
-            ),
-          ),
         ),
       ),
     );

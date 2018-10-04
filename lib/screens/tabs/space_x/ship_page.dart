@@ -31,16 +31,16 @@ class ShipPage extends StatelessWidget {
                 showDialog(
                   context: context,
                   builder: (context) => AlertDialog(
-                    title: Text('Unavailable link'),
-                    content: Text(
-                      'Link has not been yet provided by the service. Please try again at a later time.',
-                    ),
-                    actions: <Widget>[
-                      FlatButton(
-                          child: Text('OK'),
-                          onPressed: () => Navigator.of(context).pop()),
-                    ],
-                  ),
+                        title: Text('Unavailable link'),
+                        content: Text(
+                          'Link has not been yet provided by the service. Please try again at a later time.',
+                        ),
+                        actions: <Widget>[
+                          FlatButton(
+                              child: Text('OK'),
+                              onPressed: () => Navigator.of(context).pop()),
+                        ],
+                      ),
                 );
             },
             tooltip: 'MarineTraffic page',
@@ -57,11 +57,11 @@ class ShipPage extends StatelessWidget {
               _specsCard(),
               (_ship.isLandable)
                   ? Column(
-                children: <Widget>[
-                  const SizedBox(height: 8.0),
-                  _landingsCard(),
-                ],
-              )
+                      children: <Widget>[
+                        const SizedBox(height: 8.0),
+                        _landingsCard(),
+                      ],
+                    )
                   : const SizedBox(height: 0.0),
             ]),
           )
@@ -117,12 +117,12 @@ class ShipPage extends StatelessWidget {
           RowItem.textRow('Primary role', _ship.primaryRole),
           (_ship.hasSeveralRoles)
               ? Column(
-            children: <Widget>[
-              const SizedBox(height: 12.0),
-              RowItem.textRow('Secondary role', _ship.secondaryRole),
-              const SizedBox(height: 12.0),
-            ],
-          )
+                  children: <Widget>[
+                    const SizedBox(height: 12.0),
+                    RowItem.textRow('Secondary role', _ship.secondaryRole),
+                    const SizedBox(height: 12.0),
+                  ],
+                )
               : const SizedBox(height: 12.0),
           RowItem.textRow('Status', _ship.getStatus),
           const SizedBox(height: 12.0),

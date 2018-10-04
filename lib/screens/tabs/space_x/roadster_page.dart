@@ -43,8 +43,8 @@ class RoadsterPage extends StatelessWidget {
               Text(
                 'Data is updated every 5 minutes',
                 style: Theme.of(context).textTheme.subhead.copyWith(
-                  color: secondaryText,
-                ),
+                      color: secondaryText,
+                    ),
               )
             ]),
           )

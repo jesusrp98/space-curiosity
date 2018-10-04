@@ -33,7 +33,7 @@ class Rocket {
       secondStage: SecondStage.fromJson(json['second_stage']),
       hasFairing: json['fairings'] != null,
       fairing:
-      json['fairings'] == null ? null : Fairing.fromJson(json['fairings']),
+          json['fairings'] == null ? null : Fairing.fromJson(json['fairings']),
     );
   }
 

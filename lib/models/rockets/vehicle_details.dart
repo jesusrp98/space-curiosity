@@ -27,7 +27,7 @@ abstract class VehicleDetails {
       return 'No previous missions.';
     else {
       missions.forEach(
-            (mission) => allMissions +=
+        (mission) => allMissions +=
             mission['name'] + ((mission != missions.last) ? ',  ' : '.'),
       );
       return allMissions;

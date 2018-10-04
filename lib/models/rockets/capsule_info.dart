@@ -25,18 +25,18 @@ class CapsuleInfo extends Vehicle {
     this.returnMass,
     this.thrusters,
   }) : super(
-    id: id,
-    name: name,
-    type: type,
-    description: description,
-    url: url,
-    height: height,
-    diameter: diameter,
-    mass: mass,
-    active: active,
-    reusable: reusable,
-    firstFlight: firstFlight,
-  );
+          id: id,
+          name: name,
+          type: type,
+          description: description,
+          url: url,
+          height: height,
+          diameter: diameter,
+          mass: mass,
+          active: active,
+          reusable: reusable,
+          firstFlight: firstFlight,
+        );
 
   factory CapsuleInfo.fromJson(Map<String, dynamic> json) {
     return CapsuleInfo(

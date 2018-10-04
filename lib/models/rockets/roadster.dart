@@ -30,17 +30,17 @@ class Roadster extends Vehicle {
     this.earthDistance,
     this.marsDistance,
   }) : super(
-    id: 'roadster',
-    name: 'Tesla Roadster',
-    type: 'roadster',
-    description: description,
-    url: url,
-    height: 1.127,
-    diameter: 1.873,
-    mass: mass,
-    active: true,
-    firstFlight: firstFlight,
-  );
+          id: 'roadster',
+          name: 'Tesla Roadster',
+          type: 'roadster',
+          description: description,
+          url: url,
+          height: 1.127,
+          diameter: 1.873,
+          mass: mass,
+          active: true,
+          firstFlight: firstFlight,
+        );
 
   factory Roadster.fromJson(Map<String, dynamic> json) {
     return Roadster(

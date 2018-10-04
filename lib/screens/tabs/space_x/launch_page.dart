@@ -68,16 +68,16 @@ class LaunchPage extends StatelessWidget {
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
-          title: Text('Unavailable link'),
-          content: Text(
-            'Link has not been yet provided by the service. Please try again at a later time.',
-          ),
-          actions: <Widget>[
-            FlatButton(
-                child: Text('OK'),
-                onPressed: () => Navigator.of(context).pop()),
-          ],
-        ),
+              title: Text('Unavailable link'),
+              content: Text(
+                'Link has not been yet provided by the service. Please try again at a later time.',
+              ),
+              actions: <Widget>[
+                FlatButton(
+                    child: Text('OK'),
+                    onPressed: () => Navigator.of(context).pop()),
+              ],
+            ),
       );
     else
       await FlutterWebBrowser.openWebPage(
@@ -109,18 +109,18 @@ class LaunchPage extends StatelessWidget {
           const SizedBox(height: 12.0),
           InkWell(
             onTap: () => showDialog(
-              context: context,
-              builder: (context) => DetailsDialog.launchpad(
-                id: _launch.launchpadId,
-                title: _launch.launchpadName,
-              ),
-            ),
+                  context: context,
+                  builder: (context) => DetailsDialog.launchpad(
+                        id: _launch.launchpadId,
+                        title: _launch.launchpadName,
+                      ),
+                ),
             child: Text(
               _launch.launchpadName,
               style: Theme.of(context).textTheme.subhead.copyWith(
-                decoration: TextDecoration.underline,
-                color: secondaryText,
-              ),
+                    decoration: TextDecoration.underline,
+                    color: secondaryText,
+                  ),
             ),
           ),
         ],
@@ -166,23 +166,23 @@ class LaunchPage extends StatelessWidget {
           RowItem.textRow('Second stage model', secondStage.getBlock),
           (_launch.rocket.hasFairing)
               ? Column(
-            children: <Widget>[
-              const Divider(height: 24.0),
-              RowItem.iconRow('Fairings reused', fairing.reused),
-              const SizedBox(height: 12.0),
-              (fairing.recoveryAttempt == true)
-                  ? Column(
-                children: <Widget>[
-                  RowItem.iconRow(
-                      'Recovery success', fairing.recoverySuccess),
-                  const SizedBox(height: 12.0),
-                  RowItem.textRow('Recovery ship', fairing.ship),
-                ],
-              )
-                  : RowItem.iconRow(
-                  'Recovery attempt', fairing.recoveryAttempt),
-            ],
-          )
+                  children: <Widget>[
+                    const Divider(height: 24.0),
+                    RowItem.iconRow('Fairings reused', fairing.reused),
+                    const SizedBox(height: 12.0),
+                    (fairing.recoveryAttempt == true)
+                        ? Column(
+                            children: <Widget>[
+                              RowItem.iconRow(
+                                  'Recovery success', fairing.recoverySuccess),
+                              const SizedBox(height: 12.0),
+                              RowItem.textRow('Recovery ship', fairing.ship),
+                            ],
+                          )
+                        : RowItem.iconRow(
+                            'Recovery attempt', fairing.recoveryAttempt),
+                  ],
+                )
               : const SizedBox(height: 0.0),
           Column(
             children: secondStage.payloads
@@ -210,12 +210,12 @@ class LaunchPage extends StatelessWidget {
       const SizedBox(height: 12.0),
       (core.getLandingZone != 'Unknown')
           ? Column(children: <Widget>[
-        RowItem.textRow('Landing type', core.getLandingType),
-        const SizedBox(height: 12.0),
-        RowItem.textRow('Landing zone', core.getLandingZone),
-        const SizedBox(height: 12.0),
-        RowItem.iconRow('Landing success', core.landingSuccess)
-      ])
+              RowItem.textRow('Landing type', core.getLandingType),
+              const SizedBox(height: 12.0),
+              RowItem.textRow('Landing zone', core.getLandingZone),
+              const SizedBox(height: 12.0),
+              RowItem.iconRow('Landing success', core.landingSuccess)
+            ])
           : RowItem.iconRow('Landing attempt', core.landingIntent),
     ]);
   }
@@ -226,20 +226,20 @@ class LaunchPage extends StatelessWidget {
       RowItem.textRow('Payload name', payload.getId),
       (payload.isNasaPayload)
           ? Column(children: <Widget>[
-        const SizedBox(height: 12.0),
-        RowItem.dialogRow(
-          context,
-          'Capsule serial',
-          payload.getCapsuleSerial,
-          DetailsDialog.capsule(
-            id: payload.getCapsuleSerial,
-            title: 'Capsule ${payload.getCapsuleSerial}',
-          ),
-        ),
-        const SizedBox(height: 12.0),
-        RowItem.iconRow('Reused', payload.reused),
-        const SizedBox(height: 12.0)
-      ])
+              const SizedBox(height: 12.0),
+              RowItem.dialogRow(
+                context,
+                'Capsule serial',
+                payload.getCapsuleSerial,
+                DetailsDialog.capsule(
+                  id: payload.getCapsuleSerial,
+                  title: 'Capsule ${payload.getCapsuleSerial}',
+                ),
+              ),
+              const SizedBox(height: 12.0),
+              RowItem.iconRow('Reused', payload.reused),
+              const SizedBox(height: 12.0)
+            ])
           : const SizedBox(height: 12.0),
       RowItem.textRow('Manufacturer', payload.getManufacturer),
       const SizedBox(height: 12.0),

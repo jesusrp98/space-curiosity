@@ -52,7 +52,7 @@ class VehicleList extends StatelessWidget {
   Widget build(BuildContext context) {
     // Checks if list is cached
     if (PageStorage.of(context)
-        .readState(context, identifier: ValueKey(_rocketUrl)) ==
+            .readState(context, identifier: ValueKey(_rocketUrl)) ==
         null)
       PageStorage.of(context).writeState(
         context,
@@ -94,18 +94,18 @@ class VehicleList extends StatelessWidget {
                           subtitle: vehicle.subtitle,
                           trailing: VehicleStatus(vehicle.active),
                           onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                              (vehicle.type == 'rocket')
-                                  ? RocketPage(vehicle)
-                                  : (vehicle.type == 'capsule')
-                                  ? CapsulePage(vehicle)
-                                  : (vehicle.type == 'ship')
-                                  ? ShipPage(vehicle)
-                                  : RoadsterPage(vehicle),
-                            ),
-                          ),
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      (vehicle.type == 'rocket')
+                                          ? RocketPage(vehicle)
+                                          : (vehicle.type == 'capsule')
+                                              ? CapsulePage(vehicle)
+                                              : (vehicle.type == 'ship')
+                                                  ? ShipPage(vehicle)
+                                                  : RoadsterPage(vehicle),
+                                ),
+                              ),
                         ),
                         const Divider(height: 0.0, indent: 104.0)
                       ]);

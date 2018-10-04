@@ -13,40 +13,41 @@ class PlanetsTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScopedModelDescendant<PlanetsModel>(
-        builder: (context, child, model) => Scaffold(
-              appBar: AppBar(title: Text('Planets')),
-              body: StreamBuilder(
-                stream: model.loadData().asStream().distinct(),
-                builder: (BuildContext context, _) {
-                  if (model.planets == null)
-                    return NativeLoadingIndicator(
-                      center: true,
-                      text: Text("Loading..."),
-                    );
-
-                  if (model.planets.isEmpty)
-                    return Center(child: Text("No Planets Found"));
-
-                  return ListView.builder(
-                    itemCount: model.planets.length,
-                    itemBuilder: _buildItem,
+      builder: (context, child, model) => Scaffold(
+            appBar: AppBar(title: Text('Planets')),
+            body: StreamBuilder(
+              stream: model.loadData().asStream().distinct(),
+              builder: (BuildContext context, _) {
+                if (model.planets == null)
+                  return NativeLoadingIndicator(
+                    center: true,
+                    text: Text("Loading..."),
                   );
-                },
-              ),
-              floatingActionButton: FloatingActionButton(
-                child: Icon(Icons.add),
-                onPressed: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => AddEditPlanetPage(
-                              null,
-                              type: BodyType.planet,
-                            ),
-                        fullscreenDialog: true,
-                      ),
+
+                if (model.planets.isEmpty)
+                  return Center(child: Text("No Planets Found"));
+
+                return ListView.builder(
+                  itemCount: model.planets.length,
+                  itemBuilder: _buildItem,
+                );
+              },
+            ),
+            floatingActionButton: FloatingActionButton(
+              child: Icon(Icons.add),
+              onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => AddEditPlanetPage(
+                            null,
+                            type: BodyType.planet,
+                          ),
+                      fullscreenDialog: true,
                     ),
-              ),
-            ));
+                  ),
+            ),
+          ),
+    );
   }
 
   Widget _buildMoons(
@@ -67,10 +68,8 @@ class PlanetsTab extends StatelessWidget {
           onTap: () => Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => PlanetPage(
-                        planet: moon,
-                        type: BodyType.celestialBody,
-                      ),
+                  builder: (context) =>
+                      PlanetPage(planet: moon, type: BodyType.celestialBody),
                 ),
               ),
         ),

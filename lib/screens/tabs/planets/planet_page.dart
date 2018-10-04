@@ -46,10 +46,7 @@ class PlanetPage extends StatelessWidget {
             onPressed: () => Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => AddEditPlanetPage(
-                          planet,
-                          type: type,
-                        ),
+                    builder: (context) => AddEditPlanetPage(planet, type: type),
                     fullscreenDialog: true,
                   ),
                 ).then((value) {
@@ -82,7 +79,7 @@ class PlanetPage extends StatelessWidget {
     return HeadCardPage(
       image: HeroImage().buildHero(
         context: context,
-        size: HeroImage.smallSize,
+        size: HeroImage.bigSize,
         url: planet.imageUrl,
         tag: planet.id,
         title: planet.name,

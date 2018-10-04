@@ -16,12 +16,12 @@ class CapsuleDetails extends VehicleDetails {
     this.name,
     this.landings,
   }) : super(
-    serial: serial,
-    status: status,
-    details: details,
-    firstLaunched: firstLaunched,
-    missions: missions,
-  );
+          serial: serial,
+          status: status,
+          details: details,
+          firstLaunched: firstLaunched,
+          missions: missions,
+        );
 
   factory CapsuleDetails.fromJson(Map<String, dynamic> json) {
     return CapsuleDetails(

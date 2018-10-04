@@ -29,15 +29,15 @@ class ShipInfo extends Vehicle {
     this.attemptedLandings,
     this.successfulLandings,
   }) : super(
-    id: id,
-    name: name,
-    type: 'ship',
-    active: active,
-    firstFlight: firstFlight,
-    mass: mass,
-    description: description,
-    url: url,
-  );
+          id: id,
+          name: name,
+          type: 'ship',
+          active: active,
+          firstFlight: firstFlight,
+          mass: mass,
+          description: description,
+          url: url,
+        );
 
   factory ShipInfo.fromJson(Map<String, dynamic> json) {
     return ShipInfo(
@@ -69,7 +69,7 @@ class ShipInfo extends Vehicle {
       return 'This boat has not participated in any mission.';
     else {
       missions.forEach(
-            (mission) => allMissions +=
+        (mission) => allMissions +=
             mission['name'] + ((mission != missions.last) ? ',  ' : '.'),
       );
       return allMissions;
@@ -101,8 +101,8 @@ class ShipInfo extends Vehicle {
   String get getCoordinates => coordinates.isNotEmpty
       ? 'Unknown'
       : (coordinates[0].toStringAsPrecision(5) +
-      ',  ' +
-      coordinates[1].toStringAsPrecision(5));
+          ',  ' +
+          coordinates[1].toStringAsPrecision(5));
 
   String get getAttemptedLandings => attemptedLandings.toString();
 

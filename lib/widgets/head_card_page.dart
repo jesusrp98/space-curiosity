@@ -34,8 +34,7 @@ class HeadCardPage extends StatelessWidget {
                   children: <Widget>[
                     Text(
                       title,
-                      style: Theme
-                          .of(context)
+                      style: Theme.of(context)
                           .textTheme
                           .title
                           .copyWith(fontWeight: FontWeight.bold),
@@ -58,4 +57,3 @@ class HeadCardPage extends StatelessWidget {
     );
   }
 }
-

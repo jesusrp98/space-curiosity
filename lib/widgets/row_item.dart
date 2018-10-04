@@ -45,11 +45,11 @@ class RowItem extends StatelessWidget {
   /// Builds a Text-to-Text widget, but the description widget is clickable
   /// and opens a dialog
   factory RowItem.dialogRow(
-      BuildContext context,
-      String title,
-      String description,
-      DetailsDialog dialog,
-      ) {
+    BuildContext context,
+    String title,
+    String description,
+    DetailsDialog dialog,
+  ) {
     if (description != 'Unknown')
       return RowItem(
         title: title,
@@ -84,10 +84,10 @@ class RowItem extends StatelessWidget {
 
   /// Builds a dialog with the Details Dialog class
   static _getDialog(
-      BuildContext context,
-      DetailsDialog dialog,
-      String description,
-      ) {
+    BuildContext context,
+    DetailsDialog dialog,
+    String description,
+  ) {
     return InkWell(
       child: _getText(description, true),
       onTap: () => showDialog(context: context, builder: (_) => dialog),

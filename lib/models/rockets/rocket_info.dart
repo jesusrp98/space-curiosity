@@ -40,18 +40,18 @@ class RocketInfo extends Vehicle {
     this.engineConfiguration,
     this.fairingDimensions,
   }) : super(
-    id: id,
-    name: name,
-    type: type,
-    description: description,
-    url: url,
-    height: height,
-    diameter: diameter,
-    mass: mass,
-    active: active,
-    reusable: reusable,
-    firstFlight: firstFlight,
-  );
+          id: id,
+          name: name,
+          type: type,
+          description: description,
+          url: url,
+          height: height,
+          diameter: diameter,
+          mass: mass,
+          active: active,
+          reusable: reusable,
+          firstFlight: firstFlight,
+        );
 
   factory RocketInfo.fromJson(Map<String, dynamic> json) {
     return RocketInfo(
@@ -80,9 +80,9 @@ class RocketInfo extends Vehicle {
       oxidizer: json['engines']['propellant_1'],
       fairingDimensions: [
         json['second_stage']['payloads']['composite_fairing']['height']
-        ['meters'],
+            ['meters'],
         json['second_stage']['payloads']['composite_fairing']['diameter']
-        ['meters'],
+            ['meters'],
       ],
       engineConfiguration: [
         json['first_stage']['engines'],
