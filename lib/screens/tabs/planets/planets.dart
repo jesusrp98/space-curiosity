@@ -57,6 +57,7 @@ class PlanetsTab extends StatelessWidget {
         ListCell(
           leading: HeroImage().buildHero(
             context: context,
+            size: HeroImage.smallSize,
             url: moon.imageUrl,
             tag: moon.id,
             title: moon.name,
@@ -97,6 +98,7 @@ class PlanetsTab extends StatelessWidget {
           builder: (context, child, model) => ListCell(
                 leading: HeroImage().buildHero(
                   context: context,
+                  size: HeroImage.smallSize,
                   url: model.planets[index].imageUrl,
                   tag: model.planets[index].id,
                   title: model.planets[index].name,
@@ -123,10 +125,11 @@ class PlanetsTab extends StatelessWidget {
                 onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => PlanetPage(
-                                planet: model.planets[index],
-                                type: BodyType.planet,
-                              )),
+                        builder: (context) => PlanetPage(
+                              planet: model.planets[index],
+                              type: BodyType.planet,
+                            ),
+                      ),
                     ),
               ),
         ),

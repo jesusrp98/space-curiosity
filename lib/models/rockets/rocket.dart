@@ -1,15 +1,16 @@
 import 'core.dart';
+import 'fairing.dart';
 import 'second_stage.dart';
 
 /// ROCKET CLASS
 /// This class is used in the Launch class, to represent a rocket object. It has
 /// a list of cores, and a second stage.
 class Rocket {
-  final String id;
-  final String name;
-  final String type;
+  final String id, name, type;
   final List<Core> firstStage;
   final SecondStage secondStage;
+  final bool hasFairing;
+  final Fairing fairing;
 
   Rocket({
     this.id,
@@ -17,6 +18,8 @@ class Rocket {
     this.type,
     this.firstStage,
     this.secondStage,
+    this.hasFairing,
+    this.fairing,
   });
 
   factory Rocket.fromJson(Map<String, dynamic> json) {
@@ -28,20 +31,11 @@ class Rocket {
           .map((core) => Core.fromJson(core))
           .toList(),
       secondStage: SecondStage.fromJson(json['second_stage']),
+      hasFairing: json['fairings'] != null,
+      fairing:
+      json['fairings'] == null ? null : Fairing.fromJson(json['fairings']),
     );
   }
 
   bool get isHeavy => firstStage.length != 1;
-
-  Core get centralCore => firstStage[0];
-
-  Core get leftBooster => firstStage[1];
-
-  Core get rightBooster => firstStage[2];
-
-  bool get coreReused => centralCore.reused;
-
-  bool get leftBoosterReused => leftBooster.reused;
-
-  bool get rightBoosterReused => rightBooster.reused;
 }

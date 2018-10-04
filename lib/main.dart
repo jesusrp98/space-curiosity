@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       routes: <String, WidgetBuilder>{
         '/home': (_) => BottomNavigation(),
-        '/space_x': (_) => SpaceXHomePage(),
+        //'/space_x': (_) => SpaceXHomePage(),
         '/nasa': (_) => NasaTab(),
         '/news': (_) => NewsTab(),
         '/planets': (_) => PlanetsTab(),

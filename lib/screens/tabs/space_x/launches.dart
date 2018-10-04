@@ -59,35 +59,30 @@ class LaunchesTab extends StatelessWidget {
     return Column(
       children: <Widget>[
         ScopedModelDescendant<LaunchesModel>(
-          builder: (context, child, model) => ListCell(
-                leading: HeroImage().buildHero(
-                  context: context,
-                  url: model.launches[index].getImageUrl,
-                  tag: model.launches[index].getNumber,
-                  title: model.launches[index].name,
-                ),
-                title: model.launches[index].name,
-                subtitle: model.launches[index].getLaunchDate,
-                trailing: MissionNumber(model.launches[index].getNumber),
-                onTap: () => Navigator.of(context).push(
-                      PageRouteBuilder<Null>(
-                        pageBuilder: (context, animation, secondaryAnimation) {
-                          return AnimatedBuilder(
-                            animation: animation,
-                            builder: (context, child) {
-                              return Opacity(
-                                opacity: const Interval(0.0, 0.75,
-                                        curve: Curves.fastOutSlowIn)
-                                    .transform(animation.value),
-                                child: LaunchPage(model.launches[index]),
-                              );
-                            },
-                          );
-                        },
+            builder: (context, child, model) => Column(
+                  children: <Widget>[
+                    ListCell(
+                      leading: HeroImage().buildHero(
+                        context: context,
+                        size: HeroImage.smallSize,
+                        url: model.launches[index].getImageUrl,
+                        tag: model.launches[index].getNumber,
+                        title: model.launches[index].name,
                       ),
+                      title: model.launches[index].name,
+                      subtitle: model.launches[index].getLaunchDate,
+                      trailing: MissionNumber(model.launches[index].getNumber),
+                      onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  LaunchPage(model.launches[index]),
+                            ),
+                          ),
                     ),
-              ),
-        )
+                    const Divider(height: 0.0, indent: 104.0)
+                  ],
+                ))
       ],
     );
   }

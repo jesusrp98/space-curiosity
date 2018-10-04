@@ -29,7 +29,7 @@ class LaunchList extends StatelessWidget {
   Widget build(BuildContext context) {
     // Checks if list is cached
     if (PageStorage.of(context)
-            .readState(context, identifier: ValueKey(_url)) ==
+        .readState(context, identifier: ValueKey(_url)) ==
         null)
       PageStorage.of(context)
           .writeState(context, fetchPost(), identifier: ValueKey(_url));
@@ -53,43 +53,26 @@ class LaunchList extends StatelessWidget {
                     key: PageStorageKey(_url),
                     itemCount: launches.length,
                     itemBuilder: (context, index) {
-                      // Final vars used to display a launch
                       final Launch launch = launches[index];
-                      final VoidCallback onClick = () {
-                        Navigator.of(context).push(
-                          PageRouteBuilder<Null>(
-                            pageBuilder:
-                                (context, animation, secondaryAnimation) {
-                              return AnimatedBuilder(
-                                animation: animation,
-                                builder: (context, child) {
-                                  return Opacity(
-                                    opacity: const Interval(0.0, 0.75,
-                                            curve: Curves.fastOutSlowIn)
-                                        .transform(animation.value),
-                                    child: LaunchPage(launch),
-                                  );
-                                },
-                              );
-                            },
-                          ),
-                        );
-                      };
 
-                      // Displays the launch with a ListCell item
                       return Column(children: <Widget>[
                         ListCell(
                           leading: HeroImage().buildHero(
                             context: context,
+                            size: HeroImage.smallSize,
                             url: launch.getImageUrl,
                             tag: launch.getNumber,
                             title: launch.name,
-                            onClick: onClick,
                           ),
                           title: launch.name,
                           subtitle: launch.getLaunchDate,
                           trailing: MissionNumber(launch.getNumber),
-                          onTap: onClick,
+                          onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => LaunchPage(launch),
+                            ),
+                          ),
                         ),
                         const Divider(height: 0.0, indent: 104.0)
                       ]);

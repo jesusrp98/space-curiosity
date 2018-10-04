@@ -16,7 +16,7 @@ class LaunchesModel extends Model {
   }
 
   Future loadData() async {
-    final response = await http.get(Url.launches);
+    final response = await http.get(Url.launchesList);
 
     List jsonDecoded = json.decode(response.body);
     _launches = jsonDecoded.map((launch) => Launch.fromJson(launch)).toList();

@@ -1,53 +1,56 @@
 import 'package:intl/intl.dart';
-
 import 'vehicle.dart';
 
 /// CAPSULE INFO CLASS
 /// This class represents a model of a capsule, like Dragon1 or Crew Dragon,
 /// with all its specifications.
 class CapsuleInfo extends Vehicle {
-  final int crew;
-  final num launchMass;
-  final num returnMass;
+  final num crew, launchMass, returnMass;
   final List<Thruster> thrusters;
 
   CapsuleInfo({
     id,
     name,
     type,
-    active,
-    height,
-    diameter,
-    reusable,
     description,
     url,
+    height,
+    diameter,
+    mass,
+    active,
+    reusable,
+    firstFlight,
     this.crew,
     this.launchMass,
     this.returnMass,
     this.thrusters,
   }) : super(
-          id: id,
-          name: name,
-          type: type,
-          active: active,
-          height: height,
-          diameter: diameter,
-          reusable: reusable,
-          description: description,
-          url: url,
-        );
+    id: id,
+    name: name,
+    type: type,
+    description: description,
+    url: url,
+    height: height,
+    diameter: diameter,
+    mass: mass,
+    active: active,
+    reusable: reusable,
+    firstFlight: firstFlight,
+  );
 
   factory CapsuleInfo.fromJson(Map<String, dynamic> json) {
     return CapsuleInfo(
       id: json['id'],
       name: json['name'],
       type: json['type'],
-      active: json['active'],
-      height: json['height_w_trunk']['meters'],
-      diameter: json['diameter']['meters'],
-      reusable: true,
       description: json['description'],
       url: json['wikipedia'],
+      height: json['height_w_trunk']['meters'],
+      diameter: json['diameter']['meters'],
+      mass: json['dry_mass_kg'],
+      active: json['active'],
+      reusable: true,
+      firstFlight: DateTime.parse(json['first_flight']),
       crew: json['crew_capacity'],
       launchMass: json['launch_payload_mass']['kg'],
       returnMass: json['return_payload_mass']['kg'],
@@ -57,10 +60,7 @@ class CapsuleInfo extends Vehicle {
     );
   }
 
-  String get subtitle =>
-      crew > 0 ? 'Cargo & crew capsule' : 'Only cargo capsule';
-
-  String get status => active ? 'Capsule in active' : 'Capsule not active';
+  String get subtitle => firstLaunched;
 
   String get getCrew => crew == 0 ? 'No people' : '$crew people';
 
@@ -71,39 +71,39 @@ class CapsuleInfo extends Vehicle {
       '${NumberFormat.decimalPattern().format(returnMass)} kg';
 
   String get getThrusters => thrusters.length.toString();
+
+  String get capsuleType =>
+      crew > 0 ? 'Cargo & crew capsule' : 'Only cargo capsule';
 }
 
 class Thruster {
-  final String name;
-  final int amount;
-  final String fuel;
-  final String oxidizer;
-  final num thrust;
+  final String name, fuel, oxidizer;
+  final num amount, thrust;
 
   Thruster({
     this.name,
-    this.amount,
     this.fuel,
     this.oxidizer,
+    this.amount,
     this.thrust,
   });
 
   factory Thruster.fromJson(Map<String, dynamic> json) {
     return Thruster(
       name: json['type'],
-      amount: json['amount'],
       fuel: json['fuel_2'],
       oxidizer: json['fuel_1'],
+      amount: json['amount'],
       thrust: json['thrust']['kN'],
     );
   }
-
-  String get getAmount => amount.toString();
 
   String get getFuel => '${fuel[0].toUpperCase()}${fuel.substring(1)}';
 
   String get getOxidizer =>
       '${oxidizer[0].toUpperCase()}${oxidizer.substring(1)}';
+
+  String get getAmount => amount.toString();
 
   String get getThrust => '${NumberFormat.decimalPattern().format(thrust)} kN';
 }

@@ -81,8 +81,8 @@ class PlanetPage extends StatelessWidget {
   Widget _headCard(BuildContext context) {
     return HeadCardPage(
       image: HeroImage().buildHero(
-        size: 116.0,
         context: context,
+        size: HeroImage.smallSize,
         url: planet.imageUrl,
         tag: planet.id,
         title: planet.name,
@@ -113,32 +113,37 @@ class PlanetPage extends StatelessWidget {
   }
 
   Widget _detailsCard(BuildContext context) {
-    return CardPage(title: 'DETAILS', body: <Widget>[
-      RowItem.textRow('Aphelion', planet.getAphelion),
-      const SizedBox(height: 8.0),
-      RowItem.textRow('Perihelion', planet.getPerihelion),
-      const SizedBox(height: 8.0),
-      RowItem.textRow('Period', planet.getPeriod),
-      const SizedBox(height: 8.0),
-      RowItem.textRow('Speed', planet.getSpeed),
-      const SizedBox(height: 8.0),
-      RowItem.textRow('Obliquity', planet.getObliquity),
-      const SizedBox(height: 8.0),
-      RowItem.textRow('Radius', planet.getRadius),
-      const SizedBox(height: 8.0),
-      RowItem.textRow('Volume', planet.getVolume),
-      const SizedBox(height: 8.0),
-      RowItem.textRow('Mass', planet.getMass),
-      const SizedBox(height: 8.0),
-      RowItem.textRow('Density', planet.getDensity),
-      const SizedBox(height: 8.0),
-      RowItem.textRow('Gravity', planet.getGravity),
-      const SizedBox(height: 8.0),
-      RowItem.textRow('Escape velocity', planet.getEscapeVelocity),
-      const SizedBox(height: 8.0),
-      RowItem.textRow('Temperature', planet.getTemperature),
-      const SizedBox(height: 8.0),
-      RowItem.textRow('Pressure', planet.getPressure),
-    ]);
+    return CardPage(
+      title: 'DETAILS',
+      body: Column(
+        children: <Widget>[
+          RowItem.textRow('Aphelion', planet.getAphelion),
+          const SizedBox(height: 8.0),
+          RowItem.textRow('Perihelion', planet.getPerihelion),
+          const SizedBox(height: 8.0),
+          RowItem.textRow('Period', planet.getPeriod),
+          const SizedBox(height: 8.0),
+          RowItem.textRow('Speed', planet.getSpeed),
+          const SizedBox(height: 8.0),
+          RowItem.textRow('Obliquity', planet.getObliquity),
+          const SizedBox(height: 8.0),
+          RowItem.textRow('Radius', planet.getRadius),
+          const SizedBox(height: 8.0),
+          RowItem.textRow('Volume', planet.getVolume),
+          const SizedBox(height: 8.0),
+          RowItem.textRow('Mass', planet.getMass),
+          const SizedBox(height: 8.0),
+          RowItem.textRow('Density', planet.getDensity),
+          const SizedBox(height: 8.0),
+          RowItem.textRow('Gravity', planet.getGravity),
+          const SizedBox(height: 8.0),
+          RowItem.textRow('Escape velocity', planet.getEscapeVelocity),
+          const SizedBox(height: 8.0),
+          RowItem.textRow('Temperature', planet.getTemperature),
+          const SizedBox(height: 8.0),
+          RowItem.textRow('Pressure', planet.getPressure),
+        ],
+      ),
+    );
   }
 }
