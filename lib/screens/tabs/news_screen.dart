@@ -5,13 +5,16 @@ import 'package:http/http.dart' as http;
 import 'package:native_widgets/native_widgets.dart';
 import 'package:webfeed/webfeed.dart';
 
-class NewsTab extends StatelessWidget {
+class NewsScreen extends StatelessWidget {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
-        title: Text('Breaking News'),
-        elevation: 1.0,
+        title: const Text('Breaking News'),
+        centerTitle: true,
       ),
       body: NewsList(),
     );
@@ -32,7 +35,7 @@ class NewsList extends StatelessWidget {
   Widget build(BuildContext context) {
     return FutureBuilder(
       future: getFeed(),
-      builder: (BuildContext context, AsyncSnapshot<RssFeed> feed) {
+      builder: (context, feed) {
         if (feed.connectionState == ConnectionState.waiting)
           return NativeLoadingIndicator(
             center: true,
