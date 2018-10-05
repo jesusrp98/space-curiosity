@@ -6,8 +6,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 /// Class used into building hero images & their specific hero pages.
 class HeroImage {
   static const double _maxSize = 150.0;
-  static const Interval _opacityCurve =
-      const Interval(0.0, 0.75, curve: Curves.fastOutSlowIn);
+  // static const Interval _opacityCurve =
+  //     const Interval(0.0, 0.75, curve: Curves.fastOutSlowIn);
 
   static const num smallSize = 72.0, bigSize = 112.0;
 

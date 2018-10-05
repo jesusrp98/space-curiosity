@@ -23,7 +23,7 @@ class NasaImagesModel extends Model {
     notifyListeners();
   }
 
- Future refresh() async {
+  Future refresh() async {
     _count = 100;
     await fetchImages();
     notifyListeners();

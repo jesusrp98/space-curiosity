@@ -16,12 +16,12 @@ class CoreDetails extends VehicleDetails {
     this.rtlsLandings,
     this.asdsLandings,
   }) : super(
-    serial: serial,
-    status: status,
-    details: details,
-    firstLaunched: firstLaunched,
-    missions: missions,
-  );
+          serial: serial,
+          status: status,
+          details: details,
+          firstLaunched: firstLaunched,
+          missions: missions,
+        );
 
   factory CoreDetails.fromJson(Map<String, dynamic> json) {
     return CoreDetails(
