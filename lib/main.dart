@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:space_news/screens/home_screen.dart';
-import 'package:space_news/screens/tabs/news_screen.dart';
-import 'package:space_news/screens/tabs/space_x/spacex_screen.dart';
 
 import 'models/planets/celestial_body.dart';
-import 'screens/tabs/nasa/home_page.dart';
+import 'screens/home_screen.dart';
+import 'screens/tabs/news_screen.dart';
 import 'screens/tabs/planets/add_edit_planet.dart';
 import 'screens/tabs/planets/planets.dart';
+import 'screens/tabs/space_x/spacex_screen.dart';
 import 'util/colors.dart';
 import 'util/localization.dart';
 
