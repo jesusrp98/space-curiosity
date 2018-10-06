@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:space_news/screens/about_screen.dart';
-import 'package:space_news/screens/tabs/news_screen.dart';
-import 'package:space_news/screens/tabs/solar_system_screen.dart';
 import 'package:space_news/screens/tabs/space_x/spacex_screen.dart';
+import 'package:space_news/widgets/home_icon.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class HomeScreen extends StatelessWidget {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -30,30 +30,28 @@ class HomeScreen extends StatelessWidget {
       body: Column(
         children: <Widget>[
           _buildNasaCards(),
-          Row(
-            children: <Widget>[
-              RaisedButton(
-                onPressed: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (_) => SpacexScreen()),
-                    ),
-                child: const Text('SpaceX'),
-              ),
-              RaisedButton(
-                onPressed: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (_) => NewsScreen()),
-                    ),
-                child: const Text('Breaking News'),
-              ),
-              RaisedButton(
-                onPressed: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (_) => SolarSystemScreen()),
-                    ),
-                child: const Text('Solar System'),
-              ),
-            ],
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                HomeIcon(
+                  icon: FontAwesomeIcons.rocket,
+                  title: 'SpaceX',
+                  screen: SpacexScreen(),
+                ),
+                HomeIcon(
+                  icon: Icons.description,
+                  title: 'Breaking news',
+                  screen: SpacexScreen(),
+                ),
+                HomeIcon(
+                  icon: Icons.public,
+                  title: 'Solar System',
+                  screen: SpacexScreen(),
+                ),
+              ],
+            ),
           )
         ],
       ),
@@ -68,32 +66,36 @@ class HomeScreen extends StatelessWidget {
 //            builder: (BuildContext context, _) {
 //              if (model.images == null)
 //                return NativeLoadingIndicator(
-//                    center: true, text: Text('Loading...'));
+//                  center: true,
+//                  text: Text("Loading..."),
+//                );
 //
 //              if (model.images.isEmpty)
-//                return Center(child: Text('No Images Found'));
+//                return Center(child: Text("No Images Found"));
 //              int axisCount = getAxisCount(context);
 //
 //              return GridView.builder(
 //                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
 //                    crossAxisCount: axisCount),
 //                itemCount: model.images.length,
-//                itemBuilder: (BuildContext context, int index) {
+//                itemBuilder: (context, index) {
 //                  model.fetchMore();
 //                  String content = model.images[index]?.hdurl ??
 //                      model.images[index]?.url ??
 //                      "";
 //
 //                  return InkWell(
-//                    onTap: () {
-//                      Navigator.push(context, MaterialPageRoute(builder: (_) {
-//                        return ImageDetailsPage(
-//                          image: model.images[index],
-//                          currentImage: content,
-//                        );
-//                      }));
-//                    },
-//                    onLongPress: () => openURL(content),
+//                    onTap: () =>
+//                        Navigator.push(context, MaterialPageRoute(builder: (_) {
+//                          return ImageDetailsPage(
+//                            image: model.images[index],
+//                            currentImage: content,
+//                          );
+//                        })),
+//                    onLongPress: () => FlutterWebBrowser.openWebPage(
+//                          url: content,
+//                          androidToolbarColor: primaryColor,
+//                        ),
 //                    child: Padding(
 //                      padding: const EdgeInsets.all(1.0),
 //                      child: GridTile(
@@ -101,7 +103,9 @@ class HomeScreen extends StatelessWidget {
 //                          model.images[index]?.title ?? "",
 //                          maxLines: 1,
 //                          style: TextStyle(
-//                              fontWeight: FontWeight.bold, fontSize: 14.0),
+//                            fontWeight: FontWeight.bold,
+//                            fontSize: 14.0,
+//                          ),
 //                          textAlign: TextAlign.center,
 //                        ),
 //                        child: Hero(
