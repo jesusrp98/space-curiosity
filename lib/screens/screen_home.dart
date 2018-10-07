@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:space_news/screens/about_screen.dart';
-import 'package:space_news/screens/tabs/news_screen.dart';
-import 'package:space_news/screens/tabs/solar_system_screen.dart';
-import 'package:space_news/screens/tabs/space_x/spacex_screen.dart';
+import 'package:space_news/screens/screen_about.dart';
+import 'package:space_news/screens/tabs/screen_news.dart';
+import 'package:space_news/screens/tabs/screen_solar_system.dart';
+import 'package:space_news/screens/tabs/space_x/screen_spacex.dart';
 import 'package:space_news/widgets/home_icon.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 

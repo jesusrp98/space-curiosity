@@ -1,6 +1,6 @@
 import 'package:scoped_model/scoped_model.dart';
 import 'package:space_news/models/rockets/launches.dart';
-import 'package:space_news/screens/tabs/space_x/launches.dart';
+import 'package:space_news/screens/tabs/space_x/tab_launches.dart';
 import 'package:flutter/material.dart';
 import 'package:space_news/screens/tabs/space_x/tab_vehicles.dart';
 import 'package:space_news/screens/tabs/space_x/vehicles.dart';
