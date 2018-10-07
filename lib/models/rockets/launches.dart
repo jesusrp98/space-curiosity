@@ -24,6 +24,15 @@ class LaunchesModel extends Model {
     notifyListeners();
   }
 
+  Future loadUpcoming() async {
+    final response = await http.get(Url.upcomingList);
+
+    List jsonDecoded = json.decode(response.body);
+    _launches = jsonDecoded.map((launch) => Launch.fromJson(launch)).toList();
+
+    notifyListeners();
+  }
+
   bool get isLoading => _isLoading;
 
   List<Launch> get launches => _launches;

@@ -3,17 +3,16 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'package:space_news/models/rockets/launch.dart';
-import 'package:space_news/models/rockets/launches.dart';
-import 'package:space_news/screens/tabs/space_x/launch_page.dart';
+import 'package:space_news/models/rockets/vehicle.dart';
+import 'package:space_news/screens/tabs/space_x/vehicles.dart';
 import 'package:space_news/widgets/hero_image.dart';
 import 'package:space_news/widgets/list_cell.dart';
 
-class LaunchesTab extends StatelessWidget {
+class VehiclesTab extends StatelessWidget {
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
       GlobalKey<RefreshIndicatorState>();
 
-  Future<Null> _onRefresh(LaunchesModel model) {
+  Future<Null> _onRefresh(VehiclesModel model) {
     Completer<Null> completer = Completer<Null>();
     model.refresh().then((_) => completer.complete());
     return completer.future;
@@ -21,26 +20,26 @@ class LaunchesTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScopedModelDescendant<LaunchesModel>(
-      builder: (context, child, model) => ScopedModelDescendant<LaunchesModel>(
+    return ScopedModelDescendant<VehiclesModel>(
+      builder: (context, child, model) => ScopedModelDescendant<VehiclesModel>(
             builder: (context, child, model) => SafeArea(
                   child: RefreshIndicator(
                     key: _refreshIndicatorKey,
                     onRefresh: () => _onRefresh(model),
                     child: StreamBuilder(
                       stream: model.loadData().asStream().distinct(),
-                      builder: (context, _) {
-                        if (model.launches == null)
+                      builder: (BuildContext context, _) {
+                        if (model.vehicles == null)
                           return NativeLoadingIndicator(
                             center: true,
-                            text: Text('Loading...'),
+                            text: Text("Loading..."),
                           );
 
-                        if (model.launches.isEmpty)
-                          return Center(child: Text('No launches found'));
+                        if (model.vehicles.isEmpty)
+                          return Center(child: Text("No launches Found"));
 
                         return ListView.builder(
-                          itemCount: model.launches.length,
+                          itemCount: model.vehicles.length,
                           itemBuilder: _buildItem,
                         );
                       },
@@ -54,25 +53,25 @@ class LaunchesTab extends StatelessWidget {
   Widget _buildItem(BuildContext context, int index) {
     return Column(
       children: <Widget>[
-        ScopedModelDescendant<LaunchesModel>(builder: (context, child, model) {
-          final Launch launch = model.launches[index];
+        ScopedModelDescendant<VehiclesModel>(builder: (context, child, model) {
+          final Vehicle vehicle = model.vehicles[index];
           return Column(
             children: <Widget>[
               ListCell(
                 leading: HeroImage().buildHero(
                   context: context,
                   size: HeroImage.smallSize,
-                  url: launch.getImageUrl,
-                  tag: launch.getNumber,
-                  title: launch.name,
+                  url: vehicle.getImageUrl,
+                  tag: vehicle.id,
+                  title: vehicle.name,
                 ),
-                title: launch.name,
-                subtitle: launch.getLaunchDate,
-                trailing: MissionNumber(launch.getNumber),
-                onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (_) => LaunchPage(launch)),
-                    ),
+                title: vehicle.name,
+                subtitle: vehicle.subtitle,
+                trailing: VehicleStatus(vehicle.active),
+//                onTap: () => Navigator.push(
+//                      context,
+//                      MaterialPageRoute(builder: (_) => LaunchPage(vehicle)),
+//                    ),
               ),
               const Divider(height: 0.0, indent: 104.0)
             ],
