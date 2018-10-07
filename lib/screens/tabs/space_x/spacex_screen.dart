@@ -11,35 +11,14 @@ class SpacexScreen extends StatefulWidget {
 class _SpacexTabScreen extends State<SpacexScreen>
     with SingleTickerProviderStateMixin {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  TabController _tabController;
-  List<StatelessWidget> _homeLists = List(_tabs.length);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      key: _scaffoldKey,
-      appBar: AppBar(
-        title: const Text('SpaceX'),
-        centerTitle: true,
-        bottom: TabBar(
-          labelStyle: TextStyle(
-            fontFamily: 'ProductSans',
-            fontWeight: FontWeight.bold,
-          ),
-          controller: _tabController,
-          tabs: _tabs,
-        ),
-      ),
-      body: TabBarView(controller: _tabController, children: _homeLists),
-    );
-  }
-
-  /// List of the TabBar's tabs
   static const List<Tab> _tabs = const <Tab>[
     const Tab(text: 'VEHICLES'),
     const Tab(text: 'UPCOMING'),
     const Tab(text: 'LATEST'),
   ];
+
+  TabController _tabController;
+  List<StatelessWidget> _homeLists = List(_tabs.length);
 
   @override
   void initState() {
@@ -64,5 +43,25 @@ class _SpacexTabScreen extends State<SpacexScreen>
   void dispose() {
     _tabController.dispose();
     super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      key: _scaffoldKey,
+      appBar: AppBar(
+        title: const Text('SpaceX'),
+        centerTitle: true,
+        bottom: TabBar(
+          labelStyle: TextStyle(
+            fontFamily: 'ProductSans',
+            fontWeight: FontWeight.bold,
+          ),
+          controller: _tabController,
+          tabs: _tabs,
+        ),
+      ),
+      body: TabBarView(controller: _tabController, children: _homeLists),
+    );
   }
 }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:space_news/screens/about_screen.dart';
+import 'package:space_news/screens/tabs/news_screen.dart';
+import 'package:space_news/screens/tabs/solar_system_screen.dart';
 import 'package:space_news/screens/tabs/space_x/spacex_screen.dart';
 import 'package:space_news/widgets/home_icon.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -43,12 +45,12 @@ class HomeScreen extends StatelessWidget {
                 HomeIcon(
                   icon: Icons.description,
                   title: 'Breaking news',
-                  screen: SpacexScreen(),
+                  screen: NewsScreen(),
                 ),
                 HomeIcon(
                   icon: Icons.public,
                   title: 'Solar System',
-                  screen: SpacexScreen(),
+                  screen: SolarSystemScreen(),
                 ),
               ],
             ),
