@@ -9,7 +9,7 @@ import 'package:space_news/screens/tabs/space_x/launch_page.dart';
 import 'package:space_news/widgets/hero_image.dart';
 import 'package:space_news/widgets/list_cell.dart';
 
-class LaunchesTab extends StatelessWidget {
+class LaunchesLatestTab extends StatelessWidget {
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
       GlobalKey<RefreshIndicatorState>();
 
@@ -22,7 +22,8 @@ class LaunchesTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScopedModelDescendant<LaunchesLatestModel>(
-      builder: (context, child, model) => ScopedModelDescendant<LaunchesLatestModel>(
+      builder: (context, child, model) =>
+          ScopedModelDescendant<LaunchesLatestModel>(
             builder: (context, child, model) => SafeArea(
                   child: RefreshIndicator(
                     key: _refreshIndicatorKey,
@@ -45,30 +46,32 @@ class LaunchesTab extends StatelessWidget {
   Widget _buildItem(BuildContext context, int index) {
     return Column(
       children: <Widget>[
-        ScopedModelDescendant<LaunchesLatestModel>(builder: (context, child, model) {
-          final Launch launch = model.list[index];
-          return Column(
-            children: <Widget>[
-              ListCell(
-                leading: HeroImage().buildHero(
-                  context: context,
-                  size: HeroImage.smallSize,
-                  url: launch.getImageUrl,
-                  tag: launch.getNumber,
+        ScopedModelDescendant<LaunchesLatestModel>(
+          builder: (context, child, model) {
+            final Launch launch = model.list[index];
+            return Column(
+              children: <Widget>[
+                ListCell(
+                  leading: HeroImage().buildHero(
+                    context: context,
+                    size: HeroImage.smallSize,
+                    url: launch.getImageUrl,
+                    tag: launch.getNumber,
+                    title: launch.name,
+                  ),
                   title: launch.name,
+                  subtitle: launch.getLaunchDate,
+                  trailing: MissionNumber(launch.getNumber),
+                  onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => LaunchPage(launch)),
+                      ),
                 ),
-                title: launch.name,
-                subtitle: launch.getLaunchDate,
-                trailing: MissionNumber(launch.getNumber),
-                onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (_) => LaunchPage(launch)),
-                    ),
-              ),
-              const Divider(height: 0.0, indent: 104.0)
-            ],
-          );
-        })
+                const Divider(height: 0.0, indent: 104.0)
+              ],
+            );
+          },
+        )
       ],
     );
   }

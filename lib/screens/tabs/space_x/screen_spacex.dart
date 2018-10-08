@@ -1,8 +1,9 @@
 import 'package:scoped_model/scoped_model.dart';
 import 'package:space_news/scoped_model/launches_latest.dart';
 import 'package:space_news/scoped_model/launches_upcoming.dart';
-import 'package:space_news/screens/tabs/space_x/tab_launches.dart';
+import 'package:space_news/screens/tabs/space_x/tab_launches_latest.dart';
 import 'package:flutter/material.dart';
+import 'package:space_news/screens/tabs/space_x/tab_launches_upcoming.dart';
 import 'package:space_news/screens/tabs/space_x/tab_vehicles.dart';
 import 'package:space_news/scoped_model/vehicles.dart';
 
@@ -27,11 +28,11 @@ class _SpacexTabScreen extends State<SpacexScreen> {
     ),
     ScopedModel<LaunchesUpcomingModel>(
       model: _upcomingLaunches,
-      child: LaunchesTab(),
+      child: LaunchesUpcomingTab(),
     ),
     ScopedModel<LaunchesLatestModel>(
       model: _latestLaunches,
-      child: LaunchesTab(),
+      child: LaunchesLatestTab(),
     ),
   ];
 
