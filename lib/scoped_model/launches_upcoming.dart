@@ -7,6 +7,7 @@ import 'package:space_news/util/url.dart';
 import 'package:space_news/models/rockets/launch.dart';
 
 class LaunchesUpcomingModel extends GeneralModel {
+  @override
   Future loadData() async {
     loadingState(true);
 

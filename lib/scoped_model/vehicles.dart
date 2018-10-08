@@ -10,6 +10,7 @@ import 'package:space_news/scoped_model/general_model.dart';
 import 'package:space_news/util/url.dart';
 
 class VehiclesModel extends GeneralModel {
+  @override
   Future loadData() async {
     loadingState(true);
 
