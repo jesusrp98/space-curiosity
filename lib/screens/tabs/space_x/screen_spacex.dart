@@ -1,9 +1,10 @@
 import 'package:scoped_model/scoped_model.dart';
-import 'package:space_news/models/rockets/launches.dart';
+import 'package:space_news/scoped_model/launches_latest.dart';
+import 'package:space_news/scoped_model/launches_upcoming.dart';
 import 'package:space_news/screens/tabs/space_x/tab_launches.dart';
 import 'package:flutter/material.dart';
 import 'package:space_news/screens/tabs/space_x/tab_vehicles.dart';
-import 'package:space_news/screens/tabs/space_x/vehicles.dart';
+import 'package:space_news/scoped_model/vehicles.dart';
 
 class SpacexScreen extends StatefulWidget {
   @override
@@ -15,19 +16,20 @@ class _SpacexTabScreen extends State<SpacexScreen> {
   int _currentIndex = 1;
 
   static final VehiclesModel _vehicles = VehiclesModel();
-  static final LaunchesModel _upcomingLaunches = LaunchesModel();
-  static final LaunchesModel _latestLaunches = LaunchesModel();
+  static final LaunchesUpcomingModel _upcomingLaunches =
+      LaunchesUpcomingModel();
+  static final LaunchesLatestModel _latestLaunches = LaunchesLatestModel();
 
   List<ScopedModel> _tabs = [
     ScopedModel<VehiclesModel>(
       model: _vehicles,
       child: VehiclesTab(),
     ),
-    ScopedModel<LaunchesModel>(
+    ScopedModel<LaunchesUpcomingModel>(
       model: _upcomingLaunches,
       child: LaunchesTab(),
     ),
-    ScopedModel<LaunchesModel>(
+    ScopedModel<LaunchesLatestModel>(
       model: _latestLaunches,
       child: LaunchesTab(),
     ),
@@ -41,7 +43,7 @@ class _SpacexTabScreen extends State<SpacexScreen> {
 
   void _initPlatformState() async {
     _vehicles.loadData();
-    _upcomingLaunches.loadUpcoming();
+    _upcomingLaunches.loadData();
     _latestLaunches.loadData();
   }
 

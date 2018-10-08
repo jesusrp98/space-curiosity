@@ -4,11 +4,11 @@
 //
 //import '../models/daily_image.dart';
 //import '../models/planets/planets.dart';
-//import '../models/rockets/launches.dart';
+//import '../models/rockets/launches_latest.dart';
 //import 'tabs/nasa/home_page.dart';
 //import 'tabs/news.dart';
 //import 'tabs/planets/planets.dart';
-//import 'tabs/space_x/launches.dart';
+//import 'tabs/space_x/launches_latest.dart';
 //
 //enum TabItem { news, planets, spaceX, nasa }
 //

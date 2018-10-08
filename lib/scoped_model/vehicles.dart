@@ -20,6 +20,9 @@ class VehiclesModel extends Model {
   }
 
   Future loadData() async {
+    _isLoading = true;
+    notifyListeners();
+
     final rocketsResponse = await http.get(Url.rocketList);
     final capsulesResponse = await http.get(Url.capsuleList);
     final roadsterResponse = await http.get(Url.roadsterPage);
@@ -37,6 +40,7 @@ class VehiclesModel extends Model {
     _vehicles
         .addAll(shipsJson.map((rocket) => ShipInfo.fromJson(rocket)).toList());
 
+    _isLoading = false;
     notifyListeners();
   }
 

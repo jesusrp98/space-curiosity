@@ -4,7 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:space_news/models/rockets/vehicle.dart';
-import 'package:space_news/screens/tabs/space_x/vehicles.dart';
+import 'package:space_news/screens/tabs/space_x/capsule_page.dart';
+import 'package:space_news/screens/tabs/space_x/roadster_page.dart';
+import 'package:space_news/screens/tabs/space_x/rocket_page.dart';
+import 'package:space_news/screens/tabs/space_x/ship_page.dart';
+import 'package:space_news/scoped_model/vehicles.dart';
 import 'package:space_news/widgets/hero_image.dart';
 import 'package:space_news/widgets/list_cell.dart';
 
@@ -26,24 +30,15 @@ class VehiclesTab extends StatelessWidget {
                   child: RefreshIndicator(
                     key: _refreshIndicatorKey,
                     onRefresh: () => _onRefresh(model),
-                    child: StreamBuilder(
-                      stream: model.loadData().asStream().distinct(),
-                      builder: (BuildContext context, _) {
-                        if (model.vehicles == null)
-                          return NativeLoadingIndicator(
+                    child: model.isLoading
+                        ? NativeLoadingIndicator(
                             center: true,
-                            text: Text("Loading..."),
-                          );
-
-                        if (model.vehicles.isEmpty)
-                          return Center(child: Text("No launches Found"));
-
-                        return ListView.builder(
-                          itemCount: model.vehicles.length,
-                          itemBuilder: _buildItem,
-                        );
-                      },
-                    ),
+                            text: const Text('Loading'),
+                          )
+                        : ListView.builder(
+                            itemCount: model.vehicles.length,
+                            itemBuilder: _buildItem,
+                          ),
                   ),
                 ),
           ),
@@ -68,10 +63,18 @@ class VehiclesTab extends StatelessWidget {
                 title: vehicle.name,
                 subtitle: vehicle.subtitle,
                 trailing: VehicleStatus(vehicle.active),
-//                onTap: () => Navigator.push(
-//                      context,
-//                      MaterialPageRoute(builder: (_) => LaunchPage(vehicle)),
-//                    ),
+                onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => (vehicle.type == 'rocket')
+                            ? RocketPage(vehicle)
+                            : (vehicle.type == 'capsule')
+                                ? CapsulePage(vehicle)
+                                : (vehicle.type == 'ship')
+                                    ? ShipPage(vehicle)
+                                    : RoadsterPage(vehicle),
+                      ),
+                    ),
               ),
               const Divider(height: 0.0, indent: 104.0)
             ],
