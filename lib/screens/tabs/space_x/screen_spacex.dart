@@ -1,11 +1,13 @@
-import 'package:scoped_model/scoped_model.dart';
-import 'package:space_news/scoped_model/launches_latest.dart';
-import 'package:space_news/scoped_model/launches_upcoming.dart';
-import 'package:space_news/screens/tabs/space_x/tab_launches_latest.dart';
 import 'package:flutter/material.dart';
-import 'package:space_news/screens/tabs/space_x/tab_launches_upcoming.dart';
-import 'package:space_news/screens/tabs/space_x/tab_vehicles.dart';
-import 'package:space_news/scoped_model/vehicles.dart';
+import 'package:scoped_model/scoped_model.dart';
+
+import '../../../scoped_model/general_model.dart';
+import '../../../scoped_model/launches_latest.dart';
+import '../../../scoped_model/launches_upcoming.dart';
+import '../../../scoped_model/vehicles.dart';
+import 'tab_launches_latest.dart';
+import 'tab_launches_upcoming.dart';
+import 'tab_vehicles.dart';
 
 class SpacexScreen extends StatefulWidget {
   @override
@@ -16,22 +18,23 @@ class _SpacexTabScreen extends State<SpacexScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   int _currentIndex = 1;
 
-  static final VehiclesModel _vehicles = VehiclesModel();
-  static final LaunchesUpcomingModel _upcomingLaunches =
-      LaunchesUpcomingModel();
-  static final LaunchesLatestModel _latestLaunches = LaunchesLatestModel();
+  static final List<GeneralModel> modelTab = [
+    VehiclesModel(),
+    LaunchesUpcomingModel(),
+    LaunchesLatestModel(),
+  ];
 
-  List<ScopedModel> _tabs = [
+  final List<ScopedModel> _tabs = [
     ScopedModel<VehiclesModel>(
-      model: _vehicles,
+      model: modelTab[0],
       child: VehiclesTab(),
     ),
     ScopedModel<LaunchesUpcomingModel>(
-      model: _upcomingLaunches,
+      model: modelTab[1],
       child: LaunchesUpcomingTab(),
     ),
     ScopedModel<LaunchesLatestModel>(
-      model: _latestLaunches,
+      model: modelTab[2],
       child: LaunchesLatestTab(),
     ),
   ];
@@ -39,13 +42,7 @@ class _SpacexTabScreen extends State<SpacexScreen> {
   @override
   initState() {
     super.initState();
-    _initPlatformState();
-  }
-
-  void _initPlatformState() async {
-    _vehicles.loadData();
-    _upcomingLaunches.loadData();
-    _latestLaunches.loadData();
+    modelTab.forEach((model) => model.loadData());
   }
 
   void _onTabTapped(int index) => setState(() => _currentIndex = index);

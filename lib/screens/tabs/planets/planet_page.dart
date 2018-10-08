@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:space_news/util/colors.dart';
-import 'package:space_news/widgets/card_page.dart';
-import 'package:space_news/widgets/head_card_page.dart';
-import 'package:space_news/widgets/hero_image.dart';
 
 import '../../../models/planets/celestial_body.dart';
+import '../../../util/colors.dart';
+import '../../../widgets/card_page.dart';
+import '../../../widgets/head_card_page.dart';
+import '../../../widgets/hero_image.dart';
 import '../../../widgets/row_item.dart';
 import 'add_edit_planet.dart';
 

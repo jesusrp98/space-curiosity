@@ -1,4 +1,5 @@
 import 'package:intl/intl.dart';
+
 import 'vehicle.dart';
 
 /// CAPSULE INFO CLASS

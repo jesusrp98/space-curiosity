@@ -5,10 +5,10 @@ import 'dart:io';
 import 'package:async_resource/file_resource.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:scoped_model/scoped_model.dart';
+import 'package:uuid/uuid.dart';
 
 import '../services/api.dart';
 import '../util/cache_settings.dart';
-import 'package:uuid/uuid.dart';
 import '../util/keys.dart';
 
 class NasaImagesModel extends Model {

@@ -2,12 +2,13 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:space_news/models/rockets/capsule_info.dart';
-import 'package:space_news/models/rockets/roadster.dart';
-import 'package:space_news/models/rockets/rocket_info.dart';
-import 'package:space_news/models/rockets/ship_info.dart';
-import 'package:space_news/scoped_model/general_model.dart';
-import 'package:space_news/util/url.dart';
+
+import '../models/rockets/capsule_info.dart';
+import '../models/rockets/roadster.dart';
+import '../models/rockets/rocket_info.dart';
+import '../models/rockets/ship_info.dart';
+import '../util/url.dart';
+import 'general_model.dart';
 
 class VehiclesModel extends GeneralModel {
   @override

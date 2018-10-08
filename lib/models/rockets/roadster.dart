@@ -1,5 +1,6 @@
-import 'vehicle.dart';
 import 'package:intl/intl.dart';
+
+import 'vehicle.dart';
 
 /// ROADSTER CLASS
 /// This class contains all information available from Elon Musk's Tesla

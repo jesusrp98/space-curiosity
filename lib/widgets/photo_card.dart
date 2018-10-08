@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:space_news/widgets/hero_image.dart';
+
+import 'hero_image.dart';
 
 class PhotoCard extends StatelessWidget {
   final String title, subtitle;

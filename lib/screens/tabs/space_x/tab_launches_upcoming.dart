@@ -3,11 +3,12 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'package:space_news/models/rockets/launch.dart';
-import 'package:space_news/scoped_model/launches_upcoming.dart';
-import 'package:space_news/screens/tabs/space_x/launch_page.dart';
-import 'package:space_news/widgets/hero_image.dart';
-import 'package:space_news/widgets/list_cell.dart';
+
+import '../../../models/rockets/launch.dart';
+import '../../../scoped_model/launches_upcoming.dart';
+import '../../../widgets/hero_image.dart';
+import '../../../widgets/list_cell.dart';
+import 'launch_page.dart';
 
 class LaunchesUpcomingTab extends StatelessWidget {
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =

@@ -1,5 +1,6 @@
-import 'package:space_news/util/url.dart';
 import 'package:intl/intl.dart';
+
+import '../../util/url.dart';
 
 /// VEHICLE CLASS
 /// Abstract class that represents a real vehicle used by SpaceX. It can be

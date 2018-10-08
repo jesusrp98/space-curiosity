@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
-import 'package:space_news/models/rockets/ship_info.dart';
-import 'package:space_news/util/colors.dart';
-import 'package:space_news/widgets/card_page.dart';
-import 'package:space_news/widgets/head_card_page.dart';
-import 'package:space_news/widgets/hero_image.dart';
-import 'package:space_news/widgets/row_item.dart';
+
+import '../../../models/rockets/ship_info.dart';
+import '../../../util/colors.dart';
+import '../../../widgets/card_page.dart';
+import '../../../widgets/head_card_page.dart';
+import '../../../widgets/hero_image.dart';
+import '../../../widgets/row_item.dart';
 
 /// SHIP PAGE CLASS
 /// This class represent a ship page. It displays Ship's specs.

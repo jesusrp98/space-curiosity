@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
-import 'package:space_news/models/rockets/fairing.dart';
 
 import '../../../models/rockets/core.dart';
+import '../../../models/rockets/fairing.dart';
 import '../../../models/rockets/launch.dart';
 import '../../../models/rockets/rocket.dart';
 import '../../../models/rockets/second_stage.dart';
