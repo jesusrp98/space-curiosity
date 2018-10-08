@@ -12,8 +12,6 @@ import 'package:space_news/util/url.dart';
 class VehiclesModel extends GeneralModel {
   @override
   Future loadData() async {
-    loadingState(true);
-
     final rocketsResponse = await http.get(Url.rocketList);
     final capsulesResponse = await http.get(Url.capsuleList);
     final roadsterResponse = await http.get(Url.roadsterPage);
@@ -23,6 +21,7 @@ class VehiclesModel extends GeneralModel {
     List capsulesJson = json.decode(capsulesResponse.body);
     List shipsJson = json.decode(shipsResponse.body);
 
+    list.clear();
     list.add(Roadster.fromJson(json.decode(roadsterResponse.body)));
     list.addAll(
         capsulesJson.map((capsule) => CapsuleInfo.fromJson(capsule)).toList());
