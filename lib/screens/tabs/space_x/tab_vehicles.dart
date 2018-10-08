@@ -36,7 +36,7 @@ class VehiclesTab extends StatelessWidget {
                             text: const Text('Loading'),
                           )
                         : ListView.builder(
-                            itemCount: model.vehicles.length,
+                            itemCount: model.getSize,
                             itemBuilder: _buildItem,
                           ),
                   ),
@@ -49,7 +49,7 @@ class VehiclesTab extends StatelessWidget {
     return Column(
       children: <Widget>[
         ScopedModelDescendant<VehiclesModel>(builder: (context, child, model) {
-          final Vehicle vehicle = model.vehicles[index];
+          final Vehicle vehicle = model.list[index];
           return Column(
             children: <Widget>[
               ListCell(

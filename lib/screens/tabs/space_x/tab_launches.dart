@@ -33,7 +33,7 @@ class LaunchesTab extends StatelessWidget {
                             text: const Text('Loading'),
                           )
                         : ListView.builder(
-                            itemCount: model.launches.length,
+                            itemCount: model.getSize,
                             itemBuilder: _buildItem,
                           ),
                   ),
@@ -46,7 +46,7 @@ class LaunchesTab extends StatelessWidget {
     return Column(
       children: <Widget>[
         ScopedModelDescendant<LaunchesLatestModel>(builder: (context, child, model) {
-          final Launch launch = model.launches[index];
+          final Launch launch = model.list[index];
           return Column(
             children: <Widget>[
               ListCell(
