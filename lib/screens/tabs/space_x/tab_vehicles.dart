@@ -36,6 +36,7 @@ class VehiclesTab extends StatelessWidget {
                             text: const Text('Loading'),
                           )
                         : ListView.builder(
+                            key: PageStorageKey('vehicles'),
                             itemCount: model.getSize,
                             itemBuilder: _buildItem,
                           ),

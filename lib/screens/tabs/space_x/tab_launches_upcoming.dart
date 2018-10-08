@@ -34,6 +34,7 @@ class LaunchesUpcomingTab extends StatelessWidget {
                             text: const Text('Loading'),
                           )
                         : ListView.builder(
+                            key: PageStorageKey('upcoming'),
                             itemCount: model.getSize,
                             itemBuilder: _buildItem,
                           ),

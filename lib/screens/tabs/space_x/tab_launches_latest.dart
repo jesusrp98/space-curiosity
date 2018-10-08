@@ -34,6 +34,7 @@ class LaunchesLatestTab extends StatelessWidget {
                             text: const Text('Loading'),
                           )
                         : ListView.builder(
+                            key: PageStorageKey('latest'),
                             itemCount: model.getSize,
                             itemBuilder: _buildItem,
                           ),
