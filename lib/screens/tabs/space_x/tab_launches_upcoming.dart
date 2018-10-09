@@ -23,24 +23,21 @@ class LaunchesUpcomingTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScopedModelDescendant<LaunchesUpcomingModel>(
-      builder: (context, child, model) =>
-          ScopedModelDescendant<LaunchesUpcomingModel>(
-            builder: (context, child, model) => SafeArea(
-                  child: RefreshIndicator(
-                    key: _refreshIndicatorKey,
-                    onRefresh: () => _onRefresh(model),
-                    child: model.isLoading
-                        ? NativeLoadingIndicator(
-                            center: true,
-                            text: const Text('Loading'),
-                          )
-                        : ListView.builder(
-                            key: PageStorageKey('upcoming'),
-                            itemCount: model.getSize,
-                            itemBuilder: _buildItem,
-                          ),
-                  ),
-                ),
+      builder: (context, child, model) => SafeArea(
+            child: RefreshIndicator(
+              key: _refreshIndicatorKey,
+              onRefresh: () => _onRefresh(model),
+              child: model.isLoading
+                  ? NativeLoadingIndicator(
+                      center: true,
+                      text: const Text('Loading'),
+                    )
+                  : ListView.builder(
+                      key: PageStorageKey('upcoming'),
+                      itemCount: model.getSize,
+                      itemBuilder: _buildItem,
+                    ),
+            ),
           ),
     );
   }

@@ -23,24 +23,21 @@ class LaunchesLatestTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScopedModelDescendant<LaunchesLatestModel>(
-      builder: (context, child, model) =>
-          ScopedModelDescendant<LaunchesLatestModel>(
-            builder: (context, child, model) => SafeArea(
-                  child: RefreshIndicator(
-                    key: _refreshIndicatorKey,
-                    onRefresh: () => _onRefresh(model),
-                    child: model.isLoading
-                        ? NativeLoadingIndicator(
-                            center: true,
-                            text: const Text('Loading'),
-                          )
-                        : ListView.builder(
-                            key: PageStorageKey('latest'),
-                            itemCount: model.getSize,
-                            itemBuilder: _buildItem,
-                          ),
-                  ),
-                ),
+      builder: (context, child, model) => SafeArea(
+            child: RefreshIndicator(
+              key: _refreshIndicatorKey,
+              onRefresh: () => _onRefresh(model),
+              child: model.isLoading
+                  ? NativeLoadingIndicator(
+                      center: true,
+                      text: const Text('Loading'),
+                    )
+                  : ListView.builder(
+                      key: PageStorageKey('latest'),
+                      itemCount: model.getSize,
+                      itemBuilder: _buildItem,
+                    ),
+            ),
           ),
     );
   }
