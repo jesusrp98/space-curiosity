@@ -13,33 +13,27 @@ class SolarSystemScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Solar System'),
-        centerTitle: true,
-      ),
-      body: ScopedModelDescendant<PlanetsModel>(
-        builder: (context, child, model) => StreamBuilder(
-              stream: model.loadData().asStream().distinct(),
-              builder: (context, _) => model.isLoading
-                  ? NativeLoadingIndicator(
-                      center: true,
-                      text: Text("Loading..."),
-                    )
-                  : ListView.builder(
-                      itemCount: model.planets.length,
-                      itemBuilder: _buildItem,
-                    ),
-            ),
+      appBar: AppBar(title: const Text('Solar System'), centerTitle: true),
+      body: ScopedModel<PlanetsModel>(
+        model: PlanetsModel(),
+        child: ScopedModelDescendant<PlanetsModel>(
+          builder: (context, child, model) => model.isLoading
+              ? NativeLoadingIndicator(center: true)
+              : Scrollbar(
+                  child: ListView.builder(
+                    key: PageStorageKey('planets'),
+                    itemCount: model.list.length,
+                    itemBuilder: _buildItem,
+                  ),
+                ),
+        ),
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
         onPressed: () => Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => AddEditPlanetPage(
-                      null,
-                      type: BodyType.planet,
-                    ),
+                builder: (_) => AddEditPlanetPage(null, type: BodyType.planet),
                 fullscreenDialog: true,
               ),
             ),
@@ -68,7 +62,7 @@ class SolarSystemScreen extends StatelessWidget {
           onTap: () => Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) =>
+                  builder: (_) =>
                       PlanetPage(planet: moon, type: BodyType.celestialBody),
                 ),
               ),
@@ -98,17 +92,17 @@ class SolarSystemScreen extends StatelessWidget {
                 leading: HeroImage().buildHero(
                   context: context,
                   size: HeroImage.smallSize,
-                  url: model.planets[index].imageUrl,
-                  tag: model.planets[index].id,
-                  title: model.planets[index].name,
+                  url: model.list[index].imageUrl,
+                  tag: model.list[index].id,
+                  title: model.list[index].name,
                 ),
-                title: model.planets[index].name,
-                subtitle: model.planets[index].description,
+                title: model.list[index].name,
+                subtitle: model.list[index].description,
                 trailing: IconButton(
                   icon: Icon(Icons.arrow_drop_down),
                   onPressed: () async {
-                    var _moons = await model.planets[index]
-                        .getMoons(model.planets[index].id);
+                    var _moons =
+                        await model.list[index].getMoons(model.list[index].id);
                     showModalBottomSheet<void>(
                       context: context,
                       builder: (BuildContext context) {
@@ -125,7 +119,7 @@ class SolarSystemScreen extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) => PlanetPage(
-                              planet: model.planets[index],
+                              planet: model.list[index],
                               type: BodyType.planet,
                             ),
                       ),
