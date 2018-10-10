@@ -14,7 +14,7 @@ import '../util/keys.dart';
 class NasaImagesModel extends Model {
   List<ImageData> _images;
   List<ImageData> get images => _images;
-  int _count = 100;
+  int _count = 2;
   get count => _count;
 
   Future fetchMore() async {
