@@ -13,11 +13,11 @@ class HomeIcon extends StatelessWidget {
       padding: const EdgeInsets.all(16.0),
       onPressed: () => Navigator.push(
             context,
-            MaterialPageRoute(builder: (_) => screen),
+            MaterialPageRoute(builder: (_) => screen, fullscreenDialog: true),
           ),
       child: Column(
         children: <Widget>[
-          Icon(icon, size: 42.0),
+          Icon(icon, size: 36.0),
           Container(height: 8.0),
           Text(title, style: Theme.of(context).textTheme.subhead),
         ],

@@ -3,13 +3,13 @@ import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'package:space_news/screens/tabs/nasa/imagedetails.dart';
-import 'package:space_news/util/axis_count.dart';
-import 'package:space_news/util/colors.dart';
 
 import '../models/daily_image.dart';
+import '../util/axis_count.dart';
+import '../util/colors.dart';
 import '../widgets/home_icon.dart';
 import 'screen_about.dart';
+import 'tabs/nasa/imagedetails.dart';
 import 'tabs/screen_news.dart';
 import 'tabs/screen_solar_system.dart';
 import 'tabs/space_x/screen_spacex.dart';
@@ -37,40 +37,19 @@ class HomeScreen extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: Column(
-        children: <Widget>[
-          ScopedModel<NasaImagesModel>(
-            model: NasaImagesModel(),
-            child: _buildNasaCards(),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                HomeIcon(
-                  icon: FontAwesomeIcons.rocket,
-                  title: 'SpaceX',
-                  screen: SpacexScreen(),
-                ),
-                HomeIcon(
-                  icon: Icons.description,
-                  title: 'Breaking news',
-                  screen: NewsScreen(),
-                ),
-                HomeIcon(
-                  icon: Icons.public,
-                  title: 'Solar System',
-                  screen: SolarSystemScreen(),
-                ),
-              ],
-            ),
-          )
-        ],
-      ),
+      body: ContentPage(),
     );
   }
+}
 
+class ContentPage extends StatefulWidget {
+  const ContentPage({Key key}) : super(key: key);
+
+  @override
+  _ContentPageState createState() => _ContentPageState();
+}
+
+class _ContentPageState extends State<ContentPage> {
   Widget _buildNasaCards() {
     return ScopedModelDescendant<NasaImagesModel>(
       builder: (context, child, model) => StreamBuilder(
@@ -132,6 +111,56 @@ class HomeScreen extends StatelessWidget {
               );
             },
           ),
+    );
+  }
+
+  NasaImagesModel _nasaModel;
+
+  @override
+  void initState() {
+    _nasaModel = NasaImagesModel();
+    _nasaModel.fetchImages().then((_) {
+      setState(() {});
+    });
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: <Widget>[
+        Expanded(
+          child: ScopedModel<NasaImagesModel>(
+            model: _nasaModel,
+            child: _buildNasaCards(),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              HomeIcon(
+                icon: FontAwesomeIcons.rocket,
+                title: 'SpaceX',
+                screen: SpacexScreen(),
+              ),
+              HomeIcon(
+                icon: Icons.description,
+                title: 'Breaking news',
+                screen: NewsScreen(),
+              ),
+              HomeIcon(
+                icon: Icons.public,
+                title: 'Solar System',
+                screen: SolarSystemScreen(),
+              ),
+            ],
+          ),
+        )
+      ],
     );
   }
 }
