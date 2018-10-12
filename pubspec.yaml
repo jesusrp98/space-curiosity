@@ -7,10 +7,10 @@ dependencies:
 
   ## Firebase
   # firebase: '^4.3.0'
-  firebase_database: 0.4.6
-  cloud_firestore: 0.7.3
-  firebase_core: "^0.2.3"
-  firebase_analytics: "^0.3.0"
+  firebase_database: ^1.0.4
+  cloud_firestore: 0.8.1
+  firebase_core: ^0.2.5+1
+  firebase_analytics: ^1.0.3
   # firebase_admob: ^0.5.0
 
   ## Tools

@@ -35,7 +35,7 @@ packages:
       name: cloud_firestore
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.7.3"
+    version: "0.8.1"
   collection:
     dependency: transitive
     description:
@@ -84,7 +84,7 @@ packages:
       name: firebase_analytics
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.3.3"
+    version: "1.0.3"
   firebase_core:
     dependency: "direct main"
     description:
@@ -98,7 +98,7 @@ packages:
       name: firebase_database
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.4.6"
+    version: "1.0.4"
   flutter:
     dependency: "direct main"
     description: flutter
