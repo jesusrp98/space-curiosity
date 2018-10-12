@@ -122,6 +122,7 @@ class _ContentPageState extends State<ContentPage> {
               ),
               title: (model.list[0] as NasaImage).title,
               subtitle: (model.list[0] as NasaImage).getDate,
+              url: (model.list[0] as NasaImage).url,
             ),
     );
   }
