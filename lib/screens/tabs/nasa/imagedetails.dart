@@ -8,7 +8,7 @@ import '../../../models/daily_image.dart';
 import '../../../util/sendSMS.dart';
 
 class ImageDetailsPage extends StatelessWidget {
-  final ImageData image;
+  final NasaImage image;
   final String currentImage;
   ImageDetailsPage({this.image, this.currentImage});
 
@@ -59,7 +59,7 @@ class ImageDetailsPage extends StatelessWidget {
             Container(height: 4.0),
             InkWell(
               child: Hero(
-                tag: image.id,
+                tag: image.getDate,
                 child: Image.network(currentImage),
               ),
               onTap: () => openImage(currentImage),
@@ -71,7 +71,7 @@ class ImageDetailsPage extends StatelessWidget {
             ),
             Container(height: 4.0),
             new Text(
-              image?.date,
+              image.getDate,
               style: new TextStyle(fontSize: 10.0),
             ),
           ],

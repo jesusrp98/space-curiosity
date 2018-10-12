@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
+import 'package:space_news/widgets/hero_image.dart';
+import '../widgets/photo_card.dart';
 
 import '../models/daily_image.dart';
 import '../models/planets/planets.dart';
-import '../util/axis_count.dart';
-import '../util/colors.dart';
 import '../widgets/home_icon.dart';
 import 'screen_about.dart';
-import 'tabs/nasa/imagedetails.dart';
 import 'tabs/screen_news.dart';
 import 'tabs/screen_solar_system.dart';
 import 'tabs/space_x/screen_spacex.dart';
@@ -51,70 +49,6 @@ class ContentPage extends StatefulWidget {
 }
 
 class _ContentPageState extends State<ContentPage> {
-  Widget _buildNasaCards() {
-    return ScopedModelDescendant<NasaImagesModel>(
-      builder: (context, child, model) => StreamBuilder(
-            stream: model.fetchImages().asStream().distinct(),
-            builder: (BuildContext context, _) {
-              if (model.images == null)
-                return NativeLoadingIndicator(center: true);
-
-              if (model.images.isEmpty)
-                return Center(child: Text("No Images Found"));
-              int axisCount = getAxisCount(context);
-
-              return GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: axisCount),
-                itemCount: model.images.length,
-                itemBuilder: (context, index) {
-                  model.fetchMore();
-                  String content = model.images[index]?.hdurl ??
-                      model.images[index]?.url ??
-                      "";
-
-                  return InkWell(
-                    onTap: () =>
-                        Navigator.push(context, MaterialPageRoute(builder: (_) {
-                          return ImageDetailsPage(
-                            image: model.images[index],
-                            currentImage: content,
-                          );
-                        })),
-                    onLongPress: () => FlutterWebBrowser.openWebPage(
-                          url: content,
-                          androidToolbarColor: primaryColor,
-                        ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(1.0),
-                      child: GridTile(
-                        header: Text(
-                          model.images[index]?.title ?? "",
-                          maxLines: 1,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 14.0,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                        child: Hero(
-                          tag: model.images[index].id,
-                          child: Image.network(content),
-                        ),
-                        footer: Text(
-                          model.images[index]?.date ?? "",
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              );
-            },
-          ),
-    );
-  }
-
   NasaImagesModel _nasaModel;
   PlanetsModel _planetsModel;
 
@@ -122,12 +56,8 @@ class _ContentPageState extends State<ContentPage> {
   void initState() {
     _nasaModel = NasaImagesModel();
     _planetsModel = PlanetsModel();
-    _nasaModel.fetchImages().then((_) {
-      setState(() {});
-    });
-    _planetsModel.loadData().then((_) {
-      setState(() {});
-    });
+    _nasaModel.loadData().then((_) => setState(() {}));
+    _planetsModel.loadData().then((_) => setState(() {}));
     super.initState();
   }
 
@@ -137,13 +67,16 @@ class _ContentPageState extends State<ContentPage> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         Expanded(
-          child: ScopedModel<NasaImagesModel>(
-            model: _nasaModel,
-            child: _buildNasaCards(),
+          child: Padding(
+            padding: const EdgeInsets.all(32.0),
+            child: ScopedModel<NasaImagesModel>(
+              model: _nasaModel,
+              child: _buildNasaImage(),
+            ),
           ),
         ),
         Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(16.0),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -174,4 +107,85 @@ class _ContentPageState extends State<ContentPage> {
       ],
     );
   }
+
+  Widget _buildNasaImage() {
+    return ScopedModelDescendant<NasaImagesModel>(
+      builder: (context, child, model) => model.isLoading
+          ? NativeLoadingIndicator(center: true)
+          : PhotoCard(
+              image: Hero(
+                tag: (model.list[0] as NasaImage).getDate,
+                child: Image.network(
+                  (model.list[0] as NasaImage).hdurl,
+                  fit: BoxFit.fitHeight,
+                ),
+              ),
+              title: (model.list[0] as NasaImage).title,
+              subtitle: (model.list[0] as NasaImage).getDate,
+            ),
+    );
+  }
+  // Widget _buildNasaCards() {
+  //   return ScopedModelDescendant<DailyImageModel>(
+  //     builder: (context, child, model) => StreamBuilder(
+  //           stream: model.fetchImages().asStream().distinct(),
+  //           builder: (BuildContext context, _) {
+  //             if (model.images == null)
+  //               return NativeLoadingIndicator(center: true);
+
+  //             if (model.images.isEmpty)
+  //               return Center(child: Text("No Images Found"));
+  //             int axisCount = getAxisCount(context);
+
+  //             return GridView.builder(
+  //               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+  //                   crossAxisCount: axisCount),
+  //               itemCount: model.images.length,
+  //               itemBuilder: (context, index) {
+  //                 model.fetchMore();
+  //                 String content = model.images[index]?.hdurl ??
+  //                     model.images[index]?.url ??
+  //                     "";
+
+  //                 return InkWell(
+  //                   onTap: () =>
+  //                       Navigator.push(context, MaterialPageRoute(builder: (_) {
+  //                         return ImageDetailsPage(
+  //                           image: model.images[index],
+  //                           currentImage: content,
+  //                         );
+  //                       })),
+  //                   onLongPress: () => FlutterWebBrowser.openWebPage(
+  //                         url: content,
+  //                         androidToolbarColor: primaryColor,
+  //                       ),
+  //                   child: Padding(
+  //                     padding: const EdgeInsets.all(1.0),
+  //                     child: GridTile(
+  //                       header: Text(
+  //                         model.images[index]?.title ?? "",
+  //                         maxLines: 1,
+  //                         style: TextStyle(
+  //                           fontWeight: FontWeight.bold,
+  //                           fontSize: 14.0,
+  //                         ),
+  //                         textAlign: TextAlign.center,
+  //                       ),
+  //                       child: Hero(
+  //                         tag: model.images[index].id,
+  //                         child: Image.network(content),
+  //                       ),
+  //                       footer: Text(
+  //                         model.images[index]?.date ?? "",
+  //                         textAlign: TextAlign.center,
+  //                       ),
+  //                     ),
+  //                   ),
+  //                 );
+  //               },
+  //             );
+  //           },
+  //         ),
+  //   );
+  // }
 }

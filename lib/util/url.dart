@@ -1,3 +1,5 @@
+import 'keys.dart';
+
 /// URL CLASS
 /// It has all urls used in the app as static const strings
 class Url {
@@ -69,4 +71,9 @@ class Url {
   static const String spacexGithub = 'https://github.com/r-spacex/SpaceX-API';
   static const String internationalSystem =
       'https://en.wikipedia.org/wiki/International_System_of_Units';
+
+  static const String dailyPicture =
+      'https://api.nasa.gov/planetary/apod?api_key=nPYjdP6nnLyNVYPwTWCpTpumcrfiYWEN2sKm26uH';
+  static const String morePictures =
+      'https://api.nasa.gov/planetary/apod?api_key=nPYjdP6nnLyNVYPwTWCpTpumcrfiYWEN2sKm26uH&count=10';
 }

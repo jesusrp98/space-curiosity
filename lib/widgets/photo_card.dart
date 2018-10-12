@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'hero_image.dart';
-
 class PhotoCard extends StatelessWidget {
   final String title, subtitle;
-  final HeroImage image;
+  final Widget image;
 
   PhotoCard({this.title, this.subtitle, this.image});
 
@@ -13,35 +11,32 @@ class PhotoCard extends StatelessWidget {
     return Card(
       elevation: 6.0,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
-      child: Padding(
-        padding: const EdgeInsets.all(24.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Container(
-              alignment: Alignment.center,
-              padding: const EdgeInsets.only(bottom: 24.0),
-              child: Column(
-                children: <Widget>[
-                  Text(
-                    title,
-                    style: Theme.of(context)
-                        .textTheme
-                        .title
-                        .copyWith(fontWeight: FontWeight.bold),
-                  ),
-                  Text(
-                    subtitle,
-                    style: Theme.of(context)
-                        .textTheme
-                        .title
-                        .copyWith(fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
+      child: Column(
+        children: <Widget>[
+          Expanded(child: image),
+          Container(
+            padding: const EdgeInsets.all(32.0),
+            child: Column(
+              children: <Widget>[
+                Text(
+                  title,
+                  style: Theme.of(context)
+                      .textTheme
+                      .title
+                      .copyWith(fontWeight: FontWeight.bold),
+                ),
+                Container(height: 8.0),
+                Text(
+                  subtitle,
+                  style: Theme.of(context)
+                      .textTheme
+                      .title
+                      .copyWith(fontWeight: FontWeight.bold),
+                ),
+              ],
             ),
-          ],
-        ),
+          )
+        ],
       ),
     );
   }
