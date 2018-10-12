@@ -88,7 +88,7 @@ class _ContentPageState extends State<ContentPage> {
               ),
               HomeIcon(
                 icon: Icons.description,
-                title: 'Breaking news',
+                title: 'News',
                 screen: NewsScreen(),
               ),
               HomeIcon(
