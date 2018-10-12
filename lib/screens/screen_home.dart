@@ -5,6 +5,7 @@ import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import '../models/daily_image.dart';
+import '../models/planets/planets.dart';
 import '../util/axis_count.dart';
 import '../util/colors.dart';
 import '../widgets/home_icon.dart';
@@ -115,11 +116,16 @@ class _ContentPageState extends State<ContentPage> {
   }
 
   NasaImagesModel _nasaModel;
+  PlanetsModel _planetsModel;
 
   @override
   void initState() {
     _nasaModel = NasaImagesModel();
+    _planetsModel = PlanetsModel();
     _nasaModel.fetchImages().then((_) {
+      setState(() {});
+    });
+    _planetsModel.loadData().then((_) {
       setState(() {});
     });
     super.initState();
@@ -155,7 +161,12 @@ class _ContentPageState extends State<ContentPage> {
               HomeIcon(
                 icon: Icons.public,
                 title: 'Solar System',
-                screen: SolarSystemScreen(),
+                screen: ScopedModel<PlanetsModel>(
+                  model: _planetsModel,
+                  child: SolarSystemScreen(
+                    planetModel: _planetsModel,
+                  ),
+                ),
               ),
             ],
           ),

@@ -10,23 +10,22 @@ import 'planets/add_edit_planet.dart';
 import 'planets/planet_page.dart';
 
 class SolarSystemScreen extends StatelessWidget {
+  final PlanetsModel planetModel;
+  SolarSystemScreen({this.planetModel});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Solar System'), centerTitle: true),
-      body: ScopedModel<PlanetsModel>(
-        model: PlanetsModel(),
-        child: ScopedModelDescendant<PlanetsModel>(
-          builder: (context, child, model) => model.isLoading
-              ? NativeLoadingIndicator(center: true)
-              : Scrollbar(
-                  child: ListView.builder(
-                    key: PageStorageKey('planets'),
-                    itemCount: model.list.length,
-                    itemBuilder: _buildItem,
-                  ),
+      body: ScopedModelDescendant<PlanetsModel>(
+        builder: (context, child, model) => model.isLoading
+            ? NativeLoadingIndicator(center: true)
+            : Scrollbar(
+                child: ListView.builder(
+                  key: PageStorageKey('planets'),
+                  itemCount: model.list.length,
+                  itemBuilder: _buildItem,
                 ),
-        ),
+              ),
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
