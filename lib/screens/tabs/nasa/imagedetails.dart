@@ -1,78 +1,70 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:share/share.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../../../models/daily_image.dart';
-import '../../../util/sendSMS.dart';
+import '../../../util/colors.dart';
 
 class ImageDetailsPage extends StatelessWidget {
   final NasaImage image;
-  final String currentImage;
-  ImageDetailsPage({this.image, this.currentImage});
-
-  Future openImage(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
+  ImageDetailsPage(this.image);
 
   @override
   Widget build(BuildContext context) {
-    String newLine = "\n\n";
-    String _message = "" +
-        '${image?.title}' +
-        newLine +
-        '{image?.description}' +
-        newLine +
-        '${image?.hdurl}';
     return Scaffold(
-      appBar: new AppBar(
-        title: new Text(
-          "Image Details",
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
+      appBar: AppBar(
+        title: const Text('Image Details'),
         actions: <Widget>[
-          new IconButton(
-            icon: new Icon(Icons.message),
-            onPressed: () => sendSMS(_message, []),
-          ),
-          new IconButton(
-            icon: new Icon(Icons.share),
-            onPressed: () => share(_message),
+          IconButton(
+            icon: Icon(Icons.share),
+            onPressed: () => share(image.share),
           ),
         ],
         centerTitle: true,
       ),
       body: SafeArea(
-        child: new ListView(
-          shrinkWrap: true,
-          padding: const EdgeInsets.all(20.0),
+        child: Column(
           children: <Widget>[
-            new Text(
-              image?.title,
-              style: Theme.of(context).textTheme.display1,
-            ),
-            Container(height: 4.0),
             InkWell(
               child: Hero(
                 tag: image.getDate,
-                child: Image.network(currentImage),
+                child: Image.network(image.url),
               ),
-              onTap: () => openImage(currentImage),
+              onTap: () => () async => await FlutterWebBrowser.openWebPage(
+                    url: image.hdurl,
+                    androidToolbarColor: primaryColor,
+                  ),
             ),
-            Container(height: 4.0),
-            new Text(
-              image?.description,
-              style: Theme.of(context).textTheme.body1,
-            ),
-            Container(height: 4.0),
-            new Text(
-              image.getDate,
-              style: new TextStyle(fontSize: 10.0),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                children: <Widget>[
+                  Text(
+                    image.title,
+                    style: Theme.of(context).textTheme.headline,
+                  ),
+                  Container(height: 8.0),
+                  Text(
+                    image.description,
+                    textAlign: TextAlign.justify,
+                    style: Theme.of(context)
+                        .textTheme
+                        .subhead
+                        .copyWith(color: secondaryText),
+                  ),
+                  Container(height: 8.0),
+                  Text(
+                    image.getDate,
+                    style: Theme.of(context).textTheme.body1,
+                  ),
+                  image.hasCopyright
+                      ? Text(
+                          'Copyright: ${image.copyright}',
+                          style: Theme.of(context).textTheme.body1,
+                        )
+                      : Container(height: 0.0)
+                ],
+              ),
             ),
           ],
         ),

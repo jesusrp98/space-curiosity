@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'package:space_news/widgets/hero_image.dart';
-import '../widgets/photo_card.dart';
 
 import '../models/daily_image.dart';
 import '../models/planets/planets.dart';
 import '../widgets/home_icon.dart';
+import '../widgets/photo_card.dart';
 import 'screen_about.dart';
 import 'tabs/screen_news.dart';
 import 'tabs/screen_solar_system.dart';
@@ -112,18 +111,7 @@ class _ContentPageState extends State<ContentPage> {
     return ScopedModelDescendant<NasaImagesModel>(
       builder: (context, child, model) => model.isLoading
           ? NativeLoadingIndicator(center: true)
-          : PhotoCard(
-              image: Hero(
-                tag: (model.list[0] as NasaImage).getDate,
-                child: Image.network(
-                  (model.list[0] as NasaImage).hdurl,
-                  fit: BoxFit.fitHeight,
-                ),
-              ),
-              title: (model.list[0] as NasaImage).title,
-              subtitle: (model.list[0] as NasaImage).getDate,
-              url: (model.list[0] as NasaImage).url,
-            ),
+          : PhotoCard(model.list[0]),
     );
   }
   // Widget _buildNasaCards() {

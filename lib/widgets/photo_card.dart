@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 
+import '../models/daily_image.dart';
+import '../screens/tabs/nasa/imagedetails.dart';
 import '../util/colors.dart';
 
 class PhotoCard extends StatelessWidget {
-  final String title, subtitle, url;
-  final Widget image;
+  final NasaImage image;
 
-  PhotoCard({this.title, this.subtitle, this.url, this.image});
+  PhotoCard(this.image);
 
   @override
   Widget build(BuildContext context) {
@@ -16,28 +17,33 @@ class PhotoCard extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
       clipBehavior: Clip.antiAlias,
       child: InkWell(
-        // onTap: () => Navigator.push(
-        //       context,
-        //       MaterialPageRoute(
-        //         builder: (_) => ImageDetailsPage(
-        //               image: model.images[index],
-        //               currentImage: content,
-        //             ),
-        //       ),
-        //     ),
+        onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => ImageDetailsPage(image),
+              ),
+            ),
         onLongPress: () async => await FlutterWebBrowser.openWebPage(
-              url: url,
+              url: image.url,
               androidToolbarColor: primaryColor,
             ),
         child: Column(
           children: <Widget>[
-            Expanded(child: image),
+            Expanded(
+              child: Hero(
+                tag: image.getDate,
+                child: Image.network(
+                  image.url,
+                  fit: BoxFit.fitHeight,
+                ),
+              ),
+            ),
             Container(
               padding: const EdgeInsets.all(32.0),
               child: Column(
                 children: <Widget>[
                   Text(
-                    title,
+                    image.title,
                     style: Theme.of(context)
                         .textTheme
                         .title
@@ -45,7 +51,7 @@ class PhotoCard extends StatelessWidget {
                   ),
                   Container(height: 8.0),
                   Text(
-                    subtitle,
+                    image.getDate,
                     style: Theme.of(context)
                         .textTheme
                         .title

@@ -96,26 +96,32 @@ class NasaImagesModel extends GeneralModel {
 // }
 
 class NasaImage {
-  final String title, url, hdurl, description;
+  final String title, description, url, hdurl, copyright;
   final DateTime date;
 
   NasaImage({
-    this.date,
-    this.description,
-    this.hdurl,
     this.title,
+    this.description,
     this.url,
+    this.hdurl,
+    this.copyright,
+    this.date,
   });
 
   factory NasaImage.fromJson(Map<String, dynamic> json) {
     return NasaImage(
       title: json['title'] ?? 'No Name Found',
-      date: DateTime.parse(json['date']),
       description: json['explanation'],
-      hdurl: json['hdurl'],
       url: json['url'],
+      hdurl: json['hdurl'],
+      copyright: json['copyright'],
+      date: DateTime.parse(json['date']),
     );
   }
 
   String get getDate => DateFormat.yMMMMd().format(date);
+
+  bool get hasCopyright => copyright != null;
+
+  String get share => '$title\n\n$description\n\n$hdurl';
 }
