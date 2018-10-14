@@ -1,27 +1,40 @@
 import 'package:flutter/material.dart';
 
 class HomeIcon extends StatelessWidget {
-  final IconData icon;
-  final String title;
+  final Widget leading, trailing;
+  final String title, subtitle;
   final Widget screen;
 
-  HomeIcon({this.icon, this.title, this.screen});
+  HomeIcon({
+    this.leading,
+    this.trailing,
+    this.title,
+    this.subtitle,
+    this.screen,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return FlatButton(
-      padding: const EdgeInsets.all(16.0),
-      onPressed: () => Navigator.push(
-            context,
-            MaterialPageRoute(builder: (_) => screen, fullscreenDialog: true),
-          ),
-      child: Column(
+    return ListTile(
+      contentPadding:
+          const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+      leading: leading,
+      title: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Icon(icon, size: 36.0),
-          Container(height: 8.0),
-          Text(title, style: Theme.of(context).textTheme.subhead),
+          Text(
+            title,
+            style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+          ),
+          // const SizedBox(height: 8.0),
         ],
       ),
+      subtitle: Text(subtitle, style: TextStyle(fontSize: 16.0)),
+      trailing: trailing,
+      onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => screen),
+          ),
     );
   }
 }

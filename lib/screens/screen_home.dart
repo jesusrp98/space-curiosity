@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
+import 'package:space_news/widgets/list_cell.dart';
 
 import '../models/daily_image.dart';
 import '../models/planets/planets.dart';
@@ -67,42 +68,68 @@ class _ContentPageState extends State<ContentPage> {
       children: <Widget>[
         Expanded(
           child: Padding(
-            padding: const EdgeInsets.all(32.0),
+            padding: const EdgeInsets.all(16.0),
             child: ScopedModel<NasaImagesModel>(
               model: _nasaModel,
               child: _buildNasaImage(),
             ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              HomeIcon(
-                icon: FontAwesomeIcons.rocket,
-                title: 'SpaceX',
-                screen: SpacexScreen(),
-              ),
-              HomeIcon(
-                icon: Icons.description,
-                title: 'News',
-                screen: NewsScreen(),
-              ),
-              HomeIcon(
-                icon: Icons.public,
-                title: 'Solar System',
-                screen: ScopedModel<PlanetsModel>(
-                  model: _planetsModel,
-                  child: SolarSystemScreen(
-                    planetModel: _planetsModel,
-                  ),
-                ),
-              ),
-            ],
+        const Divider(height: 0.0),
+        HomeIcon(
+          leading: Icon(FontAwesomeIcons.rocket, size: 42.0),
+          title: 'SpaceX',
+          subtitle: 'Launch Tracker',
+          screen: SpacexScreen(),
+        ),
+        const Divider(height: 0.0, indent: 74.0),
+        HomeIcon(
+          leading: Icon(Icons.description, size: 42.0),
+          title: 'Breaking News',
+          subtitle: 'From around the globe',
+          screen: NewsScreen(),
+        ),
+        const Divider(height: 0.0, indent: 74.0),
+        HomeIcon(
+          leading: Icon(Icons.public, size: 42.0),
+          title: 'Solar System',
+          subtitle: 'Explore every inch of our neighborhood',
+          screen: ScopedModel<PlanetsModel>(
+            model: _planetsModel,
+            child: SolarSystemScreen(
+              planetModel: _planetsModel,
+            ),
           ),
-        )
+        ),
+        // Padding(
+        //   padding: const EdgeInsets.all(16.0),
+        //   child: Row(
+        //     crossAxisAlignment: CrossAxisAlignment.center,
+        //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //     children: <Widget>[
+        //       HomeIcon(
+        //         icon: FontAwesomeIcons.rocket,
+        //         title: 'SpaceX',
+        //         screen: SpacexScreen(),
+        //       ),
+        //       HomeIcon(
+        //         icon: Icons.description,
+        //         title: 'News',
+        //         screen: NewsScreen(),
+        //       ),
+        //       HomeIcon(
+        //         icon: Icons.public,
+        //         title: 'Solar System',
+        //         screen: ScopedModel<PlanetsModel>(
+        //           model: _planetsModel,
+        //           child: SolarSystemScreen(
+        //             planetModel: _planetsModel,
+        //           ),
+        //         ),
+        //       ),
+        //     ],
+        //   ),
+        // )
       ],
     );
   }
