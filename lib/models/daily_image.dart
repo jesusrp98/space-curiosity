@@ -10,13 +10,13 @@ class NasaImagesModel extends GeneralModel {
   @override
   Future loadData() async {
     final dailyResponse = await http.get(Url.dailyPicture);
-    final moreResponse = await http.get(Url.morePictures);
+    //final moreResponse = await http.get(Url.morePictures);
 
-    List moreJson = json.decode(moreResponse.body);
+    //List moreJson = json.decode(moreResponse.body);
 
     list.clear();
     list.add(NasaImage.fromJson(json.decode(dailyResponse.body)));
-    list.addAll(moreJson.map((image) => NasaImage.fromJson(image)).toList());
+    //list.addAll(moreJson.map((image) => NasaImage.fromJson(image)).toList());
 
     loadingState(false);
   }

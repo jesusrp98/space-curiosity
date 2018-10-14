@@ -34,12 +34,12 @@ class PhotoCard extends StatelessWidget {
                 tag: image.getDate,
                 child: Image.network(
                   image.url,
-                  fit: BoxFit.fitHeight,
+                  fit: BoxFit.cover,
                 ),
               ),
             ),
             Container(
-              padding: const EdgeInsets.all(32.0),
+              padding: const EdgeInsets.all(16.0),
               child: Column(
                 children: <Widget>[
                   Text(

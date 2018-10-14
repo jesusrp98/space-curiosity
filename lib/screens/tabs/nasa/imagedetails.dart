@@ -12,38 +12,38 @@ class ImageDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Image Details'),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.share),
-            onPressed: () => share(image.share),
-          ),
-        ],
-        centerTitle: true,
-      ),
-      body: SafeArea(
-        child: Column(
-          children: <Widget>[
-            InkWell(
-              child: Hero(
-                tag: image.getDate,
-                child: Image.network(image.url),
+      body: CustomScrollView(
+        slivers: <Widget>[
+          SliverAppBar(
+            expandedHeight: 350.0,
+            pinned: true,
+            floating: false,
+            actions: <Widget>[
+              IconButton(
+                icon: Icon(Icons.share),
+                onPressed: () => share(image.share),
               ),
-              onTap: () => () async => await FlutterWebBrowser.openWebPage(
-                    url: image.hdurl,
-                    androidToolbarColor: primaryColor,
-                  ),
+            ],
+            flexibleSpace: FlexibleSpaceBar(
+              title: Text(image.title),
+              background: InkWell(
+                child: Hero(
+                  tag: image.getDate,
+                  child: Image.network(image.url, fit: BoxFit.cover),
+                ),
+                onTap: () => () async => await FlutterWebBrowser.openWebPage(
+                      url: image.hdurl,
+                      androidToolbarColor: primaryColor,
+                    ),
+              ),
             ),
-            Padding(
+            centerTitle: true,
+          ),
+          SliverFillRemaining(
+            child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 children: <Widget>[
-                  Text(
-                    image.title,
-                    style: Theme.of(context).textTheme.headline,
-                  ),
-                  Container(height: 8.0),
                   Text(
                     image.description,
                     textAlign: TextAlign.justify,
@@ -66,9 +66,66 @@ class ImageDetailsPage extends StatelessWidget {
                 ],
               ),
             ),
-          ],
-        ),
+          )
+        ],
       ),
+      // appBar: AppBar(
+      //   title: const Text('Image Details'),
+      //   actions: <Widget>[
+      //     IconButton(
+      //       icon: Icon(Icons.share),
+      //       onPressed: () => share(image.share),
+      //     ),
+      //   ],
+      //   centerTitle: true,
+      // ),
+      // body: SafeArea(
+      //   child: Column(
+      //     children: <Widget>[
+      //       InkWell(
+      //         child: Hero(
+      //           tag: image.getDate,
+      //           child: Image.network(image.url),
+      //         ),
+      //         onTap: () => () async => await FlutterWebBrowser.openWebPage(
+      //               url: image.hdurl,
+      //               androidToolbarColor: primaryColor,
+      //             ),
+      //       ),
+      //     Padding(
+      //       padding: const EdgeInsets.all(16.0),
+      //       child: Column(
+      //         children: <Widget>[
+      //           Text(
+      //             image.title,
+      //             style: Theme.of(context).textTheme.headline,
+      //           ),
+      //           Container(height: 8.0),
+      //           Text(
+      //             image.description,
+      //             textAlign: TextAlign.justify,
+      //             style: Theme.of(context)
+      //                 .textTheme
+      //                 .subhead
+      //                 .copyWith(color: secondaryText),
+      //           ),
+      //           Container(height: 8.0),
+      //           Text(
+      //             image.getDate,
+      //             style: Theme.of(context).textTheme.body1,
+      //           ),
+      //           image.hasCopyright
+      //               ? Text(
+      //                   'Copyright: ${image.copyright}',
+      //                   style: Theme.of(context).textTheme.body1,
+      //                 )
+      //               : Container(height: 0.0)
+      //         ],
+      //       ),
+      //     ),
+      //   ],
+      // ),
+      // ),
     );
   }
 }

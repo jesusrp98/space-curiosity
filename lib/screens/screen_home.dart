@@ -77,21 +77,21 @@ class _ContentPageState extends State<ContentPage> {
         ),
         const Divider(height: 0.0),
         HomeIcon(
-          leading: Icon(FontAwesomeIcons.rocket, size: 42.0),
+          leading: Icon(FontAwesomeIcons.rocket, size: 36.0),
           title: 'SpaceX',
           subtitle: 'Launch Tracker',
           screen: SpacexScreen(),
         ),
-        const Divider(height: 0.0, indent: 74.0),
+        const Divider(height: 0.0, indent: 68.0),
         HomeIcon(
-          leading: Icon(Icons.description, size: 42.0),
+          leading: Icon(Icons.description, size: 36.0),
           title: 'Breaking News',
           subtitle: 'From around the globe',
           screen: NewsScreen(),
         ),
-        const Divider(height: 0.0, indent: 74.0),
+        const Divider(height: 0.0, indent: 68.0),
         HomeIcon(
-          leading: Icon(Icons.public, size: 42.0),
+          leading: Icon(Icons.public, size: 36.0),
           title: 'Solar System',
           subtitle: 'Explore every inch of our neighborhood',
           screen: ScopedModel<PlanetsModel>(
