@@ -123,5 +123,8 @@ class NasaImage {
 
   bool get hasCopyright => copyright != null;
 
+  String get getCopyright =>
+      hasCopyright ? 'Copyright: $copyright' : 'No copyright';
+
   String get share => '$title\n\n$description\n\n$hdurl';
 }

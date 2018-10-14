@@ -50,13 +50,7 @@ class PhotoCard extends StatelessWidget {
                         .copyWith(fontWeight: FontWeight.bold),
                   ),
                   Container(height: 8.0),
-                  Text(
-                    image.getDate,
-                    style: Theme.of(context)
-                        .textTheme
-                        .title
-                        .copyWith(fontWeight: FontWeight.bold),
-                  ),
+                  Text(image.getDate, style: Theme.of(context).textTheme.title),
                 ],
               ),
             )

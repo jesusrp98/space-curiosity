@@ -15,7 +15,8 @@ class ImageDetailsPage extends StatelessWidget {
       body: CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(
-            expandedHeight: 350.0,
+            // App bar extends 0.4 times the screen height
+            expandedHeight: MediaQuery.of(context).size.height * 0.4,
             pinned: true,
             floating: false,
             actions: <Widget>[
@@ -25,6 +26,7 @@ class ImageDetailsPage extends StatelessWidget {
               ),
             ],
             flexibleSpace: FlexibleSpaceBar(
+              centerTitle: true,
               title: Text(image.title),
               background: InkWell(
                 child: Hero(
@@ -37,13 +39,26 @@ class ImageDetailsPage extends StatelessWidget {
                     ),
               ),
             ),
-            centerTitle: true,
           ),
-          SliverFillRemaining(
+          SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 children: <Widget>[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Text(
+                        image.getCopyright,
+                        style: Theme.of(context).textTheme.body1,
+                      ),
+                      Text(
+                        image.getDate,
+                        style: Theme.of(context).textTheme.body1,
+                      ),
+                    ],
+                  ),
+                  Container(height: 16.0),
                   Text(
                     image.description,
                     textAlign: TextAlign.justify,
@@ -52,17 +67,6 @@ class ImageDetailsPage extends StatelessWidget {
                         .subhead
                         .copyWith(color: secondaryText),
                   ),
-                  Container(height: 8.0),
-                  Text(
-                    image.getDate,
-                    style: Theme.of(context).textTheme.body1,
-                  ),
-                  image.hasCopyright
-                      ? Text(
-                          'Copyright: ${image.copyright}',
-                          style: Theme.of(context).textTheme.body1,
-                        )
-                      : Container(height: 0.0)
                 ],
               ),
             ),
