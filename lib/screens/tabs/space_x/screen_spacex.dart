@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 
-import '../../../scoped_model/general_model.dart';
-import '../../../scoped_model/launches_latest.dart';
-import '../../../scoped_model/launches_upcoming.dart';
-import '../../../scoped_model/vehicles.dart';
+import '../../../models/general_model.dart';
+import '../../../models/rockets/launch.dart';
+import '../../../models/rockets/vehicle.dart';
 import 'tab_launches_latest.dart';
 import 'tab_launches_upcoming.dart';
 import 'tab_vehicles.dart';
@@ -20,8 +19,8 @@ class _SpacexTabScreen extends State<SpacexScreen> {
 
   static final List<GeneralModel> modelTab = [
     VehiclesModel(),
-    LaunchesUpcomingModel(),
-    LaunchesLatestModel(),
+    LaunchesModel(0),
+    LaunchesModel(1),
   ];
 
   final List<ScopedModel> _tabs = [
@@ -29,11 +28,11 @@ class _SpacexTabScreen extends State<SpacexScreen> {
       model: modelTab[0],
       child: VehiclesTab(),
     ),
-    ScopedModel<LaunchesUpcomingModel>(
+    ScopedModel<LaunchesModel>(
       model: modelTab[1],
       child: LaunchesUpcomingTab(),
     ),
-    ScopedModel<LaunchesLatestModel>(
+    ScopedModel<LaunchesModel>(
       model: modelTab[2],
       child: LaunchesLatestTab(),
     ),

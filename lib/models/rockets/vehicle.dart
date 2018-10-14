@@ -1,6 +1,14 @@
+import 'dart:convert';
+
+import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 
 import '../../util/url.dart';
+import '../general_model.dart';
+import 'capsule_info.dart';
+import 'roadster.dart';
+import 'rocket_info.dart';
+import 'ship_info.dart';
 
 /// VEHICLE CLASS
 /// Abstract class that represents a real vehicle used by SpaceX. It can be
@@ -47,5 +55,29 @@ abstract class Vehicle {
       return 'Scheduled to $getFirstFlight';
     else
       return 'First launched on $getFirstFlight';
+  }
+}
+
+class VehiclesModel extends GeneralModel {
+  @override
+  Future loadData() async {
+    final rocketsResponse = await http.get(Url.rocketList);
+    final capsulesResponse = await http.get(Url.capsuleList);
+    final roadsterResponse = await http.get(Url.roadsterPage);
+    final shipsResponse = await http.get(Url.shipsList);
+
+    List rocketsJson = json.decode(rocketsResponse.body);
+    List capsulesJson = json.decode(capsulesResponse.body);
+    List shipsJson = json.decode(shipsResponse.body);
+
+    list.clear();
+    list.add(Roadster.fromJson(json.decode(roadsterResponse.body)));
+    list.addAll(
+        capsulesJson.map((capsule) => CapsuleInfo.fromJson(capsule)).toList());
+    list.addAll(
+        rocketsJson.map((rocket) => RocketInfo.fromJson(rocket)).toList());
+    list.addAll(shipsJson.map((rocket) => ShipInfo.fromJson(rocket)).toList());
+
+    loadingState(false);
   }
 }

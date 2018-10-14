@@ -1,5 +1,3 @@
-import 'keys.dart';
-
 /// URL CLASS
 /// It has all urls used in the app as static const strings
 class Url {

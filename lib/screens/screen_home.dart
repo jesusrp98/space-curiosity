@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'package:space_news/widgets/list_cell.dart';
 
-import '../models/daily_image.dart';
-import '../models/planets/planets.dart';
+import '../models/nasa/nasa_image.dart';
+import '../models/planets/celestial_body.dart';
 import '../widgets/home_icon.dart';
 import '../widgets/photo_card.dart';
 import 'screen_about.dart';

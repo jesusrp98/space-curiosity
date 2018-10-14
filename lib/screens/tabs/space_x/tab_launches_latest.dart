@@ -5,7 +5,6 @@ import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import '../../../models/rockets/launch.dart';
-import '../../../scoped_model/launches_latest.dart';
 import '../../../widgets/hero_image.dart';
 import '../../../widgets/list_cell.dart';
 import 'launch_page.dart';
@@ -14,7 +13,7 @@ class LaunchesLatestTab extends StatelessWidget {
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
       GlobalKey<RefreshIndicatorState>();
 
-  Future<Null> _onRefresh(LaunchesLatestModel model) {
+  Future<Null> _onRefresh(LaunchesModel model) {
     Completer<Null> completer = Completer<Null>();
     model.refresh().then((_) => completer.complete());
     return completer.future;
@@ -22,7 +21,7 @@ class LaunchesLatestTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScopedModelDescendant<LaunchesLatestModel>(
+    return ScopedModelDescendant<LaunchesModel>(
       builder: (context, child, model) => RefreshIndicator(
             key: _refreshIndicatorKey,
             onRefresh: () => _onRefresh(model),
@@ -42,7 +41,7 @@ class LaunchesLatestTab extends StatelessWidget {
   Widget _buildItem(BuildContext context, int index) {
     return Column(
       children: <Widget>[
-        ScopedModelDescendant<LaunchesLatestModel>(
+        ScopedModelDescendant<LaunchesModel>(
           builder: (context, child, model) {
             final Launch launch = model.list[index];
             return Column(

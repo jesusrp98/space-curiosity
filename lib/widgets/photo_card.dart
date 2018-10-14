@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 
-import '../models/daily_image.dart';
+import '../models/nasa/nasa_image.dart';
 import '../screens/tabs/nasa/imagedetails.dart';
 import '../util/colors.dart';
 

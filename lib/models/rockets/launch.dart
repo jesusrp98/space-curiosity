@@ -1,6 +1,10 @@
+import 'dart:convert';
+
+import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 
 import '../../util/url.dart';
+import '../general_model.dart';
 import 'rocket.dart';
 
 /// LAUNCH CLASS
@@ -100,4 +104,21 @@ class Launch {
   String get getStaticFireDate => staticFireDate == null
       ? 'Unknown'
       : DateFormat.yMMMMd().format(staticFireDate);
+}
+
+class LaunchesModel extends GeneralModel {
+  final int type;
+
+  LaunchesModel(this.type);
+  @override
+  Future loadData() async {
+    final response =
+        await http.get(type == 0 ? Url.upcomingList : Url.launchesList);
+
+    list.clear();
+    List jsonDecoded = json.decode(response.body);
+    list.addAll(jsonDecoded.map((launch) => Launch.fromJson(launch)).toList());
+
+    loadingState(false);
+  }
 }

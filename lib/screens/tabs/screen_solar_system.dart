@@ -3,7 +3,6 @@ import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import '../../models/planets/celestial_body.dart';
-import '../../models/planets/planets.dart';
 import '../../widgets/hero_image.dart';
 import '../../widgets/list_cell.dart';
 import 'planets/add_edit_planet.dart';

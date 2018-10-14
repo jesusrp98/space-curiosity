@@ -19,6 +19,7 @@ class PlanetPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(planet.name),
+        centerTitle: true,
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.add),

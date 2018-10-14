@@ -3,8 +3,42 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 
-import '../scoped_model/general_model.dart';
-import '../util/url.dart';
+import '../../util/url.dart';
+import '../general_model.dart';
+
+class NasaImage {
+  final String title, description, url, hdurl, copyright;
+  final DateTime date;
+
+  NasaImage({
+    this.title,
+    this.description,
+    this.url,
+    this.hdurl,
+    this.copyright,
+    this.date,
+  });
+
+  factory NasaImage.fromJson(Map<String, dynamic> json) {
+    return NasaImage(
+      title: json['title'] ?? 'No Name Found',
+      description: json['explanation'],
+      url: json['url'],
+      hdurl: json['hdurl'],
+      copyright: json['copyright'],
+      date: DateTime.parse(json['date']),
+    );
+  }
+
+  String get getDate => DateFormat.yMMMMd().format(date);
+
+  bool get hasCopyright => copyright != null;
+
+  String get getCopyright =>
+      hasCopyright ? 'Copyright: $copyright' : 'No copyright';
+
+  String get share => '$title\n\n$description\n\n$hdurl';
+}
 
 class NasaImagesModel extends GeneralModel {
   @override
@@ -94,37 +128,3 @@ class NasaImagesModel extends GeneralModel {
 //     _images = _newImages;
 //   }
 // }
-
-class NasaImage {
-  final String title, description, url, hdurl, copyright;
-  final DateTime date;
-
-  NasaImage({
-    this.title,
-    this.description,
-    this.url,
-    this.hdurl,
-    this.copyright,
-    this.date,
-  });
-
-  factory NasaImage.fromJson(Map<String, dynamic> json) {
-    return NasaImage(
-      title: json['title'] ?? 'No Name Found',
-      description: json['explanation'],
-      url: json['url'],
-      hdurl: json['hdurl'],
-      copyright: json['copyright'],
-      date: DateTime.parse(json['date']),
-    );
-  }
-
-  String get getDate => DateFormat.yMMMMd().format(date);
-
-  bool get hasCopyright => copyright != null;
-
-  String get getCopyright =>
-      hasCopyright ? 'Copyright: $copyright' : 'No copyright';
-
-  String get share => '$title\n\n$description\n\n$hdurl';
-}

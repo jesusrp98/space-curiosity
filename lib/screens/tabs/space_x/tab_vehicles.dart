@@ -5,7 +5,6 @@ import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import '../../../models/rockets/vehicle.dart';
-import '../../../scoped_model/vehicles.dart';
 import '../../../widgets/hero_image.dart';
 import '../../../widgets/list_cell.dart';
 import 'capsule_page.dart';
