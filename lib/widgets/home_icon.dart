@@ -16,8 +16,10 @@ class HomeIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      contentPadding:
-          const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+      contentPadding: const EdgeInsets.symmetric(
+        vertical: 8.0,
+        horizontal: 16.0,
+      ),
       leading: leading,
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

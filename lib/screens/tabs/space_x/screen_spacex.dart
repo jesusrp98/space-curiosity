@@ -4,8 +4,7 @@ import 'package:scoped_model/scoped_model.dart';
 import '../../../models/general_model.dart';
 import '../../../models/rockets/launch.dart';
 import '../../../models/rockets/vehicle.dart';
-import 'tab_launches_latest.dart';
-import 'tab_launches_upcoming.dart';
+import 'tab_launches.dart';
 import 'tab_vehicles.dart';
 
 class SpacexScreen extends StatefulWidget {
@@ -30,11 +29,11 @@ class _SpacexTabScreen extends State<SpacexScreen> {
     ),
     ScopedModel<LaunchesModel>(
       model: modelTab[1],
-      child: LaunchesUpcomingTab(),
+      child: LaunchesTab(0),
     ),
     ScopedModel<LaunchesModel>(
       model: modelTab[2],
-      child: LaunchesLatestTab(),
+      child: LaunchesTab(1),
     ),
   ];
 

@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
+import 'package:space_news/screens/tabs/news/screen_news.dart';
+import 'package:space_news/screens/tabs/planets/screen_solar_system.dart';
 
 import '../models/nasa/nasa_image.dart';
 import '../models/planets/celestial_body.dart';
 import '../widgets/home_icon.dart';
 import '../widgets/photo_card.dart';
 import 'screen_about.dart';
-import 'tabs/screen_news.dart';
-import 'tabs/screen_solar_system.dart';
 import 'tabs/space_x/screen_spacex.dart';
 
 class HomeScreen extends StatelessWidget {

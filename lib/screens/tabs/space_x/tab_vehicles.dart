@@ -7,10 +7,10 @@ import 'package:scoped_model/scoped_model.dart';
 import '../../../models/rockets/vehicle.dart';
 import '../../../widgets/hero_image.dart';
 import '../../../widgets/list_cell.dart';
-import 'capsule_page.dart';
-import 'roadster_page.dart';
-import 'rocket_page.dart';
-import 'ship_page.dart';
+import 'page_capsule.dart';
+import 'page_roadster.dart';
+import 'page_ship.dart';
+import 'page_rocket.dart';
 
 class VehiclesTab extends StatelessWidget {
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =

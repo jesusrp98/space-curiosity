@@ -2,15 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
 
-import '../../models/planets/celestial_body.dart';
-import '../../widgets/hero_image.dart';
-import '../../widgets/list_cell.dart';
-import 'planets/add_edit_planet.dart';
-import 'planets/planet_page.dart';
+import '../../../models/planets/celestial_body.dart';
+import '../../../widgets/hero_image.dart';
+import '../../../widgets/list_cell.dart';
+import 'add_edit_planet.dart';
+import 'page_celestial_body.dart';
 
 class SolarSystemScreen extends StatelessWidget {
   final PlanetsModel planetModel;
   SolarSystemScreen({this.planetModel});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,8 +61,10 @@ class SolarSystemScreen extends StatelessWidget {
           onTap: () => Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (_) =>
-                      PlanetPage(planet: moon, type: BodyType.celestialBody),
+                  builder: (_) => CelestialBodyPage(
+                        celestialBody: moon,
+                        type: BodyType.celestialBody,
+                      ),
                 ),
               ),
         ),
@@ -116,8 +119,8 @@ class SolarSystemScreen extends StatelessWidget {
                 onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => PlanetPage(
-                              planet: model.list[index],
+                        builder: (context) => CelestialBodyPage(
+                              celestialBody: model.list[index],
                               type: BodyType.planet,
                             ),
                       ),

@@ -1,3 +1,5 @@
+import 'keys.dart';
+
 /// URL CLASS
 /// It has all urls used in the app as static const strings
 class Url {
@@ -71,7 +73,7 @@ class Url {
       'https://en.wikipedia.org/wiki/International_System_of_Units';
 
   static const String dailyPicture =
-      'https://api.nasa.gov/planetary/apod?api_key=nPYjdP6nnLyNVYPwTWCpTpumcrfiYWEN2sKm26uH';
+      'https://api.nasa.gov/planetary/apod?api_key=$nasaApiKey';
   static const String morePictures =
-      'https://api.nasa.gov/planetary/apod?api_key=nPYjdP6nnLyNVYPwTWCpTpumcrfiYWEN2sKm26uH&count=10';
+      'https://api.nasa.gov/planetary/apod?api_key=$nasaApiKey&count=10';
 }

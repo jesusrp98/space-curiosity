@@ -8,17 +8,17 @@ import '../../../widgets/hero_image.dart';
 import '../../../widgets/row_item.dart';
 import 'add_edit_planet.dart';
 
-class PlanetPage extends StatelessWidget {
-  final CelestialBody planet;
+class CelestialBodyPage extends StatelessWidget {
+  final CelestialBody celestialBody;
   final BodyType type;
 
-  PlanetPage({this.planet, this.type});
+  CelestialBodyPage({this.celestialBody, this.type});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(planet.name),
+        title: Text(celestialBody.name),
         centerTitle: true,
         actions: <Widget>[
           IconButton(
@@ -28,7 +28,7 @@ class PlanetPage extends StatelessWidget {
                   MaterialPageRoute(
                     builder: (context) => AddEditPlanetPage(
                           null,
-                          id: planet.id,
+                          id: celestialBody.id,
                           type: BodyType.celestialBody,
                         ),
                     fullscreenDialog: true,
@@ -47,7 +47,8 @@ class PlanetPage extends StatelessWidget {
             onPressed: () => Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => AddEditPlanetPage(planet, type: type),
+                    builder: (context) =>
+                        AddEditPlanetPage(celestialBody, type: type),
                     fullscreenDialog: true,
                   ),
                 ).then((value) {
@@ -81,16 +82,16 @@ class PlanetPage extends StatelessWidget {
       image: HeroImage().buildHero(
         context: context,
         size: HeroImage.bigSize,
-        url: planet.imageUrl,
-        tag: planet.id,
-        title: planet.name,
+        url: celestialBody.imageUrl,
+        tag: celestialBody.id,
+        title: celestialBody.name,
       ),
-      title: planet.name,
+      title: celestialBody.name,
       subtitle: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            planet.getPopulation,
+            celestialBody.getPopulation,
             style: Theme.of(context)
                 .textTheme
                 .subhead
@@ -106,7 +107,7 @@ class PlanetPage extends StatelessWidget {
           ),
         ],
       ),
-      details: planet.description,
+      details: celestialBody.description,
     );
   }
 
@@ -115,31 +116,31 @@ class PlanetPage extends StatelessWidget {
       title: 'DETAILS',
       body: Column(
         children: <Widget>[
-          RowItem.textRow('Aphelion', planet.getAphelion),
+          RowItem.textRow('Aphelion', celestialBody.getAphelion),
           const SizedBox(height: 8.0),
-          RowItem.textRow('Perihelion', planet.getPerihelion),
+          RowItem.textRow('Perihelion', celestialBody.getPerihelion),
           const SizedBox(height: 8.0),
-          RowItem.textRow('Period', planet.getPeriod),
+          RowItem.textRow('Period', celestialBody.getPeriod),
           const SizedBox(height: 8.0),
-          RowItem.textRow('Speed', planet.getSpeed),
+          RowItem.textRow('Speed', celestialBody.getSpeed),
           const SizedBox(height: 8.0),
-          RowItem.textRow('Obliquity', planet.getObliquity),
+          RowItem.textRow('Obliquity', celestialBody.getObliquity),
           const SizedBox(height: 8.0),
-          RowItem.textRow('Radius', planet.getRadius),
+          RowItem.textRow('Radius', celestialBody.getRadius),
           const SizedBox(height: 8.0),
-          RowItem.textRow('Volume', planet.getVolume),
+          RowItem.textRow('Volume', celestialBody.getVolume),
           const SizedBox(height: 8.0),
-          RowItem.textRow('Mass', planet.getMass),
+          RowItem.textRow('Mass', celestialBody.getMass),
           const SizedBox(height: 8.0),
-          RowItem.textRow('Density', planet.getDensity),
+          RowItem.textRow('Density', celestialBody.getDensity),
           const SizedBox(height: 8.0),
-          RowItem.textRow('Gravity', planet.getGravity),
+          RowItem.textRow('Gravity', celestialBody.getGravity),
           const SizedBox(height: 8.0),
-          RowItem.textRow('Escape velocity', planet.getEscapeVelocity),
+          RowItem.textRow('Escape velocity', celestialBody.getEscapeVelocity),
           const SizedBox(height: 8.0),
-          RowItem.textRow('Temperature', planet.getTemperature),
+          RowItem.textRow('Temperature', celestialBody.getTemperature),
           const SizedBox(height: 8.0),
-          RowItem.textRow('Pressure', planet.getPressure),
+          RowItem.textRow('Pressure', celestialBody.getPressure),
         ],
       ),
     );

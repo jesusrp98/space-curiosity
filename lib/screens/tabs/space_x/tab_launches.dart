@@ -7,11 +7,14 @@ import 'package:scoped_model/scoped_model.dart';
 import '../../../models/rockets/launch.dart';
 import '../../../widgets/hero_image.dart';
 import '../../../widgets/list_cell.dart';
-import 'launch_page.dart';
+import 'page_launch.dart';
 
-class LaunchesLatestTab extends StatelessWidget {
+class LaunchesTab extends StatelessWidget {
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
       GlobalKey<RefreshIndicatorState>();
+  final int type;
+
+  LaunchesTab(this.type);
 
   Future<Null> _onRefresh(LaunchesModel model) {
     Completer<Null> completer = Completer<Null>();
@@ -29,7 +32,7 @@ class LaunchesLatestTab extends StatelessWidget {
                 ? NativeLoadingIndicator(center: true)
                 : Scrollbar(
                     child: ListView.builder(
-                      key: PageStorageKey('latest'),
+                      key: PageStorageKey(type.toString()),
                       itemCount: model.getSize,
                       itemBuilder: _buildItem,
                     ),

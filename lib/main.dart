@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'models/planets/celestial_body.dart';
 import 'screens/screen_home.dart';
+import 'screens/tabs/news/screen_news.dart';
 import 'screens/tabs/planets/add_edit_planet.dart';
-import 'screens/tabs/screen_news.dart';
-import 'screens/tabs/screen_solar_system.dart';
+import 'screens/tabs/planets/screen_solar_system.dart';
 import 'screens/tabs/space_x/screen_spacex.dart';
 import 'util/colors.dart';
 import 'util/localization.dart';
