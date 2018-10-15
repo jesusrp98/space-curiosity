@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
@@ -55,7 +56,7 @@ class _ContentPageState extends State<ContentPage> {
   void initState() {
     _nasaModel = NasaImagesModel();
     _planetsModel = PlanetsModel();
-    _nasaModel.loadDaily().then((_) => setState(() {}));
+    _nasaModel.loadData().then((_) => setState(() {}));
     _planetsModel.loadData().then((_) => setState(() {}));
     super.initState();
   }
@@ -137,7 +138,21 @@ class _ContentPageState extends State<ContentPage> {
     return ScopedModelDescendant<NasaImagesModel>(
       builder: (context, child, model) => model.isLoading
           ? NativeLoadingIndicator(center: true)
-          : PhotoCard(model.list[0]),
+          : Swiper(
+              itemBuilder: (context, index) => ScopedModel<NasaImagesModel>(
+                    model: _nasaModel,
+                    child: ScopedModelDescendant<NasaImagesModel>(
+                      builder: (context, child, model) => model.isLoading
+                          ? NativeLoadingIndicator(center: true)
+                          : PhotoCard(model.list[index]),
+                    ),
+                  ),
+              scrollDirection: Axis.vertical,
+              itemCount: _nasaModel.list.length,
+              itemWidth: 500.0,
+              itemHeight: 500.0,
+              layout: SwiperLayout.STACK,
+            ),
     );
   }
   // Widget _buildNasaCards() {
