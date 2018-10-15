@@ -4,6 +4,7 @@ import 'package:share/share.dart';
 
 import '../../../models/nasa/nasa_image.dart';
 import '../../../util/colors.dart';
+import 'screen_more_nasa.dart';
 
 class ImageDetailsPage extends StatelessWidget {
   final NasaImage image;
@@ -73,63 +74,11 @@ class ImageDetailsPage extends StatelessWidget {
           )
         ],
       ),
-      // appBar: AppBar(
-      //   title: const Text('Image Details'),
-      //   actions: <Widget>[
-      //     IconButton(
-      //       icon: Icon(Icons.share),
-      //       onPressed: () => share(image.share),
-      //     ),
-      //   ],
-      //   centerTitle: true,
-      // ),
-      // body: SafeArea(
-      //   child: Column(
-      //     children: <Widget>[
-      //       InkWell(
-      //         child: Hero(
-      //           tag: image.getDate,
-      //           child: Image.network(image.url),
-      //         ),
-      //         onTap: () => () async => await FlutterWebBrowser.openWebPage(
-      //               url: image.hdurl,
-      //               androidToolbarColor: primaryColor,
-      //             ),
-      //       ),
-      //     Padding(
-      //       padding: const EdgeInsets.all(16.0),
-      //       child: Column(
-      //         children: <Widget>[
-      //           Text(
-      //             image.title,
-      //             style: Theme.of(context).textTheme.headline,
-      //           ),
-      //           Container(height: 8.0),
-      //           Text(
-      //             image.description,
-      //             textAlign: TextAlign.justify,
-      //             style: Theme.of(context)
-      //                 .textTheme
-      //                 .subhead
-      //                 .copyWith(color: secondaryText),
-      //           ),
-      //           Container(height: 8.0),
-      //           Text(
-      //             image.getDate,
-      //             style: Theme.of(context).textTheme.body1,
-      //           ),
-      //           image.hasCopyright
-      //               ? Text(
-      //                   'Copyright: ${image.copyright}',
-      //                   style: Theme.of(context).textTheme.body1,
-      //                 )
-      //               : Container(height: 0.0)
-      //         ],
-      //       ),
-      //     ),
-      //   ],
-      // ),
-      // ),
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.more),
+        tooltip: 'More images',
+        onPressed: () => NasaMoreImages(),
+      ),
     );
   }
 }
