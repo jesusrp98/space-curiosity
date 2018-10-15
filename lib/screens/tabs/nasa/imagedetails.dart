@@ -77,7 +77,10 @@ class ImageDetailsPage extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.more),
         tooltip: 'More images',
-        onPressed: () => NasaMoreImages(),
+        onPressed: () => Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => NasaMoreImages()),
+          ),
       ),
     );
   }
