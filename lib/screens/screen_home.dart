@@ -148,74 +148,11 @@ class _ContentPageState extends State<ContentPage> {
                     ),
                   ),
               scrollDirection: Axis.vertical,
-              itemCount: _nasaModel.list.length,
+              itemCount: _nasaModel.getSize,
               itemWidth: 500.0,
               itemHeight: 500.0,
               layout: SwiperLayout.STACK,
             ),
     );
   }
-  // Widget _buildNasaCards() {
-  //   return ScopedModelDescendant<DailyImageModel>(
-  //     builder: (context, child, model) => StreamBuilder(
-  //           stream: model.fetchImages().asStream().distinct(),
-  //           builder: (BuildContext context, _) {
-  //             if (model.images == null)
-  //               return NativeLoadingIndicator(center: true);
-
-  //             if (model.images.isEmpty)
-  //               return Center(child: Text("No Images Found"));
-  //             int axisCount = getAxisCount(context);
-
-  //             return GridView.builder(
-  //               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-  //                   crossAxisCount: axisCount),
-  //               itemCount: model.images.length,
-  //               itemBuilder: (context, index) {
-  //                 model.fetchMore();
-  //                 String content = model.images[index]?.hdurl ??
-  //                     model.images[index]?.url ??
-  //                     "";
-
-  //                 return InkWell(
-  //                   onTap: () =>
-  //                       Navigator.push(context, MaterialPageRoute(builder: (_) {
-  //                         return ImageDetailsPage(
-  //                           image: model.images[index],
-  //                           currentImage: content,
-  //                         );
-  //                       })),
-  //                   onLongPress: () => FlutterWebBrowser.openWebPage(
-  //                         url: content,
-  //                         androidToolbarColor: primaryColor,
-  //                       ),
-  //                   child: Padding(
-  //                     padding: const EdgeInsets.all(1.0),
-  //                     child: GridTile(
-  //                       header: Text(
-  //                         model.images[index]?.title ?? "",
-  //                         maxLines: 1,
-  //                         style: TextStyle(
-  //                           fontWeight: FontWeight.bold,
-  //                           fontSize: 14.0,
-  //                         ),
-  //                         textAlign: TextAlign.center,
-  //                       ),
-  //                       child: Hero(
-  //                         tag: model.images[index].id,
-  //                         child: Image.network(content),
-  //                       ),
-  //                       footer: Text(
-  //                         model.images[index]?.date ?? "",
-  //                         textAlign: TextAlign.center,
-  //                       ),
-  //                     ),
-  //                   ),
-  //                 );
-  //               },
-  //             );
-  //           },
-  //         ),
-  //   );
-  // }
 }

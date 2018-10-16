@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 
 import '../../util/url.dart';
-import '../general_model.dart';
+import '../querry_model.dart';
 
 class NasaImage {
   final String title, description, url, hdurl, copyright;
@@ -40,7 +40,7 @@ class NasaImage {
   String get share => '$title\n\n$description\n\n$hdurl';
 }
 
-class NasaImagesModel extends GeneralModel {
+class NasaImagesModel extends QuerryModel {
   @override
   Future loadData() async {
     final dailyResponse = await http.get(Url.dailyPicture);

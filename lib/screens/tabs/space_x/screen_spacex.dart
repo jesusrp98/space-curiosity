@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 
-import '../../../models/general_model.dart';
+import '../../../models/querry_model.dart';
 import '../../../models/rockets/launch.dart';
 import '../../../models/rockets/vehicle.dart';
 import 'tab_launches.dart';
@@ -16,7 +16,7 @@ class _SpacexTabScreen extends State<SpacexScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   int _currentIndex = 1;
 
-  static final List<GeneralModel> modelTab = [
+  static final List<QuerryModel> modelTab = [
     VehiclesModel(),
     LaunchesModel(0),
     LaunchesModel(1),

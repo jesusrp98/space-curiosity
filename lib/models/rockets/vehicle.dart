@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 
 import '../../util/url.dart';
-import '../general_model.dart';
+import '../querry_model.dart';
 import 'capsule_info.dart';
 import 'roadster.dart';
 import 'rocket_info.dart';
@@ -58,7 +58,7 @@ abstract class Vehicle {
   }
 }
 
-class VehiclesModel extends GeneralModel {
+class VehiclesModel extends QuerryModel {
   @override
   Future loadData() async {
     final rocketsResponse = await http.get(Url.rocketList);

@@ -2,8 +2,10 @@ import 'dart:async';
 
 import 'package:scoped_model/scoped_model.dart';
 
-abstract class GeneralModel extends Model {
+
+abstract class QuerryModel extends Model {
   List _list = List();
+  var response;
   bool _loading = true;
 
   Future refresh() async {

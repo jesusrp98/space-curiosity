@@ -4,23 +4,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
 import 'package:scoped_model/scoped_model.dart';
 
-import '../general_model.dart';
+import '../querry_model.dart';
 
 enum BodyType { planet, celestialBody }
 
 var planetsPath = Firestore.instance.collection('planets');
-
-class PlanetsModel extends GeneralModel {
-  Future loadData() async {
-    final response = await planetsPath.getDocuments();
-
-    list.addAll(response.documents
-        .map((document) => CelestialBody.fromJson(document))
-        .toList());
-
-    loadingState(false);
-  }
-}
 
 class CelestialBody extends Model {
   Future<List<CelestialBody>> getMoons(String id) async {
@@ -232,4 +220,17 @@ class CelestialBody extends Model {
 
   String get getPressure =>
       '${NumberFormat.decimalPattern().format(pressure)} Pa';
+}
+
+class PlanetsModel extends QuerryModel {
+  @override
+  Future loadData() async {
+    response = await planetsPath.getDocuments();
+
+    list.addAll(response.documents
+        .map((document) => CelestialBody.fromJson(document))
+        .toList());
+
+    loadingState(false);
+  }
 }

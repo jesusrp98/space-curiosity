@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 
 import '../../util/url.dart';
-import '../general_model.dart';
+import '../querry_model.dart';
 import 'rocket.dart';
 
 /// LAUNCH CLASS
@@ -106,14 +106,14 @@ class Launch {
       : DateFormat.yMMMMd().format(staticFireDate);
 }
 
-class LaunchesModel extends GeneralModel {
+class LaunchesModel extends QuerryModel {
   final int type;
 
   LaunchesModel(this.type);
+  
   @override
   Future loadData() async {
-    final response =
-        await http.get(type == 0 ? Url.upcomingList : Url.launchesList);
+    response = await http.get(type == 0 ? Url.upcomingList : Url.launchesList);
 
     list.clear();
     List jsonDecoded = json.decode(response.body);
