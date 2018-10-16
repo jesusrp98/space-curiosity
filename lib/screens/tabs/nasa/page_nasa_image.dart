@@ -4,11 +4,10 @@ import 'package:share/share.dart';
 
 import '../../../models/nasa/nasa_image.dart';
 import '../../../util/colors.dart';
-import 'screen_more_nasa.dart';
 
-class ImageDetailsPage extends StatelessWidget {
+class NasaImagePage extends StatelessWidget {
   final NasaImage image;
-  ImageDetailsPage(this.image);
+  NasaImagePage(this.image);
 
   @override
   Widget build(BuildContext context) {
@@ -73,14 +72,6 @@ class ImageDetailsPage extends StatelessWidget {
             ),
           )
         ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.more),
-        tooltip: 'More images',
-        onPressed: () => Navigator.push(
-            context,
-            MaterialPageRoute(builder: (_) => NasaMoreImages()),
-          ),
       ),
     );
   }

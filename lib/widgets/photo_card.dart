@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 
 import '../models/nasa/nasa_image.dart';
-import '../screens/tabs/nasa/imagedetails.dart';
+import '../screens/tabs/nasa/page_nasa_image.dart';
 import '../util/colors.dart';
 
 class PhotoCard extends StatelessWidget {
@@ -20,7 +20,7 @@ class PhotoCard extends StatelessWidget {
         onTap: () => Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (_) => ImageDetailsPage(image),
+                builder: (_) => NasaImagePage(image),
               ),
             ),
         onLongPress: () async => await FlutterWebBrowser.openWebPage(
@@ -76,7 +76,7 @@ class PhotoCardCompact extends StatelessWidget {
         onTap: () => Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (_) => ImageDetailsPage(image),
+                builder: (_) => NasaImagePage(image),
               ),
             ),
         onLongPress: () async => await FlutterWebBrowser.openWebPage(
