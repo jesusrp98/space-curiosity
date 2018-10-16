@@ -33,7 +33,7 @@ class NasaImagePage extends StatelessWidget {
                   tag: image.getDate,
                   child: Image.network(image.url, fit: BoxFit.cover),
                 ),
-                onTap: () => () async => await FlutterWebBrowser.openWebPage(
+                onTap: () async => await FlutterWebBrowser.openWebPage(
                       url: image.hdurl,
                       androidToolbarColor: primaryColor,
                     ),
