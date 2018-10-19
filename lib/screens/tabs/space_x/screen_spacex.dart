@@ -57,8 +57,6 @@ class _SpacexTabScreen extends State<SpacexScreen> {
     modelTab.forEach((model) => model.loadData());
   }
 
-  void _onTabTapped(int index) => setState(() => _currentIndex = index);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,7 +65,7 @@ class _SpacexTabScreen extends State<SpacexScreen> {
       body: _tabs[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        onTap: _onTabTapped,
+        onTap: (index) => setState(() => _currentIndex = index),
         currentIndex: _currentIndex,
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
