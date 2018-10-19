@@ -24,5 +24,7 @@ abstract class QuerryModel extends Model {
 
   int get getSize => _list.length;
 
+  dynamic getItem(index) => _list[index];
+
   bool get isLoading => _loading;
 }

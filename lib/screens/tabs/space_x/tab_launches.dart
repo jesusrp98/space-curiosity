@@ -42,35 +42,31 @@ class LaunchesTab extends StatelessWidget {
   }
 
   Widget _buildItem(BuildContext context, int index) {
-    return Column(
-      children: <Widget>[
-        ScopedModelDescendant<LaunchesModel>(
-          builder: (context, child, model) {
-            final Launch launch = model.list[index];
-            return Column(
-              children: <Widget>[
-                ListCell(
-                  leading: HeroImage().buildHero(
-                    context: context,
-                    size: HeroImage.smallSize,
-                    url: launch.getImageUrl,
-                    tag: launch.getNumber,
-                    title: launch.name,
+    return ScopedModelDescendant<LaunchesModel>(
+      builder: (context, child, model) {
+        final Launch launch = model.list[index];
+        return Column(
+          children: <Widget>[
+            ListCell(
+              leading: HeroImage().buildHero(
+                context: context,
+                size: HeroImage.smallSize,
+                url: launch.getImageUrl,
+                tag: launch.getNumber,
+                title: launch.name,
+              ),
+              title: launch.name,
+              subtitle: launch.getLaunchDate,
+              trailing: MissionNumber(launch.getNumber),
+              onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => LaunchPage(launch)),
                   ),
-                  title: launch.name,
-                  subtitle: launch.getLaunchDate,
-                  trailing: MissionNumber(launch.getNumber),
-                  onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (_) => LaunchPage(launch)),
-                      ),
-                ),
-                const Divider(height: 0.0, indent: 104.0)
-              ],
-            );
-          },
-        )
-      ],
+            ),
+            const Divider(height: 0.0, indent: 104.0)
+          ],
+        );
+      },
     );
   }
 }
