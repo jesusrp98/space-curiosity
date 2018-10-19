@@ -21,6 +21,9 @@ class Url {
     'https://api.spacexdata.com/v3/capsules/',
   ];
 
+  static const String companyDetails = 'https://api.spacexdata.com/v3/info';
+  static const String companyHistory = 'https://api.spacexdata.com/v3/history';
+
   /// Hero images
   static const String defaultImage =
       'https://firebasestorage.googleapis.com/v0/b/cherry-3ca39.appspot.com/o/rocket.png?alt=media&token=66f2dde6-e6ff-4f64-a4a4-9fab6dbe90c5';

@@ -28,36 +28,36 @@ class LaunchPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Launch details'),
-        centerTitle: true,
-        actions: <Widget>[
-          PopupMenuButton<String>(
-            itemBuilder: (context) {
-              return _popupItems.map((f) {
-                return PopupMenuItem(value: f, child: Text(f));
-              }).toList();
-            },
-            onSelected: (String option) => openWeb(context, option),
-          ),
-        ],
-      ),
-      body: Scrollbar(
-        child: ListView(children: <Widget>[
-          Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Column(children: <Widget>[
-              _missionCard(context),
-              const SizedBox(height: 8.0),
-              _firstStageCard(context),
-              const SizedBox(height: 8.0),
-              _secondStageCard(context),
-            ]),
-          )
-        ]),
-      ),
-    );
+      return Scaffold(
+        appBar: AppBar(
+          title: const Text('Launch details'),
+          centerTitle: true,
+          actions: <Widget>[
+            PopupMenuButton<String>(
+              itemBuilder: (context) {
+                return _popupItems.map((f) {
+                  return PopupMenuItem(value: f, child: Text(f));
+                }).toList();
+              },
+              onSelected: (String option) => openWeb(context, option),
+            ),
+          ],
+        ),
+        body: Scrollbar(
+          child: ListView(children: <Widget>[
+            Padding(
+              padding: EdgeInsets.all(16.0),
+              child: Column(children: <Widget>[
+                _missionCard(context),
+                const SizedBox(height: 8.0),
+                _firstStageCard(context),
+                const SizedBox(height: 8.0),
+                _secondStageCard(context),
+              ]),
+            )
+          ]),
+        ),
+      );
   }
 
   /// Method used for opening webs from the popup menu
