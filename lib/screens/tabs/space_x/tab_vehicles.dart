@@ -9,10 +9,11 @@ import '../../../widgets/hero_image.dart';
 import '../../../widgets/list_cell.dart';
 import 'page_capsule.dart';
 import 'page_roadster.dart';
-import 'page_ship.dart';
 import 'page_rocket.dart';
+import 'page_ship.dart';
 
 class VehiclesTab extends StatelessWidget {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
       GlobalKey<RefreshIndicatorState>();
 
@@ -25,18 +26,40 @@ class VehiclesTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScopedModelDescendant<VehiclesModel>(
-      builder: (context, child, model) => RefreshIndicator(
-            key: _refreshIndicatorKey,
-            onRefresh: () => _onRefresh(model),
-            child: model.isLoading
-                ? NativeLoadingIndicator(center: true)
-                : Scrollbar(
-                    child: ListView.builder(
-                      key: PageStorageKey('vehicles'),
-                      itemCount: model.getSize,
-                      itemBuilder: _buildItem,
+      builder: (context, child, model) => Scaffold(
+            key: _scaffoldKey,
+            body: RefreshIndicator(
+              key: _refreshIndicatorKey,
+              onRefresh: () => _onRefresh(model),
+              child: CustomScrollView(
+                slivers: <Widget>[
+                  SliverAppBar(
+                    expandedHeight: MediaQuery.of(context).size.height * 0.25,
+                    floating: false,
+                    pinned: true,
+                    flexibleSpace: FlexibleSpaceBar(
+                      centerTitle: true,
+                      title: Text('Vehicles'),
+                      background: Image.network(
+                        "https://www.teslarati.com/wp-content/uploads/2017/06/spacex-headquarters-hawthorne.jpg",
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
+                  (model.isLoading)
+                      ? SliverFillRemaining(
+                          child: NativeLoadingIndicator(center: true),
+                        )
+                      : SliverList(
+                          key: PageStorageKey('Vehicles'),
+                          delegate: SliverChildBuilderDelegate(
+                            _buildItem,
+                            childCount: model.getSize,
+                          ),
+                        ),
+                ],
+              ),
+            ),
           ),
     );
   }
@@ -78,5 +101,16 @@ class VehiclesTab extends StatelessWidget {
         })
       ],
     );
+  }
+
+  Widget _buildImage(BuildContext context, int index) {
+    return Column(children: <Widget>[
+      ScopedModelDescendant<VehiclesModel>(
+        builder: (context, child, model) => Image.network(
+              model.getImageUrl(index),
+              fit: BoxFit.fill,
+            ),
+      )
+    ]);
   }
 }

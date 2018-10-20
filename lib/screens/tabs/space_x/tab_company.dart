@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
+import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import '../../../models/rockets/spacex_company.dart';
@@ -9,6 +10,12 @@ import '../../../widgets/row_item.dart';
 class SpacexCompanyTab extends StatelessWidget {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
+  static const List<String> _popupItems = [
+    'SpaceX website',
+    'Twitter account',
+    'Flickr page',
+  ];
+
   @override
   Widget build(BuildContext context) {
     return ScopedModelDescendant<SpacexCompanyModel>(
@@ -17,9 +24,21 @@ class SpacexCompanyTab extends StatelessWidget {
             body: CustomScrollView(
               slivers: <Widget>[
                 SliverAppBar(
-                  expandedHeight: 200.0,
+                  expandedHeight: MediaQuery.of(context).size.height * 0.25,
                   floating: false,
                   pinned: true,
+                  actions: <Widget>[
+                    PopupMenuButton<String>(
+                      itemBuilder: (context) => _popupItems
+                          .map((f) => PopupMenuItem(value: f, child: Text(f)))
+                          .toList(),
+                      onSelected: (option) => FlutterWebBrowser.openWebPage(
+                            url: model
+                                .company.links[_popupItems.indexOf(option)],
+                            androidToolbarColor: primaryColor,
+                          ),
+                    ),
+                  ],
                   flexibleSpace: FlexibleSpaceBar(
                     centerTitle: true,
                     title: Text('About ${model.company.name}'),
@@ -29,10 +48,27 @@ class SpacexCompanyTab extends StatelessWidget {
                     ),
                   ),
                 ),
-                SliverToBoxAdapter(
-                  child: _buildBody(),
+                // TODO fix this
+              ]..addAll(
+                  (model.isLoading)
+                      ? <Widget>[
+                          SliverFillRemaining(
+                            child: NativeLoadingIndicator(center: true),
+                          )
+                        ]
+                      : <Widget>[
+                          SliverToBoxAdapter(
+                            child: _buildBody(),
+                          ),
+                          SliverList(
+                            key: PageStorageKey('spacex'),
+                            delegate: SliverChildBuilderDelegate(
+                              _buildAchievement,
+                              childCount: model.getSize,
+                            ),
+                          ),
+                        ],
                 ),
-              ],
             ),
           ),
     );
@@ -86,12 +122,7 @@ class SpacexCompanyTab extends StatelessWidget {
                     ],
                   ),
                 ),
-                Container(height: 12.0),
                 const Divider(),
-                ListView.builder(
-                  itemCount: model.getSize,
-                  itemBuilder: _buildAchievement,
-                ),
               ],
             ),
           ),
@@ -106,8 +137,11 @@ class SpacexCompanyTab extends StatelessWidget {
           children: <Widget>[
             ListTile(
               leading: CircleAvatar(
-                backgroundColor: accentColor,
-                child: Text('#$index'),
+                backgroundColor: Colors.white,
+                child: Text(
+                  '#${index + 1}',
+                  style: TextStyle(color: Colors.black),
+                ),
               ),
               title: Text(achievement.name),
               subtitle: Text(achievement.details),
@@ -116,7 +150,7 @@ class SpacexCompanyTab extends StatelessWidget {
                     androidToolbarColor: primaryColor,
                   ),
             ),
-            const Divider(),
+            const Divider(height: 0.0),
           ],
         );
       },

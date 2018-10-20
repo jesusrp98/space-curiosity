@@ -100,10 +100,10 @@ class RocketInfo extends Vehicle {
   String get getStages => '$stages stages';
 
   String get getLaunchCost =>
-      '${NumberFormat.currency(symbol: "\$", decimalDigits: 0).format(launchCost)}';
+      NumberFormat.currency(symbol: "\$", decimalDigits: 0).format(launchCost);
 
   String get getSuccessRate =>
-      '${NumberFormat.percentPattern().format(successRate / 100)}';
+      NumberFormat.percentPattern().format(successRate / 100);
 
   String get getEngineThrustSea =>
       '${NumberFormat.decimalPattern().format(engineThrustSea)} kN';

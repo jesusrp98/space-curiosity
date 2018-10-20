@@ -39,11 +39,11 @@ class _SpacexTabScreen extends State<SpacexScreen> {
     ),
     ScopedModel<LaunchesModel>(
       model: modelTab[2],
-      child: LaunchesTab(0),
+      child: LaunchesTab('Upcoming launches'),
     ),
     ScopedModel<LaunchesModel>(
       model: modelTab[3],
-      child: LaunchesTab(1),
+      child: LaunchesTab('Latest launches'),
     ),
     ScopedModel<SpacexCompanyModel>(
       model: modelTab[4],
@@ -61,7 +61,6 @@ class _SpacexTabScreen extends State<SpacexScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      appBar: AppBar(title: const Text('SpaceX'), centerTitle: true),
       body: _tabs[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,

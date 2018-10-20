@@ -10,11 +10,12 @@ import '../../../widgets/list_cell.dart';
 import 'page_launch.dart';
 
 class LaunchesTab extends StatelessWidget {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
       GlobalKey<RefreshIndicatorState>();
-  final int type;
+  final String title;
 
-  LaunchesTab(this.type);
+  LaunchesTab(this.title);
 
   Future<Null> _onRefresh(LaunchesModel model) {
     Completer<Null> completer = Completer<Null>();
@@ -25,18 +26,40 @@ class LaunchesTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScopedModelDescendant<LaunchesModel>(
-      builder: (context, child, model) => RefreshIndicator(
-            key: _refreshIndicatorKey,
-            onRefresh: () => _onRefresh(model),
-            child: model.isLoading
-                ? NativeLoadingIndicator(center: true)
-                : Scrollbar(
-                    child: ListView.builder(
-                      key: PageStorageKey(type.toString()),
-                      itemCount: model.getSize,
-                      itemBuilder: _buildItem,
+      builder: (context, child, model) => Scaffold(
+            key: _scaffoldKey,
+            body: RefreshIndicator(
+              key: _refreshIndicatorKey,
+              onRefresh: () => _onRefresh(model),
+              child: CustomScrollView(
+                slivers: <Widget>[
+                  SliverAppBar(
+                    expandedHeight: MediaQuery.of(context).size.height * 0.25,
+                    floating: false,
+                    pinned: true,
+                    flexibleSpace: FlexibleSpaceBar(
+                      centerTitle: true,
+                      title: Text(title),
+                      background: Image.network(
+                        "https://www.teslarati.com/wp-content/uploads/2017/06/spacex-headquarters-hawthorne.jpg",
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
+                  (model.isLoading)
+                      ? SliverFillRemaining(
+                          child: NativeLoadingIndicator(center: true),
+                        )
+                      : SliverList(
+                          key: PageStorageKey(title),
+                          delegate: SliverChildBuilderDelegate(
+                            _buildItem,
+                            childCount: model.getSize,
+                          ),
+                        ),
+                ],
+              ),
+            ),
           ),
     );
   }

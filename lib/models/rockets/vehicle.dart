@@ -61,6 +61,8 @@ abstract class Vehicle {
 }
 
 class VehiclesModel extends QuerryModel {
+  List<String> imagesUrl = List();
+  
   @override
   Future loadData() async {
     final rocketsResponse = await http.get(Url.rocketList);
@@ -80,6 +82,15 @@ class VehiclesModel extends QuerryModel {
         rocketsJson.map((rocket) => RocketInfo.fromJson(rocket)).toList());
     list.addAll(shipsJson.map((rocket) => ShipInfo.fromJson(rocket)).toList());
 
+    imagesUrl.clear();
+    imagesUrl.add('http://www.apimages.com/Images/Ap_Creative_Stock_Header.jpg');
+    imagesUrl.add('https://images.pexels.com/photos/37547/suit-business-man-business-man-37547.jpeg?auto=compress&cs=tinysrgb&h=350');
+    imagesUrl.add('https://i.kym-cdn.com/photos/images/original/001/316/888/f81.jpeg');
+
     loadingState(false);
   }
+
+  String getImageUrl(index) => imagesUrl[index];
+
+  int get getImagesCount => imagesUrl.length;
 }

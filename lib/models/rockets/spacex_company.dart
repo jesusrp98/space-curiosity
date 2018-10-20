@@ -61,9 +61,8 @@ class Company {
       state: json['headquarters']['state'],
       links: [
         json['links']['website'],
+        json['links']['twitter'],
         json['links']['flickr'],
-        json['links']['twiter'],
-        json['links']['elon_twitter'],
       ],
       details: json['summary'],
       founded: json['founded'],
@@ -74,7 +73,8 @@ class Company {
 
   String get getFounderDate => 'Founded in $founded by $founder';
 
-  String get getValuation => NumberFormat.decimalPattern().format(valuation);
+  String get getValuation =>
+      NumberFormat.currency(symbol: '\$', decimalDigits: 0).format(valuation);
 
   String get getLocation => '$city, $state';
 
