@@ -1,8 +1,11 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
+import '../../../util/colors.dart';
 
 import '../../../models/rockets/vehicle.dart';
 import '../../../widgets/hero_image.dart';
@@ -40,9 +43,17 @@ class VehiclesTab extends StatelessWidget {
                     flexibleSpace: FlexibleSpaceBar(
                       centerTitle: true,
                       title: Text('Vehicles'),
-                      background: Image.network(
-                        "https://www.teslarati.com/wp-content/uploads/2017/06/spacex-headquarters-hawthorne.jpg",
-                        fit: BoxFit.cover,
+                      background: Swiper(
+                        itemCount: model.getImagesCount,
+                        itemBuilder: _buildImage,
+                        autoplay: true,
+                        autoplayDelay: 10000,
+                        duration: 1000,
+                        curve: Curves.ease,
+                        onTap: (index) => FlutterWebBrowser.openWebPage(
+                              url: model.getImageUrl(index),
+                              androidToolbarColor: primaryColor,
+                            ),
                       ),
                     ),
                   ),
@@ -104,13 +115,11 @@ class VehiclesTab extends StatelessWidget {
   }
 
   Widget _buildImage(BuildContext context, int index) {
-    return Column(children: <Widget>[
-      ScopedModelDescendant<VehiclesModel>(
-        builder: (context, child, model) => Image.network(
-              model.getImageUrl(index),
-              fit: BoxFit.fill,
-            ),
-      )
-    ]);
+    return ScopedModelDescendant<VehiclesModel>(
+      builder: (context, child, model) => Image.network(
+            model.getImageUrl(index),
+            fit: BoxFit.cover,
+          ),
+    );
   }
 }

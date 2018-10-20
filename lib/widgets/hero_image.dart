@@ -131,6 +131,7 @@ class _Image extends StatelessWidget {
             onTap: onTap,
             child: CachedNetworkImage(
               imageUrl: url,
+              fit: BoxFit.cover,
               errorWidget: const Icon(Icons.error),
               fadeInDuration: Duration(milliseconds: 100),
             ),

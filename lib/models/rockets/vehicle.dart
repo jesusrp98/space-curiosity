@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
@@ -37,9 +38,13 @@ abstract class Vehicle {
 
   String get subtitle;
 
-  String get getImageUrl => (Url.vehicleImage.containsKey(id))
-      ? Url.vehicleImage[id]
-      : Url.defaultImage;
+  String get getImageUrl => (hasImages) ? getFirstPhoto : Url.defaultImage;
+
+  int get getPhotosCount => photos.length;
+
+  String get getFirstPhoto => photos[0];
+
+  bool get hasImages => photos.isNotEmpty;
 
   String get getHeight => '${NumberFormat.decimalPattern().format(height)} m';
 
@@ -62,7 +67,8 @@ abstract class Vehicle {
 
 class VehiclesModel extends QuerryModel {
   List<String> imagesUrl = List();
-  
+  static final _imagesCount = 5;
+
   @override
   Future loadData() async {
     final rocketsResponse = await http.get(Url.rocketList);
@@ -83,14 +89,14 @@ class VehiclesModel extends QuerryModel {
     list.addAll(shipsJson.map((rocket) => ShipInfo.fromJson(rocket)).toList());
 
     imagesUrl.clear();
-    imagesUrl.add('http://www.apimages.com/Images/Ap_Creative_Stock_Header.jpg');
-    imagesUrl.add('https://images.pexels.com/photos/37547/suit-business-man-business-man-37547.jpeg?auto=compress&cs=tinysrgb&h=350');
-    imagesUrl.add('https://i.kym-cdn.com/photos/images/original/001/316/888/f81.jpeg');
+    for (int i = 0; i < _imagesCount; ++i)
+      imagesUrl
+          .add((list[Random().nextInt(list.length)] as Vehicle).getFirstPhoto);
 
     loadingState(false);
   }
 
   String getImageUrl(index) => imagesUrl[index];
 
-  int get getImagesCount => imagesUrl.length;
+  int get getImagesCount => _imagesCount;
 }
