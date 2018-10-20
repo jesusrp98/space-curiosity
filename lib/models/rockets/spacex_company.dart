@@ -20,8 +20,6 @@ class SpacexCompanyModel extends QuerryModel {
         .map((achievement) => Achievement.fromJson(achievement))
         .toList());
 
-    print(list);
-
     _company = Company.fromJson(json.decode(companyResponse.body));
 
     loadingState(false);

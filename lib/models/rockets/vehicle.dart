@@ -18,6 +18,7 @@ abstract class Vehicle {
   final num height, diameter, mass;
   final bool active, reusable;
   final DateTime firstFlight;
+  final List photos;
 
   Vehicle({
     this.id,
@@ -31,6 +32,7 @@ abstract class Vehicle {
     this.active,
     this.reusable,
     this.firstFlight,
+    this.photos,
   });
 
   String get subtitle;

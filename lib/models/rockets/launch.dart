@@ -18,7 +18,7 @@ class Launch {
       imageUrl,
       details,
       tentativePrecision;
-  final List<String> links;
+  final List links, photos;
   final DateTime launchDate, localLaunchDate, staticFireDate;
   final bool launchSuccess, upcoming, tentativeDate;
   final Rocket rocket;
@@ -32,6 +32,7 @@ class Launch {
     this.details,
     this.tentativePrecision,
     this.links,
+    this.photos,
     this.launchDate,
     this.localLaunchDate,
     this.staticFireDate,
@@ -56,6 +57,7 @@ class Launch {
         json['links']['presskit'],
         json['links']['article_link'],
       ],
+      photos: json['links']['flickr_images'],
       launchDate: DateTime.parse(json['launch_date_utc']).toLocal(),
       localLaunchDate: DateTime.parse(json['launch_date_local']).toLocal(),
       staticFireDate: setStaticFireDate(json['static_fire_date_utc']),
