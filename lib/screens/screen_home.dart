@@ -144,7 +144,7 @@ class _ContentPageState extends State<ContentPage> {
                     child: ScopedModelDescendant<NasaImagesModel>(
                       builder: (context, child, model) => model.isLoading
                           ? NativeLoadingIndicator(center: true)
-                          : PhotoCard(model.list[index]),
+                          : PhotoCard(model.getItem(index)),
                     ),
                   ),
               scrollDirection: Axis.vertical,

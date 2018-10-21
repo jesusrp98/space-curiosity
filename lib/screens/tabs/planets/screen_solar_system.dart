@@ -22,7 +22,7 @@ class SolarSystemScreen extends StatelessWidget {
             : Scrollbar(
                 child: ListView.builder(
                   key: PageStorageKey('planets'),
-                  itemCount: model.list.length,
+                  itemCount: model.getSize,
                   itemBuilder: _buildItem,
                 ),
               ),
@@ -93,17 +93,18 @@ class SolarSystemScreen extends StatelessWidget {
                 leading: HeroImage().buildHero(
                   context: context,
                   size: HeroImage.smallSize,
-                  url: model.list[index].imageUrl,
-                  tag: model.list[index].id,
-                  title: model.list[index].name,
+                  url: model.getItem(index).imageUrl,
+                  tag: model.getItem(index).id,
+                  title: model.getItem(index).name,
                 ),
-                title: model.list[index].name,
-                subtitle: model.list[index].description,
+                title: model.getItem(index).name,
+                subtitle: model.getItem(index).description,
                 trailing: IconButton(
                   icon: Icon(Icons.arrow_drop_down),
                   onPressed: () async {
-                    var _moons =
-                        await model.list[index].getMoons(model.list[index].id);
+                    var _moons = await model
+                        .getItem(index)
+                        .getMoons(model.getItem(index).id);
                     showModalBottomSheet<void>(
                       context: context,
                       builder: (BuildContext context) {
@@ -120,7 +121,7 @@ class SolarSystemScreen extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) => CelestialBodyPage(
-                              celestialBody: model.list[index],
+                              celestialBody: model.getItem(index),
                               type: BodyType.planet,
                             ),
                       ),

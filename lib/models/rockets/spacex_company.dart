@@ -14,9 +14,8 @@ class SpacexCompanyModel extends QuerryModel {
     final companyResponse = await http.get(Url.companyDetails);
     response = await http.get(Url.companyHistory);
 
-    list.clear();
-    List jsonDecoded = json.decode(response.body);
-    list.addAll(jsonDecoded
+    snapshot = json.decode(response.body);
+    items.addAll(snapshot
         .map((achievement) => Achievement.fromJson(achievement))
         .toList());
 

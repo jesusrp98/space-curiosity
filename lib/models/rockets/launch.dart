@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
@@ -10,6 +11,27 @@ import 'rocket.dart';
 /// LAUNCH CLASS
 /// This class represent a single mission with all its details, like rocket,
 /// launchpad, links...
+class LaunchesModel extends QuerryModel {
+  final int type;
+
+  LaunchesModel(this.type);
+
+  @override
+  Future loadData() async {
+    response = await http.get(type == 0 ? Url.upcomingList : Url.launchesList);
+
+    snapshot = json.decode(response.body);
+    items.addAll(snapshot.map((launch) => Launch.fromJson(launch)).toList());
+
+    if (type == 0)
+      images.add(Url.defaultImage);
+    else
+      images.addAll(getItem(0).photos.sublist(0, 3));
+
+    loadingState(false);
+  }
+}
+
 class Launch {
   final int number;
   final String name,
@@ -76,6 +98,14 @@ class Launch {
     }
   }
 
+  String get getProfilePhoto => (hasImages) ? photos[0] : Url.defaultImage;
+
+  int get getPhotosCount => photos.length;
+
+  String get getRandomPhoto => photos[Random().nextInt(getPhotosCount)];
+
+  bool get hasImages => photos.isNotEmpty;
+
   String get getNumber => '#$number';
 
   String get getImageUrl => imageUrl ?? Url.defaultImage;
@@ -106,21 +136,4 @@ class Launch {
   String get getStaticFireDate => staticFireDate == null
       ? 'Unknown'
       : DateFormat.yMMMMd().format(staticFireDate);
-}
-
-class LaunchesModel extends QuerryModel {
-  final int type;
-
-  LaunchesModel(this.type);
-  
-  @override
-  Future loadData() async {
-    response = await http.get(type == 0 ? Url.upcomingList : Url.launchesList);
-
-    list.clear();
-    List jsonDecoded = json.decode(response.body);
-    list.addAll(jsonDecoded.map((launch) => Launch.fromJson(launch)).toList());
-
-    loadingState(false);
-  }
 }

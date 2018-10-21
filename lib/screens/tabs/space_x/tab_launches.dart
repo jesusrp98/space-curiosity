@@ -1,10 +1,13 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import '../../../models/rockets/launch.dart';
+import '../../../util/colors.dart';
 import '../../../widgets/hero_image.dart';
 import '../../../widgets/list_cell.dart';
 import 'page_launch.dart';
@@ -40,10 +43,19 @@ class LaunchesTab extends StatelessWidget {
                     flexibleSpace: FlexibleSpaceBar(
                       centerTitle: true,
                       title: Text(title),
-                      background: Image.network(
-                        "https://www.teslarati.com/wp-content/uploads/2017/06/spacex-headquarters-hawthorne.jpg",
-                        fit: BoxFit.cover,
-                      ),
+                      background: (model.isLoading)
+                          ? NativeLoadingIndicator(center: true)
+                          : Swiper(
+                              itemCount: model.getImagesCount,
+                              itemBuilder: _buildImage,
+                              autoplay: true,
+                              autoplayDelay: 6000,
+                              duration: 750,
+                              onTap: (index) => FlutterWebBrowser.openWebPage(
+                                    url: model.getImageUrl(index),
+                                    androidToolbarColor: primaryColor,
+                                  ),
+                            ),
                     ),
                   ),
                   (model.isLoading)
@@ -67,7 +79,7 @@ class LaunchesTab extends StatelessWidget {
   Widget _buildItem(BuildContext context, int index) {
     return ScopedModelDescendant<LaunchesModel>(
       builder: (context, child, model) {
-        final Launch launch = model.list[index];
+        final Launch launch = model.getItem(index);
         return Column(
           children: <Widget>[
             ListCell(
@@ -90,6 +102,15 @@ class LaunchesTab extends StatelessWidget {
           ],
         );
       },
+    );
+  }
+
+  Widget _buildImage(BuildContext context, int index) {
+    return ScopedModelDescendant<LaunchesModel>(
+      builder: (context, child, model) => Image.network(
+            model.getImageUrl(index),
+            fit: BoxFit.cover,
+          ),
     );
   }
 }

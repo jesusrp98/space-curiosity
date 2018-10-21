@@ -2,14 +2,17 @@ import 'dart:async';
 
 import 'package:scoped_model/scoped_model.dart';
 
-
 abstract class QuerryModel extends Model {
-  List _list = List();
+  List _items = List();
+  List _images = List();
+  List snapshot;
   var response;
   bool _loading = true;
 
   Future refresh() async {
     await loadData();
+    _items.clear();
+    _images.clear();
     notifyListeners();
   }
 
@@ -20,11 +23,17 @@ abstract class QuerryModel extends Model {
 
   Future loadData();
 
-  List get list => _list;
+  List get items => _items;
 
-  int get getSize => _list.length;
+  List get images => _images;
 
-  dynamic getItem(index) => _list[index];
+  String getImageUrl(index) => _images[index];
+
+  int get getImagesCount => _images.length;
+
+  int get getSize => _items.length;
+
+  dynamic getItem(index) => _items[index];
 
   bool get isLoading => _loading;
 }

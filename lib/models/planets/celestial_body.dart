@@ -10,6 +10,19 @@ enum BodyType { planet, celestialBody }
 
 var planetsPath = Firestore.instance.collection('planets');
 
+class PlanetsModel extends QuerryModel {
+  @override
+  Future loadData() async {
+    response = await planetsPath.getDocuments();
+
+    items.addAll(response.documents
+        .map((document) => CelestialBody.fromJson(document))
+        .toList());
+
+    loadingState(false);
+  }
+}
+
 class CelestialBody extends Model {
   Future<List<CelestialBody>> getMoons(String id) async {
     var _snapshot =
@@ -220,17 +233,4 @@ class CelestialBody extends Model {
 
   String get getPressure =>
       '${NumberFormat.decimalPattern().format(pressure)} Pa';
-}
-
-class PlanetsModel extends QuerryModel {
-  @override
-  Future loadData() async {
-    response = await planetsPath.getDocuments();
-
-    list.addAll(response.documents
-        .map((document) => CelestialBody.fromJson(document))
-        .toList());
-
-    loadingState(false);
-  }
 }

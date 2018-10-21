@@ -80,7 +80,7 @@ class VehiclesTab extends StatelessWidget {
     return Column(
       children: <Widget>[
         ScopedModelDescendant<VehiclesModel>(builder: (context, child, model) {
-          final Vehicle vehicle = model.list[index];
+          final Vehicle vehicle = model.getItem(index);
           return Column(
             children: <Widget>[
               ListCell(

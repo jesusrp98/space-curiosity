@@ -14,6 +14,35 @@ import 'ship_info.dart';
 /// VEHICLE CLASS
 /// Abstract class that represents a real vehicle used by SpaceX. It can be
 /// a rocket or a capsule, because they have similar base characteristics.
+class VehiclesModel extends QuerryModel {
+  @override
+  Future loadData() async {
+    final rocketsResponse = await http.get(Url.rocketList);
+    final capsulesResponse = await http.get(Url.capsuleList);
+    final roadsterResponse = await http.get(Url.roadsterPage);
+    final shipsResponse = await http.get(Url.shipsList);
+
+    List rocketsJson = json.decode(rocketsResponse.body);
+    List capsulesJson = json.decode(capsulesResponse.body);
+    List shipsJson = json.decode(shipsResponse.body);
+
+    items.add(Roadster.fromJson(json.decode(roadsterResponse.body)));
+    items.addAll(
+        capsulesJson.map((capsule) => CapsuleInfo.fromJson(capsule)).toList());
+    items.addAll(
+        rocketsJson.map((rocket) => RocketInfo.fromJson(rocket)).toList());
+    items.addAll(shipsJson.map((rocket) => ShipInfo.fromJson(rocket)).toList());
+
+    List<int> randomList = List<int>.generate(getSize, (index) => index);
+    randomList.shuffle();
+    randomList
+        .sublist(0, 3)
+        .forEach((index) => images.add(getItem(index).getRandomPhoto));
+
+    loadingState(false);
+  }
+}
+
 abstract class Vehicle {
   final String id, name, type, description, url;
   final num height, diameter, mass;
@@ -63,42 +92,4 @@ abstract class Vehicle {
     else
       return 'First launched on $getFirstFlight';
   }
-}
-
-class VehiclesModel extends QuerryModel {
-  List<String> imagesUrl = List();
-  static final _imagesCount = 5;
-
-  @override
-  Future loadData() async {
-    final rocketsResponse = await http.get(Url.rocketList);
-    final capsulesResponse = await http.get(Url.capsuleList);
-    final roadsterResponse = await http.get(Url.roadsterPage);
-    final shipsResponse = await http.get(Url.shipsList);
-
-    List rocketsJson = json.decode(rocketsResponse.body);
-    List capsulesJson = json.decode(capsulesResponse.body);
-    List shipsJson = json.decode(shipsResponse.body);
-
-    list.clear();
-    list.add(Roadster.fromJson(json.decode(roadsterResponse.body)));
-    list.addAll(
-        capsulesJson.map((capsule) => CapsuleInfo.fromJson(capsule)).toList());
-    list.addAll(
-        rocketsJson.map((rocket) => RocketInfo.fromJson(rocket)).toList());
-    list.addAll(shipsJson.map((rocket) => ShipInfo.fromJson(rocket)).toList());
-
-    imagesUrl.clear();
-    List<int> randomList = List<int>.generate(getSize, (index) => index);
-    randomList.shuffle();
-    randomList
-        .sublist(0, 5)
-        .forEach((index) => imagesUrl.add(getItem(index).getRandomPhoto));
-
-    loadingState(false);
-  }
-
-  String getImageUrl(index) => imagesUrl[index];
-
-  int get getImagesCount => _imagesCount;
 }
