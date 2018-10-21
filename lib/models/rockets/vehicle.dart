@@ -38,11 +38,11 @@ abstract class Vehicle {
 
   String get subtitle;
 
-  String get getImageUrl => (hasImages) ? getFirstPhoto : Url.defaultImage;
+  String get getProfilePhoto => (hasImages) ? photos[0] : Url.defaultImage;
 
   int get getPhotosCount => photos.length;
 
-  String get getFirstPhoto => photos[0];
+  String get getRandomPhoto => photos[Random().nextInt(getPhotosCount)];
 
   bool get hasImages => photos.isNotEmpty;
 
@@ -89,9 +89,11 @@ class VehiclesModel extends QuerryModel {
     list.addAll(shipsJson.map((rocket) => ShipInfo.fromJson(rocket)).toList());
 
     imagesUrl.clear();
-    for (int i = 0; i < _imagesCount; ++i)
-      imagesUrl
-          .add((list[Random().nextInt(list.length)] as Vehicle).getFirstPhoto);
+    List<int> randomList = List<int>.generate(getSize, (index) => index);
+    randomList.shuffle();
+    randomList
+        .sublist(0, 5)
+        .forEach((index) => imagesUrl.add(getItem(index).getRandomPhoto));
 
     loadingState(false);
   }

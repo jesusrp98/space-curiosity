@@ -28,7 +28,7 @@ class SpacexHomeTab extends StatelessWidget {
               child: CustomScrollView(
                 slivers: <Widget>[
                   SliverAppBar(
-                    expandedHeight: MediaQuery.of(context).size.height * 0.25,
+                    expandedHeight: MediaQuery.of(context).size.height * 0.3,
                     floating: false,
                     pinned: true,
                     flexibleSpace: FlexibleSpaceBar(

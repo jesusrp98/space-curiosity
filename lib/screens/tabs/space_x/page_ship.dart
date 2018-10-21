@@ -76,7 +76,7 @@ class ShipPage extends StatelessWidget {
       image: HeroImage().buildExpandedHero(
         context: context,
         size: HeroImage.bigSize,
-        url: _ship.getImageUrl,
+        url: _ship.getProfilePhoto,
         tag: _ship.id,
         title: _ship.name,
       ),

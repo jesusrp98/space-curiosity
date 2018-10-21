@@ -54,7 +54,7 @@ class RocketPage extends StatelessWidget {
       image: HeroImage().buildExpandedHero(
         context: context,
         size: HeroImage.bigSize,
-        url: _rocket.getImageUrl,
+        url: _rocket.getProfilePhoto,
         tag: _rocket.id,
         title: _rocket.name,
       ),

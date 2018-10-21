@@ -37,24 +37,25 @@ class VehiclesTab extends StatelessWidget {
               child: CustomScrollView(
                 slivers: <Widget>[
                   SliverAppBar(
-                    expandedHeight: MediaQuery.of(context).size.height * 0.25,
+                    expandedHeight: MediaQuery.of(context).size.height * 0.3,
                     floating: false,
                     pinned: true,
                     flexibleSpace: FlexibleSpaceBar(
                       centerTitle: true,
                       title: Text('Vehicles'),
-                      background: Swiper(
-                        itemCount: model.getImagesCount,
-                        itemBuilder: _buildImage,
-                        autoplay: true,
-                        autoplayDelay: 10000,
-                        duration: 1000,
-                        curve: Curves.ease,
-                        onTap: (index) => FlutterWebBrowser.openWebPage(
-                              url: model.getImageUrl(index),
-                              androidToolbarColor: primaryColor,
+                      background: (model.isLoading)
+                          ? NativeLoadingIndicator(center: true)
+                          : Swiper(
+                              itemCount: model.getImagesCount,
+                              itemBuilder: _buildImage,
+                              autoplay: true,
+                              autoplayDelay: 6000,
+                              duration: 750,
+                              onTap: (index) => FlutterWebBrowser.openWebPage(
+                                    url: model.getImageUrl(index),
+                                    androidToolbarColor: primaryColor,
+                                  ),
                             ),
-                      ),
                     ),
                   ),
                   (model.isLoading)
@@ -86,7 +87,7 @@ class VehiclesTab extends StatelessWidget {
                 leading: HeroImage().buildHero(
                   context: context,
                   size: HeroImage.smallSize,
-                  url: vehicle.getImageUrl,
+                  url: vehicle.getProfilePhoto,
                   tag: vehicle.id,
                   title: vehicle.name,
                 ),

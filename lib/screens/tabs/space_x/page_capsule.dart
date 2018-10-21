@@ -50,7 +50,7 @@ class CapsulePage extends StatelessWidget {
       image: HeroImage().buildExpandedHero(
         context: context,
         size: HeroImage.bigSize,
-        url: _capsule.getImageUrl,
+        url: _capsule.getProfilePhoto,
         tag: _capsule.id,
         title: _capsule.name,
       ),

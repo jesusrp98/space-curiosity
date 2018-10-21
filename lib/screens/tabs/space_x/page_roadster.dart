@@ -58,7 +58,7 @@ class RoadsterPage extends StatelessWidget {
       image: HeroImage().buildExpandedHero(
         context: context,
         size: HeroImage.bigSize,
-        url: roadster.getImageUrl,
+        url: roadster.getProfilePhoto,
         tag: roadster.id,
         title: roadster.name,
       ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
+import 'package:space_news/widgets/list_cell.dart';
 
 import '../../../models/rockets/spacex_company.dart';
 import '../../../util/colors.dart';
@@ -24,7 +25,7 @@ class SpacexCompanyTab extends StatelessWidget {
             body: CustomScrollView(
               slivers: <Widget>[
                 SliverAppBar(
-                  expandedHeight: MediaQuery.of(context).size.height * 0.25,
+                  expandedHeight: MediaQuery.of(context).size.height * 0.3,
                   floating: false,
                   pinned: true,
                   actions: <Widget>[
@@ -122,7 +123,7 @@ class SpacexCompanyTab extends StatelessWidget {
                     ],
                   ),
                 ),
-                const Divider(),
+                const Divider(height: 0.0),
               ],
             ),
           ),
@@ -135,22 +136,26 @@ class SpacexCompanyTab extends StatelessWidget {
         final Achievement achievement = model.getItem(index);
         return Column(
           children: <Widget>[
-            ListTile(
+            ListCell(
               leading: CircleAvatar(
+                radius: 25.0,
                 backgroundColor: Colors.white,
                 child: Text(
                   '#${index + 1}',
-                  style: TextStyle(color: Colors.black),
+                  style: Theme.of(context).textTheme.title.copyWith(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                      ),
                 ),
               ),
-              title: Text(achievement.name),
-              subtitle: Text(achievement.details),
+              title: achievement.name,
+              subtitle: achievement.details,
               onTap: () async => await FlutterWebBrowser.openWebPage(
                     url: achievement.url,
                     androidToolbarColor: primaryColor,
                   ),
             ),
-            const Divider(height: 0.0),
+            const Divider(height: 0.0, indent: 83.0),
           ],
         );
       },
