@@ -17,14 +17,14 @@ class AchievementCell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      contentPadding: const EdgeInsets.all(16.0),
       leading: CircleAvatar(
         radius: 25.0,
         backgroundColor: Colors.white,
         child: Text(
           '#$index',
-          style: Theme.of(context).textTheme.title.copyWith(
-                color: Colors.black
-              ),
+          style:
+              Theme.of(context).textTheme.subhead.copyWith(color: Colors.black),
         ),
       ),
       title: Column(
@@ -32,16 +32,26 @@ class AchievementCell extends StatelessWidget {
         children: <Widget>[
           Text(
             title,
-            style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+            style: TextStyle(
+              fontSize: 18.0,
+              fontWeight: FontWeight.bold,
+              color: primaryColor,
+            ),
           ),
-          Text(date, style: TextStyle(fontSize: 16.0)),
+          Text(
+            date,
+            style: Theme.of(context).textTheme.subhead.copyWith(
+                  color: primaryColor,
+                ),
+          ),
           Container(height: 8.0),
         ],
       ),
       subtitle: Text(
         subtitle,
         textAlign: TextAlign.justify,
-        style: TextStyle(fontSize: 16.0),
+        style:
+            Theme.of(context).textTheme.subhead.copyWith(color: secondaryText),
       ),
       onTap: () async => await FlutterWebBrowser.openWebPage(
             url: url,

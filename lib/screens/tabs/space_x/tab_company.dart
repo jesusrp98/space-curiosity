@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
-import '../../../widgets/achievement_cell.dart';
-import '../../../widgets/list_cell.dart';
 
 import '../../../models/rockets/spacex_company.dart';
 import '../../../util/colors.dart';
+import '../../../widgets/achievement_cell.dart';
 import '../../../widgets/row_item.dart';
 
 class SpacexCompanyTab extends StatelessWidget {

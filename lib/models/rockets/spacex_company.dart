@@ -83,14 +83,12 @@ class Company {
 class Achievement {
   final String name, details, url;
   final DateTime date;
-  final num flightNumber;
 
   Achievement({
     this.name,
     this.details,
     this.url,
     this.date,
-    this.flightNumber,
   });
 
   factory Achievement.fromJson(Map<String, dynamic> json) {
@@ -99,7 +97,6 @@ class Achievement {
       details: json['details'],
       url: json['links']['article'],
       date: DateTime.parse(json['event_date_utc']).toLocal(),
-      flightNumber: json['flight_number'],
     );
   }
 
