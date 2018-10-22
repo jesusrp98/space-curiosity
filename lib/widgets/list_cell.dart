@@ -29,7 +29,7 @@ class ListCell extends StatelessWidget {
             title,
             style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
           ),
-          const SizedBox(height: 8.0),
+          Container(height: 8.0),
         ],
       ),
       subtitle: Text(subtitle, style: TextStyle(fontSize: 16.0)),

@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'package:space_news/widgets/list_cell.dart';
+import '../../../widgets/achievement_cell.dart';
+import '../../../widgets/list_cell.dart';
 
 import '../../../models/rockets/spacex_company.dart';
 import '../../../util/colors.dart';
@@ -136,24 +137,12 @@ class SpacexCompanyTab extends StatelessWidget {
         final Achievement achievement = model.getItem(index);
         return Column(
           children: <Widget>[
-            ListCell(
-              leading: CircleAvatar(
-                radius: 25.0,
-                backgroundColor: Colors.white,
-                child: Text(
-                  '#${index + 1}',
-                  style: Theme.of(context).textTheme.title.copyWith(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                      ),
-                ),
-              ),
+            AchievementCell(
               title: achievement.name,
               subtitle: achievement.details,
-              onTap: () async => await FlutterWebBrowser.openWebPage(
-                    url: achievement.url,
-                    androidToolbarColor: primaryColor,
-                  ),
+              date: achievement.getDate,
+              url: achievement.url,
+              index: index + 1,
             ),
             const Divider(height: 0.0, indent: 83.0),
           ],

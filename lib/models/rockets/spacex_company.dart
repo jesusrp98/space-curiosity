@@ -102,4 +102,6 @@ class Achievement {
       flightNumber: json['flight_number'],
     );
   }
+
+  String get getDate => DateFormat.yMMMMd().format(date);
 }
