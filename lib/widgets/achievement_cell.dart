@@ -17,7 +17,10 @@ class AchievementCell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      contentPadding: const EdgeInsets.all(16.0),
+      contentPadding: const EdgeInsets.symmetric(
+        horizontal: 16.0,
+        vertical: 8.0,
+      ),
       leading: CircleAvatar(
         radius: 25.0,
         backgroundColor: Colors.white,
@@ -35,13 +38,13 @@ class AchievementCell extends StatelessWidget {
             style: TextStyle(
               fontSize: 18.0,
               fontWeight: FontWeight.bold,
-              color: primaryColor,
+              color: primaryText,
             ),
           ),
           Text(
             date,
             style: Theme.of(context).textTheme.subhead.copyWith(
-                  color: primaryColor,
+                  color: primaryText,
                 ),
           ),
           Container(height: 8.0),

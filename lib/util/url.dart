@@ -21,6 +21,27 @@ class Url {
     'https://api.spacexdata.com/v3/capsules/',
   ];
 
+  static const List<String> spacexCompanyScreen = [
+    'https://www.spacex.com/sites/spacex/files/styles/media_gallery_large/public/2014_-_11orbcomm_f9_in_hanger.jpg?itok=gqP7Qmrg',
+    'https://farm1.staticflickr.com/342/18039170043_e2ca8b540a_c.jpg',
+    'https://farm9.staticflickr.com/8571/16491695667_c2754ff48e_c.jpg',
+    'https://farm9.staticflickr.com/8688/17024507155_2168c8d032_c.jpg',
+    'https://www.spacex.com/sites/spacex/files/styles/media_gallery_large/public/first_reflight_-_05_crs8_recovered_first_stage_3.jpg?itok=nHqaeNdH',
+  ];
+
+  static const List<String> spacexUpcomingScreen = [
+    'https://farm5.staticflickr.com/4183/34296430820_c48e601ca1_c.jpg',
+    'https://farm1.staticflickr.com/293/32312415025_6841e30bf1_c.jpg',
+    'https://farm5.staticflickr.com/4483/37610547226_c8002032bc_c.jpg',
+    'https://farm5.staticflickr.com/4393/36073897213_3e284c477b_c.jpg',
+    'https://farm5.staticflickr.com/4235/35359372730_99255c4a20_c.jpg',
+    'https://farm3.staticflickr.com/2900/33578357343_f673899dbc_c.jpg',
+    'https://farm3.staticflickr.com/2874/34357262105_7871595659_c.jpg',
+    'https://farm8.staticflickr.com/7519/26822457306_379a806b54_c.jpg',
+    'https://farm2.staticflickr.com/1640/23779742713_e080ff9932_c.jpg',
+    'https://farm9.staticflickr.com/8601/16512864369_27bb414c91_c.jpg',
+  ];
+
   // SpaceX related info
   static const String companyDetails = 'https://api.spacexdata.com/v3/info';
   static const String companyHistory = 'https://api.spacexdata.com/v3/history';

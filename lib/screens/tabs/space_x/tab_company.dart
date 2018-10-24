@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
@@ -43,10 +44,19 @@ class SpacexCompanyTab extends StatelessWidget {
                   flexibleSpace: FlexibleSpaceBar(
                     centerTitle: true,
                     title: Text('About ${model.company.name}'),
-                    background: Image.network(
-                      "https://www.teslarati.com/wp-content/uploads/2017/06/spacex-headquarters-hawthorne.jpg",
-                      fit: BoxFit.cover,
-                    ),
+                    background: (model.isLoading)
+                        ? NativeLoadingIndicator(center: true)
+                        : Swiper(
+                            itemCount: model.getImagesCount,
+                            itemBuilder: _buildImage,
+                            autoplay: true,
+                            autoplayDelay: 6000,
+                            duration: 750,
+                            onTap: (index) => FlutterWebBrowser.openWebPage(
+                                  url: model.getImageUrl(index),
+                                  androidToolbarColor: primaryColor,
+                                ),
+                          ),
                   ),
                 ),
                 // TODO fix this
@@ -86,12 +96,9 @@ class SpacexCompanyTab extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         model.company.fullName,
-                        style: Theme.of(context)
-                            .textTheme
-                            .title
-                            .copyWith(fontWeight: FontWeight.bold),
+                        style: Theme.of(context).textTheme.subhead,
                       ),
-                      Container(height: 12.0),
+                      Container(height: 8.0),
                       Text(
                         model.company.getFounderDate,
                         style: Theme.of(context)
@@ -147,6 +154,15 @@ class SpacexCompanyTab extends StatelessWidget {
           ],
         );
       },
+    );
+  }
+
+  Widget _buildImage(BuildContext context, int index) {
+    return ScopedModelDescendant<SpacexCompanyModel>(
+      builder: (context, child, model) => Image.network(
+            model.getImageUrl(index),
+            fit: BoxFit.cover,
+          ),
     );
   }
 }

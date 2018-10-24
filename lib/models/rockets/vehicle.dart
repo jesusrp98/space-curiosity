@@ -36,7 +36,7 @@ class VehiclesModel extends QuerryModel {
     List<int> randomList = List<int>.generate(getSize, (index) => index);
     randomList.shuffle();
     randomList
-        .sublist(0, 3)
+        .sublist(0, 5)
         .forEach((index) => images.add(getItem(index).getRandomPhoto));
 
     loadingState(false);

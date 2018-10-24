@@ -10,9 +10,9 @@ abstract class QuerryModel extends Model {
   bool _loading = true;
 
   Future refresh() async {
-    await loadData();
     _items.clear();
     _images.clear();
+    await loadData();
     notifyListeners();
   }
 

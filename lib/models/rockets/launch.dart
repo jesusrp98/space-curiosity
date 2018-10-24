@@ -24,9 +24,9 @@ class LaunchesModel extends QuerryModel {
     items.addAll(snapshot.map((launch) => Launch.fromJson(launch)).toList());
 
     if (type == 0)
-      images.add(Url.defaultImage);
+      images.add(Url.spacexUpcomingScreen..shuffle()..sublist(0, 5));
     else
-      images.addAll(getItem(0).photos.sublist(0, 3));
+      images.addAll(getItem(0).photos.sublist(0, 5));
 
     loadingState(false);
   }
@@ -99,6 +99,8 @@ class Launch {
   }
 
   String get getProfilePhoto => (hasImages) ? photos[0] : Url.defaultImage;
+
+  String getPhoto(index) => photos[index];
 
   int get getPhotosCount => photos.length;
 
