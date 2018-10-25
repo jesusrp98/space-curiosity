@@ -150,7 +150,7 @@ class SpacexCompanyTab extends StatelessWidget {
               url: achievement.url,
               index: index + 1,
             ),
-            const Divider(height: 0.0, indent: 83.0),
+            const Divider(height: 0.0, indent: 82.0),
           ],
         );
       },

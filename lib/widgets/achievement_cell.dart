@@ -17,7 +17,8 @@ class AchievementCell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      contentPadding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+      contentPadding:
+          const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
       title: Row(
         children: <Widget>[
           CircleAvatar(
@@ -32,25 +33,27 @@ class AchievementCell extends StatelessWidget {
             ),
           ),
           Container(width: 16.0),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text(
-                title,
-                style: TextStyle(
-                  fontSize: 18.0,
-                  fontWeight: FontWeight.bold,
-                  color: primaryText,
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  title,
+                  style: TextStyle(
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.bold,
+                    color: primaryText,
+                  ),
                 ),
-              ),
-              Text(
-                date,
-                style: Theme.of(context).textTheme.subhead.copyWith(
-                      color: primaryText,
-                    ),
-              ),
-            ],
-          ),
+                Text(
+                  date,
+                  style: Theme.of(context).textTheme.subhead.copyWith(
+                        color: primaryText,
+                      ),
+                ),
+              ],
+            ),
+          )
         ],
       ),
       subtitle: Column(
