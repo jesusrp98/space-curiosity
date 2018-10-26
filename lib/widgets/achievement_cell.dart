@@ -28,7 +28,7 @@ class AchievementCell extends StatelessWidget {
               '#$index',
               style: Theme.of(context)
                   .textTheme
-                  .subhead
+                  .title
                   .copyWith(color: Colors.black),
             ),
           ),

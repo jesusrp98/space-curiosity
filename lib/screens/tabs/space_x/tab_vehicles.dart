@@ -107,7 +107,7 @@ class VehiclesTab extends StatelessWidget {
                       ),
                     ),
               ),
-              const Divider(height: 0.0, indent: 104.0)
+              const Divider(height: 0.0, indent: 96.0)
             ],
           );
         })

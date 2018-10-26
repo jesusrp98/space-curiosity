@@ -98,7 +98,7 @@ class LaunchesTab extends StatelessWidget {
                     MaterialPageRoute(builder: (_) => LaunchPage(launch)),
                   ),
             ),
-            const Divider(height: 0.0, indent: 104.0)
+            const Divider(height: 0.0, indent: 96.0)
           ],
         );
       },

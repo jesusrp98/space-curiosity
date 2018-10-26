@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 /// HERO IMAGE
 /// Class used into building hero images & their specific hero pages.
 class HeroImage {
-  static const num smallSize = 72.0, bigSize = 112.0, pageSize = 248.0;
+  static const num smallSize = 64.0, bigSize = 112.0, pageSize = 248.0;
 
   /// Builds the hero image page
   static Widget _buildPage({
