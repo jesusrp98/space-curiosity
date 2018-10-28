@@ -21,6 +21,11 @@ class Url {
     'https://api.spacexdata.com/v3/capsules/',
   ];
 
+  static const String coreDialog = 'https://api.spacexdata.com/v3/cores/';
+  static const String capsuleDialog = 'https://api.spacexdata.com/v3/capsules/';
+  static const String launchpadDialog = 'https://api.spacexdata.com/v3/launchpads/';
+  static const String landingpadDialog = '';
+
   static const List<String> spacexCompanyScreen = [
     'https://www.spacex.com/sites/spacex/files/styles/media_gallery_large/public/2014_-_11orbcomm_f9_in_hanger.jpg?itok=gqP7Qmrg',
     'https://farm1.staticflickr.com/342/18039170043_e2ca8b540a_c.jpg',
@@ -35,6 +40,18 @@ class Url {
     'https://farm5.staticflickr.com/4483/37610547226_c8002032bc_c.jpg',
     'https://farm5.staticflickr.com/4235/35359372730_99255c4a20_c.jpg',
     'https://farm9.staticflickr.com/8601/16512864369_27bb414c91_c.jpg',
+  ];
+
+  static const List<String> spacexHomeScreen = [
+
+  ];
+
+  static const List<String> spacexCoreDialog = [
+
+  ];
+
+  static const List<String> spacexCapsuleDialog = [
+
   ];
 
   // SpaceX related info

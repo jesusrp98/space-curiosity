@@ -1,8 +1,31 @@
-import 'vehicle_details.dart';
+import 'dart:convert';
 
+import 'package:http/http.dart' as http;
+
+import '../../util/url.dart';
+import '../querry_model.dart';
+import 'vehicle_details.dart';
 ///CORE DETAILS CLASS
 /// This class represents a single core used in a SpaceX mission,
 /// with all its details.
+class CoreModel extends QuerryModel {
+  final String id;
+
+  CoreModel(this.id);
+
+  @override
+  Future loadData() async {
+    response = await http.get(Url.coreDialog + id);
+    clearLists();
+
+    items.add(CoreDetails.fromJson(json.decode(response.body)));
+
+    loadingState(false);
+  }
+
+  CoreDetails get core => items[0];
+}
+
 class CoreDetails extends VehicleDetails {
   final int block, rtlsLandings, asdsLandings;
 

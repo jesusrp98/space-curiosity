@@ -1,8 +1,32 @@
+import 'dart:convert';
+
+import 'package:http/http.dart' as http;
+
+import '../../util/url.dart';
+import '../querry_model.dart';
 import 'vehicle_details.dart';
 
 /// CAPSULE DETAILS CLASS
 /// This class represents a real capsule used in a CRS mission,
 /// with all its details.
+class CapsuleModel extends QuerryModel {
+  final String id;
+
+  CapsuleModel(this.id);
+
+  @override
+  Future loadData() async {
+    response = await http.get(Url.capsuleDialog + id);
+    clearLists();
+
+    items.add(CapsuleDetails.fromJson(json.decode(response.body)));
+
+    loadingState(false);
+  }
+
+  CapsuleDetails get capsule => items[0];
+} 
+
 class CapsuleDetails extends VehicleDetails {
   final String name;
   final int landings;

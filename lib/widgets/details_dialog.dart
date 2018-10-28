@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 
 import '../models/rockets/capsule_details.dart';
 import '../models/rockets/core_details.dart';
-import '../models/rockets/launchpad_info.dart';
+import '../models/rockets/launchpad.dart';
 import '../util/colors.dart';
 import '../util/url.dart';
 import 'row_item.dart';
@@ -103,7 +103,7 @@ class DetailsDialog extends StatelessWidget {
 
     switch (type) {
       case 0:
-        return LaunchpadInfo.fromJson(jsonDecoded);
+        return Launchpad.fromJson(jsonDecoded);
       case 1:
         return CoreDetails.fromJson(jsonDecoded);
       default:
@@ -112,7 +112,7 @@ class DetailsDialog extends StatelessWidget {
   }
 
   /// Builds the body of the dialog with the launchpad info
-  static Widget _launchpadDialog(LaunchpadInfo launchpad) {
+  static Widget _launchpadDialog(Launchpad launchpad) {
     return _buildBody(
       body: Column(children: <Widget>[
         Text(

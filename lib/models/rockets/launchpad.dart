@@ -1,11 +1,36 @@
-/// LAUNCHPAD INFO CLASS
+import 'dart:convert';
+
+import 'package:http/http.dart' as http;
+
+import '../../util/url.dart';
+import '../querry_model.dart';
+
+/// LAUNCHPAD CLASS
 /// This class represents a real launchpad used in a SpaceX mission,
 /// with all its details.
-class LaunchpadInfo {
+class LaunchpadModel extends QuerryModel {
+  final String id;
+
+  LaunchpadModel(this.id);
+
+  @override
+  Future loadData() async {
+    response = await http.get(Url.launchpadDialog + id);
+    clearLists();
+
+    items.add(Launchpad.fromJson(json.decode(response.body)));
+
+    loadingState(false);
+  }
+
+  Launchpad get launchpad => items[0];
+}
+
+class Launchpad {
   final String name, status, location, state, details;
   final List<double> coordinates;
 
-  LaunchpadInfo({
+  Launchpad({
     this.name,
     this.status,
     this.location,
@@ -14,8 +39,8 @@ class LaunchpadInfo {
     this.coordinates,
   });
 
-  factory LaunchpadInfo.fromJson(Map<String, dynamic> json) {
-    return LaunchpadInfo(
+  factory Launchpad.fromJson(Map<String, dynamic> json) {
+    return Launchpad(
       name: json['site_name_long'],
       status: json['status'],
       location: json['location']['name'],
