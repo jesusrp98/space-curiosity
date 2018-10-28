@@ -19,14 +19,15 @@ class LaunchesModel extends QuerryModel {
   @override
   Future loadData() async {
     response = await http.get(type == 0 ? Url.upcomingList : Url.launchesList);
-
     snapshot = json.decode(response.body);
+    clearLists();
+
     items.addAll(snapshot.map((launch) => Launch.fromJson(launch)).toList());
 
     if (type == 0)
-      images.addAll(Url.spacexUpcomingScreen.sublist(0, 5));
+      images.addAll(Url.spacexUpcomingScreen);
     else
-      images.addAll(getItem(0).photos.sublist(0, 5));
+      images.addAll(getItem(0).photos.sublist(0, 3));
 
     loadingState(false);
   }

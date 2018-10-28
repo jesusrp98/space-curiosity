@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
@@ -159,8 +160,10 @@ class SpacexCompanyTab extends StatelessWidget {
 
   Widget _buildImage(BuildContext context, int index) {
     return ScopedModelDescendant<SpacexCompanyModel>(
-      builder: (context, child, model) => Image.network(
-            model.getImageUrl(index),
+      builder: (context, child, model) => CachedNetworkImage(
+            imageUrl: model.getImageUrl(index),
+            errorWidget: const Icon(Icons.error),
+            fadeInDuration: Duration(milliseconds: 100),
             fit: BoxFit.cover,
           ),
     );

@@ -33,12 +33,7 @@ class Url {
     'https://farm5.staticflickr.com/4183/34296430820_c48e601ca1_c.jpg',
     'https://farm1.staticflickr.com/293/32312415025_6841e30bf1_c.jpg',
     'https://farm5.staticflickr.com/4483/37610547226_c8002032bc_c.jpg',
-    'https://farm5.staticflickr.com/4393/36073897213_3e284c477b_c.jpg',
     'https://farm5.staticflickr.com/4235/35359372730_99255c4a20_c.jpg',
-    'https://farm3.staticflickr.com/2900/33578357343_f673899dbc_c.jpg',
-    'https://farm3.staticflickr.com/2874/34357262105_7871595659_c.jpg',
-    'https://farm8.staticflickr.com/7519/26822457306_379a806b54_c.jpg',
-    'https://farm2.staticflickr.com/1640/23779742713_e080ff9932_c.jpg',
     'https://farm9.staticflickr.com/8601/16512864369_27bb414c91_c.jpg',
   ];
 

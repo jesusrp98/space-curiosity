@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import '../../../models/querry_model.dart';
@@ -73,7 +74,7 @@ class _SpacexTabScreen extends State<SpacexScreen> {
           ),
           BottomNavigationBarItem(
             title: const Text('Vehicles'),
-            icon: Icon(Icons.directions_car),
+            icon: Icon(FontAwesomeIcons.rocket),
           ),
           BottomNavigationBarItem(
             title: const Text('Upcoming'),
@@ -85,7 +86,7 @@ class _SpacexTabScreen extends State<SpacexScreen> {
           ),
           BottomNavigationBarItem(
             title: const Text('Company'),
-            icon: Icon(Icons.receipt),
+            icon: Icon(Icons.location_city),
           ),
         ],
       ),

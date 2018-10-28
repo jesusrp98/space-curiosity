@@ -1,13 +1,14 @@
 import 'dart:async';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
-import '../../../util/colors.dart';
 
 import '../../../models/rockets/vehicle.dart';
+import '../../../util/colors.dart';
 import '../../../widgets/hero_image.dart';
 import '../../../widgets/list_cell.dart';
 import 'page_capsule.dart';
@@ -117,8 +118,10 @@ class VehiclesTab extends StatelessWidget {
 
   Widget _buildImage(BuildContext context, int index) {
     return ScopedModelDescendant<VehiclesModel>(
-      builder: (context, child, model) => Image.network(
-            model.getImageUrl(index),
+      builder: (context, child, model) => CachedNetworkImage(
+            imageUrl: model.getImageUrl(index),
+            errorWidget: const Icon(Icons.error),
+            fadeInDuration: Duration(milliseconds: 100),
             fit: BoxFit.cover,
           ),
     );

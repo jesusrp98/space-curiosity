@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 
@@ -32,8 +33,10 @@ class PhotoCard extends StatelessWidget {
             Expanded(
               child: Hero(
                 tag: image.getDate,
-                child: Image.network(
-                  image.url,
+                child: CachedNetworkImage(
+                  imageUrl: image.url,
+                  errorWidget: const Icon(Icons.error),
+                  fadeInDuration: Duration(milliseconds: 100),
                   fit: BoxFit.cover,
                 ),
               ),

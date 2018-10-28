@@ -10,8 +10,7 @@ abstract class QuerryModel extends Model {
   bool _loading = true;
 
   Future refresh() async {
-    _items.clear();
-    _images.clear();
+    clearLists();
     await loadData();
     notifyListeners();
   }
@@ -36,4 +35,9 @@ abstract class QuerryModel extends Model {
   dynamic getItem(index) => _items[index];
 
   bool get isLoading => _loading;
+
+  clearLists() {
+    _items.clear();
+    _images.clear();
+  }
 }
