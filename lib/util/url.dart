@@ -3,28 +3,32 @@ import 'keys.dart';
 /// URL CLASS
 /// It has all urls used in the app as static const strings
 class Url {
-  /// Home page lists
-  static const String rocketList = 'https://api.spacexdata.com/v3/rockets';
-  static const String capsuleList = 'https://api.spacexdata.com/v3/dragons';
-  static const String roadsterPage = 'https://api.spacexdata.com/v3/roadster';
-  static const String upcomingList =
-      'https://api.spacexdata.com/v3/launches/upcoming';
-  static const String launchesList =
-      'https://api.spacexdata.com/v3/launches/past?order=desc';
-  static const String shipsList =
-      'https://api.spacexdata.com/v3/ships?active=true';
+  //Base urls
+  static const String spacexBaseUrl = 'https://api.spacexdata.com/v3';
+  static const String nasaBaseUrl = 'https://api.nasa.gov/planetary/apod';
 
-  /// Details dialogs
+  // Home page lists
+  static const String rocketList = '$spacexBaseUrl/rockets';
+  static const String capsuleList = '$spacexBaseUrl/dragons';
+  static const String roadsterPage = '$spacexBaseUrl/roadster';
+  static const String upcomingList = '$spacexBaseUrl/launches/upcoming';
+  static const String launchesList = '$spacexBaseUrl/launches/past?order=desc';
+  static const String shipsList = '$spacexBaseUrl/ships?active=true';
+
+  // Details dialogs
   static const List<String> detailsPage = [
-    'https://api.spacexdata.com/v3/launchpads/',
-    'https://api.spacexdata.com/v3/cores/',
-    'https://api.spacexdata.com/v3/capsules/',
+    '$spacexBaseUrl/launchpads/',
+    '$spacexBaseUrl/cores/',
+    '$spacexBaseUrl/capsules/',
   ];
+  static const String coreDialog = '$spacexBaseUrl/cores/';
+  static const String capsuleDialog = '$spacexBaseUrl/capsules/';
+  static const String launchpadDialog = '$spacexBaseUrl/launchpads/';
+  static const String landingpadDialog = '$spacexBaseUrl/landingpads/';
 
-  static const String coreDialog = 'https://api.spacexdata.com/v3/cores/';
-  static const String capsuleDialog = 'https://api.spacexdata.com/v3/capsules/';
-  static const String launchpadDialog = 'https://api.spacexdata.com/v3/launchpads/';
-  static const String landingpadDialog = '';
+  // SpaceX related info
+  static const String spacexCompany = '$spacexBaseUrl/info';
+  static const String spacexAchievements = '$spacexBaseUrl/history';
 
   static const List<String> spacexCompanyScreen = [
     'https://www.spacex.com/sites/spacex/files/styles/media_gallery_large/public/2014_-_11orbcomm_f9_in_hanger.jpg?itok=gqP7Qmrg',
@@ -43,25 +47,34 @@ class Url {
   ];
 
   static const List<String> spacexHomeScreen = [
-
+    'https://www.spacex.com/sites/spacex/files/styles/media_gallery_large/public/2014_-_11orbcomm_f9_in_hanger.jpg?itok=gqP7Qmrg',
+    'https://farm2.staticflickr.com/1854/30934146778_765ea9f486_c.jpg',
+    'https://farm5.staticflickr.com/4615/40143096241_11128929df_c.jpg',
+    'https://farm5.staticflickr.com/4227/34223076793_569a584d33_c.jpg',
+    'https://www.spacex.com/sites/spacex/files/styles/media_gallery_large/public/2015_-_04_crs5_dragon_orbit13.jpg?itok=9p8_l7UP',
+    'https://www.spacex.com/sites/spacex/files/styles/media_gallery_large/public/2015_-_12_default_crew_dragon_interior_wide.jpg?itok=MXp4IjW4',
   ];
 
   static const List<String> spacexCoreDialog = [
-
+    'https://farm2.staticflickr.com/1670/26239020092_e1f620900e_c.jpg',
+    'https://farm8.staticflickr.com/7135/27042449393_5782749d32_c.jpg',
+    'https://farm5.staticflickr.com/4654/25254688767_83c0563d06_c.jpg',
+    'https://farm8.staticflickr.com/7070/26428479314_75e78939f9_c.jpg',
+    'https://farm5.staticflickr.com/4352/36438808381_1da8beb65c_c.jpg',
   ];
 
   static const List<String> spacexCapsuleDialog = [
-
+    'https://www.spacex.com/sites/spacex/files/styles/media_gallery_large/public/2013_-_5_731710main_iss034e060657_full.jpg?itok=JyR6tNGL',
+    'https://www.spacex.com/sites/spacex/files/styles/media_gallery_large/public/2015_-_04_crs5_dragon_orbit13.jpg?itok=9p8_l7UP',
+    'https://farm3.staticflickr.com/2815/32761844973_4b55b27d3c_c.jpg',
+    'https://farm9.staticflickr.com/8664/16669501448_78441c1024_c.jpg',
+    'https://farm8.staticflickr.com/7591/16787988882_0b9896dc9f_c.jpg',
   ];
-
-  // SpaceX related info
-  static const String companyDetails = 'https://api.spacexdata.com/v3/info';
-  static const String companyHistory = 'https://api.spacexdata.com/v3/history';
 
   static const String defaultImage =
       'https://firebasestorage.googleapis.com/v0/b/cherry-3ca39.appspot.com/o/rocket.png?alt=media&token=66f2dde6-e6ff-4f64-a4a4-9fab6dbe90c5';
 
-  /// About page
+  // About page
   static const String authorReddit = 'https://www.reddit.com/user/jesusrp98';
   static const String authorStore =
       'https://play.google.com/store/apps/developer?id=Chechu';
@@ -74,9 +87,8 @@ class Url {
   static const String internationalSystem =
       'https://en.wikipedia.org/wiki/International_System_of_Units';
 
-  /// Nasa images
-  static const String dailyPicture =
-      'https://api.nasa.gov/planetary/apod?api_key=$nasaApiKey';
+  // Nasa images
+  static const String dailyPicture = '$nasaBaseUrl?api_key=$nasaApiKey';
   static const String morePictures =
-      'https://api.nasa.gov/planetary/apod?api_key=$nasaApiKey&count=10';
+      '$nasaBaseUrl?api_key=$nasaApiKey&count=10';
 }
