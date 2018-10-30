@@ -53,9 +53,16 @@ class SpacexHomeTab extends StatelessWidget {
                             ),
                     ),
                   ),
-                  SliverFillRemaining(
-                    child: NativeLoadingIndicator(center: true),
-                  )
+                  (model.isLoading)
+                      ? SliverFillRemaining(
+                          child: NativeLoadingIndicator(center: true),
+                        )
+                      : SliverFillRemaining(
+                          child: Text(
+                            model.getCountdown,
+                            style: Theme.of(context).textTheme.headline,
+                          ),
+                        )
                 ],
               ),
             ),

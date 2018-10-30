@@ -15,6 +15,8 @@ class Url {
   static const String launchesList = '$spacexBaseUrl/launches/past?order=desc';
   static const String shipsList = '$spacexBaseUrl/ships?active=true';
 
+  static const String nextLaunch = '$spacexBaseUrl/launches/next';
+
   // Details dialogs
   static const List<String> detailsPage = [
     '$spacexBaseUrl/launchpads/',
