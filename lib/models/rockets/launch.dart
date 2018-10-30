@@ -126,14 +126,11 @@ class Launch {
       case 'quarter':
         return 'NET ${DateFormat.yQQQ().format(launchDate)}';
       case 'half':
-        return 'NET $getTentativeDateHalf';
+        return 'NET H${launchDate.month < 7 ? 1 : 2} ${launchDate.year}';
       default:
         return 'Date not available';
     }
   }
-
-  String get getTentativeDateHalf =>
-      'H${launchDate.month < 7 ? 1 : 2} ${launchDate.year}';
 
   String get getLocalLaunchDate =>
       DateFormat.yMMMMd().addPattern('Hm', '  ·  ').format(localLaunchDate);
