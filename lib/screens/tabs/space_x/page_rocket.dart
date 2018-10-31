@@ -1,4 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 
 import '../../../models/rockets/rocket_info.dart';
@@ -11,6 +13,7 @@ import '../../../widgets/row_item.dart';
 /// ROCKET PAGE CLASS
 /// This class represent a rocket page. It displays RocketInfo's specs.
 class RocketPage extends StatelessWidget {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final RocketInfo _rocket;
 
   RocketPage(this._rocket);
@@ -18,33 +21,52 @@ class RocketPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Rocket details'),
-        centerTitle: true,
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.public),
-            onPressed: () async => await FlutterWebBrowser.openWebPage(
-                url: _rocket.url, androidToolbarColor: primaryColor),
-            tooltip: 'Wikipedia article',
-          )
+      key: _scaffoldKey,
+      body: CustomScrollView(
+        slivers: <Widget>[
+          SliverAppBar(
+            expandedHeight: MediaQuery.of(context).size.height * 0.3,
+            floating: false,
+            pinned: true,
+            actions: <Widget>[
+              IconButton(
+                icon: const Icon(Icons.public),
+                onPressed: () async => await FlutterWebBrowser.openWebPage(
+                    url: _rocket.url, androidToolbarColor: primaryColor),
+                tooltip: 'Wikipedia article',
+              )
+            ],
+            flexibleSpace: FlexibleSpaceBar(
+              centerTitle: true,
+              title: Text(_rocket.name),
+              background: Swiper(
+                itemCount: _rocket.getPhotosCount,
+                itemBuilder: _buildImage,
+                autoplay: true,
+                autoplayDelay: 6000,
+                duration: 750,
+                onTap: (index) => FlutterWebBrowser.openWebPage(
+                      url: _rocket.getPhotoUrl(index),
+                      androidToolbarColor: primaryColor,
+                    ),
+              ),
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: EdgeInsets.all(16.0),
+              child: Column(children: <Widget>[
+                _rocketCard(context),
+                const SizedBox(height: 8.0),
+                _specsCard(),
+                const SizedBox(height: 8.0),
+                _payloadsCard(),
+                const SizedBox(height: 8.0),
+                _enginesCard(),
+              ]),
+            ),
+          ),
         ],
-      ),
-      body: Scrollbar(
-        child: ListView(children: <Widget>[
-          Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Column(children: <Widget>[
-              _rocketCard(context),
-              const SizedBox(height: 8.0),
-              _specsCard(),
-              const SizedBox(height: 8.0),
-              _payloadsCard(),
-              const SizedBox(height: 8.0),
-              _enginesCard(),
-            ]),
-          )
-        ]),
       ),
     );
   }
@@ -158,6 +180,15 @@ class RocketPage extends StatelessWidget {
           RowItem.textRow('Vacuum thrust', _rocket.getEngineThrustVacuum),
         ],
       ),
+    );
+  }
+
+  Widget _buildImage(BuildContext context, int index) {
+    return CachedNetworkImage(
+      imageUrl: _rocket.getPhotoUrl(index),
+      errorWidget: const Icon(Icons.error),
+      fadeInDuration: Duration(milliseconds: 100),
+      fit: BoxFit.cover,
     );
   }
 }

@@ -74,6 +74,8 @@ abstract class Vehicle {
 
   String get getRandomPhoto => photos[Random().nextInt(getPhotosCount)];
 
+  String getPhotoUrl(index) => photos[index];
+
   bool get hasImages => photos.isNotEmpty;
 
   String get getHeight => '${NumberFormat.decimalPattern().format(height)} m';
