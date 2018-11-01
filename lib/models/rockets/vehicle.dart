@@ -89,6 +89,8 @@ abstract class Vehicle {
 
   String get getFirstFlight => DateFormat.yMMMM().format(firstFlight);
 
+  String get getFullFirstFlight => DateFormat.yMMMMd().format(firstFlight);
+
   String get firstLaunched {
     if (!DateTime.now().isAfter(firstFlight))
       return 'Scheduled to $getFirstFlight';

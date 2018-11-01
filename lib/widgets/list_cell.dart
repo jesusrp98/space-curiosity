@@ -63,22 +63,3 @@ class MissionNumber extends StatelessWidget {
     );
   }
 }
-
-/// VEHICLE STATUS CLASS
-/// Trailing widget which displays vehicle status with an icon.
-class VehicleStatus extends StatelessWidget {
-  final bool status;
-
-  VehicleStatus(this.status);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 6.0),
-      child: Icon(
-        status ? Icons.check_circle : Icons.cancel,
-        color: lateralText,
-      ),
-    );
-  }
-}

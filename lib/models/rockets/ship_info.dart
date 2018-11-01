@@ -80,7 +80,7 @@ class ShipInfo extends Vehicle {
     }
   }
 
-  String get subtitle => 'Ship built in ${firstFlight.year}';
+  String get subtitle => 'Ship built on ${firstFlight.year}';
 
   bool get hasUrl => url != null;
 
@@ -94,9 +94,9 @@ class ShipInfo extends Vehicle {
 
   String get secondaryRole => roles[1];
 
-  String get getHomePort => 'Home at $homePort';
-
   String get getStatus => status ?? 'Unknown';
+
+  String get getBuiltFullDate => DateFormat.yMMMM().format(firstFlight);
 
   String get getSpeed => speed == null
       ? 'Unknown'

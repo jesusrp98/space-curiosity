@@ -102,8 +102,9 @@ class RocketInfo extends Vehicle {
   String get getLaunchCost =>
       NumberFormat.currency(symbol: "\$", decimalDigits: 0).format(launchCost);
 
-  String get getSuccessRate =>
-      NumberFormat.percentPattern().format(successRate / 100);
+  String get getSuccessRate => (DateTime.now().isAfter(firstFlight))
+      ? NumberFormat.percentPattern().format(successRate / 100)
+      : '--%';
 
   String get getEngineThrustSea =>
       '${NumberFormat.decimalPattern().format(engineThrustSea)} kN';

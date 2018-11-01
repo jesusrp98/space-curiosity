@@ -1,16 +1,16 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 
 import '../../../models/rockets/ship_info.dart';
 import '../../../util/colors.dart';
 import '../../../widgets/card_page.dart';
-import '../../../widgets/head_card_page.dart';
-import '../../../widgets/hero_image.dart';
 import '../../../widgets/row_item.dart';
 
 /// SHIP PAGE CLASS
 /// This class represent a ship page. It displays Ship's specs.
 class ShipPage extends StatelessWidget {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final ShipInfo _ship;
 
   ShipPage(this._ship);
@@ -18,90 +18,80 @@ class ShipPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Ship details'),
-        centerTitle: true,
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.public),
-            onPressed: () async {
-              if (_ship.hasUrl)
-                await FlutterWebBrowser.openWebPage(
-                    url: _ship.url, androidToolbarColor: primaryColor);
-              else
-                showDialog(
-                  context: context,
-                  builder: (context) => AlertDialog(
-                        title: Text('Unavailable link'),
-                        content: Text(
-                          'Link has not been yet provided by the service. Please try again at a later time.',
-                        ),
-                        actions: <Widget>[
-                          FlatButton(
-                              child: Text('OK'),
-                              onPressed: () => Navigator.of(context).pop()),
+      key: _scaffoldKey,
+      body: CustomScrollView(
+        slivers: <Widget>[
+          SliverAppBar(
+            expandedHeight: MediaQuery.of(context).size.height * 0.3,
+            floating: false,
+            pinned: true,
+            actions: <Widget>[
+              IconButton(
+                icon: const Icon(Icons.public),
+                onPressed: () async => await FlutterWebBrowser.openWebPage(
+                    url: _ship.url, androidToolbarColor: primaryColor),
+                tooltip: 'MarineTraffic page',
+              )
+            ],
+            flexibleSpace: FlexibleSpaceBar(
+              centerTitle: true,
+              title: Text(_ship.name),
+              background: InkWell(
+                onTap: () => FlutterWebBrowser.openWebPage(
+                      url: _ship.getProfilePhoto,
+                      androidToolbarColor: primaryColor,
+                    ),
+                child: Hero(
+                  tag: _ship.id,
+                  child: CachedNetworkImage(
+                    imageUrl: _ship.getProfilePhoto,
+                    errorWidget: const Icon(Icons.error),
+                    fadeInDuration: Duration(milliseconds: 100),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: EdgeInsets.all(16.0),
+              child: Column(children: <Widget>[
+                _shipCard(),
+                const SizedBox(height: 8.0),
+                _specsCard(),
+                (_ship.isLandable)
+                    ? Column(
+                        children: <Widget>[
+                          const SizedBox(height: 8.0),
+                          _landingsCard(),
                         ],
-                      ),
-                );
-            },
-            tooltip: 'MarineTraffic page',
-          )
+                      )
+                    : const SizedBox(height: 0.0),
+              ]),
+            ),
+          ),
         ],
-      ),
-      body: Scrollbar(
-        child: ListView(children: <Widget>[
-          Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Column(children: <Widget>[
-              _shipCard(context),
-              const SizedBox(height: 8.0),
-              _specsCard(),
-              (_ship.isLandable)
-                  ? Column(
-                      children: <Widget>[
-                        const SizedBox(height: 8.0),
-                        _landingsCard(),
-                      ],
-                    )
-                  : const SizedBox(height: 0.0),
-            ]),
-          )
-        ]),
       ),
     );
   }
 
-  Widget _shipCard(BuildContext context) {
-    return HeadCardPage(
-      image: HeroImage().buildExpandedHero(
-        context: context,
-        size: HeroImage.bigSize,
-        url: _ship.getProfilePhoto,
-        tag: _ship.id,
-        title: _ship.name,
-      ),
-      title: _ship.name,
-      subtitle: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+  Widget _shipCard() {
+    return CardPage(
+      title: 'DESCRIPTION',
+      body: Column(
         children: <Widget>[
-          Text(
-            _ship.getHomePort,
-            style: Theme.of(context)
-                .textTheme
-                .subhead
-                .copyWith(color: secondaryText),
-          ),
+          RowItem.textRow('Home port', _ship.homePort),
           const SizedBox(height: 12.0),
+          RowItem.textRow('Built date', _ship.getBuiltFullDate),
+          const Divider(height: 24.0),
           Text(
-            _ship.subtitle,
-            style: Theme.of(context)
-                .textTheme
-                .subhead
-                .copyWith(color: secondaryText),
-          ),
+            _ship.description,
+            textAlign: TextAlign.justify,
+            style: TextStyle(fontSize: 15.0, color: secondaryText),
+          )
         ],
       ),
-      details: _ship.description,
     );
   }
 

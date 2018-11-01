@@ -1,16 +1,17 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 
 import '../../../models/rockets/capsule_info.dart';
 import '../../../util/colors.dart';
 import '../../../widgets/card_page.dart';
-import '../../../widgets/head_card_page.dart';
-import '../../../widgets/hero_image.dart';
 import '../../../widgets/row_item.dart';
 
 /// CAPSULE PAGE CLASS
 /// This class represent a capsule page. It displays CapsuleInfo's specs.
 class CapsulePage extends StatelessWidget {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final CapsuleInfo _capsule;
 
   CapsulePage(this._capsule);
@@ -18,64 +19,78 @@ class CapsulePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Capsule details'),
-        centerTitle: true,
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.public),
-            onPressed: () async => await FlutterWebBrowser.openWebPage(
-                url: _capsule.url, androidToolbarColor: primaryColor),
-            tooltip: 'Wikipedia article',
-          )
+      key: _scaffoldKey,
+      body: CustomScrollView(
+        slivers: <Widget>[
+          SliverAppBar(
+            expandedHeight: MediaQuery.of(context).size.height * 0.3,
+            floating: false,
+            pinned: true,
+            actions: <Widget>[
+              IconButton(
+                icon: const Icon(Icons.public),
+                onPressed: () async => await FlutterWebBrowser.openWebPage(
+                    url: _capsule.url, androidToolbarColor: primaryColor),
+                tooltip: 'Wikipedia article',
+              )
+            ],
+            flexibleSpace: FlexibleSpaceBar(
+              centerTitle: true,
+              title: Text(_capsule.name),
+              background: Swiper(
+                itemCount: _capsule.getPhotosCount,
+                itemBuilder: _buildImage,
+                autoplay: true,
+                autoplayDelay: 6000,
+                duration: 750,
+                onTap: (index) => FlutterWebBrowser.openWebPage(
+                      url: _capsule.getPhotoUrl(index),
+                      androidToolbarColor: primaryColor,
+                    ),
+              ),
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: EdgeInsets.all(16.0),
+              child: Column(children: <Widget>[
+                _capsuleCard(),
+                const SizedBox(height: 8.0),
+                _specsCard(),
+                const SizedBox(height: 8.0),
+                _thrustersCard(),
+              ]),
+            ),
+          ),
         ],
       ),
-      body: ListView(children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(children: <Widget>[
-            _capsuleCard(context),
-            const SizedBox(height: 8.0),
-            _specsCard(),
-            const SizedBox(height: 8.0),
-            _thrustersCard(),
-          ]),
-        ),
-      ]),
     );
   }
 
-  Widget _capsuleCard(BuildContext context) {
-    return HeadCardPage(
-      image: HeroImage().buildExpandedHero(
-        context: context,
-        size: HeroImage.bigSize,
-        url: _capsule.getProfilePhoto,
-        tag: _capsule.id,
-        title: _capsule.name,
-      ),
-      title: _capsule.name,
-      subtitle: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+  Widget _capsuleCard() {
+    return CardPage(
+      title: 'DESCRIPTION',
+      body: Column(
         children: <Widget>[
-          Text(
-            _capsule.firstLaunched,
-            style: Theme.of(context)
-                .textTheme
-                .subhead
-                .copyWith(color: secondaryText),
-          ),
+          RowItem.textRow(
+              (DateTime.now().isAfter(_capsule.firstFlight))
+                  ? 'Maiden launch'
+                  : 'Scheduled maiden launch',
+              _capsule.getFullFirstFlight),
           const SizedBox(height: 12.0),
+          RowItem.textRow('Crew capacity', _capsule.getCrew),
+          const SizedBox(height: 12.0),
+          RowItem.iconRow('Reusable', _capsule.reusable),
+          const SizedBox(height: 12.0),
+          RowItem.iconRow('Active', _capsule.active),
+          const Divider(height: 24.0),
           Text(
-            _capsule.capsuleType,
-            style: Theme.of(context)
-                .textTheme
-                .subhead
-                .copyWith(color: secondaryText),
-          ),
+            _capsule.description,
+            textAlign: TextAlign.justify,
+            style: TextStyle(fontSize: 15.0, color: secondaryText),
+          )
         ],
       ),
-      details: _capsule.description,
     );
   }
 
@@ -85,10 +100,6 @@ class CapsulePage extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          RowItem.textRow('Crew capacity', _capsule.getCrew),
-          const SizedBox(height: 12.0),
-          RowItem.iconRow('Reusable', _capsule.reusable),
-          const Divider(height: 24.0),
           RowItem.textRow('Launch payload', _capsule.getLaunchMass),
           const SizedBox(height: 12.0),
           RowItem.textRow('Return paylaod', _capsule.getReturnMass),
@@ -133,5 +144,18 @@ class CapsulePage extends StatelessWidget {
       const SizedBox(height: 12.0),
       RowItem.textRow('Thrust', thruster.getThrust),
     ]);
+  }
+
+  Widget _buildImage(BuildContext context, int index) {
+    CachedNetworkImage photo = CachedNetworkImage(
+      imageUrl: _capsule.getPhotoUrl(index),
+      errorWidget: const Icon(Icons.error),
+      fadeInDuration: Duration(milliseconds: 100),
+      fit: BoxFit.cover,
+    );
+    if (index == 0)
+      return Hero(tag: _capsule.id, child: photo);
+    else
+      return photo;
   }
 }

@@ -6,8 +6,6 @@ import 'package:flutter_web_browser/flutter_web_browser.dart';
 import '../../../models/rockets/rocket_info.dart';
 import '../../../util/colors.dart';
 import '../../../widgets/card_page.dart';
-import '../../../widgets/head_card_page.dart';
-import '../../../widgets/hero_image.dart';
 import '../../../widgets/row_item.dart';
 
 /// ROCKET PAGE CLASS
@@ -56,7 +54,7 @@ class RocketPage extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.all(16.0),
               child: Column(children: <Widget>[
-                _rocketCard(context),
+                _rocketCard(),
                 const SizedBox(height: 8.0),
                 _specsCard(),
                 const SizedBox(height: 8.0),
@@ -71,63 +69,33 @@ class RocketPage extends StatelessWidget {
     );
   }
 
-  Widget _rocketCard(BuildContext context) {
-    // return HeadCardPage(
-    //   image: HeroImage().buildExpandedHero(
-    //     context: context,
-    //     size: HeroImage.bigSize,
-    //     url: _rocket.getProfilePhoto,
-    //     tag: _rocket.id,
-    //     title: _rocket.name,
-    //   ),
-    //   title: _rocket.name,
-    //   subtitle: Column(
-    //     crossAxisAlignment: CrossAxisAlignment.start,
-    //     children: <Widget>[
-    //       Text(
-    //         _rocket.subtitle,
-    //         style: Theme.of(context)
-    //             .textTheme
-    //             .subhead
-    //             .copyWith(color: secondaryText),
-    //       ),
-    //       const SizedBox(height: 12.0),
-    //       Text(
-    //         'Success rate: ${_rocket.getSuccessRate}',
-    //         style: Theme.of(context)
-    //             .textTheme
-    //             .subhead
-    //             .copyWith(color: secondaryText),
-    //       ),
-    //     ],
-    //   ),
-    //   details: _rocket.description,
-    // );
+  Widget _rocketCard() {
     return CardPage(
-        title: 'DESCRIPTION',
-        body: Column(
-          children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text(
-                  _rocket.subtitle,
-                  style: Theme.of(context).textTheme.subhead,
-                ),
-                Text(
-                  'Success rate: ${_rocket.getSuccessRate}',
-                  style: Theme.of(context).textTheme.subhead,
-                ),
-              ],
-            ),
-            Container(height: 16.0),
-            Text(
-              _rocket.description,
-              textAlign: TextAlign.justify,
-              style: TextStyle(fontSize: 15.0, color: secondaryText),
-            )
-          ],
-        ));
+      title: 'DESCRIPTION',
+      body: Column(
+        children: <Widget>[
+          RowItem.textRow(
+              (DateTime.now().isAfter(_rocket.firstFlight))
+                  ? 'Maiden launch'
+                  : 'Scheduled maiden launch',
+              _rocket.getFullFirstFlight),
+          const SizedBox(height: 12.0),
+          RowItem.textRow('Launch cost', _rocket.getLaunchCost),
+          const SizedBox(height: 12.0),
+          RowItem.textRow('Success rate', _rocket.getSuccessRate),
+          const SizedBox(height: 12.0),
+          RowItem.iconRow('Reusable', _rocket.reusable),
+          const SizedBox(height: 12.0),
+          RowItem.iconRow('Active', _rocket.active),
+          const Divider(height: 24.0),
+          Text(
+            _rocket.description,
+            textAlign: TextAlign.justify,
+            style: TextStyle(fontSize: 15.0, color: secondaryText),
+          )
+        ],
+      ),
+    );
   }
 
   Widget _specsCard() {
@@ -136,11 +104,7 @@ class RocketPage extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          RowItem.textRow('Launch cost', _rocket.getLaunchCost),
-          const SizedBox(height: 12.0),
           RowItem.textRow('Rocket stages', _rocket.getStages),
-          const SizedBox(height: 12.0),
-          RowItem.iconRow('Reusable', _rocket.reusable),
           const Divider(height: 24.0),
           RowItem.textRow('Fairing height', _rocket.fairingHeight),
           const SizedBox(height: 12.0),

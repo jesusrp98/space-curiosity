@@ -94,7 +94,6 @@ class VehiclesTab extends StatelessWidget {
                 ),
                 title: vehicle.name,
                 subtitle: vehicle.subtitle,
-                trailing: VehicleStatus(vehicle.active),
                 onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
