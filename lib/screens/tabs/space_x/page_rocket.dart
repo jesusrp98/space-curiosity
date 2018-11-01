@@ -72,37 +72,62 @@ class RocketPage extends StatelessWidget {
   }
 
   Widget _rocketCard(BuildContext context) {
-    return HeadCardPage(
-      image: HeroImage().buildExpandedHero(
-        context: context,
-        size: HeroImage.bigSize,
-        url: _rocket.getProfilePhoto,
-        tag: _rocket.id,
-        title: _rocket.name,
-      ),
-      title: _rocket.name,
-      subtitle: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text(
-            _rocket.subtitle,
-            style: Theme.of(context)
-                .textTheme
-                .subhead
-                .copyWith(color: secondaryText),
-          ),
-          const SizedBox(height: 12.0),
-          Text(
-            'Success rate: ${_rocket.getSuccessRate}',
-            style: Theme.of(context)
-                .textTheme
-                .subhead
-                .copyWith(color: secondaryText),
-          ),
-        ],
-      ),
-      details: _rocket.description,
-    );
+    // return HeadCardPage(
+    //   image: HeroImage().buildExpandedHero(
+    //     context: context,
+    //     size: HeroImage.bigSize,
+    //     url: _rocket.getProfilePhoto,
+    //     tag: _rocket.id,
+    //     title: _rocket.name,
+    //   ),
+    //   title: _rocket.name,
+    //   subtitle: Column(
+    //     crossAxisAlignment: CrossAxisAlignment.start,
+    //     children: <Widget>[
+    //       Text(
+    //         _rocket.subtitle,
+    //         style: Theme.of(context)
+    //             .textTheme
+    //             .subhead
+    //             .copyWith(color: secondaryText),
+    //       ),
+    //       const SizedBox(height: 12.0),
+    //       Text(
+    //         'Success rate: ${_rocket.getSuccessRate}',
+    //         style: Theme.of(context)
+    //             .textTheme
+    //             .subhead
+    //             .copyWith(color: secondaryText),
+    //       ),
+    //     ],
+    //   ),
+    //   details: _rocket.description,
+    // );
+    return CardPage(
+        title: 'DESCRIPTION',
+        body: Column(
+          children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text(
+                  _rocket.subtitle,
+                  style: Theme.of(context).textTheme.subhead,
+                ),
+                Text(
+                  'Success rate: ${_rocket.getSuccessRate}',
+                  style: Theme.of(context).textTheme.subhead,
+                ),
+              ],
+            ),
+            Container(height: 16.0),
+            Text(
+              _rocket.description,
+              textAlign: TextAlign.justify,
+              style: TextStyle(fontSize: 15.0, color: secondaryText),
+            )
+          ],
+        ));
   }
 
   Widget _specsCard() {
@@ -184,11 +209,15 @@ class RocketPage extends StatelessWidget {
   }
 
   Widget _buildImage(BuildContext context, int index) {
-    return CachedNetworkImage(
+    CachedNetworkImage photo = CachedNetworkImage(
       imageUrl: _rocket.getPhotoUrl(index),
       errorWidget: const Icon(Icons.error),
       fadeInDuration: Duration(milliseconds: 100),
       fit: BoxFit.cover,
     );
+    if (index == 0)
+      return Hero(tag: _rocket.id, child: photo);
+    else
+      return photo;
   }
 }
