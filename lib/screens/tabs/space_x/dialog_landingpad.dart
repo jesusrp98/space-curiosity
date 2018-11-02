@@ -1,6 +1,4 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
@@ -22,21 +20,19 @@ class LandingpadDialog extends StatelessWidget {
                 expandedHeight: MediaQuery.of(context).size.height * 0.3,
                 floating: false,
                 pinned: true,
-                // actions: <Widget>[
-                //   PopupMenuButton<String>(
-                //     itemBuilder: (context) => _popupItems
-                //         .map((f) => PopupMenuItem(value: f, child: Text(f)))
-                //         .toList(),
-                //     onSelected: (option) => FlutterWebBrowser.openWebPage(
-                //           url: model
-                //               .company.links[_popupItems.indexOf(option)],
-                //           androidToolbarColor: primaryColor,
-                //         ),
-                //   ),
-                // ],
+                actions: <Widget>[
+                  IconButton(
+                    icon: const Icon(Icons.public),
+                    onPressed: () => FlutterWebBrowser.openWebPage(
+                          url: model.landingpad.url,
+                          androidToolbarColor: primaryColor,
+                        ),
+                    tooltip: 'Wikipedia article',
+                  )
+                ],
                 flexibleSpace: FlexibleSpaceBar(
                   centerTitle: true,
-                  // title: Text('About ${model.company.name}'),
+                  title: Text(model.landingpad.name),
                   // background: (model.isLoading)
                   //     ? NativeLoadingIndicator(center: true)
                   //     : Swiper(
@@ -71,39 +67,36 @@ class LandingpadDialog extends StatelessWidget {
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
                     children: <Widget>[
-                      // Text(
-                      //   model.company.fullName,
-                      //   style: Theme.of(context).textTheme.subhead,
-                      // ),
-                      // Container(height: 8.0),
-                      // Text(
-                      //   model.company.getFounderDate,
-                      //   style: Theme.of(context)
-                      //       .textTheme
-                      //       .subhead
-                      //       .copyWith(color: secondaryText),
-                      // ),
-                      // Container(height: 12.0),
-                      // RowItem.textRow('CEO', model.company.ceo),
-                      // Container(height: 12.0),
-                      // RowItem.textRow('CTO', model.company.cto),
-                      // Container(height: 12.0),
-                      // RowItem.textRow('COO', model.company.coo),
-                      // Container(height: 12.0),
-                      // RowItem.textRow('Valuation', model.company.getValuation),
-                      // Container(height: 12.0),
-                      // RowItem.textRow('Location', model.company.getLocation),
-                      // Container(height: 12.0),
-                      // RowItem.textRow('Employees', model.company.getEmployees),
-                      // Container(height: 12.0),
-                      // Text(
-                      //   model.company.details,
-                      //   textAlign: TextAlign.justify,
-                      //   style: Theme.of(context)
-                      //       .textTheme
-                      //       .subhead
-                      //       .copyWith(color: secondaryText),
-                      // ),
+                      RowItem.textRow('Status', model.landingpad.getStatus),
+                      const SizedBox(height: 8.0),
+                      RowItem.textRow('Location', model.landingpad.location),
+                      const SizedBox(height: 8.0),
+                      RowItem.textRow('State', model.landingpad.state),
+                      const SizedBox(height: 8.0),
+                      RowItem.textRow(
+                        'Coordinates',
+                        model.landingpad.getCoordinates,
+                      ),
+                      RowItem.textRow(
+                        'Landing type',
+                        model.landingpad.type,
+                      ),
+                      const SizedBox(height: 8.0),
+                      RowItem.textRow(
+                        'Attempted landings',
+                        model.landingpad.getAttemptedLaunches,
+                      ),
+                      const SizedBox(height: 8.0),
+                      RowItem.textRow(
+                        'Successful landings',
+                        model.landingpad.getSuccessfulLaunches,
+                      ),
+                      const Divider(height: 24.0),
+                      Text(
+                        model.landingpad.details,
+                        textAlign: TextAlign.justify,
+                        style: TextStyle(fontSize: 15.0, color: secondaryText),
+                      ),
                     ],
                   ),
                 ),

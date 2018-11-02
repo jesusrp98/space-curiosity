@@ -1,6 +1,4 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
@@ -22,18 +20,16 @@ class LaunchpadDialog extends StatelessWidget {
                 expandedHeight: MediaQuery.of(context).size.height * 0.3,
                 floating: false,
                 pinned: true,
-                // actions: <Widget>[
-                //   PopupMenuButton<String>(
-                //     itemBuilder: (context) => _popupItems
-                //         .map((f) => PopupMenuItem(value: f, child: Text(f)))
-                //         .toList(),
-                //     onSelected: (option) => FlutterWebBrowser.openWebPage(
-                //           url: model
-                //               .company.links[_popupItems.indexOf(option)],
-                //           androidToolbarColor: primaryColor,
-                //         ),
-                //   ),
-                // ],
+                actions: <Widget>[
+                  IconButton(
+                    icon: const Icon(Icons.public),
+                    onPressed: () => FlutterWebBrowser.openWebPage(
+                          url: model.launchpad.url,
+                          androidToolbarColor: primaryColor,
+                        ),
+                    tooltip: 'Wikipedia article',
+                  )
+                ],
                 flexibleSpace: FlexibleSpaceBar(
                   centerTitle: true,
                   title: Text(model.launchpad.name),
@@ -71,12 +67,6 @@ class LaunchpadDialog extends StatelessWidget {
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
                     children: <Widget>[
-                      Text(
-                        model.launchpad.name,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 17.0, color: primaryText),
-                      ),
-                      const SizedBox(height: 8.0),
                       RowItem.textRow('Status', model.launchpad.getStatus),
                       const SizedBox(height: 8.0),
                       RowItem.textRow('Location', model.launchpad.location),
@@ -86,6 +76,15 @@ class LaunchpadDialog extends StatelessWidget {
                       RowItem.textRow(
                         'Coordinates',
                         model.launchpad.getCoordinates,
+                      ),
+                      RowItem.textRow(
+                        'Attempted launches',
+                        model.launchpad.getAttemptedLandings,
+                      ),
+                      const SizedBox(height: 8.0),
+                      RowItem.textRow(
+                        'Successful launches',
+                        model.launchpad.getSuccessfulLandings,
                       ),
                       const Divider(height: 24.0),
                       Text(

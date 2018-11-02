@@ -27,14 +27,13 @@ class LaunchpadModel extends QuerryModel {
 }
 
 class Launchpad {
-  final String name, status, type, location, state, details, url;
+  final String name, status, location, state, details, url;
   final List<double> coordinates;
   final int attemptedLandings, successfulLandings;
 
   Launchpad({
     this.name,
     this.status,
-    this.type,
     this.location,
     this.state,
     this.details,
@@ -48,7 +47,6 @@ class Launchpad {
     return Launchpad(
       name: json['site_name_long'],
       status: json['status'],
-      type: json['landing_type'],
       location: json['location']['name'],
       state: json['location']['region'],
       details: json['details'],
@@ -67,4 +65,8 @@ class Launchpad {
   String get getCoordinates => (coordinates[0].toStringAsPrecision(5) +
       ',  ' +
       coordinates[1].toStringAsPrecision(5));
+
+  String get getAttemptedLandings => attemptedLandings.toString();
+
+  String get getSuccessfulLandings => successfulLandings.toString();
 }

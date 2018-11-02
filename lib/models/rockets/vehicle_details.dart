@@ -19,7 +19,7 @@ abstract class VehicleDetails {
 
   String get getDetails;
 
-  String get getFirstLaunched => DateFormat.yMMMM().format(firstLaunched);
+  String get getFirstLaunched => DateFormat.yMMMMd().format(firstLaunched);
 
   String get getMissions {
     String allMissions = '';
