@@ -1,10 +1,11 @@
 import 'dart:convert';
 
+import 'package:duration/duration.dart';
 import 'package:http/http.dart' as http;
-import 'package:space_news/models/rockets/launch.dart';
 
 import '../../util/url.dart';
 import '../querry_model.dart';
+import 'launch.dart';
 
 class SpacexHomeModel extends QuerryModel {
   Launch launch;
@@ -12,11 +13,14 @@ class SpacexHomeModel extends QuerryModel {
   @override
   Future loadData() async {
     final response = await http.get(Url.nextLaunch);
+    clearLists();
+
+    images.addAll(Url.spacexHomeScreen);
     launch = Launch.fromJson(json.decode(response.body));
 
     loadingState(false);
   }
 
   String get getCountdown =>
-      'T - ${launch.launchDate.difference(DateTime.now()).toString()}';
+      'T - ${printDuration(launch.launchDate.difference(DateTime.now()), abbreviated: true, delimiter: ' : ', spacer: '')}';
 }

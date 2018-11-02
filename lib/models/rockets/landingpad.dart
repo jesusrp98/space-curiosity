@@ -27,8 +27,9 @@ class LandingpadModel extends QuerryModel {
 }
 
 class Landingpad {
-  final String name, status, location, state, details;
+  final String name, status, location, state, details, url;
   final List<double> coordinates;
+  final int attemptedLaunches, successfulLaunches;
 
   Landingpad({
     this.name,
@@ -36,20 +37,26 @@ class Landingpad {
     this.location,
     this.state,
     this.details,
+    this.url,
     this.coordinates,
+    this.attemptedLaunches,
+    this.successfulLaunches,
   });
 
   factory Landingpad.fromJson(Map<String, dynamic> json) {
     return Landingpad(
-      name: json['site_name_long'],
+      name: json['full_name'],
       status: json['status'],
       location: json['location']['name'],
       state: json['location']['region'],
       details: json['details'],
+      url: json['wikiepdia'],
       coordinates: [
         json['location']['latitude'],
         json['location']['longitude'],
       ],
+      attemptedLaunches: json['attempted_launches'],
+      successfulLaunches: json['successful_launches'],
     );
   }
 

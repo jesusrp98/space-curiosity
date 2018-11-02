@@ -1,12 +1,13 @@
 import 'package:intl/intl.dart';
 
+import '../../util/url.dart';
 import 'vehicle.dart';
 
 /// ROADSTER CLASS
 /// This class contains all information available from Elon Musk's Tesla
 /// Roadster, sent to space in the Falcon Heavy Test Flight.
 class Roadster extends Vehicle {
-  final String orbit;
+  final String orbit, video;
   final num apoapsis,
       periapsis,
       inclination,
@@ -23,6 +24,7 @@ class Roadster extends Vehicle {
     firstFlight,
     photos,
     this.orbit,
+    this.video,
     this.apoapsis,
     this.periapsis,
     this.inclination,
@@ -53,6 +55,7 @@ class Roadster extends Vehicle {
       firstFlight: DateTime.parse(json['launch_date_utc']).toLocal(),
       photos: json['flickr_images'],
       orbit: json['orbit_type'],
+      video: Url.roadsterVideo,
       apoapsis: json['apoapsis_au'],
       periapsis: json['periapsis_au'],
       inclination: json['inclination'],

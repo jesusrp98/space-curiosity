@@ -75,8 +75,8 @@ class Launch {
       details: json['details'],
       tentativePrecision: json['tentative_max_precision'],
       links: [
-        json['links']['reddit_campaign'],
         json['links']['video_link'],
+        json['links']['reddit_campaign'],
         json['links']['presskit'],
         json['links']['article_link'],
       ],
@@ -101,9 +101,11 @@ class Launch {
 
   String get getProfilePhoto => (hasImages) ? photos[0] : Url.defaultImage;
 
-  String getPhoto(index) => photos[index];
+  String getPhoto(index) =>
+      hasImages ? photos[index] : Url.spacexUpcomingScreen[index];
 
-  int get getPhotosCount => photos.length;
+  int get getPhotosCount =>
+      hasImages ? photos.length : Url.spacexUpcomingScreen.length;
 
   String get getRandomPhoto => photos[Random().nextInt(getPhotosCount)];
 
@@ -112,6 +114,10 @@ class Launch {
   String get getNumber => '#$number';
 
   String get getImageUrl => imageUrl ?? Url.defaultImage;
+
+  bool get hasVideo => links[0] != null;
+
+  String get getVideo => links[0];
 
   String get getDetails => details ?? 'This mission has currently no details.';
 

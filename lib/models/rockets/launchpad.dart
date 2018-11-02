@@ -27,29 +27,38 @@ class LaunchpadModel extends QuerryModel {
 }
 
 class Launchpad {
-  final String name, status, location, state, details;
+  final String name, status, type, location, state, details, url;
   final List<double> coordinates;
+  final int attemptedLandings, successfulLandings;
 
   Launchpad({
     this.name,
     this.status,
+    this.type,
     this.location,
     this.state,
     this.details,
+    this.url,
     this.coordinates,
+    this.attemptedLandings,
+    this.successfulLandings,
   });
 
   factory Launchpad.fromJson(Map<String, dynamic> json) {
     return Launchpad(
       name: json['site_name_long'],
       status: json['status'],
+      type: json['landing_type'],
       location: json['location']['name'],
       state: json['location']['region'],
       details: json['details'],
+      url: json['wikiepdia'],
       coordinates: [
         json['location']['latitude'],
         json['location']['longitude'],
       ],
+      attemptedLandings: json['attempted_landings'],
+      successfulLandings: json['successful_landings'],
     );
   }
 
