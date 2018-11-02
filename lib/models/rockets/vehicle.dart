@@ -38,7 +38,7 @@ class VehiclesModel extends QuerryModel {
     randomList.shuffle();
     randomList
         .sublist(0, 5)
-        .forEach((index) => images.add(getItem(index).getRandomPhoto));
+        .forEach((index) => photos.add(getItem(index).getRandomPhoto));
 
     loadingState(false);
   }
@@ -74,7 +74,7 @@ abstract class Vehicle {
 
   String get getRandomPhoto => photos[Random().nextInt(getPhotosCount)];
 
-  String getPhotoUrl(index) => photos[index];
+  String getPhoto(index) => photos[index];
 
   bool get hasImages => photos.isNotEmpty;
 

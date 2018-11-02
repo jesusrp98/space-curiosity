@@ -25,9 +25,9 @@ class LaunchesModel extends QuerryModel {
     items.addAll(snapshot.map((launch) => Launch.fromJson(launch)).toList());
 
     if (type == 0)
-      images.addAll(Url.spacexUpcomingScreen);
+      photos.addAll(Url.spacexUpcomingScreen);
     else
-      images.addAll(getItem(0).photos.sublist(0, 3));
+      photos.addAll(getItem(0).photos.sublist(0, 3));
 
     loadingState(false);
   }

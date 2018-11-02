@@ -4,7 +4,7 @@ import 'package:scoped_model/scoped_model.dart';
 
 abstract class QuerryModel extends Model {
   List _items = List();
-  List _images = List();
+  List _photos = List();
   List snapshot;
   var response;
   bool _loading = true;
@@ -24,11 +24,11 @@ abstract class QuerryModel extends Model {
 
   List get items => _items;
 
-  List get images => _images;
+  List get photos => _photos;
 
-  String getImageUrl(index) => _images[index];
+  String getPhoto(index) => _photos[index];
 
-  int get getImagesCount => _images.length;
+  int get getPhotosCount => _photos.length;
 
   int get getSize => _items.length;
 
@@ -38,6 +38,6 @@ abstract class QuerryModel extends Model {
 
   clearLists() {
     _items.clear();
-    _images.clear();
+    _photos.clear();
   }
 }

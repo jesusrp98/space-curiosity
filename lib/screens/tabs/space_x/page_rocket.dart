@@ -44,7 +44,7 @@ class RocketPage extends StatelessWidget {
                 autoplayDelay: 6000,
                 duration: 750,
                 onTap: (index) => FlutterWebBrowser.openWebPage(
-                      url: _rocket.getPhotoUrl(index),
+                      url: _rocket.getPhoto(index),
                       androidToolbarColor: primaryColor,
                     ),
               ),
@@ -174,7 +174,7 @@ class RocketPage extends StatelessWidget {
 
   Widget _buildImage(BuildContext context, int index) {
     CachedNetworkImage photo = CachedNetworkImage(
-      imageUrl: _rocket.getPhotoUrl(index),
+      imageUrl: _rocket.getPhoto(index),
       errorWidget: const Icon(Icons.error),
       fadeInDuration: Duration(milliseconds: 100),
       fit: BoxFit.cover,

@@ -44,7 +44,7 @@ class CapsulePage extends StatelessWidget {
                 autoplayDelay: 6000,
                 duration: 750,
                 onTap: (index) => FlutterWebBrowser.openWebPage(
-                      url: _capsule.getPhotoUrl(index),
+                      url: _capsule.getPhoto(index),
                       androidToolbarColor: primaryColor,
                     ),
               ),
@@ -148,7 +148,7 @@ class CapsulePage extends StatelessWidget {
 
   Widget _buildImage(BuildContext context, int index) {
     CachedNetworkImage photo = CachedNetworkImage(
-      imageUrl: _capsule.getPhotoUrl(index),
+      imageUrl: _capsule.getPhoto(index),
       errorWidget: const Icon(Icons.error),
       fadeInDuration: Duration(milliseconds: 100),
       fit: BoxFit.cover,

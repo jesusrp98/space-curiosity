@@ -15,7 +15,7 @@ class SpacexHomeModel extends QuerryModel {
     final response = await http.get(Url.nextLaunch);
     clearLists();
 
-    images.addAll(Url.spacexHomeScreen);
+    photos.addAll(Url.spacexHomeScreen);
     launch = Launch.fromJson(json.decode(response.body));
 
     loadingState(false);

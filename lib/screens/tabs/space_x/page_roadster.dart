@@ -57,7 +57,7 @@ class RoadsterPage extends StatelessWidget {
                       autoplayDelay: 6000,
                       duration: 750,
                       onTap: (index) => FlutterWebBrowser.openWebPage(
-                            url: _roadster.getPhotoUrl(index),
+                            url: _roadster.getPhoto(index),
                             androidToolbarColor: primaryColor,
                           ),
                     ),
@@ -153,7 +153,7 @@ class RoadsterPage extends StatelessWidget {
 
   Widget _buildImage(BuildContext context, int index) {
     CachedNetworkImage photo = CachedNetworkImage(
-      imageUrl: _roadster.getPhotoUrl(index),
+      imageUrl: _roadster.getPhoto(index),
       errorWidget: const Icon(Icons.error),
       fadeInDuration: Duration(milliseconds: 100),
       fit: BoxFit.cover,

@@ -47,13 +47,13 @@ class LaunchesTab extends StatelessWidget {
                       background: (model.isLoading)
                           ? NativeLoadingIndicator(center: true)
                           : Swiper(
-                              itemCount: model.getImagesCount,
+                              itemCount: model.getPhotosCount,
                               itemBuilder: _buildImage,
                               autoplay: true,
                               autoplayDelay: 6000,
                               duration: 750,
                               onTap: (index) => FlutterWebBrowser.openWebPage(
-                                    url: model.getImageUrl(index),
+                                    url: model.getPhoto(index),
                                     androidToolbarColor: primaryColor,
                                   ),
                             ),
@@ -109,7 +109,7 @@ class LaunchesTab extends StatelessWidget {
   Widget _buildImage(BuildContext context, int index) {
     return ScopedModelDescendant<LaunchesModel>(
       builder: (context, child, model) => CachedNetworkImage(
-            imageUrl: model.getImageUrl(index),
+            imageUrl: model.getPhoto(index),
             errorWidget: const Icon(Icons.error),
             fadeInDuration: Duration(milliseconds: 100),
             fit: BoxFit.cover,
