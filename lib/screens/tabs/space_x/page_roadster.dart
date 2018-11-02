@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
+import 'package:sliver_fab/sliver_fab.dart';
 
 import '../../../models/rockets/roadster.dart';
 import '../../../util/colors.dart';
@@ -20,56 +21,69 @@ class RoadsterPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      body: CustomScrollView(
-        slivers: <Widget>[
-          SliverAppBar(
-            expandedHeight: MediaQuery.of(context).size.height * 0.3,
-            floating: false,
-            pinned: true,
-            actions: <Widget>[
-              IconButton(
-                icon: const Icon(Icons.public),
-                onPressed: () async => await FlutterWebBrowser.openWebPage(
-                    url: _roadster.url, androidToolbarColor: primaryColor),
-                tooltip: 'Wikipedia article',
-              )
-            ],
-            flexibleSpace: FlexibleSpaceBar(
-              centerTitle: true,
-              title: Text(_roadster.name),
-              background: Swiper(
-                itemCount: _roadster.getPhotosCount,
-                itemBuilder: _buildImage,
-                autoplay: true,
-                autoplayDelay: 6000,
-                duration: 750,
-                onTap: (index) => FlutterWebBrowser.openWebPage(
-                      url: _roadster.getPhotoUrl(index),
+      body: Builder(
+        builder: (context) => SliverFab(
+              floatingActionButton: FloatingActionButton(
+                child: const Icon(Icons.play_arrow),
+                tooltip: 'Watch replay',
+                onPressed: () => FlutterWebBrowser.openWebPage(
+                      url: _roadster.video,
                       androidToolbarColor: primaryColor,
                     ),
               ),
+              expandedHeight: MediaQuery.of(context).size.height * 0.3,
+              slivers: <Widget>[
+                SliverAppBar(
+                  expandedHeight: MediaQuery.of(context).size.height * 0.3,
+                  floating: false,
+                  pinned: true,
+                  actions: <Widget>[
+                    IconButton(
+                      icon: const Icon(Icons.public),
+                      onPressed: () => FlutterWebBrowser.openWebPage(
+                            url: _roadster.url,
+                            androidToolbarColor: primaryColor,
+                          ),
+                      tooltip: 'Wikipedia article',
+                    )
+                  ],
+                  flexibleSpace: FlexibleSpaceBar(
+                    centerTitle: true,
+                    title: Text(_roadster.name),
+                    background: Swiper(
+                      itemCount: _roadster.getPhotosCount,
+                      itemBuilder: _buildImage,
+                      autoplay: true,
+                      autoplayDelay: 6000,
+                      duration: 750,
+                      onTap: (index) => FlutterWebBrowser.openWebPage(
+                            url: _roadster.getPhotoUrl(index),
+                            androidToolbarColor: primaryColor,
+                          ),
+                    ),
+                  ),
+                ),
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Column(children: <Widget>[
+                      _roadsterCard(),
+                      const SizedBox(height: 8.0),
+                      _vehicleCard(),
+                      const SizedBox(height: 8.0),
+                      _orbitCard(),
+                      const SizedBox(height: 8.0),
+                      Text(
+                        'Data is updated every 5 minutes',
+                        style: Theme.of(context).textTheme.subhead.copyWith(
+                              color: secondaryText,
+                            ),
+                      )
+                    ]),
+                  ),
+                ),
+              ],
             ),
-          ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: EdgeInsets.all(16.0),
-              child: Column(children: <Widget>[
-                _roadsterCard(),
-                const SizedBox(height: 8.0),
-                _vehicleCard(),
-                const SizedBox(height: 8.0),
-                _orbitCard(),
-                const SizedBox(height: 8.0),
-                Text(
-                  'Data is updated every 5 minutes',
-                  style: Theme.of(context).textTheme.subhead.copyWith(
-                        color: secondaryText,
-                      ),
-                )
-              ]),
-            ),
-          ),
-        ],
       ),
     );
   }

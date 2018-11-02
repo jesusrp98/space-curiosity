@@ -17,6 +17,8 @@ class Url {
 
   static const String nextLaunch = '$spacexBaseUrl/launches/next';
 
+  static const String roadsterVideo = 'https://youtu.be/wbSwFU6tY1c';
+
   // Details dialogs
   static const List<String> detailsPage = [
     '$spacexBaseUrl/launchpads/',

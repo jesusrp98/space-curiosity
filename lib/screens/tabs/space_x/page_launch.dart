@@ -1,5 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
+import 'package:sliver_fab/sliver_fab.dart';
 
 import '../../../models/rockets/core.dart';
 import '../../../models/rockets/fairing.dart';
@@ -16,12 +19,12 @@ import '../../../widgets/row_item.dart';
 /// LAUNCH PAGE CLASS
 /// This class displays all information of a specific launch.
 class LaunchPage extends StatelessWidget {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final Launch _launch;
   static const List<String> _popupItems = [
     'Reddit campaign',
-    'YouTube video',
-    'Press kit',
-    'Article',
+    'Official press kit',
+    'Internet article',
   ];
 
   LaunchPage(this._launch);
@@ -29,59 +32,74 @@ class LaunchPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Launch details'),
-        centerTitle: true,
-        actions: <Widget>[
-          PopupMenuButton<String>(
-            itemBuilder: (_) => _popupItems
-                .map((f) => PopupMenuItem(value: f, child: Text(f)))
-                .toList(),
-            onSelected: (option) => openWeb(context, option),
-          ),
-        ],
-      ),
-      body: Scrollbar(
-        child: ListView(children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(children: <Widget>[
-              _missionCard(context),
-              const SizedBox(height: 8.0),
-              _firstStageCard(context),
-              const SizedBox(height: 8.0),
-              _secondStageCard(context),
-            ]),
-          )
-        ]),
-      ),
-    );
-  }
-
-  /// Method used for opening webs from the popup menu
-  openWeb(BuildContext context, String option) async {
-    final String url = _launch.links[_popupItems.indexOf(option)];
-
-    if (url == null)
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-              title: Text('Unavailable link'),
-              content: Text(
-                'Link has not been yet provided by the service. Please try again at a later time.',
-              ),
-              actions: <Widget>[
-                FlatButton(
-                    child: Text('OK'),
-                    onPressed: () => Navigator.of(context).pop()),
+      key: _scaffoldKey,
+      body: Builder(
+        builder: (context) => SliverFab(
+              expandedHeight: MediaQuery.of(context).size.height * 0.3,
+              floatingActionButton: (_launch.hasVideo)
+                  ? FloatingActionButton(
+                      child: const Icon(Icons.play_arrow),
+                      tooltip: 'Watch replay',
+                      onPressed: () => FlutterWebBrowser.openWebPage(
+                            url: _launch.getVideo,
+                            androidToolbarColor: primaryColor,
+                          ),
+                    )
+                  : null,
+              slivers: <Widget>[
+                SliverAppBar(
+                  expandedHeight: MediaQuery.of(context).size.height * 0.3,
+                  floating: false,
+                  pinned: true,
+                  actions: <Widget>[
+                    PopupMenuButton<String>(
+                      itemBuilder: (_) => _popupItems
+                          .map((url) => PopupMenuItem(
+                                value: url,
+                                child: Text(url),
+                                enabled: _launch
+                                        .links[_popupItems.indexOf(url) + 1] !=
+                                    null,
+                              ))
+                          .toList(),
+                      onSelected: (url) => FlutterWebBrowser.openWebPage(
+                            url: _launch.links[_popupItems.indexOf(url) + 1],
+                            androidToolbarColor: primaryColor,
+                          ),
+                    ),
+                  ],
+                  flexibleSpace: FlexibleSpaceBar(
+                    centerTitle: true,
+                    title: Text(_launch.name),
+                    background: Swiper(
+                      itemCount: _launch.getPhotosCount,
+                      itemBuilder: _buildImage,
+                      autoplay: true,
+                      autoplayDelay: 6000,
+                      duration: 750,
+                      onTap: (index) => FlutterWebBrowser.openWebPage(
+                            url: _launch.getPhoto(index),
+                            androidToolbarColor: primaryColor,
+                          ),
+                    ),
+                  ),
+                ),
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Column(children: <Widget>[
+                      _missionCard(context),
+                      const SizedBox(height: 8.0),
+                      _firstStageCard(context),
+                      const SizedBox(height: 8.0),
+                      _secondStageCard(context),
+                    ]),
+                  ),
+                ),
               ],
             ),
-      );
-    else
-      await FlutterWebBrowser.openWebPage(
-        url: url,
-        androidToolbarColor: primaryColor,
-      );
+      ),
+    );
   }
 
   Widget _missionCard(BuildContext context) {
@@ -208,8 +226,6 @@ class LaunchPage extends StatelessWidget {
       const SizedBox(height: 12.0),
       (core.getLandingZone != 'Unknown')
           ? Column(children: <Widget>[
-              RowItem.textRow('Landing type', core.getLandingType),
-              const SizedBox(height: 12.0),
               RowItem.textRow('Landing zone', core.getLandingZone),
               const SizedBox(height: 12.0),
               RowItem.iconRow('Landing success', core.landingSuccess)
@@ -249,5 +265,14 @@ class LaunchPage extends StatelessWidget {
       const SizedBox(height: 12.0),
       RowItem.textRow('Orbit', payload.getOrbit),
     ]);
+  }
+
+  Widget _buildImage(BuildContext context, int index) {
+    return CachedNetworkImage(
+      imageUrl: _launch.getPhoto(index),
+      errorWidget: const Icon(Icons.error),
+      fadeInDuration: Duration(milliseconds: 100),
+      fit: BoxFit.cover,
+    );
   }
 }
