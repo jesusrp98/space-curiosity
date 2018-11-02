@@ -9,6 +9,7 @@ import 'package:scoped_model/scoped_model.dart';
 
 import '../../../models/rockets/spacex_home.dart';
 import '../../../util/colors.dart';
+import '../../../widgets/spacex_home_detail.dart';
 
 class SpacexHomeTab extends StatelessWidget {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -57,18 +58,46 @@ class SpacexHomeTab extends StatelessWidget {
                       ? SliverFillRemaining(
                           child: NativeLoadingIndicator(center: true),
                         )
-                      : SliverFillRemaining(
-                          child: Center(
-                            child: Text(
-                              model.getCountdown,
-                              style: Theme.of(context).textTheme.headline,
-                            ),
-                          ),
-                        )
+                      : SliverToBoxAdapter(child: _buildBody())
                 ],
               ),
             ),
           ),
+    );
+  }
+
+  Widget _buildBody() {
+    return ScopedModelDescendant<SpacexHomeModel>(
+      builder: (context, child, model) {
+        return Column(
+          children: <Widget>[
+            Container(height: 16.0),
+            Text(
+              model.getCountdown,
+              style: Theme.of(context).textTheme.headline,
+            ),
+            Container(height: 16.0),
+            const Divider(height: 0.0),
+            SpacexHomeDetail(Icons.public,
+                'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'),
+            const Divider(height: 0.0, indent: 74.0),
+            SpacexHomeDetail(Icons.calendar_today,
+                'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'),
+            const Divider(height: 0.0, indent: 74.0),
+            SpacexHomeDetail(Icons.location_on,
+                'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'),
+            const Divider(height: 0.0, indent: 74.0),
+            SpacexHomeDetail(Icons.timer,
+                'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'),
+            const Divider(height: 0.0, indent: 74.0),
+            SpacexHomeDetail(Icons.directions_boat,
+                'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'),
+            const Divider(height: 0.0, indent: 74.0),
+            SpacexHomeDetail(Icons.flight_land,
+                'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'),
+          ],
+        );
+      },
     );
   }
 
