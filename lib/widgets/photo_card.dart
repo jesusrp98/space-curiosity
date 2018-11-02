@@ -24,7 +24,7 @@ class PhotoCard extends StatelessWidget {
                 builder: (_) => NasaImagePage(image),
               ),
             ),
-        onLongPress: () async => await FlutterWebBrowser.openWebPage(
+        onLongPress: () => FlutterWebBrowser.openWebPage(
               url: image.url,
               androidToolbarColor: primaryColor,
             ),
@@ -47,6 +47,7 @@ class PhotoCard extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     image.title,
+                    textAlign: TextAlign.center,
                     style: Theme.of(context)
                         .textTheme
                         .title

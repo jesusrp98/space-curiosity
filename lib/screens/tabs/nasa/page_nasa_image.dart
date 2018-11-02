@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:share/share.dart';
@@ -15,25 +16,23 @@ class NasaImagePage extends StatelessWidget {
       body: CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(
-            // App bar extends 0.4 times the screen height
             expandedHeight: MediaQuery.of(context).size.height * 0.4,
             pinned: true,
             floating: false,
-            actions: <Widget>[
-              IconButton(
-                icon: Icon(Icons.share),
-                onPressed: () => share(image.share),
-              ),
-            ],
             flexibleSpace: FlexibleSpaceBar(
               centerTitle: true,
               title: Text(image.title),
               background: InkWell(
                 child: Hero(
                   tag: image.getDate,
-                  child: Image.network(image.url, fit: BoxFit.cover),
+                  child: CachedNetworkImage(
+                    imageUrl: image.url,
+                    errorWidget: const Icon(Icons.error),
+                    fadeInDuration: Duration(milliseconds: 100),
+                    fit: BoxFit.cover,
+                  ),
                 ),
-                onTap: () async => await FlutterWebBrowser.openWebPage(
+                onTap: () => FlutterWebBrowser.openWebPage(
                       url: image.hdurl,
                       androidToolbarColor: primaryColor,
                     ),
@@ -72,6 +71,11 @@ class NasaImagePage extends StatelessWidget {
             ),
           )
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+         child: const Icon(Icons.share),
+         tooltip: 'Share',
+         onPressed: () => share(image.share),
       ),
     );
   }
