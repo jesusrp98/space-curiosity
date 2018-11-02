@@ -78,6 +78,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.2.1"
+  duration:
+    dependency: "direct main"
+    description:
+      name: duration
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0"
   firebase_analytics:
     dependency: "direct main"
     description:
@@ -291,6 +298,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.99"
+  sliver_fab:
+    dependency: "direct main"
+    description:
+      name: sliver_fab
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.1"
   source_span:
     dependency: transitive
     description:
