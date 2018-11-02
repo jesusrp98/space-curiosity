@@ -9,7 +9,10 @@ import 'package:scoped_model/scoped_model.dart';
 
 import '../../../models/rockets/spacex_home.dart';
 import '../../../util/colors.dart';
+import '../../../widgets/hero_image.dart';
+import '../../../widgets/list_cell.dart';
 import '../../../widgets/spacex_home_detail.dart';
+import 'page_launch.dart';
 
 class SpacexHomeTab extends StatelessWidget {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -73,28 +76,62 @@ class SpacexHomeTab extends StatelessWidget {
           children: <Widget>[
             Container(height: 16.0),
             Text(
-              model.getCountdown,
+              model.countdown,
               style: Theme.of(context).textTheme.headline,
             ),
-            Container(height: 16.0),
+            Container(height: 8.0),
+            ListCell(
+              leading: HeroImage().buildHero(
+                context: context,
+                size: HeroImage.smallSize,
+                url: model.launch.getImageUrl,
+                tag: model.launch.getNumber,
+                title: model.launch.name,
+              ),
+              title: model.launch.name,
+              subtitle: model.launch.getLaunchDate,
+              trailing: MissionNumber(model.launch.getNumber),
+              onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => LaunchPage(model.launch)),
+                  ),
+            ),
             const Divider(height: 0.0),
-            SpacexHomeDetail(Icons.public,
-                'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'),
+            SpacexHomeDetail(
+              icon: Icons.public,
+              title: model.vehicle,
+              subtitle: model.payload,
+            ),
             const Divider(height: 0.0, indent: 74.0),
-            SpacexHomeDetail(Icons.calendar_today,
-                'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'),
+            SpacexHomeDetail(
+              icon: Icons.calendar_today,
+              title: 'Launch date',
+              subtitle: model.launchDate,
+            ),
             const Divider(height: 0.0, indent: 74.0),
-            SpacexHomeDetail(Icons.location_on,
-                'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'),
+            SpacexHomeDetail(
+              icon: Icons.location_on,
+              title: 'Launch site',
+              subtitle: model.launchpad,
+            ),
             const Divider(height: 0.0, indent: 74.0),
-            SpacexHomeDetail(Icons.timer,
-                'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'),
+            SpacexHomeDetail(
+              icon: Icons.timer,
+              title: 'Static fire date',
+              subtitle: model.staticFire,
+            ),
             const Divider(height: 0.0, indent: 74.0),
-            SpacexHomeDetail(Icons.directions_boat,
-                'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'),
+            SpacexHomeDetail(
+              icon: Icons.directions_boat,
+              title: 'Fairings',
+              subtitle: model.fairings,
+            ),
             const Divider(height: 0.0, indent: 74.0),
-            SpacexHomeDetail(Icons.flight_land,
-                'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'),
+            SpacexHomeDetail(
+              icon: Icons.flight_land,
+              title: 'Reused parts',
+              subtitle: model.landings,
+            ),
           ],
         );
       },
