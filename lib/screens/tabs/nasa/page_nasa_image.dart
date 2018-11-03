@@ -49,11 +49,11 @@ class NasaImagePage extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         image.getCopyright,
-                        style: Theme.of(context).textTheme.body1,
+                        style: Theme.of(context).textTheme.subhead,
                       ),
                       Text(
                         image.getDate,
-                        style: Theme.of(context).textTheme.body1,
+                        style: Theme.of(context).textTheme.subhead,
                       ),
                     ],
                   ),

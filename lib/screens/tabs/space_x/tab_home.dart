@@ -77,7 +77,10 @@ class SpacexHomeTab extends StatelessWidget {
             Container(height: 16.0),
             Text(
               model.countdown,
-              style: Theme.of(context).textTheme.headline,
+              style: Theme.of(context)
+                  .textTheme
+                  .headline
+                  .copyWith(fontFamily: 'RobotoMono'),
             ),
             Container(height: 8.0),
             ListCell(

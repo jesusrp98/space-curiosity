@@ -22,7 +22,7 @@ class SpacexHomeModel extends QuerryModel {
   }
 
   String get countdown =>
-      'T - ${printDuration(launch.launchDate.difference(DateTime.now()), abbreviated: true, delimiter: ' : ', spacer: '')}';
+      'T - ${printDuration(launch.launchDate.difference(DateTime.now()), abbreviated: true, delimiter: ':', spacer: '')}';
 
   String get vehicle => 'Launched by ${launch.rocket.name}';
 
@@ -64,8 +64,8 @@ class SpacexHomeModel extends QuerryModel {
     ];
 
     for (int i = 0; i < launch.rocket.firstStage.length; ++i)
-      aux += '${cores[i]}' +
-          (!launch.rocket.firstStage[i].reused ? ' ' : ' not ') +
+      aux += '${cores[i]} is' +
+          (launch.rocket.firstStage[i].reused ? ' ' : ' not ') +
           'reused, and it' +
           (launch.rocket.firstStage[i].landingIntent
               ? ' will perform a ${launch.rocket.firstStage[i].landingType} landing at ${launch.rocket.firstStage[i].landingZone}'
