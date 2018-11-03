@@ -2,19 +2,27 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
+import 'package:scoped_model/scoped_model.dart';
 import 'package:sliver_fab/sliver_fab.dart';
 
+import '../../../models/rockets/capsule_details.dart';
 import '../../../models/rockets/core.dart';
+import '../../../models/rockets/core_details.dart';
 import '../../../models/rockets/fairing.dart';
+import '../../../models/rockets/landingpad.dart';
 import '../../../models/rockets/launch.dart';
+import '../../../models/rockets/launchpad.dart';
 import '../../../models/rockets/rocket.dart';
 import '../../../models/rockets/second_stage.dart';
 import '../../../util/colors.dart';
 import '../../../widgets/card_page.dart';
-import '../../../widgets/details_dialog.dart';
 import '../../../widgets/head_card_page.dart';
 import '../../../widgets/hero_image.dart';
 import '../../../widgets/row_item.dart';
+import 'dialog_capsule.dart';
+import 'dialog_core.dart';
+import 'dialog_landingpad.dart';
+import 'dialog_launchpad.dart';
 
 /// LAUNCH PAGE CLASS
 /// This class displays all information of a specific launch.
@@ -124,12 +132,18 @@ class LaunchPage extends StatelessWidget {
           ),
           const SizedBox(height: 12.0),
           InkWell(
-            onTap: () => showDialog(
-                  context: context,
-                  builder: (context) => DetailsDialog.launchpad(
-                        id: _launch.launchpadId,
-                        title: _launch.launchpadName,
-                      ),
+            onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => ScopedModel<LaunchpadModel>(
+                          model: LaunchpadModel(
+                            _launch.launchpadId,
+                            _launch.launchpadName,
+                          )..loadData(),
+                          child: LaunchpadDialog(),
+                        ),
+                    fullscreenDialog: true,
+                  ),
                 ),
             child: Text(
               _launch.launchpadName,
@@ -217,7 +231,10 @@ class LaunchPage extends StatelessWidget {
         context,
         'Core serial',
         core.getId,
-        DetailsDialog.core(id: core.getId, title: 'Core ${core.getId}'),
+        ScopedModel<CoreModel>(
+          model: CoreModel(core.id)..loadData(),
+          child: CoreDialog(),
+        ),
       ),
       const SizedBox(height: 12.0),
       RowItem.textRow('Model', core.getBlock),
@@ -226,7 +243,15 @@ class LaunchPage extends StatelessWidget {
       const SizedBox(height: 12.0),
       (core.getLandingZone != 'Unknown')
           ? Column(children: <Widget>[
-              RowItem.textRow('Landing zone', core.getLandingZone),
+              RowItem.dialogRow(
+                context,
+                'Landing zone',
+                core.getLandingZone,
+                ScopedModel<LandingpadModel>(
+                  model: LandingpadModel(core.landingZone)..loadData(),
+                  child: LandingpadDialog(),
+                ),
+              ),
               const SizedBox(height: 12.0),
               RowItem.iconRow('Landing success', core.landingSuccess)
             ])
@@ -245,9 +270,9 @@ class LaunchPage extends StatelessWidget {
                 context,
                 'Capsule serial',
                 payload.getCapsuleSerial,
-                DetailsDialog.capsule(
-                  id: payload.getCapsuleSerial,
-                  title: 'Capsule ${payload.getCapsuleSerial}',
+                ScopedModel<CapsuleModel>(
+                  model: CapsuleModel(payload.capsuleSerial)..loadData(),
+                  child: CapsuleDialog(),
                 ),
               ),
               const SizedBox(height: 12.0),

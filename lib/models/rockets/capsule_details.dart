@@ -21,6 +21,9 @@ class CapsuleModel extends QuerryModel {
 
     items.add(CapsuleDetails.fromJson(json.decode(response.body)));
 
+    photos.addAll(Url.spacexCapsuleDialog);
+    photos.shuffle();
+
     loadingState(false);
   }
 

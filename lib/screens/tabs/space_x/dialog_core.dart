@@ -24,7 +24,7 @@ class CoreDialog extends StatelessWidget {
                 pinned: true,
                 flexibleSpace: FlexibleSpaceBar(
                   centerTitle: true,
-                  title: Text('Core ${model.core.serial}'),
+                  title: Text('Core ${model.id}'),
                   background: (model.isLoading)
                       ? NativeLoadingIndicator(center: true)
                       : Swiper(
@@ -60,26 +60,26 @@ class CoreDialog extends StatelessWidget {
                   child: Column(
                     children: <Widget>[
                       RowItem.textRow('Model', model.core.getBlock),
-                      const SizedBox(height: 8.0),
+                      const SizedBox(height: 12.0),
                       RowItem.textRow('Status', model.core.getStatus),
-                      const SizedBox(height: 8.0),
+                      const SizedBox(height: 12.0),
                       RowItem.textRow(
                         'First launched',
                         model.core.getFirstLaunched,
                       ),
-                      const SizedBox(height: 8.0),
+                      const SizedBox(height: 12.0),
                       RowItem.textRow('Launches', model.core.getLaunches),
-                      const SizedBox(height: 8.0),
+                      const SizedBox(height: 12.0),
                       RowItem.textRow(
                         'RTLS landings',
                         model.core.getRtlsLandings,
                       ),
-                      const SizedBox(height: 8.0),
+                      const SizedBox(height: 12.0),
                       RowItem.textRow(
                         'ASDS landings',
                         model.core.getAsdsLandings,
                       ),
-                      const SizedBox(height: 8.0),
+                      const SizedBox(height: 12.0),
                       Text(
                         model.core.getMissions,
                         textAlign: TextAlign.center,
@@ -87,7 +87,7 @@ class CoreDialog extends StatelessWidget {
                       ),
                       const Divider(height: 24.0),
                       Text(
-                        model.core.details,
+                        model.core.getDetails,
                         textAlign: TextAlign.justify,
                         style: TextStyle(fontSize: 15.0, color: secondaryText),
                       ),

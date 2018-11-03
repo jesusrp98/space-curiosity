@@ -7,11 +7,11 @@ import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
 
+import '../../../models/rockets/launchpad.dart';
 import '../../../models/rockets/spacex_home.dart';
 import '../../../util/colors.dart';
-import '../../../widgets/hero_image.dart';
-import '../../../widgets/list_cell.dart';
 import '../../../widgets/spacex_home_detail.dart';
+import 'dialog_launchpad.dart';
 import 'page_launch.dart';
 
 class SpacexHomeTab extends StatelessWidget {
@@ -104,10 +104,23 @@ class SpacexHomeTab extends StatelessWidget {
               icon: Icons.location_on,
               title: 'Launch site',
               subtitle: model.launchpad,
+              onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => ScopedModel<LaunchpadModel>(
+                            model: LaunchpadModel(
+                              model.launch.launchpadId,
+                              model.launch.launchpadName,
+                            )..loadData(),
+                            child: LaunchpadDialog(),
+                          ),
+                      fullscreenDialog: true,
+                    ),
+                  ),
             ),
             const Divider(height: 0.0, indent: 74.0),
             SpacexHomeDetail(
-              icon: Icons.whatshot,
+              icon: Icons.timer,
               title: 'Static fire date',
               subtitle: model.staticFire,
             ),

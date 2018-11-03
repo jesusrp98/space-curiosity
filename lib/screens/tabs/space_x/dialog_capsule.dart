@@ -24,7 +24,7 @@ class CapsuleDialog extends StatelessWidget {
                 pinned: true,
                 flexibleSpace: FlexibleSpaceBar(
                   centerTitle: true,
-                  title: Text('Capsule ${model.capsule.serial}'),
+                  title: Text('Capsule ${model.id}'),
                   background: (model.isLoading)
                       ? NativeLoadingIndicator(center: true)
                       : Swiper(
@@ -79,7 +79,7 @@ class CapsuleDialog extends StatelessWidget {
                       ),
                       const Divider(height: 24.0),
                       Text(
-                        model.capsule.details,
+                        model.capsule.getDetails,
                         textAlign: TextAlign.justify,
                         style: TextStyle(fontSize: 15.0, color: secondaryText),
                       ),

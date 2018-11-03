@@ -9,9 +9,9 @@ import '../querry_model.dart';
 /// This class represents a real launchpad used in a SpaceX mission,
 /// with all its details.
 class LaunchpadModel extends QuerryModel {
-  final String id;
+  final String id, name;
 
-  LaunchpadModel(this.id);
+  LaunchpadModel(this.id, this.name);
 
   @override
   Future loadData() async {
@@ -29,7 +29,8 @@ class LaunchpadModel extends QuerryModel {
 class Launchpad {
   final String name, status, location, state, details, url;
   final List<double> coordinates;
-  final int attemptedLandings, successfulLandings;
+  final List vehicles;
+  final int attemptedLaunches, successfulLaunches;
 
   Launchpad({
     this.name,
@@ -39,8 +40,9 @@ class Launchpad {
     this.details,
     this.url,
     this.coordinates,
-    this.attemptedLandings,
-    this.successfulLandings,
+    this.vehicles,
+    this.attemptedLaunches,
+    this.successfulLaunches,
   });
 
   factory Launchpad.fromJson(Map<String, dynamic> json) {
@@ -55,8 +57,9 @@ class Launchpad {
         json['location']['latitude'],
         json['location']['longitude'],
       ],
-      attemptedLandings: json['attempted_landings'],
-      successfulLandings: json['successful_landings'],
+      vehicles: json['vehicles_launched'],
+      attemptedLaunches: json['attempted_launches'],
+      successfulLaunches: json['successful_launches'],
     );
   }
 
@@ -66,7 +69,9 @@ class Launchpad {
       ',  ' +
       coordinates[1].toStringAsPrecision(5));
 
-  String get getAttemptedLandings => attemptedLandings.toString();
+  String get getVehicles => 'aux';
 
-  String get getSuccessfulLandings => successfulLandings.toString();
+  String get getAttemptedLaunches => attemptedLaunches.toString();
+
+  String get getSuccessfulLaunches => successfulLaunches.toString();
 }

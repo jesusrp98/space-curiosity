@@ -15,7 +15,7 @@ class LandingpadModel extends QuerryModel {
 
   @override
   Future loadData() async {
-    response = await http.get(Url.launchpadDialog + id);
+    response = await http.get(Url.landingpadDialog + id);
     clearLists();
 
     items.add(Landingpad.fromJson(json.decode(response.body)));
@@ -29,7 +29,7 @@ class LandingpadModel extends QuerryModel {
 class Landingpad {
   final String name, status, type, location, state, details, url;
   final List<double> coordinates;
-  final int attemptedLaunches, successfulLaunches;
+  final int attemptedLandings, successfulLandings;
 
   Landingpad({
     this.name,
@@ -40,8 +40,8 @@ class Landingpad {
     this.details,
     this.url,
     this.coordinates,
-    this.attemptedLaunches,
-    this.successfulLaunches,
+    this.attemptedLandings,
+    this.successfulLandings,
   });
 
   factory Landingpad.fromJson(Map<String, dynamic> json) {
@@ -57,8 +57,8 @@ class Landingpad {
         json['location']['latitude'],
         json['location']['longitude'],
       ],
-      attemptedLaunches: json['attempted_launches'],
-      successfulLaunches: json['successful_launches'],
+      attemptedLandings: json['attempted_landings'],
+      successfulLandings: json['successful_landings'],
     );
   }
 
@@ -68,7 +68,7 @@ class Landingpad {
       ',  ' +
       coordinates[1].toStringAsPrecision(5));
 
-  String get getAttemptedLaunches => attemptedLaunches.toString();
+  String get getAttemptedLandings => attemptedLandings.toString();
 
-  String get getSuccessfulLaunches => successfulLaunches.toString();
+  String get getSuccessfulLandings => successfulLandings.toString();
 }

@@ -28,7 +28,7 @@ class Url {
   static const String coreDialog = '$spacexBaseUrl/cores/';
   static const String capsuleDialog = '$spacexBaseUrl/capsules/';
   static const String launchpadDialog = '$spacexBaseUrl/launchpads/';
-  static const String landingpadDialog = '$spacexBaseUrl/landingpads/';
+  static const String landingpadDialog = '$spacexBaseUrl/landpads/';
 
   // SpaceX related info
   static const String spacexCompany = '$spacexBaseUrl/info';

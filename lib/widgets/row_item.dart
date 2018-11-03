@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:scoped_model/scoped_model.dart';
 
 import '../util/colors.dart';
 import 'details_dialog.dart';
@@ -48,12 +49,21 @@ class RowItem extends StatelessWidget {
     BuildContext context,
     String title,
     String description,
-    DetailsDialog dialog,
+    ScopedModel screen,
   ) {
     if (description != 'Unknown')
       return RowItem(
         title: title,
-        description: _getDialog(context, dialog, description),
+        description: InkWell(
+          child: _getText(description, true),
+          onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => screen,
+                  fullscreenDialog: true,
+                ),
+              ),
+        ),
       );
     else
       return RowItem(title: title, description: _getText(description));
@@ -79,18 +89,6 @@ class RowItem extends StatelessWidget {
         color: secondaryText,
         decoration: clickable ? TextDecoration.underline : TextDecoration.none,
       ),
-    );
-  }
-
-  /// Builds a dialog with the Details Dialog class
-  static _getDialog(
-    BuildContext context,
-    DetailsDialog dialog,
-    String description,
-  ) {
-    return InkWell(
-      child: _getText(description, true),
-      onTap: () => showDialog(context: context, builder: (_) => dialog),
     );
   }
 }

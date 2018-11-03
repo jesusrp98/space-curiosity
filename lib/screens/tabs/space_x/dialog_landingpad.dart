@@ -32,7 +32,7 @@ class LandingpadDialog extends StatelessWidget {
                 ],
                 flexibleSpace: FlexibleSpaceBar(
                   centerTitle: true,
-                  title: Text(model.landingpad.name),
+                  title: Text(model.id),
                   // background: (model.isLoading)
                   //     ? NativeLoadingIndicator(center: true)
                   //     : Swiper(
@@ -67,35 +67,45 @@ class LandingpadDialog extends StatelessWidget {
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
                     children: <Widget>[
+                      Text(
+                        model.landingpad.name,
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.title,
+                      ),
+                      const SizedBox(height: 12.0),
                       RowItem.textRow('Status', model.landingpad.getStatus),
-                      const SizedBox(height: 8.0),
+                      const SizedBox(height: 12.0),
                       RowItem.textRow('Location', model.landingpad.location),
-                      const SizedBox(height: 8.0),
+                      const SizedBox(height: 12.0),
                       RowItem.textRow('State', model.landingpad.state),
-                      const SizedBox(height: 8.0),
+                      const SizedBox(height: 12.0),
                       RowItem.textRow(
                         'Coordinates',
                         model.landingpad.getCoordinates,
                       ),
+                      const SizedBox(height: 12.0),
                       RowItem.textRow(
                         'Landing type',
                         model.landingpad.type,
                       ),
-                      const SizedBox(height: 8.0),
+                      const SizedBox(height: 12.0),
                       RowItem.textRow(
                         'Attempted landings',
-                        model.landingpad.getAttemptedLaunches,
+                        model.landingpad.getAttemptedLandings,
                       ),
-                      const SizedBox(height: 8.0),
+                      const SizedBox(height: 12.0),
                       RowItem.textRow(
                         'Successful landings',
-                        model.landingpad.getSuccessfulLaunches,
+                        model.landingpad.getSuccessfulLandings,
                       ),
                       const Divider(height: 24.0),
                       Text(
                         model.landingpad.details,
                         textAlign: TextAlign.justify,
-                        style: TextStyle(fontSize: 15.0, color: secondaryText),
+                        style: Theme.of(context)
+                            .textTheme
+                            .subhead
+                            .copyWith(color: secondaryText),
                       ),
                     ],
                   ),

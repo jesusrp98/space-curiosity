@@ -20,6 +20,9 @@ class CoreModel extends QuerryModel {
 
     items.add(CoreDetails.fromJson(json.decode(response.body)));
 
+    photos.addAll(Url.spacexCoreDialog);
+    photos.shuffle();
+
     loadingState(false);
   }
 

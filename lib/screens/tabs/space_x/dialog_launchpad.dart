@@ -32,7 +32,7 @@ class LaunchpadDialog extends StatelessWidget {
                 ],
                 flexibleSpace: FlexibleSpaceBar(
                   centerTitle: true,
-                  title: Text(model.launchpad.name),
+                  title: Text(model.name),
                   // background: (model.isLoading)
                   //     ? NativeLoadingIndicator(center: true)
                   //     : Swiper(
@@ -67,24 +67,31 @@ class LaunchpadDialog extends StatelessWidget {
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
                     children: <Widget>[
+                      Text(
+                        model.launchpad.name,
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.title,
+                      ),
+                      const SizedBox(height: 12.0),
                       RowItem.textRow('Status', model.launchpad.getStatus),
-                      const SizedBox(height: 8.0),
+                      const SizedBox(height: 12.0),
                       RowItem.textRow('Location', model.launchpad.location),
-                      const SizedBox(height: 8.0),
+                      const SizedBox(height: 12.0),
                       RowItem.textRow('State', model.launchpad.state),
-                      const SizedBox(height: 8.0),
+                      const SizedBox(height: 12.0),
                       RowItem.textRow(
                         'Coordinates',
                         model.launchpad.getCoordinates,
                       ),
+                      const SizedBox(height: 12.0),
                       RowItem.textRow(
                         'Attempted launches',
-                        model.launchpad.getAttemptedLandings,
+                        model.launchpad.getAttemptedLaunches,
                       ),
-                      const SizedBox(height: 8.0),
+                      const SizedBox(height: 12.0),
                       RowItem.textRow(
                         'Successful launches',
-                        model.launchpad.getSuccessfulLandings,
+                        model.launchpad.getSuccessfulLaunches,
                       ),
                       const Divider(height: 24.0),
                       Text(
