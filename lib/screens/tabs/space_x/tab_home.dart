@@ -82,32 +82,20 @@ class SpacexHomeTab extends StatelessWidget {
                   .headline
                   .copyWith(fontFamily: 'RobotoMono'),
             ),
-            Container(height: 8.0),
-            ListCell(
-              leading: HeroImage().buildHero(
-                context: context,
-                size: HeroImage.smallSize,
-                url: model.launch.getImageUrl,
-                tag: model.launch.getNumber,
-                title: model.launch.name,
-              ),
-              title: model.launch.name,
-              subtitle: model.launch.getLaunchDate,
-              trailing: MissionNumber(model.launch.getNumber),
-              onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (_) => LaunchPage(model.launch)),
-                  ),
-            ),
+            Container(height: 16.0),
             const Divider(height: 0.0),
             SpacexHomeDetail(
               icon: Icons.public,
               title: model.vehicle,
               subtitle: model.payload,
+              onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => LaunchPage(model.launch)),
+                  ),
             ),
             const Divider(height: 0.0, indent: 74.0),
             SpacexHomeDetail(
-              icon: Icons.calendar_today,
+              icon: Icons.today,
               title: 'Launch date',
               subtitle: model.launchDate,
             ),
@@ -119,7 +107,7 @@ class SpacexHomeTab extends StatelessWidget {
             ),
             const Divider(height: 0.0, indent: 74.0),
             SpacexHomeDetail(
-              icon: Icons.timer,
+              icon: Icons.whatshot,
               title: 'Static fire date',
               subtitle: model.staticFire,
             ),
@@ -131,7 +119,7 @@ class SpacexHomeTab extends StatelessWidget {
             ),
             const Divider(height: 0.0, indent: 74.0),
             SpacexHomeDetail(
-              icon: Icons.flight_land,
+              icon: Icons.autorenew,
               title: 'Reused parts',
               subtitle: model.landings,
             ),

@@ -5,8 +5,9 @@ import '../util/colors.dart';
 class SpacexHomeDetail extends StatelessWidget {
   final IconData icon;
   final String title, subtitle;
+  final VoidCallback onTap;
 
-  SpacexHomeDetail({this.icon, this.title, this.subtitle});
+  SpacexHomeDetail({this.icon, this.title, this.subtitle, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +31,7 @@ class SpacexHomeDetail extends StatelessWidget {
         style:
             Theme.of(context).textTheme.subhead.copyWith(color: secondaryText),
       ),
+      onTap: onTap,
     );
   }
 }
