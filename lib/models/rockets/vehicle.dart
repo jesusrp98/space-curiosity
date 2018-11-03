@@ -34,11 +34,13 @@ class VehiclesModel extends QuerryModel {
         rocketsJson.map((rocket) => RocketInfo.fromJson(rocket)).toList());
     items.addAll(shipsJson.map((rocket) => ShipInfo.fromJson(rocket)).toList());
 
-    List<int> randomList = List<int>.generate(getSize, (index) => index);
-    randomList.shuffle();
-    randomList
-        .sublist(0, 5)
-        .forEach((index) => photos.add(getItem(index).getRandomPhoto));
+    if (photos.isEmpty) {
+      List<int> randomList = List<int>.generate(getSize, (index) => index);
+      randomList
+          .sublist(0, 5)
+          .forEach((index) => photos.add(getItem(index).getRandomPhoto));
+    }
+    photos.shuffle();
 
     loadingState(false);
   }

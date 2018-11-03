@@ -23,6 +23,7 @@ class SpacexCompanyModel extends QuerryModel {
     _company = Company.fromJson(json.decode(companyResponse.body));
 
     photos.addAll(Url.spacexCompanyScreen);
+    photos.shuffle();
 
     loadingState(false);
   }

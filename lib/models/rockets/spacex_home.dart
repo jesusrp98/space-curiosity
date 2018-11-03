@@ -13,9 +13,12 @@ class SpacexHomeModel extends QuerryModel {
   @override
   Future loadData() async {
     final response = await http.get(Url.nextLaunch);
-    clearLists();
+    items.clear();
 
-    photos.addAll(Url.spacexHomeScreen);
+    if (photos.isEmpty) {
+      photos.addAll(Url.spacexHomeScreen);
+    }
+    photos.shuffle();
     launch = Launch.fromJson(json.decode(response.body));
 
     loadingState(false);

@@ -24,10 +24,13 @@ class LaunchesModel extends QuerryModel {
 
     items.addAll(snapshot.map((launch) => Launch.fromJson(launch)).toList());
 
-    if (type == 0)
-      photos.addAll(Url.spacexUpcomingScreen);
-    else
-      photos.addAll(getItem(0).photos.sublist(0, 3));
+    if (photos.isEmpty) {
+      if (type == 0)
+        photos.addAll(Url.spacexUpcomingScreen);
+      else
+        photos.addAll(getItem(0).photos.sublist(0, 3));
+    }
+    photos.shuffle();
 
     loadingState(false);
   }
