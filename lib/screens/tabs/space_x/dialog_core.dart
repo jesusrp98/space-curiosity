@@ -7,6 +7,7 @@ import 'package:scoped_model/scoped_model.dart';
 
 import '../../../models/rockets/core_details.dart';
 import '../../../util/colors.dart';
+import '../../../widgets/dialog_list_tile.dart';
 import '../../../widgets/row_item.dart';
 
 class CoreDialog extends StatelessWidget {
@@ -79,14 +80,14 @@ class CoreDialog extends StatelessWidget {
                         'ASDS landings',
                         model.core.getAsdsLandings,
                       ),
-                      const SizedBox(height: 12.0),
-                      Text(
-                        model.core.getMissions,
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context)
-                            .textTheme
-                            .subhead
-                            .copyWith(color: secondaryText),
+                      const Divider(height: 24.0),
+                      Column(
+                        children: model.core.missions
+                            .map((mission) => DialogListTile(
+                                  title: mission.name,
+                                  id: mission.id,
+                                ))
+                            .toList(),
                       ),
                       const Divider(height: 24.0),
                       Text(

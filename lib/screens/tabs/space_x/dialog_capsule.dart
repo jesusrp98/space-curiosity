@@ -4,10 +4,11 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'package:space_news/widgets/row_item.dart';
 
 import '../../../models/rockets/capsule_details.dart';
 import '../../../util/colors.dart';
+import '../../../widgets/dialog_list_tile.dart';
+import '../../../widgets/row_item.dart';
 
 class CapsuleDialog extends StatelessWidget {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -71,14 +72,14 @@ class CapsuleDialog extends StatelessWidget {
                       RowItem.textRow('Launches', model.capsule.getLaunches),
                       const SizedBox(height: 12.0),
                       RowItem.textRow('Splashings', model.capsule.getLandings),
-                      const SizedBox(height: 12.0),
-                      Text(
-                        model.capsule.getMissions,
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context)
-                            .textTheme
-                            .subhead
-                            .copyWith(color: secondaryText),
+                      const Divider(height: 24.0),
+                      Column(
+                        children: model.capsule.missions
+                            .map((mission) => DialogListTile(
+                                  title: mission.name,
+                                  id: mission.id,
+                                ))
+                            .toList(),
                       ),
                       const Divider(height: 24.0),
                       Text(

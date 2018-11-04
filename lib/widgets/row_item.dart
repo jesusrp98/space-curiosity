@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import '../util/colors.dart';
-import 'details_dialog.dart';
 
 /// ROW ITEM CLASS
 /// Class to build a stretched widget to display information in a

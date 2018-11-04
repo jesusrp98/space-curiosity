@@ -28,7 +28,7 @@ class CapsuleModel extends QuerryModel {
   }
 
   CapsuleDetails get capsule => items[0];
-} 
+}
 
 class CapsuleDetails extends VehicleDetails {
   final String name;
@@ -56,7 +56,9 @@ class CapsuleDetails extends VehicleDetails {
       status: json['status'],
       details: json['details'],
       firstLaunched: DateTime.parse(json['original_launch']).toLocal(),
-      missions: json['missions'],
+      missions: json['missions']
+          .map((mission) => DetailsMission.fromJson(mission))
+          .toList(),
       name: json['type'],
       landings: json['landings'],
     );

@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import '../../util/url.dart';
 import '../querry_model.dart';
 import 'vehicle_details.dart';
+
 ///CORE DETAILS CLASS
 /// This class represents a single core used in a SpaceX mission,
 /// with all its details.
@@ -30,7 +31,7 @@ class CoreModel extends QuerryModel {
 }
 
 class CoreDetails extends VehicleDetails {
-  final int block, rtlsLandings, asdsLandings;
+  final int block, rtlsLandings, rtlsAttempts, asdsLandings, asdsAttempts;
 
   CoreDetails({
     serial,
@@ -40,7 +41,9 @@ class CoreDetails extends VehicleDetails {
     missions,
     this.block,
     this.rtlsLandings,
+    this.rtlsAttempts,
     this.asdsLandings,
+    this.asdsAttempts,
   }) : super(
           serial: serial,
           status: status,
@@ -55,10 +58,14 @@ class CoreDetails extends VehicleDetails {
       status: json['status'],
       details: json['details'],
       firstLaunched: DateTime.parse(json['original_launch']).toLocal(),
-      missions: json['missions'],
+      missions: json['missions']
+          .map((mission) => DetailsMission.fromJson(mission))
+          .toList(),
       block: json['block'],
       rtlsLandings: json['rtls_landings'],
+      rtlsAttempts: json['rtls_attempts'],
       asdsLandings: json['asds_landings'],
+      asdsAttempts: json['asds_attempts'],
     );
   }
 
@@ -66,7 +73,7 @@ class CoreDetails extends VehicleDetails {
 
   String get getBlock => block == null ? 'Unknown' : 'Block $block';
 
-  String get getRtlsLandings => rtlsLandings.toString();
+  String get getRtlsLandings => '$rtlsLandings/$rtlsAttempts';
 
-  String get getAsdsLandings => asdsLandings.toString();
+  String get getAsdsLandings => '$asdsLandings/$asdsAttempts';
 }
