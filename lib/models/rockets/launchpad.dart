@@ -52,7 +52,7 @@ class Launchpad {
       location: json['location']['name'],
       state: json['location']['region'],
       details: json['details'],
-      url: json['wikiepdia'],
+      url: json['wikipedia'],
       coordinates: [
         json['location']['latitude'],
         json['location']['longitude'],
