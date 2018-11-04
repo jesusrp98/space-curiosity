@@ -44,12 +44,12 @@ class RowItem extends StatelessWidget {
 
   /// Builds a Text-to-Text widget, but the description widget is clickable
   /// and opens a dialog
-  factory RowItem.dialogRow(
+  factory RowItem.dialogRow({
     BuildContext context,
     String title,
     String description,
     ScopedModel screen,
-  ) {
+  }) {
     if (description != 'Unknown')
       return RowItem(
         title: title,

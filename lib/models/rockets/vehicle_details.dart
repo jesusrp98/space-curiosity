@@ -22,6 +22,8 @@ abstract class VehicleDetails {
   String get getFirstLaunched => DateFormat.yMMMMd().format(firstLaunched);
 
   String get getLaunches => missions.length.toString();
+
+  bool get hasMissions => missions.isNotEmpty;
 }
 
 class DetailsMission {

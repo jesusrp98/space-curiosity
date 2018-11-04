@@ -228,10 +228,10 @@ class LaunchPage extends StatelessWidget {
     return Column(children: <Widget>[
       const Divider(height: 24.0),
       RowItem.dialogRow(
-        context,
-        'Core serial',
-        core.getId,
-        ScopedModel<CoreModel>(
+        context: context,
+        title: 'Core serial',
+        description: core.getId,
+        screen: ScopedModel<CoreModel>(
           model: CoreModel(core.id)..loadData(),
           child: CoreDialog(),
         ),
@@ -244,10 +244,10 @@ class LaunchPage extends StatelessWidget {
       (core.getLandingZone != 'Unknown')
           ? Column(children: <Widget>[
               RowItem.dialogRow(
-                context,
-                'Landing zone',
-                core.getLandingZone,
-                ScopedModel<LandingpadModel>(
+                context: context,
+                title: 'Landing zone',
+                description: core.getLandingZone,
+                screen: ScopedModel<LandingpadModel>(
                   model: LandingpadModel(core.landingZone)..loadData(),
                   child: LandingpadDialog(),
                 ),
@@ -267,10 +267,10 @@ class LaunchPage extends StatelessWidget {
           ? Column(children: <Widget>[
               const SizedBox(height: 12.0),
               RowItem.dialogRow(
-                context,
-                'Capsule serial',
-                payload.getCapsuleSerial,
-                ScopedModel<CapsuleModel>(
+                context: context,
+                title: 'Capsule serial',
+                description: payload.getCapsuleSerial,
+                screen: ScopedModel<CapsuleModel>(
                   model: CapsuleModel(payload.capsuleSerial)..loadData(),
                   child: CapsuleDialog(),
                 ),

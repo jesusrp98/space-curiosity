@@ -81,14 +81,19 @@ class CoreDialog extends StatelessWidget {
                         model.core.getAsdsLandings,
                       ),
                       const Divider(height: 24.0),
-                      Column(
-                        children: model.core.missions
-                            .map((mission) => DialogListTile(
-                                  title: mission.name,
-                                  id: mission.id,
-                                ))
-                            .toList(),
-                      ),
+                      (model.core.hasMissions)
+                          ? Column(
+                              children: model.core.missions
+                                  .map((mission) => DialogListTile(
+                                        title: mission.name,
+                                        id: mission.id,
+                                      ))
+                                  .toList(),
+                            )
+                          : Text(
+                              'This core has no previous missions.',
+                              style: Theme.of(context).textTheme.subhead,
+                            ),
                       const Divider(height: 24.0),
                       Text(
                         model.core.getDetails,
