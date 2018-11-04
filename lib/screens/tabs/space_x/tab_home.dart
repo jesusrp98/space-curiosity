@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -7,10 +8,12 @@ import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
 
+import '../../../models/rockets/core_details.dart';
 import '../../../models/rockets/launchpad.dart';
 import '../../../models/rockets/spacex_home.dart';
 import '../../../util/colors.dart';
 import '../../../widgets/spacex_home_detail.dart';
+import 'dialog_core.dart';
 import 'dialog_launchpad.dart';
 import 'page_launch.dart';
 
@@ -135,6 +138,25 @@ class SpacexHomeTab extends StatelessWidget {
               icon: Icons.autorenew,
               title: 'Reused parts',
               subtitle: model.landings,
+              onTap: (model.launch.rocket.firstStage[0].id == null)
+                  ? null
+                  : () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => ScopedModel<CoreModel>(
+                                model: CoreModel(
+                                  model
+                                      .launch
+                                      .rocket
+                                      .firstStage[Random().nextInt(model
+                                          .launch.rocket.firstStage.length)]
+                                      .id,
+                                )..loadData(),
+                                child: CoreDialog(),
+                              ),
+                          fullscreenDialog: true,
+                        ),
+                      ),
             ),
           ],
         );

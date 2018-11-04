@@ -60,28 +60,34 @@ class CapsuleDialog extends StatelessWidget {
                   child: Column(
                     children: <Widget>[
                       RowItem.textRow('Model', model.capsule.name),
-                      const SizedBox(height: 8.0),
+                      const SizedBox(height: 12.0),
                       RowItem.textRow('Status', model.capsule.getStatus),
-                      const SizedBox(height: 8.0),
+                      const SizedBox(height: 12.0),
                       RowItem.textRow(
                         'First launched',
                         model.capsule.getFirstLaunched,
                       ),
-                      const SizedBox(height: 8.0),
+                      const SizedBox(height: 12.0),
                       RowItem.textRow('Launches', model.capsule.getLaunches),
-                      const SizedBox(height: 8.0),
+                      const SizedBox(height: 12.0),
                       RowItem.textRow('Splashings', model.capsule.getLandings),
-                      const SizedBox(height: 8.0),
+                      const SizedBox(height: 12.0),
                       Text(
                         model.capsule.getMissions,
                         textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 17.0, color: primaryText),
+                        style: Theme.of(context)
+                            .textTheme
+                            .subhead
+                            .copyWith(color: secondaryText),
                       ),
                       const Divider(height: 24.0),
                       Text(
                         model.capsule.getDetails,
                         textAlign: TextAlign.justify,
-                        style: TextStyle(fontSize: 15.0, color: secondaryText),
+                        style: Theme.of(context)
+                            .textTheme
+                            .subhead
+                            .copyWith(color: secondaryText),
                       ),
                     ],
                   ),

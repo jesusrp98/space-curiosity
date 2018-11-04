@@ -97,7 +97,10 @@ class LaunchpadDialog extends StatelessWidget {
                       Text(
                         model.launchpad.details,
                         textAlign: TextAlign.justify,
-                        style: TextStyle(fontSize: 15.0, color: secondaryText),
+                        style: Theme.of(context)
+                            .textTheme
+                            .subhead
+                            .copyWith(color: secondaryText),
                       ),
                     ],
                   ),

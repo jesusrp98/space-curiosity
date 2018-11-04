@@ -83,13 +83,19 @@ class CoreDialog extends StatelessWidget {
                       Text(
                         model.core.getMissions,
                         textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 17.0, color: primaryText),
+                        style: Theme.of(context)
+                            .textTheme
+                            .subhead
+                            .copyWith(color: secondaryText),
                       ),
                       const Divider(height: 24.0),
                       Text(
                         model.core.getDetails,
                         textAlign: TextAlign.justify,
-                        style: TextStyle(fontSize: 15.0, color: secondaryText),
+                        style: Theme.of(context)
+                            .textTheme
+                            .subhead
+                            .copyWith(color: secondaryText),
                       ),
                     ],
                   ),

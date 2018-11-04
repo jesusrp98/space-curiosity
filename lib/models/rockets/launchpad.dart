@@ -69,8 +69,6 @@ class Launchpad {
       ',  ' +
       coordinates[1].toStringAsPrecision(5));
 
-  String get getVehicles => 'aux';
-
   String get getAttemptedLaunches => attemptedLaunches.toString();
 
   String get getSuccessfulLaunches => successfulLaunches.toString();
