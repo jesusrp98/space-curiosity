@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:duration/duration.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 import '../../util/url.dart';
@@ -15,17 +16,12 @@ class SpacexHomeModel extends QuerryModel {
     final response = await http.get(Url.nextLaunch);
     items.clear();
 
-    if (photos.isEmpty) {
-      photos.addAll(Url.spacexHomeScreen);
-    }
+    if (photos.isEmpty) photos.addAll(Url.spacexHomeScreen);
     photos.shuffle();
     launch = Launch.fromJson(json.decode(response.body));
 
     loadingState(false);
   }
-
-  String get countdown =>
-      'T - ${printDuration(launch.launchDate.difference(DateTime.now()), abbreviated: true, delimiter: ':', spacer: '')}';
 
   DateTime get launchDateTime => launch.launchDate;
 
@@ -63,9 +59,9 @@ class SpacexHomeModel extends QuerryModel {
   String get landings {
     String aux = '';
     List<String> cores = [
-      'Central booster',
-      'Left booster',
-      'Right booster',
+      'Booster',
+      'Left core',
+      'Right core',
     ];
 
     for (int i = 0; i < launch.rocket.firstStage.length; ++i)
@@ -78,5 +74,66 @@ class SpacexHomeModel extends QuerryModel {
           ((i + 1 == launch.rocket.firstStage.length) ? '.' : '\n');
 
     return aux;
+  }
+}
+
+class Countdown extends AnimatedWidget {
+  final Animation<int> animation;
+  final DateTime launchDate;
+
+  Countdown({Key key, this.animation, this.launchDate})
+      : super(key: key, listenable: animation);
+
+  @override
+  build(BuildContext context) {
+    return Text(
+      'T - ${printDuration(launchDate.difference(DateTime.now()), abbreviated: true, delimiter: ':', spacer: '')}',
+      style: Theme.of(context)
+          .textTheme
+          .headline
+          .copyWith(fontFamily: 'RobotoMono'),
+    );
+  }
+}
+
+class LaunchCountdown extends StatefulWidget {
+  final SpacexHomeModel model;
+
+  LaunchCountdown(this.model);
+  State createState() => _LaunchCountdownState();
+}
+
+class _LaunchCountdownState extends State<LaunchCountdown>
+    with TickerProviderStateMixin {
+  AnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: Duration(
+        seconds: widget.model.launchDateTime.millisecondsSinceEpoch -
+            DateTime.now().millisecondsSinceEpoch,
+      ),
+    );
+    _controller.forward(from: 0.0);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Countdown(
+      launchDate: widget.model.launchDateTime,
+      animation: StepTween(
+        begin: widget.model.launchDateTime.millisecondsSinceEpoch,
+        end: DateTime.now().millisecondsSinceEpoch,
+      ).animate(_controller),
+    );
   }
 }
