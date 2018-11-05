@@ -6,3 +6,4 @@ build/
 .flutter-plugins
 .vscode/
 pubspec.lock
+.idea/workspace.xml

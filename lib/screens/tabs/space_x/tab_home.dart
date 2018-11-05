@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:duration/duration.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
@@ -78,13 +79,15 @@ class SpacexHomeTab extends StatelessWidget {
         return Column(
           children: <Widget>[
             Container(height: 16.0),
-            Text(
-              model.countdown,
-              style: Theme.of(context)
-                  .textTheme
-                  .headline
-                  .copyWith(fontFamily: 'RobotoMono'),
-            ),
+//            LaunchCountdownWidget(model),
+//            Text(
+//              model.countdown,
+//              style: Theme.of(context)
+//                  .textTheme
+//                  .headline
+//                  .copyWith(fontFamily: 'RobotoMono'),
+//            ),
+            LaunchCountdown(model),
             Container(height: 16.0),
             const Divider(height: 0.0),
             SpacexHomeDetail(
@@ -172,6 +175,64 @@ class SpacexHomeTab extends StatelessWidget {
             fadeInDuration: Duration(milliseconds: 100),
             fit: BoxFit.cover,
           ),
+    );
+  }
+}
+
+class Countdown extends AnimatedWidget {
+  Countdown({Key key, this.animation, this.launchDate})
+      : super(key: key, listenable: animation);
+  final Animation<int> animation;
+  final DateTime launchDate;
+
+  @override
+  build(BuildContext context) {
+    return new Text(
+      'T - ${printDuration(launchDate.difference(DateTime.now()), abbreviated: true, delimiter: ':', spacer: '')}',
+      style: Theme.of(context)
+          .textTheme
+          .headline
+          .copyWith(fontFamily: 'RobotoMono'),
+    );
+  }
+}
+
+class LaunchCountdown extends StatefulWidget {
+  final SpacexHomeModel model;
+  LaunchCountdown(this.model);
+  State createState() => new _LaunchCountdownState();
+}
+
+class _LaunchCountdownState extends State<LaunchCountdown>
+    with TickerProviderStateMixin {
+  AnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = new AnimationController(
+      vsync: this,
+      duration: new Duration(
+          seconds: widget.model.launchDateTime.millisecondsSinceEpoch -
+              DateTime.now().millisecondsSinceEpoch),
+    );
+    _controller.forward(from: 0.0);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return new Countdown(
+      launchDate: widget.model.launchDateTime,
+      animation: new StepTween(
+        begin: widget.model.launchDateTime.millisecondsSinceEpoch,
+        end: DateTime.now().millisecondsSinceEpoch,
+      ).animate(_controller),
     );
   }
 }

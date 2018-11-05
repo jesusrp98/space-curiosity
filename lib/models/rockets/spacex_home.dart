@@ -27,6 +27,8 @@ class SpacexHomeModel extends QuerryModel {
   String get countdown =>
       'T - ${printDuration(launch.launchDate.difference(DateTime.now()), abbreviated: true, delimiter: ':', spacer: '')}';
 
+  DateTime get launchDateTime => launch.launchDate;
+
   String get vehicle => 'Launched by ${launch.rocket.name}';
 
   String get payload {
