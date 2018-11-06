@@ -87,13 +87,30 @@ class Countdown extends AnimatedWidget {
   @override
   build(BuildContext context) {
     return Text(
-      'T - ${printDuration(launchDate.difference(DateTime.now()), abbreviated: true, delimiter: ':', spacer: '')}',
+      getTimer(launchDate.difference(DateTime.now())),
       style: Theme.of(context)
           .textTheme
           .headline
           .copyWith(fontFamily: 'RobotoMono'),
     );
   }
+
+  String getTimer(Duration d) =>
+      'T' +
+      (d.isNegative ? '+' : '-') +
+      d.inDays.toString().padLeft(2, '0') +
+      'd:' +
+      (d.inHours - d.inDays * Duration.hoursPerDay).toString().padLeft(2, '0') +
+      'h:' +
+      (d.inMinutes -
+              d.inDays * Duration.minutesPerDay -
+              (d.inHours - d.inDays * Duration.hoursPerDay) *
+                  Duration.minutesPerHour)
+          .toString()
+          .padLeft(2, '0') +
+      'm:' +
+      (d.inSeconds % 60).toString().padLeft(2, '0') +
+      's';
 }
 
 class LaunchCountdown extends StatefulWidget {

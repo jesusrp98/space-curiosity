@@ -80,7 +80,7 @@ class ShipInfo extends Vehicle {
     }
   }
 
-  String get subtitle => 'Ship built on ${firstFlight.year}';
+  String get subtitle => 'Ship built in ${firstFlight.year}';
 
   bool get hasUrl => url != null;
 
