@@ -53,7 +53,13 @@ class LaunchPage extends StatelessWidget {
                             androidToolbarColor: primaryColor,
                           ),
                     )
-                  : null,
+                  : (_launch.tentativePrecision == 'hour')
+                      ? FloatingActionButton(
+                          child: const Icon(Icons.event),
+                          tooltip: 'Add event',
+                          onPressed: null,
+                        )
+                      : null,
               slivers: <Widget>[
                 SliverAppBar(
                   expandedHeight: MediaQuery.of(context).size.height * 0.3,

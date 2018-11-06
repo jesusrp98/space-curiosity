@@ -85,11 +85,6 @@ class LaunchpadDialog extends StatelessWidget {
                       ),
                       const SizedBox(height: 12.0),
                       RowItem.textRow(
-                        'Attempted launches',
-                        model.launchpad.getAttemptedLaunches,
-                      ),
-                      const SizedBox(height: 12.0),
-                      RowItem.textRow(
                         'Successful launches',
                         model.launchpad.getSuccessfulLaunches,
                       ),

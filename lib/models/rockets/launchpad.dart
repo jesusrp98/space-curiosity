@@ -69,7 +69,5 @@ class Launchpad {
       ',  ' +
       coordinates[1].toStringAsPrecision(5));
 
-  String get getAttemptedLaunches => attemptedLaunches.toString();
-
-  String get getSuccessfulLaunches => successfulLaunches.toString();
+  String get getSuccessfulLaunches => '$successfulLaunches/$attemptedLaunches';
 }

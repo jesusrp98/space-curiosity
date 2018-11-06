@@ -78,11 +78,11 @@ class CapsulePage extends StatelessWidget {
                   : 'Scheduled maiden launch',
               _capsule.getFullFirstFlight),
           const SizedBox(height: 12.0),
+          RowItem.iconRow('Active', _capsule.active),
+          const SizedBox(height: 12.0),
           RowItem.textRow('Crew capacity', _capsule.getCrew),
           const SizedBox(height: 12.0),
           RowItem.iconRow('Reusable', _capsule.reusable),
-          const SizedBox(height: 12.0),
-          RowItem.iconRow('Active', _capsule.active),
           const Divider(height: 24.0),
           Text(
             _capsule.description,

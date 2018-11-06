@@ -90,11 +90,6 @@ class LandingpadDialog extends StatelessWidget {
                       ),
                       const SizedBox(height: 12.0),
                       RowItem.textRow(
-                        'Attempted landings',
-                        model.landingpad.getAttemptedLandings,
-                      ),
-                      const SizedBox(height: 12.0),
-                      RowItem.textRow(
                         'Successful landings',
                         model.landingpad.getSuccessfulLandings,
                       ),

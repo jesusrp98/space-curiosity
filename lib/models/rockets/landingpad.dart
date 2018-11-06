@@ -68,7 +68,5 @@ class Landingpad {
       ',  ' +
       coordinates[1].toStringAsPrecision(5));
 
-  String get getAttemptedLandings => attemptedLandings.toString();
-
-  String get getSuccessfulLandings => successfulLandings.toString();
+  String get getSuccessfulLandings => '$successfulLandings/$attemptedLandings';
 }

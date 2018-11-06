@@ -73,6 +73,11 @@ class VehiclesTab extends StatelessWidget {
                 ],
               ),
             ),
+            floatingActionButton: FloatingActionButton(
+              child: const Icon(Icons.search),
+              tooltip: 'Search',
+              onPressed: null,
+            ),
           ),
     );
   }
