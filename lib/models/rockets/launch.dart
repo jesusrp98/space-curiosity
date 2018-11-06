@@ -118,6 +118,8 @@ class Launch {
 
   String get getImageUrl => imageUrl ?? Url.defaultImage;
 
+  bool get hasImage => imageUrl != null;
+
   bool get hasVideo => links[0] != null;
 
   String get getVideo => links[0];

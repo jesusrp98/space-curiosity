@@ -123,7 +123,7 @@ class SpacexHomeTab extends StatelessWidget {
             ),
             const Divider(height: 0.0, indent: 74.0),
             ListCell(
-              leading: const Icon(Icons.directions_boat),
+              leading: const Icon(Icons.directions_boat, size: 42.0),
               title: 'Fairings',
               subtitle: model.fairings,
             ),

@@ -116,10 +116,12 @@ class LaunchPage extends StatelessWidget {
         url: _launch.getImageUrl,
         tag: _launch.getNumber,
         size: HeroImage.bigSize,
-        onTap: () => FlutterWebBrowser.openWebPage(
-              url: _launch.getImageUrl,
-              androidToolbarColor: primaryColor,
-            ),
+        onTap: (_launch.hasImage)
+            ? () => FlutterWebBrowser.openWebPage(
+                  url: _launch.getImageUrl,
+                  androidToolbarColor: primaryColor,
+                )
+            : null,
       ),
       title: _launch.name,
       subtitle: Column(
@@ -132,7 +134,7 @@ class LaunchPage extends StatelessWidget {
                 .subhead
                 .copyWith(color: secondaryText),
           ),
-          const SizedBox(height: 12.0),
+          const SizedBox(height: 8.0),
           InkWell(
             onTap: () => Navigator.push(
                   context,
