@@ -112,12 +112,14 @@ class LaunchPage extends StatelessWidget {
 
   Widget _missionCard(BuildContext context) {
     return HeadCardPage(
-      image: HeroImage().buildExpandedHero(
-        context: context,
-        size: HeroImage.bigSize,
+      image: HeroImage.card(
         url: _launch.getImageUrl,
         tag: _launch.getNumber,
-        title: _launch.name,
+        size: HeroImage.bigSize,
+        onTap: () => FlutterWebBrowser.openWebPage(
+              url: _launch.getImageUrl,
+              androidToolbarColor: primaryColor,
+            ),
       ),
       title: _launch.name,
       subtitle: Column(

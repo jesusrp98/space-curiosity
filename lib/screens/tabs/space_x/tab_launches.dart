@@ -84,12 +84,10 @@ class LaunchesTab extends StatelessWidget {
         return Column(
           children: <Widget>[
             ListCell(
-              leading: HeroImage().buildHero(
-                context: context,
-                size: HeroImage.smallSize,
+              leading: HeroImage.list(
                 url: launch.getImageUrl,
                 tag: launch.getNumber,
-                title: launch.name,
+                size: HeroImage.smallSize,
               ),
               title: launch.name,
               subtitle: launch.getLaunchDate,

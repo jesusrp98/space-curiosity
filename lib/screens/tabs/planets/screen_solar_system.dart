@@ -49,12 +49,10 @@ class SolarSystemScreen extends StatelessWidget {
     for (var moon in moons)
       _moons.add(
         ListCell(
-          leading: HeroImage().buildHero(
-            context: context,
-            size: HeroImage.smallSize,
+          leading: HeroImage.list(
             url: moon.imageUrl,
             tag: moon.id,
-            title: moon.name,
+            size: HeroImage.smallSize,
           ),
           title: moon.name,
           subtitle: moon.description,
@@ -90,12 +88,10 @@ class SolarSystemScreen extends StatelessWidget {
       children: <Widget>[
         ScopedModelDescendant<PlanetsModel>(
           builder: (context, child, model) => ListCell(
-                leading: HeroImage().buildHero(
-                  context: context,
-                  size: HeroImage.smallSize,
+                leading: HeroImage.list(
                   url: model.getItem(index).imageUrl,
                   tag: model.getItem(index).id,
-                  title: model.getItem(index).name,
+                  size: HeroImage.smallSize,
                 ),
                 title: model.getItem(index).name,
                 subtitle: model.getItem(index).description,

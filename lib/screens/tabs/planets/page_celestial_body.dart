@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_web_browser/flutter_web_browser.dart';
 
 import '../../../models/planets/celestial_body.dart';
 import '../../../util/colors.dart';
@@ -79,12 +80,14 @@ class CelestialBodyPage extends StatelessWidget {
 
   Widget _headCard(BuildContext context) {
     return HeadCardPage(
-      image: HeroImage().buildHero(
-        context: context,
-        size: HeroImage.bigSize,
+      image: HeroImage.card(
         url: celestialBody.imageUrl,
         tag: celestialBody.id,
-        title: celestialBody.name,
+        size: HeroImage.bigSize,
+        onTap: () => FlutterWebBrowser.openWebPage(
+              url: celestialBody.imageUrl,
+              androidToolbarColor: primaryColor,
+            ),
       ),
       title: celestialBody.name,
       subtitle: Column(

@@ -11,7 +11,7 @@ class RowItem extends StatelessWidget {
   final String title;
   final Widget description;
 
-  RowItem({this.title, this.description});
+  RowItem(this.title, this.description);
 
   @override
   Widget build(BuildContext context) {
@@ -34,12 +34,12 @@ class RowItem extends StatelessWidget {
 
   /// Builds a normal Text-to-Text row item
   factory RowItem.textRow(String title, String description) {
-    return RowItem(title: title, description: _getText(description));
+    return RowItem(title, _getText(description));
   }
 
   /// Builds a Text-to-Icon row item, to display a boolean status
   factory RowItem.iconRow(String title, bool status) {
-    return RowItem(title: title, description: _getIcon(status));
+    return RowItem(title, _getIcon(status));
   }
 
   /// Builds a Text-to-Text widget, but the description widget is clickable
@@ -52,8 +52,8 @@ class RowItem extends StatelessWidget {
   }) {
     if (description != 'Unknown')
       return RowItem(
-        title: title,
-        description: InkWell(
+        title,
+        InkWell(
           child: _getText(description, true),
           onTap: () => Navigator.push(
                 context,
@@ -65,7 +65,7 @@ class RowItem extends StatelessWidget {
         ),
       );
     else
-      return RowItem(title: title, description: _getText(description));
+      return RowItem(title, _getText(description));
   }
 
   /// Return an icon based on the [status] var

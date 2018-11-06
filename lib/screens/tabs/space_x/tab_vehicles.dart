@@ -85,12 +85,10 @@ class VehiclesTab extends StatelessWidget {
           return Column(
             children: <Widget>[
               ListCell(
-                leading: HeroImage().buildHero(
-                  context: context,
-                  size: HeroImage.smallSize,
+                leading: HeroImage.list(
                   url: vehicle.getProfilePhoto,
                   tag: vehicle.id,
-                  title: vehicle.name,
+                  size: HeroImage.smallSize,
                 ),
                 title: vehicle.name,
                 subtitle: vehicle.subtitle,
