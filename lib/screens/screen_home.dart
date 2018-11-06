@@ -6,7 +6,7 @@ import 'package:scoped_model/scoped_model.dart';
 
 import '../models/nasa/nasa_image.dart';
 import '../models/planets/celestial_body.dart';
-import '../widgets/home_icon.dart';
+import '../widgets/list_cell.dart';
 import '../widgets/photo_card.dart';
 import 'screen_about.dart';
 import 'tabs/news/screen_news.dart';
@@ -76,30 +76,41 @@ class _ContentPageState extends State<ContentPage> {
           ),
         ),
         const Divider(height: 0.0),
-        HomeIcon(
+        ListCell(
           leading: Icon(FontAwesomeIcons.rocket, size: 36.0),
           title: 'SpaceX',
           subtitle: 'Launch Tracker',
-          screen: SpacexScreen(),
+          onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => SpacexScreen()),
+              ),
         ),
         const Divider(height: 0.0, indent: 68.0),
-        HomeIcon(
+        ListCell(
           leading: Icon(Icons.description, size: 36.0),
           title: 'Breaking News',
           subtitle: 'From around the globe',
-          screen: NewsScreen(),
+          onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => NewsScreen()),
+              ),
         ),
         const Divider(height: 0.0, indent: 68.0),
-        HomeIcon(
+        ListCell(
           leading: Icon(Icons.public, size: 36.0),
           title: 'Solar System',
           subtitle: 'Explore every inch of our neighborhood',
-          screen: ScopedModel<PlanetsModel>(
-            model: _planetsModel,
-            child: SolarSystemScreen(
-              planetModel: _planetsModel,
-            ),
-          ),
+          onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => ScopedModel<PlanetsModel>(
+                        model: _planetsModel,
+                        child: SolarSystemScreen(
+                          planetModel: _planetsModel,
+                        ),
+                      ),
+                ),
+              ),
         ),
         // Padding(
         //   padding: const EdgeInsets.all(16.0),

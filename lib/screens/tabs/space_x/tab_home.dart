@@ -12,7 +12,7 @@ import '../../../models/rockets/core_details.dart';
 import '../../../models/rockets/launchpad.dart';
 import '../../../models/rockets/spacex_home.dart';
 import '../../../util/colors.dart';
-import '../../../widgets/spacex_home_detail.dart';
+import '../../../widgets/list_cell.dart';
 import 'dialog_core.dart';
 import 'dialog_launchpad.dart';
 import 'page_launch.dart';
@@ -81,8 +81,8 @@ class SpacexHomeTab extends StatelessWidget {
             LaunchCountdown(model),
             Container(height: 16.0),
             const Divider(height: 0.0),
-            SpacexHomeDetail(
-              icon: Icons.public,
+            ListCell(
+              leading: const Icon(Icons.public, size: 42.0),
               title: model.vehicle,
               subtitle: model.payload,
               onTap: () => Navigator.push(
@@ -91,14 +91,14 @@ class SpacexHomeTab extends StatelessWidget {
                   ),
             ),
             const Divider(height: 0.0, indent: 74.0),
-            SpacexHomeDetail(
-              icon: Icons.today,
+            ListCell(
+              leading: const Icon(Icons.today, size: 42.0),
               title: 'Launch date',
               subtitle: model.launchDate,
             ),
             const Divider(height: 0.0, indent: 74.0),
-            SpacexHomeDetail(
-              icon: Icons.location_on,
+            ListCell(
+              leading: const Icon(Icons.location_on, size: 42.0),
               title: 'Launch site',
               subtitle: model.launchpad,
               onTap: () => Navigator.push(
@@ -116,20 +116,20 @@ class SpacexHomeTab extends StatelessWidget {
                   ),
             ),
             const Divider(height: 0.0, indent: 74.0),
-            SpacexHomeDetail(
-              icon: Icons.timer,
+            ListCell(
+              leading: const Icon(Icons.timer, size: 42.0),
               title: 'Static fire date',
               subtitle: model.staticFire,
             ),
             const Divider(height: 0.0, indent: 74.0),
-            SpacexHomeDetail(
-              icon: Icons.directions_boat,
+            ListCell(
+              leading: const Icon(Icons.directions_boat),
               title: 'Fairings',
               subtitle: model.fairings,
             ),
             const Divider(height: 0.0, indent: 74.0),
-            SpacexHomeDetail(
-              icon: Icons.autorenew,
+            ListCell(
+              leading: const Icon(Icons.autorenew, size: 42.0),
               title: 'Reused parts',
               subtitle: model.landings,
               onTap: (model.launch.rocket.firstStage[0].id == null)
