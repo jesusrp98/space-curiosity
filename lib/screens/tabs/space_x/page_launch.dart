@@ -140,40 +140,32 @@ class LaunchPage extends StatelessWidget {
             : null,
       ),
       title: _launch.name,
-      subtitle: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text(
-            _launch.getLaunchDate,
-            style: Theme.of(context)
-                .textTheme
-                .subhead
-                .copyWith(color: secondaryText),
-          ),
-          const SizedBox(height: 8.0),
-          InkWell(
-            onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => ScopedModel<LaunchpadModel>(
-                          model: LaunchpadModel(
-                            _launch.launchpadId,
-                            _launch.launchpadName,
-                          )..loadData(),
-                          child: LaunchpadDialog(),
-                        ),
-                    fullscreenDialog: true,
-                  ),
-                ),
-            child: Text(
-              _launch.launchpadName,
-              style: Theme.of(context).textTheme.subhead.copyWith(
-                    decoration: TextDecoration.underline,
-                    color: secondaryText,
-                  ),
+      subtitle1: Text(
+        _launch.getLaunchDate,
+        style:
+            Theme.of(context).textTheme.subhead.copyWith(color: secondaryText),
+      ),
+      subtitle2: InkWell(
+        onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => ScopedModel<LaunchpadModel>(
+                      model: LaunchpadModel(
+                        _launch.launchpadId,
+                        _launch.launchpadName,
+                      )..loadData(),
+                      child: LaunchpadDialog(),
+                    ),
+                fullscreenDialog: true,
+              ),
             ),
-          ),
-        ],
+        child: Text(
+          _launch.launchpadName,
+          style: Theme.of(context).textTheme.subhead.copyWith(
+                decoration: TextDecoration.underline,
+                color: secondaryText,
+              ),
+        ),
       ),
       details: _launch.getDetails,
     );

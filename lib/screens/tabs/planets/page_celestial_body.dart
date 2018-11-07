@@ -90,25 +90,17 @@ class CelestialBodyPage extends StatelessWidget {
             ),
       ),
       title: celestialBody.name,
-      subtitle: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text(
-            celestialBody.getPopulation,
-            style: Theme.of(context)
-                .textTheme
-                .subhead
-                .copyWith(color: secondaryText),
-          ),
-          const SizedBox(height: 12.0),
-          Text(
-            "I'm a subtitle!",
-            style: Theme.of(context)
-                .textTheme
-                .subhead
-                .copyWith(color: secondaryText),
-          ),
-        ],
+      subtitle1: Text(
+        celestialBody.getPopulation,
+        style: Theme.of(context).textTheme.subhead.copyWith(
+              color: secondaryText,
+            ),
+      ),
+      subtitle2: Text(
+        "I'm a subtitle!",
+        style: Theme.of(context).textTheme.subhead.copyWith(
+              color: secondaryText,
+            ),
       ),
       details: celestialBody.description,
     );
