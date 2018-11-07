@@ -36,11 +36,7 @@ class HeroImage extends StatelessWidget {
     return HeroImage(url: url, tag: tag, size: _smallSize, onTap: null);
   }
 
-  factory HeroImage.card({
-    String url,
-    String tag,
-    VoidCallback onTap,
-  }) {
+  factory HeroImage.card({String url, String tag, VoidCallback onTap}) {
     return HeroImage(url: url, tag: tag, size: _bigSize, onTap: onTap);
   }
 }

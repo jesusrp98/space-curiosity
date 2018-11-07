@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
+import 'package:latlong/latlong.dart';
 import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
 
@@ -33,19 +35,39 @@ class LandingpadDialog extends StatelessWidget {
                 flexibleSpace: FlexibleSpaceBar(
                   centerTitle: true,
                   title: Text(model.id),
-                  // background: (model.isLoading)
-                  //     ? NativeLoadingIndicator(center: true)
-                  //     : Swiper(
-                  //         itemCount: model.getImagesCount,
-                  //         itemBuilder: _buildImage,
-                  //         autoplay: true,
-                  //         autoplayDelay: 6000,
-                  //         duration: 750,
-                  //         onTap: (index) => FlutterWebBrowser.openWebPage(
-                  //               url: model.getImageUrl(index),
-                  //               androidToolbarColor: primaryColor,
-                  //             ),
-                  //       ),
+                  background: (model.isLoading)
+                      ? NativeLoadingIndicator(center: true)
+                      : FlutterMap(
+                          options: MapOptions(
+                            center: LatLng(
+                              model.landingpad.coordinates[0],
+                              model.landingpad.coordinates[1],
+                            ),
+                            minZoom: 10.0,
+                          ),
+                          layers: <LayerOptions>[
+                            TileLayerOptions(
+                              urlTemplate:
+                                  'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                              subdomains: ['a', 'b', 'c'],
+                            ),
+                            MarkerLayerOptions(markers: [
+                              Marker(
+                                width: 45.0,
+                                height: 45.0,
+                                point: LatLng(
+                                  model.landingpad.coordinates[0],
+                                  model.landingpad.coordinates[1],
+                                ),
+                                builder: (_) => Icon(
+                                      Icons.location_on,
+                                      color: Colors.red,
+                                      size: 45.0,
+                                    ),
+                              )
+                            ])
+                          ],
+                        ),
                 ),
               ),
               (model.isLoading)

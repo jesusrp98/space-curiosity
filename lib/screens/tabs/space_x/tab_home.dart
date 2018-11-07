@@ -92,7 +92,7 @@ class SpacexHomeTab extends StatelessWidget {
             ),
             const Divider(height: 0.0, indent: 74.0),
             ListCell(
-              leading: const Icon(Icons.today, size: 42.0),
+              leading: const Icon(Icons.event, size: 42.0),
               title: 'Launch date',
               subtitle: model.launchDate,
             ),
