@@ -43,13 +43,16 @@ class LaunchpadDialog extends StatelessWidget {
                               model.launchpad.coordinates[0],
                               model.launchpad.coordinates[1],
                             ),
-                            minZoom: 10.0,
+                            zoom: 6.0,
+                            minZoom: 5.0,
+                            maxZoom: 10.0,
                           ),
                           layers: <LayerOptions>[
                             TileLayerOptions(
                               urlTemplate:
-                                  'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-                              subdomains: ['a', 'b', 'c'],
+                                  'https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png',
+                              subdomains: ['a', 'b', 'c', 'd'],
+                              backgroundColor: primaryColor,
                             ),
                             MarkerLayerOptions(markers: [
                               Marker(
@@ -61,7 +64,7 @@ class LaunchpadDialog extends StatelessWidget {
                                 ),
                                 builder: (_) => Icon(
                                       Icons.location_on,
-                                      color: Colors.red,
+                                      color: Colors.red[700],
                                       size: 45.0,
                                     ),
                               )

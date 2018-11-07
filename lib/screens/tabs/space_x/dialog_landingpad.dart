@@ -43,13 +43,16 @@ class LandingpadDialog extends StatelessWidget {
                               model.landingpad.coordinates[0],
                               model.landingpad.coordinates[1],
                             ),
-                            minZoom: 10.0,
+                            zoom: 6.0,
+                            minZoom: 5.0,
+                            maxZoom: 10.0,
                           ),
                           layers: <LayerOptions>[
                             TileLayerOptions(
                               urlTemplate:
-                                  'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-                              subdomains: ['a', 'b', 'c'],
+                                  'https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png',
+                              subdomains: ['a', 'b', 'c', 'd'],
+                              backgroundColor: primaryColor,
                             ),
                             MarkerLayerOptions(markers: [
                               Marker(
