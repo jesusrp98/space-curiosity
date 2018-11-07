@@ -92,7 +92,6 @@ class LaunchesTab extends StatelessWidget {
               leading: HeroImage.list(
                 url: launch.getImageUrl,
                 tag: launch.getNumber,
-                size: HeroImage.smallSize,
               ),
               title: launch.name,
               subtitle: launch.getLaunchDate,

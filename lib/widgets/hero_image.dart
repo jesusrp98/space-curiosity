@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 /// HERO IMAGE
 /// Class used into building hero images & their specific hero pages.
 class HeroImage extends StatelessWidget {
-  static const num smallSize = 64.0, bigSize = 100.0;
+  static const num _smallSize = 64.0, _bigSize = 100.0;
 
   final String url, tag;
   final num size;
@@ -32,16 +32,15 @@ class HeroImage extends StatelessWidget {
     );
   }
 
-  factory HeroImage.list({String url, String tag, num size}) {
-    return HeroImage(url: url, tag: tag, size: size, onTap: null);
+  factory HeroImage.list({String url, String tag}) {
+    return HeroImage(url: url, tag: tag, size: _smallSize, onTap: null);
   }
 
   factory HeroImage.card({
     String url,
     String tag,
-    num size,
     VoidCallback onTap,
   }) {
-    return HeroImage(url: url, tag: tag, size: size, onTap: onTap);
+    return HeroImage(url: url, tag: tag, size: _bigSize, onTap: onTap);
   }
 }

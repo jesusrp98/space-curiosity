@@ -93,7 +93,6 @@ class VehiclesTab extends StatelessWidget {
                 leading: HeroImage.list(
                   url: vehicle.getProfilePhoto,
                   tag: vehicle.id,
-                  size: HeroImage.smallSize,
                 ),
                 title: vehicle.name,
                 subtitle: vehicle.subtitle,

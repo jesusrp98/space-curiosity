@@ -131,7 +131,6 @@ class LaunchPage extends StatelessWidget {
       image: HeroImage.card(
         url: _launch.getImageUrl,
         tag: _launch.getNumber,
-        size: HeroImage.bigSize,
         onTap: (_launch.hasImage)
             ? () => FlutterWebBrowser.openWebPage(
                   url: _launch.getImageUrl,

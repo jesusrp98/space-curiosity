@@ -52,7 +52,6 @@ class SolarSystemScreen extends StatelessWidget {
           leading: HeroImage.list(
             url: moon.imageUrl,
             tag: moon.id,
-            size: HeroImage.smallSize,
           ),
           title: moon.name,
           subtitle: moon.description,
@@ -91,7 +90,6 @@ class SolarSystemScreen extends StatelessWidget {
                 leading: HeroImage.list(
                   url: model.getItem(index).imageUrl,
                   tag: model.getItem(index).id,
-                  size: HeroImage.smallSize,
                 ),
                 title: model.getItem(index).name,
                 subtitle: model.getItem(index).description,
