@@ -17,11 +17,10 @@ class NasaImagePage extends StatelessWidget {
         slivers: <Widget>[
           SliverAppBar(
             expandedHeight: MediaQuery.of(context).size.height * 0.4,
-            pinned: true,
+            pinned: false,
             floating: false,
             flexibleSpace: FlexibleSpaceBar(
               centerTitle: true,
-              title: Text(image.title),
               background: InkWell(
                 child: Hero(
                   tag: image.getDate,
@@ -44,28 +43,10 @@ class NasaImagePage extends StatelessWidget {
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 children: <Widget>[
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Column(
-                        children: <Widget>[
-                          Icon(Icons.copyright, size: 42.0),
-                          Text(
-                            image.getCopyright,
-                            style: Theme.of(context).textTheme.subhead,
-                          ),
-                        ],
-                      ),
-                      Column(
-                        children: <Widget>[
-                          Icon(Icons.calendar_today, size: 42.0),
-                          Text(
-                            image.getDate,
-                            style: Theme.of(context).textTheme.subhead,
-                          ),
-                        ],
-                      )
-                    ],
+                  Text(
+                    image.title,
+                    style: Theme.of(context).textTheme.headline,
+                    textAlign: TextAlign.center,
                   ),
                   Container(height: 16.0),
                   Text(
@@ -76,12 +57,45 @@ class NasaImagePage extends StatelessWidget {
                         .subhead
                         .copyWith(color: secondaryText),
                   ),
+                  Divider(height: 32.0),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Row(
+                        children: <Widget>[
+                          Icon(Icons.copyright, size: 32.0),
+                          Container(width: 8.0),
+                          Text(
+                            image.getCopyright,
+                            style: Theme.of(context)
+                                .textTheme
+                                .subhead
+                                .copyWith(color: secondaryText),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: <Widget>[
+                          Icon(Icons.calendar_today, size: 32.0),
+                          Container(width: 8.0),
+                          Text(
+                            image.getDate,
+                            style: Theme.of(context)
+                                .textTheme
+                                .subhead
+                                .copyWith(color: secondaryText),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
                 ],
               ),
             ),
           )
         ],
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.share),
         tooltip: 'Share',
