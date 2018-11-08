@@ -69,7 +69,12 @@ class LaunchPage extends StatelessWidget {
                           //       ),
                           //     ),
                         )
-                      : null,
+                      : FloatingActionButton(
+                          child: const Icon(Icons.event),
+                          tooltip: 'Add event',
+                          backgroundColor: Colors.grey,
+                          onPressed: null,
+                        ),
               slivers: <Widget>[
                 SliverAppBar(
                   expandedHeight: MediaQuery.of(context).size.height * 0.3,
