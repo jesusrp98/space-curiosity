@@ -29,6 +29,7 @@ class PhotoCard extends StatelessWidget {
               androidToolbarColor: primaryColor,
             ),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Expanded(
               child: Hero(

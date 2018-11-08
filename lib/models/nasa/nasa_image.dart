@@ -46,10 +46,8 @@ class NasaImage {
 
   String get getDate => DateFormat.yMMMMd().format(date);
 
-  bool get hasCopyright => copyright != null;
+  String get getCopyright => copyright ?? 'No copyright';
 
-  String get getCopyright =>
-      hasCopyright ? copyright : 'No copyright';
-
-  String get share => '$title\n\n$description\n\n$hdurl';
+  String get share =>
+      '$title\n\n$description\n\n$getCopyright · $getDate\n\n$hdurl';
 }
