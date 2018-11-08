@@ -6,7 +6,7 @@ dependencies:
     sdk: flutter
 
   ## Firebase
-  # firebase: '^4.3.0'
+  # firebase: ^4.3.0
   firebase_database: ^1.0.4
   cloud_firestore: 0.8.1
   firebase_core: ^0.2.5+1
@@ -16,32 +16,23 @@ dependencies:
   ## Tools
   cupertino_icons: ^0.1.2
   scoped_model: 0.3.0
-  redux: 3.0.0
   webfeed: ^0.2.3
-  flutter_redux: 0.5.1
   http: 0.11.3+17
-  intl: "^0.15.6"
-  url_launcher: "^3.0.2"
-  flutter_web_browser: "^0.9.0+1"
+  intl: ^0.15.6
+  flutter_web_browser: ^0.9.0+1
   flutter_swiper: ^1.1.3
   sliver_fab: ^0.1.1
-  #add_2_calendar: ^1.0.2
+  # add_2_calendar: ^1.0.2
   flutter_map: ^0.3.0
   # material_search: ^0.2.7
-  share: "^0.4.0"
-  device_info: "^0.2.0"
-  font_awesome_flutter: "^8.0.1"
+  share: ^0.4.0
+  font_awesome_flutter: ^8.0.1
   get_version: 0.0.5
   flutter_sms: ^0.0.3
   native_widgets: ^0.1.1+1
-  uuid: ^1.0.3
 
    ## Offline
-  flutter_offline: ^0.1.0
-  async_resource: ^0.1.2
-  shared_prefs_resource: ^0.0.1
-  path_provider: ^0.4.1
-  cached_network_image: "^0.4.1"
+  cached_network_image: ^0.4.1
 
   ## Future
   # flutter_cupertino_settings: ^0.0.8
@@ -49,20 +40,13 @@ dependencies:
   #   git:
   #     url: git://github.com/Norbert515/dynamic_theme.git
 
-# dev_dependencies:
-#   flutter_test:
-#     sdk: flutter
-
 flutter:
   fonts:
     - family: RobotoMono
       fonts:
         - asset: assets/fonts/RobotoMono-Bold.ttf
         - asset: assets/fonts/RobotoMono-Italic.ttf
-        - asset: assets/fonts/RobotoMono-Light.ttf
-        - asset: assets/fonts/RobotoMono-Medium.ttf
         - asset: assets/fonts/RobotoMono-Regular.ttf
-        - asset: assets/fonts/RobotoMono-Thin.ttf
           weight: 700
     - family: ProductSans
       fonts:
