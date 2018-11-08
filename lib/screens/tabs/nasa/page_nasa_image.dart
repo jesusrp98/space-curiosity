@@ -47,14 +47,24 @@ class NasaImagePage extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      Text(
-                        image.getCopyright,
-                        style: Theme.of(context).textTheme.subhead,
+                      Column(
+                        children: <Widget>[
+                          Icon(Icons.copyright, size: 42.0),
+                          Text(
+                            image.getCopyright,
+                            style: Theme.of(context).textTheme.subhead,
+                          ),
+                        ],
                       ),
-                      Text(
-                        image.getDate,
-                        style: Theme.of(context).textTheme.subhead,
-                      ),
+                      Column(
+                        children: <Widget>[
+                          Icon(Icons.calendar_today, size: 42.0),
+                          Text(
+                            image.getDate,
+                            style: Theme.of(context).textTheme.subhead,
+                          ),
+                        ],
+                      )
                     ],
                   ),
                   Container(height: 16.0),
@@ -73,9 +83,9 @@ class NasaImagePage extends StatelessWidget {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-         child: const Icon(Icons.share),
-         tooltip: 'Share',
-         onPressed: () => share(image.share),
+        child: const Icon(Icons.share),
+        tooltip: 'Share',
+        onPressed: () => share(image.share),
       ),
     );
   }
