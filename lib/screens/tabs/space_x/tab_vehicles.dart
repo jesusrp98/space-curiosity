@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:native_widgets/native_widgets.dart';
@@ -43,7 +44,10 @@ class VehiclesTab extends StatelessWidget {
                     pinned: true,
                     flexibleSpace: FlexibleSpaceBar(
                       centerTitle: true,
-                      title: Text('Vehicles'),
+                      title: Text(FlutterI18n.translate(
+                        context,
+                        'spacex.vehicles.title',
+                      )),
                       background: (model.isLoading)
                           ? NativeLoadingIndicator(center: true)
                           : Swiper(

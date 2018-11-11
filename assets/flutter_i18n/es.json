@@ -1,0 +1,60 @@
+{
+  "app": {
+    "title": "Curiosidad Espacial"
+  },
+  "spacex": {
+    "home": {
+      "title": "Bienvenido a SpaceX",
+      "icon": "Inicio",
+      "mission": {
+        "title": "Lanzado por",
+        "body": "Llevará a"
+      },
+      "date": {
+        "title": "Fecha de lanzamiento",
+        "body": "El lanzamiento se realizará el"
+      },
+      "launchpad": {
+        "title": "Plataforma de lanzamiento",
+        "body": "El lanzamiento tendrá lugar en"
+      },
+      "static_fire": {
+        "title": "Prueba de ingnición",
+        "body": "Este evento está fechado para el",
+        "body_null": "Este evento todavía no tiene fecha."
+      },
+      "fairings": {
+        "title": "Cofia protectora",
+        "body_new": "La cofia no es reutilizada",
+        "body_reused": "La cofia es reciclada",
+        "body_catched": "y será capturada por",
+        "body_dispensed": "y no se procederá a su captura."
+      },
+      "first_stage": {
+        "title": "Primera etapa",
+        "booster": "El propulsor",
+        "side_core": "El propulsor lateral",
+        "body_reused": "es reutilizado",
+        "body_new": "no es reutilizado",
+        "body_catched": "y aterrizará en",
+        "body_dispended": "y no realizará ningun aterrizaje."
+      }
+    },
+    "vehicles": {
+      "title": "Vehículos",
+      "icon": "Vehículos"
+    },
+    "upcoming": {
+      "title": "Próximos lanzamientos",
+      "icon": "Próximos"
+    },
+    "latest": {
+      "title": "Últimos lanzamientos",
+      "icon": "Últimos"
+    },
+    "company": {
+      "title": "Sobre SpaceX",
+      "icon": "Compañía"
+    }
+  }
+}

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:native_widgets/native_widgets.dart';
@@ -17,7 +18,7 @@ class LaunchesTab extends StatelessWidget {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
       GlobalKey<RefreshIndicatorState>();
-  final String title;
+  final int title;
 
   LaunchesTab(this.title);
 
@@ -43,7 +44,12 @@ class LaunchesTab extends StatelessWidget {
                     pinned: true,
                     flexibleSpace: FlexibleSpaceBar(
                       centerTitle: true,
-                      title: Text(title),
+                      title: Text(FlutterI18n.translate(
+                        context,
+                        title == 0
+                            ? 'spacex.upcoming.title'
+                            : 'spacex.latest.title',
+                      )),
                       background: (model.isLoading)
                           ? NativeLoadingIndicator(center: true)
                           : Swiper(
@@ -64,7 +70,7 @@ class LaunchesTab extends StatelessWidget {
                           child: NativeLoadingIndicator(center: true),
                         )
                       : SliverList(
-                          key: PageStorageKey(title),
+                          key: PageStorageKey(title.toString()),
                           delegate: SliverChildBuilderDelegate(
                             _buildItem,
                             childCount: model.getSize,
