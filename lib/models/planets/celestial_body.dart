@@ -4,9 +4,24 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
 import 'package:scoped_model/scoped_model.dart';
 
-import 'planets.dart';
+import '../querry_model.dart';
 
 enum BodyType { planet, celestialBody }
+
+var planetsPath = Firestore.instance.collection('planets');
+
+class PlanetsModel extends QuerryModel {
+  @override
+  Future loadData() async {
+    response = await planetsPath.getDocuments();
+
+    items.addAll(response.documents
+        .map((document) => CelestialBody.fromJson(document))
+        .toList());
+
+    loadingState(false);
+  }
+}
 
 class CelestialBody extends Model {
   Future<List<CelestialBody>> getMoons(String id) async {

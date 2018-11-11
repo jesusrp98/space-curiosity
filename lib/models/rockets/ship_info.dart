@@ -1,5 +1,6 @@
-import 'vehicle.dart';
 import 'package:intl/intl.dart';
+
+import 'vehicle.dart';
 
 /// SHIP INFO CLASS
 /// This class represents a real ship used in a SpaceX mission,
@@ -19,6 +20,7 @@ class ShipInfo extends Vehicle {
     mass,
     description,
     url,
+    photos,
     this.model,
     this.use,
     this.roles,
@@ -37,6 +39,7 @@ class ShipInfo extends Vehicle {
           mass: mass,
           description: description,
           url: url,
+          photos: photos,
         );
 
   factory ShipInfo.fromJson(Map<String, dynamic> json) {
@@ -45,6 +48,7 @@ class ShipInfo extends Vehicle {
       name: json['ship_name'],
       active: json['active'],
       firstFlight: DateTime(json['year_built']),
+      photos: [json['image']],
       mass: json['weight_kg'],
       description: _getDescription(json['missions']),
       url: json['url'],
@@ -90,9 +94,9 @@ class ShipInfo extends Vehicle {
 
   String get secondaryRole => roles[1];
 
-  String get getHomePort => 'Home at $homePort';
-
   String get getStatus => status ?? 'Unknown';
+
+  String get getBuiltFullDate => DateFormat.yMMMM().format(firstFlight);
 
   String get getSpeed => speed == null
       ? 'Unknown'

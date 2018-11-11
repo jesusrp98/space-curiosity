@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'models/planets/celestial_body.dart';
-import 'screens/bottom_navigation.dart';
-import 'screens/tabs/nasa/home_page.dart';
-import 'screens/tabs/news.dart';
+import 'screens/screen_home.dart';
+import 'screens/tabs/news/screen_news.dart';
 import 'screens/tabs/planets/add_edit_planet.dart';
-import 'screens/tabs/planets/planets.dart';
+import 'screens/tabs/planets/screen_solar_system.dart';
+import 'screens/tabs/space_x/screen_spacex.dart';
 import 'util/colors.dart';
 import 'util/localization.dart';
 
@@ -29,19 +29,16 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: ScopedModelLocalizations().appTitle,
       theme: _buildThemeData(),
-      home: BottomNavigation(),
+      home: HomeScreen(),
       localizationsDelegates: [ScopedModelLocalizationsDelegate()],
       debugShowCheckedModeBanner: false,
       routes: <String, WidgetBuilder>{
-        '/home': (_) => BottomNavigation(),
-        //'/space_x': (_) => SpaceXHomePage(),
-        '/nasa': (_) => NasaTab(),
-        '/news': (_) => NewsTab(),
-        '/planets': (_) => PlanetsTab(),
-        AddEditPlanetPage.routeName: (_) => AddEditPlanetPage(
-              null,
-              type: BodyType.planet,
-            ),
+        '/home': (_) => HomeScreen(),
+        '/space_x': (_) => SpacexScreen(),
+        '/news': (_) => NewsScreen(),
+        '/planets': (_) => SolarSystemScreen(),
+        AddEditPlanetPage.routeName: (_) =>
+            AddEditPlanetPage(null, type: BodyType.planet),
       },
     );
   }

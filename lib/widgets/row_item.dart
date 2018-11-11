@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:scoped_model/scoped_model.dart';
 
 import '../util/colors.dart';
-import 'details_dialog.dart';
 
 /// ROW ITEM CLASS
 /// Class to build a stretched widget to display information in a
@@ -11,7 +11,7 @@ class RowItem extends StatelessWidget {
   final String title;
   final Widget description;
 
-  RowItem({this.title, this.description});
+  RowItem(this.title, this.description);
 
   @override
   Widget build(BuildContext context) {
@@ -34,29 +34,38 @@ class RowItem extends StatelessWidget {
 
   /// Builds a normal Text-to-Text row item
   factory RowItem.textRow(String title, String description) {
-    return RowItem(title: title, description: _getText(description));
+    return RowItem(title, _getText(description));
   }
 
   /// Builds a Text-to-Icon row item, to display a boolean status
   factory RowItem.iconRow(String title, bool status) {
-    return RowItem(title: title, description: _getIcon(status));
+    return RowItem(title, _getIcon(status));
   }
 
   /// Builds a Text-to-Text widget, but the description widget is clickable
   /// and opens a dialog
-  factory RowItem.dialogRow(
+  factory RowItem.dialogRow({
     BuildContext context,
     String title,
     String description,
-    DetailsDialog dialog,
-  ) {
+    ScopedModel screen,
+  }) {
     if (description != 'Unknown')
       return RowItem(
-        title: title,
-        description: _getDialog(context, dialog, description),
+        title,
+        InkWell(
+          child: _getText(description, true),
+          onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => screen,
+                  fullscreenDialog: true,
+                ),
+              ),
+        ),
       );
     else
-      return RowItem(title: title, description: _getText(description));
+      return RowItem(title, _getText(description));
   }
 
   /// Return an icon based on the [status] var
@@ -79,18 +88,6 @@ class RowItem extends StatelessWidget {
         color: secondaryText,
         decoration: clickable ? TextDecoration.underline : TextDecoration.none,
       ),
-    );
-  }
-
-  /// Builds a dialog with the Details Dialog class
-  static _getDialog(
-    BuildContext context,
-    DetailsDialog dialog,
-    String description,
-  ) {
-    return InkWell(
-      child: _getText(description, true),
-      onTap: () => showDialog(context: context, builder: (_) => dialog),
     );
   }
 }

@@ -7,13 +7,14 @@ import '../util/colors.dart';
 class HeadCardPage extends StatelessWidget {
   final Widget image;
   final String title, details;
-  final Widget subtitle;
+  final Widget subtitle1, subtitle2;
 
   HeadCardPage({
     this.image,
     this.title,
     this.details,
-    this.subtitle,
+    this.subtitle1,
+    this.subtitle2,
   });
 
   @override
@@ -40,7 +41,14 @@ class HeadCardPage extends StatelessWidget {
                           .copyWith(fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 12.0),
-                    subtitle
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        subtitle1,
+                        const SizedBox(height: 8.0),
+                        subtitle2,
+                      ],
+                    ),
                   ],
                 ),
               ),

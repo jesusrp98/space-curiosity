@@ -1,63 +1,84 @@
+import 'keys.dart';
+
 /// URL CLASS
 /// It has all urls used in the app as static const strings
 class Url {
-  /// Home page lists
-  static const String rocketList = 'https://api.spacexdata.com/v3/rockets';
-  static const String capsuleList = 'https://api.spacexdata.com/v3/dragons';
-  static const String roadsterPage = 'https://api.spacexdata.com/v3/roadster';
-  static const String upcomingList =
-      'https://api.spacexdata.com/v3/launches/upcoming';
-  static const String launchesList =
-      'https://api.spacexdata.com/v3/launches/past?order=desc';
-  static const String shipsList =
-      'https://api.spacexdata.com/v3/ships?active=true';
+  //Base urls
+  static const String spacexBaseUrl = 'https://api.spacexdata.com/v3';
+  static const String nasaBaseUrl = 'https://api.nasa.gov/planetary/apod';
 
-  /// Details dialogs
+  // Home page lists
+  static const String rocketList = '$spacexBaseUrl/rockets';
+  static const String capsuleList = '$spacexBaseUrl/dragons';
+  static const String roadsterPage = '$spacexBaseUrl/roadster';
+  static const String upcomingList = '$spacexBaseUrl/launches/upcoming';
+  static const String launchesList = '$spacexBaseUrl/launches/past?order=desc';
+  static const String shipsList = '$spacexBaseUrl/ships?active=true';
+
+  static const String nextLaunch = '$spacexBaseUrl/launches/next';
+
+  static const String roadsterVideo = 'https://youtu.be/wbSwFU6tY1c';
+
+  // Details dialogs
   static const List<String> detailsPage = [
-    'https://api.spacexdata.com/v3/launchpads/',
-    'https://api.spacexdata.com/v3/cores/',
-    'https://api.spacexdata.com/v3/capsules/',
+    '$spacexBaseUrl/launchpads/',
+    '$spacexBaseUrl/cores/',
+    '$spacexBaseUrl/capsules/',
+  ];
+  static const String coreDialog = '$spacexBaseUrl/cores/';
+  static const String capsuleDialog = '$spacexBaseUrl/capsules/';
+  static const String launchpadDialog = '$spacexBaseUrl/launchpads/';
+  static const String landingpadDialog = '$spacexBaseUrl/landpads/';
+
+  // SpaceX related info
+  static const String spacexCompany = '$spacexBaseUrl/info';
+  static const String spacexAchievements = '$spacexBaseUrl/history';
+
+  static const List<String> spacexCompanyScreen = [
+    'https://www.spacex.com/sites/spacex/files/styles/media_gallery_large/public/2014_-_11orbcomm_f9_in_hanger.jpg?itok=gqP7Qmrg',
+    'https://farm1.staticflickr.com/342/18039170043_e2ca8b540a_c.jpg',
+    'https://farm9.staticflickr.com/8571/16491695667_c2754ff48e_c.jpg',
+    'https://farm9.staticflickr.com/8688/17024507155_2168c8d032_c.jpg',
+    'https://www.spacex.com/sites/spacex/files/styles/media_gallery_large/public/first_reflight_-_05_crs8_recovered_first_stage_3.jpg?itok=nHqaeNdH',
   ];
 
-  /// Hero images
+  static const List<String> spacexUpcomingScreen = [
+    'https://farm5.staticflickr.com/4183/34296430820_c48e601ca1_c.jpg',
+    'https://farm1.staticflickr.com/293/32312415025_6841e30bf1_c.jpg',
+    'https://farm5.staticflickr.com/4483/37610547226_c8002032bc_c.jpg',
+    'https://farm5.staticflickr.com/4235/35359372730_99255c4a20_c.jpg',
+    'https://farm9.staticflickr.com/8601/16512864369_27bb414c91_c.jpg',
+  ];
+
+  static const List<String> spacexHomeScreen = [
+    'https://www.spacex.com/sites/spacex/files/styles/media_gallery_large/public/2014_-_11orbcomm_f9_in_hanger.jpg?itok=gqP7Qmrg',
+    'https://farm2.staticflickr.com/1854/30934146778_765ea9f486_c.jpg',
+    'https://farm5.staticflickr.com/4615/40143096241_11128929df_c.jpg',
+    'https://farm5.staticflickr.com/4227/34223076793_569a584d33_c.jpg',
+    'https://www.spacex.com/sites/spacex/files/styles/media_gallery_large/public/2015_-_04_crs5_dragon_orbit13.jpg?itok=9p8_l7UP',
+    'https://www.spacex.com/sites/spacex/files/styles/media_gallery_large/public/2015_-_12_default_crew_dragon_interior_wide.jpg?itok=MXp4IjW4',
+  ];
+
+  static const List<String> spacexCoreDialog = [
+    'https://farm2.staticflickr.com/1670/26239020092_e1f620900e_c.jpg',
+    'https://farm8.staticflickr.com/7135/27042449393_5782749d32_c.jpg',
+    'https://farm5.staticflickr.com/4654/25254688767_83c0563d06_c.jpg',
+    'https://farm8.staticflickr.com/7070/26428479314_75e78939f9_c.jpg',
+    'https://farm5.staticflickr.com/4352/36438808381_1da8beb65c_c.jpg',
+  ];
+
+  static const List<String> spacexCapsuleDialog = [
+    'https://www.spacex.com/sites/spacex/files/styles/media_gallery_large/public/2013_-_5_731710main_iss034e060657_full.jpg?itok=JyR6tNGL',
+    'https://www.spacex.com/sites/spacex/files/styles/media_gallery_large/public/2015_-_04_crs5_dragon_orbit13.jpg?itok=9p8_l7UP',
+    'https://farm3.staticflickr.com/2815/32761844973_4b55b27d3c_c.jpg',
+    'https://farm9.staticflickr.com/8664/16669501448_78441c1024_c.jpg',
+    'https://farm8.staticflickr.com/7591/16787988882_0b9896dc9f_c.jpg',
+  ];
+
   static const String defaultImage =
       'https://firebasestorage.googleapis.com/v0/b/cherry-3ca39.appspot.com/o/rocket.png?alt=media&token=66f2dde6-e6ff-4f64-a4a4-9fab6dbe90c5';
-  static const Map<String, String> vehicleImage = {
-    'roadster':
-        'https://firebasestorage.googleapis.com/v0/b/cherry-3ca39.appspot.com/o/roadster.jpg?alt=media&token=8f1c0013-727b-4ce7-bcee-3cd1999bdb45',
-    'dragon1':
-        'https://firebasestorage.googleapis.com/v0/b/cherry-3ca39.appspot.com/o/dragon1.jpg?alt=media&token=1e6b7802-1013-4e1c-9c14-7456b0f0bdb9',
-    'dragon2':
-        'https://firebasestorage.googleapis.com/v0/b/cherry-3ca39.appspot.com/o/dragon2.jpg?alt=media&token=f240d81d-e56e-4626-be3a-2169bdbaa10b',
-    'falcon1':
-        'https://firebasestorage.googleapis.com/v0/b/cherry-3ca39.appspot.com/o/falcon1.jpg?alt=media&token=8015fe62-b2a5-418f-b37d-3641463f87c4',
-    'falcon9':
-        'https://firebasestorage.googleapis.com/v0/b/cherry-3ca39.appspot.com/o/falcon9.jpg?alt=media&token=96b5c764-a2ea-43f0-8766-1761db1749d4',
-    'falconheavy':
-        'https://firebasestorage.googleapis.com/v0/b/cherry-3ca39.appspot.com/o/falconheavy.jpg?alt=media&token=e9cdffae-fcdc-488c-9db5-587cc74e3255',
-    'bfr':
-        'https://firebasestorage.googleapis.com/v0/b/cherry-3ca39.appspot.com/o/bfr.jpg?alt=media&token=651d887f-7cf7-4991-9fa0-4617b4084a53',
-    'GONAVIGATOR':
-        'https://firebasestorage.googleapis.com/v0/b/cherry-3ca39.appspot.com/o/gonavigator.jpg?alt=media&token=1192551d-6b0b-40e5-b556-cf1f2f149053',
-    'GOQUEST':
-        'https://firebasestorage.googleapis.com/v0/b/cherry-3ca39.appspot.com/o/goquest.jpg?alt=media&token=af1504ef-a2c9-4ffe-bb85-c63dc75acefe',
-    'GOSEARCHER':
-        'https://firebasestorage.googleapis.com/v0/b/cherry-3ca39.appspot.com/o/gosearcher.jpg?alt=media&token=ced7bd1a-1e79-41f1-ad89-7fb231a68db0',
-    'HAWK':
-        'https://firebasestorage.googleapis.com/v0/b/cherry-3ca39.appspot.com/o/hawn.jpg?alt=media&token=65e1d71e-c068-425b-b72b-17c635451868',
-    'JRTI-2':
-        'https://firebasestorage.googleapis.com/v0/b/cherry-3ca39.appspot.com/o/JRTI-2.jpg?alt=media&token=12eae5a3-8bff-43da-912f-31c544def7c3',
-    'MRSTEVEN':
-        'https://firebasestorage.googleapis.com/v0/b/cherry-3ca39.appspot.com/o/MRSTEVEN.jpg?alt=media&token=351c5d89-41df-42a4-a738-99f2a34c9ef2',
-    'NRCQUEST':
-        'https://firebasestorage.googleapis.com/v0/b/cherry-3ca39.appspot.com/o/nrcquest.jpg?alt=media&token=43c92d49-67eb-4b1d-a669-e26c9284b457',
-    'OCISLY':
-        'https://firebasestorage.googleapis.com/v0/b/cherry-3ca39.appspot.com/o/OCISLY.jpg?alt=media&token=657af104-1f43-4e7d-830d-d99f8f2a8a1f',
-    'PACIFICFREEDOM':
-        'https://firebasestorage.googleapis.com/v0/b/cherry-3ca39.appspot.com/o/pacificfreedom.jpg?alt=media&token=3333e26e-b3da-41ed-b0f3-a29479243911',
-  };
 
-  /// About page
+  // About page
   static const String authorReddit = 'https://www.reddit.com/user/jesusrp98';
   static const String authorStore =
       'https://play.google.com/store/apps/developer?id=Chechu';
@@ -69,4 +90,9 @@ class Url {
   static const String spacexGithub = 'https://github.com/r-spacex/SpaceX-API';
   static const String internationalSystem =
       'https://en.wikipedia.org/wiki/International_System_of_Units';
+
+  // Nasa images
+  static const String dailyPicture = '$nasaBaseUrl?api_key=$nasaApiKey';
+  static const String morePictures =
+      '$nasaBaseUrl?api_key=$nasaApiKey&count=10';
 }

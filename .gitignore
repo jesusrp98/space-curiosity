@@ -1,9 +1,10 @@
 .DS_Store
 .dart_tool/
-
 .packages
 .pub/
-
 build/
-
 .flutter-plugins
+.vscode/
+pubspec.lock
+.idea/workspace.xml
+.idea/workspace.xml

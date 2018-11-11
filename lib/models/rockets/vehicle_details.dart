@@ -19,20 +19,19 @@ abstract class VehicleDetails {
 
   String get getDetails;
 
-  String get getFirstLaunched => DateFormat.yMMMM().format(firstLaunched);
-
-  String get getMissions {
-    String allMissions = '';
-    if (missions.isEmpty)
-      return 'No previous missions.';
-    else {
-      missions.forEach(
-        (mission) => allMissions +=
-            mission['name'] + ((mission != missions.last) ? ',  ' : '.'),
-      );
-      return allMissions;
-    }
-  }
+  String get getFirstLaunched => DateFormat.yMMMMd().format(firstLaunched);
 
   String get getLaunches => missions.length.toString();
+
+  bool get hasMissions => missions.isNotEmpty;
+}
+
+class DetailsMission {
+  final String name;
+  final int id;
+
+  DetailsMission(this.name, this.id);
+
+  factory DetailsMission.fromJson(Map<String, dynamic> json) =>
+      DetailsMission(json['name'], json['flight']);
 }
