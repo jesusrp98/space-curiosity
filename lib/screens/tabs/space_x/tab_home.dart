@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:native_widgets/native_widgets.dart';
@@ -44,7 +45,12 @@ class SpacexHomeTab extends StatelessWidget {
                     pinned: true,
                     flexibleSpace: FlexibleSpaceBar(
                       centerTitle: true,
-                      title: Text('Welcome to SpaceX'),
+                      title: Text(
+                        FlutterI18n.translate(
+                          context,
+                          'spacex.home.title',
+                        ),
+                      ),
                       background: (model.isLoading)
                           ? NativeLoadingIndicator(center: true)
                           : Swiper(
@@ -83,8 +89,8 @@ class SpacexHomeTab extends StatelessWidget {
             const Divider(height: 0.0),
             ListCell(
               leading: const Icon(Icons.public, size: 42.0),
-              title: model.vehicle,
-              subtitle: model.payload,
+              title: model.vehicle(context),
+              subtitle: model.payload(context),
               onTap: () => Navigator.push(
                     context,
                     MaterialPageRoute(builder: (_) => LaunchPage(model.launch)),
@@ -93,14 +99,20 @@ class SpacexHomeTab extends StatelessWidget {
             const Divider(height: 0.0, indent: 74.0),
             ListCell(
               leading: const Icon(Icons.event, size: 42.0),
-              title: 'Launch date',
-              subtitle: model.launchDate,
+              title: FlutterI18n.translate(
+                context,
+                'spacex.home.date.title',
+              ),
+              subtitle: model.launchDate(context),
             ),
             const Divider(height: 0.0, indent: 74.0),
             ListCell(
               leading: const Icon(Icons.location_on, size: 42.0),
-              title: 'Launch site',
-              subtitle: model.launchpad,
+              title: FlutterI18n.translate(
+                context,
+                'spacex.home.launchpad.title',
+              ),
+              subtitle: model.launchpad(context),
               onTap: () => Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -118,20 +130,29 @@ class SpacexHomeTab extends StatelessWidget {
             const Divider(height: 0.0, indent: 74.0),
             ListCell(
               leading: const Icon(Icons.timer, size: 42.0),
-              title: 'Static fire date',
-              subtitle: model.staticFire,
+              title: FlutterI18n.translate(
+                context,
+                'spacex.home.static_fire.title',
+              ),
+              subtitle: model.staticFire(context),
             ),
             const Divider(height: 0.0, indent: 74.0),
             ListCell(
               leading: const Icon(Icons.directions_boat, size: 42.0),
-              title: 'Fairings',
-              subtitle: model.fairings,
+              title: FlutterI18n.translate(
+                context,
+                'spacex.home.fairings.title',
+              ),
+              subtitle: model.fairings(context),
             ),
             const Divider(height: 0.0, indent: 74.0),
             ListCell(
               leading: const Icon(Icons.autorenew, size: 42.0),
-              title: 'Reused parts',
-              subtitle: model.landings,
+              title: FlutterI18n.translate(
+                context,
+                'spacex.home.first_stage.title',
+              ),
+              subtitle: model.landings(context),
               onTap: (model.launch.rocket.firstStage[0].id == null)
                   ? null
                   : () => Navigator.push(
