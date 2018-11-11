@@ -56,22 +56,31 @@ class LaunchPage extends StatelessWidget {
                     )
                   : FloatingActionButton(
                       child: const Icon(Icons.event),
+                      backgroundColor: (_launch.tentativePrecision == 'hour')
+                          ? null
+                          : Colors.grey,
                       tooltip: 'Add event',
                       onPressed: (_launch.tentativePrecision == 'hour')
-                          ? null
-                          : () {
+                          ? () {
                               // -- Add Event To Calendar --
-                              Add2Calendar.addEvent2Cal(
-                                Event(
-                                  title: _launch.name,
-                                  description: _launch.details,
-                                  location: _launch.launchpadName,
-                                  startDate: _launch.launchDate,
-                                  endDate: _launch.launchDate
-                                      .add(Duration(minutes: 30)),
-                                ),
-                              );
-                            },
+                              print("Adding Event: \n");
+                              print(_launch?.name);
+                              print(_launch?.launchpadName);
+                              print(_launch?.launchDate);
+                              Add2Calendar.addEvent2Cal(Event(
+                                title: _launch?.name ?? "Not Avaliable",
+                                description:
+                                    _launch.details ?? "No Details Avaliable",
+                                location: _launch?.launchpadName ?? "",
+                                startDate:
+                                    _launch?.launchDate ?? DateTime.now(),
+                                endDate: (_launch?.launchDate ?? DateTime.now())
+                                    .add(Duration(minutes: 30)),
+                              )).then((value) {
+                                print("Event Added: $value");
+                              });
+                            }
+                          : null,
                     ),
               slivers: <Widget>[
                 SliverAppBar(
