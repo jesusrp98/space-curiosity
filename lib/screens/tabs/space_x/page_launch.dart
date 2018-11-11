@@ -59,23 +59,30 @@ class LaunchPage extends StatelessWidget {
                       tooltip: 'Add event',
                       onPressed: (_launch.tentativePrecision == 'hour')
                           ? () {
-                              // -- Add Event To Calendar --
-                              print("Adding Event: \n");
-                              print(_launch?.name);
-                              print(_launch?.launchpadName);
-                              print(_launch?.launchDate);
-                              Add2Calendar.addEvent2Cal(Event(
-                                title: _launch?.name ?? "Not Avaliable",
-                                description:
-                                    _launch.details ?? "No Details Avaliable",
-                                location: _launch?.launchpadName ?? "",
-                                startDate:
-                                    _launch?.launchDate ?? DateTime.now(),
-                                endDate: (_launch?.launchDate ?? DateTime.now())
-                                    .add(Duration(minutes: 30)),
-                              )).then((value) {
-                                print("Event Added: $value");
-                              });
+                              try {
+                                // -- Add Event To Calendar --
+                                print("Adding Event: \n");
+                                print(_launch?.name);
+                                print(_launch?.launchpadName);
+                                print(_launch?.launchDate);
+                                Add2Calendar.addEvent2Cal(Event(
+                                  title: _launch?.name ?? "Not Avaliable",
+                                  description:
+                                      _launch.details ?? "No Details Avaliable",
+                                  location: _launch?.launchpadName ?? "",
+                                  startDate:
+                                      _launch?.launchDate ?? DateTime.now(),
+                                  endDate:
+                                      (_launch?.launchDate ?? DateTime.now())
+                                          .add(Duration(minutes: 30)),
+                                )).catchError((onError) {
+                                  print("Error Adding Event: " + onError);
+                                }).then((value) {
+                                  print("Event Added: $value");
+                                });
+                              } catch (e) {
+                                print("Error Adding Event: " + e);
+                              }
                             }
                           : null,
                     ),
