@@ -56,9 +56,6 @@ class LaunchPage extends StatelessWidget {
                     )
                   : FloatingActionButton(
                       child: const Icon(Icons.event),
-                      backgroundColor: (_launch.tentativePrecision == 'hour')
-                          ? null
-                          : Colors.grey,
                       tooltip: 'Add event',
                       onPressed: (_launch.tentativePrecision == 'hour')
                           ? () {
