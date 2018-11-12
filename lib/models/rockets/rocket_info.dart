@@ -1,3 +1,4 @@
+import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:intl/intl.dart';
 
 import 'vehicle.dart';
@@ -97,7 +98,7 @@ class RocketInfo extends Vehicle {
 
   String get subtitle => firstLaunched;
 
-  String get getStages => '$stages stages';
+  String getStages(context) => '$stages ${FlutterI18n.translate(context, 'spacex.vehicle.rocket.specifications.stages')}';
 
   String get getLaunchCost =>
       NumberFormat.currency(symbol: "\$", decimalDigits: 0).format(launchCost);

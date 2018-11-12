@@ -70,6 +70,7 @@
           "title": "orbit",
           "type": "Orbit type",
           "period": "Period",
+          "days": "days",
           "inclination": "Inclination",
           "longitude": "Longitude",
           "apoapsis": "Apoapsis",
@@ -89,6 +90,7 @@
         "specifications": {
           "title": "specifications",
           "rocket_stages": "Rocket stages",
+          "stages": "stages",
           "fairing_height": "Fairing height",
           "fairing_diameter": "Fairing diameter",
           "height": "Height",
@@ -117,6 +119,8 @@
           "launch_scheduled": "Scheduled maiden launch",
           "active": "Active",
           "crew_capacity": "Crew capacity",
+          "no_people": "No people",
+          "people": "people",
           "reusable": "Reusable"
         },
         "specifications": {
@@ -172,6 +176,7 @@
         "add_event": "Add event"
       },
       "page": {
+        "no_description": "This mission has currently no details.",
         "rocket": {
           "title": "rocket",
           "name": "Rocket name",
@@ -246,10 +251,12 @@
         "first_launched": "First launched",
         "launches": "Launches",
         "splashings": "Splashings",
-        "landings_ rtls": "RTLS landings",
+        "landings_rtls": "RTLS landings",
         "landings_asds": "ASDS landings",
-        "no_description_core": "This core has no previous missions.",
-        "no_description_capsule": "This capsule has no previous missions."
+        "no_description_core": "This core has currently no details.",
+        "no_description_capsule": "This capsule has currently no details.",
+        "no_missions_core": "This core has no previous missions.",
+        "no_missions_capsule": "This capsule has no previous missions."
       },
       "pad": {
         "status": "Status",
@@ -259,6 +266,10 @@
         "landing_type": "Landing type",
         "launches_successful": "Successful launches"
       }
+    },
+    "other": {
+      "unknown": "Unknown",
+      "block": "Block"
     }
   }
 }

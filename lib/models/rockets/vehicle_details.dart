@@ -17,7 +17,7 @@ abstract class VehicleDetails {
 
   String get getStatus => '${status[0].toUpperCase()}${status.substring(1)}';
 
-  String get getDetails;
+  String getDetails(context);
 
   String get getFirstLaunched => DateFormat.yMMMMd().format(firstLaunched);
 

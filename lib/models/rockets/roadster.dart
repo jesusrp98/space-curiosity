@@ -1,3 +1,4 @@
+import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:intl/intl.dart';
 
 import '../../util/url.dart';
@@ -86,8 +87,8 @@ class Roadster extends Vehicle {
   String get getLongitude =>
       '${NumberFormat.decimalPattern().format(longitude)}°';
 
-  String get getPeriod =>
-      '${NumberFormat.decimalPattern().format(period.round())} days';
+  String getPeriod(context) =>
+      '${NumberFormat.decimalPattern().format(period.round())} ${FlutterI18n.translate(context, 'spacex.vehicle.roadster.orbit.days')}';
 
   String get getSpeed =>
       '${NumberFormat.decimalPattern().format(speed.round())} km/h';

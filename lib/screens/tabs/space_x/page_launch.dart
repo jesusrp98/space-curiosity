@@ -188,7 +188,7 @@ class LaunchPage extends StatelessWidget {
               ),
         ),
       ),
-      details: _launch.getDetails,
+      details: _launch.getDetails(context),
     );
   }
 
@@ -261,7 +261,7 @@ class LaunchPage extends StatelessWidget {
               context,
               'spacex.launch.page.payload.second_stage.model',
             ),
-            secondStage.getBlock,
+            secondStage.getBlock(context),
           ),
           (_launch.rocket.hasFairing)
               ? Column(
@@ -324,7 +324,7 @@ class LaunchPage extends StatelessWidget {
           context,
           'spacex.launch.page.rocket.core.serial',
         ),
-        description: core.getId,
+        description: core.getId(context),
         screen: ScopedModel<CoreModel>(
           model: CoreModel(core.id)..loadData(),
           child: CoreDialog(),
@@ -336,7 +336,7 @@ class LaunchPage extends StatelessWidget {
           context,
           'spacex.launch.page.rocket.core.model',
         ),
-        core.getBlock,
+        core.getBlock(context),
       ),
       const SizedBox(height: 12.0),
       RowItem.iconRow(
@@ -355,7 +355,7 @@ class LaunchPage extends StatelessWidget {
                   context,
                   'spacex.launch.page.rocket.core.landing_zone',
                 ),
-                description: core.getLandingZone,
+                description: core.getLandingZone(context),
                 screen: ScopedModel<LandingpadModel>(
                   model: LandingpadModel(core.landingZone)..loadData(),
                   child: LandingpadDialog(),
@@ -388,7 +388,7 @@ class LaunchPage extends StatelessWidget {
           context,
           'spacex.launch.page.payload.name',
         ),
-        payload.getId,
+        payload.getId(context),
       ),
       (payload.isNasaPayload)
           ? Column(children: <Widget>[
@@ -399,7 +399,7 @@ class LaunchPage extends StatelessWidget {
                   context,
                   'spacex.launch.page.payload.capsule_serial',
                 ),
-                description: payload.getCapsuleSerial,
+                description: payload.getCapsuleSerial(context),
                 screen: ScopedModel<CapsuleModel>(
                   model: CapsuleModel(payload.capsuleSerial)..loadData(),
                   child: CapsuleDialog(),
@@ -421,7 +421,7 @@ class LaunchPage extends StatelessWidget {
           context,
           'spacex.launch.page.payload.manufacturer',
         ),
-        payload.getManufacturer,
+        payload.getManufacturer(context),
       ),
       const SizedBox(height: 12.0),
       RowItem.textRow(
@@ -429,7 +429,7 @@ class LaunchPage extends StatelessWidget {
           context,
           'spacex.launch.page.payload.customer',
         ),
-        payload.getCustomer,
+        payload.getCustomer(context),
       ),
       const SizedBox(height: 12.0),
       RowItem.textRow(
@@ -437,7 +437,7 @@ class LaunchPage extends StatelessWidget {
           context,
           'spacex.launch.page.payload.nationality',
         ),
-        payload.getNationality,
+        payload.getNationality(context),
       ),
       const SizedBox(height: 12.0),
       RowItem.textRow(
@@ -445,7 +445,7 @@ class LaunchPage extends StatelessWidget {
           context,
           'spacex.launch.page.payload.mass',
         ),
-        payload.getMass,
+        payload.getMass(context),
       ),
       const SizedBox(height: 12.0),
       RowItem.textRow(
@@ -453,7 +453,7 @@ class LaunchPage extends StatelessWidget {
           context,
           'spacex.launch.page.payload.orbit',
         ),
-        payload.getOrbit,
+        payload.getOrbit(context),
       ),
     ]);
   }

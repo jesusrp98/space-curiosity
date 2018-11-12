@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:math';
 
+import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 
@@ -85,18 +86,15 @@ abstract class Vehicle {
   String get getDiameter =>
       '${NumberFormat.decimalPattern().format(diameter)} m';
 
-  String get getMass => mass == null
-      ? 'Unknown'
+  String getMass(context) => mass == null
+      ? FlutterI18n.translate(context, 'spacex.other.unknown')
       : '${NumberFormat.decimalPattern().format(mass)} kg';
 
   String get getFirstFlight => DateFormat.yMMMM().format(firstFlight);
 
   String get getFullFirstFlight => DateFormat.yMMMMd().format(firstFlight);
 
-  String get firstLaunched {
-    if (!DateTime.now().isAfter(firstFlight))
-      return 'Scheduled to $getFirstFlight';
-    else
-      return 'First launched on $getFirstFlight';
-  }
+  String get firstLaunched => DateTime.now().isAfter(firstFlight)
+      ? 'First launched on $getFirstFlight'
+      : 'Scheduled to $getFirstFlight';
 }

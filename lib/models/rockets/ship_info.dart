@@ -1,3 +1,4 @@
+import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:intl/intl.dart';
 
 import 'vehicle.dart';
@@ -84,7 +85,8 @@ class ShipInfo extends Vehicle {
 
   bool get hasUrl => url != null;
 
-  String get getModel => model ?? 'Unknown';
+  String getModel(context) =>
+      model ?? FlutterI18n.translate(context, 'spacex.other.unknown');
 
   bool get isLandable => attemptedLandings != null;
 
@@ -94,16 +96,17 @@ class ShipInfo extends Vehicle {
 
   String get secondaryRole => roles[1];
 
-  String get getStatus => status ?? 'Unknown';
+  String getStatus(context) =>
+      status ?? FlutterI18n.translate(context, 'spacex.other.unknown');
 
   String get getBuiltFullDate => DateFormat.yMMMM().format(firstFlight);
 
-  String get getSpeed => speed == null
-      ? 'Unknown'
+  String getSpeed(context) => speed == null
+      ? FlutterI18n.translate(context, 'spacex.other.unknown')
       : '${NumberFormat.decimalPattern().format(speed * 1.852)} km/h';
 
-  String get getCoordinates => coordinates.isNotEmpty
-      ? 'Unknown'
+  String getCoordinates(context) => coordinates.isNotEmpty
+      ? FlutterI18n.translate(context, 'spacex.other.unknown')
       : (coordinates[0].toStringAsPrecision(5) +
           ',  ' +
           coordinates[1].toStringAsPrecision(5));

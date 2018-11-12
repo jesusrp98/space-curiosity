@@ -1,3 +1,4 @@
+import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:intl/intl.dart';
 
 /// SECOND STAGE CLASS
@@ -18,8 +19,10 @@ class SecondStage {
     );
   }
 
-  String get getBlock =>
-      block == null ? 'Unknown' : 'Block ${block.toString()}';
+  String getBlock(context) => block == null
+      ? FlutterI18n.translate(context, 'spacex.other.unknown')
+      : FlutterI18n.translate(context, 'spacex.other.block') +
+          ' ${block.toString()}';
 
   Payload getPayload(int index) => payloads[index];
 
@@ -57,20 +60,26 @@ class Payload {
     );
   }
 
-  String get getId => id ?? 'Unknown';
+  String getId(context) =>
+      id ?? FlutterI18n.translate(context, 'spacex.other.unknown');
 
-  String get getCapsuleSerial => capsuleSerial ?? 'Unknown';
+  String getCapsuleSerial(context) =>
+      capsuleSerial ?? FlutterI18n.translate(context, 'spacex.other.unknown');
 
-  String get getCustomer => customer ?? 'Unknown';
+  String getCustomer(context) =>
+      customer ?? FlutterI18n.translate(context, 'spacex.other.unknown');
 
-  String get getNationality => nationality ?? 'Unknown';
+  String getNationality(context) =>
+      nationality ?? FlutterI18n.translate(context, 'spacex.other.unknown');
 
-  String get getManufacturer => manufacturer ?? 'Unknown';
+  String getManufacturer(context) =>
+      manufacturer ?? FlutterI18n.translate(context, 'spacex.other.unknown');
 
-  String get getOrbit => orbit ?? 'Unknown';
+  String getOrbit(context) =>
+      orbit ?? FlutterI18n.translate(context, 'spacex.other.unknown');
 
-  String get getMass => mass == null
-      ? 'Unknown'
+  String getMass(context) => mass == null
+      ? FlutterI18n.translate(context, 'spacex.other.unknown')
       : '${NumberFormat.decimalPattern().format(mass)} kg';
 
   bool get isNasaPayload =>

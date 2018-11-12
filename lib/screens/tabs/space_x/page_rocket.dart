@@ -147,7 +147,7 @@ class RocketPage extends StatelessWidget {
               context,
               'spacex.vehicle.rocket.specifications.rocket_stages',
             ),
-            _rocket.getStages,
+            _rocket.getStages(context),
           ),
           const Divider(height: 24.0),
           RowItem.textRow(
@@ -187,7 +187,7 @@ class RocketPage extends StatelessWidget {
               context,
               'spacex.vehicle.rocket.specifications.mass',
             ),
-            _rocket.getMass,
+            _rocket.getMass(context),
           ),
         ],
       ),

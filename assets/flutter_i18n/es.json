@@ -70,6 +70,7 @@
           "title": "órbita",
           "type": "Tipo de órbita",
           "period": "Periodo",
+          "days": "días",
           "inclination": "Inlinación",
           "longitude": "Longitud",
           "apoapsis": "Apoapsis",
@@ -89,6 +90,7 @@
         "specifications": {
           "title": "especificaiones",
           "rocket_stages": "Fases del cohete",
+          "stages": "fases",
           "fairing_height": "Altura de la cofia",
           "fairing_diameter": "Diámetro de la cofia",
           "height": "Altura",
@@ -117,6 +119,8 @@
           "launch_scheduled": "Lanzamineto inaugural",
           "active": "En activo",
           "crew_capacity": "Tripulación",
+          "no_people": "Ninguna persona",
+          "people": "personas",
           "reusable": "Reutilizable"
         },
         "specifications": {
@@ -172,6 +176,7 @@
         "add_event": "Añadir evento"
       },
       "page": {
+        "no_description": "Esta misión todavía no tiene descripción.",
         "rocket": {
           "title": "cohete",
           "name": "Nombre",
@@ -246,10 +251,12 @@
         "first_launched": "Primer lanzamiento",
         "launches": "Lanzamientos",
         "splashings": "Amerizajes",
-        "landings_ rtls": "Aterrizaje  RTLS",
-        "landings_asds": "Aterrizajess ASDS",
-        "no_description_core": "Este propulsor no ha participado todavía en ninguna misión.",
-        "no_description_capsule": "Esta cápsula no ha participado todavía en ninguna misión."
+        "landings_rtls": "Aterrizajes RTLS",
+        "landings_asds": "Aterrizajes ASDS",
+        "no_description_core": "Este propulsor todavía no tiene descripción.",
+        "no_description_capsule": "Esta cápsula todavía no tiene descripción.",
+        "no_missions_core": "Este propulsor no ha participado todavía en ninguna misión.",
+        "no_missions_capsule": "Esta cápsula no ha participado todavía en ninguna misión."
       },
       "pad": {
         "status": "Estado",
@@ -259,6 +266,10 @@
         "landing_type": "Tipo de aterrizaje",
         "launches_successful": "Lanzamientos exitosos"
       }
+    },
+    "other": {
+      "unknown": "Desconocido",
+      "block": "Bloque"
     }
   }
 }

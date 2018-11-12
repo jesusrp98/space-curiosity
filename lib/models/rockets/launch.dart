@@ -125,7 +125,9 @@ class Launch {
 
   String get getVideo => links[0];
 
-  String get getDetails => details ?? 'This mission has currently no details.';
+  String getDetails(context) =>
+      details ??
+      FlutterI18n.translate(context, 'spacex.launch.page.no_description');
 
   String get getLaunchDate {
     switch (tentativePrecision) {
@@ -140,7 +142,7 @@ class Launch {
       case 'half':
         return 'NET H${launchDate.month < 7 ? 1 : 2} ${launchDate.year}';
       default:
-        return 'Date not available';
+        return 'Date error';
     }
   }
 

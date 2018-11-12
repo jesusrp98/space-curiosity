@@ -147,7 +147,7 @@ class RoadsterPage extends StatelessWidget {
               context,
               'spacex.vehicle.roadster.vehicle.mass',
             ),
-            _roadster.getMass,
+            _roadster.getMass(context),
           ),
           const SizedBox(height: 12.0),
           RowItem.textRow(
@@ -216,7 +216,7 @@ class RoadsterPage extends StatelessWidget {
               context,
               'spacex.vehicle.roadster.orbit.period',
             ),
-            _roadster.getPeriod,
+            _roadster.getPeriod(context),
           ),
           const Divider(height: 24.0),
           RowItem.textRow(

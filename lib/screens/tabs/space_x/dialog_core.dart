@@ -66,7 +66,7 @@ class CoreDialog extends StatelessWidget {
                           context,
                           'spacex.dialog.vehicle.model',
                         ),
-                        model.core.getBlock,
+                        model.core.getBlock(context),
                       ),
                       const SizedBox(height: 12.0),
                       RowItem.textRow(
@@ -96,7 +96,7 @@ class CoreDialog extends StatelessWidget {
                       RowItem.textRow(
                         FlutterI18n.translate(
                           context,
-                          'spacex.dialog.vehicle.landings_ rtls',
+                          'spacex.dialog.vehicle.landings_rtls',
                         ),
                         model.core.getRtlsLandings,
                       ),
@@ -104,7 +104,7 @@ class CoreDialog extends StatelessWidget {
                       RowItem.textRow(
                         FlutterI18n.translate(
                           context,
-                          'spacex.dialog.vehicle.landings_ asds',
+                          'spacex.dialog.vehicle.landings_asds',
                         ),
                         model.core.getAsdsLandings,
                       ),
@@ -121,13 +121,13 @@ class CoreDialog extends StatelessWidget {
                           : Text(
                               FlutterI18n.translate(
                                 context,
-                                'spacex.dialog.vehicle.no_description_core',
+                                'spacex.dialog.vehicle.no_missions_core',
                               ),
                               style: Theme.of(context).textTheme.subhead,
                             ),
                       const Divider(height: 24.0),
                       Text(
-                        model.core.getDetails,
+                        model.core.getDetails(context),
                         textAlign: TextAlign.justify,
                         style: Theme.of(context)
                             .textTheme

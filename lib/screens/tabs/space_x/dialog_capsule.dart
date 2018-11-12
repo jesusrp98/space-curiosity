@@ -113,13 +113,13 @@ class CapsuleDialog extends StatelessWidget {
                           : Text(
                               FlutterI18n.translate(
                                 context,
-                                'spacex.dialog.vehicle.no_description_capsule',
+                                'spacex.dialog.vehicle.no_missions_capsule',
                               ),
                               style: Theme.of(context).textTheme.subhead,
                             ),
                       const Divider(height: 24.0),
                       Text(
-                        model.capsule.getDetails,
+                        model.capsule.getDetails(context),
                         textAlign: TextAlign.justify,
                         style: Theme.of(context)
                             .textTheme

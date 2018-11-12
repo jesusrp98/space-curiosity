@@ -134,7 +134,7 @@ class ShipPage extends StatelessWidget {
               context,
               'spacex.vehicle.ship.specifications.model',
             ),
-            _ship.getModel,
+            _ship.getModel(context),
           ),
           const Divider(height: 24.0),
           RowItem.textRow(
@@ -164,7 +164,7 @@ class ShipPage extends StatelessWidget {
               context,
               'spacex.vehicle.ship.specifications.status',
             ),
-            _ship.getStatus,
+            _ship.getStatus(context),
           ),
           const SizedBox(height: 12.0),
           RowItem.textRow(
@@ -172,7 +172,7 @@ class ShipPage extends StatelessWidget {
               context,
               'spacex.vehicle.ship.specifications.coordinates',
             ),
-            _ship.getCoordinates,
+            _ship.getCoordinates(context),
           ),
           const Divider(height: 24.0),
           RowItem.textRow(
@@ -180,7 +180,7 @@ class ShipPage extends StatelessWidget {
               context,
               'spacex.vehicle.ship.specifications.mass',
             ),
-            _ship.getMass,
+            _ship.getMass(context),
           ),
           const SizedBox(height: 12.0),
           RowItem.textRow(
@@ -188,7 +188,7 @@ class ShipPage extends StatelessWidget {
               context,
               'spacex.vehicle.ship.specifications.speed',
             ),
-            _ship.getSpeed,
+            _ship.getSpeed(context),
           ),
         ],
       ),

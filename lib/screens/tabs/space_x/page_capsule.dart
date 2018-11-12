@@ -104,7 +104,7 @@ class CapsulePage extends StatelessWidget {
               context,
               'spacex.vehicle.capsule.description.crew_capacity',
             ),
-            _capsule.getCrew,
+            _capsule.getCrew(context),
           ),
           const SizedBox(height: 12.0),
           RowItem.iconRow(
@@ -171,7 +171,7 @@ class CapsulePage extends StatelessWidget {
               context,
               'spacex.vehicle.capsule.specifications.mass',
             ),
-            _capsule.getMass,
+            _capsule.getMass(context),
           ),
         ],
       ),

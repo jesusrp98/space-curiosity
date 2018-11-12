@@ -1,3 +1,5 @@
+import 'package:flutter_i18n/flutter_i18n.dart';
+
 /// CORE CLASS
 /// This class is used in conjunction with the 'launch.dart' class, to retrieve
 /// core information from the rocket used in a specific mission.
@@ -30,13 +32,20 @@ class Core {
     );
   }
 
-  String get getId => id ?? 'Unknown';
+  String getId(context) =>
+      id ?? FlutterI18n.translate(context, 'spacex.other.unknown');
 
-  String get getLandingType => landingType ?? 'Unknown';
+  String getLandingType(context) =>
+      landingType ?? FlutterI18n.translate(context, 'spacex.other.unknown');
 
-  String get getLandingZone => landingZone ?? 'Unknown';
+  String getLandingZone(context) =>
+      landingZone ?? FlutterI18n.translate(context, 'spacex.other.unknown');
 
-  String get getBlock => block == null ? 'Unknown' : 'Block $block';
+  String getBlock(context) => block == null
+      ? FlutterI18n.translate(context, 'spacex.other.unknown')
+      : FlutterI18n.translate(context, 'spacex.other.block') + ' $block';
 
-  String get getFlights => flights == null ? 'Unknown' : flights.toString();
+  String getFlights(context) => flights == null
+      ? FlutterI18n.translate(context, 'spacex.other.unknown')
+      : flights.toString();
 }

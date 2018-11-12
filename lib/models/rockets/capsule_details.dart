@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:http/http.dart' as http;
 
 import '../../util/url.dart';
@@ -64,7 +65,12 @@ class CapsuleDetails extends VehicleDetails {
     );
   }
 
-  String get getDetails => details ?? 'This capsule has currently no details.';
+  String getDetails(context) =>
+      details ??
+      FlutterI18n.translate(
+        context,
+        'spacex.dialog.vehicle.no_description_capsule',
+      );
 
   String get getLandings => landings.toString();
 }
