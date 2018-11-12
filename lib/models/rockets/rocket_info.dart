@@ -96,7 +96,7 @@ class RocketInfo extends Vehicle {
     );
   }
 
-  String get subtitle => firstLaunched;
+  String subtitle(context) => firstLaunched(context);
 
   String getStages(context) => FlutterI18n.translate(
         context,

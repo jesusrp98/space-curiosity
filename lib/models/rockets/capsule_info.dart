@@ -65,7 +65,7 @@ class CapsuleInfo extends Vehicle {
     );
   }
 
-  String get subtitle => firstLaunched;
+  String subtitle(context) => firstLaunched(context);
 
   String getCrew(context) => crew == 0
       ? FlutterI18n.translate(

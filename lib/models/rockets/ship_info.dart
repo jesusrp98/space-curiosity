@@ -81,7 +81,11 @@ class ShipInfo extends Vehicle {
     }
   }
 
-  String get subtitle => 'Ship built in ${firstFlight.year}';
+  String subtitle(context) => FlutterI18n.translate(
+        context,
+        'spacex.vehicle.subtitle.ship_built',
+        {'date': firstFlight.year.toString()},
+      );
 
   bool get hasUrl => url != null;
 

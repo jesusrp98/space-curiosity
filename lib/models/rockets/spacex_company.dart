@@ -83,7 +83,14 @@ class Company {
     );
   }
 
-  String get getFounderDate => 'Founded in $founded by $founder';
+  String getFounderDate(context) => FlutterI18n.translate(
+        context,
+        'spacex.company.founded',
+        {
+          'founded': founded.toString(),
+          'founder': founder,
+        },
+      );
 
   String get getValuation =>
       NumberFormat.currency(symbol: '\$', decimalDigits: 0).format(valuation);

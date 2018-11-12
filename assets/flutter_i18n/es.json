@@ -48,6 +48,12 @@
     "vehicle": {
       "title": "Vehículos",
       "icon": "Vehículos",
+      "subtitle": {
+        "first_launched": "Primer lanzamiento en {date}",
+        "scheduled_launch": "Programado para {date}",
+        "launched": "Lanzado en {date}",
+        "ship_built": "Embarcación construida en {date}"
+      },
       "menu": {
         "wikipedia": "Página de Wikipedia",
         "marine_traffic": "Página de MarineTraffic"
@@ -228,6 +234,7 @@
     "company": {
       "title": "Sobre SpaceX",
       "icon": "Compañía",
+      "founded": "Fundado en {founded} por {founder}",
       "menu": {
         "website": "Sitio web",
         "twitter": "Página de Twitter",

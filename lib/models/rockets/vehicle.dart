@@ -69,7 +69,7 @@ abstract class Vehicle {
     this.photos,
   });
 
-  String get subtitle;
+  String subtitle(context);
 
   String get getProfilePhoto => (hasImages) ? photos[0] : Url.defaultImage;
 
@@ -94,7 +94,10 @@ abstract class Vehicle {
 
   String get getFullFirstFlight => DateFormat.yMMMMd().format(firstFlight);
 
-  String get firstLaunched => DateTime.now().isAfter(firstFlight)
-      ? 'First launched on $getFirstFlight'
-      : 'Scheduled to $getFirstFlight';
+  String firstLaunched(context) => FlutterI18n.translate(
+      context,
+      DateTime.now().isAfter(firstFlight)
+          ? 'spacex.vehicle.subtitle.first_launched'
+          : 'spacex.vehicle.subtitle.scheduled_launch',
+      {'date': getFirstFlight});
 }

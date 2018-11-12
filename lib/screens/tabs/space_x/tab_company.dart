@@ -99,7 +99,7 @@ class SpacexCompanyTab extends StatelessWidget {
                       ),
                       Container(height: 8.0),
                       Text(
-                        model.company.getFounderDate,
+                        model.company.getFounderDate(context),
                         style: Theme.of(context)
                             .textTheme
                             .subhead
