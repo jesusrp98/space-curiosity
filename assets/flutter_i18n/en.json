@@ -45,8 +45,10 @@
     "vehicles": {
       "title": "Vehicles",
       "icon": "Vehicles",
-      "wikipedia": "Wikipedia page",
-      "marine_traffic": "MarineTraffic page",
+      "menu": {
+        "wikipedia": "Wikipedia page",
+        "marine_traffic": "MarineTraffic page"
+      },
       "roadster": {
         "watch_replay": "Watch replay",
         "data_updated": "Data is updated every 5 minutes",
@@ -99,7 +101,7 @@
         "engines": {
           "title": "engines",
           "model": "Engine model",
-          "engines_ first_stage": "First stage engines",
+          "engines_first_stage": "First stage engines",
           "engines_second_stage": "Second stage engines",
           "fuel": "Primary fuel",
           "oxidizer": "Oxidizer",
@@ -135,7 +137,12 @@
           "thrust": "Thrust"
         }
       },
-      "ships": {
+      "ship": {
+        "description": {
+          "title": "description",
+          "home_port": "Home port",
+          "built_date": "Built date"
+        },
         "specification": {
           "title": "specifications",
           "feature": "Feature",
@@ -154,7 +161,7 @@
         }
       }
     },
-    "launches": {
+    "launch": {
       "menu": {
         "reddit": "Reddit campaign",
         "press_kit": "Official press kit",
@@ -165,14 +172,12 @@
         "add_event": "Add event"
       },
       "page": {
-        "rocket_card": {
+        "rocket": {
           "title": "rocket",
-          "rocket": {
-            "name": "Rocket name",
-            "model": "Model",
-            "static_fire_date": "Static fire date",
-            "launch_success": "Launch success"
-          },
+          "name": "Rocket name",
+          "model": "Model",
+          "static_fire_date": "Static fire date",
+          "launch_success": "Launch success",
           "core": {
             "serial": "Core serial",
             "model": "Model",
@@ -182,26 +187,24 @@
             "landing_attempt": "Landing attempt"
           }
         },
-        "payload_card": {
+        "payload": {
           "title": "payload",
+          "name": "Payload name",
+          "capsule_serial": "Capsule serial",
+          "capsule_reused": "Reused",
+          "manufacturer": "Manufacturer",
+          "customer": "Customer",
+          "nationality": "Nationality",
+          "mass": "Mass",
+          "orbit": "Orbit",
           "second_stage": {
             "model": "Second stage model"
           },
           "fairings": {
-            "fairings_reused": "Fairings reused",
+            "reused": "Fairings reused",
             "recovery_attempt": "Recovery attempt",
             "recovery_success": "Recovery success",
             "recovery_ship": "Recovery ship"
-          },
-          "payload": {
-            "name": "Payload name",
-            "capsule_serial": "Capsule serial",
-            "capsule_reused": "Reused",
-            "manufacturer": "Manufacturer",
-            "customer": "Customer",
-            "nationality": "Nationality",
-            "mass": "Mass",
-            "orbit": "Orbit"
           }
         }
       }
@@ -217,7 +220,15 @@
     "company": {
       "title": "About SpaceX",
       "icon": "Company",
+      "menu": {
+        "website": "SpaceX website",
+        "twitter": "Twitter account",
+        "flickr": "Flickr page"
+      },
       "tab": {
+        "ceo": "CEO",
+        "cto": "CTO",
+        "coo": "COO",
         "valuation": "Valuation",
         "location": "Location",
         "employees": "Employees"

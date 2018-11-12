@@ -24,11 +24,11 @@ class SpacexHomeModel extends QuerryModel {
   }
 
   String vehicle(context) =>
-      '${FlutterI18n.translate(context, 'spacex.home.mission.title')} ${launch.rocket.name}';
+      '${FlutterI18n.translate(context, 'spacex.home.tab.mission.title')} ${launch.rocket.name}';
 
   String payload(context) {
     String aux =
-        '${FlutterI18n.translate(context, 'spacex.home.mission.body')} ';
+        '${FlutterI18n.translate(context, 'spacex.home.tab.mission.body')} ';
 
     for (int i = 0; i < launch.rocket.secondStage.payloads.length; ++i)
       aux +=
@@ -41,24 +41,24 @@ class SpacexHomeModel extends QuerryModel {
   }
 
   String launchDate(context) =>
-      '${FlutterI18n.translate(context, 'spacex.home.date.body')} ${launch.getLaunchDate}.';
+      '${FlutterI18n.translate(context, 'spacex.home.tab.date.body')} ${launch.getLaunchDate}.';
 
   String launchpad(context) =>
-      '${FlutterI18n.translate(context, 'spacex.home.launchpad.body')} ${launch.launchpadName}.';
+      '${FlutterI18n.translate(context, 'spacex.home.tab.launchpad.body')} ${launch.launchpadName}.';
 
   String staticFire(context) => launch.staticFireDate == null
-      ? FlutterI18n.translate(context, 'spacex.home.static_fire.body_null')
-      : '${FlutterI18n.translate(context, 'spacex.home.static_fire.body')} ${launch.getStaticFireDate}.';
+      ? FlutterI18n.translate(context, 'spacex.home.tab.static_fire.body_null')
+      : '${FlutterI18n.translate(context, 'spacex.home.tab.static_fire.body')} ${launch.getStaticFireDate}.';
 
   String fairings(context) =>
-      '${launch.rocket.fairing.reused ? FlutterI18n.translate(context, 'spacex.home.fairings.body_reused') : FlutterI18n.translate(context, 'spacex.home.fairings.body_new')}, ${launch.rocket.fairing.recoveryAttempt ? FlutterI18n.translate(context, 'spacex.home.fairings.body_catched') + ' ' + launch.rocket.fairing.ship + '.' : FlutterI18n.translate(context, 'spacex.home.fairings.body_dispensed')}';
+      '${launch.rocket.fairing.reused ? FlutterI18n.translate(context, 'spacex.home.tab.fairings.body_reused') : FlutterI18n.translate(context, 'spacex.home.tab.fairings.body_new')}, ${launch.rocket.fairing.recoveryAttempt ? FlutterI18n.translate(context, 'spacex.home.tab.fairings.body_catched') + ' ' + launch.rocket.fairing.ship + '.' : FlutterI18n.translate(context, 'spacex.home.tab.fairings.body_dispensed')}';
 
   String landings(context) {
     String aux = '';
     List<String> cores = [
-      FlutterI18n.translate(context, 'spacex.home.first_stage.booster'),
-      FlutterI18n.translate(context, 'spacex.home.first_stage.side_core'),
-      FlutterI18n.translate(context, 'spacex.home.first_stage.side_core'),
+      FlutterI18n.translate(context, 'spacex.home.tab.first_stage.booster'),
+      FlutterI18n.translate(context, 'spacex.home.tab.first_stage.side_core'),
+      FlutterI18n.translate(context, 'spacex.home.tab.first_stage.side_core'),
     ];
 
     for (int i = 0; i < launch.rocket.firstStage.length; ++i)
@@ -66,20 +66,20 @@ class SpacexHomeModel extends QuerryModel {
           ' ' +
           (launch.rocket.firstStage[i].reused
               ? FlutterI18n.translate(
-                  context, 'spacex.home.first_stage.body_reused')
+                  context, 'spacex.home.tab.first_stage.body_reused')
               : FlutterI18n.translate(
-                  context, 'spacex.home.first_stage.body_new')) +
+                  context, 'spacex.home.tab.first_stage.body_new')) +
           ', ' +
           (launch.rocket.firstStage[i].landingIntent
               ? FlutterI18n.translate(
-                      context, 'spacex.home.first_stage.body_catched') +
+                      context, 'spacex.home.tab.first_stage.body_catched') +
                   ' ' +
                   launch.rocket.firstStage[i].landingZone +
                   ' (' +
                   launch.rocket.firstStage[i].landingType +
                   ').'
               : FlutterI18n.translate(
-                  context, 'spacex.home.first_stage.body_dispended')) +
+                  context, 'spacex.home.tab.first_stage.body_dispended')) +
           ((i + 1 == launch.rocket.firstStage.length) ? '' : '\n');
 
     return aux;

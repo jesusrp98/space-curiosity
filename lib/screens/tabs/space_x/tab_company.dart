@@ -112,17 +112,52 @@ class SpacexCompanyTab extends StatelessWidget {
                             .copyWith(color: secondaryText),
                       ),
                       Container(height: 12.0),
-                      RowItem.textRow('CEO', model.company.ceo),
+                      RowItem.textRow(
+                        FlutterI18n.translate(
+                          context,
+                          'spacex.company.tab.ceo',
+                        ),
+                        model.company.ceo,
+                      ),
                       Container(height: 12.0),
-                      RowItem.textRow('CTO', model.company.cto),
+                      RowItem.textRow(
+                        FlutterI18n.translate(
+                          context,
+                          'spacex.company.tab.cto',
+                        ),
+                        model.company.cto,
+                      ),
                       Container(height: 12.0),
-                      RowItem.textRow('COO', model.company.coo),
+                      RowItem.textRow(
+                          FlutterI18n.translate(
+                            context,
+                            'spacex.company.tab.coo',
+                          ),
+                          model.company.coo),
                       Container(height: 12.0),
-                      RowItem.textRow('Valuation', model.company.getValuation),
+                      RowItem.textRow(
+                        FlutterI18n.translate(
+                          context,
+                          'spacex.company.tab.valuation',
+                        ),
+                        model.company.getValuation,
+                      ),
                       Container(height: 12.0),
-                      RowItem.textRow('Location', model.company.getLocation),
+                      RowItem.textRow(
+                        FlutterI18n.translate(
+                          context,
+                          'spacex.company.tab.location',
+                        ),
+                        model.company.getLocation,
+                      ),
                       Container(height: 12.0),
-                      RowItem.textRow('Employees', model.company.getEmployees),
+                      RowItem.textRow(
+                        FlutterI18n.translate(
+                          context,
+                          'spacex.company.tab.employees',
+                        ),
+                        model.company.getEmployees,
+                      ),
                       Container(height: 12.0),
                       Text(
                         model.company.details,
