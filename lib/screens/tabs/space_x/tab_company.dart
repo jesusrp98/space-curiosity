@@ -14,12 +14,6 @@ import '../../../widgets/row_item.dart';
 class SpacexCompanyTab extends StatelessWidget {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  static const List<String> _popupItems = [
-    'SpaceX website',
-    'Twitter account',
-    'Flickr page',
-  ];
-
   @override
   Widget build(BuildContext context) {
     return ScopedModelDescendant<SpacexCompanyModel>(
@@ -33,12 +27,12 @@ class SpacexCompanyTab extends StatelessWidget {
                   pinned: true,
                   actions: <Widget>[
                     PopupMenuButton<String>(
-                      itemBuilder: (context) => _popupItems
+                      itemBuilder: (context) => model.getEllipsis(context)
                           .map((f) => PopupMenuItem(value: f, child: Text(f)))
                           .toList(),
                       onSelected: (option) => FlutterWebBrowser.openWebPage(
                             url: model
-                                .company.links[_popupItems.indexOf(option)],
+                                .company.links[model.getEllipsisIndex(context, option)],
                             androidToolbarColor: primaryColor,
                           ),
                     ),

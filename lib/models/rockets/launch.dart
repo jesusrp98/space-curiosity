@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:math';
 
+import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 
@@ -152,4 +153,12 @@ class Launch {
   String get getStaticFireDate => staticFireDate == null
       ? 'Unknown'
       : DateFormat.yMMMMd().format(staticFireDate);
+
+  List<String> getEllipsis(context) => <String>[
+        FlutterI18n.translate(context, 'spacex.launch.menu.reddit'),
+        FlutterI18n.translate(context, 'spacex.launch.menu.press_kit'),
+        FlutterI18n.translate(context, 'spacex.launch.menu.article')
+      ];
+
+  int getEllipsisIndex(context, url) => getEllipsis(context).indexOf(url) + 1;
 }

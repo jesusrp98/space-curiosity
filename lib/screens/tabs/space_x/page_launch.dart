@@ -31,11 +31,6 @@ import 'dialog_launchpad.dart';
 class LaunchPage extends StatelessWidget {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final Launch _launch;
-  static const List<String> _popupItems = [
-    'Reddit campaign',
-    'Official press kit',
-    'Internet article',
-  ];
 
   LaunchPage(this._launch);
 
@@ -100,17 +95,21 @@ class LaunchPage extends StatelessWidget {
                   pinned: true,
                   actions: <Widget>[
                     PopupMenuButton<String>(
-                      itemBuilder: (_) => _popupItems
+                      itemBuilder: (_) => _launch
+                          .getEllipsis(context)
                           .map((url) => PopupMenuItem(
                                 value: url,
                                 child: Text(url),
-                                enabled: _launch
-                                        .links[_popupItems.indexOf(url) + 1] !=
+                                enabled: _launch.links[_launch.getEllipsisIndex(
+                                      context,
+                                      url,
+                                    )] !=
                                     null,
                               ))
                           .toList(),
                       onSelected: (url) => FlutterWebBrowser.openWebPage(
-                            url: _launch.links[_popupItems.indexOf(url) + 1],
+                            url: _launch
+                                .links[_launch.getEllipsisIndex(context, url)],
                             androidToolbarColor: primaryColor,
                           ),
                     ),
