@@ -73,7 +73,7 @@
           "title": "orbit",
           "type": "Orbit type",
           "period": "Period",
-          "days": "days",
+          "days": "{days} days",
           "inclination": "Inclination",
           "longitude": "Longitude",
           "apoapsis": "Apoapsis",
@@ -93,7 +93,7 @@
         "specifications": {
           "title": "specifications",
           "rocket_stages": "Rocket stages",
-          "stages": "stages",
+          "stages": "{stages} stages",
           "fairing_height": "Fairing height",
           "fairing_diameter": "Fairing diameter",
           "height": "Height",
@@ -123,7 +123,7 @@
           "active": "Active",
           "crew_capacity": "Crew capacity",
           "no_people": "No people",
-          "people": "people",
+          "people": "{people} people",
           "reusable": "Reusable"
         },
         "specifications": {
@@ -272,7 +272,7 @@
     },
     "other": {
       "unknown": "Unknown",
-      "block": "Block"
+      "block": "Block {block}"
     }
   }
 }

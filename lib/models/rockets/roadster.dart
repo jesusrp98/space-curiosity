@@ -87,8 +87,11 @@ class Roadster extends Vehicle {
   String get getLongitude =>
       '${NumberFormat.decimalPattern().format(longitude)}°';
 
-  String getPeriod(context) =>
-      '${NumberFormat.decimalPattern().format(period.round())} ${FlutterI18n.translate(context, 'spacex.vehicle.roadster.orbit.days')}';
+  String getPeriod(context) => FlutterI18n.translate(
+        context,
+        'spacex.vehicle.roadster.orbit.days',
+        {'days': NumberFormat.decimalPattern().format(period.round())},
+      );
 
   String get getSpeed =>
       '${NumberFormat.decimalPattern().format(speed.round())} km/h';

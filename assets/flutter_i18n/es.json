@@ -73,7 +73,7 @@
           "title": "órbita",
           "type": "Tipo de órbita",
           "period": "Periodo",
-          "days": "días",
+          "days": "{days} días",
           "inclination": "Inlinación",
           "longitude": "Longitud",
           "apoapsis": "Apoapsis",
@@ -93,7 +93,7 @@
         "specifications": {
           "title": "especificaiones",
           "rocket_stages": "Fases del cohete",
-          "stages": "fases",
+          "stages": "{stages} fases",
           "fairing_height": "Altura de la cofia",
           "fairing_diameter": "Diámetro de la cofia",
           "height": "Altura",
@@ -123,7 +123,7 @@
           "active": "En activo",
           "crew_capacity": "Tripulación",
           "no_people": "Ninguna persona",
-          "people": "personas",
+          "people": "{people} personas",
           "reusable": "Reutilizable"
         },
         "specifications": {
@@ -272,7 +272,7 @@
     },
     "other": {
       "unknown": "Desconocido",
-      "block": "Bloque"
+      "block": "Bloque {block}"
     }
   }
 }

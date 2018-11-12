@@ -64,9 +64,8 @@ class Landingpad {
 
   String get getStatus => '${status[0].toUpperCase()}${status.substring(1)}';
 
-  String get getCoordinates => (coordinates[0].toStringAsPrecision(5) +
-      ',  ' +
-      coordinates[1].toStringAsPrecision(5));
+  String get getCoordinates =>
+      '${coordinates[0].toStringAsPrecision(5)},  ${coordinates[1].toStringAsPrecision(5)}';
 
   String get getSuccessfulLandings => '$successfulLandings/$attemptedLandings';
 }

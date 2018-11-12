@@ -43,7 +43,11 @@ class Core {
 
   String getBlock(context) => block == null
       ? FlutterI18n.translate(context, 'spacex.other.unknown')
-      : FlutterI18n.translate(context, 'spacex.other.block') + ' $block';
+      : FlutterI18n.translate(
+          context,
+          'spacex.other.block',
+          {'block': block.toString()},
+        );
 
   String getFlights(context) => flights == null
       ? FlutterI18n.translate(context, 'spacex.other.unknown')

@@ -72,11 +72,11 @@ class CapsuleInfo extends Vehicle {
           context,
           'spacex.vehicle.capsule.description.no_people',
         )
-      : '$crew ' +
-          FlutterI18n.translate(
-            context,
-            'spacex.vehicle.capsule.description.people',
-          );
+      : FlutterI18n.translate(
+          context,
+          'spacex.vehicle.capsule.description.people',
+          {'people': crew.toString()},
+        );
 
   String get getLaunchMass =>
       '${NumberFormat.decimalPattern().format(launchMass)} kg';

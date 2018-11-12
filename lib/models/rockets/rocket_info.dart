@@ -98,7 +98,11 @@ class RocketInfo extends Vehicle {
 
   String get subtitle => firstLaunched;
 
-  String getStages(context) => '$stages ${FlutterI18n.translate(context, 'spacex.vehicle.rocket.specifications.stages')}';
+  String getStages(context) => FlutterI18n.translate(
+        context,
+        'spacex.vehicle.rocket.specifications.stages',
+        {'stages': stages.toString()},
+      );
 
   String get getLaunchCost =>
       NumberFormat.currency(symbol: "\$", decimalDigits: 0).format(launchCost);

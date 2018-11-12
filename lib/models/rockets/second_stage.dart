@@ -14,15 +14,18 @@ class SecondStage {
     return SecondStage(
       block: json['block'],
       payloads: (json['payloads'] as List)
-          .map((payload) => new Payload.fromJson(payload))
+          .map((payload) => Payload.fromJson(payload))
           .toList(),
     );
   }
 
   String getBlock(context) => block == null
       ? FlutterI18n.translate(context, 'spacex.other.unknown')
-      : FlutterI18n.translate(context, 'spacex.other.block') +
-          ' ${block.toString()}';
+      : FlutterI18n.translate(
+          context,
+          'spacex.other.block',
+          {'block': block.toString()},
+        );
 
   Payload getPayload(int index) => payloads[index];
 
