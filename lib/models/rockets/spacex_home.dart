@@ -23,35 +23,78 @@ class SpacexHomeModel extends QuerryModel {
     loadingState(false);
   }
 
-  String vehicle(context) =>
-      '${FlutterI18n.translate(context, 'spacex.home.tab.mission.title')} ${launch.rocket.name}';
+  String vehicle(context) => FlutterI18n.translate(
+        context,
+        'spacex.home.tab.mission.title',
+        {'rocket': launch.rocket.name},
+      );
 
   String payload(context) {
-    String aux =
-        '${FlutterI18n.translate(context, 'spacex.home.tab.mission.body')} ';
+    String aux = '';
 
     for (int i = 0; i < launch.rocket.secondStage.payloads.length; ++i)
-      aux +=
-          '${launch.rocket.secondStage.payloads[i].id} to ${launch.rocket.secondStage.payloads[i].orbit} orbit' +
-              ((i + 1 == launch.rocket.secondStage.payloads.length)
-                  ? '.'
-                  : ', ');
+      aux += FlutterI18n.translate(
+            context,
+            'spacex.home.tab.mission.body_payload',
+            {
+              'name': launch.rocket.secondStage.payloads[i].id,
+              'orbit': launch.rocket.secondStage.payloads[i].orbit
+            },
+          ) +
+          (i + 1 == launch.rocket.secondStage.payloads.length ? '.' : ', ');
 
-    return aux;
+    return FlutterI18n.translate(
+      context,
+      'spacex.home.tab.mission.body',
+      {'payloads': aux},
+    );
   }
 
-  String launchDate(context) =>
-      '${FlutterI18n.translate(context, 'spacex.home.tab.date.body')} ${launch.getLaunchDate}.';
+  String launchDate(context) => FlutterI18n.translate(
+        context,
+        'spacex.home.tab.date.body',
+        {'date': launch.getLaunchDate},
+      );
 
-  String launchpad(context) =>
-      '${FlutterI18n.translate(context, 'spacex.home.tab.launchpad.body')} ${launch.launchpadName}.';
+  String launchpad(context) => FlutterI18n.translate(
+        context,
+        'spacex.home.tab.launchpad.body',
+        {'launchpad': launch.launchpadName},
+      );
 
   String staticFire(context) => launch.staticFireDate == null
-      ? FlutterI18n.translate(context, 'spacex.home.tab.static_fire.body_null')
-      : '${FlutterI18n.translate(context, 'spacex.home.tab.static_fire.body')} ${launch.getStaticFireDate}.';
+      ? FlutterI18n.translate(
+          context,
+          'spacex.home.tab.static_fire.body_unknown',
+        )
+      : FlutterI18n.translate(
+          context,
+          'spacex.home.tab.static_fire.body',
+          {'date': launch.getStaticFireDate(context)},
+        );
 
-  String fairings(context) =>
-      '${launch.rocket.fairing.reused ? FlutterI18n.translate(context, 'spacex.home.tab.fairings.body_reused') : FlutterI18n.translate(context, 'spacex.home.tab.fairings.body_new')}, ${launch.rocket.fairing.recoveryAttempt ? FlutterI18n.translate(context, 'spacex.home.tab.fairings.body_catched') + ' ' + launch.rocket.fairing.ship + '.' : FlutterI18n.translate(context, 'spacex.home.tab.fairings.body_dispensed')}';
+  String fairings(context) => FlutterI18n.translate(
+        context,
+        'spacex.home.tab.fairings.body',
+        {
+          'reused': FlutterI18n.translate(
+            context,
+            launch.rocket.fairing.reused
+                ? 'spacex.home.tab.fairings.body_reused'
+                : 'spacex.home.tab.fairings.body_new',
+          ),
+          'catched': launch.rocket.fairing.recoveryAttempt
+              ? FlutterI18n.translate(
+                  context,
+                  'spacex.home.tab.fairings.body_catching',
+                  {'ship': launch.rocket.fairing.ship},
+                )
+              : FlutterI18n.translate(
+                  context,
+                  'spacex.home.tab.fairings.body_dispensed',
+                )
+        },
+      );
 
   String landings(context) {
     String aux = '';
@@ -62,25 +105,30 @@ class SpacexHomeModel extends QuerryModel {
     ];
 
     for (int i = 0; i < launch.rocket.firstStage.length; ++i)
-      aux += cores[i] +
-          ' ' +
-          (launch.rocket.firstStage[i].reused
-              ? FlutterI18n.translate(
-                  context, 'spacex.home.tab.first_stage.body_reused')
-              : FlutterI18n.translate(
-                  context, 'spacex.home.tab.first_stage.body_new')) +
-          ', ' +
-          (launch.rocket.firstStage[i].landingIntent
-              ? FlutterI18n.translate(
-                      context, 'spacex.home.tab.first_stage.body_catched') +
-                  ' ' +
-                  launch.rocket.firstStage[i].landingZone +
-                  ' (' +
-                  launch.rocket.firstStage[i].landingType +
-                  ').'
-              : FlutterI18n.translate(
-                  context, 'spacex.home.tab.first_stage.body_dispended')) +
-          ((i + 1 == launch.rocket.firstStage.length) ? '' : '\n');
+      aux += FlutterI18n.translate(
+            context,
+            'spacex.home.tab.first_stage.body',
+            {
+              'booster': cores[i],
+              'reused': FlutterI18n.translate(
+                context,
+                launch.rocket.firstStage[i].reused
+                    ? 'spacex.home.tab.first_stage.body_reused'
+                    : 'spacex.home.tab.first_stage.body_new',
+              ),
+              'landing': launch.rocket.firstStage[i].landingIntent
+                  ? FlutterI18n.translate(
+                      context,
+                      'spacex.home.tab.first_stage.body_landing',
+                      {'landingpad': launch.rocket.firstStage[i].landingZone},
+                    )
+                  : FlutterI18n.translate(
+                      context,
+                      'spacex.home.tab.first_stage.body_dispended',
+                    )
+            },
+          ) +
+          (i + 1 == launch.rocket.firstStage.length ? '' : '\n');
 
     return aux;
   }

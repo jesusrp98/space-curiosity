@@ -8,37 +8,40 @@
       "icon": "Inicio",
       "tab": {
         "mission": {
-          "title": "Lanzado por",
-          "body": "Llevará a"
+          "title": "Lanzado por {rocket}",
+          "body": "Llevará a {payloads}",
+          "body_payload": "{name} a una órbita '{orbit}'"
         },
         "date": {
           "title": "Fecha de lanzamiento",
-          "body": "El lanzamiento se realizará el"
+          "body": "El lanzamiento se realizará el {date}."
         },
         "launchpad": {
           "title": "Plataforma de lanzamiento",
-          "body": "El lanzamiento tendrá lugar en"
+          "body": "El lanzamiento tendrá lugar en {launchpad}."
         },
         "static_fire": {
           "title": "Prueba de ingnición",
-          "body": "Este evento está fechado para el",
-          "body_null": "Este evento todavía no tiene fecha."
+          "body": "Este evento está fechado para el {date}.",
+          "body_unknown": "Este evento todavía no tiene fecha."
         },
         "fairings": {
           "title": "Cofia protectora",
+          "body": "{reused}, {catched}.",
           "body_new": "La cofia no es reutilizada",
           "body_reused": "La cofia es reciclada",
-          "body_catched": "y será capturada por",
-          "body_dispensed": "y no se procederá a su captura."
+          "body_catching": "y será capturada por {ship}",
+          "body_dispensed": "y no se procederá a su captura"
         },
         "first_stage": {
           "title": "Primera etapa",
           "booster": "El propulsor",
           "side_core": "El propulsor lateral",
+          "body": "{booster} {reused}, {landing}.",
           "body_reused": "es reutilizado",
           "body_new": "no es reutilizado",
-          "body_catched": "y aterrizará en",
-          "body_dispended": "y no realizará ningun aterrizaje."
+          "body_landing": "y aterrizará en {landingpad}",
+          "body_dispended": "y no realizará ningun aterrizaje"
         }
       }
     },
