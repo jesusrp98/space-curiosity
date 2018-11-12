@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:native_widgets/native_widgets.dart';
@@ -60,20 +61,47 @@ class CapsuleDialog extends StatelessWidget {
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
                     children: <Widget>[
-                      RowItem.textRow('Model', model.capsule.name),
-                      const SizedBox(height: 12.0),
-                      RowItem.textRow('Status', model.capsule.getStatus),
+                      RowItem.textRow(
+                        FlutterI18n.translate(
+                          context,
+                          'spacex.dialog.vehicle.model',
+                        ),
+                        model.capsule.name,
+                      ),
                       const SizedBox(height: 12.0),
                       RowItem.textRow(
-                        'First launched',
+                        FlutterI18n.translate(
+                          context,
+                          'spacex.dialog.vehicle.status',
+                        ),
+                        model.capsule.getStatus,
+                      ),
+                      const SizedBox(height: 12.0),
+                      RowItem.textRow(
+                        FlutterI18n.translate(
+                          context,
+                          'spacex.dialog.vehicle.first_launched',
+                        ),
                         model.capsule.getFirstLaunched,
                       ),
                       const SizedBox(height: 12.0),
-                      RowItem.textRow('Launches', model.capsule.getLaunches),
+                      RowItem.textRow(
+                        FlutterI18n.translate(
+                          context,
+                          'spacex.dialog.vehicle.launches',
+                        ),
+                        model.capsule.getLaunches,
+                      ),
                       const SizedBox(height: 12.0),
-                      RowItem.textRow('Splashings', model.capsule.getLandings),
+                      RowItem.textRow(
+                        FlutterI18n.translate(
+                          context,
+                          'spacex.dialog.vehicle.splashings',
+                        ),
+                        model.capsule.getLandings,
+                      ),
                       const Divider(height: 24.0),
-                      (model.capsule.hasMissions)
+                      model.capsule.hasMissions
                           ? Column(
                               children: model.capsule.missions
                                   .map((mission) => DialogListTile(
@@ -83,7 +111,10 @@ class CapsuleDialog extends StatelessWidget {
                                   .toList(),
                             )
                           : Text(
-                              'This capsule has no previous missions.',
+                              FlutterI18n.translate(
+                                context,
+                                'spacex.dialog.vehicle.no_description_capsule',
+                              ),
                               style: Theme.of(context).textTheme.subhead,
                             ),
                       const Divider(height: 24.0),

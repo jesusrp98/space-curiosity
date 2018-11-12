@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:latlong/latlong.dart';
@@ -29,7 +30,10 @@ class LaunchpadDialog extends StatelessWidget {
                           url: model.launchpad.url,
                           androidToolbarColor: primaryColor,
                         ),
-                    tooltip: 'Wikipedia article',
+                    tooltip: FlutterI18n.translate(
+                      context,
+                      'spacex.dialog.menu.wikipedia',
+                    ),
                   )
                 ],
                 flexibleSpace: FlexibleSpaceBar(
@@ -98,19 +102,43 @@ class LaunchpadDialog extends StatelessWidget {
                         style: Theme.of(context).textTheme.title,
                       ),
                       const SizedBox(height: 12.0),
-                      RowItem.textRow('Status', model.launchpad.getStatus),
-                      const SizedBox(height: 12.0),
-                      RowItem.textRow('Location', model.launchpad.location),
-                      const SizedBox(height: 12.0),
-                      RowItem.textRow('State', model.launchpad.state),
+                      RowItem.textRow(
+                        FlutterI18n.translate(
+                          context,
+                          'spacex.dialog.pad.status',
+                        ),
+                        model.launchpad.getStatus,
+                      ),
                       const SizedBox(height: 12.0),
                       RowItem.textRow(
-                        'Coordinates',
+                        FlutterI18n.translate(
+                          context,
+                          'spacex.dialog.pad.location',
+                        ),
+                        model.launchpad.location,
+                      ),
+                      const SizedBox(height: 12.0),
+                      RowItem.textRow(
+                        FlutterI18n.translate(
+                          context,
+                          'spacex.dialog.pad.state',
+                        ),
+                        model.launchpad.state,
+                      ),
+                      const SizedBox(height: 12.0),
+                      RowItem.textRow(
+                        FlutterI18n.translate(
+                          context,
+                          'spacex.dialog.pad.coordinates',
+                        ),
                         model.launchpad.getCoordinates,
                       ),
                       const SizedBox(height: 12.0),
                       RowItem.textRow(
-                        'Successful launches',
+                        FlutterI18n.translate(
+                          context,
+                          'spacex.dialog.pad.launches_successful',
+                        ),
                         model.launchpad.getSuccessfulLaunches,
                       ),
                       const Divider(height: 24.0),

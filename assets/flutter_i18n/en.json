@@ -233,6 +233,32 @@
         "location": "Location",
         "employees": "Employees"
       }
+    },
+    "dialog": {
+      "menu": {
+        "wikipedia": "Wikipedia page"
+      },
+      "vehicle": {
+        "title_core": "Core",
+        "title_capsule": "Capsule",
+        "model": "Model",
+        "status": "Status",
+        "first_launched": "First launched",
+        "launches": "Launches",
+        "splashings": "Splashings",
+        "landings_ rtls": "RTLS landings",
+        "landings_asds": "ASDS landings",
+        "no_description_core": "This core has no previous missions.",
+        "no_description_capsule": "This capsule has no previous missions."
+      },
+      "pad": {
+        "status": "Status",
+        "location": "Location",
+        "state": "State",
+        "coordinates": "Coordinates",
+        "landing_type": "Landing type",
+        "launches_successful": "Successful launches"
+      }
     }
   }
 }

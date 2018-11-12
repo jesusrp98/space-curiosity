@@ -233,6 +233,32 @@
         "location": "Localización",
         "employees": "Empleados"
       }
+    },
+    "dialog": {
+      "menu": {
+        "wikipedia": "Página de Wikipedia"
+      },
+      "vehicle": {
+        "title_core": "Propulsor",
+        "title_capsule": "Cápsula",
+        "model": "Modelo",
+        "status": "Estado",
+        "first_launched": "Primer lanzamiento",
+        "launches": "Lanzamientos",
+        "splashings": "Amerizajes",
+        "landings_ rtls": "Aterrizaje  RTLS",
+        "landings_asds": "Aterrizajess ASDS",
+        "no_description_core": "Este propulsor no ha participado todavía en ninguna misión.",
+        "no_description_capsule": "Esta cápsula no ha participado todavía en ninguna misión."
+      },
+      "pad": {
+        "status": "Estado",
+        "location": "Localidad",
+        "state": "Estado",
+        "coordinates": "Coordenadas",
+        "landing_type": "Tipo de aterrizaje",
+        "launches_successful": "Lanzamientos exitosos"
+      }
     }
   }
 }

@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:native_widgets/native_widgets.dart';
@@ -60,24 +61,51 @@ class CoreDialog extends StatelessWidget {
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
                     children: <Widget>[
-                      RowItem.textRow('Model', model.core.getBlock),
-                      const SizedBox(height: 12.0),
-                      RowItem.textRow('Status', model.core.getStatus),
+                      RowItem.textRow(
+                        FlutterI18n.translate(
+                          context,
+                          'spacex.dialog.vehicle.model',
+                        ),
+                        model.core.getBlock,
+                      ),
                       const SizedBox(height: 12.0),
                       RowItem.textRow(
-                        'First launched',
+                        FlutterI18n.translate(
+                          context,
+                          'spacex.dialog.vehicle.status',
+                        ),
+                        model.core.getStatus,
+                      ),
+                      const SizedBox(height: 12.0),
+                      RowItem.textRow(
+                        FlutterI18n.translate(
+                          context,
+                          'spacex.dialog.vehicle.first_launched',
+                        ),
                         model.core.getFirstLaunched,
                       ),
                       const SizedBox(height: 12.0),
-                      RowItem.textRow('Launches', model.core.getLaunches),
+                      RowItem.textRow(
+                        FlutterI18n.translate(
+                          context,
+                          'spacex.dialog.vehicle.launches',
+                        ),
+                        model.core.getLaunches,
+                      ),
                       const SizedBox(height: 12.0),
                       RowItem.textRow(
-                        'RTLS landings',
+                        FlutterI18n.translate(
+                          context,
+                          'spacex.dialog.vehicle.landings_ rtls',
+                        ),
                         model.core.getRtlsLandings,
                       ),
                       const SizedBox(height: 12.0),
                       RowItem.textRow(
-                        'ASDS landings',
+                        FlutterI18n.translate(
+                          context,
+                          'spacex.dialog.vehicle.landings_ asds',
+                        ),
                         model.core.getAsdsLandings,
                       ),
                       const Divider(height: 24.0),
@@ -91,7 +119,10 @@ class CoreDialog extends StatelessWidget {
                                   .toList(),
                             )
                           : Text(
-                              'This core has no previous missions.',
+                              FlutterI18n.translate(
+                                context,
+                                'spacex.dialog.vehicle.no_description_core',
+                              ),
                               style: Theme.of(context).textTheme.subhead,
                             ),
                       const Divider(height: 24.0),
