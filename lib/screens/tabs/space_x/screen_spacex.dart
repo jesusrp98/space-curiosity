@@ -79,7 +79,7 @@ class _SpacexTabScreen extends State<SpacexScreen> {
           BottomNavigationBarItem(
             title: Text(FlutterI18n.translate(
               context,
-              'spacex.vehicles.icon',
+              'spacex.vehicle.icon',
             )),
             icon: Icon(FontAwesomeIcons.rocket),
           ),

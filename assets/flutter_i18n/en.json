@@ -42,7 +42,7 @@
         }
       }
     },
-    "vehicles": {
+    "vehicle": {
       "title": "Vehicles",
       "icon": "Vehicles",
       "menu": {
@@ -143,7 +143,7 @@
           "home_port": "Home port",
           "built_date": "Built date"
         },
-        "specification": {
+        "specifications": {
           "title": "specifications",
           "feature": "Feature",
           "model": "Ship model",

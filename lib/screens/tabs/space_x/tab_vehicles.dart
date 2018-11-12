@@ -46,7 +46,7 @@ class VehiclesTab extends StatelessWidget {
                       centerTitle: true,
                       title: Text(FlutterI18n.translate(
                         context,
-                        'spacex.vehicles.title',
+                        'spacex.vehicle.title',
                       )),
                       background: (model.isLoading)
                           ? NativeLoadingIndicator(center: true)

@@ -1,4 +1,4 @@
-import 'package:add_2_calendar/add_2_calendar.dart';
+//import 'package:add_2_calendar/add_2_calendar.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
@@ -64,34 +64,34 @@ class LaunchPage extends StatelessWidget {
                         context,
                         'spacex.launch.tooltip.add_event',
                       ),
-                      onPressed: (_launch.tentativePrecision == 'hour')
-                          ? () {
-                              try {
-                                // -- Add Event To Calendar --
-                                print("Adding Event: \n");
-                                print(_launch?.name);
-                                print(_launch?.launchpadName);
-                                print(_launch?.launchDate);
-                                Add2Calendar.addEvent2Cal(Event(
-                                  title: _launch?.name ?? "Not Avaliable",
-                                  description:
-                                      _launch.details ?? "No Details Avaliable",
-                                  location: _launch?.launchpadName ?? "",
-                                  startDate:
-                                      _launch?.launchDate ?? DateTime.now(),
-                                  endDate:
-                                      (_launch?.launchDate ?? DateTime.now())
-                                          .add(Duration(minutes: 30)),
-                                )).catchError((onError) {
-                                  print("Error Adding Event: " + onError);
-                                }).then((value) {
-                                  print("Event Added: $value");
-                                });
-                              } catch (e) {
-                                print("Error Adding Event: " + e);
-                              }
-                            }
-                          : null,
+                      // onPressed: (_launch.tentativePrecision == 'hour')
+                      //     ? () {
+                      //         try {
+                      //           // -- Add Event To Calendar --
+                      //           print("Adding Event: \n");
+                      //           print(_launch?.name);
+                      //           print(_launch?.launchpadName);
+                      //           print(_launch?.launchDate);
+                      //           Add2Calendar.addEvent2Cal(Event(
+                      //             title: _launch?.name ?? "Not Avaliable",
+                      //             description:
+                      //                 _launch.details ?? "No Details Avaliable",
+                      //             location: _launch?.launchpadName ?? "",
+                      //             startDate:
+                      //                 _launch?.launchDate ?? DateTime.now(),
+                      //             endDate:
+                      //                 (_launch?.launchDate ?? DateTime.now())
+                      //                     .add(Duration(minutes: 30)),
+                      //           )).catchError((onError) {
+                      //             print("Error Adding Event: " + onError);
+                      //           }).then((value) {
+                      //             print("Event Added: $value");
+                      //           });
+                      //         } catch (e) {
+                      //           print("Error Adding Event: " + e);
+                      //         }
+                      //       }
+                      //     : null,
                     ),
               slivers: <Widget>[
                 SliverAppBar(

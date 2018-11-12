@@ -101,7 +101,7 @@ class SpacexHomeTab extends StatelessWidget {
               leading: const Icon(Icons.event, size: 42.0),
               title: FlutterI18n.translate(
                 context,
-                'spacex.home.date.title',
+                'spacex.home.tab.date.title',
               ),
               subtitle: model.launchDate(context),
             ),
@@ -110,7 +110,7 @@ class SpacexHomeTab extends StatelessWidget {
               leading: const Icon(Icons.location_on, size: 42.0),
               title: FlutterI18n.translate(
                 context,
-                'spacex.home.launchpad.title',
+                'spacex.home.tab.launchpad.title',
               ),
               subtitle: model.launchpad(context),
               onTap: () => Navigator.push(
@@ -132,7 +132,7 @@ class SpacexHomeTab extends StatelessWidget {
               leading: const Icon(Icons.timer, size: 42.0),
               title: FlutterI18n.translate(
                 context,
-                'spacex.home.static_fire.title',
+                'spacex.home.tab.static_fire.title',
               ),
               subtitle: model.staticFire(context),
             ),
@@ -141,7 +141,7 @@ class SpacexHomeTab extends StatelessWidget {
               leading: const Icon(Icons.directions_boat, size: 42.0),
               title: FlutterI18n.translate(
                 context,
-                'spacex.home.fairings.title',
+                'spacex.home.tab.fairings.title',
               ),
               subtitle: model.fairings(context),
             ),
@@ -150,7 +150,7 @@ class SpacexHomeTab extends StatelessWidget {
               leading: const Icon(Icons.autorenew, size: 42.0),
               title: FlutterI18n.translate(
                 context,
-                'spacex.home.first_stage.title',
+                'spacex.home.tab.first_stage.title',
               ),
               subtitle: model.landings(context),
               onTap: (model.launch.rocket.firstStage[0].id == null)

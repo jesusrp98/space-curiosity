@@ -124,7 +124,7 @@ class ShipPage extends StatelessWidget {
           RowItem.textRow(
             FlutterI18n.translate(
               context,
-              'spacex.vehicle.ship.specifications.features',
+              'spacex.vehicle.ship.specifications.feature',
             ),
             _ship.use,
           ),
@@ -151,7 +151,7 @@ class ShipPage extends StatelessWidget {
                     RowItem.textRow(
                       FlutterI18n.translate(
                         context,
-                        'spacex.vehicle.ship.specifications.secondary_role',
+                        'spacex.vehicle.ship.specifications.role_secondary',
                       ),
                       _ship.secondaryRole,
                     ),
