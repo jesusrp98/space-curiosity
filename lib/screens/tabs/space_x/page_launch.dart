@@ -224,7 +224,7 @@ class LaunchPage extends StatelessWidget {
               context,
               'spacex.launch.page.rocket.static_fire_date',
             ),
-            _launch.getStaticFireDate,
+            _launch.getStaticFireDate(context),
           ),
           const SizedBox(height: 12.0),
           RowItem.iconRow(

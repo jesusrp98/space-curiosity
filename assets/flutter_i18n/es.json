@@ -103,8 +103,8 @@
         "engines": {
           "title": "motores",
           "model": "Modelo de motor",
-          "engines_first_stage": "Motor de la primera fase",
-          "engines_second_stage": "Motor de la segunda fase",
+          "engines_first_stage": "Motores de la primera fase",
+          "engines_second_stage": "Motores de la segunda fase",
           "fuel": "Combustible",
           "oxidizer": "Oxidante",
           "thrust_weight": "Ratio potencia peso",
