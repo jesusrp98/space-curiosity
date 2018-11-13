@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:http/http.dart' as http;
 
 import '../../util/url.dart';
@@ -69,9 +70,20 @@ class CoreDetails extends VehicleDetails {
     );
   }
 
-  String get getDetails => details ?? 'This core has currently no details.';
+  String getDetails(context) =>
+      details ??
+      FlutterI18n.translate(
+        context,
+        'spacex.dialog.vehicle.no_description_core',
+      );
 
-  String get getBlock => block == null ? 'Unknown' : 'Block $block';
+  String getBlock(context) => block == null
+      ? FlutterI18n.translate(context, 'spacex.other.unknown')
+      : FlutterI18n.translate(
+          context,
+          'spacex.other.block',
+          {'block': block.toString()},
+        );
 
   String get getRtlsLandings => '$rtlsLandings/$rtlsAttempts';
 

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 
@@ -29,6 +30,14 @@ class SpacexCompanyModel extends QuerryModel {
   }
 
   Company get company => _company;
+
+  List<String> getEllipsis(context) => <String>[
+        FlutterI18n.translate(context, 'spacex.company.menu.website'),
+        FlutterI18n.translate(context, 'spacex.company.menu.twitter'),
+        FlutterI18n.translate(context, 'spacex.company.menu.flickr')
+      ];
+
+  int getEllipsisIndex(context, url) => getEllipsis(context).indexOf(url);
 }
 
 class Company {
@@ -74,7 +83,14 @@ class Company {
     );
   }
 
-  String get getFounderDate => 'Founded in $founded by $founder';
+  String getFounderDate(context) => FlutterI18n.translate(
+        context,
+        'spacex.company.founded',
+        {
+          'founded': founded.toString(),
+          'founder': founder,
+        },
+      );
 
   String get getValuation =>
       NumberFormat.currency(symbol: '\$', decimalDigits: 0).format(valuation);

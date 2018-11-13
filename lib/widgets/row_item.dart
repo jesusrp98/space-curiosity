@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import '../util/colors.dart';
@@ -50,7 +51,7 @@ class RowItem extends StatelessWidget {
     String description,
     ScopedModel screen,
   }) {
-    if (description != 'Unknown')
+    if (description != FlutterI18n.translate(context, 'spacex.other.unknown'))
       return RowItem(
         title,
         InkWell(

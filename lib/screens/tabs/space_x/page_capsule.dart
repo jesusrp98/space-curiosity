@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 
@@ -29,9 +30,14 @@ class CapsulePage extends StatelessWidget {
             actions: <Widget>[
               IconButton(
                 icon: const Icon(Icons.public),
-                onPressed: () async => await FlutterWebBrowser.openWebPage(
-                    url: _capsule.url, androidToolbarColor: primaryColor),
-                tooltip: 'Wikipedia article',
+                onPressed: () => FlutterWebBrowser.openWebPage(
+                      url: _capsule.url,
+                      androidToolbarColor: primaryColor,
+                    ),
+                tooltip: FlutterI18n.translate(
+                  context,
+                  'spacex.other.menu.wikipedia',
+                ),
               )
             ],
             flexibleSpace: FlexibleSpaceBar(
@@ -54,11 +60,11 @@ class CapsulePage extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.all(16.0),
               child: Column(children: <Widget>[
-                _capsuleCard(),
+                _capsuleCard(context),
                 const SizedBox(height: 8.0),
-                _specsCard(),
+                _specsCard(context),
                 const SizedBox(height: 8.0),
-                _thrustersCard(),
+                _thrustersCard(context),
               ]),
             ),
           ),
@@ -67,22 +73,47 @@ class CapsulePage extends StatelessWidget {
     );
   }
 
-  Widget _capsuleCard() {
+  Widget _capsuleCard(context) {
     return CardPage(
-      title: 'DESCRIPTION',
+      title: FlutterI18n.translate(
+        context,
+        'spacex.vehicle.capsule.description.title',
+      ),
       body: Column(
         children: <Widget>[
           RowItem.textRow(
-              (DateTime.now().isAfter(_capsule.firstFlight))
-                  ? 'Maiden launch'
-                  : 'Scheduled maiden launch',
-              _capsule.getFullFirstFlight),
+            FlutterI18n.translate(
+              context,
+              DateTime.now().isAfter(_capsule.firstFlight)
+                  ? 'spacex.vehicle.capsule.description.launch_maiden'
+                  : 'spacex.vehicle.capsule.description.launch_scheduled',
+            ),
+            _capsule.getFullFirstFlight,
+          ),
           const SizedBox(height: 12.0),
-          RowItem.iconRow('Active', _capsule.active),
+          RowItem.iconRow(
+            FlutterI18n.translate(
+              context,
+              'spacex.vehicle.capsule.description.active',
+            ),
+            _capsule.active,
+          ),
           const SizedBox(height: 12.0),
-          RowItem.textRow('Crew capacity', _capsule.getCrew),
+          RowItem.textRow(
+            FlutterI18n.translate(
+              context,
+              'spacex.vehicle.capsule.description.crew_capacity',
+            ),
+            _capsule.getCrew(context),
+          ),
           const SizedBox(height: 12.0),
-          RowItem.iconRow('Reusable', _capsule.reusable),
+          RowItem.iconRow(
+            FlutterI18n.translate(
+              context,
+              'spacex.vehicle.capsule.description.reusable',
+            ),
+            _capsule.reusable,
+          ),
           const Divider(height: 24.0),
           Text(
             _capsule.description,
@@ -94,36 +125,77 @@ class CapsulePage extends StatelessWidget {
     );
   }
 
-  Widget _specsCard() {
+  Widget _specsCard(context) {
     return CardPage(
-      title: 'SPECIFICATIONS',
+      title: FlutterI18n.translate(
+        context,
+        'spacex.vehicle.capsule.specifications.title',
+      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          RowItem.textRow('Launch payload', _capsule.getLaunchMass),
+          RowItem.textRow(
+            FlutterI18n.translate(
+              context,
+              'spacex.vehicle.capsule.specifications.payload_launch',
+            ),
+            _capsule.getLaunchMass,
+          ),
           const SizedBox(height: 12.0),
-          RowItem.textRow('Return paylaod', _capsule.getReturnMass),
+          RowItem.textRow(
+            FlutterI18n.translate(
+              context,
+              'spacex.vehicle.capsule.specifications.payload_return',
+            ),
+            _capsule.getReturnMass,
+          ),
           const Divider(height: 24.0),
-          RowItem.textRow('Height', _capsule.getHeight),
+          RowItem.textRow(
+            FlutterI18n.translate(
+              context,
+              'spacex.vehicle.capsule.specifications.height',
+            ),
+            _capsule.getHeight,
+          ),
           const SizedBox(height: 12.0),
-          RowItem.textRow('Diameter', _capsule.getDiameter),
+          RowItem.textRow(
+            FlutterI18n.translate(
+              context,
+              'spacex.vehicle.capsule.specifications.diameter',
+            ),
+            _capsule.getDiameter,
+          ),
           const SizedBox(height: 12.0),
-          RowItem.textRow('Dry mass', _capsule.getMass),
+          RowItem.textRow(
+            FlutterI18n.translate(
+              context,
+              'spacex.vehicle.capsule.specifications.mass',
+            ),
+            _capsule.getMass(context),
+          ),
         ],
       ),
     );
   }
 
-  Widget _thrustersCard() {
+  Widget _thrustersCard(context) {
     return CardPage(
-      title: 'THRUSTERS',
+      title: FlutterI18n.translate(
+        context,
+        'spacex.vehicle.capsule.thruster.title',
+      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          RowItem.textRow('Thruster systems', _capsule.getThrusters),
+          RowItem.textRow(
+              FlutterI18n.translate(
+                context,
+                'spacex.vehicle.capsule.thruster.systems',
+              ),
+              _capsule.getThrusters),
           Column(
             children: _capsule.thrusters
-                .map((thruster) => _getThruster(thruster))
+                .map((thruster) => _getThruster(context, thruster))
                 .toList(),
           )
         ],
@@ -131,18 +203,48 @@ class CapsulePage extends StatelessWidget {
     );
   }
 
-  Widget _getThruster(Thruster thruster) {
+  Widget _getThruster(context, Thruster thruster) {
     return Column(children: <Widget>[
       const Divider(height: 24.0),
-      RowItem.textRow('Thruster name', thruster.name),
+      RowItem.textRow(
+        FlutterI18n.translate(
+          context,
+          'spacex.vehicle.capsule.thruster.name',
+        ),
+        thruster.name,
+      ),
       const SizedBox(height: 12.0),
-      RowItem.textRow('Amount', thruster.getAmount),
+      RowItem.textRow(
+        FlutterI18n.translate(
+          context,
+          'spacex.vehicle.capsule.thruster.amount',
+        ),
+        thruster.getAmount,
+      ),
       const SizedBox(height: 12.0),
-      RowItem.textRow('Primary fuel', thruster.getFuel),
+      RowItem.textRow(
+        FlutterI18n.translate(
+          context,
+          'spacex.vehicle.capsule.thruster.fuel',
+        ),
+        thruster.getFuel,
+      ),
       const SizedBox(height: 12.0),
-      RowItem.textRow('Oxidizer', thruster.getOxidizer),
+      RowItem.textRow(
+        FlutterI18n.translate(
+          context,
+          'spacex.vehicle.capsule.thruster.oxidizer',
+        ),
+        thruster.getOxidizer,
+      ),
       const SizedBox(height: 12.0),
-      RowItem.textRow('Thrust', thruster.getThrust),
+      RowItem.textRow(
+        FlutterI18n.translate(
+          context,
+          'spacex.vehicle.capsule.thruster.thrust',
+        ),
+        thruster.getThrust,
+      ),
     ]);
   }
 

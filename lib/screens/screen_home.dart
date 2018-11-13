@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:native_widgets/native_widgets.dart';
@@ -30,8 +31,8 @@ class HomeScreen extends StatelessWidget {
                 ),
           ),
         ],
-        title: const Text(
-          'Space Curiosity',
+        title: Text(
+          FlutterI18n.translate(context, 'app.title'),
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         centerTitle: true,

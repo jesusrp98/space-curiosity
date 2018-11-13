@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:http/http.dart' as http;
 
 import '../../util/url.dart';
@@ -22,55 +23,112 @@ class SpacexHomeModel extends QuerryModel {
     loadingState(false);
   }
 
-  DateTime get launchDateTime => launch.launchDate;
+  String vehicle(context) => FlutterI18n.translate(
+        context,
+        'spacex.home.tab.mission.title',
+        {'rocket': launch.rocket.name},
+      );
 
-  String get vehicle => 'Launched by ${launch.rocket.name}';
-
-  String get payload {
-    String aux = 'It will carry ';
+  String payload(context) {
+    String aux = '';
 
     for (int i = 0; i < launch.rocket.secondStage.payloads.length; ++i)
-      aux +=
-          '${launch.rocket.secondStage.payloads[i].id} to ${launch.rocket.secondStage.payloads[i].orbit} orbit' +
-              ((i + 1 == launch.rocket.secondStage.payloads.length)
-                  ? '.'
-                  : ', ');
+      aux += FlutterI18n.translate(
+            context,
+            'spacex.home.tab.mission.body_payload',
+            {
+              'name': launch.rocket.secondStage.payloads[i].id,
+              'orbit': launch.rocket.secondStage.payloads[i].orbit
+            },
+          ) +
+          (i + 1 == launch.rocket.secondStage.payloads.length ? '.' : ', ');
 
-    return aux;
+    return FlutterI18n.translate(
+      context,
+      'spacex.home.tab.mission.body',
+      {'payloads': aux},
+    );
   }
 
-  String get launchDate => 'Launch is set to ${launch.getLaunchDate}.';
+  String launchDate(context) => FlutterI18n.translate(
+        context,
+        'spacex.home.tab.date.body',
+        {'date': launch.getLaunchDate},
+      );
 
-  String get launchpad => 'Launch will happend on ${launch.launchpadName}.';
+  String launchpad(context) => FlutterI18n.translate(
+        context,
+        'spacex.home.tab.launchpad.body',
+        {'launchpad': launch.launchpadName},
+      );
 
-  String get staticFire => (launch.staticFireDate == null)
-      ? 'Static fire event is not dated yet.'
-      : 'Static fire is dated to ${launch.getStaticFireDate}.';
+  String staticFire(context) => launch.staticFireDate == null
+      ? FlutterI18n.translate(
+          context,
+          'spacex.home.tab.static_fire.body_unknown',
+        )
+      : FlutterI18n.translate(
+          context,
+          'spacex.home.tab.static_fire.body',
+          {'date': launch.getStaticFireDate(context)},
+        );
 
-  String get fairings =>
-      'Fairings will' +
-      ((launch.rocket.fairing.reused) ? ' ' : ' not ') +
-      'be reused, and they ' +
-      ((launch.rocket.fairing.recoveryAttempt)
-          ? 'will be catched by ${launch.rocket.fairing.ship}.'
-          : 'won\'t be recovered.');
+  String fairings(context) => FlutterI18n.translate(
+        context,
+        'spacex.home.tab.fairings.body',
+        {
+          'reused': FlutterI18n.translate(
+            context,
+            launch.rocket.fairing.reused
+                ? 'spacex.home.tab.fairings.body_reused'
+                : 'spacex.home.tab.fairings.body_new',
+          ),
+          'catched': launch.rocket.fairing.recoveryAttempt
+              ? FlutterI18n.translate(
+                  context,
+                  'spacex.home.tab.fairings.body_catching',
+                  {'ship': launch.rocket.fairing.ship},
+                )
+              : FlutterI18n.translate(
+                  context,
+                  'spacex.home.tab.fairings.body_dispensed',
+                )
+        },
+      );
 
-  String get landings {
+  String landings(context) {
     String aux = '';
     List<String> cores = [
-      'Booster',
-      'Left core',
-      'Right core',
+      FlutterI18n.translate(context, 'spacex.home.tab.first_stage.booster'),
+      FlutterI18n.translate(context, 'spacex.home.tab.first_stage.side_core'),
+      FlutterI18n.translate(context, 'spacex.home.tab.first_stage.side_core'),
     ];
 
     for (int i = 0; i < launch.rocket.firstStage.length; ++i)
-      aux += '${cores[i]} is' +
-          (launch.rocket.firstStage[i].reused ? ' ' : ' not ') +
-          'reused, and it' +
-          (launch.rocket.firstStage[i].landingIntent
-              ? ' will perform a ${launch.rocket.firstStage[i].landingType} landing at ${launch.rocket.firstStage[i].landingZone}'
-              : ' won\'t perform a landing') +
-          ((i + 1 == launch.rocket.firstStage.length) ? '.' : '\n');
+      aux += FlutterI18n.translate(
+            context,
+            'spacex.home.tab.first_stage.body',
+            {
+              'booster': cores[i],
+              'reused': FlutterI18n.translate(
+                context,
+                launch.rocket.firstStage[i].reused
+                    ? 'spacex.home.tab.first_stage.body_reused'
+                    : 'spacex.home.tab.first_stage.body_new',
+              ),
+              'landing': launch.rocket.firstStage[i].landingIntent
+                  ? FlutterI18n.translate(
+                      context,
+                      'spacex.home.tab.first_stage.body_landing',
+                      {'landingpad': launch.rocket.firstStage[i].landingZone},
+                    )
+                  : FlutterI18n.translate(
+                      context,
+                      'spacex.home.tab.first_stage.body_dispended',
+                    )
+            },
+          ) +
+          (i + 1 == launch.rocket.firstStage.length ? '' : '\n');
 
     return aux;
   }
@@ -129,7 +187,7 @@ class _LaunchCountdownState extends State<LaunchCountdown>
     _controller = AnimationController(
       vsync: this,
       duration: Duration(
-        seconds: widget.model.launchDateTime.millisecondsSinceEpoch -
+        seconds: widget.model.launch.launchDate.millisecondsSinceEpoch -
             DateTime.now().millisecondsSinceEpoch,
       ),
     );
@@ -145,9 +203,9 @@ class _LaunchCountdownState extends State<LaunchCountdown>
   @override
   Widget build(BuildContext context) {
     return Countdown(
-      launchDate: widget.model.launchDateTime,
+      launchDate: widget.model.launch.launchDate,
       animation: StepTween(
-        begin: widget.model.launchDateTime.millisecondsSinceEpoch,
+        begin: widget.model.launch.launchDate.millisecondsSinceEpoch,
         end: DateTime.now().millisecondsSinceEpoch,
       ).animate(_controller),
     );

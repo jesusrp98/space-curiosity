@@ -23,7 +23,7 @@ class CardPage extends StatelessWidget {
               alignment: Alignment.center,
               padding: const EdgeInsets.only(bottom: 24.0),
               child: Text(
-                title,
+                title.toUpperCase(),
                 style: Theme.of(context)
                     .textTheme
                     .title

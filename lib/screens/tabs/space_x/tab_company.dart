@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:native_widgets/native_widgets.dart';
@@ -12,12 +13,6 @@ import '../../../widgets/row_item.dart';
 
 class SpacexCompanyTab extends StatelessWidget {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
-  static const List<String> _popupItems = [
-    'SpaceX website',
-    'Twitter account',
-    'Flickr page',
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -32,19 +27,22 @@ class SpacexCompanyTab extends StatelessWidget {
                   pinned: true,
                   actions: <Widget>[
                     PopupMenuButton<String>(
-                      itemBuilder: (context) => _popupItems
+                      itemBuilder: (context) => model.getEllipsis(context)
                           .map((f) => PopupMenuItem(value: f, child: Text(f)))
                           .toList(),
                       onSelected: (option) => FlutterWebBrowser.openWebPage(
                             url: model
-                                .company.links[_popupItems.indexOf(option)],
+                                .company.links[model.getEllipsisIndex(context, option)],
                             androidToolbarColor: primaryColor,
                           ),
                     ),
                   ],
                   flexibleSpace: FlexibleSpaceBar(
                     centerTitle: true,
-                    title: Text('About ${model.company.name}'),
+                    title: Text(FlutterI18n.translate(
+                      context,
+                      'spacex.company.title',
+                    )),
                     background: (model.isLoading)
                         ? NativeLoadingIndicator(center: true)
                         : Swiper(
@@ -101,24 +99,59 @@ class SpacexCompanyTab extends StatelessWidget {
                       ),
                       Container(height: 8.0),
                       Text(
-                        model.company.getFounderDate,
+                        model.company.getFounderDate(context),
                         style: Theme.of(context)
                             .textTheme
                             .subhead
                             .copyWith(color: secondaryText),
                       ),
                       Container(height: 12.0),
-                      RowItem.textRow('CEO', model.company.ceo),
+                      RowItem.textRow(
+                        FlutterI18n.translate(
+                          context,
+                          'spacex.company.tab.ceo',
+                        ),
+                        model.company.ceo,
+                      ),
                       Container(height: 12.0),
-                      RowItem.textRow('CTO', model.company.cto),
+                      RowItem.textRow(
+                        FlutterI18n.translate(
+                          context,
+                          'spacex.company.tab.cto',
+                        ),
+                        model.company.cto,
+                      ),
                       Container(height: 12.0),
-                      RowItem.textRow('COO', model.company.coo),
+                      RowItem.textRow(
+                          FlutterI18n.translate(
+                            context,
+                            'spacex.company.tab.coo',
+                          ),
+                          model.company.coo),
                       Container(height: 12.0),
-                      RowItem.textRow('Valuation', model.company.getValuation),
+                      RowItem.textRow(
+                        FlutterI18n.translate(
+                          context,
+                          'spacex.company.tab.valuation',
+                        ),
+                        model.company.getValuation,
+                      ),
                       Container(height: 12.0),
-                      RowItem.textRow('Location', model.company.getLocation),
+                      RowItem.textRow(
+                        FlutterI18n.translate(
+                          context,
+                          'spacex.company.tab.location',
+                        ),
+                        model.company.getLocation,
+                      ),
                       Container(height: 12.0),
-                      RowItem.textRow('Employees', model.company.getEmployees),
+                      RowItem.textRow(
+                        FlutterI18n.translate(
+                          context,
+                          'spacex.company.tab.employees',
+                        ),
+                        model.company.getEmployees,
+                      ),
                       Container(height: 12.0),
                       Text(
                         model.company.details,

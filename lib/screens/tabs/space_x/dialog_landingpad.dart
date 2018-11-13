@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:latlong/latlong.dart';
@@ -29,7 +30,10 @@ class LandingpadDialog extends StatelessWidget {
                           url: model.landingpad.url,
                           androidToolbarColor: primaryColor,
                         ),
-                    tooltip: 'Wikipedia article',
+                    tooltip: FlutterI18n.translate(
+                      context,
+                      'spacex.other.menu.wikipedia',
+                    ),
                   )
                 ],
                 flexibleSpace: FlexibleSpaceBar(
@@ -98,24 +102,51 @@ class LandingpadDialog extends StatelessWidget {
                         style: Theme.of(context).textTheme.title,
                       ),
                       const SizedBox(height: 12.0),
-                      RowItem.textRow('Status', model.landingpad.getStatus),
-                      const SizedBox(height: 12.0),
-                      RowItem.textRow('Location', model.landingpad.location),
-                      const SizedBox(height: 12.0),
-                      RowItem.textRow('State', model.landingpad.state),
+                      RowItem.textRow(
+                        FlutterI18n.translate(
+                          context,
+                          'spacex.dialog.pad.status',
+                        ),
+                        model.landingpad.getStatus,
+                      ),
                       const SizedBox(height: 12.0),
                       RowItem.textRow(
-                        'Coordinates',
+                        FlutterI18n.translate(
+                          context,
+                          'spacex.dialog.pad.location',
+                        ),
+                        model.landingpad.location,
+                      ),
+                      const SizedBox(height: 12.0),
+                      RowItem.textRow(
+                        FlutterI18n.translate(
+                          context,
+                          'spacex.dialog.pad.state',
+                        ),
+                        model.landingpad.state,
+                      ),
+                      const SizedBox(height: 12.0),
+                      RowItem.textRow(
+                        FlutterI18n.translate(
+                          context,
+                          'spacex.dialog.pad.coordinates',
+                        ),
                         model.landingpad.getCoordinates,
                       ),
                       const SizedBox(height: 12.0),
                       RowItem.textRow(
-                        'Landing type',
+                        FlutterI18n.translate(
+                          context,
+                          'spacex.dialog.pad.landing_type',
+                        ),
                         model.landingpad.type,
                       ),
                       const SizedBox(height: 12.0),
                       RowItem.textRow(
-                        'Successful landings',
+                        FlutterI18n.translate(
+                          context,
+                          'spacex.dialog.pad.launches_successful',
+                        ),
                         model.landingpad.getSuccessfulLandings,
                       ),
                       const Divider(height: 24.0),

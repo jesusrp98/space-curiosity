@@ -1,0 +1,288 @@
+{
+  "app": {
+    "title": "Curiosidad Espacial"
+  },
+  "nasa": {
+    "no_copyright": "Sin copyright",
+    "share": "Compartir",
+    "copy_link": "Copiar enlace",
+    "download": "Descargar"
+  },
+  "spacex": {
+    "home": {
+      "title": "Bienvenido a SpaceX",
+      "icon": "Inicio",
+      "tab": {
+        "mission": {
+          "title": "Lanzado por {rocket}",
+          "body": "Llevará a {payloads}",
+          "body_payload": "{name} a una órbita {orbit}"
+        },
+        "date": {
+          "title": "Fecha de lanzamiento",
+          "body": "El lanzamiento se realizará el {date}."
+        },
+        "launchpad": {
+          "title": "Plataforma de lanzamiento",
+          "body": "El lanzamiento tendrá lugar en {launchpad}."
+        },
+        "static_fire": {
+          "title": "Prueba de ignición",
+          "body": "Este evento está fechado para el {date}.",
+          "body_unknown": "Este evento todavía no tiene fecha."
+        },
+        "fairings": {
+          "title": "Cofia protectora",
+          "body": "{reused}, {catched}.",
+          "body_new": "La cofia no es reutilizada",
+          "body_reused": "La cofia es reciclada",
+          "body_catching": "y será capturada por {ship}",
+          "body_dispensed": "y no se procederá a su captura"
+        },
+        "first_stage": {
+          "title": "Primera etapa",
+          "booster": "El propulsor",
+          "side_core": "El propulsor lateral",
+          "body": "{booster} {reused}, {landing}.",
+          "body_reused": "es reutilizado",
+          "body_new": "no es reutilizado",
+          "body_landing": "y aterrizará en {landingpad}",
+          "body_dispended": "y no realizará ningún aterrizaje"
+        }
+      }
+    },
+    "vehicle": {
+      "title": "Vehículos",
+      "icon": "Vehículos",
+      "subtitle": {
+        "first_launched": "Primer lanzamiento en {date}",
+        "scheduled_launch": "Programado para {date}",
+        "launched": "Lanzado en {date}",
+        "ship_built": "Embarcación construida en {date}"
+      },
+      "roadster": {
+        "data_updated": "Los datos se actualizan cada 5 minutos",
+        "description": {
+          "title": "descripción",
+          "launch_date": "Fecha de lanzamiento",
+          "launch_vehicle": "Vehículo de lanzamiento"
+        },
+        "vehicle": {
+          "title": "vehículo",
+          "mass": "Masa total",
+          "height": "Altura",
+          "diameter": "Diámetro",
+          "speed": "Velocidad",
+          "distance_earth": "Distancia a la Tierra",
+          "distance_mars": "Distancia a Marte"
+        },
+        "orbit": {
+          "title": "órbita",
+          "type": "Tipo de órbita",
+          "period": "Periodo",
+          "days": "{days} días",
+          "inclination": "Inclinación",
+          "longitude": "Longitud",
+          "apoapsis": "Apoapsis",
+          "periapsis": "Periapsis"
+        }
+      },
+      "rocket": {
+        "description": {
+          "title": "descripción",
+          "launch_maiden": "Lanzamiento inaugural",
+          "launch_scheduled": "Lanzamiento inaugural",
+          "active": "En activo",
+          "launch_cost": "Coste de lanzamiento",
+          "success_rate": "Tasa de éxito",
+          "reusable": "Reutilizable"
+        },
+        "specifications": {
+          "title": "especificaiones",
+          "rocket_stages": "Etapas del cohete",
+          "stages": "{stages} etapas",
+          "fairing_height": "Altura de la cofia",
+          "fairing_diameter": "Diámetro de la cofia",
+          "height": "Altura",
+          "diameter": "Diámetro",
+          "mass": "Masa total"
+        },
+        "capability": {
+          "title": "capacidad"
+        },
+        "engines": {
+          "title": "motores",
+          "model": "Modelo de motor",
+          "engines_first_stage": "Motores de la primera etapa",
+          "engines_second_stage": "Motores de la segunda etapa",
+          "fuel": "Combustible",
+          "oxidizer": "Oxidante",
+          "thrust_weight": "Ratio potencia peso",
+          "thrust_sea": "Potencia a nivel del mar",
+          "thrust_vacuum": "Potencia en el vacío"
+        }
+      },
+      "capsule": {
+        "description": {
+          "title": "descripción",
+          "launch_maiden": "Lanzamiento inaugural",
+          "launch_scheduled": "Lanzamiento inaugural",
+          "active": "En activo",
+          "crew_capacity": "Tripulación",
+          "no_people": "Ninguna persona",
+          "people": "{people} personas",
+          "reusable": "Reutilizable"
+        },
+        "specifications": {
+          "title": "especificaciones",
+          "payload_launch": "Carga de lanzamiento",
+          "payload_return": "Carga de retorno",
+          "height": "Altura",
+          "diameter": "Diámetro",
+          "mass": "Masa sin carga"
+        },
+        "thruster": {
+          "title": "propulsores",
+          "systems": "Sistemas de propulsores",
+          "name": "Nombre",
+          "amount": "Cantidad",
+          "fuel": "Combustible",
+          "oxidizer": "Oxidante",
+          "thrust": "Propulsión"
+        }
+      },
+      "ship": {
+        "description": {
+          "title": "descripción",
+          "home_port": "Puerto base",
+          "built_date": "Fecha de construcción"
+        },
+        "specifications": {
+          "title": "especificaciones",
+          "feature": "Funcionalidad",
+          "model": "Modelo",
+          "role_primary": "Papel principal",
+          "role_secondary": "Papel secundario",
+          "status": "Estado",
+          "coordinates": "Coordenadas",
+          "mass": "Masa total",
+          "speed": "Velocidad actual"
+        },
+        "landings": {
+          "title": "aterrizajes",
+          "landings_attempted": "Intentos de aterrizaje",
+          "landings_successful": "Aterrizajes exitosos"
+        }
+      }
+    },
+    "launch": {
+      "menu": {
+        "reddit": "Página de Reddit",
+        "press_kit": "Kit de prensa",
+        "article": "Artículo de internet"
+      },
+      "page": {
+        "no_description": "Esta misión todavía no tiene descripción.",
+        "rocket": {
+          "title": "cohete",
+          "name": "Nombre",
+          "model": "Modelo",
+          "static_fire_date": "Prueba de ignición",
+          "launch_success": "Lanzamiento exitoso",
+          "core": {
+            "serial": "Número de serial",
+            "model": "Modelo",
+            "reused": "Reusado",
+            "landing_zone": "Zona de aterrizaje",
+            "landing_success": "Aterrizaje exitoso",
+            "landing_attempt": "Intento de aterrizaje"
+          }
+        },
+        "payload": {
+          "title": "carga",
+          "name": "Nombre de carga",
+          "capsule_serial": "Número de serie",
+          "capsule_reused": "Reusada",
+          "manufacturer": "Fabricante",
+          "customer": "Cliente",
+          "nationality": "Nacionalidad",
+          "mass": "Peso",
+          "orbit": "Órbita",
+          "second_stage": {
+            "model": "Modelo de la segunda etapa"
+          },
+          "fairings": {
+            "reused": "Cofia reusada",
+            "recovery_attempt": "Intento de recuperación",
+            "recovery_success": "Recuperación con éxito",
+            "recovery_ship": "Barco de recuperación"
+          }
+        }
+      }
+    },
+    "upcoming": {
+      "title": "Próximos lanzamientos",
+      "icon": "Próximos"
+    },
+    "latest": {
+      "title": "Últimos lanzamientos",
+      "icon": "Últimos"
+    },
+    "company": {
+      "title": "Sobre SpaceX",
+      "icon": "Compañía",
+      "founded": "Fundado en {founded} por {founder}",
+      "menu": {
+        "website": "Sitio web",
+        "twitter": "Página de Twitter",
+        "flickr": "Página de Flickr"
+      },
+      "tab": {
+        "ceo": "CEO",
+        "cto": "CTO",
+        "coo": "COO",
+        "valuation": "Valor",
+        "location": "Sede",
+        "employees": "Empleados"
+      }
+    },
+    "dialog": {
+      "vehicle": {
+        "title_core": "Propulsor {serial}",
+        "title_capsule": "Cápsula {serial}",
+        "model": "Modelo",
+        "status": "Estado",
+        "first_launched": "Primer lanzamiento",
+        "launches": "Lanzamientos",
+        "splashings": "Amerizajes",
+        "landings_rtls": "Aterrizajes RTLS",
+        "landings_asds": "Aterrizajes ASDS",
+        "no_description_core": "Este propulsor todavía no tiene descripción.",
+        "no_description_capsule": "Esta cápsula todavía no tiene descripción.",
+        "no_missions_core": "Este propulsor todavía no ha participado en ninguna misión.",
+        "no_missions_capsule": "Esta cápsula todavía no ha participado en ninguna misión."
+      },
+      "pad": {
+        "status": "Estado",
+        "location": "Localidad",
+        "state": "Estado",
+        "coordinates": "Coordenadas",
+        "landing_type": "Tipo de aterrizaje",
+        "launches_successful": "Lanzamientos exitosos"
+      }
+    },
+    "other": {
+      "unknown": "Desconocido",
+      "block": "Bloque {block}",
+      "menu": {
+        "wikipedia": "Página de Wikipedia",
+        "marine_traffic": "Página de MarineTraffic"
+      },
+      "tooltip": {
+        "watch_replay": "Ver lanzamiento",
+        "add_event": "Añadir evento",
+        "search": "Buscar"
+      }
+    }
+  }
+}

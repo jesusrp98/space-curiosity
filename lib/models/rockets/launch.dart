@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:math';
 
+import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 
@@ -124,7 +125,9 @@ class Launch {
 
   String get getVideo => links[0];
 
-  String get getDetails => details ?? 'This mission has currently no details.';
+  String getDetails(context) =>
+      details ??
+      FlutterI18n.translate(context, 'spacex.launch.page.no_description');
 
   String get getLaunchDate {
     switch (tentativePrecision) {
@@ -139,7 +142,7 @@ class Launch {
       case 'half':
         return 'NET H${launchDate.month < 7 ? 1 : 2} ${launchDate.year}';
       default:
-        return 'Date not available';
+        return 'Date error';
     }
   }
 
@@ -149,7 +152,15 @@ class Launch {
   String get getUtcLaunchDate =>
       DateFormat.yMMMMd().addPattern('Hm', '  ·  ').format(launchDate.toUtc());
 
-  String get getStaticFireDate => staticFireDate == null
-      ? 'Unknown'
+  String getStaticFireDate(context) => staticFireDate == null
+      ? FlutterI18n.translate(context, 'spacex.other.unknown')
       : DateFormat.yMMMMd().format(staticFireDate);
+
+  List<String> getEllipsis(context) => <String>[
+        FlutterI18n.translate(context, 'spacex.launch.menu.reddit'),
+        FlutterI18n.translate(context, 'spacex.launch.menu.press_kit'),
+        FlutterI18n.translate(context, 'spacex.launch.menu.article')
+      ];
+
+  int getEllipsisIndex(context, url) => getEllipsis(context).indexOf(url) + 1;
 }

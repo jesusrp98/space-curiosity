@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:scoped_model/scoped_model.dart';
 
@@ -40,11 +41,11 @@ class _SpacexTabScreen extends State<SpacexScreen> {
     ),
     ScopedModel<LaunchesModel>(
       model: modelTab[2],
-      child: LaunchesTab('Upcoming launches'),
+      child: LaunchesTab(0),
     ),
     ScopedModel<LaunchesModel>(
       model: modelTab[3],
-      child: LaunchesTab('Latest launches'),
+      child: LaunchesTab(1),
     ),
     ScopedModel<SpacexCompanyModel>(
       model: modelTab[4],
@@ -69,23 +70,38 @@ class _SpacexTabScreen extends State<SpacexScreen> {
         currentIndex: _currentIndex,
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            title: const Text('Home'),
+            title: Text(FlutterI18n.translate(
+              context,
+              'spacex.home.icon',
+            )),
             icon: Icon(Icons.home),
           ),
           BottomNavigationBarItem(
-            title: const Text('Vehicles'),
+            title: Text(FlutterI18n.translate(
+              context,
+              'spacex.vehicle.icon',
+            )),
             icon: Icon(FontAwesomeIcons.rocket),
           ),
           BottomNavigationBarItem(
-            title: const Text('Upcoming'),
+            title: Text(FlutterI18n.translate(
+              context,
+              'spacex.upcoming.icon',
+            )),
             icon: Icon(Icons.timer),
           ),
           BottomNavigationBarItem(
-            title: const Text('Latest'),
+            title: Text(FlutterI18n.translate(
+              context,
+              'spacex.latest.icon',
+            )),
             icon: Icon(Icons.library_books),
           ),
           BottomNavigationBarItem(
-            title: const Text('Company'),
+            title: Text(FlutterI18n.translate(
+              context,
+              'spacex.company.icon',
+            )),
             icon: Icon(Icons.location_city),
           ),
         ],

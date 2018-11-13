@@ -1,3 +1,4 @@
+import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:intl/intl.dart';
 
 import 'vehicle.dart';
@@ -64,9 +65,18 @@ class CapsuleInfo extends Vehicle {
     );
   }
 
-  String get subtitle => firstLaunched;
+  String subtitle(context) => firstLaunched(context);
 
-  String get getCrew => crew == 0 ? 'No people' : '$crew people';
+  String getCrew(context) => crew == 0
+      ? FlutterI18n.translate(
+          context,
+          'spacex.vehicle.capsule.description.no_people',
+        )
+      : FlutterI18n.translate(
+          context,
+          'spacex.vehicle.capsule.description.people',
+          {'people': crew.toString()},
+        );
 
   String get getLaunchMass =>
       '${NumberFormat.decimalPattern().format(launchMass)} kg';
@@ -75,9 +85,6 @@ class CapsuleInfo extends Vehicle {
       '${NumberFormat.decimalPattern().format(returnMass)} kg';
 
   String get getThrusters => thrusters.length.toString();
-
-  String get capsuleType =>
-      crew > 0 ? 'Cargo & crew capsule' : 'Only cargo capsule';
 }
 
 class Thruster {

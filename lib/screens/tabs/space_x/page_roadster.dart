@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:sliver_fab/sliver_fab.dart';
@@ -25,7 +26,10 @@ class RoadsterPage extends StatelessWidget {
         builder: (context) => SliverFab(
               floatingActionButton: FloatingActionButton(
                 child: const Icon(Icons.play_arrow),
-                tooltip: 'Watch replay',
+                tooltip: FlutterI18n.translate(
+                  context,
+                  'spacex.other.tooltip.watch_replay',
+                ),
                 onPressed: () => FlutterWebBrowser.openWebPage(
                       url: _roadster.video,
                       androidToolbarColor: primaryColor,
@@ -44,7 +48,10 @@ class RoadsterPage extends StatelessWidget {
                             url: _roadster.url,
                             androidToolbarColor: primaryColor,
                           ),
-                      tooltip: 'Wikipedia article',
+                      tooltip: FlutterI18n.translate(
+                        context,
+                        'spacex.other.menu.wikipedia',
+                      ),
                     )
                   ],
                   flexibleSpace: FlexibleSpaceBar(
@@ -67,17 +74,21 @@ class RoadsterPage extends StatelessWidget {
                   child: Padding(
                     padding: EdgeInsets.all(16.0),
                     child: Column(children: <Widget>[
-                      _roadsterCard(),
+                      _roadsterCard(context),
                       const SizedBox(height: 8.0),
-                      _vehicleCard(),
+                      _vehicleCard(context),
                       const SizedBox(height: 8.0),
-                      _orbitCard(),
+                      _orbitCard(context),
                       const SizedBox(height: 8.0),
                       Text(
-                        'Data is updated every 5 minutes',
-                        style: Theme.of(context).textTheme.subhead.copyWith(
-                              color: secondaryText,
-                            ),
+                        FlutterI18n.translate(
+                          context,
+                          'spacex.vehicle.roadster.data_updated',
+                        ),
+                        style: Theme.of(context)
+                            .textTheme
+                            .subhead
+                            .copyWith(color: secondaryText),
                       )
                     ]),
                   ),
@@ -88,14 +99,29 @@ class RoadsterPage extends StatelessWidget {
     );
   }
 
-  Widget _roadsterCard() {
+  Widget _roadsterCard(context) {
     return CardPage(
-      title: 'DESCRIPTION',
+      title: FlutterI18n.translate(
+        context,
+        'spacex.vehicle.roadster.description.title',
+      ),
       body: Column(
         children: <Widget>[
-          RowItem.textRow('Launch date', _roadster.getFullFirstFlight),
+          RowItem.textRow(
+            FlutterI18n.translate(
+              context,
+              'spacex.vehicle.roadster.description.launch_date',
+            ),
+            _roadster.getFullFirstFlight,
+          ),
           const SizedBox(height: 12.0),
-          RowItem.textRow('Launch vehicle', 'Falcon Heavy'),
+          RowItem.textRow(
+            FlutterI18n.translate(
+              context,
+              'spacex.vehicle.roadster.description.launch_vehicle',
+            ),
+            'Falcon Heavy',
+          ),
           const Divider(height: 24.0),
           Text(
             _roadster.description,
@@ -107,45 +133,123 @@ class RoadsterPage extends StatelessWidget {
     );
   }
 
-  Widget _vehicleCard() {
+  Widget _vehicleCard(context) {
     return CardPage(
-      title: 'VEHICLE',
+      title: FlutterI18n.translate(
+        context,
+        'spacex.vehicle.roadster.vehicle.title',
+      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          RowItem.textRow('Total mass', _roadster.getMass),
+          RowItem.textRow(
+            FlutterI18n.translate(
+              context,
+              'spacex.vehicle.roadster.vehicle.mass',
+            ),
+            _roadster.getMass(context),
+          ),
           const SizedBox(height: 12.0),
-          RowItem.textRow('Height', _roadster.getHeight),
+          RowItem.textRow(
+            FlutterI18n.translate(
+              context,
+              'spacex.vehicle.roadster.vehicle.height',
+            ),
+            _roadster.getHeight,
+          ),
           const SizedBox(height: 12.0),
-          RowItem.textRow('Diameter', _roadster.getDiameter),
+          RowItem.textRow(
+            FlutterI18n.translate(
+              context,
+              'spacex.vehicle.roadster.vehicle.diameter',
+            ),
+            _roadster.getDiameter,
+          ),
           const SizedBox(height: 12.0),
-          RowItem.textRow('Speed', _roadster.getSpeed),
+          RowItem.textRow(
+            FlutterI18n.translate(
+              context,
+              'spacex.vehicle.roadster.vehicle.speed',
+            ),
+            _roadster.getSpeed,
+          ),
           const Divider(height: 24.0),
-          RowItem.textRow('Earth distance', _roadster.getEarthDistance),
+          RowItem.textRow(
+            FlutterI18n.translate(
+              context,
+              'spacex.vehicle.roadster.vehicle.distance_earth',
+            ),
+            _roadster.getEarthDistance,
+          ),
           const SizedBox(height: 12.0),
-          RowItem.textRow('Mars distance', _roadster.getMarsDistance),
+          RowItem.textRow(
+            FlutterI18n.translate(
+              context,
+              'spacex.vehicle.roadster.vehicle.distance_mars',
+            ),
+            _roadster.getMarsDistance,
+          ),
         ],
       ),
     );
   }
 
-  Widget _orbitCard() {
+  Widget _orbitCard(context) {
     return CardPage(
-      title: 'ORBIT',
+      title: FlutterI18n.translate(
+        context,
+        'spacex.vehicle.roadster.orbit.title',
+      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          RowItem.textRow('Orbit type', _roadster.getOrbit),
+          RowItem.textRow(
+            FlutterI18n.translate(
+              context,
+              'spacex.vehicle.roadster.orbit.type',
+            ),
+            _roadster.getOrbit,
+          ),
           const SizedBox(height: 12.0),
-          RowItem.textRow('Period', _roadster.getPeriod),
+          RowItem.textRow(
+            FlutterI18n.translate(
+              context,
+              'spacex.vehicle.roadster.orbit.period',
+            ),
+            _roadster.getPeriod(context),
+          ),
           const Divider(height: 24.0),
-          RowItem.textRow('Inclination', _roadster.getInclination),
+          RowItem.textRow(
+            FlutterI18n.translate(
+              context,
+              'spacex.vehicle.roadster.orbit.inclination',
+            ),
+            _roadster.getInclination,
+          ),
           const SizedBox(height: 12.0),
-          RowItem.textRow('Longitude', _roadster.getLongitude),
+          RowItem.textRow(
+            FlutterI18n.translate(
+              context,
+              'spacex.vehicle.roadster.orbit.longitude',
+            ),
+            _roadster.getLongitude,
+          ),
           const Divider(height: 24.0),
-          RowItem.textRow('Apoapsis', _roadster.getApoapsis),
+          RowItem.textRow(
+            FlutterI18n.translate(
+              context,
+              'spacex.vehicle.roadster.orbit.apoapsis',
+            ),
+            _roadster.getApoapsis,
+          ),
           const SizedBox(height: 12.0),
-          RowItem.textRow('Periapsis', _roadster.getPeriapsis),
+          RowItem.textRow(
+            FlutterI18n.translate(
+              context,
+              'spacex.vehicle.roadster.orbit.periapsis',
+            ),
+            _roadster.getPeriapsis,
+          ),
         ],
       ),
     );
