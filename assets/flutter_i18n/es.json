@@ -93,8 +93,8 @@
         },
         "specifications": {
           "title": "especificaiones",
-          "rocket_stages": "Fases del cohete",
-          "stages": "{stages} fases",
+          "rocket_stages": "Etapas del cohete",
+          "stages": "{stages} etapas",
           "fairing_height": "Altura de la cofia",
           "fairing_diameter": "Diámetro de la cofia",
           "height": "Altura",
@@ -107,8 +107,8 @@
         "engines": {
           "title": "motores",
           "model": "Modelo de motor",
-          "engines_first_stage": "Motores de la primera fase",
-          "engines_second_stage": "Motores de la segunda fase",
+          "engines_first_stage": "Motores de la primera etapa",
+          "engines_second_stage": "Motores de la segunda etapa",
           "fuel": "Combustible",
           "oxidizer": "Oxidante",
           "thrust_weight": "Ratio potencia peso",
@@ -133,7 +133,7 @@
           "payload_return": "Carga de retorno",
           "height": "Altura",
           "diameter": "Diámetro",
-          "mass": "Masa"
+          "mass": "Masa sin carga"
         },
         "thruster": {
           "title": "propulsores",
@@ -154,7 +154,7 @@
         "specifications": {
           "title": "especificaciones",
           "feature": "Funcionalidad",
-          "model": "Modelo de embarcación",
+          "model": "Modelo",
           "role_primary": "Papel principal",
           "role_secondary": "Papel secundario",
           "status": "Estado",
@@ -203,7 +203,7 @@
           "mass": "Peso",
           "orbit": "Órbita",
           "second_stage": {
-            "model": "Modelo de la segunda fase"
+            "model": "Modelo de la segunda etapa"
           },
           "fairings": {
             "reused": "Cofia reusada",
@@ -235,8 +235,8 @@
         "ceo": "CEO",
         "cto": "CTO",
         "coo": "COO",
-        "valuation": "Valuación",
-        "location": "Localización",
+        "valuation": "Valor",
+        "location": "Sede",
         "employees": "Empleados"
       }
     },
@@ -253,8 +253,8 @@
         "landings_asds": "Aterrizajes ASDS",
         "no_description_core": "Este propulsor todavía no tiene descripción.",
         "no_description_capsule": "Esta cápsula todavía no tiene descripción.",
-        "no_missions_core": "Este propulsor no ha participado todavía en ninguna misión.",
-        "no_missions_capsule": "Esta cápsula no ha participado todavía en ninguna misión."
+        "no_missions_core": "Este propulsor todavía no ha participado en ninguna misión.",
+        "no_missions_capsule": "Esta cápsula todavía no ha participado en ninguna misión."
       },
       "pad": {
         "status": "Estado",
