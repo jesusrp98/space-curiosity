@@ -7,7 +7,7 @@ import 'package:share/share.dart';
 
 import '../../../models/nasa/nasa_image.dart';
 import '../../../util/colors.dart';
-import 'package:image_downloader/image_downloader.dart';
+//import 'package:image_downloader/image_downloader.dart';
 
 class NasaImagePage extends StatelessWidget {
   final NasaImage image;
@@ -111,7 +111,7 @@ class NasaImagePage extends StatelessWidget {
                       OptionButton(
                         icon: Icons.cloud_download,
                         title: FlutterI18n.translate(context, 'nasa.download'),
-                        onTap: () => ImageDownloader.downloadImage(image.url),
+                        //onTap: () => ImageDownloader.downloadImage(image.url),
                       ),
                     ],
                   ),
