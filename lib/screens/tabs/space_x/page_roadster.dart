@@ -28,7 +28,7 @@ class RoadsterPage extends StatelessWidget {
                 child: const Icon(Icons.play_arrow),
                 tooltip: FlutterI18n.translate(
                   context,
-                  'spacex.vehicle.roadster.watch_replay',
+                  'spacex.other.tooltip.watch_replay',
                 ),
                 onPressed: () => FlutterWebBrowser.openWebPage(
                       url: _roadster.video,
@@ -50,7 +50,7 @@ class RoadsterPage extends StatelessWidget {
                           ),
                       tooltip: FlutterI18n.translate(
                         context,
-                        'spacex.vehicle.menu.wikipedia',
+                        'spacex.other.menu.wikipedia',
                       ),
                     )
                   ],

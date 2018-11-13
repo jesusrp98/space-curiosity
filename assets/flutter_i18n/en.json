@@ -18,7 +18,7 @@
         },
         "launchpad": {
           "title": "Launchpad",
-          "body": "Launch will happend on {launchpad}."
+          "body": "Launch will happen on {launchpad}."
         },
         "static_fire": {
           "title": "Static fire",
@@ -54,12 +54,7 @@
         "launched": "Launched on {date}",
         "ship_built": "Ship built in {date}"
       },
-      "menu": {
-        "wikipedia": "Wikipedia page",
-        "marine_traffic": "MarineTraffic page"
-      },
       "roadster": {
-        "watch_replay": "Watch replay",
         "data_updated": "Data is updated every 5 minutes",
         "description": {
           "title": "description",
@@ -180,10 +175,6 @@
         "press_kit": "Official press kit",
         "article": "Internet article"
       },
-      "tooltip": {
-        "watch_replay": "Watch replay",
-        "add_event": "Add event"
-      },
       "page": {
         "no_description": "This mission has currently no details.",
         "rocket": {
@@ -250,12 +241,9 @@
       }
     },
     "dialog": {
-      "menu": {
-        "wikipedia": "Wikipedia page"
-      },
       "vehicle": {
-        "title_core": "Core",
-        "title_capsule": "Capsule",
+        "title_core": "Core {serial}",
+        "title_capsule": "Capsule {serial}",
         "model": "Model",
         "status": "Status",
         "first_launched": "First launched",
@@ -279,7 +267,16 @@
     },
     "other": {
       "unknown": "Unknown",
-      "block": "Block {block}"
+      "block": "Block {block}",
+      "menu": {
+        "wikipedia": "Wikipedia page",
+        "marine_traffic": "MarineTraffic page"
+      },
+      "tooltip": {
+        "watch_replay": "Watch launch",
+        "add_event": "Add event",
+        "search": "Search"
+      }
     }
   }
 }

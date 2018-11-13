@@ -32,7 +32,7 @@ class LaunchpadDialog extends StatelessWidget {
                         ),
                     tooltip: FlutterI18n.translate(
                       context,
-                      'spacex.dialog.menu.wikipedia',
+                      'spacex.other.menu.wikipedia',
                     ),
                   )
                 ],

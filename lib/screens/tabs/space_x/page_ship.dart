@@ -33,7 +33,7 @@ class ShipPage extends StatelessWidget {
                     url: _ship.url, androidToolbarColor: primaryColor),
                 tooltip: FlutterI18n.translate(
                   context,
-                  'spacex.vehicle.menu.marine_traffic',
+                  'spacex.other.menu.marine_traffic',
                 ),
               )
             ],

@@ -46,7 +46,7 @@ class LaunchPage extends StatelessWidget {
                       child: const Icon(Icons.play_arrow),
                       tooltip: FlutterI18n.translate(
                         context,
-                        'spacex.launch.tooltip.watch_later',
+                        'spacex.other.tooltip.watch_later',
                       ),
                       onPressed: () => FlutterWebBrowser.openWebPage(
                             url: _launch.getVideo,
@@ -57,7 +57,7 @@ class LaunchPage extends StatelessWidget {
                       child: const Icon(Icons.event),
                       tooltip: FlutterI18n.translate(
                         context,
-                        'spacex.launch.tooltip.add_event',
+                        'spacex.other.tooltip.add_event',
                       ),
                       // onPressed: (_launch.tentativePrecision == 'hour')
                       //     ? () {

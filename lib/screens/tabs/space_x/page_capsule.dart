@@ -36,7 +36,7 @@ class CapsulePage extends StatelessWidget {
                     ),
                 tooltip: FlutterI18n.translate(
                   context,
-                  'spacex.vehicle.menu.wikipedia',
+                  'spacex.other.menu.wikipedia',
                 ),
               )
             ],

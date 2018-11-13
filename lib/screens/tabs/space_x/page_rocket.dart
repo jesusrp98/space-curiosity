@@ -34,7 +34,7 @@ class RocketPage extends StatelessWidget {
                     url: _rocket.url, androidToolbarColor: primaryColor),
                 tooltip: FlutterI18n.translate(
                   context,
-                  'spacex.vehicle.menu.wikipedia',
+                  'spacex.other.menu.wikipedia',
                 ),
               )
             ],

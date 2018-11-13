@@ -26,7 +26,13 @@ class CoreDialog extends StatelessWidget {
                 pinned: true,
                 flexibleSpace: FlexibleSpaceBar(
                   centerTitle: true,
-                  title: Text('Core ${model.id}'),
+                  title: Text(
+                    FlutterI18n.translate(
+                      context,
+                      'spacex.dialog.vehicle.title_core',
+                      {'serial': model.id},
+                    ),
+                  ),
                   background: (model.isLoading)
                       ? NativeLoadingIndicator(center: true)
                       : Swiper(

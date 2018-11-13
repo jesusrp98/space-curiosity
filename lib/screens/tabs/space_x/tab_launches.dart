@@ -81,7 +81,10 @@ class LaunchesTab extends StatelessWidget {
             ),
             floatingActionButton: FloatingActionButton(
               child: const Icon(Icons.search),
-              tooltip: 'Search',
+              tooltip: FlutterI18n.translate(
+                context,
+                'spacex.other.tooltip.search',
+              ),
               onPressed: null,
             ),
           ),
