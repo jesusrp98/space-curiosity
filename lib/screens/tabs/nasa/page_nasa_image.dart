@@ -1,12 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:clipboard_manager/clipboard_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:share/share.dart';
-//import 'package:image_downloader/image_downloader.dart';
 
 import '../../../models/nasa/nasa_image.dart';
 import '../../../util/colors.dart';
+import 'package:image_downloader/image_downloader.dart';
 
 class NasaImagePage extends StatelessWidget {
   final NasaImage image;
@@ -59,7 +60,7 @@ class NasaImagePage extends StatelessWidget {
                           Icon(Icons.copyright, size: 32.0),
                           Container(width: 8.0),
                           Text(
-                            image.getCopyright,
+                            image.getCopyright(context),
                             style: Theme.of(context)
                                 .textTheme
                                 .subhead
@@ -97,19 +98,20 @@ class NasaImagePage extends StatelessWidget {
                     children: <Widget>[
                       OptionButton(
                         icon: Icons.share,
-                        title: 'Share',
-                        onTap: () => share(image.share),
+                        title: FlutterI18n.translate(context, 'nasa.share'),
+                        onTap: () => share(image.share(context)),
                       ),
                       OptionButton(
                         icon: Icons.link,
-                        title: 'Copy link',
-                        onTap: () =>
-                            ClipboardManager.copyToClipBoard(image.url),
+                        title: FlutterI18n.translate(context, 'nasa.copy_link'),
+                        onTap: () => ClipboardManager.copyToClipBoard(
+                              image.url,
+                            ),
                       ),
                       OptionButton(
                         icon: Icons.cloud_download,
-                        title: 'Download',
-                        //onTap: () => ImageDownloader.downloadImage(image.url),
+                        title: FlutterI18n.translate(context, 'nasa.download'),
+                        onTap: () => ImageDownloader.downloadImage(image.url),
                       ),
                     ],
                   ),

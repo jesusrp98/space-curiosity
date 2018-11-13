@@ -2,6 +2,12 @@
   "app": {
     "title": "Curiosidad Espacial"
   },
+  "nasa": {
+    "no_copyright": "Sin copyright",
+    "share": "Compartir",
+    "copy_link": "Copiar enlace",
+    "download": "Descargar"
+  },
   "spacex": {
     "home": {
       "title": "Bienvenido a SpaceX",

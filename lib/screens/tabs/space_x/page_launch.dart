@@ -46,7 +46,7 @@ class LaunchPage extends StatelessWidget {
                       child: const Icon(Icons.play_arrow),
                       tooltip: FlutterI18n.translate(
                         context,
-                        'spacex.other.tooltip.watch_later',
+                        'spacex.other.tooltip.watch_replay',
                       ),
                       onPressed: () => FlutterWebBrowser.openWebPage(
                             url: _launch.getVideo,

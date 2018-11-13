@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 
@@ -46,8 +47,9 @@ class NasaImage {
 
   String get getDate => DateFormat.yMMMMd().format(date);
 
-  String get getCopyright => copyright ?? 'No copyright';
+  String getCopyright(context) =>
+      copyright ?? FlutterI18n.translate(context, 'nasa.no_copyright');
 
-  String get share =>
-      '$title\n\n$description\n\n$getCopyright · $getDate\n\n$hdurl';
+  String share(context) =>
+      '$title\n\n$description\n\n${getCopyright(context)} · $getDate\n\n$hdurl';
 }
