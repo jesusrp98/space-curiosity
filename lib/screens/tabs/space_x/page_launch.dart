@@ -44,50 +44,31 @@ class LaunchPage extends StatelessWidget {
               floatingActionButton: (_launch.hasVideo)
                   ? FloatingActionButton(
                       child: const Icon(Icons.play_arrow),
-                      tooltip: FlutterI18n.translate(
-                        context,
-                        'spacex.other.tooltip.watch_replay',
-                      ),
+                      tooltip: 'Watch replay',
                       onPressed: () => FlutterWebBrowser.openWebPage(
                             url: _launch.getVideo,
                             androidToolbarColor: primaryColor,
                           ),
                     )
-                  : FloatingActionButton(
-                      child: const Icon(Icons.event),
-                      tooltip: FlutterI18n.translate(
-                        context,
-                        'spacex.other.tooltip.add_event',
-                      ),
-                      // onPressed: (_launch.tentativePrecision == 'hour')
-                      //     ? () {
-                      //         try {
-                      //           // -- Add Event To Calendar --
-                      //           print("Adding Event: \n");
-                      //           print(_launch?.name);
-                      //           print(_launch?.launchpadName);
-                      //           print(_launch?.launchDate);
-                      //           Add2Calendar.addEvent2Cal(Event(
-                      //             title: _launch?.name ?? "Not Avaliable",
-                      //             description:
-                      //                 _launch.details ?? "No Details Avaliable",
-                      //             location: _launch?.launchpadName ?? "",
-                      //             startDate:
-                      //                 _launch?.launchDate ?? DateTime.now(),
-                      //             endDate:
-                      //                 (_launch?.launchDate ?? DateTime.now())
-                      //                     .add(Duration(minutes: 30)),
-                      //           )).catchError((onError) {
-                      //             print("Error Adding Event: " + onError);
-                      //           }).then((value) {
-                      //             print("Event Added: $value");
-                      //           });
-                      //         } catch (e) {
-                      //           print("Error Adding Event: " + e);
-                      //         }
-                      //       }
-                      //     : null,
-                    ),
+                  : (_launch.tentativePrecision == 'hour')
+                      ? FloatingActionButton(
+                          child: const Icon(Icons.event),
+                          tooltip: 'Add event',
+                          // onPressed: () => Add2Calendar.addEvent2Cal(Event(
+                          //       title: _launch.name,
+                          //       description: _launch.details,
+                          //       location: _launch.launchpadName,
+                          //       startDate: _launch.launchDate,
+                          //       endDate: _launch.launchDate
+                          //           .add(Duration(minutes: 30)),
+                          //     )),
+                        )
+                      : FloatingActionButton(
+                          child: const Icon(Icons.event),
+                          tooltip: 'Add event',
+                          backgroundColor: Colors.grey,
+                          onPressed: null,
+                        ),
               slivers: <Widget>[
                 SliverAppBar(
                   expandedHeight: MediaQuery.of(context).size.height * 0.3,
