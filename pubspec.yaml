@@ -29,6 +29,7 @@ dependencies:
   #get_version: ^0.0.5
   native_widgets: ^0.1.1+1
   flutter_i18n: ^0.4.0
+  material_search: ^0.2.8
 
   ## Icons
   font_awesome_flutter: ^8.0.1
