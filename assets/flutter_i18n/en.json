@@ -185,7 +185,7 @@
         "no_description": "This mission has currently no details.",
         "rocket": {
           "title": "rocket",
-          "name": "Rocket name",
+          "name": "Name",
           "model": "Model",
           "static_fire_date": "Static fire date",
           "launch_success": "Launch success",
