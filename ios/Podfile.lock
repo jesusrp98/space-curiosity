@@ -1,6 +1,4 @@
 PODS:
-  - add_2_calendar (0.0.1):
-    - Flutter
   - BoringSSL (10.0.6):
     - BoringSSL/Implementation (= 10.0.6)
     - BoringSSL/Interface (= 10.0.6)
@@ -76,8 +74,6 @@ PODS:
   - Flutter (1.0.0)
   - flutter_web_browser (0.0.1):
     - Flutter
-  - get_version (0.0.1):
-    - Flutter
   - GoogleAppMeasurement (5.2.0):
     - GoogleUtilities/AppDelegateSwizzler (~> 5.2)
     - GoogleUtilities/MethodSwizzler (~> 5.2)
@@ -132,14 +128,14 @@ PODS:
     - gRPC-Core (= 1.14.0)
     - gRPC-RxLibrary (= 1.14.0)
   - GTMSessionFetcher/Core (1.2.0)
+  - image_downloader (0.0.1):
+    - Flutter
   - leveldb-library (1.20)
   - nanopb (0.3.8):
     - nanopb/decode (= 0.3.8)
     - nanopb/encode (= 0.3.8)
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
-  - package_info (0.0.1):
-    - Flutter
   - path_provider (0.0.1):
     - Flutter
   - Protobuf (3.6.1)
@@ -149,14 +145,12 @@ PODS:
     - Flutter
 
 DEPENDENCIES:
-  - add_2_calendar (from `.symlinks/plugins/add_2_calendar/ios`)
   - clipboard_manager (from `.symlinks/plugins/clipboard_manager/ios`)
   - cloud_firestore (from `.symlinks/plugins/cloud_firestore/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
   - Flutter (from `.symlinks/flutter/ios`)
   - flutter_web_browser (from `.symlinks/plugins/flutter_web_browser/ios`)
-  - get_version (from `.symlinks/plugins/get_version/ios`)
-  - package_info (from `.symlinks/plugins/package_info/ios`)
+  - image_downloader (from `.symlinks/plugins/image_downloader/ios`)
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
   - share (from `.symlinks/plugins/share/ios`)
   - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
@@ -185,8 +179,6 @@ SPEC REPOS:
     - Protobuf
 
 EXTERNAL SOURCES:
-  add_2_calendar:
-    :path: ".symlinks/plugins/add_2_calendar/ios"
   clipboard_manager:
     :path: ".symlinks/plugins/clipboard_manager/ios"
   cloud_firestore:
@@ -197,10 +189,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/flutter/ios"
   flutter_web_browser:
     :path: ".symlinks/plugins/flutter_web_browser/ios"
-  get_version:
-    :path: ".symlinks/plugins/get_version/ios"
-  package_info:
-    :path: ".symlinks/plugins/package_info/ios"
+  image_downloader:
+    :path: ".symlinks/plugins/image_downloader/ios"
   path_provider:
     :path: ".symlinks/plugins/path_provider/ios"
   share:
@@ -209,7 +199,6 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/shared_preferences/ios"
 
 SPEC CHECKSUMS:
-  add_2_calendar: da1cb32f7bda3252f01c732f49e6ec72983b50fa
   BoringSSL: e10f92a27043805c01071fe815a5cd98ae8212e7
   clipboard_manager: a6f1e56e1abb10def5bd6a83e86183086bdcfd01
   cloud_firestore: a2d49d9c7219fce31033eb1a2ee953d7733c91d6
@@ -224,7 +213,6 @@ SPEC CHECKSUMS:
   FirebaseInstanceID: 78ba376fcd5b94c001f9999b2cbd3d1f1e56e78d
   Flutter: 9d0fac939486c9aba2809b7982dfdbb47a7b0296
   flutter_web_browser: 6a716fdf08f528f7c527eeae1fef13680172bb81
-  get_version: a59b7bd8fbf7543739bd853218b6685899419d05
   GoogleAppMeasurement: 2b3a023a61239c8d002e6e4fcf4abce8eddce0e0
   GoogleUtilities: 760ccb53b7c7f40f9c02d8c241f76f841a7a6162
   gRPC: 9d4c549f37c7cef22478634bac7a0405b6e3dbfb
@@ -233,9 +221,9 @@ SPEC CHECKSUMS:
   gRPC-ProtoRPC: 76f6053639a842e1fb45fa82aa598bf3f4d9f66f
   gRPC-RxLibrary: 3c305f32155024b116b780f389323c73a28197e6
   GTMSessionFetcher: 0c4baf0a73acd0041bf9f71ea018deedab5ea84e
+  image_downloader: 69e4fff42da518e8be6a620075dd7dc6387f0a9b
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
-  package_info: d7c98b64f60add4c2908b9d94d82a45d3c8827ad
   path_provider: 09407919825bfe3c2deae39453b7a5b44f467873
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
   share: 8d04605548e55f7ce4ebb7b3e933f3c85028c9cf
