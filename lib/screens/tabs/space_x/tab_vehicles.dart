@@ -7,6 +7,7 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
+import 'package:space_news/screens/tabs/space_x/search_vehicles.dart';
 
 import '../../../models/rockets/vehicle.dart';
 import '../../../util/colors.dart';
@@ -83,7 +84,9 @@ class VehiclesTab extends StatelessWidget {
                 context,
                 'spacex.other.tooltip.search',
               ),
-              onPressed: null,
+              onPressed: () => Navigator.of(context).push(
+                    searchVehicles(context, model.items),
+                  ),
             ),
           ),
     );
