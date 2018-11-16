@@ -8,7 +8,6 @@ import 'package:scoped_model/scoped_model.dart';
 
 import '../../../models/rockets/core_details.dart';
 import '../../../util/colors.dart';
-import '../../../widgets/dialog_list_tile.dart';
 import '../../../widgets/row_item.dart';
 
 class CoreDialog extends StatelessWidget {
@@ -114,23 +113,24 @@ class CoreDialog extends StatelessWidget {
                         ),
                         model.core.getAsdsLandings,
                       ),
-                      const Divider(height: 24.0),
-                      (model.core.hasMissions)
+                      model.core.hasMissions
                           ? Column(
-                              children: model.core.missions
-                                  .map((mission) => DialogListTile(
-                                        title: mission.name,
-                                        id: mission.id,
-                                      ))
-                                  .toList(),
+                              children: <Widget>[
+                                const Divider(height: 24.0),
+                                Column(
+                                  children: model.core.missions
+                                      .map(
+                                        (mission) => _getMission(
+                                              context,
+                                              model.core.missions,
+                                              mission,
+                                            ),
+                                      )
+                                      .toList(),
+                                )
+                              ],
                             )
-                          : Text(
-                              FlutterI18n.translate(
-                                context,
-                                'spacex.dialog.vehicle.no_missions_core',
-                              ),
-                              style: Theme.of(context).textTheme.subhead,
-                            ),
+                          : Container(),
                       const Divider(height: 24.0),
                       Text(
                         model.core.getDetails(context),
@@ -146,6 +146,22 @@ class CoreDialog extends StatelessWidget {
               ],
             ),
           ),
+    );
+  }
+
+  Column _getMission(BuildContext context, List missions, mission) {
+    return Column(
+      children: <Widget>[
+        RowItem.textRow(
+            FlutterI18n.translate(
+              context,
+              'spacex.dialog.vehicle.mission',
+              {'number': mission.id.toString()},
+            ),
+            mission.name),
+      ]..add(
+          mission != missions.last ? const SizedBox(height: 12.0) : Container(),
+        ),
     );
   }
 

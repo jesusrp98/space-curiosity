@@ -257,10 +257,9 @@
         "splashings": "Amerizajes",
         "landings_rtls": "Aterrizajes RTLS",
         "landings_asds": "Aterrizajes ASDS",
+        "mission": "Misión nº{number}",
         "no_description_core": "Este propulsor todavía no tiene descripción.",
-        "no_description_capsule": "Esta cápsula todavía no tiene descripción.",
-        "no_missions_core": "Este propulsor todavía no ha participado en ninguna misión.",
-        "no_missions_capsule": "Esta cápsula todavía no ha participado en ninguna misión."
+        "no_description_capsule": "Esta cápsula todavía no tiene descripción."
       },
       "pad": {
         "status": "Estado",

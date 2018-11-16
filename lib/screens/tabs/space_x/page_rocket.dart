@@ -201,26 +201,36 @@ class RocketPage extends StatelessWidget {
         'spacex.vehicle.rocket.capability.title',
       ),
       body: Column(
-        children: _combineList(_rocket.payloadWeights
-            .map((payloadWeight) => _getPayloadWeight(payloadWeight))
-            .toList()),
+        children: _rocket.payloadWeights
+            .map(
+              (mission) => _getPayloadWeight(
+                    context,
+                    _rocket.payloadWeights,
+                    mission,
+                  ),
+            )
+            .toList(),
       ),
     );
   }
 
-  List<Widget> _getPayloadWeight(PayloadWeight payloadWeight) {
-    return <Widget>[
-      RowItem.textRow(payloadWeight.name, payloadWeight.getMass),
-      const SizedBox(height: 12.0),
-    ];
-  }
-
-  List<Widget> _combineList(List<List<Widget>> map) {
-    final List<Widget> finalList = List();
-
-    map.forEach((payloadWeight) => finalList.addAll(payloadWeight));
-
-    return finalList..removeLast();
+  Column _getPayloadWeight(
+    BuildContext context,
+    List payloadWeights,
+    payloadWeight,
+  ) {
+    return Column(
+      children: <Widget>[
+        RowItem.textRow(
+          payloadWeight.name,
+          payloadWeight.getMass,
+        ),
+      ]..add(
+          payloadWeight != payloadWeights.last
+              ? const SizedBox(height: 12.0)
+              : Container(),
+        ),
+    );
   }
 
   Widget _enginesCard(context) {

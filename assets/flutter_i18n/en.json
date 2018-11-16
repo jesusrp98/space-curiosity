@@ -257,10 +257,9 @@
         "splashings": "Splashings",
         "landings_rtls": "RTLS landings",
         "landings_asds": "ASDS landings",
+        "mission": "Mission #{number}",
         "no_description_core": "This core has currently no details.",
-        "no_description_capsule": "This capsule has currently no details.",
-        "no_missions_core": "This core has no previous missions.",
-        "no_missions_capsule": "This capsule has no previous missions."
+        "no_description_capsule": "This capsule has currently no details."
       },
       "pad": {
         "status": "Status",
