@@ -83,7 +83,8 @@ class SpacexHomeModel extends QuerryModel {
                 ? 'spacex.home.tab.fairings.body_reused'
                 : 'spacex.home.tab.fairings.body_new',
           ),
-          'catched': launch.rocket.fairing.recoveryAttempt
+          'catched': launch.rocket.fairing.recoveryAttempt != null ||
+                  launch.rocket.fairing.recoveryAttempt == true
               ? FlutterI18n.translate(
                   context,
                   'spacex.home.tab.fairings.body_catching',
@@ -137,14 +138,17 @@ class SpacexHomeModel extends QuerryModel {
 class Countdown extends AnimatedWidget {
   final Animation<int> animation;
   final DateTime launchDate;
+  final String name;
 
-  Countdown({Key key, this.animation, this.launchDate})
+  Countdown({Key key, this.animation, this.launchDate, this.name})
       : super(key: key, listenable: animation);
 
   @override
   build(BuildContext context) {
     return Text(
-      getTimer(launchDate.difference(DateTime.now())),
+      launchDate.isAfter(DateTime.now())
+          ? getTimer(launchDate.difference(DateTime.now()), '-')
+          : getTimer(DateTime.now().difference(launchDate), '+'),
       style: Theme.of(context)
           .textTheme
           .headline
@@ -152,9 +156,9 @@ class Countdown extends AnimatedWidget {
     );
   }
 
-  String getTimer(Duration d) =>
+  String getTimer(Duration d, String symbol) =>
       'T' +
-      (d.isNegative ? '+' : '-') +
+      symbol +
       d.inDays.toString().padLeft(2, '0') +
       'd:' +
       (d.inHours - d.inDays * Duration.hoursPerDay).toString().padLeft(2, '0') +
