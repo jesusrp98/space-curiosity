@@ -274,6 +274,7 @@
     "other": {
       "unknown": "Desconocido",
       "block": "Bloque {block}",
+      "no_data": "No hay datos",
       "menu": {
         "wikipedia": "Página de Wikipedia",
         "marine_traffic": "Página de MarineTraffic"

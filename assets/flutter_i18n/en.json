@@ -274,6 +274,7 @@
     "other": {
       "unknown": "Unknown",
       "block": "Block {block}",
+      "no_data": "No data",
       "menu": {
         "wikipedia": "Wikipedia page",
         "marine_traffic": "MarineTraffic page"

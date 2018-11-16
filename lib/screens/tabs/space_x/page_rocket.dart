@@ -112,7 +112,7 @@ class RocketPage extends StatelessWidget {
               context,
               'spacex.vehicle.rocket.description.success_rate',
             ),
-            _rocket.getSuccessRate,
+            _rocket.getSuccessRate(context),
           ),
           const SizedBox(height: 12.0),
           RowItem.iconRow(
@@ -155,7 +155,7 @@ class RocketPage extends StatelessWidget {
               context,
               'spacex.vehicle.rocket.specifications.fairing_height',
             ),
-            _rocket.fairingHeight,
+            _rocket.fairingHeight(context),
           ),
           const SizedBox(height: 12.0),
           RowItem.textRow(
@@ -163,7 +163,7 @@ class RocketPage extends StatelessWidget {
               context,
               'spacex.vehicle.rocket.specifications.fairing_diameter',
             ),
-            _rocket.fairingDiameter,
+            _rocket.fairingDiameter(context),
           ),
           const Divider(height: 24.0),
           RowItem.textRow(
@@ -277,7 +277,7 @@ class RocketPage extends StatelessWidget {
               context,
               'spacex.vehicle.rocket.engines.thrust_weight',
             ),
-            _rocket.getThrustToWeight,
+            _rocket.getThrustToWeight(context),
           ),
           const SizedBox(height: 12.0),
           RowItem.textRow(
