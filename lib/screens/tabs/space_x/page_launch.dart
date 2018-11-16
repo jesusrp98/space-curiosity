@@ -50,25 +50,27 @@ class LaunchPage extends StatelessWidget {
                             androidToolbarColor: primaryColor,
                           ),
                     )
-                  : (_launch.tentativePrecision == 'hour')
-                      ? FloatingActionButton(
-                          child: const Icon(Icons.event),
-                          tooltip: 'Add event',
-                          // onPressed: () => Add2Calendar.addEvent2Cal(Event(
-                          //       title: _launch.name,
-                          //       description: _launch.details,
-                          //       location: _launch.launchpadName,
-                          //       startDate: _launch.launchDate,
-                          //       endDate: _launch.launchDate
-                          //           .add(Duration(minutes: 30)),
-                          //     )),
-                        )
-                      : FloatingActionButton(
-                          child: const Icon(Icons.event),
-                          tooltip: 'Add event',
-                          backgroundColor: Colors.grey,
-                          onPressed: null,
-                        ),
+                  : FloatingActionButton(
+                      child: Icon(
+                        Icons.event,
+                        color: (_launch.tentativePrecision == 'hour')
+                            ? null
+                            : Colors.grey,
+                      ),
+                      tooltip: 'Add event',
+                      onPressed: (_launch.tentativePrecision == 'hour')
+                          ? () {
+                              // Add2Calendar.addEvent2Cal(Event(
+                              //     title: _launch.name,
+                              //     description: _launch.details,
+                              //     location: _launch.launchpadName,
+                              //     startDate: _launch.launchDate,
+                              //     endDate: _launch.launchDate
+                              //         .add(Duration(minutes: 30)),
+                              //   ));
+                            }
+                          : null,
+                    ),
               slivers: <Widget>[
                 SliverAppBar(
                   expandedHeight: MediaQuery.of(context).size.height * 0.3,
