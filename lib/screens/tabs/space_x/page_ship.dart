@@ -212,11 +212,21 @@ class ShipPage extends StatelessWidget {
         'spacex.vehicle.ship.missions.title',
       ),
       body: Column(
-        children: _ship.missions
-            .map(
-              (mission) => _getMission(context, _ship.missions, mission),
-            )
-            .toList(),
+        children: _ship.hasMissions
+            ? _ship.missions
+                .map(
+                  (mission) => _getMission(context, _ship.missions, mission),
+                )
+                .toList()
+            : <Widget>[
+                Text(
+                  FlutterI18n.translate(
+                    context,
+                    'spacex.vehicle.ship.missions.no_missions',
+                  ),
+                  style: TextStyle(fontSize: 15.0, color: secondaryText),
+                ),
+              ],
       ),
     );
   }

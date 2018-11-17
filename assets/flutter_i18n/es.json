@@ -170,7 +170,8 @@
         },
         "missions": {
           "title": "MISIONES",
-          "mission": "Misión nº{number}"
+          "mission": "Misión nº{number}",
+          "no_missions": "Esta embarcación todavía no ha participado en ninguna misión."
         }
       }
     },

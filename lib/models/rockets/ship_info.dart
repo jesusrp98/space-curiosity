@@ -102,6 +102,8 @@ class ShipInfo extends Vehicle {
 
   String get secondaryRole => roles[1];
 
+  bool get hasMissions => missions.isNotEmpty;
+
   String getStatus(context) =>
       status ?? FlutterI18n.translate(context, 'spacex.other.unknown');
 

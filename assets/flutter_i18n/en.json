@@ -170,7 +170,8 @@
         },
         "missions": {
           "title": "MISSIONS",
-          "mission": "Mission #{number}"
+          "mission": "Mission #{number}",
+          "no_missions": "This boat has not participated in any mission yet."
         }
       }
     },

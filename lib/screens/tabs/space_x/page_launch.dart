@@ -327,7 +327,7 @@ class LaunchPage extends StatelessWidget {
         core.reused,
       ),
       const SizedBox(height: 12.0),
-      core.landingIntent
+      core.landingIntent != null
           ? Column(children: <Widget>[
               RowItem.dialogRow(
                 context: context,
