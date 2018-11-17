@@ -168,8 +168,11 @@
         },
         "landings": {
           "title": "aterrizajes",
-          "landings_attempted": "Intentos de aterrizaje",
           "landings_successful": "Aterrizajes exitosos"
+        },
+        "missions": {
+          "title": "MISIONES",
+          "mission": "Misión nº{number}"
         }
       }
     },

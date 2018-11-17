@@ -64,14 +64,8 @@ class ShipPage extends StatelessWidget {
                 _shipCard(context),
                 const SizedBox(height: 8.0),
                 _specsCard(context),
-                (_ship.isLandable)
-                    ? Column(
-                        children: <Widget>[
-                          const SizedBox(height: 8.0),
-                          _landingsCard(context),
-                        ],
-                      )
-                    : const SizedBox(height: 0.0),
+                const SizedBox(height: 8.0),
+                _missionsCard(context),
               ]),
             ),
           ),
@@ -101,12 +95,20 @@ class ShipPage extends StatelessWidget {
                 'spacex.vehicle.ship.description.built_date',
               ),
               _ship.getBuiltFullDate),
-          const Divider(height: 24.0),
-          Text(
-            _ship.description,
-            textAlign: TextAlign.justify,
-            style: TextStyle(fontSize: 15.0, color: secondaryText),
-          )
+          _ship.isLandable
+              ? Column(
+                  children: <Widget>[
+                    const Divider(height: 24.0),
+                    RowItem.textRow(
+                      FlutterI18n.translate(
+                        context,
+                        'spacex.vehicle.ship.landings.landings_successful',
+                      ),
+                      _ship.getSuccessfulLandings,
+                    ),
+                  ],
+                )
+              : Container()
         ],
       ),
     );
@@ -195,32 +197,35 @@ class ShipPage extends StatelessWidget {
     );
   }
 
-  Widget _landingsCard(context) {
+  Widget _missionsCard(context) {
     return CardPage(
       title: FlutterI18n.translate(
         context,
-        'spacex.vehicle.ship.landings.title',
+        'spacex.vehicle.ship.missions.title',
       ),
       body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          RowItem.textRow(
-            FlutterI18n.translate(
-              context,
-              'spacex.vehicle.ship.landings.landings_attempted',
-            ),
-            _ship.getAttemptedLandings,
-          ),
-          const SizedBox(height: 12.0),
-          RowItem.textRow(
-            FlutterI18n.translate(
-              context,
-              'spacex.vehicle.ship.landings.landings_successful',
-            ),
-            _ship.getSuccessfulLandings,
-          ),
-        ],
+        children: _ship.missions
+            .map(
+              (mission) => _getMission(context, _ship.missions, mission),
+            )
+            .toList(),
       ),
+    );
+  }
+
+  Column _getMission(BuildContext context, List missions, mission) {
+    return Column(
+      children: <Widget>[
+        RowItem.textRow(
+            FlutterI18n.translate(
+              context,
+              'spacex.vehicle.ship.missions.mission',
+              {'number': mission.id.toString()},
+            ),
+            mission.name),
+      ]..add(
+          mission != missions.last ? const SizedBox(height: 12.0) : Container(),
+        ),
     );
   }
 }

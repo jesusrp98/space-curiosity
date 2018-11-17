@@ -2,13 +2,14 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:intl/intl.dart';
 
 import 'vehicle.dart';
+import 'vehicle_details.dart';
 
 /// SHIP INFO CLASS
 /// This class represents a real ship used in a SpaceX mission,
 /// with all its details.
 class ShipInfo extends Vehicle {
   final String model, use, homePort, status;
-  final List roles;
+  final List roles, missions;
   final num speed;
   final List<double> coordinates;
   final int attemptedLandings, successfulLandings;
@@ -25,6 +26,7 @@ class ShipInfo extends Vehicle {
     this.model,
     this.use,
     this.roles,
+    this.missions,
     this.homePort,
     this.status,
     this.speed,
@@ -38,7 +40,7 @@ class ShipInfo extends Vehicle {
           active: active,
           firstFlight: firstFlight,
           mass: mass,
-          description: description,
+          description: 'No description',
           url: url,
           photos: photos,
         );
@@ -51,11 +53,13 @@ class ShipInfo extends Vehicle {
       firstFlight: DateTime(json['year_built']),
       photos: [json['image']],
       mass: json['weight_kg'],
-      description: _getDescription(json['missions']),
       url: json['url'],
       model: json['ship_model'],
       use: json['ship_type'],
       roles: json['roles'],
+      missions: json['missions']
+          .map((mission) => DetailsMission.fromJson(mission))
+          .toList(),
       homePort: json['home_port'],
       status: json['status'],
       speed: json['speed_kn'],
@@ -66,19 +70,6 @@ class ShipInfo extends Vehicle {
       attemptedLandings: json['attempted_landings'],
       successfulLandings: json['successful_landings'],
     );
-  }
-
-  static String _getDescription(List missions) {
-    String allMissions = '';
-    if (missions.isEmpty)
-      return 'This boat has not participated in any mission.';
-    else {
-      missions.forEach(
-        (mission) => allMissions +=
-            mission['name'] + ((mission != missions.last) ? ',  ' : '.'),
-      );
-      return allMissions;
-    }
   }
 
   String subtitle(context) => FlutterI18n.translate(
@@ -115,7 +106,5 @@ class ShipInfo extends Vehicle {
           ',  ' +
           coordinates[1].toStringAsPrecision(5));
 
-  String get getAttemptedLandings => attemptedLandings.toString();
-
-  String get getSuccessfulLandings => successfulLandings.toString();
+  String get getSuccessfulLandings => '$successfulLandings/$attemptedLandings';
 }

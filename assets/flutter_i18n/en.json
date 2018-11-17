@@ -168,8 +168,11 @@
         },
         "landings": {
           "title": "landings",
-          "landings_attempted": "Attempted landings",
           "landings_successful": "Successful landings"
+        },
+        "missions": {
+          "title": "MISSIONS",
+          "mission": "Mission #{number}"
         }
       }
     },
