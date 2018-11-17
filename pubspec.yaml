@@ -22,11 +22,11 @@ dependencies:
   sliver_fab: ^0.1.1
   clipboard_manager: ^0.0.1
   image_downloader: ^0.9.0
-  # add_2_calendar: ^1.0.2
+  add_2_calendar: ^1.0.2
   flutter_map: ^0.3.0
   share: ^0.4.0
   # UPDATE KOTLIN VERSION
-  #get_version: ^0.0.5
+  # get_version: ^0.0.5
   native_widgets: ^0.1.1+1
   flutter_i18n: ^0.4.0
 

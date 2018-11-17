@@ -1,4 +1,4 @@
-//import 'package:add_2_calendar/add_2_calendar.dart';
+import 'package:add_2_calendar/add_2_calendar.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
@@ -57,16 +57,15 @@ class LaunchPage extends StatelessWidget {
                           : Colors.grey,
                       tooltip: 'Add event',
                       onPressed: _launch.tentativePrecision == 'hour'
-                          ? () {
-                              // Add2Calendar.addEvent2Cal(Event(
-                              //     title: _launch.name,
-                              //     description: _launch.details,
-                              //     location: _launch.launchpadName,
-                              //     startDate: _launch.launchDate,
-                              //     endDate: _launch.launchDate
-                              //         .add(Duration(minutes: 30)),
-                              //   ));
-                            }
+                          ? () => Add2Calendar.addEvent2Cal(Event(
+                                title: _launch.name,
+                                description: _launch.details,
+                                location: _launch.launchpadName,
+                                startDate: _launch.launchDate,
+                                endDate: _launch.launchDate.add(Duration(
+                                  minutes: 30,
+                                )),
+                              ))
                           : null,
                     ),
               slivers: <Widget>[

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 
+import 'package:add_2_calendar/add_2_calendar.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
@@ -104,6 +105,17 @@ class SpacexHomeTab extends StatelessWidget {
                 'spacex.home.tab.date.title',
               ),
               subtitle: model.launchDate(context),
+              onTap: model.launch.tentativePrecision == 'hour'
+                  ? () => Add2Calendar.addEvent2Cal(Event(
+                        title: model.launch.name,
+                        description: model.launch.details,
+                        location: model.launch.launchpadName,
+                        startDate: model.launch.launchDate,
+                        endDate: model.launch.launchDate.add(Duration(
+                          minutes: 30,
+                        )),
+                      ))
+                  : null,
             ),
             const Divider(height: 0.0, indent: 74.0),
             ListCell(
