@@ -12,7 +12,10 @@ class ShipInfo extends Vehicle {
   final List roles, missions;
   final num speed;
   final List<double> coordinates;
-  final int attemptedLandings, successfulLandings;
+  final int attemptedLandings,
+      successfulLandings,
+      attemptedCatches,
+      successfulCatches;
 
   ShipInfo({
     id,
@@ -33,6 +36,8 @@ class ShipInfo extends Vehicle {
     this.coordinates,
     this.attemptedLandings,
     this.successfulLandings,
+    this.attemptedCatches,
+    this.successfulCatches,
   }) : super(
           id: id,
           name: name,
@@ -69,6 +74,8 @@ class ShipInfo extends Vehicle {
       ],
       attemptedLandings: json['attempted_landings'],
       successfulLandings: json['successful_landings'],
+      attemptedCatches: json['attempted_catches'],
+      successfulCatches: json['successful_catches'],
     );
   }
 
@@ -83,7 +90,11 @@ class ShipInfo extends Vehicle {
   String getModel(context) =>
       model ?? FlutterI18n.translate(context, 'spacex.other.unknown');
 
+  bool get hasExtras => isLandable || canCatch;
+
   bool get isLandable => attemptedLandings != null;
+
+  bool get canCatch => attemptedCatches != null;
 
   bool get hasSeveralRoles => roles.length > 1;
 
@@ -107,4 +118,6 @@ class ShipInfo extends Vehicle {
           coordinates[1].toStringAsPrecision(5));
 
   String get getSuccessfulLandings => '$successfulLandings/$attemptedLandings';
+
+  String get getSuccessfulCatches => '$successfulCatches/$attemptedCatches';
 }

@@ -153,7 +153,9 @@
         "description": {
           "title": "descripción",
           "home_port": "Puerto base",
-          "built_date": "Fecha de construcción"
+          "built_date": "Fecha de construcción",
+          "landings_successful": "Aterrizajes exitosos",
+          "catches_successful": "Capturas exitosos"
         },
         "specifications": {
           "title": "especificaciones",
@@ -165,10 +167,6 @@
           "coordinates": "Coordenadas",
           "mass": "Masa total",
           "speed": "Velocidad actual"
-        },
-        "landings": {
-          "title": "aterrizajes",
-          "landings_successful": "Aterrizajes exitosos"
         },
         "missions": {
           "title": "MISIONES",

@@ -95,17 +95,25 @@ class ShipPage extends StatelessWidget {
                 'spacex.vehicle.ship.description.built_date',
               ),
               _ship.getBuiltFullDate),
-          _ship.isLandable
+          _ship.hasExtras
               ? Column(
                   children: <Widget>[
                     const Divider(height: 24.0),
-                    RowItem.textRow(
-                      FlutterI18n.translate(
-                        context,
-                        'spacex.vehicle.ship.landings.landings_successful',
-                      ),
-                      _ship.getSuccessfulLandings,
-                    ),
+                    _ship.isLandable
+                        ? RowItem.textRow(
+                            FlutterI18n.translate(
+                              context,
+                              'spacex.vehicle.ship.description.landings_successful',
+                            ),
+                            _ship.getSuccessfulLandings,
+                          )
+                        : RowItem.textRow(
+                            FlutterI18n.translate(
+                              context,
+                              'spacex.vehicle.ship.description.catches_successful',
+                            ),
+                            _ship.getSuccessfulCatches,
+                          ),
                   ],
                 )
               : Container()

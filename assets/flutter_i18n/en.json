@@ -153,7 +153,9 @@
         "description": {
           "title": "description",
           "home_port": "Home port",
-          "built_date": "Built date"
+          "built_date": "Built date",
+          "landings_successful": "Successful landings",
+          "catches_successful": "Successful catches"
         },
         "specifications": {
           "title": "specifications",
@@ -165,10 +167,6 @@
           "coordinates": "Coordinates",
           "mass": "Total mass",
           "speed": "Current speed"
-        },
-        "landings": {
-          "title": "landings",
-          "landings_successful": "Successful landings"
         },
         "missions": {
           "title": "MISSIONS",
