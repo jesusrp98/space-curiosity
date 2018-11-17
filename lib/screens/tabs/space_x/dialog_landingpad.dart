@@ -145,7 +145,7 @@ class LandingpadDialog extends StatelessWidget {
                       RowItem.textRow(
                         FlutterI18n.translate(
                           context,
-                          'spacex.dialog.pad.launches_successful',
+                          'spacex.dialog.pad.landings_successful',
                         ),
                         model.landingpad.getSuccessfulLandings,
                       ),

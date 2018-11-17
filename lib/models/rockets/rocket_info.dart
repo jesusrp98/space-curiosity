@@ -118,7 +118,7 @@ class RocketInfo extends Vehicle {
       '${NumberFormat.decimalPattern().format(engineThrustVacuum)} kN';
 
   String getThrustToWeight(context) => thrustToWeight == null
-      ? FlutterI18n.translate(context, 'spacex.other.unkown')
+      ? FlutterI18n.translate(context, 'spacex.other.unknown')
       : NumberFormat.decimalPattern().format(thrustToWeight);
 
   String get getEngine => '${engine[0].toUpperCase()}${engine.substring(1)}';
@@ -129,11 +129,11 @@ class RocketInfo extends Vehicle {
       '${oxidizer[0].toUpperCase()}${oxidizer.substring(1)}';
 
   String fairingHeight(context) => fairingDimensions[0] == null
-      ? FlutterI18n.translate(context, 'spacex.other.unkown')
+      ? FlutterI18n.translate(context, 'spacex.other.unknown')
       : '${NumberFormat.decimalPattern().format(fairingDimensions[0])} m';
 
   String fairingDiameter(context) => fairingDimensions[1] == null
-      ? FlutterI18n.translate(context, 'spacex.other.unkown')
+      ? FlutterI18n.translate(context, 'spacex.other.unknown')
       : '${NumberFormat.decimalPattern().format(fairingDimensions[1])} m';
 
   String get firstStageEngines => engineConfiguration[0].toString();

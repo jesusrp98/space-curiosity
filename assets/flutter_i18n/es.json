@@ -91,7 +91,6 @@
         "description": {
           "title": "descripción",
           "launch_maiden": "Lanzamiento inaugural",
-          "launch_scheduled": "Lanzamiento inaugural",
           "active": "En activo",
           "launch_cost": "Coste de lanzamiento",
           "success_rate": "Tasa de éxito",
@@ -126,7 +125,6 @@
         "description": {
           "title": "descripción",
           "launch_maiden": "Lanzamiento inaugural",
-          "launch_scheduled": "Lanzamiento inaugural",
           "active": "En activo",
           "crew_capacity": "Tripulación",
           "no_people": "Ninguna persona",
@@ -267,7 +265,8 @@
         "state": "Estado",
         "coordinates": "Coordenadas",
         "landing_type": "Tipo de aterrizaje",
-        "launches_successful": "Lanzamientos exitosos"
+        "launches_successful": "Lanzamientos exitosos",
+        "landings_successful": "Aterrizajes exitosos"
       }
     },
     "other": {

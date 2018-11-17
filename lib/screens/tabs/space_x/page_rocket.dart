@@ -84,9 +84,7 @@ class RocketPage extends StatelessWidget {
           RowItem.textRow(
             FlutterI18n.translate(
               context,
-              DateTime.now().isAfter(_rocket.firstFlight)
-                  ? 'spacex.vehicle.rocket.description.launch_maiden'
-                  : 'spacex.vehicle.rocket.description.launch_scheduled',
+              'spacex.vehicle.rocket.description.launch_maiden',
             ),
             _rocket.getFullFirstFlight,
           ),

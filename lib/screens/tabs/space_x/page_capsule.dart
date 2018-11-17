@@ -84,9 +84,7 @@ class CapsulePage extends StatelessWidget {
           RowItem.textRow(
             FlutterI18n.translate(
               context,
-              DateTime.now().isAfter(_capsule.firstFlight)
-                  ? 'spacex.vehicle.capsule.description.launch_maiden'
-                  : 'spacex.vehicle.capsule.description.launch_scheduled',
+              'spacex.vehicle.capsule.description.launch_maiden',
             ),
             _capsule.getFullFirstFlight,
           ),

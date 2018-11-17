@@ -41,7 +41,7 @@ class LaunchPage extends StatelessWidget {
       body: Builder(
         builder: (context) => SliverFab(
               expandedHeight: MediaQuery.of(context).size.height * 0.3,
-              floatingActionButton: (_launch.hasVideo)
+              floatingActionButton: _launch.hasVideo
                   ? FloatingActionButton(
                       child: const Icon(Icons.play_arrow),
                       tooltip: 'Watch replay',
@@ -51,14 +51,12 @@ class LaunchPage extends StatelessWidget {
                           ),
                     )
                   : FloatingActionButton(
-                      child: Icon(
-                        Icons.event,
-                        color: (_launch.tentativePrecision == 'hour')
-                            ? null
-                            : Colors.grey,
-                      ),
+                      child: const Icon(Icons.event),
+                      backgroundColor: _launch.tentativePrecision == 'hour'
+                          ? accentColor
+                          : Colors.grey,
                       tooltip: 'Add event',
-                      onPressed: (_launch.tentativePrecision == 'hour')
+                      onPressed: _launch.tentativePrecision == 'hour'
                           ? () {
                               // Add2Calendar.addEvent2Cal(Event(
                               //     title: _launch.name,

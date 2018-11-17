@@ -91,7 +91,6 @@
         "description": {
           "title": "description",
           "launch_maiden": "Maiden launch",
-          "launch_scheduled": "Scheduled maiden launch",
           "active": "Active",
           "launch_cost": "Launch cost",
           "success_rate": "Success rate",
@@ -126,7 +125,6 @@
         "description": {
           "title": "description",
           "launch_maiden": "Maiden launch",
-          "launch_scheduled": "Scheduled maiden launch",
           "active": "Active",
           "crew_capacity": "Crew capacity",
           "no_people": "No people",
@@ -267,7 +265,8 @@
         "state": "State",
         "coordinates": "Coordinates",
         "landing_type": "Landing type",
-        "launches_successful": "Successful launches"
+        "launches_successful": "Successful launches",
+        "landings_successful": "Successful landings"
       }
     },
     "other": {
