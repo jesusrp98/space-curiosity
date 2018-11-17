@@ -78,7 +78,7 @@
         },
         "orbit": {
           "title": "órbita",
-          "type": "Tipo de órbita",
+          "type": "Tipo",
           "period": "Periodo",
           "days": "{days} días",
           "inclination": "Inclinación",

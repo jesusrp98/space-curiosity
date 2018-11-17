@@ -78,7 +78,7 @@
         },
         "orbit": {
           "title": "orbit",
-          "type": "Orbit type",
+          "type": "Type",
           "period": "Period",
           "days": "{days} days",
           "inclination": "Inclination",
@@ -185,7 +185,7 @@
           "title": "rocket",
           "name": "Name",
           "model": "Model",
-          "static_fire_date": "Static fire date",
+          "static_fire_date": "Static fire",
           "launch_success": "Launch success",
           "core": {
             "serial": "Core serial",
