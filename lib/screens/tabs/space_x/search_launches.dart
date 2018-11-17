@@ -13,11 +13,7 @@ searchLaunches(BuildContext context, List list) {
           barBackgroundColor: primaryColor,
           iconColor: Colors.white,
           placeholder: 'Search',
-<<<<<<< HEAD
           limit: list.length,
-=======
-          limit: 100,
->>>>>>> Initial implementation of search
           results: list
               .map((v) => MaterialSearchResult<Launch>(
                     icon: Icons.person,
