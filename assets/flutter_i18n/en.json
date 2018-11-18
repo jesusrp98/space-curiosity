@@ -190,6 +190,10 @@
           "model": "Model",
           "static_fire_date": "Static fire",
           "launch_success": "Launch success",
+          "failure": {
+            "time": "Failure time",
+            "altitude": "Failure altitude"
+          },
           "core": {
             "serial": "Core serial",
             "model": "Model",

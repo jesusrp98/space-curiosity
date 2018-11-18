@@ -49,6 +49,7 @@ class Launch {
   final DateTime launchDate, localLaunchDate, staticFireDate;
   final bool launchSuccess, upcoming, tentativeDate;
   final Rocket rocket;
+  final FailureDetails failureDetails;
 
   Launch({
     this.number,
@@ -67,6 +68,7 @@ class Launch {
     this.upcoming,
     this.tentativeDate,
     this.rocket,
+    this.failureDetails,
   });
 
   factory Launch.fromJson(Map<String, dynamic> json) {
@@ -92,12 +94,21 @@ class Launch {
       upcoming: json['upcoming'],
       tentativeDate: json['is_tentative'],
       rocket: Rocket.fromJson(json['rocket']),
+      failureDetails: setFailureDetails(json['launch_failure_details']),
     );
   }
 
   static DateTime setStaticFireDate(String date) {
     try {
       return DateTime.parse(date).toLocal();
+    } catch (_) {
+      return null;
+    }
+  }
+
+  static FailureDetails setFailureDetails(Map<String, dynamic> failureDetails) {
+    try {
+      return FailureDetails.fromJson(failureDetails);
     } catch (_) {
       return null;
     }
@@ -165,4 +176,28 @@ class Launch {
       ];
 
   int getEllipsisIndex(context, url) => getEllipsis(context).indexOf(url) + 1;
+}
+
+class FailureDetails {
+  final num time, altitude;
+  final String reason;
+
+  FailureDetails({this.time, this.altitude, this.reason});
+
+  factory FailureDetails.fromJson(Map<String, dynamic> json) {
+    return FailureDetails(
+      time: json['time'],
+      altitude: json['altitude'],
+      reason: json['reason'],
+    );
+  }
+
+  String get getTime =>
+      'T${time.isNegative ? '-' : '+'}${NumberFormat.decimalPattern().format(time.abs())} s';
+
+  String getAltitude(context) => altitude == null
+      ? FlutterI18n.translate(context, 'spacex.other.unknown')
+      : '${NumberFormat.decimalPattern().format(altitude)} m';
+
+  String get getReason => '${reason[0].toUpperCase()}${reason.substring(1)}';
 }

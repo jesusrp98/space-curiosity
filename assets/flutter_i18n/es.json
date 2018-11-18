@@ -190,6 +190,10 @@
           "model": "Modelo",
           "static_fire_date": "Prueba de ignición",
           "launch_success": "Lanzamiento exitoso",
+          "failure": {
+            "time": "Tiempo",
+            "altitude": "Altitud"
+          },
           "core": {
             "serial": "Número de serial",
             "model": "Modelo",

@@ -214,6 +214,37 @@ class LaunchPage extends StatelessWidget {
             ),
             _launch.launchSuccess,
           ),
+          _launch.launchSuccess != null && _launch.launchSuccess == false
+              ? Column(
+                  children: <Widget>[
+                    const Divider(height: 24.0),
+                    RowItem.textRow(
+                      FlutterI18n.translate(
+                        context,
+                        'spacex.launch.page.rocket.failure.time',
+                      ),
+                      _launch.failureDetails.getTime,
+                    ),
+                    const SizedBox(height: 12.0),
+                    RowItem.textRow(
+                      FlutterI18n.translate(
+                        context,
+                        'spacex.launch.page.rocket.failure.altitude',
+                      ),
+                      _launch.failureDetails.getAltitude(context),
+                    ),
+                    const SizedBox(height: 12.0),
+                    Text(
+                      _launch.failureDetails.getReason,
+                      textAlign: TextAlign.justify,
+                      style: Theme.of(context)
+                          .textTheme
+                          .subhead
+                          .copyWith(color: secondaryText),
+                    ),
+                  ],
+                )
+              : Container(),
           Column(
             children: rocket.firstStage
                 .map((core) => _getCores(context, core))
