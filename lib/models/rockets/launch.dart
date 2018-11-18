@@ -141,6 +141,8 @@ class Launch {
         return 'NET ${DateFormat.yQQQ().format(launchDate)}';
       case 'half':
         return 'NET H${launchDate.month < 7 ? 1 : 2} ${launchDate.year}';
+      case 'year':
+        return 'NET ${launchDate.year}';
       default:
         return 'Date error';
     }
