@@ -247,7 +247,7 @@ class RocketPage extends StatelessWidget {
             ),
             _rocket.getEngine,
           ),
-          const SizedBox(height: 12.0),
+          const Divider(height: 24.0),
           RowItem.textRow(
             FlutterI18n.translate(
               context,
