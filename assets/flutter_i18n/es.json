@@ -13,6 +13,7 @@
       "title": "Bienvenido a SpaceX",
       "icon": "Inicio",
       "tab": {
+        "no_countdown": "¡{mission} próximamente!",
         "mission": {
           "title": "Lanzado por {rocket}",
           "body": "Llevará a {payloads}",
