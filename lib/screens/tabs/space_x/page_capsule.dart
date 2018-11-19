@@ -89,14 +89,6 @@ class CapsulePage extends StatelessWidget {
             _capsule.getFullFirstFlight,
           ),
           const SizedBox(height: 12.0),
-          RowItem.iconRow(
-            FlutterI18n.translate(
-              context,
-              'spacex.vehicle.capsule.description.active',
-            ),
-            _capsule.active,
-          ),
-          const SizedBox(height: 12.0),
           RowItem.textRow(
             FlutterI18n.translate(
               context,
@@ -108,9 +100,9 @@ class CapsulePage extends StatelessWidget {
           RowItem.iconRow(
             FlutterI18n.translate(
               context,
-              'spacex.vehicle.capsule.description.reusable',
+              'spacex.vehicle.capsule.description.active',
             ),
-            _capsule.reusable,
+            _capsule.active,
           ),
           const Divider(height: 24.0),
           Text(
@@ -146,6 +138,14 @@ class CapsulePage extends StatelessWidget {
               'spacex.vehicle.capsule.specifications.payload_return',
             ),
             _capsule.getReturnMass,
+          ),
+          const SizedBox(height: 12.0),
+          RowItem.iconRow(
+            FlutterI18n.translate(
+              context,
+              'spacex.vehicle.capsule.description.reusable',
+            ),
+            _capsule.reusable,
           ),
           const Divider(height: 24.0),
           RowItem.textRow(
