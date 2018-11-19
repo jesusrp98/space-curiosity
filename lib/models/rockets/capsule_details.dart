@@ -8,7 +8,7 @@ import '../querry_model.dart';
 import 'vehicle_details.dart';
 
 /// CAPSULE DETAILS CLASS
-/// This class represents a real capsule used in a CRS mission,
+/// This class represents a real capsule used in a NASA mission,
 /// with all its details.
 class CapsuleModel extends QuerryModel {
   final String id;

@@ -1,6 +1,7 @@
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:intl/intl.dart';
 
+import 'rocket_stage.dart';
 import 'vehicle.dart';
 
 /// ROCKET INFO CLASS
@@ -12,10 +13,11 @@ class RocketInfo extends Vehicle {
       successRate,
       engineThrustSea,
       engineThrustVacuum,
-      thrustToWeight;
+      engineThrustToWeight;
   final List<PayloadWeight> payloadWeights;
   final String engine, fuel, oxidizer;
-  final List<num> engineConfiguration, fairingDimensions;
+  final FirstStage firstStage;
+  final SecondStage secondStage;
 
   RocketInfo({
     id,
@@ -27,7 +29,6 @@ class RocketInfo extends Vehicle {
     diameter,
     mass,
     active,
-    reusable,
     firstFlight,
     photos,
     this.stages,
@@ -35,13 +36,13 @@ class RocketInfo extends Vehicle {
     this.successRate,
     this.engineThrustSea,
     this.engineThrustVacuum,
-    this.thrustToWeight,
+    this.engineThrustToWeight,
     this.payloadWeights,
     this.engine,
     this.fuel,
     this.oxidizer,
-    this.engineConfiguration,
-    this.fairingDimensions,
+    this.firstStage,
+    this.secondStage,
   }) : super(
           id: id,
           name: name,
@@ -52,7 +53,6 @@ class RocketInfo extends Vehicle {
           diameter: diameter,
           mass: mass,
           active: active,
-          reusable: reusable,
           firstFlight: firstFlight,
           photos: photos,
         );
@@ -68,7 +68,6 @@ class RocketInfo extends Vehicle {
       diameter: json['diameter']['meters'],
       mass: json['mass']['kg'],
       active: json['active'],
-      reusable: json['first_stage']['reusable'],
       firstFlight: DateTime.parse(json['first_flight']),
       photos: json['flickr_images'],
       stages: json['stages'],
@@ -76,23 +75,15 @@ class RocketInfo extends Vehicle {
       successRate: json['success_rate_pct'],
       engineThrustSea: json['engines']['thrust_sea_level']['kN'],
       engineThrustVacuum: json['engines']['thrust_vacuum']['kN'],
-      thrustToWeight: json['engines']['thrust_to_weight'],
+      engineThrustToWeight: json['engines']['thrust_to_weight'],
       payloadWeights: (json['payload_weights'] as List)
           .map((payloadWeight) => PayloadWeight.fromJson(payloadWeight))
           .toList(),
       engine: json['engines']['type'] + ' ' + json['engines']['version'],
       fuel: json['engines']['propellant_2'],
       oxidizer: json['engines']['propellant_1'],
-      fairingDimensions: [
-        json['second_stage']['payloads']['composite_fairing']['height']
-            ['meters'],
-        json['second_stage']['payloads']['composite_fairing']['diameter']
-            ['meters'],
-      ],
-      engineConfiguration: [
-        json['first_stage']['engines'],
-        json['second_stage']['engines'],
-      ],
+      firstStage: FirstStage.fromJson(json['first_stage']),
+      secondStage: SecondStage.fromJson(json['second_stage']),
     );
   }
 
@@ -117,9 +108,9 @@ class RocketInfo extends Vehicle {
   String get getEngineThrustVacuum =>
       '${NumberFormat.decimalPattern().format(engineThrustVacuum)} kN';
 
-  String getThrustToWeight(context) => thrustToWeight == null
+  String getEngineThrustToWeight(context) => engineThrustToWeight == null
       ? FlutterI18n.translate(context, 'spacex.other.unknown')
-      : NumberFormat.decimalPattern().format(thrustToWeight);
+      : NumberFormat.decimalPattern().format(engineThrustToWeight);
 
   String get getEngine => '${engine[0].toUpperCase()}${engine.substring(1)}';
 
@@ -127,18 +118,6 @@ class RocketInfo extends Vehicle {
 
   String get getOxidizer =>
       '${oxidizer[0].toUpperCase()}${oxidizer.substring(1)}';
-
-  String fairingHeight(context) => fairingDimensions[0] == null
-      ? FlutterI18n.translate(context, 'spacex.other.unknown')
-      : '${NumberFormat.decimalPattern().format(fairingDimensions[0])} m';
-
-  String fairingDiameter(context) => fairingDimensions[1] == null
-      ? FlutterI18n.translate(context, 'spacex.other.unknown')
-      : '${NumberFormat.decimalPattern().format(fairingDimensions[1])} m';
-
-  String get firstStageEngines => engineConfiguration[0].toString();
-
-  String get secondStageEngines => engineConfiguration[1].toString();
 }
 
 class PayloadWeight {

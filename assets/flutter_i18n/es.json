@@ -92,17 +92,14 @@
         "description": {
           "title": "descripción",
           "launch_maiden": "Lanzamiento inaugural",
-          "active": "En activo",
           "launch_cost": "Coste de lanzamiento",
           "success_rate": "Tasa de éxito",
-          "reusable": "Reutilizable"
+          "active": "En activo"
         },
         "specifications": {
           "title": "especificaiones",
           "rocket_stages": "Etapas del cohete",
           "stages": "{stages} etapas",
-          "fairing_height": "Altura de la cofia",
-          "fairing_diameter": "Diámetro de la cofia",
           "height": "Altura",
           "diameter": "Diámetro",
           "mass": "Masa total"
@@ -110,11 +107,20 @@
         "capability": {
           "title": "capacidad"
         },
+        "stage": {
+          "stage_first": "Primera etapa",
+          "stage_second": "Segunda etapa",
+          "reusable": "Reutilizable",
+          "engines": "Motores",
+          "fuel_amount": "Cantidad de combustible",
+          "fuel_amount_tons": "{tons} toneladas",
+          "burn_time": "Tiempo de ignición",
+          "fairing_height": "Altura de la cofia",
+          "fairing_diameter": "Diámetro de la cofia"
+        },
         "engines": {
           "title": "motores",
           "model": "Modelo de motor",
-          "engines_first_stage": "Motores de la primera etapa",
-          "engines_second_stage": "Motores de la segunda etapa",
           "fuel": "Combustible",
           "oxidizer": "Oxidante",
           "thrust_weight": "Ratio potencia peso",

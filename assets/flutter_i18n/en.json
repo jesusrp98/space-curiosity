@@ -92,17 +92,14 @@
         "description": {
           "title": "description",
           "launch_maiden": "Maiden launch",
-          "active": "Active",
           "launch_cost": "Launch cost",
           "success_rate": "Success rate",
-          "reusable": "Reusable"
+          "active": "Active"
         },
         "specifications": {
           "title": "specifications",
           "rocket_stages": "Rocket stages",
           "stages": "{stages} stages",
-          "fairing_height": "Fairing height",
-          "fairing_diameter": "Fairing diameter",
           "height": "Height",
           "diameter": "Diameter",
           "mass": "Total mass"
@@ -110,11 +107,20 @@
         "capability": {
           "title": "capability"
         },
+        "stage": {
+          "stage_first": "First stage",
+          "stage_second": "Second stage",
+          "reusable": "Reusable",
+          "engines": "Engines",
+          "fuel_amount": "Fuel amount",
+          "fuel_amount_tons": "{tons} tons",
+          "burn_time": "Burn time",
+          "fairing_height": "Fairing height",
+          "fairing_diameter": "Fairing diameter"
+        },
         "engines": {
           "title": "engines",
           "model": "Engine model",
-          "engines_first_stage": "First stage engines",
-          "engines_second_stage": "Second stage engines",
           "fuel": "Primary fuel",
           "oxidizer": "Oxidizer",
           "thrust_weight": "Thrust to weight",

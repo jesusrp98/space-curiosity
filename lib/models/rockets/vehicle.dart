@@ -50,7 +50,7 @@ class VehiclesModel extends QuerryModel {
 abstract class Vehicle {
   final String id, name, type, description, url;
   final num height, diameter, mass;
-  final bool active, reusable;
+  final bool active;
   final DateTime firstFlight;
   final List photos;
 
@@ -64,7 +64,6 @@ abstract class Vehicle {
     this.diameter,
     this.mass,
     this.active,
-    this.reusable,
     this.firstFlight,
     this.photos,
   });

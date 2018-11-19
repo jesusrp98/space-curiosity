@@ -4,11 +4,12 @@ import 'package:intl/intl.dart';
 import 'vehicle.dart';
 
 /// CAPSULE INFO CLASS
-/// This class represents a model of a capsule, like Dragon1 or Crew Dragon,
+/// This class represents a model of a capsule, like Dragon 1 or 2,,
 /// with all its specifications.
 class CapsuleInfo extends Vehicle {
   final num crew, launchMass, returnMass;
   final List<Thruster> thrusters;
+  final bool reusable;
 
   CapsuleInfo({
     id,
@@ -20,13 +21,13 @@ class CapsuleInfo extends Vehicle {
     diameter,
     mass,
     active,
-    reusable,
     firstFlight,
     photos,
     this.crew,
     this.launchMass,
     this.returnMass,
     this.thrusters,
+    this.reusable,
   }) : super(
           id: id,
           name: name,
@@ -37,7 +38,6 @@ class CapsuleInfo extends Vehicle {
           diameter: diameter,
           mass: mass,
           active: active,
-          reusable: reusable,
           firstFlight: firstFlight,
           photos: photos,
         );
@@ -53,7 +53,6 @@ class CapsuleInfo extends Vehicle {
       diameter: json['diameter']['meters'],
       mass: json['dry_mass_kg'],
       active: json['active'],
-      reusable: true,
       firstFlight: DateTime.parse(json['first_flight']),
       photos: json['flickr_images'],
       crew: json['crew_capacity'],
@@ -62,6 +61,7 @@ class CapsuleInfo extends Vehicle {
       thrusters: (json['thrusters'] as List)
           .map((thruster) => Thruster.fromJson(thruster))
           .toList(),
+      reusable: true,
     );
   }
 
