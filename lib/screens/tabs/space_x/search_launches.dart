@@ -16,7 +16,7 @@ searchLaunches(BuildContext context, List list) {
           limit: list.length,
           results: list
               .map((v) => MaterialSearchResult<Launch>(
-                    icon: Icons.person,
+                    icon: Icons.search,
                     value: v,
                     text: v.name,
                   ))
