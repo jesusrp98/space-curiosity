@@ -56,7 +56,7 @@
       "title": "Vehicles",
       "icon": "Vehicles",
       "subtitle": {
-        "first_launched": "First launched {date}",
+        "first_launched": "First launched on {date}",
         "scheduled_launch": "Scheduled to {date}",
         "launched": "Launched on {date}",
         "ship_built": "Ship built in {date}"

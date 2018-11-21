@@ -153,7 +153,7 @@ class Launch {
       case 'half':
         return 'NET H${launchDate.month < 7 ? 1 : 2} ${launchDate.year}';
       case 'year':
-        return 'NET ${launchDate.year}';
+        return 'NET ${DateFormat.y().format(launchDate)}';
       default:
         return 'Date error';
     }
@@ -197,7 +197,7 @@ class FailureDetails {
 
   String getAltitude(context) => altitude == null
       ? FlutterI18n.translate(context, 'spacex.other.unknown')
-      : '${NumberFormat.decimalPattern().format(altitude)} m';
+      : '${NumberFormat.decimalPattern().format(altitude)} km';
 
   String get getReason => '${reason[0].toUpperCase()}${reason.substring(1)}';
 }
