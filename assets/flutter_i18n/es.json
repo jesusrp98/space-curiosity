@@ -77,7 +77,7 @@
         },
         "vehicle": {
           "title": "vehículo",
-          "mass": "Masa total",
+          "mass": "Peso",
           "height": "Altura",
           "diameter": "Diámetro",
           "speed": "Velocidad",
@@ -109,7 +109,7 @@
           "stages": "{stages} etapas",
           "height": "Altura",
           "diameter": "Diámetro",
-          "mass": "Masa total"
+          "mass": "Peso"
         },
         "capability": {
           "title": "capacidad"
@@ -152,7 +152,7 @@
           "payload_return": "Carga de retorno",
           "height": "Altura",
           "diameter": "Diámetro",
-          "mass": "Masa sin carga"
+          "mass": "Peso sin carga"
         },
         "thruster": {
           "title": "propulsores",
@@ -180,7 +180,7 @@
           "role_secondary": "Papel secundario",
           "status": "Estado",
           "coordinates": "Coordenadas",
-          "mass": "Masa total",
+          "mass": "Peso",
           "speed": "Velocidad actual"
         },
         "missions": {

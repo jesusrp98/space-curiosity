@@ -77,7 +77,7 @@
         },
         "vehicle": {
           "title": "vehicle",
-          "mass": "Total mass",
+          "mass": "Weight",
           "height": "Height",
           "diameter": "Diameter",
           "speed": "Speed",
@@ -109,7 +109,7 @@
           "stages": "{stages} stages",
           "height": "Height",
           "diameter": "Diameter",
-          "mass": "Total mass"
+          "mass": "Weight"
         },
         "capability": {
           "title": "capability"
@@ -152,7 +152,7 @@
           "payload_return": "Return payload",
           "height": "Height",
           "diameter": "Diameter",
-          "mass": "Dry mass"
+          "mass": "Dry weight"
         },
         "thruster": {
           "title": "thrusters",
@@ -180,7 +180,7 @@
           "role_secondary": "Secondary role",
           "status": "Status",
           "coordinates": "Coordinates",
-          "mass": "Total mass",
+          "mass": "Weight",
           "speed": "Current speed"
         },
         "missions": {
@@ -225,7 +225,7 @@
           "manufacturer": "Manufacturer",
           "customer": "Customer",
           "nationality": "Nationality",
-          "mass": "Mass",
+          "mass": "Weight",
           "orbit": "Orbit",
           "second_stage": {
             "model": "Second stage model"
