@@ -8,12 +8,7 @@ import 'package:scoped_model/scoped_model.dart';
 import '../models/nasa/nasa_image.dart';
 import '../models/planets/celestial_body.dart';
 import '../util/colors.dart';
-import '../widgets/list_cell.dart';
 import '../widgets/photo_card.dart';
-import 'screen_about.dart';
-import 'tabs/news/screen_news.dart';
-import 'tabs/planets/screen_solar_system.dart';
-import 'tabs/space_x/screen_spacex.dart';
 
 class HomeScreen extends StatelessWidget {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -38,7 +33,7 @@ class HomeScreen extends StatelessWidget {
         label: Text('Share image'),
         onPressed: () {},
       ),
-      bottomNavigationBar: BottomAppBar(  
+      bottomNavigationBar: BottomAppBar(
         color: primaryColor,
         child: Row(
           mainAxisSize: MainAxisSize.max,
@@ -49,67 +44,67 @@ class HomeScreen extends StatelessWidget {
               tooltip: 'Menu',
               onPressed: () => showModalBottomSheet(
                     context: context,
-                    builder: (context) {
-                      return Column(
-                        children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Icon(
-                              Icons.expand_more,
-                              size: 24.0,
+                    builder: (context) => Column(
+                          children: <Widget>[
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Icon(
+                                Icons.expand_more,
+                                size: 24.0,
+                              ),
                             ),
-                          ),
-                          Expanded(
-                            child: ListView(
-                              children: <Widget>[
-                                ListTile(
-                                  leading: Icon(FontAwesomeIcons.rocket),
-                                  title: Text('SpaceX'),
-                                  onTap: () {
-                                    Navigator.pop(context);
-                                    Navigator.of(context).pushNamed('/spacex');
-                                  }
-                                ),
-                                ListTile(
-                                  leading: Icon(Icons.description),
-                                  title: Text('News'),
-                                  onTap: () {
-                                    Navigator.pop(context);
-                                    Navigator.of(context).pushNamed('/news');
-                                  }
-                                ),
-                                ListTile(
-                                  leading: Icon(Icons.public),
-                                  title: Text('Solar System'),
-                                  onTap: () {
-                                    Navigator.pop(context);
-                                    Navigator.of(context).pushNamed('/planets');
-                                  }
-                                ),
-                                ListTile(
-                                  leading: Icon(Icons.my_location),
-                                  title: Text('ISS tracker'),
-                                  onTap: () {},
-                                ),
-                                ListTile(
-                                  leading: Icon(Icons.fitness_center),
-                                  title: Text('Weight calculator'),
-                                  onTap: () {},
-                                ),
-                              ],
-                            ),
-                          )
-                        ],
-                      );
-                    },
+                            Expanded(
+                              child: ListView(
+                                children: <Widget>[
+                                  ListTile(
+                                    leading: Icon(FontAwesomeIcons.rocket),
+                                    title: Text('SpaceX'),
+                                    onTap: () {
+                                      Navigator.pop(context);
+                                      Navigator.of(context)
+                                          .pushNamed('/spacex');
+                                    },
+                                  ),
+                                  ListTile(
+                                    leading: Icon(Icons.description),
+                                    title: Text('News'),
+                                    onTap: () {
+                                      Navigator.pop(context);
+                                      Navigator.of(context).pushNamed('/news');
+                                    },
+                                  ),
+                                  ListTile(
+                                    leading: Icon(Icons.public),
+                                    title: Text('Solar System'),
+                                    onTap: () {
+                                      Navigator.pop(context);
+                                      Navigator.of(context)
+                                          .pushNamed('/planets');
+                                    },
+                                  ),
+                                  ListTile(
+                                    leading: Icon(Icons.my_location),
+                                    title: Text('ISS tracker'),
+                                    onTap: () {},
+                                  ),
+                                  ListTile(
+                                    leading: Icon(Icons.fitness_center),
+                                    title: Text('Weight calculator'),
+                                    onTap: () {},
+                                  ),
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
                   ),
             ),
             IconButton(
               icon: Icon(Icons.more_vert),
-              tooltip: 'Settings',
+              tooltip: 'Actions',
               onPressed: () => showModalBottomSheet(
                     context: context,
-                    builder: (_) => Column(
+                    builder: (context) => Column(
                           mainAxisSize: MainAxisSize.min,
                           children: <Widget>[
                             Padding(
@@ -122,16 +117,18 @@ class HomeScreen extends StatelessWidget {
                             ListTile(
                               leading: Icon(Icons.info),
                               title: Text('About this app'),
-                              onTap: () => Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (_) => AboutScreen()),
-                                  ),
+                              onTap: () {
+                                Navigator.pop(context);
+                                Navigator.of(context).pushNamed('/info');
+                              },
                             ),
                             ListTile(
                               leading: Icon(Icons.settings),
                               title: Text('Customize your experience'),
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.pop(context);
+                                Navigator.of(context).pushNamed('/settings');
+                              },
                             ),
                           ],
                         ),
