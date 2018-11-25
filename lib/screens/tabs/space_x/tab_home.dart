@@ -85,7 +85,7 @@ class SpacexHomeTab extends StatelessWidget {
         return Column(
           children: <Widget>[
             Container(height: 16.0),
-            model.launch.tentativeTime
+            !model.launch.tentativeTime
                 ? LaunchCountdown(model)
                 : Text(
                     FlutterI18n.translate(
@@ -114,7 +114,7 @@ class SpacexHomeTab extends StatelessWidget {
                 'spacex.home.tab.date.title',
               ),
               subtitle: model.launchDate(context),
-              onTap: model.launch.tentativeTime
+              onTap: !model.launch.tentativeTime
                   ? () => Add2Calendar.addEvent2Cal(Event(
                         title: model.launch.name,
                         description: model.launch.details,

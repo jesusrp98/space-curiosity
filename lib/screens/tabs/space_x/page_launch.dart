@@ -53,9 +53,9 @@ class LaunchPage extends StatelessWidget {
                   : FloatingActionButton(
                       child: const Icon(Icons.event),
                       backgroundColor:
-                          _launch.tentativeTime ? accentColor : Colors.grey,
+                          !_launch.tentativeTime ? accentColor : Colors.grey,
                       tooltip: 'Add event',
-                      onPressed: _launch.tentativeTime
+                      onPressed: !_launch.tentativeTime
                           ? () => Add2Calendar.addEvent2Cal(Event(
                                 title: _launch.name,
                                 description: _launch.details,

@@ -88,7 +88,7 @@ class _SpacexTabScreen extends State<SpacexScreen> {
               context,
               'spacex.upcoming.icon',
             )),
-            icon: Icon(Icons.timer),
+            icon: Icon(Icons.access_time),
           ),
           BottomNavigationBarItem(
             title: Text(FlutterI18n.translate(
