@@ -46,8 +46,8 @@ class Launch {
       details,
       tentativePrecision;
   final List links, photos;
-  final DateTime launchDate, localLaunchDate, staticFireDate;
-  final bool launchSuccess, upcoming, tentativeDate;
+  final DateTime launchDate, staticFireDate;
+  final bool launchSuccess, upcoming, tentativeTime;
   final Rocket rocket;
   final FailureDetails failureDetails;
 
@@ -62,11 +62,10 @@ class Launch {
     this.links,
     this.photos,
     this.launchDate,
-    this.localLaunchDate,
     this.staticFireDate,
     this.launchSuccess,
     this.upcoming,
-    this.tentativeDate,
+    this.tentativeTime,
     this.rocket,
     this.failureDetails,
   });
@@ -88,11 +87,10 @@ class Launch {
       ],
       photos: json['links']['flickr_images'],
       launchDate: DateTime.parse(json['launch_date_utc']).toLocal(),
-      localLaunchDate: DateTime.parse(json['launch_date_local']).toLocal(),
       staticFireDate: setStaticFireDate(json['static_fire_date_utc']),
       launchSuccess: json['launch_success'],
       upcoming: json['upcoming'],
-      tentativeDate: json['is_tentative'],
+      tentativeTime: json['is_tentative'],
       rocket: Rocket.fromJson(json['rocket']),
       failureDetails: setFailureDetails(json['launch_failure_details']),
     );
@@ -158,9 +156,6 @@ class Launch {
         return 'Date error';
     }
   }
-
-  String get getLocalLaunchDate =>
-      DateFormat.yMMMMd().addPattern('Hm', '  ·  ').format(localLaunchDate);
 
   String get getUtcLaunchDate =>
       DateFormat.yMMMMd().addPattern('Hm', '  ·  ').format(launchDate.toUtc());
