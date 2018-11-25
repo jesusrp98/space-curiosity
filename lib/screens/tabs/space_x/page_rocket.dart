@@ -232,7 +232,7 @@ class RocketPage extends StatelessWidget {
               context,
               'spacex.vehicle.rocket.stage.engines',
             ),
-            _rocket.firstStage.engines.toString(),
+            _rocket.firstStage.getEngines(context),
           ),
           const SizedBox(height: 12.0),
           RowItem.textRow(
@@ -292,7 +292,7 @@ class RocketPage extends StatelessWidget {
               context,
               'spacex.vehicle.rocket.stage.engines',
             ),
-            _rocket.secondStage.engines.toString(),
+            _rocket.secondStage.getEngines(context),
           ),
           const SizedBox(height: 12.0),
           RowItem.textRow(

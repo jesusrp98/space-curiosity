@@ -119,6 +119,7 @@
           "stage_second": "Second stage",
           "reusable": "Reusable",
           "engines": "Engines",
+          "engines_number": "{number} engines",
           "fuel_amount": "Fuel amount",
           "fuel_amount_tons": "{tons} tons",
           "burn_time": "Burn time",
@@ -127,8 +128,8 @@
         },
         "engines": {
           "title": "engines",
-          "model": "Engine model",
-          "fuel": "Primary fuel",
+          "model": "Model",
+          "fuel": "Fuel",
           "oxidizer": "Oxidizer",
           "thrust_weight": "Thrust to weight",
           "thrust_sea": "Sea level thrust",

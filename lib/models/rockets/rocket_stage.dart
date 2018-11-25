@@ -20,6 +20,12 @@ abstract class Stage {
         {'tons': NumberFormat.decimalPattern().format(fuelAmount)},
       );
 
+  String getEngines(context) => FlutterI18n.translate(
+        context,
+        'spacex.vehicle.rocket.stage.engines_number',
+        {'number': engines.toString()},
+      );
+
   String getBurnTime(context) => burnTime == null
       ? FlutterI18n.translate(context, 'spacex.other.unknown')
       : '${NumberFormat.decimalPattern().format(burnTime)} s';

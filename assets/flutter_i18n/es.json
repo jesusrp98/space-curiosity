@@ -119,6 +119,7 @@
           "stage_second": "Segunda etapa",
           "reusable": "Reutilizable",
           "engines": "Motores",
+          "engines_number": "{number} motores",
           "fuel_amount": "Cantidad de combustible",
           "fuel_amount_tons": "{tons} toneladas",
           "burn_time": "Tiempo de ignición",
@@ -127,7 +128,7 @@
         },
         "engines": {
           "title": "motores",
-          "model": "Modelo de motor",
+          "model": "Modelo",
           "fuel": "Combustible",
           "oxidizer": "Oxidante",
           "thrust_weight": "Ratio potencia peso",
