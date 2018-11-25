@@ -133,6 +133,21 @@ class SpacexHomeModel extends QuerryModel {
 
     return aux;
   }
+
+  String capsule(context) =>
+      launch.rocket.secondStage.payloads[0].capsuleSerial == null
+          ? FlutterI18n.translate(context, 'spacex.home.tab.capsule.body_null')
+          : FlutterI18n.translate(context, 'spacex.home.tab.capsule.body', {
+              'reused': launch.rocket.secondStage.payloads[0].reused
+                  ? FlutterI18n.translate(
+                      context,
+                      'spacex.home.tab.capsule.body_reused',
+                    )
+                  : FlutterI18n.translate(
+                      context,
+                      'spacex.home.tab.capsule.body_new',
+                    )
+            });
 }
 
 class Countdown extends AnimatedWidget {

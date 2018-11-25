@@ -49,6 +49,13 @@
           "body_new": "is not reused",
           "body_landing": "and it will land on {landingpad}",
           "body_dispended": "and it won't perform a landing"
+        },
+        "capsule": {
+          "title": "Cargo capsule",
+          "body": "The capsule {reused}.",
+          "body_reused": "is reused",
+          "body_new": "is not reused",
+          "body_null": "Capsule serial is unknown."
         }
       }
     },

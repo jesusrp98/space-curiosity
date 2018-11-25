@@ -91,12 +91,15 @@ abstract class Vehicle {
 
   String get getFirstFlight => DateFormat.yMMMM().format(firstFlight);
 
-  String get getFullFirstFlight => DateFormat.yMMMMd().format(firstFlight);
+  String get getFullFirstFlight => DateTime.now().isAfter(firstFlight)
+      ? DateFormat.yMMMMd().format(firstFlight)
+      : getFirstFlight;
 
   String firstLaunched(context) => FlutterI18n.translate(
-      context,
-      DateTime.now().isAfter(firstFlight)
-          ? 'spacex.vehicle.subtitle.first_launched'
-          : 'spacex.vehicle.subtitle.scheduled_launch',
-      {'date': getFirstFlight});
+        context,
+        DateTime.now().isAfter(firstFlight)
+            ? 'spacex.vehicle.subtitle.first_launched'
+            : 'spacex.vehicle.subtitle.scheduled_launch',
+        {'date': getFirstFlight},
+      );
 }

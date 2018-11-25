@@ -194,6 +194,21 @@ class SpacexHomeTab extends StatelessWidget {
                         ),
                       ),
             ),
+            model.launch.rocket.secondStage.payloads[0].isNasaPayload
+                ? Column(
+                    children: <Widget>[
+                      ListCell(
+                        leading: const Icon(Icons.directions_boat, size: 42.0),
+                        title: FlutterI18n.translate(
+                          context,
+                          'spacex.home.tab.capsule.title',
+                        ),
+                        subtitle: model.fairings(context),
+                      ),
+                      const Divider(height: 0.0, indent: 74.0),
+                    ],
+                  )
+                : Container()
           ],
         );
       },

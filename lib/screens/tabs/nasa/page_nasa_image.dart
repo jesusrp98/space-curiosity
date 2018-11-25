@@ -109,7 +109,7 @@ class NasaImagePage extends StatelessWidget {
                             ),
                       ),
                       OptionButton(
-                        icon: Icons.cloud_download,
+                        icon: Icons.get_app,
                         title: FlutterI18n.translate(context, 'nasa.download'),
                         onTap: () => ImageDownloader.downloadImage(image.url),
                       ),
