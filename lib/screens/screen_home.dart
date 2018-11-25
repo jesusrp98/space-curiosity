@@ -4,6 +4,7 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
+import 'package:space_news/widgets/list_cell.dart';
 
 import '../models/nasa/nasa_image.dart';
 import '../models/planets/celestial_body.dart';
@@ -56,40 +57,60 @@ class HomeScreen extends StatelessWidget {
                             Expanded(
                               child: ListView(
                                 children: <Widget>[
-                                  ListTile(
-                                    leading: Icon(FontAwesomeIcons.rocket),
-                                    title: Text('SpaceX'),
+                                  ListCell(
+                                    leading: Icon(
+                                      FontAwesomeIcons.rocket,
+                                      size: 32,
+                                    ),
+                                    title: 'SpaceX',
+                                    subtitle: 'Launch tracker',
                                     onTap: () {
                                       Navigator.pop(context);
                                       Navigator.of(context)
                                           .pushNamed('/spacex');
                                     },
                                   ),
-                                  ListTile(
-                                    leading: Icon(Icons.description),
-                                    title: Text('News'),
+                                  ListCell(
+                                    leading: Icon(
+                                      Icons.description,
+                                      size: 32,
+                                    ),
+                                    title: 'News',
+                                    subtitle: 'From around the globe',
                                     onTap: () {
                                       Navigator.pop(context);
                                       Navigator.of(context).pushNamed('/news');
                                     },
                                   ),
-                                  ListTile(
-                                    leading: Icon(Icons.public),
-                                    title: Text('Solar System'),
+                                  ListCell(
+                                    leading: Icon(
+                                      Icons.public,
+                                      size: 32,
+                                    ),
+                                    title: 'Solar System',
+                                    subtitle: 'Explore every inch of our neighborhood',
                                     onTap: () {
                                       Navigator.pop(context);
                                       Navigator.of(context)
                                           .pushNamed('/planets');
                                     },
                                   ),
-                                  ListTile(
-                                    leading: Icon(Icons.my_location),
-                                    title: Text('ISS tracker'),
+                                  ListCell(
+                                    leading: Icon(
+                                      Icons.my_location,
+                                      size: 32,
+                                    ),
+                                    title: 'ISS tracker',
+                                    subtitle: 'They\'re floating avobe us!',
                                     onTap: () {},
                                   ),
-                                  ListTile(
-                                    leading: Icon(Icons.fitness_center),
-                                    title: Text('Weight calculator'),
+                                  ListCell(
+                                    leading: Icon(
+                                      Icons.fitness_center,
+                                      size: 32,
+                                    ),
+                                    title: 'Weight calculator',
+                                    subtitle: 'Does Mars makes me fatter?',
                                     onTap: () {},
                                   ),
                                 ],
@@ -194,8 +215,11 @@ class _ContentPageState extends State<ContentPage> {
                   ),
               scrollDirection: Axis.vertical,
               itemCount: _nasaModel.getSize,
+              autoplay: true,
+              autoplayDelay: 6000,
+              duration: 750,
               itemWidth: 500.0,
-              itemHeight: 500.0,
+              itemHeight: 550.0,
               layout: SwiperLayout.STACK,
             ),
     );
