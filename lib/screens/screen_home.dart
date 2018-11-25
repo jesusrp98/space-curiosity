@@ -7,6 +7,7 @@ import 'package:scoped_model/scoped_model.dart';
 
 import '../models/nasa/nasa_image.dart';
 import '../models/planets/celestial_body.dart';
+import '../util/colors.dart';
 import '../widgets/list_cell.dart';
 import '../widgets/photo_card.dart';
 import 'screen_about.dart';
@@ -22,15 +23,8 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.info_outline),
-            onPressed: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => AboutScreen()),
-                ),
-          ),
-        ],
+        elevation: 0.0,
+        backgroundColor: backgroundColor,
         title: Text(
           FlutterI18n.translate(context, 'app.title'),
           style: TextStyle(fontWeight: FontWeight.bold),
@@ -38,6 +32,114 @@ class HomeScreen extends StatelessWidget {
         centerTitle: true,
       ),
       body: ContentPage(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: FloatingActionButton.extended(
+        icon: const Icon(Icons.share),
+        label: Text('Share image'),
+        onPressed: () {},
+      ),
+      bottomNavigationBar: BottomAppBar(  
+        color: primaryColor,
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            IconButton(
+              icon: Icon(Icons.menu),
+              tooltip: 'Menu',
+              onPressed: () => showModalBottomSheet(
+                    context: context,
+                    builder: (context) {
+                      return Column(
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Icon(
+                              Icons.expand_more,
+                              size: 24.0,
+                            ),
+                          ),
+                          Expanded(
+                            child: ListView(
+                              children: <Widget>[
+                                ListTile(
+                                  leading: Icon(FontAwesomeIcons.rocket),
+                                  title: Text('SpaceX'),
+                                  onTap: () {
+                                    Navigator.pop(context);
+                                    Navigator.of(context).pushNamed('/spacex');
+                                  }
+                                ),
+                                ListTile(
+                                  leading: Icon(Icons.description),
+                                  title: Text('News'),
+                                  onTap: () {
+                                    Navigator.pop(context);
+                                    Navigator.of(context).pushNamed('/news');
+                                  }
+                                ),
+                                ListTile(
+                                  leading: Icon(Icons.public),
+                                  title: Text('Solar System'),
+                                  onTap: () {
+                                    Navigator.pop(context);
+                                    Navigator.of(context).pushNamed('/planets');
+                                  }
+                                ),
+                                ListTile(
+                                  leading: Icon(Icons.my_location),
+                                  title: Text('ISS tracker'),
+                                  onTap: () {},
+                                ),
+                                ListTile(
+                                  leading: Icon(Icons.fitness_center),
+                                  title: Text('Weight calculator'),
+                                  onTap: () {},
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      );
+                    },
+                  ),
+            ),
+            IconButton(
+              icon: Icon(Icons.more_vert),
+              tooltip: 'Settings',
+              onPressed: () => showModalBottomSheet(
+                    context: context,
+                    builder: (_) => Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Icon(
+                                Icons.expand_more,
+                                size: 24.0,
+                              ),
+                            ),
+                            ListTile(
+                              leading: Icon(Icons.info),
+                              title: Text('About this app'),
+                              onTap: () => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) => AboutScreen()),
+                                  ),
+                            ),
+                            ListTile(
+                              leading: Icon(Icons.settings),
+                              title: Text('Customize your experience'),
+                              onTap: () {},
+                            ),
+                          ],
+                        ),
+                  ),
+            )
+          ],
+        ),
+      ),
     );
   }
 }
@@ -69,79 +171,13 @@ class _ContentPageState extends State<ContentPage> {
       children: <Widget>[
         Expanded(
           child: Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: ScopedModel<NasaImagesModel>(
               model: _nasaModel,
               child: _buildNasaImage(),
             ),
           ),
         ),
-        const Divider(height: 0.0),
-        ListCell(
-          leading: Icon(FontAwesomeIcons.rocket, size: 36.0),
-          title: 'SpaceX',
-          subtitle: 'Launch Tracker',
-          onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(builder: (_) => SpacexScreen()),
-              ),
-        ),
-        const Divider(height: 0.0, indent: 68.0),
-        ListCell(
-          leading: Icon(Icons.description, size: 36.0),
-          title: 'Breaking News',
-          subtitle: 'From around the globe',
-          onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(builder: (_) => NewsScreen()),
-              ),
-        ),
-        const Divider(height: 0.0, indent: 68.0),
-        ListCell(
-          leading: Icon(Icons.public, size: 36.0),
-          title: 'Solar System',
-          subtitle: 'Explore every inch of our neighborhood',
-          onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => ScopedModel<PlanetsModel>(
-                        model: _planetsModel,
-                        child: SolarSystemScreen(
-                          planetModel: _planetsModel,
-                        ),
-                      ),
-                ),
-              ),
-        ),
-        // Padding(
-        //   padding: const EdgeInsets.all(16.0),
-        //   child: Row(
-        //     crossAxisAlignment: CrossAxisAlignment.center,
-        //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //     children: <Widget>[
-        //       HomeIcon(
-        //         icon: FontAwesomeIcons.rocket,
-        //         title: 'SpaceX',
-        //         screen: SpacexScreen(),
-        //       ),
-        //       HomeIcon(
-        //         icon: Icons.description,
-        //         title: 'News',
-        //         screen: NewsScreen(),
-        //       ),
-        //       HomeIcon(
-        //         icon: Icons.public,
-        //         title: 'Solar System',
-        //         screen: ScopedModel<PlanetsModel>(
-        //           model: _planetsModel,
-        //           child: SolarSystemScreen(
-        //             planetModel: _planetsModel,
-        //           ),
-        //         ),
-        //       ),
-        //     ],
-        //   ),
-        // )
       ],
     );
   }
