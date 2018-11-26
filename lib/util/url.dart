@@ -6,6 +6,7 @@ class Url {
   //Base urls
   static const String spacexBaseUrl = 'https://api.spacexdata.com/v3';
   static const String nasaBaseUrl = 'https://api.nasa.gov/planetary/apod';
+  static const String issBaseUrl = 'http://api.open-notify.org';
 
   // Home page lists
   static const String rocketList = '$spacexBaseUrl/rockets';
@@ -95,4 +96,8 @@ class Url {
   static const String dailyPicture = '$nasaBaseUrl?api_key=$nasaApiKey';
   static const String morePictures =
       '$nasaBaseUrl?api_key=$nasaApiKey&count=10';
+
+  // ISS stuff
+  static const String issLocation = '$issBaseUrl/iss-now.json';
+  static const String issPassTimes = '$issBaseUrl/iss-pass.json';
 }
