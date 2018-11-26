@@ -1,16 +1,18 @@
 class IssLocation {
-  final List<num> location;
+  final List<num> coordinates;
   final DateTime date;
 
-  IssLocation({this.location, this.date});
+  IssLocation({this.coordinates, this.date});
 
   factory IssLocation.fromJson(Map<String, dynamic> json) {
     return IssLocation(
-      location: [
+      coordinates: [
         json['iss_position']['latitude'],
         json['iss_position']['longitude'],
       ],
       date: DateTime.fromMicrosecondsSinceEpoch(json['timestamp']),
     );
   }
+
+
 }

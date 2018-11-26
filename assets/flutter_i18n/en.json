@@ -8,6 +8,9 @@
     "copy_link": "Copy link",
     "download": "Download"
   },
+  "iss": {
+    "title": "ISS"
+  },
   "spacex": {
     "home": {
       "title": "Welcome to SpaceX",
