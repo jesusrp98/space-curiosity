@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:http/http.dart' as http;
 
 import '../../util/url.dart';
@@ -18,4 +19,10 @@ class IssModel extends QuerryModel {
 
     loadingState(false);
   }
+
+  IssLocation get issLocation => getItem(0);
+
+  IssPassTimes get issPassTimes => getItem(1);
+
+  String title(context) => FlutterI18n.translate(context, 'iss.title');
 }
