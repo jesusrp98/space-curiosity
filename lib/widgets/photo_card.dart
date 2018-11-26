@@ -34,12 +34,7 @@ class PhotoCard extends StatelessWidget {
             Expanded(
               child: Hero(
                 tag: image.getDate,
-                child: CachedNetworkImage(
-                  imageUrl: image.url,
-                  errorWidget: const Icon(Icons.error),
-                  fadeInDuration: Duration(milliseconds: 100),
-                  fit: BoxFit.cover,
-                ),
+                child: getMedia(image.url),
               ),
             ),
             Container(
@@ -70,60 +65,19 @@ class PhotoCard extends StatelessWidget {
       ),
     );
   }
-}
 
-class PhotoCardCompact extends StatelessWidget {
-  final NasaImage image;
+  Widget getMedia(String url) {
+    return CachedNetworkImage(
+            imageUrl: url.contains('youtube') ? getVideoThumbnail(url) : url,
+            errorWidget: const Icon(Icons.error),
+            fadeInDuration: Duration(milliseconds: 100),
+            fit: BoxFit.cover,
+          );
+  }
 
-  PhotoCardCompact(this.image);
+  String getVideoThumbnail(String url) {
+    RegExp regExp = RegExp(r"");
 
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      elevation: 6.0,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
-      clipBehavior: Clip.antiAlias,
-      child: InkWell(
-        onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (_) => NasaImagePage(image),
-              ),
-            ),
-        onLongPress: () async => await FlutterWebBrowser.openWebPage(
-              url: image.url,
-              androidToolbarColor: primaryColor,
-            ),
-        child: Column(
-          children: <Widget>[
-            Expanded(
-              child: Hero(
-                tag: image.getDate,
-                child: Image.network(
-                  image.url,
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                children: <Widget>[
-                  Text(
-                    image.title,
-                    style: Theme.of(context)
-                        .textTheme
-                        .title
-                        .copyWith(fontWeight: FontWeight.bold),
-                  ),
-                  Container(height: 8.0),
-                  Text(image.getDate, style: Theme.of(context).textTheme.title),
-                ],
-              ),
-            )
-          ],
-        ),
-      ),
-    );
+    return regExp.stringMatch(url).toString();
   }
 }
