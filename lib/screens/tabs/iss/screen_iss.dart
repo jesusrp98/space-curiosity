@@ -1,94 +1,103 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_map/flutter_map.dart';
-import 'package:latlong/latlong.dart';
-import 'package:native_widgets/native_widgets.dart';
+import 'package:flutter_i18n/flutter_i18n.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'package:space_news/models/iss/iss.dart';
-import 'package:space_news/util/colors.dart';
 
-class IssScreen extends StatelessWidget {
+import '../../../models/querry_model.dart';
+
+class IssScreen extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => _IssScreenState();
+}
+
+class _IssScreenState extends State<IssScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  int _currentIndex = 0;
+
+  static final List<QuerryModel> modelTab = [
+    // SpacexHomeModel(),
+    // VehiclesModel(),
+    // LaunchesModel(0),
+    // LaunchesModel(1),
+    // SpacexCompanyModel(),
+  ];
+
+  final List<ScopedModel> _tabs = [
+    // ScopedModel<SpacexHomeModel>(
+    //   model: modelTab[0],
+    //   child: SpacexHomeTab(),
+    // ),
+    // ScopedModel<VehiclesModel>(
+    //   model: modelTab[1],
+    //   child: VehiclesTab(),
+    // ),
+    // ScopedModel<LaunchesModel>(
+    //   model: modelTab[2],
+    //   child: LaunchesTab(0),
+    // ),
+    // ScopedModel<LaunchesModel>(
+    //   model: modelTab[3],
+    //   child: LaunchesTab(1),
+    // ),
+    // ScopedModel<SpacexCompanyModel>(
+    //   model: modelTab[4],
+    //   child: SpacexCompanyTab(),
+    // ),
+  ];
+
+  @override
+  initState() {
+    super.initState();
+    modelTab.forEach((model) => model.loadData());
+  }
 
   @override
   Widget build(BuildContext context) {
-    return ScopedModel<IssModel>(
-      model: IssModel()..loadData(),
-      child: ScopedModelDescendant<IssModel>(
-        builder: (context, child, model) => Scaffold(
-              key: _scaffoldKey,
-              body: CustomScrollView(slivers: <Widget>[
-                SliverAppBar(
-                  expandedHeight: MediaQuery.of(context).size.height * 0.3,
-                  floating: false,
-                  pinned: true,
-                  flexibleSpace: FlexibleSpaceBar(
-                    centerTitle: true,
-                    title: Text(model.title(context)),
-                    background: (model.isLoading)
-                        ? NativeLoadingIndicator(center: true)
-                        : FlutterMap(
-                            options: MapOptions(
-                              center: LatLng(
-                                0.0,
-                                0.0,
-                              ),
-                              zoom: 6.0,
-                              minZoom: 5.0,
-                              maxZoom: 10.0,
-                            ),
-                            layers: <LayerOptions>[
-                              TileLayerOptions(
-                                urlTemplate:
-                                    'https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png',
-                                subdomains: ['a', 'b', 'c', 'd'],
-                                backgroundColor: primaryColor,
-                              ),
-                              MarkerLayerOptions(markers: [
-                                Marker(
-                                  width: 45.0,
-                                  height: 45.0,
-                                  point: LatLng(
-                                    model.issLocation.coordinates[0],
-                                    model.issLocation.coordinates[1],
-                                  ),
-                                  builder: (_) => Icon(
-                                        Icons.location_on,
-                                        color: Colors.red,
-                                        size: 45.0,
-                                      ),
-                                )
-                              ])
-                            ],
-                          ),
-                  ),
-                ),
-                (model.isLoading)
-                    ? SliverFillRemaining(
-                        child: NativeLoadingIndicator(center: true),
-                      )
-                    : SliverToBoxAdapter(child: _buildBody())
-              ]),
-            ),
+    return Scaffold(
+      key: _scaffoldKey,
+      body: _tabs[_currentIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        onTap: (index) => setState(() => _currentIndex = index),
+        currentIndex: _currentIndex,
+        items: <BottomNavigationBarItem>[
+          // BottomNavigationBarItem(
+          //   title: Text(FlutterI18n.translate(
+          //     context,
+          //     'spacex.home.icon',
+          //   )),
+          //   icon: Icon(Icons.home),
+          // ),
+          // BottomNavigationBarItem(
+          //   title: Text(FlutterI18n.translate(
+          //     context,
+          //     'spacex.vehicle.icon',
+          //   )),
+          //   icon: Icon(FontAwesomeIcons.rocket),
+          // ),
+          // BottomNavigationBarItem(
+          //   title: Text(FlutterI18n.translate(
+          //     context,
+          //     'spacex.upcoming.icon',
+          //   )),
+          //   icon: Icon(Icons.access_time),
+          // ),
+          // BottomNavigationBarItem(
+          //   title: Text(FlutterI18n.translate(
+          //     context,
+          //     'spacex.latest.icon',
+          //   )),
+          //   icon: Icon(Icons.library_books),
+          // ),
+          // BottomNavigationBarItem(
+          //   title: Text(FlutterI18n.translate(
+          //     context,
+          //     'spacex.company.icon',
+          //   )),
+          //   icon: Icon(Icons.location_city),
+          // ),
+        ],
       ),
-    );
-  }
-
-  Widget _buildBody() {
-    return ScopedModelDescendant<IssModel>(
-      builder: (context, child, model) => Scrollbar(
-            child: Column(
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    children: <Widget>[
-                      Text("Hello hello")
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
     );
   }
 }
