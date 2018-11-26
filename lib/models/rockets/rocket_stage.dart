@@ -3,13 +3,12 @@ import 'package:intl/intl.dart';
 
 abstract class Stage {
   final bool reusable;
-  final num engines, fuelAmount, burnTime, thrustSea, thrustVacuum;
+  final num engines, fuelAmount, thrustSea, thrustVacuum;
 
   Stage({
     this.reusable,
     this.engines,
     this.fuelAmount,
-    this.burnTime,
     this.thrustSea,
     this.thrustVacuum,
   });
@@ -26,10 +25,6 @@ abstract class Stage {
         {'number': engines.toString()},
       );
 
-  String getBurnTime(context) => burnTime == null
-      ? FlutterI18n.translate(context, 'spacex.other.unknown')
-      : '${NumberFormat.decimalPattern().format(burnTime)} s';
-
   String get getThrustSea =>
       '${NumberFormat.decimalPattern().format(thrustSea)} kN';
 
@@ -42,14 +37,12 @@ class FirstStage extends Stage {
     reusable,
     engines,
     fuelAmount,
-    burnTime,
     thrustSea,
     thrustVacuum,
   }) : super(
           reusable: reusable,
           engines: engines,
           fuelAmount: fuelAmount,
-          burnTime: burnTime,
           thrustSea: thrustSea,
           thrustVacuum: thrustVacuum,
         );
@@ -58,7 +51,6 @@ class FirstStage extends Stage {
       reusable: json['reusable'],
       engines: json['engines'],
       fuelAmount: json['fuel_amount_tons'],
-      burnTime: json['burn_time_sec'],
       thrustSea: json['thrust_sea_level']['kN'],
       thrustVacuum: json['thrust_vacuum']['kN'],
     );
@@ -72,14 +64,12 @@ class SecondStage extends Stage {
     reusable,
     engines,
     fuelAmount,
-    burnTime,
     thrustVacuum,
     this.fairingDimensions,
   }) : super(
           reusable: reusable,
           engines: engines,
           fuelAmount: fuelAmount,
-          burnTime: burnTime,
           thrustVacuum: thrustVacuum,
         );
   factory SecondStage.fromJson(Map<String, dynamic> json) {
@@ -87,7 +77,6 @@ class SecondStage extends Stage {
       reusable: json['reusable'],
       engines: json['engines'],
       fuelAmount: json['fuel_amount_tons'],
-      burnTime: json['burn_time_sec'],
       thrustVacuum: json['thrust']['kN'],
       fairingDimensions: [
         json['payloads']['composite_fairing']['height']['meters'],

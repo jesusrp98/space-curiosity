@@ -122,7 +122,6 @@
           "engines_number": "{number} motores",
           "fuel_amount": "Cantidad de combustible",
           "fuel_amount_tons": "{tons} toneladas",
-          "burn_time": "Tiempo de ignición",
           "fairing_height": "Altura de la cofia",
           "fairing_diameter": "Diámetro de la cofia"
         },

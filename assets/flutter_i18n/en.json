@@ -122,7 +122,6 @@
           "engines_number": "{number} engines",
           "fuel_amount": "Fuel amount",
           "fuel_amount_tons": "{tons} tons",
-          "burn_time": "Burn time",
           "fairing_height": "Fairing height",
           "fairing_diameter": "Fairing diameter"
         },
