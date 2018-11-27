@@ -54,13 +54,14 @@ class HomeScreen extends StatelessWidget {
                                 size: 24.0,
                               ),
                             ),
+                            const Divider(height: 0.0),
                             Expanded(
                               child: ListView(
                                 children: <Widget>[
                                   ListCell(
                                     leading: Icon(
                                       FontAwesomeIcons.rocket,
-                                      size: 32,
+                                      size: 42,
                                     ),
                                     title: 'SpaceX',
                                     subtitle: 'Launch tracker',
@@ -70,10 +71,11 @@ class HomeScreen extends StatelessWidget {
                                           .pushNamed('/spacex');
                                     },
                                   ),
+                                  const Divider(height: 0.0, indent: 74.0),
                                   ListCell(
                                     leading: Icon(
                                       Icons.description,
-                                      size: 32,
+                                      size: 42,
                                     ),
                                     title: 'News',
                                     subtitle: 'From around the globe',
@@ -82,35 +84,49 @@ class HomeScreen extends StatelessWidget {
                                       Navigator.of(context).pushNamed('/news');
                                     },
                                   ),
+                                  const Divider(height: 0.0, indent: 74.0),
                                   ListCell(
                                     leading: Icon(
                                       Icons.public,
-                                      size: 32,
+                                      size: 42,
                                     ),
                                     title: 'Solar System',
-                                    subtitle: 'Explore every inch of our neighborhood',
+                                    subtitle:
+                                        'Explore every inch of our neighborhood',
                                     onTap: () {
                                       Navigator.pop(context);
                                       Navigator.of(context)
                                           .pushNamed('/planets');
                                     },
                                   ),
+                                  const Divider(height: 0.0, indent: 74.0),
                                   ListCell(
                                     leading: Icon(
                                       Icons.my_location,
-                                      size: 32,
+                                      size: 42,
                                     ),
                                     title: 'ISS tracker',
                                     subtitle: 'They\'re floating avobe us!',
                                     onTap: () {},
                                   ),
+                                  const Divider(height: 0.0, indent: 74.0),
                                   ListCell(
                                     leading: Icon(
                                       Icons.fitness_center,
-                                      size: 32,
+                                      size: 42,
                                     ),
                                     title: 'Weight calculator',
                                     subtitle: 'Does Mars makes me fatter?',
+                                    onTap: () {},
+                                  ),
+                                  const Divider(height: 0.0, indent: 74.0),
+                                  ListCell(
+                                    leading: Icon(
+                                      Icons.camera_alt,
+                                      size: 42,
+                                    ),
+                                    title: 'Mars rovers',
+                                    subtitle: 'Show me some photos!',
                                     onTap: () {},
                                   ),
                                 ],
@@ -135,6 +151,7 @@ class HomeScreen extends StatelessWidget {
                                 size: 24.0,
                               ),
                             ),
+                            const Divider(height: 0.0),
                             ListTile(
                               leading: Icon(Icons.info),
                               title: Text('About this app'),
@@ -143,6 +160,7 @@ class HomeScreen extends StatelessWidget {
                                 Navigator.of(context).pushNamed('/info');
                               },
                             ),
+                            const Divider(height: 0.0, indent: 72.0),
                             ListTile(
                               leading: Icon(Icons.settings),
                               title: Text('Customize your experience'),
