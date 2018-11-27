@@ -36,8 +36,5 @@ abstract class QuerryModel extends Model {
 
   bool get isLoading => _loading;
 
-  clearLists() {
-    _items.clear();
-    _photos.clear();
-  }
+  clearLists() => _items.clear();
 }
