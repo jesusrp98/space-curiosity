@@ -34,7 +34,16 @@ class PhotoCard extends StatelessWidget {
             Expanded(
               child: Hero(
                 tag: image.getDate,
-                child: getMedia(image.url),
+                child: CachedNetworkImage(
+                  imageUrl: image.url,
+                  errorWidget: const Icon(
+                    Icons.error,
+                    color: secondaryText,
+                    size: 128.0,
+                  ),
+                  fadeInDuration: Duration(milliseconds: 100),
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
             Container(
@@ -64,20 +73,5 @@ class PhotoCard extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  Widget getMedia(String url) {
-    return CachedNetworkImage(
-            imageUrl: url.contains('youtube') ? getVideoThumbnail(url) : url,
-            errorWidget: const Icon(Icons.error),
-            fadeInDuration: Duration(milliseconds: 100),
-            fit: BoxFit.cover,
-          );
-  }
-
-  String getVideoThumbnail(String url) {
-    RegExp regExp = RegExp(r"");
-
-    return regExp.stringMatch(url).toString();
   }
 }

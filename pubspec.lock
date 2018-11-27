@@ -49,7 +49,7 @@ packages:
       name: cached_network_image
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.4.2"
+    version: "0.5.1"
   charcode:
     dependency: transitive
     description:
@@ -138,14 +138,14 @@ packages:
       name: flutter_cache_manager
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.1.2"
+    version: "0.2.0+1"
   flutter_i18n:
     dependency: "direct main"
     description:
       name: flutter_i18n
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.4.0"
+    version: "0.5.0"
   flutter_image:
     dependency: transitive
     description:
@@ -220,7 +220,7 @@ packages:
       name: http
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.11.3+17"
+    version: "0.12.0"
   http_multi_server:
     dependency: transitive
     description:
@@ -241,7 +241,7 @@ packages:
       name: image_downloader
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.9.0"
+    version: "0.9.1"
   intl:
     dependency: "direct main"
     description:
@@ -423,7 +423,7 @@ packages:
       name: share
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.4.0"
+    version: "0.5.3"
   shared_preferences:
     dependency: transitive
     description:
@@ -631,7 +631,7 @@ packages:
       name: webfeed
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.3"
+    version: "0.4.0"
   xml:
     dependency: transitive
     description:

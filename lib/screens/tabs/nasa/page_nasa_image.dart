@@ -99,7 +99,7 @@ class NasaImagePage extends StatelessWidget {
                       OptionButton(
                         icon: Icons.share,
                         title: FlutterI18n.translate(context, 'nasa.share'),
-                        onTap: () => share(image.share(context)),
+                        onTap: () => Share.share(image.share(context)),
                       ),
                       OptionButton(
                         icon: Icons.link,
