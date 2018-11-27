@@ -1,6 +1,8 @@
 class IssAstronauts {
   final List<Astronaut> astronauts;
+
   IssAstronauts(this.astronauts);
+
   factory IssAstronauts.fromJson(Map<String, dynamic> json) {
     return IssAstronauts(
       (json['people'] as List)
@@ -12,7 +14,9 @@ class IssAstronauts {
 
 class Astronaut {
   final String name, craft;
+
   Astronaut({this.name, this.craft});
+
   factory Astronaut.fromJson(Map<String, dynamic> json) {
     return Astronaut(
       name: json['name'],

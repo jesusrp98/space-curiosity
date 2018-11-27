@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:scoped_model/scoped_model.dart';
 
-import '../../../models/querry_model.dart';
+import '../../../models/iss/iss.dart';
+import 'tab_astronauts.dart';
+import 'tab_home.dart';
+import 'tab_times.dart';
 
 class IssScreen extends StatefulWidget {
   @override
@@ -14,41 +16,27 @@ class _IssScreenState extends State<IssScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   int _currentIndex = 0;
 
-  static final List<QuerryModel> modelTab = [
-    // SpacexHomeModel(),
-    // VehiclesModel(),
-    // LaunchesModel(0),
-    // LaunchesModel(1),
-    // SpacexCompanyModel(),
-  ];
+  static final IssModel issModel = IssModel();
 
   final List<ScopedModel> _tabs = [
-    // ScopedModel<SpacexHomeModel>(
-    //   model: modelTab[0],
-    //   child: SpacexHomeTab(),
-    // ),
-    // ScopedModel<VehiclesModel>(
-    //   model: modelTab[1],
-    //   child: VehiclesTab(),
-    // ),
-    // ScopedModel<LaunchesModel>(
-    //   model: modelTab[2],
-    //   child: LaunchesTab(0),
-    // ),
-    // ScopedModel<LaunchesModel>(
-    //   model: modelTab[3],
-    //   child: LaunchesTab(1),
-    // ),
-    // ScopedModel<SpacexCompanyModel>(
-    //   model: modelTab[4],
-    //   child: SpacexCompanyTab(),
-    // ),
+    ScopedModel<IssModel>(
+      model: issModel,
+      child: IssHomeTab(),
+    ),
+    ScopedModel<IssModel>(
+      model: issModel,
+      child: IssTimesTab(),
+    ),
+    ScopedModel<IssModel>(
+      model: issModel,
+      child: IssAstronautsTab(),
+    ),
   ];
 
   @override
   initState() {
     super.initState();
-    modelTab.forEach((model) => model.loadData());
+    issModel.loadData();
   }
 
   @override
@@ -61,41 +49,27 @@ class _IssScreenState extends State<IssScreen> {
         onTap: (index) => setState(() => _currentIndex = index),
         currentIndex: _currentIndex,
         items: <BottomNavigationBarItem>[
-          // BottomNavigationBarItem(
-          //   title: Text(FlutterI18n.translate(
-          //     context,
-          //     'spacex.home.icon',
-          //   )),
-          //   icon: Icon(Icons.home),
-          // ),
-          // BottomNavigationBarItem(
-          //   title: Text(FlutterI18n.translate(
-          //     context,
-          //     'spacex.vehicle.icon',
-          //   )),
-          //   icon: Icon(FontAwesomeIcons.rocket),
-          // ),
-          // BottomNavigationBarItem(
-          //   title: Text(FlutterI18n.translate(
-          //     context,
-          //     'spacex.upcoming.icon',
-          //   )),
-          //   icon: Icon(Icons.access_time),
-          // ),
-          // BottomNavigationBarItem(
-          //   title: Text(FlutterI18n.translate(
-          //     context,
-          //     'spacex.latest.icon',
-          //   )),
-          //   icon: Icon(Icons.library_books),
-          // ),
-          // BottomNavigationBarItem(
-          //   title: Text(FlutterI18n.translate(
-          //     context,
-          //     'spacex.company.icon',
-          //   )),
-          //   icon: Icon(Icons.location_city),
-          // ),
+          BottomNavigationBarItem(
+            title: Text(FlutterI18n.translate(
+              context,
+              'iss.home.icon',
+            )),
+            icon: Icon(Icons.home),
+          ),
+          BottomNavigationBarItem(
+            title: Text(FlutterI18n.translate(
+              context,
+              'iss.times.icon',
+            )),
+            icon: Icon(Icons.today),
+          ),
+          BottomNavigationBarItem(
+            title: Text(FlutterI18n.translate(
+              context,
+              'iss.astronauts.icon',
+            )),
+            icon: Icon(Icons.people),
+          ),
         ],
       ),
     );

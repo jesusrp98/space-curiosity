@@ -9,7 +9,21 @@
     "download": "Download"
   },
   "iss": {
-    "title": "ISS"
+    "home": {
+      "title": "ISS",
+      "icon": "Home",
+      "tab": {}
+    },
+    "times": {
+      "title": "Pass times",
+      "icon": "Home",
+      "tab": {}
+    },
+    "astronauts": {
+      "title": "Astronauts",
+      "icon": "Home",
+      "tab": {}
+    }
   },
   "spacex": {
     "home": {
