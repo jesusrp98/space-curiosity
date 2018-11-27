@@ -120,7 +120,7 @@
           "reusable": "Reutilizable",
           "engines": "Motores",
           "engines_number": "{number} motores",
-          "fuel_amount": "Cantidad de combustible",
+          "fuel_amount": "Combustible",
           "fuel_amount_tons": "{tons} toneladas",
           "fairing_height": "Altura de la cofia",
           "fairing_diameter": "Diámetro de la cofia"
@@ -155,7 +155,7 @@
         },
         "thruster": {
           "title": "propulsores",
-          "systems": "Sistemas de propulsores",
+          "systems": "Sistemas de propulsión",
           "name": "Nombre",
           "amount": "Cantidad",
           "fuel": "Combustible",
@@ -184,7 +184,7 @@
         },
         "missions": {
           "title": "MISIONES",
-          "mission": "Misión nº{number}",
+          "mission": "Misión n°{number}",
           "no_missions": "Esta embarcación todavía no ha participado en ninguna misión."
         }
       }
@@ -208,7 +208,7 @@
             "altitude": "Altitud"
           },
           "core": {
-            "serial": "Número de serial",
+            "serial": "Número de serie",
             "model": "Modelo",
             "reused": "Reusado",
             "landing_zone": "Zona de aterrizaje",
@@ -218,7 +218,7 @@
         },
         "payload": {
           "title": "carga",
-          "name": "Nombre de carga",
+          "name": "Nombre",
           "capsule_serial": "Número de serie",
           "capsule_reused": "Reusada",
           "manufacturer": "Fabricante",
@@ -231,9 +231,9 @@
           },
           "fairings": {
             "reused": "Cofia reusada",
-            "recovery_attempt": "Intento de recuperación",
-            "recovery_success": "Recuperación con éxito",
-            "recovery_ship": "Barco de recuperación"
+            "recovery_attempt": "Intento de caputra",
+            "recovery_success": "Caputra con éxito",
+            "recovery_ship": "Barco asignado"
           }
         }
       }
@@ -251,7 +251,7 @@
       "icon": "Compañía",
       "founded": "Fundado en {founded} por {founder}",
       "menu": {
-        "website": "Sitio web",
+        "website": "Sitio web oficial",
         "twitter": "Página de Twitter",
         "flickr": "Página de Flickr"
       },
@@ -275,7 +275,7 @@
         "splashings": "Amerizajes",
         "landings_rtls": "Aterrizajes RTLS",
         "landings_asds": "Aterrizajes ASDS",
-        "mission": "Misión nº{number}",
+        "mission": "Misión n°{number}",
         "no_description_core": "Este propulsor todavía no tiene descripción.",
         "no_description_capsule": "Esta cápsula todavía no tiene descripción."
       },

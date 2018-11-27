@@ -167,6 +167,22 @@ class RocketPage extends StatelessWidget {
             ),
             _rocket.getMass(context),
           ),
+          const Divider(height: 24.0),
+          RowItem.textRow(
+            FlutterI18n.translate(
+              context,
+              'spacex.vehicle.rocket.stage.fairing_height',
+            ),
+            _rocket.secondStage.fairingHeight(context),
+          ),
+          const SizedBox(height: 12.0),
+          RowItem.textRow(
+            FlutterI18n.translate(
+              context,
+              'spacex.vehicle.rocket.stage.fairing_diameter',
+            ),
+            _rocket.secondStage.fairingDiameter(context),
+          ),
         ],
       ),
     );
@@ -235,14 +251,6 @@ class RocketPage extends StatelessWidget {
             _rocket.firstStage.getEngines(context),
           ),
           const SizedBox(height: 12.0),
-          RowItem.textRow(
-            FlutterI18n.translate(
-              context,
-              'spacex.vehicle.rocket.stage.burn_time',
-            ),
-            _rocket.firstStage.getBurnTime(context),
-          ),
-          const SizedBox(height: 12.0),
           RowItem.iconRow(
             FlutterI18n.translate(
               context,
@@ -295,14 +303,6 @@ class RocketPage extends StatelessWidget {
             _rocket.secondStage.getEngines(context),
           ),
           const SizedBox(height: 12.0),
-          RowItem.textRow(
-            FlutterI18n.translate(
-              context,
-              'spacex.vehicle.rocket.stage.burn_time',
-            ),
-            _rocket.secondStage.getBurnTime(context),
-          ),
-          const SizedBox(height: 12.0),          
           RowItem.iconRow(
             FlutterI18n.translate(
               context,
@@ -317,22 +317,6 @@ class RocketPage extends StatelessWidget {
               'spacex.vehicle.rocket.engines.thrust_vacuum',
             ),
             _rocket.secondStage.getThrustVacuum,
-          ),
-          const Divider(height: 24.0),
-          RowItem.textRow(
-            FlutterI18n.translate(
-              context,
-              'spacex.vehicle.rocket.stage.fairing_height',
-            ),
-            _rocket.secondStage.fairingHeight(context),
-          ),
-          const SizedBox(height: 12.0),
-          RowItem.textRow(
-            FlutterI18n.translate(
-              context,
-              'spacex.vehicle.rocket.stage.fairing_diameter',
-            ),
-            _rocket.secondStage.fairingDiameter(context),
           ),
         ],
       ),

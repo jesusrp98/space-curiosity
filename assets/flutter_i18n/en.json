@@ -156,7 +156,7 @@
         "thruster": {
           "title": "thrusters",
           "systems": "Thruster systems",
-          "name": "Thruster name",
+          "name": "Name",
           "amount": "Amount",
           "fuel": "Primary fuel",
           "oxidizer": "Oxidizer",
@@ -218,7 +218,7 @@
         },
         "payload": {
           "title": "payload",
-          "name": "Payload name",
+          "name": "Name",
           "capsule_serial": "Capsule serial",
           "capsule_reused": "Reused",
           "manufacturer": "Manufacturer",

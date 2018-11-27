@@ -44,7 +44,10 @@ class LaunchPage extends StatelessWidget {
               floatingActionButton: _launch.hasVideo
                   ? FloatingActionButton(
                       child: const Icon(Icons.play_arrow),
-                      tooltip: 'Watch replay',
+                      tooltip: FlutterI18n.translate(
+                        context,
+                        'spacex.other.tooltip.watch_replay',
+                      ),
                       onPressed: () => FlutterWebBrowser.openWebPage(
                             url: _launch.getVideo,
                             androidToolbarColor: primaryColor,
@@ -54,7 +57,10 @@ class LaunchPage extends StatelessWidget {
                       child: const Icon(Icons.event),
                       backgroundColor:
                           !_launch.tentativeTime ? accentColor : Colors.grey,
-                      tooltip: 'Add event',
+                      tooltip: FlutterI18n.translate(
+                        context,
+                        'spacex.other.tooltip.add_event',
+                      ),
                       onPressed: !_launch.tentativeTime
                           ? () => Add2Calendar.addEvent2Cal(Event(
                                 title: _launch.name,
