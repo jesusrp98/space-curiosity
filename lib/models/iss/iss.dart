@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 
 import '../../util/url.dart';
 import '../querry_model.dart';
+import 'astronauts.dart';
 import 'current_location.dart';
 import 'pass_time.dart';
 
@@ -14,8 +15,12 @@ class IssModel extends QuerryModel {
     response = await http.get(Url.issLocation);
     items.add(IssLocation.fromJson(json.decode(response.body)));
 
+    // TODO get location
     response = await http.get('${Url.issPassTimes}?lat=___&long=___');
     items.add(IssPassTimes.fromJson(json.decode(response.body)));
+
+    response = await http.get(Url.issAstronauts);
+    items.add(IssAstronauts.fromJson(json.decode(response.body)));
 
     loadingState(false);
   }

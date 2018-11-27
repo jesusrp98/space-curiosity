@@ -100,4 +100,5 @@ class Url {
   // ISS stuff
   static const String issLocation = '$issBaseUrl/iss-now.json';
   static const String issPassTimes = '$issBaseUrl/iss-pass.json';
+  static const String issAstronauts = '$issBaseUrl/astros.json';
 }

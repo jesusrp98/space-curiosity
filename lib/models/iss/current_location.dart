@@ -13,6 +13,4 @@ class IssLocation {
       date: DateTime.fromMicrosecondsSinceEpoch(json['timestamp']),
     );
   }
-
-
 }
