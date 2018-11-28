@@ -45,6 +45,7 @@
           "booster": "El propulsor",
           "side_core": "El propulsor lateral",
           "body": "{booster} {reused}, {landing}.",
+          "body_null": "No se conocen todavía los detalles sobre la primera fase.",
           "body_reused": "es reutilizado",
           "body_new": "no es reutilizado",
           "body_landing": "y aterrizará en {landingpad}",
@@ -53,9 +54,9 @@
         "capsule": {
           "title": "Cápsula de carga",
           "body": "La cápsula {reused}.",
+          "body_null": "No se conocen todavía los detalles sobre la cápsula.",
           "body_reused": "es reutilizada",
-          "body_new": "no es reutilizada",
-          "body_null": "Todavía no se conoce la cápsula."
+          "body_new": "no es reutilizada"
         }
       }
     },

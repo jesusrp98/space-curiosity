@@ -45,17 +45,18 @@
           "booster": "The booster",
           "side_core": "The side core",
           "body": "{booster} {reused}, {landing}.",
+          "body_null": "Details about the first stage are yet to be disclosed.",
           "body_reused": "is reused",
           "body_new": "is not reused",
           "body_landing": "and it will land on {landingpad}",
           "body_dispended": "and it won't perform a landing"
         },
         "capsule": {
-          "title": "Cargo capsule",
+          "title": "Dragon capsule",
           "body": "The capsule {reused}.",
+          "body_null": "Details about the capsule are yet to be disclosed.",
           "body_reused": "is reused",
-          "body_new": "is not reused",
-          "body_null": "Capsule serial is unknown."
+          "body_new": "is not reused"
         }
       }
     },

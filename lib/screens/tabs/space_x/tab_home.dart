@@ -10,6 +10,7 @@ import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
 
+import '../../../models/rockets/capsule_details.dart';
 import '../../../models/rockets/core_details.dart';
 import '../../../models/rockets/launchpad.dart';
 import '../../../models/rockets/spacex_home.dart';
@@ -158,14 +159,28 @@ class SpacexHomeTab extends StatelessWidget {
               subtitle: model.staticFire(context),
             ),
             const Divider(height: 0.0, indent: 74.0),
-            ListCell(
-              leading: const Icon(Icons.directions_boat, size: 42.0),
-              title: FlutterI18n.translate(
-                context,
-                'spacex.home.tab.fairings.title',
-              ),
-              subtitle: model.fairings(context),
-            ),
+            model.launch.rocket.hasFairing
+                ? ListCell(
+                    leading: const Icon(Icons.directions_boat, size: 42.0),
+                    title: FlutterI18n.translate(
+                      context,
+                      'spacex.home.tab.fairings.title',
+                    ),
+                    subtitle: model.fairings(context),
+                  )
+                : Column(
+                    children: <Widget>[
+                      ListCell(
+                        leading: const Icon(Icons.shopping_basket, size: 42.0),
+                        title: FlutterI18n.translate(
+                          context,
+                          'spacex.home.tab.capsule.title',
+                        ),
+                        subtitle: model.capsule(context),
+                      ),
+                      const Divider(height: 0.0, indent: 74.0),
+                    ],
+                  ),
             const Divider(height: 0.0, indent: 74.0),
             ListCell(
               leading: const Icon(Icons.autorenew, size: 42.0),
@@ -194,21 +209,6 @@ class SpacexHomeTab extends StatelessWidget {
                         ),
                       ),
             ),
-            model.launch.rocket.secondStage.payloads[0].isNasaPayload
-                ? Column(
-                    children: <Widget>[
-                      ListCell(
-                        leading: const Icon(Icons.directions_boat, size: 42.0),
-                        title: FlutterI18n.translate(
-                          context,
-                          'spacex.home.tab.capsule.title',
-                        ),
-                        subtitle: model.fairings(context),
-                      ),
-                      const Divider(height: 0.0, indent: 74.0),
-                    ],
-                  )
-                : Container()
           ],
         );
       },
