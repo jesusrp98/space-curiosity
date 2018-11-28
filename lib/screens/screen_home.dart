@@ -206,16 +206,9 @@ class _ContentPageState extends State<ContentPage> {
       builder: (context, child, model) => model.isLoading
           ? NativeLoadingIndicator(center: true)
           : Swiper(
-              itemBuilder: (context, index) => ScopedModel<NasaImagesModel>(
-                    model: _nasaModel,
-                    child: ScopedModelDescendant<NasaImagesModel>(
-                      builder: (context, child, model) => model.isLoading
-                          ? NativeLoadingIndicator(center: true)
-                          : PhotoCard(model.getItem(index)),
-                    ),
-                  ),
+              itemBuilder: (_, index) => PhotoCard(model.getItem(index)),
               scrollDirection: Axis.vertical,
-              itemCount: _nasaModel.getSize,
+              itemCount: model.getSize,
               autoplay: true,
               autoplayDelay: 6000,
               duration: 750,
