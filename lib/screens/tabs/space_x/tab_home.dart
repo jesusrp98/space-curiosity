@@ -16,6 +16,7 @@ import '../../../models/rockets/launchpad.dart';
 import '../../../models/rockets/spacex_home.dart';
 import '../../../util/colors.dart';
 import '../../../widgets/list_cell.dart';
+import 'dialog_capsule.dart';
 import 'dialog_core.dart';
 import 'dialog_launchpad.dart';
 import 'page_launch.dart';
@@ -168,18 +169,29 @@ class SpacexHomeTab extends StatelessWidget {
                     ),
                     subtitle: model.fairings(context),
                   )
-                : Column(
-                    children: <Widget>[
-                      ListCell(
-                        leading: const Icon(Icons.shopping_basket, size: 42.0),
-                        title: FlutterI18n.translate(
-                          context,
-                          'spacex.home.tab.capsule.title',
-                        ),
-                        subtitle: model.capsule(context),
-                      ),
-                      const Divider(height: 0.0, indent: 74.0),
-                    ],
+                : ListCell(
+                    leading: const Icon(Icons.shopping_basket, size: 42.0),
+                    title: FlutterI18n.translate(
+                      context,
+                      'spacex.home.tab.capsule.title',
+                    ),
+                    subtitle: model.capsule(context),
+                    onTap: model.launch.rocket.hasFairing
+                        ? () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => ScopedModel<CapsuleModel>(
+                                      model: CapsuleModel(
+                                        model.launch.rocket.secondStage
+                                            .getPayload(0)
+                                            .capsuleSerial,
+                                      )..loadData(),
+                                      child: CapsuleDialog(),
+                                    ),
+                                fullscreenDialog: true,
+                              ),
+                            )
+                        : null,
                   ),
             const Divider(height: 0.0, indent: 74.0),
             ListCell(
@@ -189,7 +201,7 @@ class SpacexHomeTab extends StatelessWidget {
                 'spacex.home.tab.first_stage.title',
               ),
               subtitle: model.landings(context),
-              onTap: (model.launch.rocket.firstStage[0].id == null)
+              onTap: model.launch.rocket.firstStage[0].id == null
                   ? null
                   : () => Navigator.push(
                         context,
