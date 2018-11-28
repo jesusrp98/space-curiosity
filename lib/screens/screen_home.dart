@@ -4,6 +4,7 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
+import 'package:space_news/widgets/home_sheet.dart';
 import 'package:space_news/widgets/list_cell.dart';
 
 import '../models/nasa/nasa_image.dart';
@@ -45,94 +46,82 @@ class HomeScreen extends StatelessWidget {
               tooltip: 'Menu',
               onPressed: () => showModalBottomSheet(
                     context: context,
-                    builder: (context) => Column(
-                          children: <Widget>[
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Icon(
-                                Icons.expand_more,
-                                size: 24.0,
-                              ),
+                    builder: (context) => HomeSheet(
+                          Expanded(
+                            child: ListView(
+                              children: <Widget>[
+                                ListCell(
+                                  leading: Icon(
+                                    FontAwesomeIcons.rocket,
+                                    size: 42,
+                                  ),
+                                  title: 'SpaceX',
+                                  subtitle: 'Launch tracker',
+                                  onTap: () {
+                                    Navigator.pop(context);
+                                    Navigator.of(context).pushNamed('/spacex');
+                                  },
+                                ),
+                                const Divider(height: 0.0, indent: 74.0),
+                                ListCell(
+                                  leading: Icon(
+                                    Icons.description,
+                                    size: 42,
+                                  ),
+                                  title: 'News',
+                                  subtitle: 'From around the globe',
+                                  onTap: () {
+                                    Navigator.pop(context);
+                                    Navigator.of(context).pushNamed('/news');
+                                  },
+                                ),
+                                const Divider(height: 0.0, indent: 74.0),
+                                ListCell(
+                                  leading: Icon(
+                                    Icons.public,
+                                    size: 42,
+                                  ),
+                                  title: 'Solar System',
+                                  subtitle:
+                                      'Explore every inch of our neighborhood',
+                                  onTap: () {
+                                    Navigator.pop(context);
+                                    Navigator.of(context).pushNamed('/planets');
+                                  },
+                                ),
+                                const Divider(height: 0.0, indent: 74.0),
+                                ListCell(
+                                  leading: Icon(
+                                    Icons.my_location,
+                                    size: 42,
+                                  ),
+                                  title: 'ISS tracker',
+                                  subtitle: 'They\'re floating avobe us!',
+                                  onTap: () {},
+                                ),
+                                const Divider(height: 0.0, indent: 74.0),
+                                ListCell(
+                                  leading: Icon(
+                                    Icons.fitness_center,
+                                    size: 42,
+                                  ),
+                                  title: 'Weight calculator',
+                                  subtitle: 'Does Mars makes me fatter?',
+                                  onTap: () {},
+                                ),
+                                const Divider(height: 0.0, indent: 74.0),
+                                ListCell(
+                                  leading: Icon(
+                                    Icons.camera_alt,
+                                    size: 42,
+                                  ),
+                                  title: 'Mars rovers',
+                                  subtitle: 'Show me some photos!',
+                                  onTap: () {},
+                                ),
+                              ],
                             ),
-                            const Divider(height: 0.0),
-                            Expanded(
-                              child: ListView(
-                                children: <Widget>[
-                                  ListCell(
-                                    leading: Icon(
-                                      FontAwesomeIcons.rocket,
-                                      size: 42,
-                                    ),
-                                    title: 'SpaceX',
-                                    subtitle: 'Launch tracker',
-                                    onTap: () {
-                                      Navigator.pop(context);
-                                      Navigator.of(context)
-                                          .pushNamed('/spacex');
-                                    },
-                                  ),
-                                  const Divider(height: 0.0, indent: 74.0),
-                                  ListCell(
-                                    leading: Icon(
-                                      Icons.description,
-                                      size: 42,
-                                    ),
-                                    title: 'News',
-                                    subtitle: 'From around the globe',
-                                    onTap: () {
-                                      Navigator.pop(context);
-                                      Navigator.of(context).pushNamed('/news');
-                                    },
-                                  ),
-                                  const Divider(height: 0.0, indent: 74.0),
-                                  ListCell(
-                                    leading: Icon(
-                                      Icons.public,
-                                      size: 42,
-                                    ),
-                                    title: 'Solar System',
-                                    subtitle:
-                                        'Explore every inch of our neighborhood',
-                                    onTap: () {
-                                      Navigator.pop(context);
-                                      Navigator.of(context)
-                                          .pushNamed('/planets');
-                                    },
-                                  ),
-                                  const Divider(height: 0.0, indent: 74.0),
-                                  ListCell(
-                                    leading: Icon(
-                                      Icons.my_location,
-                                      size: 42,
-                                    ),
-                                    title: 'ISS tracker',
-                                    subtitle: 'They\'re floating avobe us!',
-                                    onTap: () {},
-                                  ),
-                                  const Divider(height: 0.0, indent: 74.0),
-                                  ListCell(
-                                    leading: Icon(
-                                      Icons.fitness_center,
-                                      size: 42,
-                                    ),
-                                    title: 'Weight calculator',
-                                    subtitle: 'Does Mars makes me fatter?',
-                                    onTap: () {},
-                                  ),
-                                  const Divider(height: 0.0, indent: 74.0),
-                                  ListCell(
-                                    leading: Icon(
-                                      Icons.camera_alt,
-                                      size: 42,
-                                    ),
-                                    title: 'Mars rovers',
-                                    subtitle: 'Show me some photos!',
-                                    onTap: () {},
-                                  ),
-                                ],
-                              ),
-                            )
-                          ],
+                          ),
                         ),
                   ),
             ),
@@ -141,35 +130,29 @@ class HomeScreen extends StatelessWidget {
               tooltip: 'Actions',
               onPressed: () => showModalBottomSheet(
                     context: context,
-                    builder: (context) => Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: <Widget>[
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Icon(
-                                Icons.expand_more,
-                                size: 24.0,
+                    builder: (context) => HomeSheet(
+                          Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: <Widget>[
+                              ListTile(
+                                leading: Icon(Icons.info),
+                                title: Text('About this app'),
+                                onTap: () {
+                                  Navigator.pop(context);
+                                  Navigator.of(context).pushNamed('/info');
+                                },
                               ),
-                            ),
-                            const Divider(height: 0.0),
-                            ListTile(
-                              leading: Icon(Icons.info),
-                              title: Text('About this app'),
-                              onTap: () {
-                                Navigator.pop(context);
-                                Navigator.of(context).pushNamed('/info');
-                              },
-                            ),
-                            const Divider(height: 0.0, indent: 72.0),
-                            ListTile(
-                              leading: Icon(Icons.settings),
-                              title: Text('Customize your experience'),
-                              onTap: () {
-                                Navigator.pop(context);
-                                Navigator.of(context).pushNamed('/settings');
-                              },
-                            ),
-                          ],
+                              const Divider(height: 0.0, indent: 72.0),
+                              ListTile(
+                                leading: Icon(Icons.settings),
+                                title: Text('Customize your experience'),
+                                onTap: () {
+                                  Navigator.pop(context);
+                                  Navigator.of(context).pushNamed('/settings');
+                                },
+                              ),
+                            ],
+                          ),
                         ),
                   ),
             )
