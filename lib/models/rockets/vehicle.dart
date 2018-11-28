@@ -40,8 +40,8 @@ class VehiclesModel extends QuerryModel {
       randomList
           .sublist(0, 5)
           .forEach((index) => photos.add(getItem(index).getRandomPhoto));
+      photos.shuffle();
     }
-    photos.shuffle();
 
     loadingState(false);
   }

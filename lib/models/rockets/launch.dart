@@ -30,8 +30,8 @@ class LaunchesModel extends QuerryModel {
         photos.addAll(Url.spacexUpcomingScreen);
       else
         photos.addAll(getItem(0).photos.sublist(0, 3));
+      photos.shuffle();
     }
-    photos.shuffle();
 
     loadingState(false);
   }
