@@ -50,24 +50,30 @@ class _IssScreenState extends State<IssScreen> {
         currentIndex: _currentIndex,
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            title: Text(FlutterI18n.translate(
-              context,
-              'iss.home.icon',
-            )),
+            title: Text(
+              FlutterI18n.translate(
+                context,
+                'iss.home.icon',
+              ),
+            ),
             icon: Icon(Icons.home),
           ),
           BottomNavigationBarItem(
-            title: Text(FlutterI18n.translate(
-              context,
-              'iss.times.icon',
-            )),
-            icon: Icon(Icons.today),
+            title: Text(
+              FlutterI18n.translate(
+                context,
+                'iss.times.icon',
+              ),
+            ),
+            icon: Icon(Icons.timer),
           ),
           BottomNavigationBarItem(
-            title: Text(FlutterI18n.translate(
-              context,
-              'iss.astronauts.icon',
-            )),
+            title: Text(
+              FlutterI18n.translate(
+                context,
+                'iss.astronauts.icon',
+              ),
+            ),
             icon: Icon(Icons.people),
           ),
         ],

@@ -105,7 +105,7 @@ class IssHomeTab extends StatelessWidget {
               ),
               const Divider(height: 0.0, indent: 74.0),
               ListCell(
-                leading: const Icon(Icons.public, size: 42.0),
+                leading: const Icon(Icons.update, size: 42.0),
                 title: FlutterI18n.translate(
                   context,
                   'iss.home.tab.orbit.title',
@@ -114,7 +114,7 @@ class IssHomeTab extends StatelessWidget {
               ),
               const Divider(height: 0.0, indent: 74.0),
               ListCell(
-                leading: const Icon(Icons.public, size: 42.0),
+                leading: const Icon(Icons.attach_money, size: 42.0),
                 title: FlutterI18n.translate(
                   context,
                   'iss.home.tab.project.title',
@@ -123,7 +123,7 @@ class IssHomeTab extends StatelessWidget {
               ),
               const Divider(height: 0.0, indent: 74.0),
               ListCell(
-                leading: const Icon(Icons.public, size: 42.0),
+                leading: const Icon(Icons.people, size: 42.0),
                 title: FlutterI18n.translate(
                   context,
                   'iss.home.tab.numbers.title',
@@ -132,7 +132,7 @@ class IssHomeTab extends StatelessWidget {
               ),
               const Divider(height: 0.0, indent: 74.0),
               ListCell(
-                leading: const Icon(Icons.public, size: 42.0),
+                leading: const Icon(Icons.straighten, size: 42.0),
                 title: FlutterI18n.translate(
                   context,
                   'iss.home.tab.specifications.title',

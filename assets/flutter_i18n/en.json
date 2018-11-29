@@ -35,20 +35,20 @@
         },
         "specifications": {
           "title": "Specifications",
-          "body": "ISS is {lenght}m long and {width}m wide, weighing over {mass} ks."
+          "body": "ISS is {lenght}m long and {width}m wide, weighing over {mass} kg."
         }
       }
     },
     "times": {
       "title": "Pass times",
-      "icon": "Home",
+      "icon": "Pass times",
       "tab": {
         "duration": "During {time} seconds"
       }
     },
     "astronauts": {
       "title": "Astronauts",
-      "icon": "Home",
+      "icon": "Astronauts",
       "tab": {
         "from": "On board {place}"
       }

@@ -49,7 +49,7 @@ class IssModel extends QuerryModel {
   String altitudeBody(context) => FlutterI18n.translate(
         context,
         'iss.home.tab.altitude.body',
-        {'height': '20 November 1998', 'velocity': '7.66'},
+        {'height': '400', 'velocity': '7.66'},
       );
 
   String orbitBody(context) => FlutterI18n.translate(
@@ -67,7 +67,7 @@ class IssModel extends QuerryModel {
   String numbersBody(context) => FlutterI18n.translate(
         context,
         'iss.home.tab.numbers.body',
-        {'days': '20 November 1998', 'orbits': 20.toString()},
+        {'days': '6000', 'orbits': '100.000'},
       );
 
   String specificationsBody(context) => FlutterI18n.translate(
