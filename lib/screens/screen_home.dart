@@ -4,6 +4,7 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
+import 'package:space_news/screens/tabs/iss/screen_iss.dart';
 
 import '../models/nasa/nasa_image.dart';
 import '../models/planets/celestial_body.dart';
@@ -83,7 +84,7 @@ class _ContentPageState extends State<ContentPage> {
           subtitle: 'Launch Tracker',
           onTap: () => Navigator.push(
                 context,
-                MaterialPageRoute(builder: (_) => SpacexScreen()),
+                MaterialPageRoute(builder: (_) => IssScreen()),
               ),
         ),
         const Divider(height: 0.0, indent: 68.0),

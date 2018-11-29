@@ -17,7 +17,7 @@ class IssModel extends QuerryModel {
 
     // TODO get location
     response =
-        await http.get('${Url.issPassTimes}?lat=48.864716&long=2.349014');
+        await http.get('${Url.issPassTimes}?lat=48.864716&lon=2.349014&n=11');
     items.add(IssPassTimes.fromJson(json.decode(response.body)));
 
     response = await http.get(Url.issAstronauts);

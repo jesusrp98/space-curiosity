@@ -41,9 +41,9 @@ class IssTimesTab extends StatelessWidget {
                           : FlutterMap(
                               options: MapOptions(
                                 center: LatLng(0.0, 0.0),
-                                zoom: 6.0,
-                                minZoom: 5.0,
-                                maxZoom: 10.0,
+                                zoom: 1.0,
+                                minZoom: 1.0,
+                                maxZoom: 5.0,
                               ),
                               layers: <LayerOptions>[
                                 TileLayerOptions(
@@ -103,7 +103,7 @@ class IssTimesTab extends StatelessWidget {
               title: passTime.getDate,
               subtitle: passTime.getDuration(context),
             ),
-            const Divider(height: 0.0, indent: 96.0)
+            const Divider(height: 0.0, indent: 74.0)
           ],
         );
       },

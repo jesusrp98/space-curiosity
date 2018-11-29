@@ -7,8 +7,8 @@ class IssLocation {
   factory IssLocation.fromJson(Map<String, dynamic> json) {
     return IssLocation(
       coordinates: [
-        json['iss_position']['latitude'],
-        json['iss_position']['longitude'],
+        num.parse(json['iss_position']['latitude']),
+        num.parse(json['iss_position']['longitude']),
       ],
       date: DateTime.fromMicrosecondsSinceEpoch(json['timestamp']),
     );

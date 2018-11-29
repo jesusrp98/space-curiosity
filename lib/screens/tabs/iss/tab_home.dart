@@ -41,9 +41,9 @@ class IssHomeTab extends StatelessWidget {
                           : FlutterMap(
                               options: MapOptions(
                                 center: LatLng(0.0, 0.0),
-                                zoom: 6.0,
-                                minZoom: 5.0,
-                                maxZoom: 10.0,
+                                zoom: 1.0,
+                                minZoom: 1.0,
+                                maxZoom: 5.0,
                               ),
                               layers: <LayerOptions>[
                                 TileLayerOptions(
@@ -99,7 +99,7 @@ class IssHomeTab extends StatelessWidget {
                 leading: const Icon(Icons.public, size: 42.0),
                 title: FlutterI18n.translate(
                   context,
-                  'iss.home.tab.altutude.title',
+                  'iss.home.tab.altitude.title',
                 ),
                 subtitle: model.altitudeBody(context),
               ),
