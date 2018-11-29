@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:latlong/latlong.dart';
 import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
+import 'package:space_news/models/iss/astronauts.dart';
+import 'package:space_news/widgets/list_cell.dart';
 import '../../../models/iss/iss.dart';
 import '../../../util/colors.dart';
 
@@ -21,7 +24,7 @@ class IssAstronautsTab extends StatelessWidget {
                 pinned: true,
                 flexibleSpace: FlexibleSpaceBar(
                   centerTitle: true,
-                  title: Text(model.title(context)),
+                  title: Text(model.astronautsTitle(context)),
                   background: (model.isLoading)
                       ? NativeLoadingIndicator(center: true)
                       : FlutterMap(
@@ -64,26 +67,39 @@ class IssAstronautsTab extends StatelessWidget {
                   ? SliverFillRemaining(
                       child: NativeLoadingIndicator(center: true),
                     )
-                  : SliverToBoxAdapter(child: _buildBody())
+                  : SliverList(
+                      key: PageStorageKey(model.astronautsTitle(context)),
+                      delegate: SliverChildBuilderDelegate(
+                        _buildItem,
+                        childCount: model.getSize,
+                      ),
+                    ),
             ]),
           ),
     );
   }
 
-  Widget _buildBody() {
-    return ScopedModelDescendant<IssModel>(
-      builder: (context, child, model) => Scrollbar(
+  Widget _buildItem(BuildContext context, int index) {
+    return ScopedModelDescendant<IssModel>(builder: (context, child, model) {
+      final Astronaut astronaut = model.getItem(2).astronauts[index];
+
+      return Column(
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.all(16.0),
             child: Column(
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    children: <Widget>[Text("Hello hello")],
-                  ),
+                ListCell(
+                  leading: Icon(FontAwesomeIcons.userAstronaut, size: 42.0),
+                  title: astronaut.name,
+                  subtitle: astronaut.description(context),
                 ),
+                const Divider(height: 0.0, indent: 96.0)
               ],
             ),
           ),
-    );
+        ],
+      );
+    });
   }
 }

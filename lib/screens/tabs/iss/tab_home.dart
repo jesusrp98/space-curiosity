@@ -21,7 +21,7 @@ class IssHomeTab extends StatelessWidget {
                 pinned: true,
                 flexibleSpace: FlexibleSpaceBar(
                   centerTitle: true,
-                  title: Text(model.title(context)),
+                  title: Text(model.homeTitle(context)),
                   background: (model.isLoading)
                       ? NativeLoadingIndicator(center: true)
                       : FlutterMap(

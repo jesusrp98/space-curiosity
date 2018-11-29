@@ -1,3 +1,5 @@
+import 'package:flutter_i18n/flutter_i18n.dart';
+
 class IssAstronauts {
   final List<Astronaut> astronauts;
 
@@ -23,4 +25,9 @@ class Astronaut {
       craft: json['craft'],
     );
   }
+
+  String description(context) => FlutterI18n.translate(
+        context,
+        'iss.astronauts.tab.from', {'place': craft},
+      );
 }

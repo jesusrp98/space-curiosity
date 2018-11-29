@@ -17,12 +17,16 @@
     "times": {
       "title": "Pass times",
       "icon": "Home",
-      "tab": {}
+      "tab": {
+        "duration": "During {time} seconds"
+      }
     },
     "astronauts": {
       "title": "Astronauts",
       "icon": "Home",
-      "tab": {}
+      "tab": {
+        "from": "From {place}"
+      }
     }
   },
   "spacex": {

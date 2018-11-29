@@ -29,5 +29,11 @@ class IssModel extends QuerryModel {
 
   IssPassTimes get issPassTimes => getItem(1);
 
-  String title(context) => FlutterI18n.translate(context, 'iss.title');
+  IssAstronauts get astronauts => getItem(2);
+
+  String homeTitle(context) => FlutterI18n.translate(context, 'iss.home.title');
+
+  String passTimesTitle(context) => FlutterI18n.translate(context, 'iss.times.title');
+
+  String astronautsTitle(context) => FlutterI18n.translate(context, 'iss.astronauts.title');
 }

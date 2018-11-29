@@ -3,6 +3,8 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong/latlong.dart';
 import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
+import 'package:space_news/models/iss/pass_time.dart';
+import 'package:space_news/widgets/list_cell.dart';
 import '../../../models/iss/iss.dart';
 import '../../../util/colors.dart';
 
@@ -21,7 +23,7 @@ class IssTimesTab extends StatelessWidget {
                 pinned: true,
                 flexibleSpace: FlexibleSpaceBar(
                   centerTitle: true,
-                  title: Text(model.title(context)),
+                  title: Text(model.passTimesTitle(context)),
                   background: (model.isLoading)
                       ? NativeLoadingIndicator(center: true)
                       : FlutterMap(
@@ -64,26 +66,39 @@ class IssTimesTab extends StatelessWidget {
                   ? SliverFillRemaining(
                       child: NativeLoadingIndicator(center: true),
                     )
-                  : SliverToBoxAdapter(child: _buildBody())
+                  : SliverList(
+                      key: PageStorageKey(model.passTimesTitle(context)),
+                      delegate: SliverChildBuilderDelegate(
+                        _buildItem,
+                        childCount: model.getSize,
+                      ),
+                    ),
             ]),
           ),
     );
   }
 
-  Widget _buildBody() {
-    return ScopedModelDescendant<IssModel>(
-      builder: (context, child, model) => Scrollbar(
+  Widget _buildItem(BuildContext context, int index) {
+    return ScopedModelDescendant<IssModel>(builder: (context, child, model) {
+      final PassTime passTime = model.getItem(1).passTimes[index];
+
+      return Column(
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.all(16.0),
             child: Column(
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    children: <Widget>[Text("Hello hello")],
-                  ),
+                ListCell(
+                  leading: Icon(Icons.timer, size: 42.0),
+                  title: passTime.getDate,
+                  subtitle: passTime.getDuration(context),
                 ),
+                const Divider(height: 0.0, indent: 96.0)
               ],
             ),
           ),
-    );
+        ],
+      );
+    });
   }
 }

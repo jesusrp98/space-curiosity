@@ -1,3 +1,6 @@
+import 'package:flutter_i18n/flutter_i18n.dart';
+import 'package:intl/intl.dart';
+
 class IssPassTimes {
   final List<PassTime> passTimes;
 
@@ -24,4 +27,13 @@ class PassTime {
       date: DateTime.fromMicrosecondsSinceEpoch(json['risetime']),
     );
   }
+
+  String get getDate =>
+      DateFormat.yMMMMd().addPattern('Hm', '  ·  ').format(date);
+
+  String getDuration(context) => FlutterI18n.translate(
+        context,
+        'iss.times.tab.duration',
+        {'time': duration.inSeconds.toString()},
+      );
 }
