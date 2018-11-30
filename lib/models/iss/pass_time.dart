@@ -24,7 +24,7 @@ class PassTime {
   factory PassTime.fromJson(Map<String, dynamic> json) {
     return PassTime(
       duration: Duration(seconds: json['duration']),
-      date: DateTime.fromMillisecondsSinceEpoch(json['risetime']).toLocal(),
+      date: DateTime.fromMillisecondsSinceEpoch(json['risetime'] * 1000).toLocal(),
     );
   }
 

@@ -1,6 +1,8 @@
 import 'dart:async';
 
+import 'package:add_2_calendar/add_2_calendar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong/latlong.dart';
 import 'package:native_widgets/native_widgets.dart';
@@ -77,13 +79,22 @@ class IssTimesTab extends StatelessWidget {
                       ? SliverFillRemaining(
                           child: NativeLoadingIndicator(center: true),
                         )
-                      : SliverList(
-                          key: PageStorageKey(model.passTimesTitle(context)),
-                          delegate: SliverChildBuilderDelegate(
-                            _buildItem,
-                            childCount: model.issPassTimes.passTimes.length,
-                          ),
-                        ),
+                      : model.currentLocation != null
+                          ? SliverList(
+                              key:
+                                  PageStorageKey(model.passTimesTitle(context)),
+                              delegate: SliverChildBuilderDelegate(
+                                _buildItem,
+                                childCount: model.issPassTimes.passTimes.length,
+                              ),
+                            )
+                          : SliverFillRemaining(
+                              child: Icon(
+                                Icons.sentiment_dissatisfied,
+                                size: 100.0,
+                                color: secondaryText,
+                              ),
+                            )
                 ],
               ),
             ),
@@ -102,6 +113,27 @@ class IssTimesTab extends StatelessWidget {
               leading: Icon(Icons.timer, size: 42.0),
               title: passTime.getDate,
               subtitle: passTime.getDuration(context),
+              trailing: IconButton(
+                icon: Icon(
+                  Icons.event,
+                  size: 27.0,
+                  color: lateralText,
+                ),
+                tooltip: FlutterI18n.translate(
+                  context,
+                  'spacex.other.tooltip.add_event',
+                ),
+                onPressed: () => Add2Calendar.addEvent2Cal(
+                      Event(
+                        title: FlutterI18n.translate(
+                          context,
+                          'iss.times.tab.event',
+                        ),
+                        startDate: passTime.date,
+                        endDate: passTime.date.add(passTime.duration),
+                      ),
+                    ),
+              ),
             ),
             const Divider(height: 0.0, indent: 74.0)
           ],

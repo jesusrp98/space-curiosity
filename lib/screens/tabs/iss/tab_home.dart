@@ -90,7 +90,7 @@ class IssHomeTab extends StatelessWidget {
       builder: (context, child, model) => Column(
             children: <Widget>[
               ListCell(
-                leading: const Icon(Icons.public, size: 42.0),
+                leading: const Icon(Icons.flight_takeoff, size: 42.0),
                 title: model.launchedTitle(context),
                 subtitle: model.launchedBody(context),
               ),

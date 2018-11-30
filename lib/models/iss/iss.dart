@@ -1,7 +1,9 @@
 import 'dart:convert';
 
+import 'package:flutter/services.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:http/http.dart' as http;
+import 'package:location/location.dart';
 
 import '../../util/url.dart';
 import '../querry_model.dart';
@@ -10,15 +12,24 @@ import 'current_location.dart';
 import 'pass_time.dart';
 
 class IssModel extends QuerryModel {
+  Map<String, double> currentLocation;
+
   @override
   Future loadData() async {
+    clearLists();
     response = await http.get(Url.issLocation);
     items.add(IssLocation.fromJson(json.decode(response.body)));
 
-    // TODO get location
-    response =
-        await http.get('${Url.issPassTimes}?lat=48.864716&lon=2.349014&n=11');
-    items.add(IssPassTimes.fromJson(json.decode(response.body)));
+    try {
+      currentLocation = await Location().getLocation();
+      response = await http.get(
+        '${Url.issPassTimes}?lat=${currentLocation['latitude']}&lon=${currentLocation['longitude']}&n=11',
+      );
+      items.add(IssPassTimes.fromJson(json.decode(response.body)));
+    } on PlatformException {
+      currentLocation = null;
+      items.add(null);
+    }
 
     response = await http.get(Url.issAstronauts);
     items.add(IssAstronauts.fromJson(json.decode(response.body)));

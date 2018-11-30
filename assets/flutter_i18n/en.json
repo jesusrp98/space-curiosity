@@ -19,7 +19,7 @@
         },
         "altitude": {
           "title": "Altitude",
-          "body": "ISS is orbiting at {height} above us, at {velocity} km/s."
+          "body": "ISS is orbiting at {height} km above us, at {velocity} km/s."
         },
         "orbit": {
           "title": "Orbital period",
@@ -35,7 +35,7 @@
         },
         "specifications": {
           "title": "Specifications",
-          "body": "ISS is {lenght}m long and {width}m wide, weighing over {mass} kg."
+          "body": "ISS is {lenght} m long and {width} m wide, weighing over {mass} kg."
         }
       }
     },
@@ -43,7 +43,8 @@
       "title": "Pass times",
       "icon": "Pass times",
       "tab": {
-        "duration": "During {time} seconds"
+        "duration": "During {time} seconds",
+        "event": "International Space Station"
       }
     },
     "astronauts": {
