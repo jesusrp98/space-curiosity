@@ -43,16 +43,16 @@
       "title": "Pass times",
       "icon": "Pass times",
       "tab": {
-        "duration": "During {time} seconds",
+        "duration": "It will last {time} seconds",
         "event": "International Space Station",
         "location_error": "Permission denied"
       }
     },
     "astronauts": {
-      "title": "Astronauts",
+      "title": "Current astronauts",
       "icon": "Astronauts",
       "tab": {
-        "from": "On board {place}"
+        "from": "Aboard the {place}"
       }
     }
   },

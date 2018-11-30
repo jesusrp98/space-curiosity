@@ -68,6 +68,19 @@ class IssTimesTab extends StatelessWidget {
                                             color: Colors.red,
                                             size: 45.0,
                                           ),
+                                    ),
+                                    Marker(
+                                      width: 24.0,
+                                      height: 24.0,
+                                      point: LatLng(
+                                        model.currentLocation['latitude'],
+                                        model.currentLocation['longitude'],
+                                      ),
+                                      builder: (_) => Icon(
+                                            Icons.my_location,
+                                            color: Colors.grey,
+                                            size: 24.0,
+                                          ),
                                     )
                                   ],
                                 )
