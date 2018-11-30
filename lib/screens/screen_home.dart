@@ -12,6 +12,10 @@ import '../widgets/photo_card.dart';
 
 class HomeScreen extends StatelessWidget {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final Map<String, String> _menu = {
+    'home.menu.about': '/about',
+    'home.menu.settings': '/settings'
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -24,13 +28,15 @@ class HomeScreen extends StatelessWidget {
         ),
         actions: <Widget>[
           PopupMenuButton<String>(
-            itemBuilder: (_) => ['About the app', 'Customize']
-                .map((text) => PopupMenuItem(
-                      value: text,
-                      child: Text(text),
+            itemBuilder: (_) => _menu.keys
+                .map((string) => PopupMenuItem(
+                      value: string,
+                      child: Text(
+                        FlutterI18n.translate(context, string),
+                      ),
                     ))
                 .toList(),
-            onSelected: (_) => {},
+            onSelected: (string) => openPage(context, _menu[string]),
           )
         ],
         centerTitle: true,
@@ -39,7 +45,7 @@ class HomeScreen extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton.extended(
         icon: const Icon(Icons.menu),
-        label: Text('Main menu'),
+        label: Text(FlutterI18n.translate(context, 'home.page.fab')),
         onPressed: () => showModalBottomSheet(
               context: context,
               builder: (context) => Column(
@@ -59,8 +65,14 @@ class HomeScreen extends StatelessWidget {
                                 FontAwesomeIcons.rocket,
                                 size: 42,
                               ),
-                              title: 'SpaceX tracker',
-                              subtitle: 'Elon Musk & company experiments',
+                              title: FlutterI18n.translate(
+                                context,
+                                'home.page.menu.spacex.title',
+                              ),
+                              subtitle: FlutterI18n.translate(
+                                context,
+                                'home.page.menu.spacex.body',
+                              ),
                               onTap: () => openPage(context, '/spacex'),
                             ),
                             const Divider(height: 0.0, indent: 74.0),
@@ -69,8 +81,14 @@ class HomeScreen extends StatelessWidget {
                                 Icons.description,
                                 size: 42,
                               ),
-                              title: 'Latest news',
-                              subtitle: 'Headlines from around the globe',
+                              title: FlutterI18n.translate(
+                                context,
+                                'home.page.menu.news.title',
+                              ),
+                              subtitle: FlutterI18n.translate(
+                                context,
+                                'home.page.menu.news.body',
+                              ),
                               onTap: () => openPage(context, '/news'),
                             ),
                             const Divider(height: 0.0, indent: 74.0),
@@ -79,9 +97,14 @@ class HomeScreen extends StatelessWidget {
                                 Icons.public,
                                 size: 42,
                               ),
-                              title: 'Solar System',
-                              subtitle:
-                                  'Explore every inch of our neighborhood',
+                              title: FlutterI18n.translate(
+                                context,
+                                'home.page.menu.planets.title',
+                              ),
+                              subtitle: FlutterI18n.translate(
+                                context,
+                                'home.page.menu.planets.body',
+                              ),
                               onTap: () => openPage(context, '/planets'),
                             ),
                             const Divider(height: 0.0, indent: 74.0),
@@ -90,8 +113,14 @@ class HomeScreen extends StatelessWidget {
                                   Icons.my_location,
                                   size: 42,
                                 ),
-                                title: 'ISS tracker',
-                                subtitle: 'They\'re floating above us!',
+                                title: FlutterI18n.translate(
+                                  context,
+                                  'home.page.menu.iss.title',
+                                ),
+                                subtitle: FlutterI18n.translate(
+                                  context,
+                                  'home.page.menu.iss.body',
+                                ),
                                 onTap: () => openPage(context, '/iss')),
                             const Divider(height: 0.0, indent: 74.0),
                             ListCell(
@@ -99,8 +128,14 @@ class HomeScreen extends StatelessWidget {
                                 Icons.fitness_center,
                                 size: 42,
                               ),
-                              title: 'Weight calculator',
-                              subtitle: 'Does Mars makes me fatter?',
+                              title: FlutterI18n.translate(
+                                context,
+                                'home.page.menu.weight.title',
+                              ),
+                              subtitle: FlutterI18n.translate(
+                                context,
+                                'home.page.menu.weight.body',
+                              ),
                               // COMING SOON!
                             ),
                             const Divider(height: 0.0, indent: 74.0),
@@ -109,9 +144,14 @@ class HomeScreen extends StatelessWidget {
                                 Icons.camera_alt,
                                 size: 42,
                               ),
-                              title: 'Dear Mars',
-                              subtitle:
-                                  'All about the red planet & its inhabitants',
+                              title: FlutterI18n.translate(
+                                context,
+                                'home.page.menu.mars.title',
+                              ),
+                              subtitle: FlutterI18n.translate(
+                                context,
+                                'home.page.menu.mars.body',
+                              ),
                               // COMING SOON!
                             ),
                           ],
