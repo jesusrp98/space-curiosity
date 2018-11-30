@@ -45,7 +45,14 @@ class NasaImage {
     );
   }
 
-  String get getDate => DateFormat.yMMMMd().format(date);
+  String get getDate {
+    if (date == null) return "";
+    try {
+      return DateFormat.yMMMMd().format(date);
+    } catch (e) {
+      return "";
+    }
+  }
 
   String getCopyright(context) =>
       copyright ?? FlutterI18n.translate(context, 'nasa.no_copyright');
