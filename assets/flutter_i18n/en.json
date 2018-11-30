@@ -44,7 +44,8 @@
       "icon": "Pass times",
       "tab": {
         "duration": "During {time} seconds",
-        "event": "International Space Station"
+        "event": "International Space Station",
+        "location_error": "Permission denied"
       }
     },
     "astronauts": {

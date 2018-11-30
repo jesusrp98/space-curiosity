@@ -89,10 +89,27 @@ class IssTimesTab extends StatelessWidget {
                               ),
                             )
                           : SliverFillRemaining(
-                              child: Icon(
-                                Icons.sentiment_dissatisfied,
-                                size: 100.0,
-                                color: secondaryText,
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  Icon(
+                                    Icons.sentiment_dissatisfied,
+                                    size: 100.0,
+                                    color: secondaryText,
+                                  ),
+                                  Container(height: 16.0),
+                                  Text(
+                                    FlutterI18n.translate(
+                                      context,
+                                      'iss.times.tab.location_error',
+                                    ),
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .title
+                                        .copyWith(color: primaryText),
+                                  )
+                                ],
                               ),
                             )
                 ],
