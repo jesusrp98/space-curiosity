@@ -109,19 +109,20 @@ class HomeScreen extends StatelessWidget {
                             ),
                             const Divider(height: 0.0, indent: 74.0),
                             ListCell(
-                                leading: Icon(
-                                  Icons.my_location,
-                                  size: 42,
-                                ),
-                                title: FlutterI18n.translate(
-                                  context,
-                                  'home.page.menu.iss.title',
-                                ),
-                                subtitle: FlutterI18n.translate(
-                                  context,
-                                  'home.page.menu.iss.body',
-                                ),
-                                onTap: () => openPage(context, '/iss')),
+                              leading: Icon(
+                                Icons.my_location,
+                                size: 42,
+                              ),
+                              title: FlutterI18n.translate(
+                                context,
+                                'home.page.menu.iss.title',
+                              ),
+                              subtitle: FlutterI18n.translate(
+                                context,
+                                'home.page.menu.iss.body',
+                              ),
+                              onTap: () => openPage(context, '/iss'),
+                            ),
                             const Divider(height: 0.0, indent: 74.0),
                             ListCell(
                               leading: Icon(
@@ -136,7 +137,7 @@ class HomeScreen extends StatelessWidget {
                                 context,
                                 'home.page.menu.weight.body',
                               ),
-                              // COMING SOON!
+                              onTap: () => openPage(context, '/weight'),
                             ),
                             const Divider(height: 0.0, indent: 74.0),
                             ListCell(
@@ -152,7 +153,7 @@ class HomeScreen extends StatelessWidget {
                                 context,
                                 'home.page.menu.mars.body',
                               ),
-                              // COMING SOON!
+                              onTap: () => openPage(context, '/mars'),
                             ),
                           ],
                         ),
