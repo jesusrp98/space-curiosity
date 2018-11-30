@@ -24,20 +24,22 @@ class HomeScreen extends StatelessWidget {
         ),
         actions: <Widget>[
           PopupMenuButton<String>(
-              itemBuilder: (_) => ['About the app', 'Customize']
-                  .map((text) => PopupMenuItem(
-                        value: text,
-                        child: Text(text),
-                      ))
-                  .toList(),
-              onSelected: (_) => {},
+            itemBuilder: (_) => ['About the app', 'Customize']
+                .map((text) => PopupMenuItem(
+                      value: text,
+                      child: Text(text),
+                    ))
+                .toList(),
+            onSelected: (_) => {},
           )
         ],
         centerTitle: true,
       ),
       body: ContentPage(),
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.menu),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: FloatingActionButton.extended(
+        icon: const Icon(Icons.menu),
+        label: Text('Main menu'),
         onPressed: () => showModalBottomSheet(
               context: context,
               builder: (context) => Column(
@@ -49,7 +51,6 @@ class HomeScreen extends StatelessWidget {
                           size: 24.0,
                         ),
                       ),
-                      const Divider(height: 0.0),
                       Expanded(
                         child: ListView(
                           children: <Widget>[
@@ -58,12 +59,9 @@ class HomeScreen extends StatelessWidget {
                                 FontAwesomeIcons.rocket,
                                 size: 42,
                               ),
-                              title: 'SpaceX',
-                              subtitle: 'Launch tracker',
-                              onTap: () {
-                                Navigator.pop(context);
-                                Navigator.of(context).pushNamed('/spacex');
-                              },
+                              title: 'SpaceX tracker',
+                              subtitle: 'Elon Musk & company experiments',
+                              onTap: () => openPage(context, '/spacex'),
                             ),
                             const Divider(height: 0.0, indent: 74.0),
                             ListCell(
@@ -71,12 +69,9 @@ class HomeScreen extends StatelessWidget {
                                 Icons.description,
                                 size: 42,
                               ),
-                              title: 'News',
-                              subtitle: 'From around the globe',
-                              onTap: () {
-                                Navigator.pop(context);
-                                Navigator.of(context).pushNamed('/news');
-                              },
+                              title: 'Latest news',
+                              subtitle: 'Headlines from around the globe',
+                              onTap: () => openPage(context, '/news'),
                             ),
                             const Divider(height: 0.0, indent: 74.0),
                             ListCell(
@@ -87,21 +82,17 @@ class HomeScreen extends StatelessWidget {
                               title: 'Solar System',
                               subtitle:
                                   'Explore every inch of our neighborhood',
-                              onTap: () {
-                                Navigator.pop(context);
-                                Navigator.of(context).pushNamed('/planets');
-                              },
+                              onTap: () => openPage(context, '/planets'),
                             ),
                             const Divider(height: 0.0, indent: 74.0),
                             ListCell(
-                              leading: Icon(
-                                Icons.my_location,
-                                size: 42,
-                              ),
-                              title: 'ISS tracker',
-                              subtitle: 'They\'re floating avobe us!',
-                              onTap: () {},
-                            ),
+                                leading: Icon(
+                                  Icons.my_location,
+                                  size: 42,
+                                ),
+                                title: 'ISS tracker',
+                                subtitle: 'They\'re floating above us!',
+                                onTap: () => openPage(context, '/iss')),
                             const Divider(height: 0.0, indent: 74.0),
                             ListCell(
                               leading: Icon(
@@ -110,7 +101,7 @@ class HomeScreen extends StatelessWidget {
                               ),
                               title: 'Weight calculator',
                               subtitle: 'Does Mars makes me fatter?',
-                              onTap: () {},
+                              // COMING SOON!
                             ),
                             const Divider(height: 0.0, indent: 74.0),
                             ListCell(
@@ -118,9 +109,10 @@ class HomeScreen extends StatelessWidget {
                                 Icons.camera_alt,
                                 size: 42,
                               ),
-                              title: 'Mars rovers',
-                              subtitle: 'Show me some photos!',
-                              onTap: () {},
+                              title: 'Dear Mars',
+                              subtitle:
+                                  'All about the red planet & its inhabitants',
+                              // COMING SOON!
                             ),
                           ],
                         ),
@@ -128,53 +120,13 @@ class HomeScreen extends StatelessWidget {
                     ],
                   ),
             ),
-        // bottomNavigationBar: BottomAppBar(
-        //   color: primaryColor,
-        //   child: Row(
-        //     mainAxisSize: MainAxisSize.max,
-        //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //     children: <Widget>[
-        //       IconButton(
-        //         icon: Icon(Icons.menu),
-        //         tooltip: 'Menu',
-        //         onPressed: () =>
-        //             ),
-        //       ),
-        //       IconButton(
-        //         icon: Icon(Icons.more_vert),
-        //         tooltip: 'Actions',
-        //         onPressed: () => showModalBottomSheet(
-        //               context: context,
-        //               builder: (context) => HomeSheet(
-        //                     Column(
-        //                       mainAxisSize: MainAxisSize.min,
-        //                       children: <Widget>[
-        //                         ListTile(
-        //                           leading: Icon(Icons.info),
-        //                           title: Text('About this app'),
-        //                           onTap: () {
-        //                             Navigator.pop(context);
-        //                             Navigator.of(context).pushNamed('/info');
-        //                           },
-        //                         ),
-        //                         const Divider(height: 0.0, indent: 72.0),
-        //                         ListTile(
-        //                           leading: Icon(Icons.settings),
-        //                           title: Text('Customize your experience'),
-        //                           onTap: () {
-        //                             Navigator.pop(context);
-        //                             Navigator.of(context).pushNamed('/settings');
-        //                           },
-        //                         ),
-        //                       ],
-        //                     ),
-        //                   ),
-        //             ),
-        //       )
-        //     ],
-        //   ),
       ),
     );
+  }
+
+  openPage(BuildContext context, String route) {
+    Navigator.pop(context);
+    Navigator.of(context).pushNamed(route);
   }
 }
 
