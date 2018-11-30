@@ -33,7 +33,7 @@ class PhotoCard extends StatelessWidget {
           children: <Widget>[
             Expanded(
               child: Hero(
-                tag: image?.getDate ?? "",
+                tag: image.getDate,
                 child: CachedNetworkImage(
                   imageUrl: image.url,
                   errorWidget: const Icon(
