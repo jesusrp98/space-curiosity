@@ -9,42 +9,55 @@ import 'screens/tabs/planets/add_edit_planet.dart';
 import 'screens/tabs/planets/screen_solar_system.dart';
 import 'screens/tabs/space_x/screen_spacex.dart';
 import 'util/colors.dart';
+import 'package:dynamic_theme/dynamic_theme.dart';
+import 'package:scoped_model/scoped_model.dart';
+import 'models/app_model.dart';
+import 'screens/settings.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  ThemeData _buildThemeData() => ThemeData(
-        brightness: Brightness.dark,
-        fontFamily: 'ProductSans',
-        primaryColor: primaryColor,
-        accentColor: accentColor,
-        canvasColor: backgroundColor,
-        cardColor: cardColor,
-        dialogBackgroundColor: cardColor,
-        dividerColor: dividerColor,
-        highlightColor: highlightColor,
-      );
-
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Space Curiosity',
-      theme: _buildThemeData(),
-      home: HomeScreen(),
-      debugShowCheckedModeBanner: false,
-      routes: <String, WidgetBuilder>{
-        '/home': (_) => HomeScreen(),
-        '/space_x': (_) => SpacexScreen(),
-        '/news': (_) => NewsScreen(),
-        '/planets': (_) => SolarSystemScreen(),
-        AddEditPlanetPage.routeName: (_) =>
-            AddEditPlanetPage(null, type: BodyType.planet),
-      },
-      localizationsDelegates: [
-        FlutterI18nDelegate(false, 'en'),
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate
-      ],
+    return new ScopedModel<AppModel>(
+      model: new AppModel(),
+      child: new ScopedModelDescendant<AppModel>(
+        builder: (context, child, model) => new DynamicTheme(
+            defaultBrightness: model.defaultBrigthness,
+            data: (brightness) => new ThemeData(
+                  brightness: brightness,
+                  fontFamily: 'ProductSans',
+                  primaryColor: primaryColor,
+                  accentColor: accentColor,
+                  canvasColor: backgroundColor,
+                  cardColor: cardColor,
+                  dialogBackgroundColor: cardColor,
+                  dividerColor: dividerColor,
+                  highlightColor: highlightColor,
+                ),
+            themedWidgetBuilder: (context, theme) {
+              return MaterialApp(
+                title: 'Space Curiosity',
+                theme: theme,
+                home: HomeScreen(),
+                debugShowCheckedModeBanner: false,
+                routes: <String, WidgetBuilder>{
+                  '/home': (_) => HomeScreen(),
+                  '/space_x': (_) => SpacexScreen(),
+                  '/news': (_) => NewsScreen(),
+                  '/planets': (_) => SolarSystemScreen(),
+                  AddEditPlanetPage.routeName: (_) =>
+                      AddEditPlanetPage(null, type: BodyType.planet),
+                  '/settings': (_) => SettingsPage(),
+                },
+                localizationsDelegates: [
+                  FlutterI18nDelegate(false, 'en'),
+                  GlobalMaterialLocalizations.delegate,
+                  GlobalWidgetsLocalizations.delegate
+                ],
+              );
+            }),
+      ),
     );
   }
 }

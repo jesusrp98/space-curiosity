@@ -22,6 +22,10 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.settings),
+          onPressed: () => Navigator.pushNamed(context, "/settings"),
+        ),
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.info_outline),

@@ -1,4 +1,6 @@
 PODS:
+  - add_2_calendar (0.0.1):
+    - Flutter
   - BoringSSL (10.0.6):
     - BoringSSL/Implementation (= 10.0.6)
     - BoringSSL/Interface (= 10.0.6)
@@ -139,12 +141,13 @@ PODS:
   - path_provider (0.0.1):
     - Flutter
   - Protobuf (3.6.1)
-  - share (0.0.1):
+  - share (0.5.2):
     - Flutter
   - shared_preferences (0.0.1):
     - Flutter
 
 DEPENDENCIES:
+  - add_2_calendar (from `.symlinks/plugins/add_2_calendar/ios`)
   - clipboard_manager (from `.symlinks/plugins/clipboard_manager/ios`)
   - cloud_firestore (from `.symlinks/plugins/cloud_firestore/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
@@ -179,6 +182,8 @@ SPEC REPOS:
     - Protobuf
 
 EXTERNAL SOURCES:
+  add_2_calendar:
+    :path: ".symlinks/plugins/add_2_calendar/ios"
   clipboard_manager:
     :path: ".symlinks/plugins/clipboard_manager/ios"
   cloud_firestore:
@@ -199,6 +204,7 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/shared_preferences/ios"
 
 SPEC CHECKSUMS:
+  add_2_calendar: da1cb32f7bda3252f01c732f49e6ec72983b50fa
   BoringSSL: e10f92a27043805c01071fe815a5cd98ae8212e7
   clipboard_manager: a6f1e56e1abb10def5bd6a83e86183086bdcfd01
   cloud_firestore: a2d49d9c7219fce31033eb1a2ee953d7733c91d6
@@ -221,12 +227,12 @@ SPEC CHECKSUMS:
   gRPC-ProtoRPC: 76f6053639a842e1fb45fa82aa598bf3f4d9f66f
   gRPC-RxLibrary: 3c305f32155024b116b780f389323c73a28197e6
   GTMSessionFetcher: 0c4baf0a73acd0041bf9f71ea018deedab5ea84e
-  image_downloader: 69e4fff42da518e8be6a620075dd7dc6387f0a9b
+  image_downloader: 59b0e3638f0d35234555bb0605791df26b92962b
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   path_provider: 09407919825bfe3c2deae39453b7a5b44f467873
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
-  share: 8d04605548e55f7ce4ebb7b3e933f3c85028c9cf
+  share: 222b5dcc8031238af9d7de91149df65bad1aef75
   shared_preferences: 5a1d487c427ee18fcd3ea1f2a131569481834b53
 
 PODFILE CHECKSUM: 8c385bd0135977bc39adfc355e443a54346c6d08
