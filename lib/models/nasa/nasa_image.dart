@@ -12,10 +12,11 @@ class NasaImagesModel extends QuerryModel {
   Future loadData() async {
     response = await http.get(Url.dailyPicture);
     final moreResponse = await http.get(Url.morePictures);
-
-    snapshot = json.decode(moreResponse.body);
-    items.add(NasaImage.fromJson(json.decode(response.body)));
-    items.addAll(snapshot.map((image) => NasaImage.fromJson(image)).toList());
+    try {
+      snapshot = json.decode(moreResponse.body);
+      items.add(NasaImage.fromJson(json.decode(response.body)));
+      items.addAll(snapshot.map((image) => NasaImage.fromJson(image)).toList());
+    } catch (e) {}
 
     loadingState(false);
   }

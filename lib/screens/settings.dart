@@ -17,6 +17,14 @@ class _SettingsPageState extends State<SettingsPage> {
   void initState() {
     // _darkTheme = Theme.of(context).brightness == Brightness.light;
     // _darkTheme = widget.model.theme == Themes.dark;
+    var _model = ScopedModel.of<AppModel>(context);
+    if (_model.theme == Themes.light) {
+      setState(() {
+        _darkTheme = false;
+      });
+    }
+    print('Theme: ${_model.theme.toString()}');
+
     super.initState();
   }
 
@@ -32,13 +40,15 @@ class _SettingsPageState extends State<SettingsPage> {
                     value: _darkTheme,
                     onChanged: (bool value) {
                       if (value) {
-                        model.themeData = Themes.dark;
+                        model.theme = Themes.dark;
                       } else {
-                        model.themeData = Themes.light;
+                        model.theme = Themes.light;
                       }
+                      model.themeData = model.theme;
                       setState(() {
                         _darkTheme = value;
                       });
+                      print('Theme: ${model.theme.toString()}');
                     },
                   ),
                 ),
