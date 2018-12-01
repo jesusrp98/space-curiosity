@@ -47,11 +47,13 @@ class NasaImage {
   }
 
   String get getDate {
+    print('Date: $date');
     if (date == null) return DateTime.now().millisecondsSinceEpoch.toString();
     try {
-      return DateFormat.yMMMMd().format(date);
+      return DateFormat.yMMMMd('en_US').format(date);
     } catch (e) {
-      return DateTime.now().millisecondsSinceEpoch.toString();
+      print(e);
+      return '';
     }
   }
 
