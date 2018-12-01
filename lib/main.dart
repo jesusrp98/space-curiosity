@@ -12,36 +12,39 @@ import 'screens/tabs/planets/add_edit_planet.dart';
 import 'screens/tabs/planets/screen_solar_system.dart';
 import 'screens/tabs/space_x/screen_spacex.dart';
 
-void main() => runApp(MyApp());
+final AppModel model = AppModel();
+
+void main() async {
+  await model.loadTheme();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new ScopedModel<AppModel>(
-      model: AppModel(),
+      model: model,
       child: new ScopedModelDescendant<AppModel>(
-        builder: (context, child, model) => 
-               MaterialApp(
-                title: 'Space Curiosity',
-                theme: model.themeData,
-                home: HomeScreen(),
-                debugShowCheckedModeBanner: false,
-                routes: <String, WidgetBuilder>{
-                  '/home': (_) => HomeScreen(),
-                  '/space_x': (_) => SpacexScreen(),
-                  '/news': (_) => NewsScreen(),
-                  '/planets': (_) => SolarSystemScreen(),
-                  AddEditPlanetPage.routeName: (_) =>
-                      AddEditPlanetPage(null, type: BodyType.planet),
-                  '/settings': (_) => SettingsPage(),
-                },
-                localizationsDelegates: [
-                  FlutterI18nDelegate(false, 'en'),
-                  GlobalMaterialLocalizations.delegate,
-                  GlobalWidgetsLocalizations.delegate
-                ],
-              ),
-            
+        builder: (context, child, model) => MaterialApp(
+              title: 'Space Curiosity',
+              theme: model.themeData,
+              home: HomeScreen(),
+              debugShowCheckedModeBanner: false,
+              routes: <String, WidgetBuilder>{
+                '/home': (_) => HomeScreen(),
+                '/space_x': (_) => SpacexScreen(),
+                '/news': (_) => NewsScreen(),
+                '/planets': (_) => SolarSystemScreen(),
+                AddEditPlanetPage.routeName: (_) =>
+                    AddEditPlanetPage(null, type: BodyType.planet),
+                '/settings': (_) => SettingsPage(),
+              },
+              localizationsDelegates: [
+                FlutterI18nDelegate(false, 'en'),
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate
+              ],
+            ),
       ),
     );
   }

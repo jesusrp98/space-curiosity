@@ -13,6 +13,7 @@ dependencies:
 
   ## Offline
   cached_network_image: ^0.5.1
+  shared_preferences: ^0.4.3
 
   ## Tools
   dynamic_theme: ^1.0.0

@@ -425,7 +425,7 @@ packages:
     source: hosted
     version: "0.5.3"
   shared_preferences:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: shared_preferences
       url: "https://pub.dartlang.org"

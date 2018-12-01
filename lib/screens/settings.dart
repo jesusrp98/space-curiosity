@@ -3,6 +3,7 @@ import 'package:scoped_model/scoped_model.dart';
 
 import '../models/app_model.dart';
 import '../util/colors.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsPage extends StatefulWidget {
   SettingsPage({Key key}) : super(key: key);
@@ -38,16 +39,20 @@ class _SettingsPageState extends State<SettingsPage> {
                   title: Text("Dark Theme"),
                   trailing: Switch(
                     value: _darkTheme,
-                    onChanged: (bool value) {
-                      if (value) {
-                        model.theme = Themes.dark;
-                      } else {
-                        model.theme = Themes.light;
-                      }
-                      model.themeData = model.theme;
+                    onChanged: (bool value) async {
                       setState(() {
                         _darkTheme = value;
                       });
+                      SharedPreferences prefs =
+                          await SharedPreferences.getInstance();
+                      if (value) {
+                        model.theme = Themes.dark;
+                        prefs.setString("theme", "dark");
+                      } else {
+                        model.theme = Themes.light;
+                        prefs.setString("theme", "light");
+                      }
+                      model.themeData = model.theme;
                       print('Theme: ${model.theme.toString()}');
                     },
                   ),
