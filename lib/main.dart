@@ -15,7 +15,7 @@ import 'screens/tabs/space_x/screen_spacex.dart';
 final AppModel model = AppModel();
 
 void main() async {
-  await model.loadTheme();
+  model.loadTheme();
   runApp(MyApp());
 }
 

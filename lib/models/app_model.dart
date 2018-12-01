@@ -13,9 +13,11 @@ class AppModel extends Model {
   get theme => _currentTheme;
 
   set theme(Themes newTheme) {
-    _currentTheme = newTheme;
-    themeData = newTheme;
-    notifyListeners();
+    if (newTheme != null) {
+      _currentTheme = newTheme;
+      themeData = newTheme;
+      notifyListeners();
+    }
   }
 
   ThemeData _themeData = new ThemeData(
@@ -49,6 +51,8 @@ class AppModel extends Model {
         _themeData = ThemeData.light();
         break;
       case Themes.dark:
+        _themeData = ThemeData.dark();
+        break;
       case Themes.black:
         // _themeData = new ThemeData(
         //   brightness: Brightness.dark,
@@ -61,7 +65,8 @@ class AppModel extends Model {
         //   dividerColor: dividerColor,
         //   highlightColor: highlightColor,
         // );
-        _themeData = ThemeData.dark();
+        _themeData =
+            ThemeData.dark().copyWith(scaffoldBackgroundColor: Colors.black);
         break;
       default:
     }
