@@ -9,36 +9,165 @@ import '../models/nasa/nasa_image.dart';
 import '../models/planets/celestial_body.dart';
 import '../widgets/list_cell.dart';
 import '../widgets/photo_card.dart';
-import 'screen_about.dart';
-import 'tabs/news/screen_news.dart';
-import 'tabs/planets/screen_solar_system.dart';
-import 'tabs/space_x/screen_spacex.dart';
 
 class HomeScreen extends StatelessWidget {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final Map<String, String> _menu = {
+    'home.menu.about': '/about',
+    'home.menu.settings': '/settings'
+  };
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.info_outline),
-            onPressed: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => AboutScreen()),
-                ),
-          ),
-        ],
         title: Text(
           FlutterI18n.translate(context, 'app.title'),
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
+        actions: <Widget>[
+          PopupMenuButton<String>(
+            itemBuilder: (_) => _menu.keys
+                .map((string) => PopupMenuItem(
+                      value: string,
+                      child: Text(
+                        FlutterI18n.translate(context, string),
+                      ),
+                    ))
+                .toList(),
+            onSelected: (string) => openPage(context, _menu[string]),
+          )
+        ],
         centerTitle: true,
       ),
       body: ContentPage(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: FloatingActionButton.extended(
+        icon: const Icon(Icons.menu),
+        label: Text(FlutterI18n.translate(context, 'home.page.fab')),
+        onPressed: () => showModalBottomSheet(
+              context: context,
+              builder: (context) => Column(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Icon(
+                          Icons.expand_more,
+                          size: 24.0,
+                        ),
+                      ),
+                      Expanded(
+                        child: ListView(
+                          children: <Widget>[
+                            ListCell(
+                              leading: Icon(
+                                FontAwesomeIcons.rocket,
+                                size: 42,
+                              ),
+                              title: FlutterI18n.translate(
+                                context,
+                                'home.page.menu.spacex.title',
+                              ),
+                              subtitle: FlutterI18n.translate(
+                                context,
+                                'home.page.menu.spacex.body',
+                              ),
+                              onTap: () => openPage(context, '/spacex'),
+                            ),
+                            const Divider(height: 0.0, indent: 74.0),
+                            ListCell(
+                              leading: Icon(
+                                Icons.description,
+                                size: 42,
+                              ),
+                              title: FlutterI18n.translate(
+                                context,
+                                'home.page.menu.news.title',
+                              ),
+                              subtitle: FlutterI18n.translate(
+                                context,
+                                'home.page.menu.news.body',
+                              ),
+                              onTap: () => openPage(context, '/news'),
+                            ),
+                            const Divider(height: 0.0, indent: 74.0),
+                            ListCell(
+                              leading: Icon(
+                                Icons.public,
+                                size: 42,
+                              ),
+                              title: FlutterI18n.translate(
+                                context,
+                                'home.page.menu.planets.title',
+                              ),
+                              subtitle: FlutterI18n.translate(
+                                context,
+                                'home.page.menu.planets.body',
+                              ),
+                              onTap: () => openPage(context, '/planets'),
+                            ),
+                            const Divider(height: 0.0, indent: 74.0),
+                            ListCell(
+                              leading: Icon(
+                                Icons.my_location,
+                                size: 42,
+                              ),
+                              title: FlutterI18n.translate(
+                                context,
+                                'home.page.menu.iss.title',
+                              ),
+                              subtitle: FlutterI18n.translate(
+                                context,
+                                'home.page.menu.iss.body',
+                              ),
+                              onTap: () => openPage(context, '/iss'),
+                            ),
+                            const Divider(height: 0.0, indent: 74.0),
+                            ListCell(
+                              leading: Icon(
+                                Icons.fitness_center,
+                                size: 42,
+                              ),
+                              title: FlutterI18n.translate(
+                                context,
+                                'home.page.menu.weight.title',
+                              ),
+                              subtitle: FlutterI18n.translate(
+                                context,
+                                'home.page.menu.weight.body',
+                              ),
+                              onTap: () => openPage(context, '/weight'),
+                            ),
+                            const Divider(height: 0.0, indent: 74.0),
+                            ListCell(
+                              leading: Icon(
+                                Icons.camera_alt,
+                                size: 42,
+                              ),
+                              title: FlutterI18n.translate(
+                                context,
+                                'home.page.menu.mars.title',
+                              ),
+                              subtitle: FlutterI18n.translate(
+                                context,
+                                'home.page.menu.mars.body',
+                              ),
+                              onTap: () => openPage(context, '/mars'),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+            ),
+      ),
     );
+  }
+
+  openPage(BuildContext context, String route) {
+    Navigator.pop(context);
+    Navigator.of(context).pushNamed(route);
   }
 }
 
@@ -69,79 +198,13 @@ class _ContentPageState extends State<ContentPage> {
       children: <Widget>[
         Expanded(
           child: Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: ScopedModel<NasaImagesModel>(
               model: _nasaModel,
               child: _buildNasaImage(),
             ),
           ),
         ),
-        const Divider(height: 0.0),
-        ListCell(
-          leading: Icon(FontAwesomeIcons.rocket, size: 36.0),
-          title: 'SpaceX',
-          subtitle: 'Launch Tracker',
-          onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(builder: (_) => SpacexScreen()),
-              ),
-        ),
-        const Divider(height: 0.0, indent: 68.0),
-        ListCell(
-          leading: Icon(Icons.description, size: 36.0),
-          title: 'Breaking News',
-          subtitle: 'From around the globe',
-          onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(builder: (_) => NewsScreen()),
-              ),
-        ),
-        const Divider(height: 0.0, indent: 68.0),
-        ListCell(
-          leading: Icon(Icons.public, size: 36.0),
-          title: 'Solar System',
-          subtitle: 'Explore every inch of our neighborhood',
-          onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => ScopedModel<PlanetsModel>(
-                        model: _planetsModel,
-                        child: SolarSystemScreen(
-                          planetModel: _planetsModel,
-                        ),
-                      ),
-                ),
-              ),
-        ),
-        // Padding(
-        //   padding: const EdgeInsets.all(16.0),
-        //   child: Row(
-        //     crossAxisAlignment: CrossAxisAlignment.center,
-        //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //     children: <Widget>[
-        //       HomeIcon(
-        //         icon: FontAwesomeIcons.rocket,
-        //         title: 'SpaceX',
-        //         screen: SpacexScreen(),
-        //       ),
-        //       HomeIcon(
-        //         icon: Icons.description,
-        //         title: 'News',
-        //         screen: NewsScreen(),
-        //       ),
-        //       HomeIcon(
-        //         icon: Icons.public,
-        //         title: 'Solar System',
-        //         screen: ScopedModel<PlanetsModel>(
-        //           model: _planetsModel,
-        //           child: SolarSystemScreen(
-        //             planetModel: _planetsModel,
-        //           ),
-        //         ),
-        //       ),
-        //     ],
-        //   ),
-        // )
       ],
     );
   }
@@ -151,18 +214,14 @@ class _ContentPageState extends State<ContentPage> {
       builder: (context, child, model) => model.isLoading
           ? NativeLoadingIndicator(center: true)
           : Swiper(
-              itemBuilder: (context, index) => ScopedModel<NasaImagesModel>(
-                    model: _nasaModel,
-                    child: ScopedModelDescendant<NasaImagesModel>(
-                      builder: (context, child, model) => model.isLoading
-                          ? NativeLoadingIndicator(center: true)
-                          : PhotoCard(model.getItem(index)),
-                    ),
-                  ),
+              itemBuilder: (_, index) => PhotoCard(model.getItem(index)),
               scrollDirection: Axis.vertical,
-              itemCount: _nasaModel.getSize,
-              itemWidth: 500.0,
-              itemHeight: 500.0,
+              itemCount: model.getSize,
+              autoplay: true,
+              autoplayDelay: 6000,
+              duration: 750,
+              itemWidth: MediaQuery.of(context).size.width,
+              itemHeight: MediaQuery.of(context).size.height * 0.7,
               layout: SwiperLayout.STACK,
             ),
     );

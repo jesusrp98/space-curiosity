@@ -2,6 +2,41 @@
   "app": {
     "title": "Curiosidad Espacial"
   },
+  "home": {
+    "menu": {
+      "settings": "Ajustes",
+      "about": "Información"
+    },
+    "page": {
+      "fab": "Menú principal",
+      "menu": {
+        "spacex": {
+          "title": "SpaceX",
+          "body": "Una historia de halcones y dragones"
+        },
+        "news": {
+          "title": "Últimas noticias",
+          "body": "Titulares espaciales de todo el mundo"
+        },
+        "planets": {
+          "title": "Explorador del Sistema Solar",
+          "body": "Explora cada centímetro de nuestro vecindario"
+        },
+        "iss": {
+          "title": "Estación Espacial Internacional",
+          "body": "El laboratorio flotante más grande del mundo"
+        },
+        "weight": {
+          "title": "Calculador de peso",
+          "body": "¿Cuánto pesarías en Marte?"
+        },
+        "mars": {
+          "title": "Catálogo marciano",
+          "body": "Todo sobre el planeta rojo y sus habitantes"
+        }
+      }
+    }
+  },
   "nasa": {
     "no_copyright": "Sin copyright",
     "share": "Compartir",

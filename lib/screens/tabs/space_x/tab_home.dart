@@ -86,18 +86,19 @@ class SpacexHomeTab extends StatelessWidget {
       builder: (context, child, model) {
         return Column(
           children: <Widget>[
-            Container(height: 16.0),
-            !model.launch.tentativeTime
-                ? LaunchCountdown(model)
-                : Text(
-                    FlutterI18n.translate(
-                      context,
-                      'spacex.home.tab.no_countdown',
-                      {'mission': model.launch.name},
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: !model.launch.tentativeTime
+                  ? LaunchCountdown(model)
+                  : Text(
+                      FlutterI18n.translate(
+                        context,
+                        'spacex.home.tab.no_countdown',
+                        {'mission': model.launch.name},
+                      ),
+                      style: Theme.of(context).textTheme.headline,
                     ),
-                    style: Theme.of(context).textTheme.headline,
-                  ),
-            Container(height: 16.0),
+            ),
             const Divider(height: 0.0),
             ListCell(
               leading: const Icon(Icons.public, size: 42.0),
