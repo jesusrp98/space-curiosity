@@ -20,25 +20,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new ScopedModel<AppModel>(
-      model: new AppModel(),
+      model: AppModel(),
       child: new ScopedModelDescendant<AppModel>(
-        builder: (context, child, model) => new DynamicTheme(
-            defaultBrightness: model.defaultBrigthness,
-            data: (brightness) => new ThemeData(
-                  brightness: brightness,
-                  fontFamily: 'ProductSans',
-                  primaryColor: primaryColor,
-                  accentColor: accentColor,
-                  canvasColor: backgroundColor,
-                  cardColor: cardColor,
-                  dialogBackgroundColor: cardColor,
-                  dividerColor: dividerColor,
-                  highlightColor: highlightColor,
-                ),
-            themedWidgetBuilder: (context, theme) {
-              return MaterialApp(
+        builder: (context, child, model) => 
+               MaterialApp(
                 title: 'Space Curiosity',
-                theme: theme,
+                theme: model.themeData,
                 home: HomeScreen(),
                 debugShowCheckedModeBanner: false,
                 routes: <String, WidgetBuilder>{
@@ -55,8 +42,8 @@ class MyApp extends StatelessWidget {
                   GlobalMaterialLocalizations.delegate,
                   GlobalWidgetsLocalizations.delegate
                 ],
-              );
-            }),
+              ),
+            
       ),
     );
   }

@@ -46,11 +46,11 @@ class NasaImage {
   }
 
   String get getDate {
-    if (date == null) return "";
+    if (date == null) return DateTime.now().millisecondsSinceEpoch.toString();
     try {
       return DateFormat.yMMMMd().format(date);
     } catch (e) {
-      return "";
+      return DateTime.now().millisecondsSinceEpoch.toString();
     }
   }
 
