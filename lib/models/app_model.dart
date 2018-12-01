@@ -37,17 +37,6 @@ class AppModel extends Model {
   set themeData(Themes newTheme) {
     switch (newTheme) {
       case Themes.light:
-        // _themeData = new ThemeData(
-        //   brightness: Brightness.dark,
-        //   fontFamily: 'ProductSans',
-        //   primaryColor: primaryColor,
-        //   accentColor: accentColor,
-        //   canvasColor: backgroundColor,
-        //   cardColor: cardColor,
-        //   dialogBackgroundColor: cardColor,
-        //   dividerColor: dividerColor,
-        //   highlightColor: highlightColor,
-        // );
         _themeData = ThemeData.light().copyWith(
           brightness: Brightness.light,
           // fontFamily: 'ProductSans',
@@ -74,17 +63,6 @@ class AppModel extends Model {
         );
         break;
       case Themes.black:
-        // _themeData = new ThemeData(
-        //   brightness: Brightness.dark,
-        //   fontFamily: 'ProductSans',
-        //   primaryColor: primaryColor,
-        //   accentColor: accentColor,
-        //   canvasColor: backgroundColor,
-        //   cardColor: cardColor,
-        //   dialogBackgroundColor: cardColor,
-        //   dividerColor: dividerColor,
-        //   highlightColor: highlightColor,
-        // );
         _themeData = ThemeData.dark().copyWith(
           scaffoldBackgroundColor: Colors.black,
           brightness: Brightness.dark,
