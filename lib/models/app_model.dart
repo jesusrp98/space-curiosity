@@ -48,10 +48,30 @@ class AppModel extends Model {
         //   dividerColor: dividerColor,
         //   highlightColor: highlightColor,
         // );
-        _themeData = ThemeData.light();
+        _themeData = ThemeData.light().copyWith(
+          brightness: Brightness.light,
+          // fontFamily: 'ProductSans',
+          primaryColor: Colors.blue,
+          accentColor: accentColor,
+          canvasColor: Colors.white,
+          // cardColor: cardColor,
+          dialogBackgroundColor: cardColor,
+          dividerColor: dividerColor,
+          highlightColor: highlightColor,
+        );
         break;
       case Themes.dark:
-        _themeData = ThemeData.dark();
+        _themeData = ThemeData.dark().copyWith(
+          brightness: Brightness.dark,
+          // fontFamily: 'ProductSans',
+          primaryColor: primaryColor,
+          accentColor: accentColor,
+          canvasColor: backgroundColor,
+          cardColor: cardColor,
+          dialogBackgroundColor: cardColor,
+          dividerColor: dividerColor,
+          highlightColor: highlightColor,
+        );
         break;
       case Themes.black:
         // _themeData = new ThemeData(
@@ -65,8 +85,18 @@ class AppModel extends Model {
         //   dividerColor: dividerColor,
         //   highlightColor: highlightColor,
         // );
-        _themeData =
-            ThemeData.dark().copyWith(scaffoldBackgroundColor: Colors.black);
+        _themeData = ThemeData.dark().copyWith(
+          scaffoldBackgroundColor: Colors.black,
+          brightness: Brightness.dark,
+          // fontFamily: 'ProductSans',
+          primaryColor: primaryColor,
+          accentColor: accentColor,
+          canvasColor: Colors.black,
+          cardColor: Colors.black,
+          dialogBackgroundColor: Colors.black,
+          dividerColor: dividerColor,
+          highlightColor: highlightColor,
+        );
         break;
       default:
     }
