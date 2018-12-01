@@ -85,7 +85,7 @@ class SpacexHomeModel extends QuerryModel {
                 ? 'spacex.home.tab.fairings.body_reused'
                 : 'spacex.home.tab.fairings.body_new',
           ),
-          'catched': launch.rocket.fairing.recoveryAttempt != null ||
+          'catched': launch.rocket.fairing.recoveryAttempt != null &&
                   launch.rocket.fairing.recoveryAttempt == true
               ? FlutterI18n.translate(
                   context,
