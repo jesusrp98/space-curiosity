@@ -5,6 +5,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'models/planets/celestial_body.dart';
 import 'screens/screen_about.dart';
 import 'screens/screen_home.dart';
+import 'screens/tabs/iss/screen_iss.dart';
 import 'screens/tabs/news/screen_news.dart';
 import 'screens/tabs/planets/add_edit_planet.dart';
 import 'screens/tabs/planets/screen_solar_system.dart';
@@ -38,6 +39,7 @@ class MyApp extends StatelessWidget {
         '/spacex': (_) => SpacexScreen(),
         '/news': (_) => NewsScreen(),
         '/planets': (_) => SolarSystemScreen(),
+        '/iss': (_) => IssScreen(),
         '/info': (_) => AboutScreen(),
         '/settings': (_) => AboutScreen(),
         AddEditPlanetPage.routeName: (_) =>
