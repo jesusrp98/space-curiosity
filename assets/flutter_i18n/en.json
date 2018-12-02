@@ -43,6 +43,54 @@
     "copy_link": "Copy link",
     "download": "Download"
   },
+  "iss": {
+    "home": {
+      "title": "ISS",
+      "icon": "Home",
+      "tab": {
+        "launched": {
+          "title": "Launched in {year}",
+          "body": "Launched in {date}, that's {years} ago."
+        },
+        "altitude": {
+          "title": "Altitude",
+          "body": "ISS is orbiting at {height} km above us, at {velocity} km/s."
+        },
+        "orbit": {
+          "title": "Orbital period",
+          "body": "It takes {period} minutes to go around the globe, performing {orbits} orbits per day."
+        },
+        "project": {
+          "title": "Project cost",
+          "body": "Over {countries} countries collaborated in this project, which costed them over {cost}."
+        },
+        "numbers": {
+          "title": "Overall numbers",
+          "body": "It has been occupied for more than {days}, orbiting {orbits} times the Earth."
+        },
+        "specifications": {
+          "title": "Specifications",
+          "body": "ISS is {lenght} m long and {width} m wide, weighing over {mass} kg."
+        }
+      }
+    },
+    "times": {
+      "title": "Pass times",
+      "icon": "Pass times",
+      "tab": {
+        "duration": "It will last {time} seconds",
+        "event": "International Space Station",
+        "location_error": "Permission denied"
+      }
+    },
+    "astronauts": {
+      "title": "Current astronauts",
+      "icon": "Astronauts",
+      "tab": {
+        "from": "Aboard the {place}"
+      }
+    }
+  },
   "spacex": {
     "home": {
       "title": "Welcome to SpaceX",
