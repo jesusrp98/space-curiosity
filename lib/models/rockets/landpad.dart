@@ -7,7 +7,7 @@ import '../querry_model.dart';
 
 /// LANDPAD MODEL
 /// Details about a specific landpad,
-/// where boosters can land after completing its mission
+/// where boosters can land after completing its mission.
 class LandpadModel extends QuerryModel {
   // Landingpad id: OCISLY
   final String id;

@@ -2,11 +2,10 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:intl/intl.dart';
 
 import 'rocket_stage.dart';
-import 'vehicle.dart';
+import 'info_vehicle.dart';
 
-/// ROCKET INFO CLASS
-/// This class represents a model of a rocket, like Falcon 9 or BFR, with
-/// all its specifications in place.
+/// ROCKET INFO MODEL
+/// General information about a Falcon rocket.
 class RocketInfo extends Vehicle {
   final num stages,
       launchCost,
@@ -120,6 +119,8 @@ class RocketInfo extends Vehicle {
       '${oxidizer[0].toUpperCase()}${oxidizer.substring(1)}';
 }
 
+/// PAYLOAD WEIGHT MODEL
+/// Auxiliary model to storage specific orbit & payload capability
 class PayloadWeight {
   final String name;
   final int mass;

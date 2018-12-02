@@ -1,12 +1,11 @@
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:intl/intl.dart';
 
-import 'vehicle.dart';
-import 'vehicle_details.dart';
+import 'info_vehicle.dart';
+import 'details_vehicle.dart';
 
-/// SHIP INFO CLASS
-/// This class represents a real ship used in a SpaceX mission,
-/// with all its details.
+/// SHIP INFO MODEL
+/// General information about a ship used by SpaceX.
 class ShipInfo extends Vehicle {
   final String model, use, homePort, status;
   final List roles, missions;

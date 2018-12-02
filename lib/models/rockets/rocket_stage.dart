@@ -1,6 +1,8 @@
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:intl/intl.dart';
 
+/// STAGE MODEL
+/// General information about a specific stage of a Falcon rocket.
 abstract class Stage {
   final bool reusable;
   final num engines, fuelAmount, thrustSea, thrustVacuum;

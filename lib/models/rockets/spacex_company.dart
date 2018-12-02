@@ -7,6 +7,9 @@ import 'package:intl/intl.dart';
 import '../../util/url.dart';
 import '../querry_model.dart';
 
+/// SPACEX-AS-A-COMPAMY MODEL
+/// General information about SpaceX's company data.
+/// /// Used in the 'Company' tab, under the SpaceX screen.
 class SpacexCompanyModel extends QuerryModel {
   Company _company;
 
@@ -100,6 +103,8 @@ class Company {
   String get getEmployees => NumberFormat.decimalPattern().format(employees);
 }
 
+/// SPACEX'S ACHIEVMENT MODEL
+/// Auxiliary model to storage specific SpaceX's achievments.
 class Achievement {
   final String name, details, url;
   final DateTime date;

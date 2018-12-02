@@ -5,10 +5,10 @@ import 'package:http/http.dart' as http;
 
 import '../../util/url.dart';
 import '../querry_model.dart';
-import 'vehicle_details.dart';
+import 'details_vehicle.dart';
 
 /// CORE DETAILS MODEL
-/// Details about a specific core or booster used in a specific mission
+/// Details about a specific core or booster used in a specific mission.
 class CoreModel extends QuerryModel {
   // Core serial: B000
   final String id;

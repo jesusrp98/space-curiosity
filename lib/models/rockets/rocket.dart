@@ -2,9 +2,8 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 
 import 'second_stage.dart';
 
-/// ROCKET CLASS
-/// This class is used in the Launch class, to represent a rocket object. It has
-/// a list of cores, and a second stage.
+/// ROCKET MODEL
+/// Auxiliary model to storage all details about a rocket which performed a SpaceX's mission.
 class Rocket {
   final String id, name, type;
   final List<Core> firstStage;
@@ -40,6 +39,8 @@ class Rocket {
   bool get isHeavy => firstStage.length != 1;
 }
 
+/// CORE CLASS
+/// Auxiliary model to storage details about a core in a particular mission.
 class Core {
   final String id, landingType, landingZone;
   final bool reused, landingSuccess, landingIntent;
@@ -91,8 +92,8 @@ class Core {
       : flights.toString();
 }
 
-/// FAIRING CLASS
-/// This class represent a detailed fairing, including the recovery process.
+/// FAIRING MODEL
+/// Auxiliary model to storage details about rocket's fairings.
 class Fairing {
   final bool reused, recoveryAttempt, recoverySuccess;
   final String ship;

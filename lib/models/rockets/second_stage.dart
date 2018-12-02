@@ -1,9 +1,7 @@
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:intl/intl.dart';
 
-/// SECOND STAGE CLASS
-/// This class is used in the Rocket class, to represent the second stage
-/// of a Falcon rocket. Contains a list of the mission payload(s).
+// ??
 class SecondStage {
   final int block;
   final List<Payload> payloads;
@@ -32,8 +30,7 @@ class SecondStage {
   int get getNumberPayload => payloads.length;
 }
 
-/// PAYLOAD CLASS
-/// This class represents payload sent to space by any vehicle
+// ??
 class Payload {
   final String id, capsuleSerial, customer, nationality, manufacturer, orbit;
   final bool reused;

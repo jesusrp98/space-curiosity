@@ -1,10 +1,10 @@
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:intl/intl.dart';
 
-import 'vehicle.dart';
+import 'info_vehicle.dart';
 
 /// CAPSULE INFO MODEL
-/// General information about a Dragon capsule
+/// General information about a Dragon capsule.
 class CapsuleInfo extends Vehicle {
   final num crew, launchMass, returnMass;
   final List<Thruster> thrusters;

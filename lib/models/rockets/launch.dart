@@ -9,9 +9,9 @@ import '../../util/url.dart';
 import '../querry_model.dart';
 import 'rocket.dart';
 
-/// LAUNCH MODEL
-/// Details about a specific launch, performed by a Falcon rocket,
-/// including launch & landing pads, rocket & payload information...
+/// LAUNCHES MODEL
+/// Model which storages information about
+/// past or futures launches, depending on [type].
 class LaunchesModel extends QuerryModel {
   // Upcoming or latest launches
   final int type;
@@ -44,6 +44,9 @@ class LaunchesModel extends QuerryModel {
   }
 }
 
+/// LAUNCH MODEL
+/// Details about a specific launch, performed by a Falcon rocket,
+/// including launch & landing pads, rocket & payload information...
 class Launch {
   final int number;
   final String name,

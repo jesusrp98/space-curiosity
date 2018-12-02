@@ -8,6 +8,9 @@ import '../../util/url.dart';
 import '../querry_model.dart';
 import 'launch.dart';
 
+/// SPACEX HOME TAB MODEL
+/// Storages essencial data from the next scheduled launch.
+/// Used in the 'Home' tab, under the SpaceX screen.
 class SpacexHomeModel extends QuerryModel {
   Launch launch;
 
@@ -157,45 +160,8 @@ class SpacexHomeModel extends QuerryModel {
             });
 }
 
-class Countdown extends AnimatedWidget {
-  final Animation<int> animation;
-  final DateTime launchDate;
-  final String name;
-
-  Countdown({Key key, this.animation, this.launchDate, this.name})
-      : super(key: key, listenable: animation);
-
-  @override
-  build(BuildContext context) {
-    return Text(
-      launchDate.isAfter(DateTime.now())
-          ? getTimer(launchDate.difference(DateTime.now()), '-')
-          : getTimer(DateTime.now().difference(launchDate), '+'),
-      style: Theme.of(context)
-          .textTheme
-          .headline
-          .copyWith(fontFamily: 'RobotoMono'),
-    );
-  }
-
-  String getTimer(Duration d, String symbol) =>
-      'T' +
-      symbol +
-      d.inDays.toString().padLeft(2, '0') +
-      'd:' +
-      (d.inHours - d.inDays * Duration.hoursPerDay).toString().padLeft(2, '0') +
-      'h:' +
-      (d.inMinutes -
-              d.inDays * Duration.minutesPerDay -
-              (d.inHours - d.inDays * Duration.hoursPerDay) *
-                  Duration.minutesPerHour)
-          .toString()
-          .padLeft(2, '0') +
-      'm:' +
-      (d.inSeconds % 60).toString().padLeft(2, '0') +
-      's';
-}
-
+/// COUNTDOWN WIDGET
+/// Stateful widget used to display a countdown to the next launch.
 class LaunchCountdown extends StatefulWidget {
   final SpacexHomeModel model;
 
@@ -236,4 +202,43 @@ class _LaunchCountdownState extends State<LaunchCountdown>
       ).animate(_controller),
     );
   }
+}
+
+class Countdown extends AnimatedWidget {
+  final Animation<int> animation;
+  final DateTime launchDate;
+  final String name;
+
+  Countdown({Key key, this.animation, this.launchDate, this.name})
+      : super(key: key, listenable: animation);
+
+  @override
+  build(BuildContext context) {
+    return Text(
+      launchDate.isAfter(DateTime.now())
+          ? getTimer(launchDate.difference(DateTime.now()), '-')
+          : getTimer(DateTime.now().difference(launchDate), '+'),
+      style: Theme.of(context)
+          .textTheme
+          .headline
+          .copyWith(fontFamily: 'RobotoMono'),
+    );
+  }
+
+  String getTimer(Duration d, String symbol) =>
+      'T' +
+      symbol +
+      d.inDays.toString().padLeft(2, '0') +
+      'd:' +
+      (d.inHours - d.inDays * Duration.hoursPerDay).toString().padLeft(2, '0') +
+      'h:' +
+      (d.inMinutes -
+              d.inDays * Duration.minutesPerDay -
+              (d.inHours - d.inDays * Duration.hoursPerDay) *
+                  Duration.minutesPerHour)
+          .toString()
+          .padLeft(2, '0') +
+      'm:' +
+      (d.inSeconds % 60).toString().padLeft(2, '0') +
+      's';
 }
