@@ -87,7 +87,7 @@ class CapsuleInfo extends Vehicle {
 }
 
 /// THRUSTER MODEL
-/// Auxiliar model used to storage capsule's thrusters data
+/// Auxiliar model used to storage Dragon's thrusters data
 class Thruster {
   final String name, fuel, oxidizer;
   final num amount, thrust;

@@ -47,7 +47,7 @@ class VehiclesModel extends QuerryModel {
       photos.shuffle();
     }
 
-    // Finished with loading data
+    // Finished loading data
     loadingState(false);
   }
 }

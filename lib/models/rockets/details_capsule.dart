@@ -8,9 +8,9 @@ import '../querry_model.dart';
 import 'details_vehicle.dart';
 
 /// CAPSULE DETAILS MODEL
-/// Details about a specific Dragon used in a NASA mission.
+/// Details about a specific capsule used in a CRS mission.
 class CapsuleModel extends QuerryModel {
-  // Capsule serial: C000
+  // Capsule serial: C0000
   final String id;
 
   CapsuleModel(this.id);
@@ -30,7 +30,7 @@ class CapsuleModel extends QuerryModel {
     photos.addAll(Url.spacexCapsuleDialog);
     photos.shuffle();
 
-    // Finished with loading data
+    // Finished loading data
     loadingState(false);
   }
 

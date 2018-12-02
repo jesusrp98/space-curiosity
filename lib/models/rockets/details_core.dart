@@ -10,7 +10,7 @@ import 'details_vehicle.dart';
 /// CORE DETAILS MODEL
 /// Details about a specific core or booster used in a specific mission.
 class CoreModel extends QuerryModel {
-  // Core serial: B000
+  // Core serial: B0000
   final String id;
 
   CoreModel(this.id);
@@ -30,7 +30,7 @@ class CoreModel extends QuerryModel {
     photos.addAll(Url.spacexCoreDialog);
     photos.shuffle();
 
-    // Finished with loading data
+    // Finished loading data
     loadingState(false);
   }
 

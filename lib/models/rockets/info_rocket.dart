@@ -120,7 +120,7 @@ class RocketInfo extends Vehicle {
 }
 
 /// PAYLOAD WEIGHT MODEL
-/// Auxiliary model to storage specific orbit & payload capability
+/// Auxiliary model to storage specific orbit & payload capability.
 class PayloadWeight {
   final String name;
   final int mass;

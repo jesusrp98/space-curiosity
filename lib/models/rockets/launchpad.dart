@@ -7,9 +7,9 @@ import '../querry_model.dart';
 
 /// LAUNCHPAD MODEL
 /// Details about a specific launchpad, where rockets are launched from.
+/// Launchpad [id] : ccafs_slc_40
+/// Launchpad [name]: Cape Canaveral Air Force Station Space Launch Complex 40
 class LaunchpadModel extends QuerryModel {
-  // Launchpad id: ccafs_slc_40
-  // Launchpad name: Cape Canaveral Air Force Station Space Launch Complex 40
   final String id, name;
 
   LaunchpadModel(this.id, this.name);
@@ -25,7 +25,7 @@ class LaunchpadModel extends QuerryModel {
     // Added parsed item
     items.add(Launchpad.fromJson(json.decode(response.body)));
 
-    // Finished with loading data
+    // Finished loading data
     loadingState(false);
   }
 

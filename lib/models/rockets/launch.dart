@@ -12,8 +12,9 @@ import 'rocket.dart';
 /// LAUNCHES MODEL
 /// Model which storages information about
 /// past or futures launches, depending on [type].
+///   [type] == 0 => Upcoming launches
+///   [type] == 1 => Latest launches
 class LaunchesModel extends QuerryModel {
-  // Upcoming or latest launches
   final int type;
 
   LaunchesModel(this.type);
@@ -39,7 +40,7 @@ class LaunchesModel extends QuerryModel {
       photos.shuffle();
     }
 
-    // Finished with loading data
+    // Finished loading data
     loadingState(false);
   }
 }
