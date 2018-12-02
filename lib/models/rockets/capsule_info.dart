@@ -3,9 +3,8 @@ import 'package:intl/intl.dart';
 
 import 'vehicle.dart';
 
-/// CAPSULE INFO CLASS
-/// This class represents a model of a capsule, like Dragon 1 or 2,,
-/// with all its specifications.
+/// CAPSULE INFO MODEL
+/// General information about a Dragon capsule
 class CapsuleInfo extends Vehicle {
   final num crew, launchMass, returnMass;
   final List<Thruster> thrusters;
@@ -87,6 +86,8 @@ class CapsuleInfo extends Vehicle {
   String get getThrusters => thrusters.length.toString();
 }
 
+/// THRUSTER MODEL
+/// Auxiliar model used to storage capsule's thrusters data
 class Thruster {
   final String name, fuel, oxidizer;
   final num amount, thrust;

@@ -7,24 +7,30 @@ import '../../util/url.dart';
 import '../querry_model.dart';
 import 'vehicle_details.dart';
 
-/// CAPSULE DETAILS CLASS
-/// This class represents a real capsule used in a NASA mission,
-/// with all its details.
+/// CAPSULE DETAILS MODEL
+/// Details about a specific Dragon used in a NASA mission
 class CapsuleModel extends QuerryModel {
+  // Capsule serial: C000
   final String id;
 
   CapsuleModel(this.id);
 
   @override
   Future loadData() async {
+    // Get item by http call
     response = await http.get(Url.capsuleDialog + id);
-    clearLists();
 
+    // Clear old data
+    clearItems();
+
+    // Added parsed item
     items.add(CapsuleDetails.fromJson(json.decode(response.body)));
 
+    // Adds photos & shuffle them
     photos.addAll(Url.spacexCapsuleDialog);
     photos.shuffle();
 
+    // Finished with loading data
     loadingState(false);
   }
 

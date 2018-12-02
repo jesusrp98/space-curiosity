@@ -10,7 +10,7 @@ abstract class QuerryModel extends Model {
   bool _loading = true;
 
   Future refresh() async {
-    clearLists();
+    clearItems();
     await loadData();
     notifyListeners();
   }
@@ -36,5 +36,5 @@ abstract class QuerryModel extends Model {
 
   bool get isLoading => _loading;
 
-  clearLists() => _items.clear();
+  clearItems() => _items.clear();
 }

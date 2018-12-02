@@ -5,21 +5,27 @@ import 'package:http/http.dart' as http;
 import '../../util/url.dart';
 import '../querry_model.dart';
 
-/// LAUNCHPAD CLASS
-/// This class represents a real launchpad used in a SpaceX mission,
-/// with all its details.
-class LandingpadModel extends QuerryModel {
+/// LANDPAD MODEL
+/// Details about a specific landpad,
+/// where boosters can land after completing its mission
+class LandpadModel extends QuerryModel {
+  // Landingpad id: OCISLY
   final String id;
 
-  LandingpadModel(this.id);
+  LandpadModel(this.id);
 
   @override
   Future loadData() async {
+    // Get item by http call
     response = await http.get(Url.landingpadDialog + id);
-    clearLists();
 
+    // Clear old data
+    clearItems();
+
+    // Added parsed item
     items.add(Landingpad.fromJson(json.decode(response.body)));
 
+    // Finished with loading data
     loadingState(false);
   }
 

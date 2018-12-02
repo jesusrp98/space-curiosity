@@ -7,24 +7,30 @@ import '../../util/url.dart';
 import '../querry_model.dart';
 import 'vehicle_details.dart';
 
-///CORE DETAILS CLASS
-/// This class represents a single core used in a SpaceX mission,
-/// with all its details.
+/// CORE DETAILS MODEL
+/// Details about a specific core or booster used in a specific mission
 class CoreModel extends QuerryModel {
+  // Core serial: B000
   final String id;
 
   CoreModel(this.id);
 
   @override
   Future loadData() async {
+    // Get item by http call
     response = await http.get(Url.coreDialog + id);
-    clearLists();
 
+    // Clear old data
+    clearItems();
+
+    // Added parsed item
     items.add(CoreDetails.fromJson(json.decode(response.body)));
 
+    // Adds photos & shuffle them
     photos.addAll(Url.spacexCoreDialog);
     photos.shuffle();
 
+    // Finished with loading data
     loadingState(false);
   }
 

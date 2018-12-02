@@ -9,22 +9,28 @@ import '../../util/url.dart';
 import '../querry_model.dart';
 import 'rocket.dart';
 
-/// LAUNCH CLASS
-/// This class represent a single mission with all its details, like rocket,
-/// launchpad, links...
+/// LAUNCH MODEL
+/// Details about a specific launch, performed by a Falcon rocket,
+/// including launch & landing pads, rocket & payload information...
 class LaunchesModel extends QuerryModel {
+  // Upcoming or latest launches
   final int type;
 
   LaunchesModel(this.type);
 
   @override
   Future loadData() async {
+    // Get item by http call & parse it
     response = await http.get(type == 0 ? Url.upcomingList : Url.launchesList);
     snapshot = json.decode(response.body);
-    clearLists();
 
+    // Clear old data
+    clearItems();
+
+    // Added parsed items
     items.addAll(snapshot.map((launch) => Launch.fromJson(launch)).toList());
 
+    // Adds photos & shuffle them
     if (photos.isEmpty) {
       if (getItem(0).photos.isEmpty)
         photos.addAll(Url.spacexUpcomingScreen);
@@ -33,6 +39,7 @@ class LaunchesModel extends QuerryModel {
       photos.shuffle();
     }
 
+    // Finished with loading data
     loadingState(false);
   }
 }
@@ -173,6 +180,8 @@ class Launch {
   int getEllipsisIndex(context, url) => getEllipsis(context).indexOf(url) + 1;
 }
 
+/// FAILURE DETAILS MODEL
+/// Auxiliar model to storage details about a launch failure
 class FailureDetails {
   final num time, altitude;
   final String reason;

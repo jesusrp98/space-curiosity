@@ -14,7 +14,7 @@ class SpacexCompanyModel extends QuerryModel {
   Future loadData() async {
     final companyResponse = await http.get(Url.spacexCompany);
     response = await http.get(Url.spacexAchievements);
-    clearLists();
+    clearItems();
 
     snapshot = json.decode(response.body);
     items.addAll(snapshot

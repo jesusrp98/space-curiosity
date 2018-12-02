@@ -26,7 +26,7 @@ class VehiclesModel extends QuerryModel {
     List rocketsJson = json.decode(rocketsResponse.body);
     List capsulesJson = json.decode(capsulesResponse.body);
     List shipsJson = json.decode(shipsResponse.body);
-    clearLists();
+    clearItems();
 
     items.add(Roadster.fromJson(json.decode(roadsterResponse.body)));
     items.addAll(

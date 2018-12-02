@@ -16,7 +16,7 @@ class IssModel extends QuerryModel {
 
   @override
   Future loadData() async {
-    clearLists();
+    clearItems();
     response = await http.get(Url.issLocation);
     items.add(IssLocation.fromJson(json.decode(response.body)));
 

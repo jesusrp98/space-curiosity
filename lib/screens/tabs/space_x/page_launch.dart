@@ -8,9 +8,7 @@ import 'package:scoped_model/scoped_model.dart';
 import 'package:sliver_fab/sliver_fab.dart';
 
 import '../../../models/rockets/capsule_details.dart';
-import '../../../models/rockets/core.dart';
 import '../../../models/rockets/core_details.dart';
-import '../../../models/rockets/fairing.dart';
 import '../../../models/rockets/landingpad.dart';
 import '../../../models/rockets/launch.dart';
 import '../../../models/rockets/launchpad.dart';

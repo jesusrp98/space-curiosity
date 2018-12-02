@@ -5,21 +5,28 @@ import 'package:http/http.dart' as http;
 import '../../util/url.dart';
 import '../querry_model.dart';
 
-/// LAUNCHPAD CLASS
-/// This class represents a real launchpad used in a SpaceX mission,
-/// with all its details.
+/// LAUNCHPAD MODEL
+/// Details about a specific launchpad,
+/// where rockets are launched
 class LaunchpadModel extends QuerryModel {
+  // Launchpad id: ccafs_slc_40
+  // Launchpad name: Cape Canaveral Air Force Station Space Launch Complex 40
   final String id, name;
 
   LaunchpadModel(this.id, this.name);
 
   @override
   Future loadData() async {
+    // Get item by http call
     response = await http.get(Url.launchpadDialog + id);
-    clearLists();
 
+    // Clear old data
+    clearItems();
+
+    // Added parsed item
     items.add(Launchpad.fromJson(json.decode(response.body)));
 
+    // Finished with loading data
     loadingState(false);
   }
 
