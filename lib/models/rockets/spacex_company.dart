@@ -9,7 +9,7 @@ import '../querry_model.dart';
 
 /// SPACEX-AS-A-COMPAMY MODEL
 /// General information about SpaceX's company data.
-/// /// Used in the 'Company' tab, under the SpaceX screen.
+/// Used in the 'Company' tab, under the SpaceX screen.
 class SpacexCompanyModel extends QuerryModel {
   Company _company;
 
