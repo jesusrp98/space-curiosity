@@ -90,29 +90,6 @@ class Core {
       : flights.toString();
 }
 
-/// FAIRING MODEL
-/// Auxiliary model to storage details about rocket's fairings.
-class Fairing {
-  final bool reused, recoveryAttempt, recoverySuccess;
-  final String ship;
-
-  Fairing({
-    this.reused,
-    this.recoveryAttempt,
-    this.recoverySuccess,
-    this.ship,
-  });
-
-  factory Fairing.fromJson(Map<String, dynamic> json) {
-    return Fairing(
-      reused: json['reused'],
-      recoveryAttempt: json['recovery_attempt'],
-      recoverySuccess: json['recovered'],
-      ship: json['ship'],
-    );
-  }
-}
-
 /// SECOND STAGE MODEL
 /// Details about rocket's second stage.
 class SecondStage {
@@ -198,4 +175,27 @@ class Payload {
 
   bool get isNasaPayload =>
       customer == 'NASA (CCtCap)' || customer == 'NASA (CRS)';
+}
+
+/// FAIRING MODEL
+/// Auxiliary model to storage details about rocket's fairings.
+class Fairing {
+  final bool reused, recoveryAttempt, recoverySuccess;
+  final String ship;
+
+  Fairing({
+    this.reused,
+    this.recoveryAttempt,
+    this.recoverySuccess,
+    this.ship,
+  });
+
+  factory Fairing.fromJson(Map<String, dynamic> json) {
+    return Fairing(
+      reused: json['reused'],
+      recoveryAttempt: json['recovery_attempt'],
+      recoverySuccess: json['recovered'],
+      ship: json['ship'],
+    );
+  }
 }

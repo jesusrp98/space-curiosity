@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 import '../../util/url.dart';
 import '../querry_model.dart';
 import 'details_vehicle.dart';
+import 'mission_details.dart';
 
 /// CAPSULE DETAILS MODEL
 /// Details about a specific capsule used in a CRS mission.

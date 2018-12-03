@@ -26,13 +26,3 @@ abstract class VehicleDetails {
 
   bool get hasMissions => missions.isNotEmpty;
 }
-
-class DetailsMission {
-  final String name;
-  final int id;
-
-  DetailsMission(this.name, this.id);
-
-  factory DetailsMission.fromJson(Map<String, dynamic> json) =>
-      DetailsMission(json['name'], json['flight']);
-}

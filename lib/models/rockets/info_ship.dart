@@ -2,7 +2,7 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:intl/intl.dart';
 
 import 'info_vehicle.dart';
-import 'details_vehicle.dart';
+import 'mission_details.dart';
 
 /// SHIP INFO MODEL
 /// General information about a ship used by SpaceX.
