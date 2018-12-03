@@ -10,8 +10,8 @@ import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
 
-import '../../../models/rockets/capsule_details.dart';
-import '../../../models/rockets/core_details.dart';
+import '../../../models/rockets/details_capsule.dart';
+import '../../../models/rockets/details_core.dart';
 import '../../../models/rockets/launchpad.dart';
 import '../../../models/rockets/spacex_home.dart';
 import '../../../util/colors.dart';
@@ -177,22 +177,20 @@ class SpacexHomeTab extends StatelessWidget {
                       'spacex.home.tab.capsule.title',
                     ),
                     subtitle: model.capsule(context),
-                    onTap: model.launch.rocket.hasFairing
-                        ? () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (_) => ScopedModel<CapsuleModel>(
-                                      model: CapsuleModel(
-                                        model.launch.rocket.secondStage
-                                            .getPayload(0)
-                                            .capsuleSerial,
-                                      )..loadData(),
-                                      child: CapsuleDialog(),
-                                    ),
-                                fullscreenDialog: true,
-                              ),
-                            )
-                        : null,
+                    onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => ScopedModel<CapsuleModel>(
+                                  model: CapsuleModel(
+                                    model.launch.rocket.secondStage
+                                        .getPayload(0)
+                                        .capsuleSerial,
+                                  )..loadData(),
+                                  child: CapsuleDialog(),
+                                ),
+                            fullscreenDialog: true,
+                          ),
+                        ),
                   ),
             const Divider(height: 0.0, indent: 74.0),
             ListCell(

@@ -4,7 +4,7 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 
-import '../../../models/rockets/capsule_info.dart';
+import '../../../models/rockets/info_capsule.dart';
 import '../../../util/colors.dart';
 import '../../../widgets/card_page.dart';
 import '../../../widgets/row_item.dart';

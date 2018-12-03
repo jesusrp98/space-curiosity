@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:material_search/material_search.dart';
 import 'package:space_news/util/colors.dart';
 
-import '../../../models/rockets/vehicle.dart';
+import '../../../models/rockets/info_vehicle.dart';
 import 'page_capsule.dart';
 import 'page_roadster.dart';
 import 'page_rocket.dart';

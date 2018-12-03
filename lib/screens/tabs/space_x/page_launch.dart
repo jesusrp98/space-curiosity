@@ -7,13 +7,12 @@ import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:sliver_fab/sliver_fab.dart';
 
-import '../../../models/rockets/capsule_details.dart';
-import '../../../models/rockets/core_details.dart';
-import '../../../models/rockets/landingpad.dart';
+import '../../../models/rockets/details_capsule.dart';
+import '../../../models/rockets/details_core.dart';
+import '../../../models/rockets/landpad.dart';
 import '../../../models/rockets/launch.dart';
 import '../../../models/rockets/launchpad.dart';
 import '../../../models/rockets/rocket.dart';
-import '../../../models/rockets/second_stage.dart';
 import '../../../util/colors.dart';
 import '../../../widgets/card_page.dart';
 import '../../../widgets/head_card_page.dart';
@@ -370,8 +369,8 @@ class LaunchPage extends StatelessWidget {
                   'spacex.launch.page.rocket.core.landing_zone',
                 ),
                 description: core.getLandingZone(context),
-                screen: ScopedModel<LandingpadModel>(
-                  model: LandingpadModel(core.landingZone)..loadData(),
+                screen: ScopedModel<LandpadModel>(
+                  model: LandpadModel(core.landingZone)..loadData(),
                   child: LandingpadDialog(),
                 ),
               ),

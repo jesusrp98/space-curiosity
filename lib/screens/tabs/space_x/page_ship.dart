@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 
-import '../../../models/rockets/ship_info.dart';
+import '../../../models/rockets/info_ship.dart';
 import '../../../util/colors.dart';
 import '../../../widgets/card_page.dart';
 import '../../../widgets/row_item.dart';

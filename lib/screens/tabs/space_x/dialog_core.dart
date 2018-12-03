@@ -6,7 +6,7 @@ import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
 
-import '../../../models/rockets/core_details.dart';
+import '../../../models/rockets/details_core.dart';
 import '../../../util/colors.dart';
 import '../../../widgets/row_item.dart';
 

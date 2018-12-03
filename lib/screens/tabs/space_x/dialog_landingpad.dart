@@ -6,7 +6,7 @@ import 'package:latlong/latlong.dart';
 import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
 
-import '../../../models/rockets/landingpad.dart';
+import '../../../models/rockets/landpad.dart';
 import '../../../util/colors.dart';
 import '../../../widgets/row_item.dart';
 
@@ -15,7 +15,7 @@ class LandingpadDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScopedModelDescendant<LandingpadModel>(
+    return ScopedModelDescendant<LandpadModel>(
       builder: (context, child, model) => Scaffold(
             key: _scaffoldKey,
             body: CustomScrollView(slivers: <Widget>[
@@ -88,7 +88,7 @@ class LandingpadDialog extends StatelessWidget {
   }
 
   Widget _buildBody() {
-    return ScopedModelDescendant<LandingpadModel>(
+    return ScopedModelDescendant<LandpadModel>(
       builder: (context, child, model) => Scrollbar(
             child: Column(
               children: <Widget>[

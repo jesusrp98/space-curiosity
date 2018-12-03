@@ -34,7 +34,7 @@ class Rocket {
 
   bool get isHeavy => firstStage.length != 1;
 
-  bool get hasFairing => fairing == null;
+  bool get hasFairing => fairing != null;
 }
 
 /// CORE CLASS

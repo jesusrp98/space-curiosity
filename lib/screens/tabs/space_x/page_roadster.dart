@@ -5,7 +5,7 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:sliver_fab/sliver_fab.dart';
 
-import '../../../models/rockets/roadster.dart';
+import '../../../models/rockets/info_roadster.dart';
 import '../../../util/colors.dart';
 import '../../../widgets/card_page.dart';
 import '../../../widgets/row_item.dart';
@@ -14,7 +14,7 @@ import '../../../widgets/row_item.dart';
 /// Displays live information about Elon Musk's Tesla Roadster.
 class RoadsterPage extends StatelessWidget {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  final Roadster _roadster;
+  final RoadsterInfo _roadster;
 
   RoadsterPage(this._roadster);
 

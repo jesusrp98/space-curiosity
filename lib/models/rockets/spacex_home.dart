@@ -202,11 +202,12 @@ class _LaunchCountdownState extends State<LaunchCountdown>
   @override
   Widget build(BuildContext context) {
     return Countdown(
-      launchDate: widget.model.launch.launchDate,
       animation: StepTween(
         begin: widget.model.launch.launchDate.millisecondsSinceEpoch,
         end: DateTime.now().millisecondsSinceEpoch,
       ).animate(_controller),
+      launchDate: widget.model.launch.launchDate,
+      name: widget.model.launch.name,
     );
   }
 }
@@ -223,8 +224,9 @@ class Countdown extends AnimatedWidget {
   build(BuildContext context) {
     return Text(
       launchDate.isAfter(DateTime.now())
-          ? getTimer(launchDate.difference(DateTime.now()), '-')
-          : getTimer(DateTime.now().difference(launchDate), '+'),
+          ? getTimer(launchDate.difference(DateTime.now()))
+          : getLive,
+      textAlign: TextAlign.center,
       style: Theme.of(context)
           .textTheme
           .headline
@@ -232,9 +234,8 @@ class Countdown extends AnimatedWidget {
     );
   }
 
-  String getTimer(Duration d, String symbol) =>
-      'T' +
-      symbol +
+  String getTimer(Duration d) =>
+      'T-' +
       d.inDays.toString().padLeft(2, '0') +
       'd:' +
       (d.inHours - d.inDays * Duration.hoursPerDay).toString().padLeft(2, '0') +
@@ -248,4 +249,6 @@ class Countdown extends AnimatedWidget {
       'm:' +
       (d.inSeconds % 60).toString().padLeft(2, '0') +
       's';
+
+  String get getLive => '$name is now live!';
 }

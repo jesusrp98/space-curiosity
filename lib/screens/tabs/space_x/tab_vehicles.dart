@@ -9,7 +9,7 @@ import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:space_news/screens/tabs/space_x/search_vehicles.dart';
 
-import '../../../models/rockets/vehicle.dart';
+import '../../../models/rockets/info_vehicle.dart';
 import '../../../util/colors.dart';
 import '../../../widgets/hero_image.dart';
 import '../../../widgets/list_cell.dart';
