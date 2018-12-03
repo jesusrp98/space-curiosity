@@ -8,7 +8,6 @@ class Rocket {
   final String id, name, type;
   final List<Core> firstStage;
   final SecondStage secondStage;
-  final bool hasFairing;
   final Fairing fairing;
 
   Rocket({
@@ -17,7 +16,6 @@ class Rocket {
     this.type,
     this.firstStage,
     this.secondStage,
-    this.hasFairing,
     this.fairing,
   });
 
@@ -30,13 +28,14 @@ class Rocket {
           .map((core) => Core.fromJson(core))
           .toList(),
       secondStage: SecondStage.fromJson(json['second_stage']),
-      hasFairing: json['fairings'] != null,
       fairing:
           json['fairings'] == null ? null : Fairing.fromJson(json['fairings']),
     );
   }
 
   bool get isHeavy => firstStage.length != 1;
+
+  bool get hasFairing => fairing == null;
 }
 
 /// CORE CLASS

@@ -35,7 +35,6 @@ class LaunchpadModel extends QuerryModel {
 class Launchpad {
   final String name, status, location, state, details, url;
   final List<double> coordinates;
-  final List vehicles;
   final int attemptedLaunches, successfulLaunches;
 
   Launchpad({
@@ -46,7 +45,6 @@ class Launchpad {
     this.details,
     this.url,
     this.coordinates,
-    this.vehicles,
     this.attemptedLaunches,
     this.successfulLaunches,
   });
@@ -63,7 +61,6 @@ class Launchpad {
         json['location']['latitude'],
         json['location']['longitude'],
       ],
-      vehicles: json['vehicles_launched'],
       attemptedLaunches: json['attempted_launches'],
       successfulLaunches: json['successful_launches'],
     );
