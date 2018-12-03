@@ -30,15 +30,19 @@ class VehiclesModel extends QuerryModel {
     // Clear old data
     clearItems();
 
-    // Added parsed item
+    // Add parsed item
     items.add(RoadsterInfo.fromJson(json.decode(roadsterResponse.body)));
     items.addAll(
-        capsulesJson.map((capsule) => CapsuleInfo.fromJson(capsule)).toList());
+      capsulesJson.map((capsule) => CapsuleInfo.fromJson(capsule)).toList(),
+    );
     items.addAll(
-        rocketsJson.map((rocket) => RocketInfo.fromJson(rocket)).toList());
-    items.addAll(shipsJson.map((rocket) => ShipInfo.fromJson(rocket)).toList());
+      rocketsJson.map((rocket) => RocketInfo.fromJson(rocket)).toList(),
+    );
+    items.addAll(
+      shipsJson.map((rocket) => ShipInfo.fromJson(rocket)).toList(),
+    );
 
-    // Adds photos & shuffle them
+    // Add one photo per vehicle & shuffle them
     if (photos.isEmpty) {
       List<int> randomList = List<int>.generate(getSize, (index) => index);
       randomList

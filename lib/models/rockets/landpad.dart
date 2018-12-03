@@ -22,7 +22,7 @@ class LandpadModel extends QuerryModel {
     // Clear old data
     clearItems();
 
-    // Added parsed item
+    // Add parsed item
     items.add(Landingpad.fromJson(json.decode(response.body)));
 
     // Finished loading data

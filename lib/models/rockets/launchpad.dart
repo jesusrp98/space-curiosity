@@ -22,7 +22,7 @@ class LaunchpadModel extends QuerryModel {
     // Clear old data
     clearItems();
 
-    // Added parsed item
+    // Add parsed item
     items.add(Launchpad.fromJson(json.decode(response.body)));
 
     // Finished loading data

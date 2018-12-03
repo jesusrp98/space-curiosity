@@ -28,10 +28,10 @@ class LaunchesModel extends QuerryModel {
     // Clear old data
     clearItems();
 
-    // Added parsed items
+    // Add parsed items
     items.addAll(snapshot.map((launch) => Launch.fromJson(launch)).toList());
 
-    // Adds photos & shuffle them
+    // Add photos & shuffle them
     if (photos.isEmpty) {
       if (getItem(0).photos.isEmpty)
         photos.addAll(Url.spacexUpcomingScreen);

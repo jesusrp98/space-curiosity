@@ -24,10 +24,10 @@ class CoreModel extends QuerryModel {
     // Clear old data
     clearItems();
 
-    // Added parsed item
+    // Add parsed item
     items.add(CoreDetails.fromJson(json.decode(response.body)));
 
-    // Adds photos & shuffle them
+    // Add photos & shuffle them
     photos.addAll(Url.spacexCoreDialog);
     photos.shuffle();
 

@@ -24,10 +24,10 @@ class CapsuleModel extends QuerryModel {
     // Clear old data
     clearItems();
 
-    // Added parsed item
+    // Add parsed item
     items.add(CapsuleDetails.fromJson(json.decode(response.body)));
 
-    // Adds photos & shuffle them
+    // Add photos & shuffle them
     photos.addAll(Url.spacexCapsuleDialog);
     photos.shuffle();
 

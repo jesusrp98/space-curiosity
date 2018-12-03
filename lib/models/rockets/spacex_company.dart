@@ -15,10 +15,14 @@ class SpacexCompanyModel extends QuerryModel {
 
   @override
   Future loadData() async {
+    // Get items by http call
     final companyResponse = await http.get(Url.spacexCompany);
     response = await http.get(Url.spacexAchievements);
+
+    // Clear old data
     clearItems();
 
+    // Added parsed item
     snapshot = json.decode(response.body);
     items.addAll(snapshot
         .map((achievement) => Achievement.fromJson(achievement))
@@ -26,9 +30,11 @@ class SpacexCompanyModel extends QuerryModel {
 
     _company = Company.fromJson(json.decode(companyResponse.body));
 
+    // Add photos & shuffle them
     photos.addAll(Url.spacexCompanyScreen);
     photos.shuffle();
 
+    // Finished loading data
     loadingState(false);
   }
 
