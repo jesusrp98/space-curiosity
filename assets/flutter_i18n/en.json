@@ -97,6 +97,7 @@
       "icon": "Home",
       "tab": {
         "no_countdown": "{mission} coming soon!",
+        "live_mission": "¡{mission} is now live!",
         "mission": {
           "title": "Launched by {rocket}",
           "body": "It will carry {payloads}",

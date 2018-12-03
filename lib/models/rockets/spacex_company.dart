@@ -24,9 +24,9 @@ class SpacexCompanyModel extends QuerryModel {
 
     // Added parsed item
     snapshot = json.decode(response.body);
-    items.addAll(snapshot
-        .map((achievement) => Achievement.fromJson(achievement))
-        .toList());
+    items.addAll(
+      snapshot.map((achievement) => Achievement.fromJson(achievement)).toList(),
+    );
 
     _company = Company.fromJson(json.decode(companyResponse.body));
 

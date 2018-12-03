@@ -22,7 +22,7 @@ class VehiclesModel extends QuerryModel {
     final capsulesResponse = await http.get(Url.capsuleList);
     final roadsterResponse = await http.get(Url.roadsterPage);
     final shipsResponse = await http.get(Url.shipsList);
-
+    
     List rocketsJson = json.decode(rocketsResponse.body);
     List capsulesJson = json.decode(capsulesResponse.body);
     List shipsJson = json.decode(shipsResponse.body);
@@ -30,7 +30,7 @@ class VehiclesModel extends QuerryModel {
     // Clear old data
     clearItems();
 
-    // Add parsed item
+    // Add parsed items
     items.add(RoadsterInfo.fromJson(json.decode(roadsterResponse.body)));
     items.addAll(
       capsulesJson.map((capsule) => CapsuleInfo.fromJson(capsule)).toList(),

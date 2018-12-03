@@ -119,7 +119,9 @@ class SpacexHomeModel extends QuerryModel {
 
     if (launch.rocket.firstStage[0].id == null) {
       aux = FlutterI18n.translate(
-          context, 'spacex.home.tab.first_stage.body_null');
+        context,
+        'spacex.home.tab.first_stage.body_null',
+      );
     } else {
       for (int i = 0; i < launch.rocket.firstStage.length; ++i)
         aux += FlutterI18n.translate(
@@ -154,17 +156,21 @@ class SpacexHomeModel extends QuerryModel {
   String capsule(context) =>
       launch.rocket.secondStage.payloads[0].capsuleSerial == null
           ? FlutterI18n.translate(context, 'spacex.home.tab.capsule.body_null')
-          : FlutterI18n.translate(context, 'spacex.home.tab.capsule.body', {
-              'reused': launch.rocket.secondStage.payloads[0].reused
-                  ? FlutterI18n.translate(
-                      context,
-                      'spacex.home.tab.capsule.body_reused',
-                    )
-                  : FlutterI18n.translate(
-                      context,
-                      'spacex.home.tab.capsule.body_new',
-                    )
-            });
+          : FlutterI18n.translate(
+              context,
+              'spacex.home.tab.capsule.body',
+              {
+                'reused': launch.rocket.secondStage.payloads[0].reused
+                    ? FlutterI18n.translate(
+                        context,
+                        'spacex.home.tab.capsule.body_reused',
+                      )
+                    : FlutterI18n.translate(
+                        context,
+                        'spacex.home.tab.capsule.body_new',
+                      )
+              },
+            );
 }
 
 /// COUNTDOWN WIDGET
@@ -217,15 +223,22 @@ class Countdown extends AnimatedWidget {
   final DateTime launchDate;
   final String name;
 
-  Countdown({Key key, this.animation, this.launchDate, this.name})
-      : super(key: key, listenable: animation);
+  Countdown({
+    Key key,
+    this.animation,
+    this.launchDate,
+    this.name,
+  }) : super(
+          key: key,
+          listenable: animation,
+        );
 
   @override
   build(BuildContext context) {
     return Text(
       launchDate.isAfter(DateTime.now())
           ? getTimer(launchDate.difference(DateTime.now()))
-          : getLive,
+          : getLive(context),
       textAlign: TextAlign.center,
       style: Theme.of(context)
           .textTheme
@@ -250,5 +263,9 @@ class Countdown extends AnimatedWidget {
       (d.inSeconds % 60).toString().padLeft(2, '0') +
       's';
 
-  String get getLive => '$name is now live!';
+  String getLive(context) => FlutterI18n.translate(
+        context,
+        'spacex.home.tab.live_mission',
+        {'mission': name},
+      );
 }

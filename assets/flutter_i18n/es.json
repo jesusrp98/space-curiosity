@@ -49,6 +49,7 @@
       "icon": "Inicio",
       "tab": {
         "no_countdown": "¡{mission} próximamente!",
+        "live_mission": "¡{mission} está ahora en vivo!",
         "mission": {
           "title": "Lanzado por {rocket}",
           "body": "Llevará a {payloads}",
