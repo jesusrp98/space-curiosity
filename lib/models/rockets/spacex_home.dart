@@ -124,30 +124,47 @@ class SpacexHomeModel extends QuerryModel {
       );
     } else {
       for (int i = 0; i < launch.rocket.firstStage.length; ++i)
-        aux += FlutterI18n.translate(
-              context,
-              'spacex.home.tab.first_stage.body',
-              {
-                'booster': cores[i],
-                'reused': FlutterI18n.translate(
+        aux += (launch.rocket.firstStage[i].landingIntent != null)
+            ? FlutterI18n.translate(
+                context,
+                'spacex.home.tab.first_stage.body',
+                {
+                  'booster': cores[i],
+                  'reused': FlutterI18n.translate(
+                    context,
+                    launch.rocket.firstStage[i].reused
+                        ? 'spacex.home.tab.first_stage.body_reused'
+                        : 'spacex.home.tab.first_stage.body_new',
+                  ),
+                  'landing': launch.rocket.firstStage[i].landingIntent
+                      ? FlutterI18n.translate(
+                          context,
+                          'spacex.home.tab.first_stage.body_landing',
+                          {
+                            'landingpad':
+                                launch.rocket.firstStage[i].landingZone
+                          },
+                        )
+                      : FlutterI18n.translate(
+                          context,
+                          'spacex.home.tab.first_stage.body_dispended',
+                        )
+                },
+              )
+            : FlutterI18n.translate(
                   context,
-                  launch.rocket.firstStage[i].reused
-                      ? 'spacex.home.tab.first_stage.body_reused'
-                      : 'spacex.home.tab.first_stage.body_new',
-                ),
-                'landing': launch.rocket.firstStage[i].landingIntent
-                    ? FlutterI18n.translate(
-                        context,
-                        'spacex.home.tab.first_stage.body_landing',
-                        {'landingpad': launch.rocket.firstStage[i].landingZone},
-                      )
-                    : FlutterI18n.translate(
-                        context,
-                        'spacex.home.tab.first_stage.body_dispended',
-                      )
-              },
-            ) +
-            (i + 1 == launch.rocket.firstStage.length ? '' : '\n');
+                  'spacex.home.tab.first_stage.body_unknown_landing',
+                  {
+                    'booster': cores[i],
+                    'reused': FlutterI18n.translate(
+                      context,
+                      launch.rocket.firstStage[i].reused
+                          ? 'spacex.home.tab.first_stage.body_reused'
+                          : 'spacex.home.tab.first_stage.body_new',
+                    )
+                  },
+                ) +
+                (i + 1 == launch.rocket.firstStage.length ? '' : '\n');
     }
 
     return aux;

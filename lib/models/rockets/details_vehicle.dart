@@ -1,3 +1,4 @@
+import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:intl/intl.dart';
 
 /// VEHICLE DETAILS MODEL
@@ -20,7 +21,9 @@ abstract class VehicleDetails {
 
   String getDetails(context);
 
-  String get getFirstLaunched => DateFormat.yMMMMd().format(firstLaunched);
+  String getFirstLaunched(context) => firstLaunched != null
+      ? DateFormat.yMMMMd().format(firstLaunched)
+      : FlutterI18n.translate(context, 'spacex.other.unknown');
 
   String get getLaunches => missions.length.toString();
 

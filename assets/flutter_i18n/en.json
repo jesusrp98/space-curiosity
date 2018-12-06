@@ -129,6 +129,7 @@
           "booster": "The booster",
           "side_core": "The side core",
           "body": "{booster} {reused}, {landing}.",
+          "body_unknown_landing": "{booster} {reused}.",
           "body_null": "Details about the first stage are yet to be disclosed.",
           "body_reused": "is reused",
           "body_new": "is not reused",

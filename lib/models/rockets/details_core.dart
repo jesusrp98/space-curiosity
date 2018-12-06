@@ -65,7 +65,9 @@ class CoreDetails extends VehicleDetails {
       serial: json['core_serial'],
       status: json['status'],
       details: json['details'],
-      firstLaunched: DateTime.parse(json['original_launch']).toLocal(),
+      firstLaunched: json['original_launch'] != null
+          ? DateTime.parse(json['original_launch']).toLocal()
+          : null,
       missions: json['missions']
           .map((mission) => DetailsMission.fromJson(mission))
           .toList(),

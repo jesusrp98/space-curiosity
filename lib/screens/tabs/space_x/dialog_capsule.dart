@@ -87,7 +87,7 @@ class CapsuleDialog extends StatelessWidget {
                           context,
                           'spacex.dialog.vehicle.first_launched',
                         ),
-                        model.capsule.getFirstLaunched,
+                        model.capsule.getFirstLaunched(context),
                       ),
                       const SizedBox(height: 12.0),
                       RowItem.textRow(
