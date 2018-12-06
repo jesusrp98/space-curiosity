@@ -14,8 +14,8 @@ class RocketInfo extends Vehicle {
       engineThrustToWeight;
   final List<PayloadWeight> payloadWeights;
   final String engine, fuel, oxidizer;
-  final FirstStage firstStage;
-  final SecondStage secondStage;
+  final Stage firstStage, secondStage;
+  final List<double> fairingDimensions;
 
   RocketInfo({
     id,
@@ -41,6 +41,7 @@ class RocketInfo extends Vehicle {
     this.oxidizer,
     this.firstStage,
     this.secondStage,
+    this.fairingDimensions,
   }) : super(
           id: id,
           name: name,
@@ -80,8 +81,14 @@ class RocketInfo extends Vehicle {
       engine: json['engines']['type'] + ' ' + json['engines']['version'],
       fuel: json['engines']['propellant_2'],
       oxidizer: json['engines']['propellant_1'],
-      firstStage: FirstStage.fromJson(json['first_stage']),
-      secondStage: SecondStage.fromJson(json['second_stage']),
+      firstStage: Stage.fromJson(json['first_stage']),
+      secondStage: Stage.fromJson(json['second_stage']),
+      fairingDimensions: [
+        json['second_stage']['payloads']['composite_fairing']['height']
+            ['meters'],
+        json['second_stage']['payloads']['composite_fairing']['diameter']
+            ['meters'],
+      ],
     );
   }
 
@@ -116,6 +123,14 @@ class RocketInfo extends Vehicle {
 
   String get getOxidizer =>
       '${oxidizer[0].toUpperCase()}${oxidizer.substring(1)}';
+
+  String fairingHeight(context) => fairingDimensions[0] == null
+      ? FlutterI18n.translate(context, 'spacex.other.unknown')
+      : '${NumberFormat.decimalPattern().format(fairingDimensions[0])} m';
+
+  String fairingDiameter(context) => fairingDimensions[1] == null
+      ? FlutterI18n.translate(context, 'spacex.other.unknown')
+      : '${NumberFormat.decimalPattern().format(fairingDimensions[1])} m';
 }
 
 /// PAYLOAD WEIGHT MODEL
@@ -135,7 +150,7 @@ class PayloadWeight {
 
 /// STAGE MODEL
 /// General information about a specific stage of a Falcon rocket.
-abstract class Stage {
+class Stage {
   final bool reusable;
   final num engines, fuelAmount, thrustSea, thrustVacuum;
 
@@ -147,11 +162,15 @@ abstract class Stage {
     this.thrustVacuum,
   });
 
-  String getFuelAmount(context) => FlutterI18n.translate(
-        context,
-        'spacex.vehicle.rocket.stage.fuel_amount_tons',
-        {'tons': NumberFormat.decimalPattern().format(fuelAmount)},
-      );
+  factory Stage.fromJson(Map<String, dynamic> json) {
+    return Stage(
+      reusable: json['reusable'],
+      engines: json['engines'],
+      fuelAmount: json['fuel_amount_tons'],
+      thrustSea: (json['thrust_sea_level'] ?? json['thrust'])['kN'],
+      thrustVacuum: (json['thrust_vacuum'] ?? json['thrust'])['kN'],
+    );
+  }
 
   String getEngines(context) => FlutterI18n.translate(
         context,
@@ -159,71 +178,15 @@ abstract class Stage {
         {'number': engines.toString()},
       );
 
+  String getFuelAmount(context) => FlutterI18n.translate(
+        context,
+        'spacex.vehicle.rocket.stage.fuel_amount_tons',
+        {'tons': NumberFormat.decimalPattern().format(fuelAmount)},
+      );
+
   String get getThrustSea =>
       '${NumberFormat.decimalPattern().format(thrustSea)} kN';
 
   String get getThrustVacuum =>
       '${NumberFormat.decimalPattern().format(thrustVacuum)} kN';
-}
-
-class FirstStage extends Stage {
-  FirstStage({
-    reusable,
-    engines,
-    fuelAmount,
-    thrustSea,
-    thrustVacuum,
-  }) : super(
-          reusable: reusable,
-          engines: engines,
-          fuelAmount: fuelAmount,
-          thrustSea: thrustSea,
-          thrustVacuum: thrustVacuum,
-        );
-  factory FirstStage.fromJson(Map<String, dynamic> json) {
-    return FirstStage(
-      reusable: json['reusable'],
-      engines: json['engines'],
-      fuelAmount: json['fuel_amount_tons'],
-      thrustSea: json['thrust_sea_level']['kN'],
-      thrustVacuum: json['thrust_vacuum']['kN'],
-    );
-  }
-}
-
-class SecondStage extends Stage {
-  final List fairingDimensions;
-
-  SecondStage({
-    reusable,
-    engines,
-    fuelAmount,
-    thrustVacuum,
-    this.fairingDimensions,
-  }) : super(
-          reusable: reusable,
-          engines: engines,
-          fuelAmount: fuelAmount,
-          thrustVacuum: thrustVacuum,
-        );
-  factory SecondStage.fromJson(Map<String, dynamic> json) {
-    return SecondStage(
-      reusable: json['reusable'],
-      engines: json['engines'],
-      fuelAmount: json['fuel_amount_tons'],
-      thrustVacuum: json['thrust']['kN'],
-      fairingDimensions: [
-        json['payloads']['composite_fairing']['height']['meters'],
-        json['payloads']['composite_fairing']['diameter']['meters'],
-      ],
-    );
-  }
-
-  String fairingHeight(context) => fairingDimensions[0] == null
-      ? FlutterI18n.translate(context, 'spacex.other.unknown')
-      : '${NumberFormat.decimalPattern().format(fairingDimensions[0])} m';
-
-  String fairingDiameter(context) => fairingDimensions[1] == null
-      ? FlutterI18n.translate(context, 'spacex.other.unknown')
-      : '${NumberFormat.decimalPattern().format(fairingDimensions[1])} m';
 }
