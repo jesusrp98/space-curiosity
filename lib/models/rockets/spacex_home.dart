@@ -91,7 +91,7 @@ class SpacexHomeModel extends QuerryModel {
         {
           'reused': FlutterI18n.translate(
             context,
-            launch.rocket.fairing.reused
+            launch.rocket.fairing.reused != null && launch.rocket.fairing.reused
                 ? 'spacex.home.tab.fairings.body_reused'
                 : 'spacex.home.tab.fairings.body_new',
           ),
@@ -158,7 +158,8 @@ class SpacexHomeModel extends QuerryModel {
                     'booster': cores[i],
                     'reused': FlutterI18n.translate(
                       context,
-                      launch.rocket.firstStage[i].reused
+                      launch.rocket.firstStage[i].reused != null &&
+                              launch.rocket.firstStage[i].reused
                           ? 'spacex.home.tab.first_stage.body_reused'
                           : 'spacex.home.tab.first_stage.body_new',
                     )
@@ -245,10 +246,7 @@ class Countdown extends AnimatedWidget {
     this.animation,
     this.launchDate,
     this.name,
-  }) : super(
-          key: key,
-          listenable: animation,
-        );
+  }) : super(key: key, listenable: animation);
 
   @override
   build(BuildContext context) {

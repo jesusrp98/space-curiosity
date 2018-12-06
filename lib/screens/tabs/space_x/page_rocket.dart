@@ -173,7 +173,7 @@ class RocketPage extends StatelessWidget {
               context,
               'spacex.vehicle.rocket.stage.fairing_height',
             ),
-            _rocket.secondStage.fairingHeight(context),
+            _rocket.fairingHeight(context),
           ),
           const SizedBox(height: 12.0),
           RowItem.textRow(
@@ -181,7 +181,7 @@ class RocketPage extends StatelessWidget {
               context,
               'spacex.vehicle.rocket.stage.fairing_diameter',
             ),
-            _rocket.secondStage.fairingDiameter(context),
+            _rocket.fairingDiameter(context),
           ),
         ],
       ),

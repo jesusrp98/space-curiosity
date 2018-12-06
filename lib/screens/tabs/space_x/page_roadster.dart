@@ -145,22 +145,6 @@ class RoadsterPage extends StatelessWidget {
           RowItem.textRow(
             FlutterI18n.translate(
               context,
-              'spacex.vehicle.roadster.vehicle.height',
-            ),
-            _roadster.getHeight,
-          ),
-          const SizedBox(height: 12.0),
-          RowItem.textRow(
-            FlutterI18n.translate(
-              context,
-              'spacex.vehicle.roadster.vehicle.diameter',
-            ),
-            _roadster.getDiameter,
-          ),
-          const SizedBox(height: 12.0),
-          RowItem.textRow(
-            FlutterI18n.translate(
-              context,
               'spacex.vehicle.roadster.vehicle.mass',
             ),
             _roadster.getMass(context),

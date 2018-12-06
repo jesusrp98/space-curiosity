@@ -44,7 +44,6 @@ class ShipInfo extends Vehicle {
           active: active,
           firstFlight: firstFlight,
           mass: mass,
-          description: 'No description',
           url: url,
           photos: photos,
         );
@@ -114,9 +113,7 @@ class ShipInfo extends Vehicle {
 
   String getCoordinates(context) => coordinates.isNotEmpty
       ? FlutterI18n.translate(context, 'spacex.other.unknown')
-      : (coordinates[0].toStringAsPrecision(5) +
-          ',  ' +
-          coordinates[1].toStringAsPrecision(5));
+      : '${coordinates[0].toStringAsPrecision(5)},  ${coordinates[1].toStringAsPrecision(5)}';
 
   String get getSuccessfulLandings => '$successfulLandings/$attemptedLandings';
 

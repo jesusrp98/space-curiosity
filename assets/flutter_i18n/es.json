@@ -81,6 +81,7 @@
           "booster": "El propulsor",
           "side_core": "El propulsor lateral",
           "body": "{booster} {reused}, {landing}.",
+          "body_unknown_landing": "{booster} {reused}.",
           "body_null": "No se conocen todavía los detalles sobre la primera fase.",
           "body_reused": "es reutilizado",
           "body_new": "no es reutilizado",

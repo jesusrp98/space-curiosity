@@ -40,10 +40,7 @@ class RoadsterInfo extends Vehicle {
           type: 'roadster',
           description: description,
           url: url,
-          height: 1.127,
-          diameter: 1.873,
           mass: mass,
-          active: true,
           firstFlight: firstFlight,
           photos: photos,
         );
