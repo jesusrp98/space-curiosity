@@ -34,7 +34,7 @@ class IssModel extends QuerryModel {
     response = await http.get(Url.issAstronauts);
     items.add(IssAstronauts.fromJson(json.decode(response.body)));
 
-    loadingState(false);
+    setLoading(false);
   }
 
   IssLocation get issLocation => getItem(0);

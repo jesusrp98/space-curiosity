@@ -72,7 +72,7 @@ class VehiclesTab extends StatelessWidget {
                           key: PageStorageKey('Vehicles'),
                           delegate: SliverChildBuilderDelegate(
                             _buildItem,
-                            childCount: model.getSize,
+                            childCount: model.getItemCount,
                           ),
                         ),
                 ],

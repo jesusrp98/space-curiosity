@@ -32,7 +32,7 @@ class CapsuleModel extends QuerryModel {
     photos.shuffle();
 
     // Finished loading data
-    loadingState(false);
+    setLoading(false);
   }
 
   CapsuleDetails get capsule => items[0];

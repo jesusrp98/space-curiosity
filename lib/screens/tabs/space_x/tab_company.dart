@@ -73,7 +73,7 @@ class SpacexCompanyTab extends StatelessWidget {
                             key: PageStorageKey('spacex'),
                             delegate: SliverChildBuilderDelegate(
                               _buildAchievement,
-                              childCount: model.getSize,
+                              childCount: model.getItemCount,
                             ),
                           ),
                         ],

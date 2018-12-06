@@ -74,7 +74,7 @@ class LaunchesTab extends StatelessWidget {
                           key: PageStorageKey(title.toString()),
                           delegate: SliverChildBuilderDelegate(
                             _buildItem,
-                            childCount: model.getSize,
+                            childCount: model.getItemCount,
                           ),
                         ),
                 ],

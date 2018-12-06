@@ -41,7 +41,7 @@ class LaunchesModel extends QuerryModel {
     }
 
     // Finished loading data
-    loadingState(false);
+    setLoading(false);
   }
 }
 

@@ -26,7 +26,7 @@ class LandpadModel extends QuerryModel {
     items.add(Landingpad.fromJson(json.decode(response.body)));
 
     // Finished loading data
-    loadingState(false);
+    setLoading(false);
   }
 
   Landingpad get landingpad => items[0];

@@ -22,7 +22,7 @@ class SolarSystemScreen extends StatelessWidget {
             : Scrollbar(
                 child: ListView.builder(
                   key: PageStorageKey('planets'),
-                  itemCount: model.getSize,
+                  itemCount: model.getItemCount,
                   itemBuilder: _buildItem,
                 ),
               ),

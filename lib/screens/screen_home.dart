@@ -217,7 +217,7 @@ class _ContentPageState extends State<ContentPage> {
           : Swiper(
               itemBuilder: (_, index) => PhotoCard(model.getItem(index)),
               scrollDirection: Axis.vertical,
-              itemCount: model.getSize,
+              itemCount: model.getItemCount,
               autoplay: true,
               autoplayDelay: 6000,
               duration: 750,

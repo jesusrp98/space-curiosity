@@ -32,7 +32,7 @@ class SpacexHomeModel extends QuerryModel {
     }
 
     // Finished loading data
-    loadingState(false);
+    setLoading(false);
   }
 
   String vehicle(context) => FlutterI18n.translate(

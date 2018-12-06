@@ -35,7 +35,7 @@ class SpacexCompanyModel extends QuerryModel {
     photos.shuffle();
 
     // Finished loading data
-    loadingState(false);
+    setLoading(false);
   }
 
   Company get company => _company;

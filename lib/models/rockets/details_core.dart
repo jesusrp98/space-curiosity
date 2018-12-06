@@ -32,7 +32,7 @@ class CoreModel extends QuerryModel {
     photos.shuffle();
 
     // Finished loading data
-    loadingState(false);
+    setLoading(false);
   }
 
   CoreDetails get core => items[0];

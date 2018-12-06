@@ -22,7 +22,7 @@ class VehiclesModel extends QuerryModel {
     final capsulesResponse = await http.get(Url.capsuleList);
     final roadsterResponse = await http.get(Url.roadsterPage);
     final shipsResponse = await http.get(Url.shipsList);
-    
+
     List rocketsJson = json.decode(rocketsResponse.body);
     List capsulesJson = json.decode(capsulesResponse.body);
     List shipsJson = json.decode(shipsResponse.body);
@@ -44,7 +44,7 @@ class VehiclesModel extends QuerryModel {
 
     // Add one photo per vehicle & shuffle them
     if (photos.isEmpty) {
-      List<int> randomList = List<int>.generate(getSize, (index) => index);
+      List<int> randomList = List<int>.generate(getItemCount, (index) => index);
       randomList
           .sublist(0, 5)
           .forEach((index) => photos.add(getItem(index).getRandomPhoto));
@@ -52,7 +52,7 @@ class VehiclesModel extends QuerryModel {
     }
 
     // Finished loading data
-    loadingState(false);
+    setLoading(false);
   }
 }
 

@@ -26,7 +26,7 @@ class LaunchpadModel extends QuerryModel {
     items.add(Launchpad.fromJson(json.decode(response.body)));
 
     // Finished loading data
-    loadingState(false);
+    setLoading(false);
   }
 
   Launchpad get launchpad => items[0];
