@@ -9,7 +9,7 @@ import '../querry_model.dart';
 /// Details about a specific landpad,
 /// where boosters can land after completing its mission.
 class LandpadModel extends QuerryModel {
-  // Landingpad id: OCISLY
+  // Landpad id: OCISLY
   final String id;
 
   LandpadModel(this.id);
@@ -23,21 +23,21 @@ class LandpadModel extends QuerryModel {
     clearItems();
 
     // Add parsed item
-    items.add(Landingpad.fromJson(json.decode(response.body)));
+    items.add(Landpad.fromJson(json.decode(response.body)));
 
     // Finished loading data
     setLoading(false);
   }
 
-  Landingpad get landingpad => items[0];
+  Landpad get landpad => items[0];
 }
 
-class Landingpad {
+class Landpad {
   final String name, status, type, location, state, details, url;
   final List<double> coordinates;
   final int attemptedLandings, successfulLandings;
 
-  Landingpad({
+  Landpad({
     this.name,
     this.status,
     this.type,
@@ -50,8 +50,8 @@ class Landingpad {
     this.successfulLandings,
   });
 
-  factory Landingpad.fromJson(Map<String, dynamic> json) {
-    return Landingpad(
+  factory Landpad.fromJson(Map<String, dynamic> json) {
+    return Landpad(
       name: json['full_name'],
       status: json['status'],
       type: json['landing_type'],

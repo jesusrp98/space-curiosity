@@ -9,157 +9,154 @@ import 'package:scoped_model/scoped_model.dart';
 import '../../../models/rockets/landpad.dart';
 import '../../../util/colors.dart';
 import '../../../widgets/row_item.dart';
+import '../../../widgets/separator.dart';
 
 class LandingpadDialog extends StatelessWidget {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
   @override
   Widget build(BuildContext context) {
     return ScopedModelDescendant<LandpadModel>(
       builder: (context, child, model) => Scaffold(
-            key: _scaffoldKey,
-            body: CustomScrollView(slivers: <Widget>[
-              SliverAppBar(
-                expandedHeight: MediaQuery.of(context).size.height * 0.3,
-                floating: false,
-                pinned: true,
-                actions: <Widget>[
-                  IconButton(
-                    icon: const Icon(Icons.public),
-                    onPressed: () => FlutterWebBrowser.openWebPage(
-                          url: model.landingpad.url,
-                          androidToolbarColor: primaryColor,
-                        ),
-                    tooltip: FlutterI18n.translate(
-                      context,
-                      'spacex.other.menu.wikipedia',
-                    ),
-                  )
-                ],
-                flexibleSpace: FlexibleSpaceBar(
-                  centerTitle: true,
-                  title: Text(model.id),
-                  background: (model.isLoading)
-                      ? NativeLoadingIndicator(center: true)
-                      : FlutterMap(
-                          options: MapOptions(
-                            center: LatLng(
-                              model.landingpad.coordinates[0],
-                              model.landingpad.coordinates[1],
-                            ),
-                            zoom: 6.0,
-                            minZoom: 5.0,
-                            maxZoom: 10.0,
+            body: CustomScrollView(
+              slivers: <Widget>[
+                SliverAppBar(
+                  expandedHeight: MediaQuery.of(context).size.height * 0.3,
+                  floating: false,
+                  pinned: true,
+                  actions: <Widget>[
+                    IconButton(
+                      icon: const Icon(Icons.public),
+                      onPressed: () async =>
+                          await FlutterWebBrowser.openWebPage(
+                            url: model.landpad.url,
+                            androidToolbarColor: primaryColor,
                           ),
-                          layers: <LayerOptions>[
-                            TileLayerOptions(
-                              urlTemplate:
-                                  'https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png',
-                              subdomains: ['a', 'b', 'c', 'd'],
-                              backgroundColor: primaryColor,
-                            ),
-                            MarkerLayerOptions(markers: [
-                              Marker(
-                                width: 45.0,
-                                height: 45.0,
-                                point: LatLng(
-                                  model.landingpad.coordinates[0],
-                                  model.landingpad.coordinates[1],
-                                ),
-                                builder: (_) => Icon(
-                                      Icons.location_on,
-                                      color: Colors.red,
-                                      size: 45.0,
-                                    ),
-                              )
-                            ])
-                          ],
-                        ),
-                ),
-              ),
-              (model.isLoading)
-                  ? SliverFillRemaining(
-                      child: NativeLoadingIndicator(center: true),
+                      tooltip: FlutterI18n.translate(
+                        context,
+                        'spacex.other.menu.wikipedia',
+                      ),
                     )
-                  : SliverToBoxAdapter(child: _buildBody())
-            ]),
+                  ],
+                  flexibleSpace: FlexibleSpaceBar(
+                    centerTitle: true,
+                    title: Text(model.id),
+                    background: model.isLoading
+                        ? NativeLoadingIndicator(center: true)
+                        : FlutterMap(
+                            options: MapOptions(
+                              center: LatLng(
+                                model.landpad.coordinates[0],
+                                model.landpad.coordinates[1],
+                              ),
+                              zoom: 6.0,
+                              minZoom: 5.0,
+                              maxZoom: 10.0,
+                            ),
+                            layers: <LayerOptions>[
+                              TileLayerOptions(
+                                urlTemplate:
+                                    'https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png',
+                                subdomains: ['a', 'b', 'c', 'd'],
+                                backgroundColor: primaryColor,
+                              ),
+                              MarkerLayerOptions(
+                                markers: [
+                                  Marker(
+                                    width: 45.0,
+                                    height: 45.0,
+                                    point: LatLng(
+                                      model.landpad.coordinates[0],
+                                      model.landpad.coordinates[1],
+                                    ),
+                                    builder: (_) => const Icon(
+                                          Icons.location_on,
+                                          color: locationPin,
+                                          size: 45.0,
+                                        ),
+                                  )
+                                ],
+                              )
+                            ],
+                          ),
+                  ),
+                ),
+                model.isLoading
+                    ? SliverFillRemaining(
+                        child: NativeLoadingIndicator(center: true),
+                      )
+                    : SliverToBoxAdapter(child: _buildBody())
+              ],
+            ),
           ),
     );
   }
 
   Widget _buildBody() {
     return ScopedModelDescendant<LandpadModel>(
-      builder: (context, child, model) => Scrollbar(
+      builder: (context, child, model) => Padding(
+            padding: const EdgeInsets.all(16.0),
             child: Column(
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    children: <Widget>[
-                      Text(
-                        model.landingpad.name,
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.title,
-                      ),
-                      const SizedBox(height: 12.0),
-                      RowItem.textRow(
-                        FlutterI18n.translate(
-                          context,
-                          'spacex.dialog.pad.status',
-                        ),
-                        model.landingpad.getStatus,
-                      ),
-                      const SizedBox(height: 12.0),
-                      RowItem.textRow(
-                        FlutterI18n.translate(
-                          context,
-                          'spacex.dialog.pad.location',
-                        ),
-                        model.landingpad.location,
-                      ),
-                      const SizedBox(height: 12.0),
-                      RowItem.textRow(
-                        FlutterI18n.translate(
-                          context,
-                          'spacex.dialog.pad.state',
-                        ),
-                        model.landingpad.state,
-                      ),
-                      const SizedBox(height: 12.0),
-                      RowItem.textRow(
-                        FlutterI18n.translate(
-                          context,
-                          'spacex.dialog.pad.coordinates',
-                        ),
-                        model.landingpad.getCoordinates,
-                      ),
-                      const SizedBox(height: 12.0),
-                      RowItem.textRow(
-                        FlutterI18n.translate(
-                          context,
-                          'spacex.dialog.pad.landing_type',
-                        ),
-                        model.landingpad.type,
-                      ),
-                      const SizedBox(height: 12.0),
-                      RowItem.textRow(
-                        FlutterI18n.translate(
-                          context,
-                          'spacex.dialog.pad.landings_successful',
-                        ),
-                        model.landingpad.getSuccessfulLandings,
-                      ),
-                      const Divider(height: 24.0),
-                      Text(
-                        model.landingpad.details,
-                        textAlign: TextAlign.justify,
-                        style: Theme.of(context)
-                            .textTheme
-                            .subhead
-                            .copyWith(color: secondaryText),
-                      ),
-                    ],
+                Text(
+                  model.landpad.name,
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.title,
+                ),
+                Separator.spacer(),
+                RowItem.textRow(
+                  FlutterI18n.translate(
+                    context,
+                    'spacex.dialog.pad.status',
                   ),
+                  model.landpad.getStatus,
+                ),
+                Separator.spacer(),
+                RowItem.textRow(
+                  FlutterI18n.translate(
+                    context,
+                    'spacex.dialog.pad.location',
+                  ),
+                  model.landpad.location,
+                ),
+                Separator.spacer(),
+                RowItem.textRow(
+                  FlutterI18n.translate(
+                    context,
+                    'spacex.dialog.pad.state',
+                  ),
+                  model.landpad.state,
+                ),
+                Separator.spacer(),
+                RowItem.textRow(
+                  FlutterI18n.translate(
+                    context,
+                    'spacex.dialog.pad.coordinates',
+                  ),
+                  model.landpad.getCoordinates,
+                ),
+                Separator.spacer(),
+                RowItem.textRow(
+                  FlutterI18n.translate(
+                    context,
+                    'spacex.dialog.pad.landing_type',
+                  ),
+                  model.landpad.type,
+                ),
+                Separator.spacer(),
+                RowItem.textRow(
+                  FlutterI18n.translate(
+                    context,
+                    'spacex.dialog.pad.landings_successful',
+                  ),
+                  model.landpad.getSuccessfulLandings,
+                ),
+                Separator.divider(),
+                Text(
+                  model.landpad.details,
+                  textAlign: TextAlign.justify,
+                  style: Theme.of(context)
+                      .textTheme
+                      .subhead
+                      .copyWith(color: secondaryText),
                 ),
               ],
             ),
