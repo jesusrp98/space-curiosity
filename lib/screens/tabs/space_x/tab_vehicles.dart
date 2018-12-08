@@ -33,6 +33,7 @@ class VehiclesTab extends StatelessWidget {
             body: RefreshIndicator(
               onRefresh: () => _onRefresh(model),
               child: CustomScrollView(
+                key: PageStorageKey('Vehicles'),
                 slivers: <Widget>[
                   SliverAppBar(
                     expandedHeight: MediaQuery.of(context).size.height * 0.3,
@@ -67,7 +68,6 @@ class VehiclesTab extends StatelessWidget {
                           child: NativeLoadingIndicator(center: true),
                         )
                       : SliverList(
-                          key: PageStorageKey('Vehicles'),
                           delegate: SliverChildBuilderDelegate(
                             _buildItem,
                             childCount: model.getItemCount,

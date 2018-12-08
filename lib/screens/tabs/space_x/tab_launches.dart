@@ -31,6 +31,7 @@ class LaunchesTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScopedModelDescendant<LaunchesModel>(
       builder: (context, child, model) => Scaffold(
+            key: PageStorageKey('Lauches $title'),
             body: RefreshIndicator(
               onRefresh: () => _onRefresh(model),
               child: CustomScrollView(
@@ -70,7 +71,6 @@ class LaunchesTab extends StatelessWidget {
                           child: NativeLoadingIndicator(center: true),
                         )
                       : SliverList(
-                          key: PageStorageKey(title.toString()),
                           delegate: SliverChildBuilderDelegate(
                             _buildItem,
                             childCount: model.getItemCount,

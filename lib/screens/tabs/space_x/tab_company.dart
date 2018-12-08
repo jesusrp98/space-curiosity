@@ -18,6 +18,7 @@ class SpacexCompanyTab extends StatelessWidget {
     return ScopedModelDescendant<SpacexCompanyModel>(
       builder: (context, child, model) => Scaffold(
             body: CustomScrollView(
+              key: PageStorageKey('Company'),
               slivers: <Widget>[
                 SliverAppBar(
                   expandedHeight: MediaQuery.of(context).size.height * 0.3,
@@ -71,7 +72,6 @@ class SpacexCompanyTab extends StatelessWidget {
                             child: _buildBody(),
                           ),
                           SliverList(
-                            key: PageStorageKey('spacex'),
                             delegate: SliverChildBuilderDelegate(
                               _buildAchievement,
                               childCount: model.getItemCount,

@@ -33,6 +33,7 @@ class SpacexHomeTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScopedModelDescendant<SpacexHomeModel>(
       builder: (context, child, model) => Scaffold(
+            key: PageStorageKey('Home'),
             body: RefreshIndicator(
               onRefresh: () => _onRefresh(model),
               child: CustomScrollView(
