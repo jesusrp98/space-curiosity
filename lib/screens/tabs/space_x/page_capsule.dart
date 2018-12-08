@@ -8,11 +8,11 @@ import '../../../models/rockets/info_capsule.dart';
 import '../../../util/colors.dart';
 import '../../../widgets/card_page.dart';
 import '../../../widgets/row_item.dart';
+import '../../../widgets/separator.dart';
 
 /// CAPSULE PAGE CLASS
 /// This class represent a capsule page. It displays CapsuleInfo's specs.
 class CapsulePage extends StatelessWidget {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final CapsuleInfo _capsule;
 
   CapsulePage(this._capsule);
@@ -20,7 +20,6 @@ class CapsulePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey,
       body: CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(
@@ -30,7 +29,7 @@ class CapsulePage extends StatelessWidget {
             actions: <Widget>[
               IconButton(
                 icon: const Icon(Icons.public),
-                onPressed: () => FlutterWebBrowser.openWebPage(
+                onPressed: () async => await FlutterWebBrowser.openWebPage(
                       url: _capsule.url,
                       androidToolbarColor: primaryColor,
                     ),
@@ -49,7 +48,7 @@ class CapsulePage extends StatelessWidget {
                 autoplay: true,
                 autoplayDelay: 6000,
                 duration: 750,
-                onTap: (index) => FlutterWebBrowser.openWebPage(
+                onTap: (index) async => await FlutterWebBrowser.openWebPage(
                       url: _capsule.getPhoto(index),
                       androidToolbarColor: primaryColor,
                     ),
@@ -58,14 +57,16 @@ class CapsulePage extends StatelessWidget {
           ),
           SliverToBoxAdapter(
             child: Padding(
-              padding: EdgeInsets.all(16.0),
-              child: Column(children: <Widget>[
-                _capsuleCard(context),
-                const SizedBox(height: 8.0),
-                _specsCard(context),
-                const SizedBox(height: 8.0),
-                _thrustersCard(context),
-              ]),
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                children: <Widget>[
+                  _capsuleCard(context),
+                  Separator.cardSpacer(),
+                  _specsCard(context),
+                  Separator.cardSpacer(),
+                  _thrustersCard(context),
+                ],
+              ),
             ),
           ),
         ],
@@ -73,7 +74,7 @@ class CapsulePage extends StatelessWidget {
     );
   }
 
-  Widget _capsuleCard(context) {
+  Widget _capsuleCard(BuildContext context) {
     return CardPage(
       title: FlutterI18n.translate(
         context,
@@ -88,7 +89,7 @@ class CapsulePage extends StatelessWidget {
             ),
             _capsule.getFullFirstFlight,
           ),
-          const SizedBox(height: 12.0),
+          Separator.spacer(),
           RowItem.textRow(
             FlutterI18n.translate(
               context,
@@ -96,7 +97,7 @@ class CapsulePage extends StatelessWidget {
             ),
             _capsule.getCrew(context),
           ),
-          const SizedBox(height: 12.0),
+          Separator.spacer(),
           RowItem.iconRow(
             FlutterI18n.translate(
               context,
@@ -104,7 +105,7 @@ class CapsulePage extends StatelessWidget {
             ),
             _capsule.active,
           ),
-          const Divider(height: 24.0),
+          Separator.divider(),
           Text(
             _capsule.description,
             textAlign: TextAlign.justify,
@@ -115,7 +116,7 @@ class CapsulePage extends StatelessWidget {
     );
   }
 
-  Widget _specsCard(context) {
+  Widget _specsCard(BuildContext context) {
     return CardPage(
       title: FlutterI18n.translate(
         context,
@@ -131,7 +132,7 @@ class CapsulePage extends StatelessWidget {
             ),
             _capsule.getLaunchMass,
           ),
-          const SizedBox(height: 12.0),
+          Separator.spacer(),
           RowItem.textRow(
             FlutterI18n.translate(
               context,
@@ -139,7 +140,7 @@ class CapsulePage extends StatelessWidget {
             ),
             _capsule.getReturnMass,
           ),
-          const SizedBox(height: 12.0),
+          Separator.spacer(),
           RowItem.iconRow(
             FlutterI18n.translate(
               context,
@@ -147,7 +148,7 @@ class CapsulePage extends StatelessWidget {
             ),
             _capsule.reusable,
           ),
-          const Divider(height: 24.0),
+          Separator.divider(),
           RowItem.textRow(
             FlutterI18n.translate(
               context,
@@ -155,7 +156,7 @@ class CapsulePage extends StatelessWidget {
             ),
             _capsule.getHeight,
           ),
-          const SizedBox(height: 12.0),
+          Separator.spacer(),
           RowItem.textRow(
             FlutterI18n.translate(
               context,
@@ -163,7 +164,7 @@ class CapsulePage extends StatelessWidget {
             ),
             _capsule.getDiameter,
           ),
-          const SizedBox(height: 12.0),
+          Separator.spacer(),
           RowItem.textRow(
             FlutterI18n.translate(
               context,
@@ -176,7 +177,7 @@ class CapsulePage extends StatelessWidget {
     );
   }
 
-  Widget _thrustersCard(context) {
+  Widget _thrustersCard(BuildContext context) {
     return CardPage(
       title: FlutterI18n.translate(
         context,
@@ -201,61 +202,61 @@ class CapsulePage extends StatelessWidget {
     );
   }
 
-  Widget _getThruster(context, Thruster thruster) {
-    return Column(children: <Widget>[
-      const Divider(height: 24.0),
-      RowItem.textRow(
-        FlutterI18n.translate(
-          context,
-          'spacex.vehicle.capsule.thruster.name',
+  Widget _getThruster(BuildContext context, Thruster thruster) {
+    return Column(
+      children: <Widget>[
+        Separator.divider(),
+        RowItem.textRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.vehicle.capsule.thruster.name',
+          ),
+          thruster.name,
         ),
-        thruster.name,
-      ),
-      const SizedBox(height: 12.0),
-      RowItem.textRow(
-        FlutterI18n.translate(
-          context,
-          'spacex.vehicle.capsule.thruster.amount',
+        Separator.spacer(),
+        RowItem.textRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.vehicle.capsule.thruster.amount',
+          ),
+          thruster.getAmount,
         ),
-        thruster.getAmount,
-      ),
-      const SizedBox(height: 12.0),
-      RowItem.textRow(
-        FlutterI18n.translate(
-          context,
-          'spacex.vehicle.capsule.thruster.fuel',
+        Separator.spacer(),
+        RowItem.textRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.vehicle.capsule.thruster.fuel',
+          ),
+          thruster.getFuel,
         ),
-        thruster.getFuel,
-      ),
-      const SizedBox(height: 12.0),
-      RowItem.textRow(
-        FlutterI18n.translate(
-          context,
-          'spacex.vehicle.capsule.thruster.oxidizer',
+        Separator.spacer(),
+        RowItem.textRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.vehicle.capsule.thruster.oxidizer',
+          ),
+          thruster.getOxidizer,
         ),
-        thruster.getOxidizer,
-      ),
-      const SizedBox(height: 12.0),
-      RowItem.textRow(
-        FlutterI18n.translate(
-          context,
-          'spacex.vehicle.capsule.thruster.thrust',
+        Separator.spacer(),
+        RowItem.textRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.vehicle.capsule.thruster.thrust',
+          ),
+          thruster.getThrust,
         ),
-        thruster.getThrust,
-      ),
-    ]);
+      ],
+    );
   }
 
   Widget _buildImage(BuildContext context, int index) {
-    CachedNetworkImage photo = CachedNetworkImage(
+    final CachedNetworkImage photo = CachedNetworkImage(
       imageUrl: _capsule.getPhoto(index),
       errorWidget: const Icon(Icons.error),
       fadeInDuration: Duration(milliseconds: 100),
       fit: BoxFit.cover,
     );
-    if (index == 0)
-      return Hero(tag: _capsule.id, child: photo);
-    else
-      return photo;
+
+    return index == 0 ? Hero(tag: _capsule.id, child: photo) : photo;
   }
 }

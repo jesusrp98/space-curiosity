@@ -7,11 +7,11 @@ import '../../../models/rockets/info_ship.dart';
 import '../../../util/colors.dart';
 import '../../../widgets/card_page.dart';
 import '../../../widgets/row_item.dart';
+import '../../../widgets/separator.dart';
 
 /// SHIP PAGE CLASS
 /// This class represent a ship page. It displays Ship's specs.
 class ShipPage extends StatelessWidget {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final ShipInfo _ship;
 
   ShipPage(this._ship);
@@ -19,7 +19,6 @@ class ShipPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey,
       body: CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(
@@ -29,7 +28,7 @@ class ShipPage extends StatelessWidget {
             actions: <Widget>[
               IconButton(
                 icon: const Icon(Icons.public),
-                onPressed: () => FlutterWebBrowser.openWebPage(
+                onPressed: () async => await FlutterWebBrowser.openWebPage(
                     url: _ship.url, androidToolbarColor: primaryColor),
                 tooltip: FlutterI18n.translate(
                   context,
@@ -41,7 +40,7 @@ class ShipPage extends StatelessWidget {
               centerTitle: true,
               title: Text(_ship.name),
               background: InkWell(
-                onTap: () => FlutterWebBrowser.openWebPage(
+                onTap: () async => await FlutterWebBrowser.openWebPage(
                       url: _ship.getProfilePhoto,
                       androidToolbarColor: primaryColor,
                     ),
@@ -59,12 +58,12 @@ class ShipPage extends StatelessWidget {
           ),
           SliverToBoxAdapter(
             child: Padding(
-              padding: EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(16.0),
               child: Column(children: <Widget>[
                 _shipCard(context),
-                const SizedBox(height: 8.0),
+                Separator.cardSpacer(),
                 _specsCard(context),
-                const SizedBox(height: 8.0),
+                Separator.cardSpacer(),
                 _missionsCard(context),
               ]),
             ),
@@ -74,7 +73,7 @@ class ShipPage extends StatelessWidget {
     );
   }
 
-  Widget _shipCard(context) {
+  Widget _shipCard(BuildContext context) {
     return CardPage(
       title: FlutterI18n.translate(
         context,
@@ -88,7 +87,7 @@ class ShipPage extends StatelessWidget {
                 'spacex.vehicle.ship.description.home_port',
               ),
               _ship.homePort),
-          const SizedBox(height: 12.0),
+          Separator.spacer(),
           RowItem.textRow(
               FlutterI18n.translate(
                 context,
@@ -98,7 +97,7 @@ class ShipPage extends StatelessWidget {
           _ship.hasExtras
               ? Column(
                   children: <Widget>[
-                    const Divider(height: 24.0),
+                    Separator.divider(),
                     _ship.isLandable
                         ? RowItem.textRow(
                             FlutterI18n.translate(
@@ -116,13 +115,13 @@ class ShipPage extends StatelessWidget {
                           ),
                   ],
                 )
-              : Container()
+              : Separator.none()
         ],
       ),
     );
   }
 
-  Widget _specsCard(context) {
+  Widget _specsCard(BuildContext context) {
     return CardPage(
       title: FlutterI18n.translate(
         context,
@@ -138,7 +137,7 @@ class ShipPage extends StatelessWidget {
             ),
             _ship.use,
           ),
-          const SizedBox(height: 12.0),
+          Separator.spacer(),
           RowItem.textRow(
             FlutterI18n.translate(
               context,
@@ -146,7 +145,7 @@ class ShipPage extends StatelessWidget {
             ),
             _ship.getModel(context),
           ),
-          const Divider(height: 24.0),
+          Separator.divider(),
           RowItem.textRow(
             FlutterI18n.translate(
               context,
@@ -154,10 +153,10 @@ class ShipPage extends StatelessWidget {
             ),
             _ship.primaryRole,
           ),
-          (_ship.hasSeveralRoles)
+          _ship.hasSeveralRoles
               ? Column(
                   children: <Widget>[
-                    const SizedBox(height: 12.0),
+                    Separator.spacer(),
                     RowItem.textRow(
                       FlutterI18n.translate(
                         context,
@@ -165,10 +164,10 @@ class ShipPage extends StatelessWidget {
                       ),
                       _ship.secondaryRole,
                     ),
-                    const SizedBox(height: 12.0),
+                    Separator.spacer(),
                   ],
                 )
-              : const SizedBox(height: 12.0),
+              : Separator.spacer(),
           RowItem.textRow(
             FlutterI18n.translate(
               context,
@@ -176,7 +175,7 @@ class ShipPage extends StatelessWidget {
             ),
             _ship.getStatus(context),
           ),
-          const SizedBox(height: 12.0),
+          Separator.spacer(),
           RowItem.textRow(
             FlutterI18n.translate(
               context,
@@ -184,7 +183,7 @@ class ShipPage extends StatelessWidget {
             ),
             _ship.getCoordinates(context),
           ),
-          const Divider(height: 24.0),
+          Separator.divider(),
           RowItem.textRow(
             FlutterI18n.translate(
               context,
@@ -192,7 +191,7 @@ class ShipPage extends StatelessWidget {
             ),
             _ship.getMass(context),
           ),
-          const SizedBox(height: 12.0),
+          Separator.spacer(),
           RowItem.textRow(
             FlutterI18n.translate(
               context,
@@ -205,7 +204,7 @@ class ShipPage extends StatelessWidget {
     );
   }
 
-  Widget _missionsCard(context) {
+  Widget _missionsCard(BuildContext context) {
     return CardPage(
       title: FlutterI18n.translate(
         context,
@@ -242,7 +241,7 @@ class ShipPage extends StatelessWidget {
             ),
             mission.name),
       ]..add(
-          mission != missions.last ? const SizedBox(height: 12.0) : Container(),
+          mission != missions.last ? Separator.spacer() : Separator.none(),
         ),
     );
   }

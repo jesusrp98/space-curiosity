@@ -9,11 +9,11 @@ import '../../../models/rockets/info_roadster.dart';
 import '../../../util/colors.dart';
 import '../../../widgets/card_page.dart';
 import '../../../widgets/row_item.dart';
+import '../../../widgets/separator.dart';
 
 /// ROADSTER PAGE CLASS
 /// Displays live information about Elon Musk's Tesla Roadster.
 class RoadsterPage extends StatelessWidget {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final RoadsterInfo _roadster;
 
   RoadsterPage(this._roadster);
@@ -21,7 +21,6 @@ class RoadsterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey,
       body: Builder(
         builder: (context) => SliverFab(
               floatingActionButton: FloatingActionButton(
@@ -30,7 +29,7 @@ class RoadsterPage extends StatelessWidget {
                   context,
                   'spacex.other.tooltip.watch_replay',
                 ),
-                onPressed: () => FlutterWebBrowser.openWebPage(
+                onPressed: () async => await FlutterWebBrowser.openWebPage(
                       url: _roadster.video,
                       androidToolbarColor: primaryColor,
                     ),
@@ -44,7 +43,8 @@ class RoadsterPage extends StatelessWidget {
                   actions: <Widget>[
                     IconButton(
                       icon: const Icon(Icons.public),
-                      onPressed: () => FlutterWebBrowser.openWebPage(
+                      onPressed: () async =>
+                          await FlutterWebBrowser.openWebPage(
                             url: _roadster.url,
                             androidToolbarColor: primaryColor,
                           ),
@@ -63,7 +63,8 @@ class RoadsterPage extends StatelessWidget {
                       autoplay: true,
                       autoplayDelay: 6000,
                       duration: 750,
-                      onTap: (index) => FlutterWebBrowser.openWebPage(
+                      onTap: (index) async =>
+                          await FlutterWebBrowser.openWebPage(
                             url: _roadster.getPhoto(index),
                             androidToolbarColor: primaryColor,
                           ),
@@ -72,25 +73,27 @@ class RoadsterPage extends StatelessWidget {
                 ),
                 SliverToBoxAdapter(
                   child: Padding(
-                    padding: EdgeInsets.all(16.0),
-                    child: Column(children: <Widget>[
-                      _roadsterCard(context),
-                      const SizedBox(height: 8.0),
-                      _vehicleCard(context),
-                      const SizedBox(height: 8.0),
-                      _orbitCard(context),
-                      const SizedBox(height: 8.0),
-                      Text(
-                        FlutterI18n.translate(
-                          context,
-                          'spacex.vehicle.roadster.data_updated',
-                        ),
-                        style: Theme.of(context)
-                            .textTheme
-                            .subhead
-                            .copyWith(color: secondaryText),
-                      )
-                    ]),
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      children: <Widget>[
+                        _roadsterCard(context),
+                        Separator.cardSpacer(),
+                        _vehicleCard(context),
+                        Separator.cardSpacer(),
+                        _orbitCard(context),
+                        Separator.cardSpacer(),
+                        Text(
+                          FlutterI18n.translate(
+                            context,
+                            'spacex.vehicle.roadster.data_updated',
+                          ),
+                          style: Theme.of(context)
+                              .textTheme
+                              .subhead
+                              .copyWith(color: secondaryText),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ],
@@ -99,7 +102,7 @@ class RoadsterPage extends StatelessWidget {
     );
   }
 
-  Widget _roadsterCard(context) {
+  Widget _roadsterCard(BuildContext context) {
     return CardPage(
       title: FlutterI18n.translate(
         context,
@@ -114,7 +117,7 @@ class RoadsterPage extends StatelessWidget {
             ),
             _roadster.getFullFirstFlight,
           ),
-          const SizedBox(height: 12.0),
+          Separator.spacer(),
           RowItem.textRow(
             FlutterI18n.translate(
               context,
@@ -122,7 +125,7 @@ class RoadsterPage extends StatelessWidget {
             ),
             'Falcon Heavy',
           ),
-          const Divider(height: 24.0),
+          Separator.divider(),
           Text(
             _roadster.description,
             textAlign: TextAlign.justify,
@@ -133,7 +136,7 @@ class RoadsterPage extends StatelessWidget {
     );
   }
 
-  Widget _vehicleCard(context) {
+  Widget _vehicleCard(BuildContext context) {
     return CardPage(
       title: FlutterI18n.translate(
         context,
@@ -149,7 +152,7 @@ class RoadsterPage extends StatelessWidget {
             ),
             _roadster.getMass(context),
           ),
-          const SizedBox(height: 12.0),
+          Separator.spacer(),
           RowItem.textRow(
             FlutterI18n.translate(
               context,
@@ -157,7 +160,7 @@ class RoadsterPage extends StatelessWidget {
             ),
             _roadster.getSpeed,
           ),
-          const Divider(height: 24.0),
+          Separator.divider(),
           RowItem.textRow(
             FlutterI18n.translate(
               context,
@@ -165,7 +168,7 @@ class RoadsterPage extends StatelessWidget {
             ),
             _roadster.getEarthDistance,
           ),
-          const SizedBox(height: 12.0),
+          Separator.spacer(),
           RowItem.textRow(
             FlutterI18n.translate(
               context,
@@ -178,7 +181,7 @@ class RoadsterPage extends StatelessWidget {
     );
   }
 
-  Widget _orbitCard(context) {
+  Widget _orbitCard(BuildContext context) {
     return CardPage(
       title: FlutterI18n.translate(
         context,
@@ -194,7 +197,7 @@ class RoadsterPage extends StatelessWidget {
             ),
             _roadster.getOrbit,
           ),
-          const SizedBox(height: 12.0),
+          Separator.spacer(),
           RowItem.textRow(
             FlutterI18n.translate(
               context,
@@ -202,7 +205,7 @@ class RoadsterPage extends StatelessWidget {
             ),
             _roadster.getPeriod(context),
           ),
-          const Divider(height: 24.0),
+          Separator.divider(),
           RowItem.textRow(
             FlutterI18n.translate(
               context,
@@ -210,7 +213,7 @@ class RoadsterPage extends StatelessWidget {
             ),
             _roadster.getInclination,
           ),
-          const SizedBox(height: 12.0),
+          Separator.spacer(),
           RowItem.textRow(
             FlutterI18n.translate(
               context,
@@ -218,7 +221,7 @@ class RoadsterPage extends StatelessWidget {
             ),
             _roadster.getLongitude,
           ),
-          const Divider(height: 24.0),
+          Separator.divider(),
           RowItem.textRow(
             FlutterI18n.translate(
               context,
@@ -226,7 +229,7 @@ class RoadsterPage extends StatelessWidget {
             ),
             _roadster.getApoapsis,
           ),
-          const SizedBox(height: 12.0),
+          Separator.spacer(),
           RowItem.textRow(
             FlutterI18n.translate(
               context,
@@ -240,15 +243,13 @@ class RoadsterPage extends StatelessWidget {
   }
 
   Widget _buildImage(BuildContext context, int index) {
-    CachedNetworkImage photo = CachedNetworkImage(
+    final CachedNetworkImage photo = CachedNetworkImage(
       imageUrl: _roadster.getPhoto(index),
       errorWidget: const Icon(Icons.error),
       fadeInDuration: Duration(milliseconds: 100),
       fit: BoxFit.cover,
     );
-    if (index == 0)
-      return Hero(tag: _roadster.id, child: photo);
-    else
-      return photo;
+
+    return index == 0 ? Hero(tag: _roadster.id, child: photo) : photo;
   }
 }

@@ -8,11 +8,11 @@ import '../../../models/rockets/info_rocket.dart';
 import '../../../util/colors.dart';
 import '../../../widgets/card_page.dart';
 import '../../../widgets/row_item.dart';
+import '../../../widgets/separator.dart';
 
 /// ROCKET PAGE CLASS
 /// This class represent a rocket page. It displays RocketInfo's specs.
 class RocketPage extends StatelessWidget {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final RocketInfo _rocket;
 
   RocketPage(this._rocket);
@@ -20,7 +20,6 @@ class RocketPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey,
       body: CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(
@@ -30,7 +29,7 @@ class RocketPage extends StatelessWidget {
             actions: <Widget>[
               IconButton(
                 icon: const Icon(Icons.public),
-                onPressed: () => FlutterWebBrowser.openWebPage(
+                onPressed: () async => await FlutterWebBrowser.openWebPage(
                     url: _rocket.url, androidToolbarColor: primaryColor),
                 tooltip: FlutterI18n.translate(
                   context,
@@ -47,7 +46,7 @@ class RocketPage extends StatelessWidget {
                 autoplay: true,
                 autoplayDelay: 6000,
                 duration: 750,
-                onTap: (index) => FlutterWebBrowser.openWebPage(
+                onTap: (index) async => await FlutterWebBrowser.openWebPage(
                       url: _rocket.getPhoto(index),
                       androidToolbarColor: primaryColor,
                     ),
@@ -56,18 +55,18 @@ class RocketPage extends StatelessWidget {
           ),
           SliverToBoxAdapter(
             child: Padding(
-              padding: EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(16.0),
               child: Column(children: <Widget>[
                 _rocketCard(context),
-                const SizedBox(height: 8.0),
+                Separator.cardSpacer(),
                 _specsCard(context),
-                const SizedBox(height: 8.0),
+                Separator.cardSpacer(),
                 _payloadsCard(context),
-                const SizedBox(height: 8.0),
+                Separator.cardSpacer(),
                 _firstStage(context),
-                const SizedBox(height: 8.0),
+                Separator.cardSpacer(),
                 _secondStage(context),
-                const SizedBox(height: 8.0),
+                Separator.cardSpacer(),
                 _enginesCard(context),
               ]),
             ),
@@ -77,7 +76,7 @@ class RocketPage extends StatelessWidget {
     );
   }
 
-  Widget _rocketCard(context) {
+  Widget _rocketCard(BuildContext context) {
     return CardPage(
       title: FlutterI18n.translate(
         context,
@@ -92,7 +91,7 @@ class RocketPage extends StatelessWidget {
             ),
             _rocket.getFullFirstFlight,
           ),
-          const SizedBox(height: 12.0),
+          Separator.spacer(),
           RowItem.textRow(
             FlutterI18n.translate(
               context,
@@ -100,7 +99,7 @@ class RocketPage extends StatelessWidget {
             ),
             _rocket.getLaunchCost,
           ),
-          const SizedBox(height: 12.0),
+          Separator.spacer(),
           RowItem.textRow(
             FlutterI18n.translate(
               context,
@@ -108,7 +107,7 @@ class RocketPage extends StatelessWidget {
             ),
             _rocket.getSuccessRate(context),
           ),
-          const SizedBox(height: 12.0),
+          Separator.spacer(),
           RowItem.iconRow(
             FlutterI18n.translate(
               context,
@@ -116,7 +115,7 @@ class RocketPage extends StatelessWidget {
             ),
             _rocket.active,
           ),
-          const Divider(height: 24.0),
+          Separator.divider(),
           Text(
             _rocket.description,
             textAlign: TextAlign.justify,
@@ -127,7 +126,7 @@ class RocketPage extends StatelessWidget {
     );
   }
 
-  Widget _specsCard(context) {
+  Widget _specsCard(BuildContext context) {
     return CardPage(
       title: FlutterI18n.translate(
         context,
@@ -143,7 +142,7 @@ class RocketPage extends StatelessWidget {
             ),
             _rocket.getStages(context),
           ),
-          const Divider(height: 24.0),
+          Separator.divider(),
           RowItem.textRow(
             FlutterI18n.translate(
               context,
@@ -151,7 +150,7 @@ class RocketPage extends StatelessWidget {
             ),
             _rocket.getHeight,
           ),
-          const SizedBox(height: 12.0),
+          Separator.spacer(),
           RowItem.textRow(
             FlutterI18n.translate(
               context,
@@ -159,7 +158,7 @@ class RocketPage extends StatelessWidget {
             ),
             _rocket.getDiameter,
           ),
-          const SizedBox(height: 12.0),
+          Separator.spacer(),
           RowItem.textRow(
             FlutterI18n.translate(
               context,
@@ -167,7 +166,7 @@ class RocketPage extends StatelessWidget {
             ),
             _rocket.getMass(context),
           ),
-          const Divider(height: 24.0),
+          Separator.divider(),
           RowItem.textRow(
             FlutterI18n.translate(
               context,
@@ -175,7 +174,7 @@ class RocketPage extends StatelessWidget {
             ),
             _rocket.fairingHeight(context),
           ),
-          const SizedBox(height: 12.0),
+          Separator.spacer(),
           RowItem.textRow(
             FlutterI18n.translate(
               context,
@@ -188,7 +187,7 @@ class RocketPage extends StatelessWidget {
     );
   }
 
-  Widget _payloadsCard(context) {
+  Widget _payloadsCard(BuildContext context) {
     return CardPage(
       title: FlutterI18n.translate(
         context,
@@ -211,7 +210,7 @@ class RocketPage extends StatelessWidget {
   Column _getPayloadWeight(
     BuildContext context,
     List payloadWeights,
-    payloadWeight,
+    PayloadWeight payloadWeight,
   ) {
     return Column(
       children: <Widget>[
@@ -221,13 +220,13 @@ class RocketPage extends StatelessWidget {
         ),
       ]..add(
           payloadWeight != payloadWeights.last
-              ? const SizedBox(height: 12.0)
-              : Container(),
+              ? Separator.spacer()
+              : Separator.none(),
         ),
     );
   }
 
-  Widget _firstStage(context) {
+  Widget _firstStage(BuildContext context) {
     return CardPage(
       title: FlutterI18n.translate(
         context,
@@ -242,7 +241,7 @@ class RocketPage extends StatelessWidget {
             ),
             _rocket.firstStage.getFuelAmount(context),
           ),
-          const SizedBox(height: 12.0),
+          Separator.spacer(),
           RowItem.textRow(
             FlutterI18n.translate(
               context,
@@ -250,7 +249,7 @@ class RocketPage extends StatelessWidget {
             ),
             _rocket.firstStage.getEngines(context),
           ),
-          const SizedBox(height: 12.0),
+          Separator.spacer(),
           RowItem.iconRow(
             FlutterI18n.translate(
               context,
@@ -258,7 +257,7 @@ class RocketPage extends StatelessWidget {
             ),
             _rocket.firstStage.reusable,
           ),
-          const Divider(height: 24.0),
+          Separator.divider(),
           RowItem.textRow(
             FlutterI18n.translate(
               context,
@@ -266,7 +265,7 @@ class RocketPage extends StatelessWidget {
             ),
             _rocket.firstStage.getThrustSea,
           ),
-          const SizedBox(height: 12.0),
+          Separator.spacer(),
           RowItem.textRow(
             FlutterI18n.translate(
               context,
@@ -279,7 +278,7 @@ class RocketPage extends StatelessWidget {
     );
   }
 
-  Widget _secondStage(context) {
+  Widget _secondStage(BuildContext context) {
     return CardPage(
       title: FlutterI18n.translate(
         context,
@@ -294,7 +293,7 @@ class RocketPage extends StatelessWidget {
             ),
             _rocket.secondStage.getFuelAmount(context),
           ),
-          const SizedBox(height: 12.0),
+          Separator.spacer(),
           RowItem.textRow(
             FlutterI18n.translate(
               context,
@@ -302,7 +301,7 @@ class RocketPage extends StatelessWidget {
             ),
             _rocket.secondStage.getEngines(context),
           ),
-          const SizedBox(height: 12.0),
+          Separator.spacer(),
           RowItem.iconRow(
             FlutterI18n.translate(
               context,
@@ -310,7 +309,7 @@ class RocketPage extends StatelessWidget {
             ),
             _rocket.secondStage.reusable,
           ),
-          const Divider(height: 24.0),
+          Separator.divider(),
           RowItem.textRow(
             FlutterI18n.translate(
               context,
@@ -323,7 +322,7 @@ class RocketPage extends StatelessWidget {
     );
   }
 
-  Widget _enginesCard(context) {
+  Widget _enginesCard(BuildContext context) {
     return CardPage(
       title: FlutterI18n.translate(
         context,
@@ -339,7 +338,7 @@ class RocketPage extends StatelessWidget {
             ),
             _rocket.getEngine,
           ),
-          const Divider(height: 24.0),
+          Separator.divider(),
           RowItem.textRow(
             FlutterI18n.translate(
               context,
@@ -347,7 +346,7 @@ class RocketPage extends StatelessWidget {
             ),
             _rocket.getFuel,
           ),
-          const SizedBox(height: 12.0),
+          Separator.spacer(),
           RowItem.textRow(
             FlutterI18n.translate(
               context,
@@ -355,7 +354,7 @@ class RocketPage extends StatelessWidget {
             ),
             _rocket.getOxidizer,
           ),
-          const Divider(height: 24.0),
+          Separator.divider(),
           RowItem.textRow(
             FlutterI18n.translate(
               context,
@@ -363,7 +362,7 @@ class RocketPage extends StatelessWidget {
             ),
             _rocket.getEngineThrustToWeight(context),
           ),
-          const SizedBox(height: 12.0),
+          Separator.spacer(),
           RowItem.textRow(
             FlutterI18n.translate(
               context,
@@ -371,7 +370,7 @@ class RocketPage extends StatelessWidget {
             ),
             _rocket.getEngineThrustSea,
           ),
-          const SizedBox(height: 12.0),
+          Separator.spacer(),
           RowItem.textRow(
             FlutterI18n.translate(
               context,

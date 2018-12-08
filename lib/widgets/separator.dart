@@ -14,6 +14,10 @@ class Separator extends StatelessWidget {
     return Separator(SizedBox(height: 12.0));
   }
 
+  factory Separator.cardSpacer() {
+    return Separator(SizedBox(height: 8.0));
+  }
+
   factory Separator.divider({double indent = 0.0}) {
     return Separator(Divider(height: 24, indent: indent));
   }

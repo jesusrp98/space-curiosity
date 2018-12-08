@@ -18,6 +18,7 @@ import '../../../widgets/card_page.dart';
 import '../../../widgets/head_card_page.dart';
 import '../../../widgets/hero_image.dart';
 import '../../../widgets/row_item.dart';
+import '../../../widgets/separator.dart';
 import 'dialog_capsule.dart';
 import 'dialog_core.dart';
 import 'dialog_landingpad.dart';
@@ -26,7 +27,6 @@ import 'dialog_launchpad.dart';
 /// LAUNCH PAGE CLASS
 /// This class displays all information of a specific launch.
 class LaunchPage extends StatelessWidget {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final Launch _launch;
 
   LaunchPage(this._launch);
@@ -34,7 +34,6 @@ class LaunchPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey,
       body: Builder(
         builder: (context) => SliverFab(
               expandedHeight: MediaQuery.of(context).size.height * 0.3,
@@ -45,7 +44,8 @@ class LaunchPage extends StatelessWidget {
                         context,
                         'spacex.other.tooltip.watch_replay',
                       ),
-                      onPressed: () => FlutterWebBrowser.openWebPage(
+                      onPressed: () async =>
+                          await FlutterWebBrowser.openWebPage(
                             url: _launch.getVideo,
                             androidToolbarColor: primaryColor,
                           ),
@@ -59,15 +59,17 @@ class LaunchPage extends StatelessWidget {
                         'spacex.other.tooltip.add_event',
                       ),
                       onPressed: !_launch.tentativeTime
-                          ? () => Add2Calendar.addEvent2Cal(Event(
-                                title: _launch.name,
-                                description: _launch.details,
-                                location: _launch.launchpadName,
-                                startDate: _launch.launchDate,
-                                endDate: _launch.launchDate.add(Duration(
-                                  minutes: 30,
-                                )),
-                              ))
+                          ? () => Add2Calendar.addEvent2Cal(
+                                Event(
+                                  title: _launch.name,
+                                  description: _launch.details,
+                                  location: _launch.launchpadName,
+                                  startDate: _launch.launchDate,
+                                  endDate: _launch.launchDate.add(
+                                    Duration(minutes: 30),
+                                  ),
+                                ),
+                              )
                           : null,
                     ),
               slivers: <Widget>[
@@ -79,17 +81,21 @@ class LaunchPage extends StatelessWidget {
                     PopupMenuButton<String>(
                       itemBuilder: (_) => _launch
                           .getEllipsis(context)
-                          .map((url) => PopupMenuItem(
-                                value: url,
-                                child: Text(url),
-                                enabled: _launch.links[_launch.getEllipsisIndex(
-                                      context,
-                                      url,
-                                    )] !=
-                                    null,
-                              ))
+                          .map(
+                            (url) => PopupMenuItem(
+                                  value: url,
+                                  child: Text(url),
+                                  enabled:
+                                      _launch.links[_launch.getEllipsisIndex(
+                                            context,
+                                            url,
+                                          )] !=
+                                          null,
+                                ),
+                          )
                           .toList(),
-                      onSelected: (url) => FlutterWebBrowser.openWebPage(
+                      onSelected: (url) async =>
+                          await FlutterWebBrowser.openWebPage(
                             url: _launch
                                 .links[_launch.getEllipsisIndex(context, url)],
                             androidToolbarColor: primaryColor,
@@ -105,7 +111,8 @@ class LaunchPage extends StatelessWidget {
                       autoplay: true,
                       autoplayDelay: 6000,
                       duration: 750,
-                      onTap: (index) => FlutterWebBrowser.openWebPage(
+                      onTap: (index) async =>
+                          await FlutterWebBrowser.openWebPage(
                             url: _launch.getPhoto(index),
                             androidToolbarColor: primaryColor,
                           ),
@@ -114,14 +121,16 @@ class LaunchPage extends StatelessWidget {
                 ),
                 SliverToBoxAdapter(
                   child: Padding(
-                    padding: EdgeInsets.all(16.0),
-                    child: Column(children: <Widget>[
-                      _missionCard(context),
-                      const SizedBox(height: 8.0),
-                      _firstStageCard(context),
-                      const SizedBox(height: 8.0),
-                      _secondStageCard(context),
-                    ]),
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      children: <Widget>[
+                        _missionCard(context),
+                        Separator.cardSpacer(),
+                        _firstStageCard(context),
+                        Separator.cardSpacer(),
+                        _secondStageCard(context),
+                      ],
+                    ),
                   ),
                 ),
               ],
@@ -135,8 +144,8 @@ class LaunchPage extends StatelessWidget {
       image: HeroImage.card(
         url: _launch.getImageUrl,
         tag: _launch.getNumber,
-        onTap: (_launch.hasImage)
-            ? () => FlutterWebBrowser.openWebPage(
+        onTap: _launch.hasImage
+            ? () async => await FlutterWebBrowser.openWebPage(
                   url: _launch.getImageUrl,
                   androidToolbarColor: primaryColor,
                 )
@@ -145,8 +154,9 @@ class LaunchPage extends StatelessWidget {
       title: _launch.name,
       subtitle1: Text(
         _launch.getLaunchDate,
-        style:
-            Theme.of(context).textTheme.subhead.copyWith(color: secondaryText),
+        style: Theme.of(context).textTheme.subhead.copyWith(
+              color: secondaryText,
+            ),
       ),
       subtitle2: InkWell(
         onTap: () => Navigator.push(
@@ -192,7 +202,7 @@ class LaunchPage extends StatelessWidget {
             ),
             rocket.name,
           ),
-          const SizedBox(height: 12.0),
+          Separator.spacer(),
           RowItem.textRow(
             FlutterI18n.translate(
               context,
@@ -200,7 +210,7 @@ class LaunchPage extends StatelessWidget {
             ),
             rocket.type,
           ),
-          const SizedBox(height: 12.0),
+          Separator.spacer(),
           RowItem.textRow(
             FlutterI18n.translate(
               context,
@@ -208,7 +218,7 @@ class LaunchPage extends StatelessWidget {
             ),
             _launch.getStaticFireDate(context),
           ),
-          const SizedBox(height: 12.0),
+          Separator.spacer(),
           RowItem.iconRow(
             FlutterI18n.translate(
               context,
@@ -219,7 +229,7 @@ class LaunchPage extends StatelessWidget {
           _launch.launchSuccess != null && _launch.launchSuccess == false
               ? Column(
                   children: <Widget>[
-                    const Divider(height: 24.0),
+                    Separator.divider(),
                     RowItem.textRow(
                       FlutterI18n.translate(
                         context,
@@ -227,7 +237,7 @@ class LaunchPage extends StatelessWidget {
                       ),
                       _launch.failureDetails.getTime,
                     ),
-                    const SizedBox(height: 12.0),
+                    Separator.spacer(),
                     RowItem.textRow(
                       FlutterI18n.translate(
                         context,
@@ -235,7 +245,7 @@ class LaunchPage extends StatelessWidget {
                       ),
                       _launch.failureDetails.getAltitude(context),
                     ),
-                    const SizedBox(height: 12.0),
+                    Separator.spacer(),
                     Text(
                       _launch.failureDetails.getReason,
                       textAlign: TextAlign.justify,
@@ -246,7 +256,7 @@ class LaunchPage extends StatelessWidget {
                     ),
                   ],
                 )
-              : Container(),
+              : Separator.none(),
           Column(
             children: rocket.firstStage
                 .map((core) => _getCores(context, core))
@@ -276,10 +286,10 @@ class LaunchPage extends StatelessWidget {
             ),
             secondStage.getBlock(context),
           ),
-          (_launch.rocket.hasFairing)
+          _launch.rocket.hasFairing
               ? Column(
                   children: <Widget>[
-                    const Divider(height: 24.0),
+                    Separator.divider(),
                     RowItem.iconRow(
                       FlutterI18n.translate(
                         context,
@@ -287,8 +297,8 @@ class LaunchPage extends StatelessWidget {
                       ),
                       fairing.reused,
                     ),
-                    const SizedBox(height: 12.0),
-                    (fairing.recoveryAttempt == true)
+                    Separator.spacer(),
+                    fairing.recoveryAttempt
                         ? Column(
                             children: <Widget>[
                               RowItem.iconRow(
@@ -298,7 +308,7 @@ class LaunchPage extends StatelessWidget {
                                 ),
                                 fairing.recoverySuccess,
                               ),
-                              const SizedBox(height: 12.0),
+                              Separator.spacer(),
                               RowItem.textRow(
                                 FlutterI18n.translate(
                                   context,
@@ -317,7 +327,7 @@ class LaunchPage extends StatelessWidget {
                           ),
                   ],
                 )
-              : const SizedBox(height: 0.0),
+              : Separator.none(),
           Column(
             children: secondStage.payloads
                 .map((payload) => _getPayload(context, payload))
@@ -329,146 +339,152 @@ class LaunchPage extends StatelessWidget {
   }
 
   Widget _getCores(BuildContext context, Core core) {
-    return Column(children: <Widget>[
-      const Divider(height: 24.0),
-      RowItem.dialogRow(
-        context: context,
-        title: FlutterI18n.translate(
-          context,
-          'spacex.launch.page.rocket.core.serial',
+    return Column(
+      children: <Widget>[
+        Separator.divider(),
+        RowItem.dialogRow(
+          context: context,
+          title: FlutterI18n.translate(
+            context,
+            'spacex.launch.page.rocket.core.serial',
+          ),
+          description: core.getId(context),
+          screen: ScopedModel<CoreModel>(
+            model: CoreModel(core.id)..loadData(),
+            child: CoreDialog(),
+          ),
         ),
-        description: core.getId(context),
-        screen: ScopedModel<CoreModel>(
-          model: CoreModel(core.id)..loadData(),
-          child: CoreDialog(),
+        Separator.spacer(),
+        RowItem.textRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.launch.page.rocket.core.model',
+          ),
+          core.getBlock(context),
         ),
-      ),
-      const SizedBox(height: 12.0),
-      RowItem.textRow(
-        FlutterI18n.translate(
-          context,
-          'spacex.launch.page.rocket.core.model',
+        Separator.spacer(),
+        RowItem.iconRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.launch.page.rocket.core.reused',
+          ),
+          core.reused,
         ),
-        core.getBlock(context),
-      ),
-      const SizedBox(height: 12.0),
-      RowItem.iconRow(
-        FlutterI18n.translate(
-          context,
-          'spacex.launch.page.rocket.core.reused',
-        ),
-        core.reused,
-      ),
-      const SizedBox(height: 12.0),
-      core.landingIntent != null && core.landingIntent
-          ? Column(children: <Widget>[
-              RowItem.dialogRow(
-                context: context,
-                title: FlutterI18n.translate(
-                  context,
-                  'spacex.launch.page.rocket.core.landing_zone',
+        Separator.spacer(),
+        core.landingIntent != null && core.landingIntent
+            ? Column(children: <Widget>[
+                RowItem.dialogRow(
+                  context: context,
+                  title: FlutterI18n.translate(
+                    context,
+                    'spacex.launch.page.rocket.core.landing_zone',
+                  ),
+                  description: core.getLandingZone(context),
+                  screen: ScopedModel<LandpadModel>(
+                    model: LandpadModel(core.landingZone)..loadData(),
+                    child: LandingpadDialog(),
+                  ),
                 ),
-                description: core.getLandingZone(context),
-                screen: ScopedModel<LandpadModel>(
-                  model: LandpadModel(core.landingZone)..loadData(),
-                  child: LandingpadDialog(),
-                ),
-              ),
-              const SizedBox(height: 12.0),
-              RowItem.iconRow(
+                Separator.spacer(),
+                RowItem.iconRow(
+                  FlutterI18n.translate(
+                    context,
+                    'spacex.launch.page.rocket.core.landing_success',
+                  ),
+                  core.landingSuccess,
+                )
+              ])
+            : RowItem.iconRow(
                 FlutterI18n.translate(
                   context,
-                  'spacex.launch.page.rocket.core.landing_success',
+                  'spacex.launch.page.rocket.core.landing_attempt',
                 ),
-                core.landingSuccess,
-              )
-            ])
-          : RowItem.iconRow(
-              FlutterI18n.translate(
-                context,
-                'spacex.launch.page.rocket.core.landing_attempt',
+                core.landingIntent,
               ),
-              core.landingIntent,
-            ),
-    ]);
+      ],
+    );
   }
 
   Widget _getPayload(BuildContext context, Payload payload) {
-    return Column(children: <Widget>[
-      const Divider(height: 24.0),
-      RowItem.textRow(
-        FlutterI18n.translate(
-          context,
-          'spacex.launch.page.payload.name',
+    return Column(
+      children: <Widget>[
+        Separator.divider(),
+        RowItem.textRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.launch.page.payload.name',
+          ),
+          payload.getId(context),
         ),
-        payload.getId(context),
-      ),
-      (payload.isNasaPayload)
-          ? Column(children: <Widget>[
-              const SizedBox(height: 12.0),
-              RowItem.dialogRow(
-                context: context,
-                title: FlutterI18n.translate(
-                  context,
-                  'spacex.launch.page.payload.capsule_serial',
-                ),
-                description: payload.getCapsuleSerial(context),
-                screen: ScopedModel<CapsuleModel>(
-                  model: CapsuleModel(payload.capsuleSerial)..loadData(),
-                  child: CapsuleDialog(),
-                ),
-              ),
-              const SizedBox(height: 12.0),
-              RowItem.iconRow(
-                FlutterI18n.translate(
-                  context,
-                  'spacex.launch.page.payload.capsule_reused',
-                ),
-                payload.reused,
-              ),
-              const SizedBox(height: 12.0)
-            ])
-          : const SizedBox(height: 12.0),
-      RowItem.textRow(
-        FlutterI18n.translate(
-          context,
-          'spacex.launch.page.payload.manufacturer',
+        payload.isNasaPayload
+            ? Column(
+                children: <Widget>[
+                  Separator.spacer(),
+                  RowItem.dialogRow(
+                    context: context,
+                    title: FlutterI18n.translate(
+                      context,
+                      'spacex.launch.page.payload.capsule_serial',
+                    ),
+                    description: payload.getCapsuleSerial(context),
+                    screen: ScopedModel<CapsuleModel>(
+                      model: CapsuleModel(payload.capsuleSerial)..loadData(),
+                      child: CapsuleDialog(),
+                    ),
+                  ),
+                  Separator.spacer(),
+                  RowItem.iconRow(
+                    FlutterI18n.translate(
+                      context,
+                      'spacex.launch.page.payload.capsule_reused',
+                    ),
+                    payload.reused,
+                  ),
+                  Separator.spacer()
+                ],
+              )
+            : Separator.spacer(),
+        RowItem.textRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.launch.page.payload.manufacturer',
+          ),
+          payload.getManufacturer(context),
         ),
-        payload.getManufacturer(context),
-      ),
-      const SizedBox(height: 12.0),
-      RowItem.textRow(
-        FlutterI18n.translate(
-          context,
-          'spacex.launch.page.payload.customer',
+        Separator.spacer(),
+        RowItem.textRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.launch.page.payload.customer',
+          ),
+          payload.getCustomer(context),
         ),
-        payload.getCustomer(context),
-      ),
-      const SizedBox(height: 12.0),
-      RowItem.textRow(
-        FlutterI18n.translate(
-          context,
-          'spacex.launch.page.payload.nationality',
+        Separator.spacer(),
+        RowItem.textRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.launch.page.payload.nationality',
+          ),
+          payload.getNationality(context),
         ),
-        payload.getNationality(context),
-      ),
-      const SizedBox(height: 12.0),
-      RowItem.textRow(
-        FlutterI18n.translate(
-          context,
-          'spacex.launch.page.payload.mass',
+        Separator.spacer(),
+        RowItem.textRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.launch.page.payload.mass',
+          ),
+          payload.getMass(context),
         ),
-        payload.getMass(context),
-      ),
-      const SizedBox(height: 12.0),
-      RowItem.textRow(
-        FlutterI18n.translate(
-          context,
-          'spacex.launch.page.payload.orbit',
+        Separator.spacer(),
+        RowItem.textRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.launch.page.payload.orbit',
+          ),
+          payload.getOrbit(context),
         ),
-        payload.getOrbit(context),
-      ),
-    ]);
+      ],
+    );
   }
 
   Widget _buildImage(BuildContext context, int index) {
