@@ -9,7 +9,6 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'package:space_news/widgets/separator.dart';
 
 import '../../../models/rockets/details_capsule.dart';
 import '../../../models/rockets/details_core.dart';
@@ -17,6 +16,7 @@ import '../../../models/rockets/launchpad.dart';
 import '../../../models/rockets/spacex_home.dart';
 import '../../../util/colors.dart';
 import '../../../widgets/list_cell.dart';
+import '../../../widgets/separator.dart';
 import 'dialog_capsule.dart';
 import 'dialog_core.dart';
 import 'dialog_launchpad.dart';

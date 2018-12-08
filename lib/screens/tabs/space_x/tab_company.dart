@@ -5,12 +5,12 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'package:space_news/widgets/separator.dart';
 
 import '../../../models/rockets/spacex_company.dart';
 import '../../../util/colors.dart';
 import '../../../widgets/achievement_cell.dart';
 import '../../../widgets/row_item.dart';
+import '../../../widgets/separator.dart';
 
 class SpacexCompanyTab extends StatelessWidget {
   @override

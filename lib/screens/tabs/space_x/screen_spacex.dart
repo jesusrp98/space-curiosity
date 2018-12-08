@@ -4,10 +4,10 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import '../../../models/querry_model.dart';
+import '../../../models/rockets/info_vehicle.dart';
 import '../../../models/rockets/launch.dart';
 import '../../../models/rockets/spacex_company.dart';
 import '../../../models/rockets/spacex_home.dart';
-import '../../../models/rockets/info_vehicle.dart';
 import 'tab_company.dart';
 import 'tab_home.dart';
 import 'tab_launches.dart';

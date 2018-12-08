@@ -7,14 +7,14 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'package:space_news/screens/tabs/space_x/search_launches.dart';
-import 'package:space_news/widgets/separator.dart';
 
 import '../../../models/rockets/launch.dart';
 import '../../../util/colors.dart';
 import '../../../widgets/hero_image.dart';
 import '../../../widgets/list_cell.dart';
+import '../../../widgets/separator.dart';
 import 'page_launch.dart';
+import 'search_launches.dart';
 
 class LaunchesTab extends StatelessWidget {
   final int title;
