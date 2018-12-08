@@ -11,43 +11,39 @@ import 'page_ship.dart';
 
 searchVehicles(BuildContext context, List list) {
   return MaterialPageRoute<Vehicle>(
-    builder: (context) {
-      return Material(
-        child: MaterialSearch<Vehicle>(
-          barBackgroundColor: primaryColor,
-          iconColor: Colors.white,
-          placeholder: FlutterI18n.translate(
-            context,
-            'spacex.other.tooltip.search',
-          ),
-          limit: list.length,
-          results: list
-              .map((v) => MaterialSearchResult<Vehicle>(
-                    icon: Icons.search,
-                    value: v,
-                    text: v.name,
-                  ))
-              .toList(),
-          filter: (dynamic value, String criteria) {
-            return value.name
+    builder: (context) => Material(
+          child: MaterialSearch<Vehicle>(
+            barBackgroundColor: primaryColor,
+            iconColor: Colors.white,
+            placeholder: FlutterI18n.translate(
+              context,
+              'spacex.other.tooltip.search',
+            ),
+            limit: list.length,
+            results: list
+                .map((item) => MaterialSearchResult<Vehicle>(
+                      icon: Icons.search,
+                      value: item,
+                      text: item.name,
+                    ))
+                .toList(),
+            filter: (dynamic value, String criteria) => value.name
                 .toLowerCase()
                 .trim()
-                .contains(RegExp(r'' + criteria.toLowerCase().trim() + ''));
-          },
-          onSelect: (dynamic vehicle) => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => (vehicle.type == 'rocket')
-                      ? RocketPage(vehicle)
-                      : (vehicle.type == 'capsule')
-                          ? CapsulePage(vehicle)
-                          : (vehicle.type == 'ship')
-                              ? ShipPage(vehicle)
-                              : RoadsterPage(vehicle),
+                .contains(RegExp(r'' + criteria.toLowerCase().trim() + '')),
+            onSelect: (dynamic vehicle) => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => (vehicle.type == 'rocket')
+                        ? RocketPage(vehicle)
+                        : (vehicle.type == 'capsule')
+                            ? CapsulePage(vehicle)
+                            : (vehicle.type == 'ship')
+                                ? ShipPage(vehicle)
+                                : RoadsterPage(vehicle),
+                  ),
                 ),
-              ),
+          ),
         ),
-      );
-    },
   );
 }
