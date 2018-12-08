@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:material_search/material_search.dart';
-import 'package:space_news/util/colors.dart';
 
 import '../../../models/rockets/info_vehicle.dart';
+import '../../../util/colors.dart';
 import 'page_capsule.dart';
 import 'page_roadster.dart';
 import 'page_rocket.dart';
@@ -15,7 +16,10 @@ searchVehicles(BuildContext context, List list) {
         child: MaterialSearch<Vehicle>(
           barBackgroundColor: primaryColor,
           iconColor: Colors.white,
-          placeholder: 'Search',
+          placeholder: FlutterI18n.translate(
+            context,
+            'spacex.other.tooltip.search',
+          ),
           limit: list.length,
           results: list
               .map((v) => MaterialSearchResult<Vehicle>(

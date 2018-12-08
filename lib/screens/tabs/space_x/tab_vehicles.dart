@@ -7,22 +7,19 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'package:space_news/screens/tabs/space_x/search_vehicles.dart';
 
 import '../../../models/rockets/info_vehicle.dart';
 import '../../../util/colors.dart';
 import '../../../widgets/hero_image.dart';
 import '../../../widgets/list_cell.dart';
+import '../../../widgets/separator.dart';
 import 'page_capsule.dart';
 import 'page_roadster.dart';
 import 'page_rocket.dart';
 import 'page_ship.dart';
+import 'search_vehicles.dart';
 
 class VehiclesTab extends StatelessWidget {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
-      GlobalKey<RefreshIndicatorState>();
-
   Future<Null> _onRefresh(VehiclesModel model) {
     Completer<Null> completer = Completer<Null>();
     model.refresh().then((_) => completer.complete());
@@ -33,9 +30,7 @@ class VehiclesTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScopedModelDescendant<VehiclesModel>(
       builder: (context, child, model) => Scaffold(
-            key: _scaffoldKey,
             body: RefreshIndicator(
-              key: _refreshIndicatorKey,
               onRefresh: () => _onRefresh(model),
               child: CustomScrollView(
                 slivers: <Widget>[
@@ -45,10 +40,12 @@ class VehiclesTab extends StatelessWidget {
                     pinned: true,
                     flexibleSpace: FlexibleSpaceBar(
                       centerTitle: true,
-                      title: Text(FlutterI18n.translate(
-                        context,
-                        'spacex.vehicle.title',
-                      )),
+                      title: Text(
+                        FlutterI18n.translate(
+                          context,
+                          'spacex.vehicle.title',
+                        ),
+                      ),
                       background: (model.isLoading)
                           ? NativeLoadingIndicator(center: true)
                           : Swiper(
@@ -57,14 +54,15 @@ class VehiclesTab extends StatelessWidget {
                               autoplay: true,
                               autoplayDelay: 6000,
                               duration: 750,
-                              onTap: (index) => FlutterWebBrowser.openWebPage(
+                              onTap: (index) async =>
+                                  await FlutterWebBrowser.openWebPage(
                                     url: model.getPhoto(index),
                                     androidToolbarColor: primaryColor,
                                   ),
                             ),
                     ),
                   ),
-                  (model.isLoading)
+                  model.isLoading
                       ? SliverFillRemaining(
                           child: NativeLoadingIndicator(center: true),
                         )
@@ -119,7 +117,7 @@ class VehiclesTab extends StatelessWidget {
                       ),
                     ),
               ),
-              const Divider(height: 0.0, indent: 96.0)
+              Separator.divider(height: 0.0, indent: 96.0)
             ],
           );
         })

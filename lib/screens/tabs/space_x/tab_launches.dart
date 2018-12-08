@@ -8,6 +8,7 @@ import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:space_news/screens/tabs/space_x/search_launches.dart';
+import 'package:space_news/widgets/separator.dart';
 
 import '../../../models/rockets/launch.dart';
 import '../../../util/colors.dart';
@@ -16,9 +17,6 @@ import '../../../widgets/list_cell.dart';
 import 'page_launch.dart';
 
 class LaunchesTab extends StatelessWidget {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
-      GlobalKey<RefreshIndicatorState>();
   final int title;
 
   LaunchesTab(this.title);
@@ -33,9 +31,7 @@ class LaunchesTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScopedModelDescendant<LaunchesModel>(
       builder: (context, child, model) => Scaffold(
-            key: _scaffoldKey,
             body: RefreshIndicator(
-              key: _refreshIndicatorKey,
               onRefresh: () => _onRefresh(model),
               child: CustomScrollView(
                 slivers: <Widget>[
@@ -45,12 +41,14 @@ class LaunchesTab extends StatelessWidget {
                     pinned: true,
                     flexibleSpace: FlexibleSpaceBar(
                       centerTitle: true,
-                      title: Text(FlutterI18n.translate(
-                        context,
-                        title == 0
-                            ? 'spacex.upcoming.title'
-                            : 'spacex.latest.title',
-                      )),
+                      title: Text(
+                        FlutterI18n.translate(
+                          context,
+                          title == 0
+                              ? 'spacex.upcoming.title'
+                              : 'spacex.latest.title',
+                        ),
+                      ),
                       background: (model.isLoading)
                           ? NativeLoadingIndicator(center: true)
                           : Swiper(
@@ -59,14 +57,15 @@ class LaunchesTab extends StatelessWidget {
                               autoplay: true,
                               autoplayDelay: 6000,
                               duration: 750,
-                              onTap: (index) => FlutterWebBrowser.openWebPage(
+                              onTap: (index) async =>
+                                  await FlutterWebBrowser.openWebPage(
                                     url: model.getPhoto(index),
                                     androidToolbarColor: primaryColor,
                                   ),
                             ),
                     ),
                   ),
-                  (model.isLoading)
+                  model.isLoading
                       ? SliverFillRemaining(
                           child: NativeLoadingIndicator(center: true),
                         )
@@ -113,7 +112,7 @@ class LaunchesTab extends StatelessWidget {
                     MaterialPageRoute(builder: (_) => LaunchPage(launch)),
                   ),
             ),
-            const Divider(height: 0.0, indent: 96.0)
+            Separator.divider(height: 0.0, indent: 96.0)
           ],
         );
       },

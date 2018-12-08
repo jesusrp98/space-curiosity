@@ -19,7 +19,6 @@ class SpacexScreen extends StatefulWidget {
 }
 
 class _SpacexTabScreen extends State<SpacexScreen> {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   int _currentIndex = 0;
 
   static final List<QuerryModel> modelTab = [
@@ -62,7 +61,6 @@ class _SpacexTabScreen extends State<SpacexScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey,
       body: _tabs[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,

@@ -5,6 +5,7 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
+import 'package:space_news/widgets/separator.dart';
 
 import '../../../models/rockets/spacex_company.dart';
 import '../../../util/colors.dart';
@@ -12,13 +13,10 @@ import '../../../widgets/achievement_cell.dart';
 import '../../../widgets/row_item.dart';
 
 class SpacexCompanyTab extends StatelessWidget {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
   @override
   Widget build(BuildContext context) {
     return ScopedModelDescendant<SpacexCompanyModel>(
       builder: (context, child, model) => Scaffold(
-            key: _scaffoldKey,
             body: CustomScrollView(
               slivers: <Widget>[
                 SliverAppBar(
@@ -27,12 +25,14 @@ class SpacexCompanyTab extends StatelessWidget {
                   pinned: true,
                   actions: <Widget>[
                     PopupMenuButton<String>(
-                      itemBuilder: (context) => model.getEllipsis(context)
+                      itemBuilder: (context) => model
+                          .getEllipsis(context)
                           .map((f) => PopupMenuItem(value: f, child: Text(f)))
                           .toList(),
-                      onSelected: (option) => FlutterWebBrowser.openWebPage(
-                            url: model
-                                .company.links[model.getEllipsisIndex(context, option)],
+                      onSelected: (option) async =>
+                          await FlutterWebBrowser.openWebPage(
+                            url: model.company
+                                .links[model.getEllipsisIndex(context, option)],
                             androidToolbarColor: primaryColor,
                           ),
                     ),
@@ -51,7 +51,8 @@ class SpacexCompanyTab extends StatelessWidget {
                             autoplay: true,
                             autoplayDelay: 6000,
                             duration: 750,
-                            onTap: (index) => FlutterWebBrowser.openWebPage(
+                            onTap: (index) async =>
+                                await FlutterWebBrowser.openWebPage(
                                   url: model.getPhoto(index),
                                   androidToolbarColor: primaryColor,
                                 ),
@@ -85,87 +86,85 @@ class SpacexCompanyTab extends StatelessWidget {
 
   Widget _buildBody() {
     return ScopedModelDescendant<SpacexCompanyModel>(
-      builder: (context, child, model) => Scrollbar(
-            child: Column(
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    children: <Widget>[
-                      Text(
-                        model.company.fullName,
-                        style: Theme.of(context).textTheme.subhead,
+      builder: (context, child, model) => Column(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  children: <Widget>[
+                    Text(
+                      model.company.fullName,
+                      style: Theme.of(context).textTheme.subhead,
+                    ),
+                    Separator.spacer(height: 8.0),
+                    Text(
+                      model.company.getFounderDate(context),
+                      style: Theme.of(context)
+                          .textTheme
+                          .subhead
+                          .copyWith(color: secondaryText),
+                    ),
+                    Separator.spacer(),
+                    RowItem.textRow(
+                      FlutterI18n.translate(
+                        context,
+                        'spacex.company.tab.ceo',
                       ),
-                      Container(height: 8.0),
-                      Text(
-                        model.company.getFounderDate(context),
-                        style: Theme.of(context)
-                            .textTheme
-                            .subhead
-                            .copyWith(color: secondaryText),
+                      model.company.ceo,
+                    ),
+                    Separator.spacer(),
+                    RowItem.textRow(
+                      FlutterI18n.translate(
+                        context,
+                        'spacex.company.tab.cto',
                       ),
-                      Container(height: 12.0),
-                      RowItem.textRow(
+                      model.company.cto,
+                    ),
+                    Separator.spacer(),
+                    RowItem.textRow(
                         FlutterI18n.translate(
                           context,
-                          'spacex.company.tab.ceo',
+                          'spacex.company.tab.coo',
                         ),
-                        model.company.ceo,
+                        model.company.coo),
+                    Separator.spacer(),
+                    RowItem.textRow(
+                      FlutterI18n.translate(
+                        context,
+                        'spacex.company.tab.valuation',
                       ),
-                      Container(height: 12.0),
-                      RowItem.textRow(
-                        FlutterI18n.translate(
-                          context,
-                          'spacex.company.tab.cto',
-                        ),
-                        model.company.cto,
+                      model.company.getValuation,
+                    ),
+                    Separator.spacer(),
+                    RowItem.textRow(
+                      FlutterI18n.translate(
+                        context,
+                        'spacex.company.tab.location',
                       ),
-                      Container(height: 12.0),
-                      RowItem.textRow(
-                          FlutterI18n.translate(
-                            context,
-                            'spacex.company.tab.coo',
-                          ),
-                          model.company.coo),
-                      Container(height: 12.0),
-                      RowItem.textRow(
-                        FlutterI18n.translate(
-                          context,
-                          'spacex.company.tab.valuation',
-                        ),
-                        model.company.getValuation,
+                      model.company.getLocation,
+                    ),
+                    Separator.spacer(),
+                    RowItem.textRow(
+                      FlutterI18n.translate(
+                        context,
+                        'spacex.company.tab.employees',
                       ),
-                      Container(height: 12.0),
-                      RowItem.textRow(
-                        FlutterI18n.translate(
-                          context,
-                          'spacex.company.tab.location',
-                        ),
-                        model.company.getLocation,
-                      ),
-                      Container(height: 12.0),
-                      RowItem.textRow(
-                        FlutterI18n.translate(
-                          context,
-                          'spacex.company.tab.employees',
-                        ),
-                        model.company.getEmployees,
-                      ),
-                      Container(height: 12.0),
-                      Text(
-                        model.company.details,
-                        textAlign: TextAlign.justify,
-                        style: Theme.of(context)
-                            .textTheme
-                            .subhead
-                            .copyWith(color: secondaryText),
-                      ),
-                    ],
-                  ),
+                      model.company.getEmployees,
+                    ),
+                    Separator.spacer(),
+                    Text(
+                      model.company.details,
+                      textAlign: TextAlign.justify,
+                      style: Theme.of(context)
+                          .textTheme
+                          .subhead
+                          .copyWith(color: secondaryText),
+                    ),
+                  ],
                 ),
-                const Divider(height: 0.0),
-              ],
-            ),
+              ),
+              Separator.divider(height: 0.0)
+            ],
           ),
     );
   }
@@ -183,7 +182,7 @@ class SpacexCompanyTab extends StatelessWidget {
               url: achievement.url,
               index: index + 1,
             ),
-            const Divider(height: 0.0, indent: 82.0),
+            Separator.divider(height: 0.0, indent: 82.0),
           ],
         );
       },
