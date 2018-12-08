@@ -33,7 +33,7 @@ class SpacexHomeTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScopedModelDescendant<SpacexHomeModel>(
       builder: (context, child, model) => Scaffold(
-            key: PageStorageKey('Home'),
+            key: PageStorageKey('spacex_home'),
             body: RefreshIndicator(
               onRefresh: () => _onRefresh(model),
               child: CustomScrollView(
@@ -44,12 +44,10 @@ class SpacexHomeTab extends StatelessWidget {
                     pinned: true,
                     flexibleSpace: FlexibleSpaceBar(
                       centerTitle: true,
-                      title: Text(
-                        FlutterI18n.translate(
-                          context,
-                          'spacex.home.title',
-                        ),
-                      ),
+                      title: Text(FlutterI18n.translate(
+                        context,
+                        'spacex.home.title',
+                      )),
                       background: model.isLoading
                           ? NativeLoadingIndicator(center: true)
                           : Swiper(

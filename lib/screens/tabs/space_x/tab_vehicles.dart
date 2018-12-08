@@ -33,7 +33,7 @@ class VehiclesTab extends StatelessWidget {
             body: RefreshIndicator(
               onRefresh: () => _onRefresh(model),
               child: CustomScrollView(
-                key: PageStorageKey('Vehicles'),
+                key: PageStorageKey('spacex_vehicles'),
                 slivers: <Widget>[
                   SliverAppBar(
                     expandedHeight: MediaQuery.of(context).size.height * 0.3,
@@ -41,13 +41,11 @@ class VehiclesTab extends StatelessWidget {
                     pinned: true,
                     flexibleSpace: FlexibleSpaceBar(
                       centerTitle: true,
-                      title: Text(
-                        FlutterI18n.translate(
-                          context,
-                          'spacex.vehicle.title',
-                        ),
-                      ),
-                      background: (model.isLoading)
+                      title: Text(FlutterI18n.translate(
+                        context,
+                        'spacex.vehicle.title',
+                      )),
+                      background: model.isLoading
                           ? NativeLoadingIndicator(center: true)
                           : Swiper(
                               itemCount: model.getPhotosCount,
@@ -69,7 +67,7 @@ class VehiclesTab extends StatelessWidget {
                         )
                       : SliverList(
                           delegate: SliverChildBuilderDelegate(
-                            _buildItem,
+                            _buildVehicle,
                             childCount: model.getItemCount,
                           ),
                         ),
@@ -90,38 +88,36 @@ class VehiclesTab extends StatelessWidget {
     );
   }
 
-  Widget _buildItem(BuildContext context, int index) {
-    return Column(
-      children: <Widget>[
-        ScopedModelDescendant<VehiclesModel>(builder: (context, child, model) {
-          final Vehicle vehicle = model.getItem(index);
-          return Column(
-            children: <Widget>[
-              ListCell(
-                leading: HeroImage.list(
-                  url: vehicle.getProfilePhoto,
-                  tag: vehicle.id,
-                ),
-                title: vehicle.name,
-                subtitle: vehicle.subtitle(context),
-                onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => (vehicle.type == 'rocket')
-                            ? RocketPage(vehicle)
-                            : (vehicle.type == 'capsule')
-                                ? CapsulePage(vehicle)
-                                : (vehicle.type == 'ship')
-                                    ? ShipPage(vehicle)
-                                    : RoadsterPage(vehicle),
-                      ),
-                    ),
+  Widget _buildVehicle(BuildContext context, int index) {
+    return ScopedModelDescendant<VehiclesModel>(
+      builder: (context, child, model) {
+        final Vehicle vehicle = model.getItem(index);
+        return Column(
+          children: <Widget>[
+            ListCell(
+              leading: HeroImage.list(
+                url: vehicle.getProfilePhoto,
+                tag: vehicle.id,
               ),
-              Separator.divider(height: 0.0, indent: 96.0)
-            ],
-          );
-        })
-      ],
+              title: vehicle.name,
+              subtitle: vehicle.subtitle(context),
+              onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => (vehicle.type == 'rocket')
+                          ? RocketPage(vehicle)
+                          : (vehicle.type == 'capsule')
+                              ? CapsulePage(vehicle)
+                              : (vehicle.type == 'ship')
+                                  ? ShipPage(vehicle)
+                                  : RoadsterPage(vehicle),
+                    ),
+                  ),
+            ),
+            Separator.divider(height: 0.0, indent: 96.0)
+          ],
+        );
+      },
     );
   }
 

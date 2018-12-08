@@ -18,7 +18,7 @@ class SpacexCompanyTab extends StatelessWidget {
     return ScopedModelDescendant<SpacexCompanyModel>(
       builder: (context, child, model) => Scaffold(
             body: CustomScrollView(
-              key: PageStorageKey('Company'),
+              key: PageStorageKey('spacex_company'),
               slivers: <Widget>[
                 SliverAppBar(
                   expandedHeight: MediaQuery.of(context).size.height * 0.3,
@@ -28,7 +28,10 @@ class SpacexCompanyTab extends StatelessWidget {
                     PopupMenuButton<String>(
                       itemBuilder: (context) => model
                           .getEllipsis(context)
-                          .map((f) => PopupMenuItem(value: f, child: Text(f)))
+                          .map((text) => PopupMenuItem(
+                                value: text,
+                                child: Text(text),
+                              ))
                           .toList(),
                       onSelected: (option) async =>
                           await FlutterWebBrowser.openWebPage(
@@ -44,7 +47,7 @@ class SpacexCompanyTab extends StatelessWidget {
                       context,
                       'spacex.company.title',
                     )),
-                    background: (model.isLoading)
+                    background: model.isLoading
                         ? NativeLoadingIndicator(center: true)
                         : Swiper(
                             itemCount: model.getPhotosCount,
@@ -61,7 +64,7 @@ class SpacexCompanyTab extends StatelessWidget {
                   ),
                 ),
               ]..addAll(
-                  (model.isLoading)
+                  model.isLoading
                       ? <Widget>[
                           SliverFillRemaining(
                             child: NativeLoadingIndicator(center: true),

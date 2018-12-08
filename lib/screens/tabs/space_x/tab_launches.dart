@@ -31,7 +31,7 @@ class LaunchesTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScopedModelDescendant<LaunchesModel>(
       builder: (context, child, model) => Scaffold(
-            key: PageStorageKey('Lauches $title'),
+            key: PageStorageKey('spacex_launches_$title'),
             body: RefreshIndicator(
               onRefresh: () => _onRefresh(model),
               child: CustomScrollView(
@@ -42,15 +42,13 @@ class LaunchesTab extends StatelessWidget {
                     pinned: true,
                     flexibleSpace: FlexibleSpaceBar(
                       centerTitle: true,
-                      title: Text(
-                        FlutterI18n.translate(
-                          context,
-                          title == 0
-                              ? 'spacex.upcoming.title'
-                              : 'spacex.latest.title',
-                        ),
-                      ),
-                      background: (model.isLoading)
+                      title: Text(FlutterI18n.translate(
+                        context,
+                        title == 0
+                            ? 'spacex.upcoming.title'
+                            : 'spacex.latest.title',
+                      )),
+                      background: model.isLoading
                           ? NativeLoadingIndicator(center: true)
                           : Swiper(
                               itemCount: model.getPhotosCount,
@@ -72,7 +70,7 @@ class LaunchesTab extends StatelessWidget {
                         )
                       : SliverList(
                           delegate: SliverChildBuilderDelegate(
-                            _buildItem,
+                            _buildLaunch,
                             childCount: model.getItemCount,
                           ),
                         ),
@@ -93,7 +91,7 @@ class LaunchesTab extends StatelessWidget {
     );
   }
 
-  Widget _buildItem(BuildContext context, int index) {
+  Widget _buildLaunch(BuildContext context, int index) {
     return ScopedModelDescendant<LaunchesModel>(
       builder: (context, child, model) {
         final Launch launch = model.getItem(index);
