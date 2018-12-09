@@ -124,7 +124,7 @@ class SpacexHomeModel extends QuerryModel {
       );
     } else {
       for (int i = 0; i < launch.rocket.firstStage.length; ++i)
-        aux += (launch.rocket.firstStage[i].landingIntent != null)
+        aux += launch.rocket.firstStage[i].landingIntent != null
             ? FlutterI18n.translate(
                 context,
                 'spacex.home.tab.first_stage.body',

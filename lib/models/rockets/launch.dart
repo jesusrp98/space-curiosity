@@ -121,7 +121,7 @@ class Launch {
     }
   }
 
-  String get getProfilePhoto => (hasImages) ? photos[0] : Url.defaultImage;
+  String get getProfilePhoto => hasImages ? photos[0] : Url.defaultImage;
 
   String getPhoto(index) =>
       hasImages ? photos[index] : Url.spacexUpcomingScreen[index];

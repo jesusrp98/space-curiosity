@@ -103,7 +103,7 @@ class RocketInfo extends Vehicle {
   String get getLaunchCost =>
       NumberFormat.currency(symbol: "\$", decimalDigits: 0).format(launchCost);
 
-  String getSuccessRate(context) => (DateTime.now().isAfter(firstFlight))
+  String getSuccessRate(context) => DateTime.now().isAfter(firstFlight)
       ? NumberFormat.percentPattern().format(successRate / 100)
       : FlutterI18n.translate(context, 'spacex.other.no_data');
 
