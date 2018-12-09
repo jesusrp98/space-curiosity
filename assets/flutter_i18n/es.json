@@ -72,7 +72,7 @@
           "title": "Cofia protectora",
           "body": "{reused}, {catched}.",
           "body_new": "La cofia no es reutilizada",
-          "body_reused": "La cofia es reciclada",
+          "body_reused": "La cofia es reutilizada",
           "body_catching": "y será capturada por {ship}",
           "body_dispensed": "y no se procederá a su captura"
         },
