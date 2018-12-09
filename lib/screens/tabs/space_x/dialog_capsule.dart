@@ -7,6 +7,7 @@ import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import '../../../models/rockets/details_capsule.dart';
+import '../../../models/rockets/mission_details.dart';
 import '../../../util/colors.dart';
 import '../../../widgets/row_item.dart';
 import '../../../widgets/separator.dart';
@@ -105,8 +106,8 @@ class CapsuleDialog extends StatelessWidget {
                         children: model.capsule.missions
                             .map((mission) => _getMission(
                                   context,
-                                  model.capsule.missions,
                                   mission,
+                                  model.capsule.missions,
                                 ))
                             .toList(),
                       )
@@ -126,7 +127,11 @@ class CapsuleDialog extends StatelessWidget {
     );
   }
 
-  Column _getMission(BuildContext context, List missions, mission) {
+  Column _getMission(
+    BuildContext context,
+    DetailsMission mission,
+    List missions,
+  ) {
     return Column(
       children: <Widget>[
         RowItem.textRow(
@@ -137,9 +142,7 @@ class CapsuleDialog extends StatelessWidget {
           ),
           mission.name,
         ),
-      ]..add(
-          mission != missions.last ? Separator.spacer() : Separator.none(),
-        ),
+      ]..add(mission != missions.last ? Separator.spacer() : Separator.none()),
     );
   }
 
