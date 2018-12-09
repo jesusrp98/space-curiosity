@@ -71,9 +71,7 @@ class SpacexCompanyTab extends StatelessWidget {
                           )
                         ]
                       : <Widget>[
-                          SliverToBoxAdapter(
-                            child: _buildBody(),
-                          ),
+                          SliverToBoxAdapter(child: _buildBody()),
                           SliverList(
                             delegate: SliverChildBuilderDelegate(
                               _buildAchievement,

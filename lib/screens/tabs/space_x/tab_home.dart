@@ -36,41 +36,39 @@ class SpacexHomeTab extends StatelessWidget {
             key: PageStorageKey('spacex_home'),
             body: RefreshIndicator(
               onRefresh: () => _onRefresh(model),
-              child: CustomScrollView(
-                slivers: <Widget>[
-                  SliverAppBar(
-                    expandedHeight: MediaQuery.of(context).size.height * 0.3,
-                    floating: false,
-                    pinned: true,
-                    flexibleSpace: FlexibleSpaceBar(
-                      centerTitle: true,
-                      title: Text(FlutterI18n.translate(
-                        context,
-                        'spacex.home.title',
-                      )),
-                      background: model.isLoading
-                          ? NativeLoadingIndicator(center: true)
-                          : Swiper(
-                              itemCount: model.getPhotosCount,
-                              itemBuilder: _buildImage,
-                              autoplay: true,
-                              autoplayDelay: 6000,
-                              duration: 750,
-                              onTap: (index) async =>
-                                  await FlutterWebBrowser.openWebPage(
-                                    url: model.getPhoto(index),
-                                    androidToolbarColor: primaryColor,
-                                  ),
-                            ),
-                    ),
+              child: CustomScrollView(slivers: <Widget>[
+                SliverAppBar(
+                  expandedHeight: MediaQuery.of(context).size.height * 0.3,
+                  floating: false,
+                  pinned: true,
+                  flexibleSpace: FlexibleSpaceBar(
+                    centerTitle: true,
+                    title: Text(FlutterI18n.translate(
+                      context,
+                      'spacex.home.title',
+                    )),
+                    background: model.isLoading
+                        ? NativeLoadingIndicator(center: true)
+                        : Swiper(
+                            itemCount: model.getPhotosCount,
+                            itemBuilder: _buildImage,
+                            autoplay: true,
+                            autoplayDelay: 6000,
+                            duration: 750,
+                            onTap: (index) async =>
+                                await FlutterWebBrowser.openWebPage(
+                                  url: model.getPhoto(index),
+                                  androidToolbarColor: primaryColor,
+                                ),
+                          ),
                   ),
-                  model.isLoading
-                      ? SliverFillRemaining(
-                          child: NativeLoadingIndicator(center: true),
-                        )
-                      : SliverToBoxAdapter(child: _buildBody())
-                ],
-              ),
+                ),
+                model.isLoading
+                    ? SliverFillRemaining(
+                        child: NativeLoadingIndicator(center: true),
+                      )
+                    : SliverToBoxAdapter(child: _buildBody())
+              ]),
             ),
           ),
     );

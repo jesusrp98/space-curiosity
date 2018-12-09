@@ -20,61 +20,59 @@ class RocketPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: CustomScrollView(
-        slivers: <Widget>[
-          SliverAppBar(
-            expandedHeight: MediaQuery.of(context).size.height * 0.3,
-            floating: false,
-            pinned: true,
-            actions: <Widget>[
-              IconButton(
-                icon: const Icon(Icons.public),
-                onPressed: () async => await FlutterWebBrowser.openWebPage(
-                      url: _rocket.url,
-                      androidToolbarColor: primaryColor,
-                    ),
-                tooltip: FlutterI18n.translate(
-                  context,
-                  'spacex.other.menu.wikipedia',
-                ),
-              )
-            ],
-            flexibleSpace: FlexibleSpaceBar(
-              centerTitle: true,
-              title: Text(_rocket.name),
-              background: Swiper(
-                itemCount: _rocket.getPhotosCount,
-                itemBuilder: _buildImage,
-                autoplay: true,
-                autoplayDelay: 6000,
-                duration: 750,
-                onTap: (index) async => await FlutterWebBrowser.openWebPage(
-                      url: _rocket.getPhoto(index),
-                      androidToolbarColor: primaryColor,
-                    ),
+      body: CustomScrollView(slivers: <Widget>[
+        SliverAppBar(
+          expandedHeight: MediaQuery.of(context).size.height * 0.3,
+          floating: false,
+          pinned: true,
+          actions: <Widget>[
+            IconButton(
+              icon: const Icon(Icons.public),
+              onPressed: () async => await FlutterWebBrowser.openWebPage(
+                    url: _rocket.url,
+                    androidToolbarColor: primaryColor,
+                  ),
+              tooltip: FlutterI18n.translate(
+                context,
+                'spacex.other.menu.wikipedia',
               ),
+            )
+          ],
+          flexibleSpace: FlexibleSpaceBar(
+            centerTitle: true,
+            title: Text(_rocket.name),
+            background: Swiper(
+              itemCount: _rocket.getPhotosCount,
+              itemBuilder: _buildImage,
+              autoplay: true,
+              autoplayDelay: 6000,
+              duration: 750,
+              onTap: (index) async => await FlutterWebBrowser.openWebPage(
+                    url: _rocket.getPhoto(index),
+                    androidToolbarColor: primaryColor,
+                  ),
             ),
           ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(children: <Widget>[
-                _rocketCard(context),
-                Separator.cardSpacer(),
-                _specsCard(context),
-                Separator.cardSpacer(),
-                _payloadsCard(context),
-                Separator.cardSpacer(),
-                _firstStage(context),
-                Separator.cardSpacer(),
-                _secondStage(context),
-                Separator.cardSpacer(),
-                _enginesCard(context),
-              ]),
-            ),
+        ),
+        SliverToBoxAdapter(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(children: <Widget>[
+              _rocketCard(context),
+              Separator.cardSpacer(),
+              _specsCard(context),
+              Separator.cardSpacer(),
+              _payloadsCard(context),
+              Separator.cardSpacer(),
+              _firstStage(context),
+              Separator.cardSpacer(),
+              _secondStage(context),
+              Separator.cardSpacer(),
+              _enginesCard(context),
+            ]),
           ),
-        ],
-      ),
+        ),
+      ]),
     );
   }
 
@@ -132,58 +130,55 @@ class RocketPage extends StatelessWidget {
         context,
         'spacex.vehicle.rocket.specifications.title',
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          RowItem.textRow(
-            FlutterI18n.translate(
-              context,
-              'spacex.vehicle.rocket.specifications.rocket_stages',
-            ),
-            _rocket.getStages(context),
+      body: Column(children: <Widget>[
+        RowItem.textRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.vehicle.rocket.specifications.rocket_stages',
           ),
-          Separator.divider(),
-          RowItem.textRow(
-            FlutterI18n.translate(
-              context,
-              'spacex.vehicle.rocket.specifications.height',
-            ),
-            _rocket.getHeight,
+          _rocket.getStages(context),
+        ),
+        Separator.divider(),
+        RowItem.textRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.vehicle.rocket.specifications.height',
           ),
-          Separator.spacer(),
-          RowItem.textRow(
-            FlutterI18n.translate(
-              context,
-              'spacex.vehicle.rocket.specifications.diameter',
-            ),
-            _rocket.getDiameter,
+          _rocket.getHeight,
+        ),
+        Separator.spacer(),
+        RowItem.textRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.vehicle.rocket.specifications.diameter',
           ),
-          Separator.spacer(),
-          RowItem.textRow(
-            FlutterI18n.translate(
-              context,
-              'spacex.vehicle.rocket.specifications.mass',
-            ),
-            _rocket.getMass(context),
+          _rocket.getDiameter,
+        ),
+        Separator.spacer(),
+        RowItem.textRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.vehicle.rocket.specifications.mass',
           ),
-          Separator.divider(),
-          RowItem.textRow(
-            FlutterI18n.translate(
-              context,
-              'spacex.vehicle.rocket.stage.fairing_height',
-            ),
-            _rocket.fairingHeight(context),
+          _rocket.getMass(context),
+        ),
+        Separator.divider(),
+        RowItem.textRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.vehicle.rocket.stage.fairing_height',
           ),
-          Separator.spacer(),
-          RowItem.textRow(
-            FlutterI18n.translate(
-              context,
-              'spacex.vehicle.rocket.stage.fairing_diameter',
-            ),
-            _rocket.fairingDiameter(context),
+          _rocket.fairingHeight(context),
+        ),
+        Separator.spacer(),
+        RowItem.textRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.vehicle.rocket.stage.fairing_diameter',
           ),
-        ],
-      ),
+          _rocket.fairingDiameter(context),
+        ),
+      ]),
     );
   }
 
@@ -324,58 +319,55 @@ class RocketPage extends StatelessWidget {
         context,
         'spacex.vehicle.rocket.engines.title',
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          RowItem.textRow(
-            FlutterI18n.translate(
-              context,
-              'spacex.vehicle.rocket.engines.model',
-            ),
-            _rocket.getEngine,
+      body: Column(children: <Widget>[
+        RowItem.textRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.vehicle.rocket.engines.model',
           ),
-          Separator.divider(),
-          RowItem.textRow(
-            FlutterI18n.translate(
-              context,
-              'spacex.vehicle.rocket.engines.fuel',
-            ),
-            _rocket.getFuel,
+          _rocket.getEngine,
+        ),
+        Separator.divider(),
+        RowItem.textRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.vehicle.rocket.engines.fuel',
           ),
-          Separator.spacer(),
-          RowItem.textRow(
-            FlutterI18n.translate(
-              context,
-              'spacex.vehicle.rocket.engines.oxidizer',
-            ),
-            _rocket.getOxidizer,
+          _rocket.getFuel,
+        ),
+        Separator.spacer(),
+        RowItem.textRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.vehicle.rocket.engines.oxidizer',
           ),
-          Separator.divider(),
-          RowItem.textRow(
-            FlutterI18n.translate(
-              context,
-              'spacex.vehicle.rocket.engines.thrust_weight',
-            ),
-            _rocket.getEngineThrustToWeight(context),
+          _rocket.getOxidizer,
+        ),
+        Separator.divider(),
+        RowItem.textRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.vehicle.rocket.engines.thrust_weight',
           ),
-          Separator.spacer(),
-          RowItem.textRow(
-            FlutterI18n.translate(
-              context,
-              'spacex.vehicle.rocket.engines.thrust_sea',
-            ),
-            _rocket.getEngineThrustSea,
+          _rocket.getEngineThrustToWeight(context),
+        ),
+        Separator.spacer(),
+        RowItem.textRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.vehicle.rocket.engines.thrust_sea',
           ),
-          Separator.spacer(),
-          RowItem.textRow(
-            FlutterI18n.translate(
-              context,
-              'spacex.vehicle.rocket.engines.thrust_vacuum',
-            ),
-            _rocket.getEngineThrustVacuum,
+          _rocket.getEngineThrustSea,
+        ),
+        Separator.spacer(),
+        RowItem.textRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.vehicle.rocket.engines.thrust_vacuum',
           ),
-        ],
-      ),
+          _rocket.getEngineThrustVacuum,
+        ),
+      ]),
     );
   }
 
@@ -386,9 +378,7 @@ class RocketPage extends StatelessWidget {
       fadeInDuration: Duration(milliseconds: 100),
       fit: BoxFit.cover,
     );
-    if (index == 0)
-      return Hero(tag: _rocket.id, child: photo);
-    else
-      return photo;
+
+    return index == 0 ? Hero(tag: _rocket.id, child: photo) : photo;
   }
 }

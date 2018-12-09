@@ -16,42 +16,40 @@ class CapsuleDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScopedModelDescendant<CapsuleModel>(
       builder: (context, child, model) => Scaffold(
-            body: CustomScrollView(
-              slivers: <Widget>[
-                SliverAppBar(
-                  expandedHeight: MediaQuery.of(context).size.height * 0.3,
-                  floating: false,
-                  pinned: true,
-                  flexibleSpace: FlexibleSpaceBar(
-                    centerTitle: true,
-                    title: Text(FlutterI18n.translate(
-                      context,
-                      'spacex.dialog.vehicle.title_capsule',
-                      {'serial': model.id},
-                    )),
-                    background: model.isLoading
-                        ? NativeLoadingIndicator(center: true)
-                        : Swiper(
-                            itemCount: model.getPhotosCount,
-                            itemBuilder: _buildImage,
-                            autoplay: true,
-                            autoplayDelay: 6000,
-                            duration: 750,
-                            onTap: (index) async =>
-                                await FlutterWebBrowser.openWebPage(
-                                  url: model.getPhoto(index),
-                                  androidToolbarColor: primaryColor,
-                                ),
-                          ),
-                  ),
+            body: CustomScrollView(slivers: <Widget>[
+              SliverAppBar(
+                expandedHeight: MediaQuery.of(context).size.height * 0.3,
+                floating: false,
+                pinned: true,
+                flexibleSpace: FlexibleSpaceBar(
+                  centerTitle: true,
+                  title: Text(FlutterI18n.translate(
+                    context,
+                    'spacex.dialog.vehicle.title_capsule',
+                    {'serial': model.id},
+                  )),
+                  background: model.isLoading
+                      ? NativeLoadingIndicator(center: true)
+                      : Swiper(
+                          itemCount: model.getPhotosCount,
+                          itemBuilder: _buildImage,
+                          autoplay: true,
+                          autoplayDelay: 6000,
+                          duration: 750,
+                          onTap: (index) async =>
+                              await FlutterWebBrowser.openWebPage(
+                                url: model.getPhoto(index),
+                                androidToolbarColor: primaryColor,
+                              ),
+                        ),
                 ),
-                model.isLoading
-                    ? SliverFillRemaining(
-                        child: NativeLoadingIndicator(center: true),
-                      )
-                    : SliverToBoxAdapter(child: _buildBody())
-              ],
-            ),
+              ),
+              model.isLoading
+                  ? SliverFillRemaining(
+                      child: NativeLoadingIndicator(center: true),
+                    )
+                  : SliverToBoxAdapter(child: _buildBody())
+            ]),
           ),
     );
   }
@@ -101,22 +99,18 @@ class CapsuleDialog extends StatelessWidget {
                 model.capsule.getLandings,
               ),
               model.capsule.hasMissions
-                  ? Column(
-                      children: <Widget>[
-                        Separator.divider(),
-                        Column(
-                          children: model.capsule.missions
-                              .map(
-                                (mission) => _getMission(
-                                      context,
-                                      model.capsule.missions,
-                                      mission,
-                                    ),
-                              )
-                              .toList(),
-                        )
-                      ],
-                    )
+                  ? Column(children: <Widget>[
+                      Separator.divider(),
+                      Column(
+                        children: model.capsule.missions
+                            .map((mission) => _getMission(
+                                  context,
+                                  model.capsule.missions,
+                                  mission,
+                                ))
+                            .toList(),
+                      )
+                    ])
                   : Separator.none(),
               Separator.divider(),
               Text(

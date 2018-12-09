@@ -138,42 +138,39 @@ class RoadsterPage extends StatelessWidget {
         context,
         'spacex.vehicle.roadster.vehicle.title',
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          RowItem.textRow(
-            FlutterI18n.translate(
-              context,
-              'spacex.vehicle.roadster.vehicle.mass',
-            ),
-            _roadster.getMass(context),
+      body: Column(children: <Widget>[
+        RowItem.textRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.vehicle.roadster.vehicle.mass',
           ),
-          Separator.spacer(),
-          RowItem.textRow(
-            FlutterI18n.translate(
-              context,
-              'spacex.vehicle.roadster.vehicle.speed',
-            ),
-            _roadster.getSpeed,
+          _roadster.getMass(context),
+        ),
+        Separator.spacer(),
+        RowItem.textRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.vehicle.roadster.vehicle.speed',
           ),
-          Separator.divider(),
-          RowItem.textRow(
-            FlutterI18n.translate(
-              context,
-              'spacex.vehicle.roadster.vehicle.distance_earth',
-            ),
-            _roadster.getEarthDistance,
+          _roadster.getSpeed,
+        ),
+        Separator.divider(),
+        RowItem.textRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.vehicle.roadster.vehicle.distance_earth',
           ),
-          Separator.spacer(),
-          RowItem.textRow(
-            FlutterI18n.translate(
-              context,
-              'spacex.vehicle.roadster.vehicle.distance_mars',
-            ),
-            _roadster.getMarsDistance,
+          _roadster.getEarthDistance,
+        ),
+        Separator.spacer(),
+        RowItem.textRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.vehicle.roadster.vehicle.distance_mars',
           ),
-        ],
-      ),
+          _roadster.getMarsDistance,
+        ),
+      ]),
     );
   }
 
@@ -183,58 +180,55 @@ class RoadsterPage extends StatelessWidget {
         context,
         'spacex.vehicle.roadster.orbit.title',
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          RowItem.textRow(
-            FlutterI18n.translate(
-              context,
-              'spacex.vehicle.roadster.orbit.type',
-            ),
-            _roadster.getOrbit,
+      body: Column(children: <Widget>[
+        RowItem.textRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.vehicle.roadster.orbit.type',
           ),
-          Separator.spacer(),
-          RowItem.textRow(
-            FlutterI18n.translate(
-              context,
-              'spacex.vehicle.roadster.orbit.period',
-            ),
-            _roadster.getPeriod(context),
+          _roadster.getOrbit,
+        ),
+        Separator.spacer(),
+        RowItem.textRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.vehicle.roadster.orbit.period',
           ),
-          Separator.divider(),
-          RowItem.textRow(
-            FlutterI18n.translate(
-              context,
-              'spacex.vehicle.roadster.orbit.inclination',
-            ),
-            _roadster.getInclination,
+          _roadster.getPeriod(context),
+        ),
+        Separator.divider(),
+        RowItem.textRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.vehicle.roadster.orbit.inclination',
           ),
-          Separator.spacer(),
-          RowItem.textRow(
-            FlutterI18n.translate(
-              context,
-              'spacex.vehicle.roadster.orbit.longitude',
-            ),
-            _roadster.getLongitude,
+          _roadster.getInclination,
+        ),
+        Separator.spacer(),
+        RowItem.textRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.vehicle.roadster.orbit.longitude',
           ),
-          Separator.divider(),
-          RowItem.textRow(
-            FlutterI18n.translate(
-              context,
-              'spacex.vehicle.roadster.orbit.apoapsis',
-            ),
-            _roadster.getApoapsis,
+          _roadster.getLongitude,
+        ),
+        Separator.divider(),
+        RowItem.textRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.vehicle.roadster.orbit.apoapsis',
           ),
-          Separator.spacer(),
-          RowItem.textRow(
-            FlutterI18n.translate(
-              context,
-              'spacex.vehicle.roadster.orbit.periapsis',
-            ),
-            _roadster.getPeriapsis,
+          _roadster.getApoapsis,
+        ),
+        Separator.spacer(),
+        RowItem.textRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.vehicle.roadster.orbit.periapsis',
           ),
-        ],
-      ),
+          _roadster.getPeriapsis,
+        ),
+      ]),
     );
   }
 

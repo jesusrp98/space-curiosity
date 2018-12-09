@@ -33,46 +33,45 @@ class VehiclesTab extends StatelessWidget {
             body: RefreshIndicator(
               onRefresh: () => _onRefresh(model),
               child: CustomScrollView(
-                key: PageStorageKey('spacex_vehicles'),
-                slivers: <Widget>[
-                  SliverAppBar(
-                    expandedHeight: MediaQuery.of(context).size.height * 0.3,
-                    floating: false,
-                    pinned: true,
-                    flexibleSpace: FlexibleSpaceBar(
-                      centerTitle: true,
-                      title: Text(FlutterI18n.translate(
-                        context,
-                        'spacex.vehicle.title',
-                      )),
-                      background: model.isLoading
-                          ? NativeLoadingIndicator(center: true)
-                          : Swiper(
-                              itemCount: model.getPhotosCount,
-                              itemBuilder: _buildImage,
-                              autoplay: true,
-                              autoplayDelay: 6000,
-                              duration: 750,
-                              onTap: (index) async =>
-                                  await FlutterWebBrowser.openWebPage(
-                                    url: model.getPhoto(index),
-                                    androidToolbarColor: primaryColor,
-                                  ),
-                            ),
+                  key: PageStorageKey('spacex_vehicles'),
+                  slivers: <Widget>[
+                    SliverAppBar(
+                      expandedHeight: MediaQuery.of(context).size.height * 0.3,
+                      floating: false,
+                      pinned: true,
+                      flexibleSpace: FlexibleSpaceBar(
+                        centerTitle: true,
+                        title: Text(FlutterI18n.translate(
+                          context,
+                          'spacex.vehicle.title',
+                        )),
+                        background: model.isLoading
+                            ? NativeLoadingIndicator(center: true)
+                            : Swiper(
+                                itemCount: model.getPhotosCount,
+                                itemBuilder: _buildImage,
+                                autoplay: true,
+                                autoplayDelay: 6000,
+                                duration: 750,
+                                onTap: (index) async =>
+                                    await FlutterWebBrowser.openWebPage(
+                                      url: model.getPhoto(index),
+                                      androidToolbarColor: primaryColor,
+                                    ),
+                              ),
+                      ),
                     ),
-                  ),
-                  model.isLoading
-                      ? SliverFillRemaining(
-                          child: NativeLoadingIndicator(center: true),
-                        )
-                      : SliverList(
-                          delegate: SliverChildBuilderDelegate(
-                            _buildVehicle,
-                            childCount: model.getItemCount,
+                    model.isLoading
+                        ? SliverFillRemaining(
+                            child: NativeLoadingIndicator(center: true),
+                          )
+                        : SliverList(
+                            delegate: SliverChildBuilderDelegate(
+                              _buildVehicle,
+                              childCount: model.getItemCount,
+                            ),
                           ),
-                        ),
-                ],
-              ),
+                  ]),
             ),
             floatingActionButton: FloatingActionButton(
               child: const Icon(Icons.search),
@@ -92,31 +91,29 @@ class VehiclesTab extends StatelessWidget {
     return ScopedModelDescendant<VehiclesModel>(
       builder: (context, child, model) {
         final Vehicle vehicle = model.getItem(index);
-        return Column(
-          children: <Widget>[
-            ListCell(
-              leading: HeroImage.list(
-                url: vehicle.getProfilePhoto,
-                tag: vehicle.id,
-              ),
-              title: vehicle.name,
-              subtitle: vehicle.subtitle(context),
-              onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => (vehicle.type == 'rocket')
-                          ? RocketPage(vehicle)
-                          : (vehicle.type == 'capsule')
-                              ? CapsulePage(vehicle)
-                              : (vehicle.type == 'ship')
-                                  ? ShipPage(vehicle)
-                                  : RoadsterPage(vehicle),
-                    ),
-                  ),
+        return Column(children: <Widget>[
+          ListCell(
+            leading: HeroImage.list(
+              url: vehicle.getProfilePhoto,
+              tag: vehicle.id,
             ),
-            Separator.divider(height: 0.0, indent: 96.0)
-          ],
-        );
+            title: vehicle.name,
+            subtitle: vehicle.subtitle(context),
+            onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => (vehicle.type == 'rocket')
+                        ? RocketPage(vehicle)
+                        : (vehicle.type == 'capsule')
+                            ? CapsulePage(vehicle)
+                            : (vehicle.type == 'ship')
+                                ? ShipPage(vehicle)
+                                : RoadsterPage(vehicle),
+                  ),
+                ),
+          ),
+          Separator.divider(height: 0.0, indent: 96.0)
+        ]);
       },
     );
   }

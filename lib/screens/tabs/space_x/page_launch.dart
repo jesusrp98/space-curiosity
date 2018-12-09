@@ -59,17 +59,15 @@ class LaunchPage extends StatelessWidget {
                         'spacex.other.tooltip.add_event',
                       ),
                       onPressed: !_launch.tentativeTime
-                          ? () => Add2Calendar.addEvent2Cal(
-                                Event(
-                                  title: _launch.name,
-                                  description: _launch.details,
-                                  location: _launch.launchpadName,
-                                  startDate: _launch.launchDate,
-                                  endDate: _launch.launchDate.add(
-                                    Duration(minutes: 30),
-                                  ),
+                          ? () => Add2Calendar.addEvent2Cal(Event(
+                                title: _launch.name,
+                                description: _launch.details,
+                                location: _launch.launchpadName,
+                                startDate: _launch.launchDate,
+                                endDate: _launch.launchDate.add(
+                                  Duration(minutes: 30),
                                 ),
-                              )
+                              ))
                           : null,
                     ),
               slivers: <Widget>[
@@ -96,8 +94,10 @@ class LaunchPage extends StatelessWidget {
                           .toList(),
                       onSelected: (url) async =>
                           await FlutterWebBrowser.openWebPage(
-                            url: _launch
-                                .links[_launch.getEllipsisIndex(context, url)],
+                            url: _launch.links[_launch.getEllipsisIndex(
+                              context,
+                              url,
+                            )],
                             androidToolbarColor: primaryColor,
                           ),
                     ),
@@ -190,76 +190,73 @@ class LaunchPage extends StatelessWidget {
         context,
         'spacex.launch.page.rocket.title',
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          RowItem.textRow(
-            FlutterI18n.translate(
-              context,
-              'spacex.launch.page.rocket.name',
-            ),
-            rocket.name,
+      body: Column(children: <Widget>[
+        RowItem.textRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.launch.page.rocket.name',
           ),
-          Separator.spacer(),
-          RowItem.textRow(
-            FlutterI18n.translate(
-              context,
-              'spacex.launch.page.rocket.model',
-            ),
-            rocket.type,
+          rocket.name,
+        ),
+        Separator.spacer(),
+        RowItem.textRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.launch.page.rocket.model',
           ),
-          Separator.spacer(),
-          RowItem.textRow(
-            FlutterI18n.translate(
-              context,
-              'spacex.launch.page.rocket.static_fire_date',
-            ),
-            _launch.getStaticFireDate(context),
+          rocket.type,
+        ),
+        Separator.spacer(),
+        RowItem.textRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.launch.page.rocket.static_fire_date',
           ),
-          Separator.spacer(),
-          RowItem.iconRow(
-            FlutterI18n.translate(
-              context,
-              'spacex.launch.page.rocket.launch_success',
-            ),
-            _launch.launchSuccess,
+          _launch.getStaticFireDate(context),
+        ),
+        Separator.spacer(),
+        RowItem.iconRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.launch.page.rocket.launch_success',
           ),
-          _launch.launchSuccess != null && _launch.launchSuccess == false
-              ? Column(children: <Widget>[
-                  Separator.divider(),
-                  RowItem.textRow(
-                    FlutterI18n.translate(
-                      context,
-                      'spacex.launch.page.rocket.failure.time',
-                    ),
-                    _launch.failureDetails.getTime,
+          _launch.launchSuccess,
+        ),
+        _launch.launchSuccess != null && _launch.launchSuccess == false
+            ? Column(children: <Widget>[
+                Separator.divider(),
+                RowItem.textRow(
+                  FlutterI18n.translate(
+                    context,
+                    'spacex.launch.page.rocket.failure.time',
                   ),
-                  Separator.spacer(),
-                  RowItem.textRow(
-                    FlutterI18n.translate(
-                      context,
-                      'spacex.launch.page.rocket.failure.altitude',
-                    ),
-                    _launch.failureDetails.getAltitude(context),
+                  _launch.failureDetails.getTime,
+                ),
+                Separator.spacer(),
+                RowItem.textRow(
+                  FlutterI18n.translate(
+                    context,
+                    'spacex.launch.page.rocket.failure.altitude',
                   ),
-                  Separator.spacer(),
-                  Text(
-                    _launch.failureDetails.getReason,
-                    textAlign: TextAlign.justify,
-                    style: Theme.of(context)
-                        .textTheme
-                        .subhead
-                        .copyWith(color: secondaryText),
-                  ),
-                ])
-              : Separator.none(),
-          Column(
-            children: rocket.firstStage
-                .map((core) => _getCores(context, core))
-                .toList(),
-          ),
-        ],
-      ),
+                  _launch.failureDetails.getAltitude(context),
+                ),
+                Separator.spacer(),
+                Text(
+                  _launch.failureDetails.getReason,
+                  textAlign: TextAlign.justify,
+                  style: Theme.of(context)
+                      .textTheme
+                      .subhead
+                      .copyWith(color: secondaryText),
+                ),
+              ])
+            : Separator.none(),
+        Column(
+          children: rocket.firstStage
+              .map((core) => _getCores(context, core))
+              .toList(),
+        ),
+      ]),
     );
   }
 
@@ -272,63 +269,60 @@ class LaunchPage extends StatelessWidget {
         context,
         'spacex.launch.page.payload.title',
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          RowItem.textRow(
-            FlutterI18n.translate(
-              context,
-              'spacex.launch.page.payload.second_stage.model',
-            ),
-            secondStage.getBlock(context),
+      body: Column(children: <Widget>[
+        RowItem.textRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.launch.page.payload.second_stage.model',
           ),
-          _launch.rocket.hasFairing
-              ? Column(children: <Widget>[
-                  Separator.divider(),
-                  RowItem.iconRow(
-                    FlutterI18n.translate(
-                      context,
-                      'spacex.launch.page.payload.fairings.reused',
-                    ),
-                    fairing.reused,
+          secondStage.getBlock(context),
+        ),
+        _launch.rocket.hasFairing
+            ? Column(children: <Widget>[
+                Separator.divider(),
+                RowItem.iconRow(
+                  FlutterI18n.translate(
+                    context,
+                    'spacex.launch.page.payload.fairings.reused',
                   ),
-                  Separator.spacer(),
-                  fairing.recoveryAttempt
-                      ? Column(
-                          children: <Widget>[
-                            RowItem.iconRow(
-                              FlutterI18n.translate(
-                                context,
-                                'spacex.launch.page.payload.fairings.recovery_success',
-                              ),
-                              fairing.recoverySuccess,
+                  fairing.reused,
+                ),
+                Separator.spacer(),
+                fairing.recoveryAttempt
+                    ? Column(
+                        children: <Widget>[
+                          RowItem.iconRow(
+                            FlutterI18n.translate(
+                              context,
+                              'spacex.launch.page.payload.fairings.recovery_success',
                             ),
-                            Separator.spacer(),
-                            RowItem.textRow(
-                              FlutterI18n.translate(
-                                context,
-                                'spacex.launch.page.payload.fairings.recovery_ship',
-                              ),
-                              fairing.ship,
-                            ),
-                          ],
-                        )
-                      : RowItem.iconRow(
-                          FlutterI18n.translate(
-                            context,
-                            'spacex.launch.page.payload.fairings.recovery_attempt',
+                            fairing.recoverySuccess,
                           ),
-                          fairing.recoveryAttempt,
+                          Separator.spacer(),
+                          RowItem.textRow(
+                            FlutterI18n.translate(
+                              context,
+                              'spacex.launch.page.payload.fairings.recovery_ship',
+                            ),
+                            fairing.ship,
+                          ),
+                        ],
+                      )
+                    : RowItem.iconRow(
+                        FlutterI18n.translate(
+                          context,
+                          'spacex.launch.page.payload.fairings.recovery_attempt',
                         ),
-                ])
-              : Separator.none(),
-          Column(
-            children: secondStage.payloads
-                .map((payload) => _getPayload(context, payload))
-                .toList(),
-          ),
-        ],
-      ),
+                        fairing.recoveryAttempt,
+                      ),
+              ])
+            : Separator.none(),
+        Column(
+          children: secondStage.payloads
+              .map((payload) => _getPayload(context, payload))
+              .toList(),
+        ),
+      ]),
     );
   }
 

@@ -19,59 +19,57 @@ class ShipPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: CustomScrollView(
-        slivers: <Widget>[
-          SliverAppBar(
-            expandedHeight: MediaQuery.of(context).size.height * 0.3,
-            floating: false,
-            pinned: true,
-            actions: <Widget>[
-              IconButton(
-                icon: const Icon(Icons.public),
-                onPressed: () async => await FlutterWebBrowser.openWebPage(
-                      url: _ship.url,
-                      androidToolbarColor: primaryColor,
-                    ),
-                tooltip: FlutterI18n.translate(
-                  context,
-                  'spacex.other.menu.marine_traffic',
-                ),
-              )
-            ],
-            flexibleSpace: FlexibleSpaceBar(
-              centerTitle: true,
-              title: Text(_ship.name),
-              background: InkWell(
-                onTap: () async => await FlutterWebBrowser.openWebPage(
-                      url: _ship.getProfilePhoto,
-                      androidToolbarColor: primaryColor,
-                    ),
-                child: Hero(
-                  tag: _ship.id,
-                  child: CachedNetworkImage(
-                    imageUrl: _ship.getProfilePhoto,
-                    errorWidget: const Icon(Icons.error),
-                    fadeInDuration: Duration(milliseconds: 100),
-                    fit: BoxFit.cover,
+      body: CustomScrollView(slivers: <Widget>[
+        SliverAppBar(
+          expandedHeight: MediaQuery.of(context).size.height * 0.3,
+          floating: false,
+          pinned: true,
+          actions: <Widget>[
+            IconButton(
+              icon: const Icon(Icons.public),
+              onPressed: () async => await FlutterWebBrowser.openWebPage(
+                    url: _ship.url,
+                    androidToolbarColor: primaryColor,
                   ),
+              tooltip: FlutterI18n.translate(
+                context,
+                'spacex.other.menu.marine_traffic',
+              ),
+            )
+          ],
+          flexibleSpace: FlexibleSpaceBar(
+            centerTitle: true,
+            title: Text(_ship.name),
+            background: InkWell(
+              onTap: () async => await FlutterWebBrowser.openWebPage(
+                    url: _ship.getProfilePhoto,
+                    androidToolbarColor: primaryColor,
+                  ),
+              child: Hero(
+                tag: _ship.id,
+                child: CachedNetworkImage(
+                  imageUrl: _ship.getProfilePhoto,
+                  errorWidget: const Icon(Icons.error),
+                  fadeInDuration: Duration(milliseconds: 100),
+                  fit: BoxFit.cover,
                 ),
               ),
             ),
           ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(children: <Widget>[
-                _shipCard(context),
-                Separator.cardSpacer(),
-                _specsCard(context),
-                Separator.cardSpacer(),
-                _missionsCard(context),
-              ]),
-            ),
+        ),
+        SliverToBoxAdapter(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(children: <Widget>[
+              _shipCard(context),
+              Separator.cardSpacer(),
+              _specsCard(context),
+              Separator.cardSpacer(),
+              _missionsCard(context),
+            ]),
           ),
-        ],
-      ),
+        ),
+      ]),
     );
   }
 
@@ -127,80 +125,75 @@ class ShipPage extends StatelessWidget {
         context,
         'spacex.vehicle.ship.specifications.title',
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          RowItem.textRow(
-            FlutterI18n.translate(
-              context,
-              'spacex.vehicle.ship.specifications.feature',
-            ),
-            _ship.use,
+      body: Column(children: <Widget>[
+        RowItem.textRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.vehicle.ship.specifications.feature',
           ),
-          Separator.spacer(),
-          RowItem.textRow(
-            FlutterI18n.translate(
-              context,
-              'spacex.vehicle.ship.specifications.model',
-            ),
-            _ship.getModel(context),
+          _ship.use,
+        ),
+        Separator.spacer(),
+        RowItem.textRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.vehicle.ship.specifications.model',
           ),
-          Separator.divider(),
-          RowItem.textRow(
-            FlutterI18n.translate(
-              context,
-              'spacex.vehicle.ship.specifications.role_primary',
-            ),
-            _ship.primaryRole,
+          _ship.getModel(context),
+        ),
+        Separator.divider(),
+        RowItem.textRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.vehicle.ship.specifications.role_primary',
           ),
-          _ship.hasSeveralRoles
-              ? Column(
-                  children: <Widget>[
-                    Separator.spacer(),
-                    RowItem.textRow(
-                      FlutterI18n.translate(
-                        context,
-                        'spacex.vehicle.ship.specifications.role_secondary',
-                      ),
-                      _ship.secondaryRole,
-                    ),
-                    Separator.spacer(),
-                  ],
-                )
-              : Separator.spacer(),
-          RowItem.textRow(
-            FlutterI18n.translate(
-              context,
-              'spacex.vehicle.ship.specifications.status',
-            ),
-            _ship.getStatus(context),
+          _ship.primaryRole,
+        ),
+        _ship.hasSeveralRoles
+            ? Column(children: <Widget>[
+                Separator.spacer(),
+                RowItem.textRow(
+                  FlutterI18n.translate(
+                    context,
+                    'spacex.vehicle.ship.specifications.role_secondary',
+                  ),
+                  _ship.secondaryRole,
+                ),
+                Separator.spacer(),
+              ])
+            : Separator.spacer(),
+        RowItem.textRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.vehicle.ship.specifications.status',
           ),
-          Separator.spacer(),
-          RowItem.textRow(
-            FlutterI18n.translate(
-              context,
-              'spacex.vehicle.ship.specifications.coordinates',
-            ),
-            _ship.getCoordinates(context),
+          _ship.getStatus(context),
+        ),
+        Separator.spacer(),
+        RowItem.textRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.vehicle.ship.specifications.coordinates',
           ),
-          Separator.divider(),
-          RowItem.textRow(
-            FlutterI18n.translate(
-              context,
-              'spacex.vehicle.ship.specifications.mass',
-            ),
-            _ship.getMass(context),
+          _ship.getCoordinates(context),
+        ),
+        Separator.divider(),
+        RowItem.textRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.vehicle.ship.specifications.mass',
           ),
-          Separator.spacer(),
-          RowItem.textRow(
-            FlutterI18n.translate(
-              context,
-              'spacex.vehicle.ship.specifications.speed',
-            ),
-            _ship.getSpeed(context),
+          _ship.getMass(context),
+        ),
+        Separator.spacer(),
+        RowItem.textRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.vehicle.ship.specifications.speed',
           ),
-        ],
-      ),
+          _ship.getSpeed(context),
+        ),
+      ]),
     );
   }
 
@@ -213,9 +206,7 @@ class ShipPage extends StatelessWidget {
       body: Column(
         children: _ship.hasMissions
             ? _ship.missions
-                .map(
-                  (mission) => _getMission(context, _ship.missions, mission),
-                )
+                .map((mission) => _getMission(context, _ship.missions, mission))
                 .toList()
             : <Widget>[
                 Text(
