@@ -21,7 +21,7 @@ import '../../../widgets/row_item.dart';
 import '../../../widgets/separator.dart';
 import 'dialog_capsule.dart';
 import 'dialog_core.dart';
-import 'dialog_landingpad.dart';
+import 'dialog_landpad.dart';
 import 'dialog_launchpad.dart';
 
 /// LAUNCH PAGE CLASS
@@ -382,7 +382,7 @@ class LaunchPage extends StatelessWidget {
                   description: core.getLandingZone(context),
                   screen: ScopedModel<LandpadModel>(
                     model: LandpadModel(core.landingZone)..loadData(),
-                    child: LandingpadDialog(),
+                    child: LandpadDialog(),
                   ),
                 ),
                 Separator.spacer(),

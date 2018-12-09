@@ -11,7 +11,7 @@ import '../../../util/colors.dart';
 import '../../../widgets/row_item.dart';
 import '../../../widgets/separator.dart';
 
-class LandingpadDialog extends StatelessWidget {
+class LandpadDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScopedModelDescendant<LandpadModel>(
@@ -34,7 +34,7 @@ class LandingpadDialog extends StatelessWidget {
                         context,
                         'spacex.other.menu.wikipedia',
                       ),
-                    )
+                    ),
                   ],
                   flexibleSpace: FlexibleSpaceBar(
                     centerTitle: true,
@@ -94,72 +94,70 @@ class LandingpadDialog extends StatelessWidget {
     return ScopedModelDescendant<LandpadModel>(
       builder: (context, child, model) => Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Column(
-              children: <Widget>[
-                Text(
-                  model.landpad.name,
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.title,
+            child: Column(children: <Widget>[
+              Text(
+                model.landpad.name,
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.title,
+              ),
+              Separator.spacer(),
+              RowItem.textRow(
+                FlutterI18n.translate(
+                  context,
+                  'spacex.dialog.pad.status',
                 ),
-                Separator.spacer(),
-                RowItem.textRow(
-                  FlutterI18n.translate(
-                    context,
-                    'spacex.dialog.pad.status',
-                  ),
-                  model.landpad.getStatus,
+                model.landpad.getStatus,
+              ),
+              Separator.spacer(),
+              RowItem.textRow(
+                FlutterI18n.translate(
+                  context,
+                  'spacex.dialog.pad.location',
                 ),
-                Separator.spacer(),
-                RowItem.textRow(
-                  FlutterI18n.translate(
-                    context,
-                    'spacex.dialog.pad.location',
-                  ),
-                  model.landpad.location,
+                model.landpad.location,
+              ),
+              Separator.spacer(),
+              RowItem.textRow(
+                FlutterI18n.translate(
+                  context,
+                  'spacex.dialog.pad.state',
                 ),
-                Separator.spacer(),
-                RowItem.textRow(
-                  FlutterI18n.translate(
-                    context,
-                    'spacex.dialog.pad.state',
-                  ),
-                  model.landpad.state,
+                model.landpad.state,
+              ),
+              Separator.spacer(),
+              RowItem.textRow(
+                FlutterI18n.translate(
+                  context,
+                  'spacex.dialog.pad.coordinates',
                 ),
-                Separator.spacer(),
-                RowItem.textRow(
-                  FlutterI18n.translate(
-                    context,
-                    'spacex.dialog.pad.coordinates',
-                  ),
-                  model.landpad.getCoordinates,
+                model.landpad.getCoordinates,
+              ),
+              Separator.spacer(),
+              RowItem.textRow(
+                FlutterI18n.translate(
+                  context,
+                  'spacex.dialog.pad.landing_type',
                 ),
-                Separator.spacer(),
-                RowItem.textRow(
-                  FlutterI18n.translate(
-                    context,
-                    'spacex.dialog.pad.landing_type',
-                  ),
-                  model.landpad.type,
+                model.landpad.type,
+              ),
+              Separator.spacer(),
+              RowItem.textRow(
+                FlutterI18n.translate(
+                  context,
+                  'spacex.dialog.pad.landings_successful',
                 ),
-                Separator.spacer(),
-                RowItem.textRow(
-                  FlutterI18n.translate(
-                    context,
-                    'spacex.dialog.pad.landings_successful',
-                  ),
-                  model.landpad.getSuccessfulLandings,
-                ),
-                Separator.divider(),
-                Text(
-                  model.landpad.details,
-                  textAlign: TextAlign.justify,
-                  style: Theme.of(context)
-                      .textTheme
-                      .subhead
-                      .copyWith(color: secondaryText),
-                ),
-              ],
-            ),
+                model.landpad.getSuccessfulLandings,
+              ),
+              Separator.divider(),
+              Text(
+                model.landpad.details,
+                textAlign: TextAlign.justify,
+                style: Theme.of(context)
+                    .textTheme
+                    .subhead
+                    .copyWith(color: secondaryText),
+              ),
+            ]),
           ),
     );
   }

@@ -94,64 +94,62 @@ class LaunchpadDialog extends StatelessWidget {
     return ScopedModelDescendant<LaunchpadModel>(
       builder: (context, child, model) => Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Column(
-              children: <Widget>[
-                Text(
-                  model.launchpad.name,
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.title,
+            child: Column(children: <Widget>[
+              Text(
+                model.launchpad.name,
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.title,
+              ),
+              Separator.spacer(),
+              RowItem.textRow(
+                FlutterI18n.translate(
+                  context,
+                  'spacex.dialog.pad.status',
                 ),
-                Separator.spacer(),
-                RowItem.textRow(
-                  FlutterI18n.translate(
-                    context,
-                    'spacex.dialog.pad.status',
-                  ),
-                  model.launchpad.getStatus,
+                model.launchpad.getStatus,
+              ),
+              Separator.spacer(),
+              RowItem.textRow(
+                FlutterI18n.translate(
+                  context,
+                  'spacex.dialog.pad.location',
                 ),
-                Separator.spacer(),
-                RowItem.textRow(
-                  FlutterI18n.translate(
-                    context,
-                    'spacex.dialog.pad.location',
-                  ),
-                  model.launchpad.location,
+                model.launchpad.location,
+              ),
+              Separator.spacer(),
+              RowItem.textRow(
+                FlutterI18n.translate(
+                  context,
+                  'spacex.dialog.pad.state',
                 ),
-                Separator.spacer(),
-                RowItem.textRow(
-                  FlutterI18n.translate(
-                    context,
-                    'spacex.dialog.pad.state',
-                  ),
-                  model.launchpad.state,
+                model.launchpad.state,
+              ),
+              Separator.spacer(),
+              RowItem.textRow(
+                FlutterI18n.translate(
+                  context,
+                  'spacex.dialog.pad.coordinates',
                 ),
-                Separator.spacer(),
-                RowItem.textRow(
-                  FlutterI18n.translate(
-                    context,
-                    'spacex.dialog.pad.coordinates',
-                  ),
-                  model.launchpad.getCoordinates,
+                model.launchpad.getCoordinates,
+              ),
+              Separator.spacer(),
+              RowItem.textRow(
+                FlutterI18n.translate(
+                  context,
+                  'spacex.dialog.pad.launches_successful',
                 ),
-                Separator.spacer(),
-                RowItem.textRow(
-                  FlutterI18n.translate(
-                    context,
-                    'spacex.dialog.pad.launches_successful',
-                  ),
-                  model.launchpad.getSuccessfulLaunches,
-                ),
-                Separator.divider(),
-                Text(
-                  model.launchpad.details,
-                  textAlign: TextAlign.justify,
-                  style: Theme.of(context)
-                      .textTheme
-                      .subhead
-                      .copyWith(color: secondaryText),
-                ),
-              ],
-            ),
+                model.launchpad.getSuccessfulLaunches,
+              ),
+              Separator.divider(),
+              Text(
+                model.launchpad.details,
+                textAlign: TextAlign.justify,
+                style: Theme.of(context)
+                    .textTheme
+                    .subhead
+                    .copyWith(color: secondaryText),
+              ),
+            ]),
           ),
     );
   }

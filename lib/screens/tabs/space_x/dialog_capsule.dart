@@ -24,13 +24,11 @@ class CapsuleDialog extends StatelessWidget {
                   pinned: true,
                   flexibleSpace: FlexibleSpaceBar(
                     centerTitle: true,
-                    title: Text(
-                      FlutterI18n.translate(
-                        context,
-                        'spacex.dialog.vehicle.title_capsule',
-                        {'serial': model.id},
-                      ),
-                    ),
+                    title: Text(FlutterI18n.translate(
+                      context,
+                      'spacex.dialog.vehicle.title_capsule',
+                      {'serial': model.id},
+                    )),
                     background: model.isLoading
                         ? NativeLoadingIndicator(center: true)
                         : Swiper(
@@ -62,76 +60,74 @@ class CapsuleDialog extends StatelessWidget {
     return ScopedModelDescendant<CapsuleModel>(
       builder: (context, child, model) => Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Column(
-              children: <Widget>[
-                RowItem.textRow(
-                  FlutterI18n.translate(
-                    context,
-                    'spacex.dialog.vehicle.model',
-                  ),
-                  model.capsule.name,
+            child: Column(children: <Widget>[
+              RowItem.textRow(
+                FlutterI18n.translate(
+                  context,
+                  'spacex.dialog.vehicle.model',
                 ),
-                Separator.spacer(),
-                RowItem.textRow(
-                  FlutterI18n.translate(
-                    context,
-                    'spacex.dialog.vehicle.status',
-                  ),
-                  model.capsule.getStatus,
+                model.capsule.name,
+              ),
+              Separator.spacer(),
+              RowItem.textRow(
+                FlutterI18n.translate(
+                  context,
+                  'spacex.dialog.vehicle.status',
                 ),
-                Separator.spacer(),
-                RowItem.textRow(
-                  FlutterI18n.translate(
-                    context,
-                    'spacex.dialog.vehicle.first_launched',
-                  ),
-                  model.capsule.getFirstLaunched(context),
+                model.capsule.getStatus,
+              ),
+              Separator.spacer(),
+              RowItem.textRow(
+                FlutterI18n.translate(
+                  context,
+                  'spacex.dialog.vehicle.first_launched',
                 ),
-                Separator.spacer(),
-                RowItem.textRow(
-                  FlutterI18n.translate(
-                    context,
-                    'spacex.dialog.vehicle.launches',
-                  ),
-                  model.capsule.getLaunches,
+                model.capsule.getFirstLaunched(context),
+              ),
+              Separator.spacer(),
+              RowItem.textRow(
+                FlutterI18n.translate(
+                  context,
+                  'spacex.dialog.vehicle.launches',
                 ),
-                Separator.spacer(),
-                RowItem.textRow(
-                  FlutterI18n.translate(
-                    context,
-                    'spacex.dialog.vehicle.splashings',
-                  ),
-                  model.capsule.getLandings,
+                model.capsule.getLaunches,
+              ),
+              Separator.spacer(),
+              RowItem.textRow(
+                FlutterI18n.translate(
+                  context,
+                  'spacex.dialog.vehicle.splashings',
                 ),
-                model.capsule.hasMissions
-                    ? Column(
-                        children: <Widget>[
-                          Separator.divider(),
-                          Column(
-                            children: model.capsule.missions
-                                .map(
-                                  (mission) => _getMission(
-                                        context,
-                                        model.capsule.missions,
-                                        mission,
-                                      ),
-                                )
-                                .toList(),
-                          )
-                        ],
-                      )
-                    : Separator.none(),
-                Separator.divider(),
-                Text(
-                  model.capsule.getDetails(context),
-                  textAlign: TextAlign.justify,
-                  style: Theme.of(context)
-                      .textTheme
-                      .subhead
-                      .copyWith(color: secondaryText),
-                ),
-              ],
-            ),
+                model.capsule.getLandings,
+              ),
+              model.capsule.hasMissions
+                  ? Column(
+                      children: <Widget>[
+                        Separator.divider(),
+                        Column(
+                          children: model.capsule.missions
+                              .map(
+                                (mission) => _getMission(
+                                      context,
+                                      model.capsule.missions,
+                                      mission,
+                                    ),
+                              )
+                              .toList(),
+                        )
+                      ],
+                    )
+                  : Separator.none(),
+              Separator.divider(),
+              Text(
+                model.capsule.getDetails(context),
+                textAlign: TextAlign.justify,
+                style: Theme.of(context)
+                    .textTheme
+                    .subhead
+                    .copyWith(color: secondaryText),
+              ),
+            ]),
           ),
     );
   }

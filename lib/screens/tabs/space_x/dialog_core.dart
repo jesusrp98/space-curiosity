@@ -24,13 +24,11 @@ class CoreDialog extends StatelessWidget {
                   pinned: true,
                   flexibleSpace: FlexibleSpaceBar(
                     centerTitle: true,
-                    title: Text(
-                      FlutterI18n.translate(
-                        context,
-                        'spacex.dialog.vehicle.title_core',
-                        {'serial': model.id},
-                      ),
-                    ),
+                    title: Text(FlutterI18n.translate(
+                      context,
+                      'spacex.dialog.vehicle.title_core',
+                      {'serial': model.id},
+                    )),
                     background: model.isLoading
                         ? NativeLoadingIndicator(center: true)
                         : Swiper(
@@ -62,84 +60,82 @@ class CoreDialog extends StatelessWidget {
     return ScopedModelDescendant<CoreModel>(
       builder: (context, child, model) => Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Column(
-              children: <Widget>[
-                RowItem.textRow(
-                  FlutterI18n.translate(
-                    context,
-                    'spacex.dialog.vehicle.model',
-                  ),
-                  model.core.getBlock(context),
+            child: Column(children: <Widget>[
+              RowItem.textRow(
+                FlutterI18n.translate(
+                  context,
+                  'spacex.dialog.vehicle.model',
                 ),
-                Separator.spacer(),
-                RowItem.textRow(
-                  FlutterI18n.translate(
-                    context,
-                    'spacex.dialog.vehicle.status',
-                  ),
-                  model.core.getStatus,
+                model.core.getBlock(context),
+              ),
+              Separator.spacer(),
+              RowItem.textRow(
+                FlutterI18n.translate(
+                  context,
+                  'spacex.dialog.vehicle.status',
                 ),
-                Separator.spacer(),
-                RowItem.textRow(
-                  FlutterI18n.translate(
-                    context,
-                    'spacex.dialog.vehicle.first_launched',
-                  ),
-                  model.core.getFirstLaunched(context),
+                model.core.getStatus,
+              ),
+              Separator.spacer(),
+              RowItem.textRow(
+                FlutterI18n.translate(
+                  context,
+                  'spacex.dialog.vehicle.first_launched',
                 ),
-                Separator.spacer(),
-                RowItem.textRow(
-                  FlutterI18n.translate(
-                    context,
-                    'spacex.dialog.vehicle.launches',
-                  ),
-                  model.core.getLaunches,
+                model.core.getFirstLaunched(context),
+              ),
+              Separator.spacer(),
+              RowItem.textRow(
+                FlutterI18n.translate(
+                  context,
+                  'spacex.dialog.vehicle.launches',
                 ),
-                Separator.spacer(),
-                RowItem.textRow(
-                  FlutterI18n.translate(
-                    context,
-                    'spacex.dialog.vehicle.landings_rtls',
-                  ),
-                  model.core.getRtlsLandings,
+                model.core.getLaunches,
+              ),
+              Separator.spacer(),
+              RowItem.textRow(
+                FlutterI18n.translate(
+                  context,
+                  'spacex.dialog.vehicle.landings_rtls',
                 ),
-                Separator.spacer(),
-                RowItem.textRow(
-                  FlutterI18n.translate(
-                    context,
-                    'spacex.dialog.vehicle.landings_asds',
-                  ),
-                  model.core.getAsdsLandings,
+                model.core.getRtlsLandings,
+              ),
+              Separator.spacer(),
+              RowItem.textRow(
+                FlutterI18n.translate(
+                  context,
+                  'spacex.dialog.vehicle.landings_asds',
                 ),
-                model.core.hasMissions
-                    ? Column(
-                        children: <Widget>[
-                          Separator.divider(),
-                          Column(
-                            children: model.core.missions
-                                .map(
-                                  (mission) => _getMission(
-                                        context,
-                                        model.core.missions,
-                                        mission,
-                                      ),
-                                )
-                                .toList(),
-                          )
-                        ],
-                      )
-                    : Separator.none(),
-                Separator.divider(),
-                Text(
-                  model.core.getDetails(context),
-                  textAlign: TextAlign.justify,
-                  style: Theme.of(context)
-                      .textTheme
-                      .subhead
-                      .copyWith(color: secondaryText),
-                ),
-              ],
-            ),
+                model.core.getAsdsLandings,
+              ),
+              model.core.hasMissions
+                  ? Column(
+                      children: <Widget>[
+                        Separator.divider(),
+                        Column(
+                          children: model.core.missions
+                              .map(
+                                (mission) => _getMission(
+                                      context,
+                                      model.core.missions,
+                                      mission,
+                                    ),
+                              )
+                              .toList(),
+                        )
+                      ],
+                    )
+                  : Separator.none(),
+              Separator.divider(),
+              Text(
+                model.core.getDetails(context),
+                textAlign: TextAlign.justify,
+                style: Theme.of(context)
+                    .textTheme
+                    .subhead
+                    .copyWith(color: secondaryText),
+              ),
+            ]),
           ),
     );
   }
