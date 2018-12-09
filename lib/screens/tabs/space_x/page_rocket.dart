@@ -30,7 +30,9 @@ class RocketPage extends StatelessWidget {
               IconButton(
                 icon: const Icon(Icons.public),
                 onPressed: () async => await FlutterWebBrowser.openWebPage(
-                    url: _rocket.url, androidToolbarColor: primaryColor),
+                      url: _rocket.url,
+                      androidToolbarColor: primaryColor,
+                    ),
                 tooltip: FlutterI18n.translate(
                   context,
                   'spacex.other.menu.wikipedia',
@@ -82,47 +84,45 @@ class RocketPage extends StatelessWidget {
         context,
         'spacex.vehicle.rocket.description.title',
       ),
-      body: Column(
-        children: <Widget>[
-          RowItem.textRow(
-            FlutterI18n.translate(
-              context,
-              'spacex.vehicle.rocket.description.launch_maiden',
-            ),
-            _rocket.getFullFirstFlight,
+      body: Column(children: <Widget>[
+        RowItem.textRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.vehicle.rocket.description.launch_maiden',
           ),
-          Separator.spacer(),
-          RowItem.textRow(
-            FlutterI18n.translate(
-              context,
-              'spacex.vehicle.rocket.description.launch_cost',
-            ),
-            _rocket.getLaunchCost,
+          _rocket.getFullFirstFlight,
+        ),
+        Separator.spacer(),
+        RowItem.textRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.vehicle.rocket.description.launch_cost',
           ),
-          Separator.spacer(),
-          RowItem.textRow(
-            FlutterI18n.translate(
-              context,
-              'spacex.vehicle.rocket.description.success_rate',
-            ),
-            _rocket.getSuccessRate(context),
+          _rocket.getLaunchCost,
+        ),
+        Separator.spacer(),
+        RowItem.textRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.vehicle.rocket.description.success_rate',
           ),
-          Separator.spacer(),
-          RowItem.iconRow(
-            FlutterI18n.translate(
-              context,
-              'spacex.vehicle.rocket.description.active',
-            ),
-            _rocket.active,
+          _rocket.getSuccessRate(context),
+        ),
+        Separator.spacer(),
+        RowItem.iconRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.vehicle.rocket.description.active',
           ),
-          Separator.divider(),
-          Text(
-            _rocket.description,
-            textAlign: TextAlign.justify,
-            style: TextStyle(fontSize: 15.0, color: secondaryText),
-          )
-        ],
-      ),
+          _rocket.active,
+        ),
+        Separator.divider(),
+        Text(
+          _rocket.description,
+          textAlign: TextAlign.justify,
+          style: TextStyle(fontSize: 15.0, color: secondaryText),
+        )
+      ]),
     );
   }
 
@@ -232,49 +232,47 @@ class RocketPage extends StatelessWidget {
         context,
         'spacex.vehicle.rocket.stage.stage_first',
       ),
-      body: Column(
-        children: <Widget>[
-          RowItem.textRow(
-            FlutterI18n.translate(
-              context,
-              'spacex.vehicle.rocket.stage.fuel_amount',
-            ),
-            _rocket.firstStage.getFuelAmount(context),
+      body: Column(children: <Widget>[
+        RowItem.textRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.vehicle.rocket.stage.fuel_amount',
           ),
-          Separator.spacer(),
-          RowItem.textRow(
-            FlutterI18n.translate(
-              context,
-              'spacex.vehicle.rocket.stage.engines',
-            ),
-            _rocket.firstStage.getEngines(context),
+          _rocket.firstStage.getFuelAmount(context),
+        ),
+        Separator.spacer(),
+        RowItem.textRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.vehicle.rocket.stage.engines',
           ),
-          Separator.spacer(),
-          RowItem.iconRow(
-            FlutterI18n.translate(
-              context,
-              'spacex.vehicle.rocket.stage.reusable',
-            ),
-            _rocket.firstStage.reusable,
+          _rocket.firstStage.getEngines(context),
+        ),
+        Separator.spacer(),
+        RowItem.iconRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.vehicle.rocket.stage.reusable',
           ),
-          Separator.divider(),
-          RowItem.textRow(
-            FlutterI18n.translate(
-              context,
-              'spacex.vehicle.rocket.engines.thrust_sea',
-            ),
-            _rocket.firstStage.getThrustSea,
+          _rocket.firstStage.reusable,
+        ),
+        Separator.divider(),
+        RowItem.textRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.vehicle.rocket.engines.thrust_sea',
           ),
-          Separator.spacer(),
-          RowItem.textRow(
-            FlutterI18n.translate(
-              context,
-              'spacex.vehicle.rocket.engines.thrust_vacuum',
-            ),
-            _rocket.firstStage.getThrustVacuum,
+          _rocket.firstStage.getThrustSea,
+        ),
+        Separator.spacer(),
+        RowItem.textRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.vehicle.rocket.engines.thrust_vacuum',
           ),
-        ],
-      ),
+          _rocket.firstStage.getThrustVacuum,
+        ),
+      ]),
     );
   }
 
@@ -284,41 +282,39 @@ class RocketPage extends StatelessWidget {
         context,
         'spacex.vehicle.rocket.stage.stage_second',
       ),
-      body: Column(
-        children: <Widget>[
-          RowItem.textRow(
-            FlutterI18n.translate(
-              context,
-              'spacex.vehicle.rocket.stage.fuel_amount',
-            ),
-            _rocket.secondStage.getFuelAmount(context),
+      body: Column(children: <Widget>[
+        RowItem.textRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.vehicle.rocket.stage.fuel_amount',
           ),
-          Separator.spacer(),
-          RowItem.textRow(
-            FlutterI18n.translate(
-              context,
-              'spacex.vehicle.rocket.stage.engines',
-            ),
-            _rocket.secondStage.getEngines(context),
+          _rocket.secondStage.getFuelAmount(context),
+        ),
+        Separator.spacer(),
+        RowItem.textRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.vehicle.rocket.stage.engines',
           ),
-          Separator.spacer(),
-          RowItem.iconRow(
-            FlutterI18n.translate(
-              context,
-              'spacex.vehicle.rocket.stage.reusable',
-            ),
-            _rocket.secondStage.reusable,
+          _rocket.secondStage.getEngines(context),
+        ),
+        Separator.spacer(),
+        RowItem.iconRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.vehicle.rocket.stage.reusable',
           ),
-          Separator.divider(),
-          RowItem.textRow(
-            FlutterI18n.translate(
-              context,
-              'spacex.vehicle.rocket.engines.thrust_vacuum',
-            ),
-            _rocket.secondStage.getThrustVacuum,
+          _rocket.secondStage.reusable,
+        ),
+        Separator.divider(),
+        RowItem.textRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.vehicle.rocket.engines.thrust_vacuum',
           ),
-        ],
-      ),
+          _rocket.secondStage.getThrustVacuum,
+        ),
+      ]),
     );
   }
 

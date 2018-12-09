@@ -58,15 +58,13 @@ class CapsulePage extends StatelessWidget {
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.all(16.0),
-              child: Column(
-                children: <Widget>[
-                  _capsuleCard(context),
-                  Separator.cardSpacer(),
-                  _specsCard(context),
-                  Separator.cardSpacer(),
-                  _thrustersCard(context),
-                ],
-              ),
+              child: Column(children: <Widget>[
+                _capsuleCard(context),
+                Separator.cardSpacer(),
+                _specsCard(context),
+                Separator.cardSpacer(),
+                _thrustersCard(context),
+              ]),
             ),
           ),
         ],
@@ -80,39 +78,37 @@ class CapsulePage extends StatelessWidget {
         context,
         'spacex.vehicle.capsule.description.title',
       ),
-      body: Column(
-        children: <Widget>[
-          RowItem.textRow(
-            FlutterI18n.translate(
-              context,
-              'spacex.vehicle.capsule.description.launch_maiden',
-            ),
-            _capsule.getFullFirstFlight,
+      body: Column(children: <Widget>[
+        RowItem.textRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.vehicle.capsule.description.launch_maiden',
           ),
-          Separator.spacer(),
-          RowItem.textRow(
-            FlutterI18n.translate(
-              context,
-              'spacex.vehicle.capsule.description.crew_capacity',
-            ),
-            _capsule.getCrew(context),
+          _capsule.getFullFirstFlight,
+        ),
+        Separator.spacer(),
+        RowItem.textRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.vehicle.capsule.description.crew_capacity',
           ),
-          Separator.spacer(),
-          RowItem.iconRow(
-            FlutterI18n.translate(
-              context,
-              'spacex.vehicle.capsule.description.active',
-            ),
-            _capsule.active,
+          _capsule.getCrew(context),
+        ),
+        Separator.spacer(),
+        RowItem.iconRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.vehicle.capsule.description.active',
           ),
-          Separator.divider(),
-          Text(
-            _capsule.description,
-            textAlign: TextAlign.justify,
-            style: TextStyle(fontSize: 15.0, color: secondaryText),
-          )
-        ],
-      ),
+          _capsule.active,
+        ),
+        Separator.divider(),
+        Text(
+          _capsule.description,
+          textAlign: TextAlign.justify,
+          style: TextStyle(fontSize: 15.0, color: secondaryText),
+        )
+      ]),
     );
   }
 
@@ -203,50 +199,48 @@ class CapsulePage extends StatelessWidget {
   }
 
   Widget _getThruster(BuildContext context, Thruster thruster) {
-    return Column(
-      children: <Widget>[
-        Separator.divider(),
-        RowItem.textRow(
-          FlutterI18n.translate(
-            context,
-            'spacex.vehicle.capsule.thruster.name',
-          ),
-          thruster.name,
+    return Column(children: <Widget>[
+      Separator.divider(),
+      RowItem.textRow(
+        FlutterI18n.translate(
+          context,
+          'spacex.vehicle.capsule.thruster.name',
         ),
-        Separator.spacer(),
-        RowItem.textRow(
-          FlutterI18n.translate(
-            context,
-            'spacex.vehicle.capsule.thruster.amount',
-          ),
-          thruster.getAmount,
+        thruster.name,
+      ),
+      Separator.spacer(),
+      RowItem.textRow(
+        FlutterI18n.translate(
+          context,
+          'spacex.vehicle.capsule.thruster.amount',
         ),
-        Separator.spacer(),
-        RowItem.textRow(
-          FlutterI18n.translate(
-            context,
-            'spacex.vehicle.capsule.thruster.fuel',
-          ),
-          thruster.getFuel,
+        thruster.getAmount,
+      ),
+      Separator.spacer(),
+      RowItem.textRow(
+        FlutterI18n.translate(
+          context,
+          'spacex.vehicle.capsule.thruster.fuel',
         ),
-        Separator.spacer(),
-        RowItem.textRow(
-          FlutterI18n.translate(
-            context,
-            'spacex.vehicle.capsule.thruster.oxidizer',
-          ),
-          thruster.getOxidizer,
+        thruster.getFuel,
+      ),
+      Separator.spacer(),
+      RowItem.textRow(
+        FlutterI18n.translate(
+          context,
+          'spacex.vehicle.capsule.thruster.oxidizer',
         ),
-        Separator.spacer(),
-        RowItem.textRow(
-          FlutterI18n.translate(
-            context,
-            'spacex.vehicle.capsule.thruster.thrust',
-          ),
-          thruster.getThrust,
+        thruster.getOxidizer,
+      ),
+      Separator.spacer(),
+      RowItem.textRow(
+        FlutterI18n.translate(
+          context,
+          'spacex.vehicle.capsule.thruster.thrust',
         ),
-      ],
-    );
+        thruster.getThrust,
+      ),
+    ]);
   }
 
   Widget _buildImage(BuildContext context, int index) {

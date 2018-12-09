@@ -29,7 +29,9 @@ class ShipPage extends StatelessWidget {
               IconButton(
                 icon: const Icon(Icons.public),
                 onPressed: () async => await FlutterWebBrowser.openWebPage(
-                    url: _ship.url, androidToolbarColor: primaryColor),
+                      url: _ship.url,
+                      androidToolbarColor: primaryColor,
+                    ),
                 tooltip: FlutterI18n.translate(
                   context,
                   'spacex.other.menu.marine_traffic',
@@ -79,45 +81,43 @@ class ShipPage extends StatelessWidget {
         context,
         'spacex.vehicle.ship.description.title',
       ),
-      body: Column(
-        children: <Widget>[
-          RowItem.textRow(
-              FlutterI18n.translate(
-                context,
-                'spacex.vehicle.ship.description.home_port',
-              ),
-              _ship.homePort),
-          Separator.spacer(),
-          RowItem.textRow(
-              FlutterI18n.translate(
-                context,
-                'spacex.vehicle.ship.description.built_date',
-              ),
-              _ship.getBuiltFullDate),
-          _ship.hasExtras
-              ? Column(
-                  children: <Widget>[
-                    Separator.divider(),
-                    _ship.isLandable
-                        ? RowItem.textRow(
-                            FlutterI18n.translate(
-                              context,
-                              'spacex.vehicle.ship.description.landings_successful',
-                            ),
-                            _ship.getSuccessfulLandings,
-                          )
-                        : RowItem.textRow(
-                            FlutterI18n.translate(
-                              context,
-                              'spacex.vehicle.ship.description.catches_successful',
-                            ),
-                            _ship.getSuccessfulCatches,
+      body: Column(children: <Widget>[
+        RowItem.textRow(
+            FlutterI18n.translate(
+              context,
+              'spacex.vehicle.ship.description.home_port',
+            ),
+            _ship.homePort),
+        Separator.spacer(),
+        RowItem.textRow(
+            FlutterI18n.translate(
+              context,
+              'spacex.vehicle.ship.description.built_date',
+            ),
+            _ship.getBuiltFullDate),
+        _ship.hasExtras
+            ? Column(
+                children: <Widget>[
+                  Separator.divider(),
+                  _ship.isLandable
+                      ? RowItem.textRow(
+                          FlutterI18n.translate(
+                            context,
+                            'spacex.vehicle.ship.description.landings_successful',
                           ),
-                  ],
-                )
-              : Separator.none()
-        ],
-      ),
+                          _ship.getSuccessfulLandings,
+                        )
+                      : RowItem.textRow(
+                          FlutterI18n.translate(
+                            context,
+                            'spacex.vehicle.ship.description.catches_successful',
+                          ),
+                          _ship.getSuccessfulCatches,
+                        ),
+                ],
+              )
+            : Separator.none()
+      ]),
     );
   }
 

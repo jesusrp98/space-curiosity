@@ -74,26 +74,24 @@ class RoadsterPage extends StatelessWidget {
                 SliverToBoxAdapter(
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      children: <Widget>[
-                        _roadsterCard(context),
-                        Separator.cardSpacer(),
-                        _vehicleCard(context),
-                        Separator.cardSpacer(),
-                        _orbitCard(context),
-                        Separator.cardSpacer(),
-                        Text(
-                          FlutterI18n.translate(
-                            context,
-                            'spacex.vehicle.roadster.data_updated',
-                          ),
-                          style: Theme.of(context)
-                              .textTheme
-                              .subhead
-                              .copyWith(color: secondaryText),
-                        )
-                      ],
-                    ),
+                    child: Column(children: <Widget>[
+                      _roadsterCard(context),
+                      Separator.cardSpacer(),
+                      _vehicleCard(context),
+                      Separator.cardSpacer(),
+                      _orbitCard(context),
+                      Separator.cardSpacer(),
+                      Text(
+                        FlutterI18n.translate(
+                          context,
+                          'spacex.vehicle.roadster.data_updated',
+                        ),
+                        style: Theme.of(context)
+                            .textTheme
+                            .subhead
+                            .copyWith(color: secondaryText),
+                      )
+                    ]),
                   ),
                 ),
               ],
@@ -108,31 +106,29 @@ class RoadsterPage extends StatelessWidget {
         context,
         'spacex.vehicle.roadster.description.title',
       ),
-      body: Column(
-        children: <Widget>[
-          RowItem.textRow(
-            FlutterI18n.translate(
-              context,
-              'spacex.vehicle.roadster.description.launch_date',
-            ),
-            _roadster.getFullFirstFlight,
+      body: Column(children: <Widget>[
+        RowItem.textRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.vehicle.roadster.description.launch_date',
           ),
-          Separator.spacer(),
-          RowItem.textRow(
-            FlutterI18n.translate(
-              context,
-              'spacex.vehicle.roadster.description.launch_vehicle',
-            ),
-            'Falcon Heavy',
+          _roadster.getFullFirstFlight,
+        ),
+        Separator.spacer(),
+        RowItem.textRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.vehicle.roadster.description.launch_vehicle',
           ),
-          Separator.divider(),
-          Text(
-            _roadster.description,
-            textAlign: TextAlign.justify,
-            style: TextStyle(fontSize: 15.0, color: secondaryText),
-          )
-        ],
-      ),
+          'Falcon Heavy',
+        ),
+        Separator.divider(),
+        Text(
+          _roadster.description,
+          textAlign: TextAlign.justify,
+          style: TextStyle(fontSize: 15.0, color: secondaryText),
+        )
+      ]),
     );
   }
 
