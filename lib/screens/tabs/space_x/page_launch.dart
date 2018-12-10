@@ -214,7 +214,7 @@ class LaunchPage extends StatelessWidget {
           ),
           _launch.launchSuccess,
         ),
-        _launch.launchSuccess != null && _launch.launchSuccess == false
+        _launch.launchSuccess == false
             ? Column(children: <Widget>[
                 Separator.divider(),
                 RowItem.textRow(
@@ -235,7 +235,7 @@ class LaunchPage extends StatelessWidget {
                 Separator.spacer(),
                 Text(
                   _launch.failureDetails.getReason,
-                  textAlign: TextAlign.justify,
+                  textAlign: TextAlign.center,
                   style: Theme.of(context)
                       .textTheme
                       .subhead
@@ -280,7 +280,7 @@ class LaunchPage extends StatelessWidget {
                   fairing.reused,
                 ),
                 Separator.spacer(),
-                fairing.recoveryAttempt
+                fairing.recoveryAttempt == true
                     ? Column(
                         children: <Widget>[
                           RowItem.iconRow(
@@ -350,7 +350,7 @@ class LaunchPage extends StatelessWidget {
         core.reused,
       ),
       Separator.spacer(),
-      core.landingIntent != null && core.landingIntent
+      core.landingIntent == true
           ? Column(children: <Widget>[
               RowItem.dialogRow(
                 context: context,
