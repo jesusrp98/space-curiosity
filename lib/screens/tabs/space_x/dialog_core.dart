@@ -7,7 +7,7 @@ import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import '../../../models/rockets/details_core.dart';
-import '../../../models/rockets/mission_details.dart';
+import '../../../models/rockets/mission_item.dart';
 import '../../../util/colors.dart';
 import '../../../widgets/row_item.dart';
 import '../../../widgets/separator.dart';
@@ -107,18 +107,15 @@ class CoreDialog extends StatelessWidget {
                 ),
                 model.core.getAsdsLandings,
               ),
+              Separator.divider(),
               model.core.hasMissions
                   ? Column(children: <Widget>[
-                      Separator.divider(),
                       Column(
                         children: model.core.missions
-                            .map((mission) => _getMission(
-                                  context,
-                                  mission,
-                                  model.core.missions,
-                                ))
+                            .map((mission) => _getMission(context, mission))
                             .toList(),
-                      )
+                      ),
+                      Separator.divider(),
                     ])
                   : Separator.none(),
               Separator.divider(),
@@ -135,23 +132,17 @@ class CoreDialog extends StatelessWidget {
     );
   }
 
-  Column _getMission(
-    BuildContext context,
-    DetailsMission mission,
-    List missions,
-  ) {
-    return Column(
-      children: <Widget>[
-        RowItem.textRow(
-          FlutterI18n.translate(
-            context,
-            'spacex.dialog.vehicle.mission',
-            {'number': mission.id.toString()},
-          ),
-          mission.name,
+  Column _getMission(BuildContext context, MissionItem mission) {
+    return Column(children: <Widget>[
+      RowItem.textRow(
+        FlutterI18n.translate(
+          context,
+          'spacex.dialog.vehicle.mission',
+          {'number': mission.id.toString()},
         ),
-      ]..add(mission != missions.last ? Separator.spacer() : Separator.none()),
-    );
+        mission.name,
+      ),
+    ]);
   }
 
   Widget _buildImage(BuildContext context, int index) {

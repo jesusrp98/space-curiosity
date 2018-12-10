@@ -2,7 +2,7 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:intl/intl.dart';
 
 import 'info_vehicle.dart';
-import 'mission_details.dart';
+import 'mission_item.dart';
 
 /// SHIP INFO MODEL
 /// General information about a ship used by SpaceX.
@@ -60,7 +60,7 @@ class ShipInfo extends Vehicle {
       use: json['ship_type'],
       roles: json['roles'],
       missions: json['missions']
-          .map((mission) => DetailsMission.fromJson(mission))
+          .map((mission) => MissionItem.fromJson(mission))
           .toList(),
       homePort: json['home_port'],
       status: json['status'],

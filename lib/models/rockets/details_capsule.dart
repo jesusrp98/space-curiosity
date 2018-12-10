@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 import '../../util/url.dart';
 import '../querry_model.dart';
 import 'details_vehicle.dart';
-import 'mission_details.dart';
+import 'mission_item.dart';
 
 /// CAPSULE DETAILS MODEL
 /// Details about a specific capsule used in a CRS mission.
@@ -67,7 +67,7 @@ class CapsuleDetails extends VehicleDetails {
           ? DateTime.parse(json['original_launch'])
           : null,
       missions: json['missions']
-          .map((mission) => DetailsMission.fromJson(mission))
+          .map((mission) => MissionItem.fromJson(mission))
           .toList(),
       name: json['type'],
       landings: json['landings'],
