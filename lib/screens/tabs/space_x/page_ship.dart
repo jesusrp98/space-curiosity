@@ -147,9 +147,9 @@ class ShipPage extends StatelessWidget {
           ),
           _ship.primaryRole,
         ),
+        Separator.spacer(),
         _ship.hasSeveralRoles
             ? Column(children: <Widget>[
-                Separator.spacer(),
                 RowItem.textRow(
                   FlutterI18n.translate(
                     context,
@@ -159,7 +159,7 @@ class ShipPage extends StatelessWidget {
                 ),
                 Separator.spacer(),
               ])
-            : Separator.spacer(),
+            : Separator.none(),
         RowItem.textRow(
           FlutterI18n.translate(
             context,
