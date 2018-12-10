@@ -104,13 +104,16 @@ class CapsuleDialog extends StatelessWidget {
                   ? Column(children: <Widget>[
                       Column(
                         children: model.capsule.missions
-                            .map((mission) => _getMission(context, mission))
+                            .map((mission) => _getMission(
+                                  context,
+                                  model.capsule.missions,
+                                  mission,
+                                ))
                             .toList(),
                       ),
                       Separator.divider(),
                     ])
                   : Separator.none(),
-              Separator.divider(),
               Text(
                 model.capsule.getDetails(context),
                 textAlign: TextAlign.justify,
@@ -124,7 +127,7 @@ class CapsuleDialog extends StatelessWidget {
     );
   }
 
-  Column _getMission(BuildContext context, MissionItem mission) {
+  Column _getMission(BuildContext context, List missions, MissionItem mission) {
     return Column(children: <Widget>[
       RowItem.textRow(
         FlutterI18n.translate(
@@ -134,6 +137,7 @@ class CapsuleDialog extends StatelessWidget {
         ),
         mission.name,
       ),
+      mission != missions.last ? Separator.spacer() : Separator.none(),
     ]);
   }
 
