@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
@@ -6,6 +5,7 @@ import 'package:flutter_web_browser/flutter_web_browser.dart';
 
 import '../../../models/rockets/info_capsule.dart';
 import '../../../util/colors.dart';
+import '../../../widgets/cache_image.dart';
 import '../../../widgets/card_page.dart';
 import '../../../widgets/row_item.dart';
 import '../../../widgets/separator.dart';
@@ -43,7 +43,12 @@ class CapsulePage extends StatelessWidget {
             title: Text(_capsule.name),
             background: Swiper(
               itemCount: _capsule.getPhotosCount,
-              itemBuilder: _buildImage,
+              itemBuilder: (_, index) {
+                final CacheImage photo = CacheImage(_capsule.getPhoto(index));
+                return index == 0
+                    ? Hero(tag: _capsule.id, child: photo)
+                    : photo;
+              },
               autoplay: true,
               autoplayDelay: 6000,
               duration: 750,
@@ -233,16 +238,5 @@ class CapsulePage extends StatelessWidget {
         thruster.getThrust,
       ),
     ]);
-  }
-
-  Widget _buildImage(BuildContext context, int index) {
-    final CachedNetworkImage photo = CachedNetworkImage(
-      imageUrl: _capsule.getPhoto(index),
-      errorWidget: const Icon(Icons.error),
-      fadeInDuration: Duration(milliseconds: 100),
-      fit: BoxFit.cover,
-    );
-
-    return index == 0 ? Hero(tag: _capsule.id, child: photo) : photo;
   }
 }

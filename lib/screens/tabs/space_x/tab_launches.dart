@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
@@ -10,6 +9,7 @@ import 'package:scoped_model/scoped_model.dart';
 
 import '../../../models/rockets/launch.dart';
 import '../../../util/colors.dart';
+import '../../../widgets/cache_image.dart';
 import '../../../widgets/hero_image.dart';
 import '../../../widgets/list_cell.dart';
 import '../../../widgets/separator.dart';
@@ -51,7 +51,9 @@ class LaunchesTab extends StatelessWidget {
                         ? NativeLoadingIndicator(center: true)
                         : Swiper(
                             itemCount: model.getPhotosCount,
-                            itemBuilder: _buildImage,
+                            itemBuilder: (_, index) => CacheImage(
+                                  model.getPhoto(index),
+                                ),
                             autoplay: true,
                             autoplayDelay: 6000,
                             duration: 750,
@@ -110,17 +112,6 @@ class LaunchesTab extends StatelessWidget {
           Separator.divider(height: 0.0, indent: 96.0)
         ]);
       },
-    );
-  }
-
-  Widget _buildImage(BuildContext context, int index) {
-    return ScopedModelDescendant<LaunchesModel>(
-      builder: (context, child, model) => CachedNetworkImage(
-            imageUrl: model.getPhoto(index),
-            errorWidget: const Icon(Icons.error),
-            fadeInDuration: Duration(milliseconds: 100),
-            fit: BoxFit.cover,
-          ),
     );
   }
 }

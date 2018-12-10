@@ -1,5 +1,4 @@
 import 'package:add_2_calendar/add_2_calendar.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
@@ -14,6 +13,7 @@ import '../../../models/rockets/launch.dart';
 import '../../../models/rockets/launchpad.dart';
 import '../../../models/rockets/rocket.dart';
 import '../../../util/colors.dart';
+import '../../../widgets/cache_image.dart';
 import '../../../widgets/card_page.dart';
 import '../../../widgets/head_card_page.dart';
 import '../../../widgets/hero_image.dart';
@@ -99,7 +99,9 @@ class LaunchPage extends StatelessWidget {
                     title: Text(_launch.name),
                     background: Swiper(
                       itemCount: _launch.getPhotosCount,
-                      itemBuilder: _buildImage,
+                      itemBuilder: (_, index) => CacheImage(
+                            _launch.getPhoto(index),
+                          ),
                       autoplay: true,
                       autoplayDelay: 6000,
                       duration: 750,
@@ -459,14 +461,5 @@ class LaunchPage extends StatelessWidget {
         payload.getOrbit(context),
       ),
     ]);
-  }
-
-  Widget _buildImage(BuildContext context, int index) {
-    return CachedNetworkImage(
-      imageUrl: _launch.getPhoto(index),
-      errorWidget: const Icon(Icons.error),
-      fadeInDuration: Duration(milliseconds: 100),
-      fit: BoxFit.cover,
-    );
   }
 }

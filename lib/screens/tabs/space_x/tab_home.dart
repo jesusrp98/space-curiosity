@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:add_2_calendar/add_2_calendar.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
@@ -15,6 +14,7 @@ import '../../../models/rockets/details_core.dart';
 import '../../../models/rockets/launchpad.dart';
 import '../../../models/rockets/spacex_home.dart';
 import '../../../util/colors.dart';
+import '../../../widgets/cache_image.dart';
 import '../../../widgets/list_cell.dart';
 import '../../../widgets/separator.dart';
 import 'dialog_capsule.dart';
@@ -51,7 +51,9 @@ class SpacexHomeTab extends StatelessWidget {
                         ? NativeLoadingIndicator(center: true)
                         : Swiper(
                             itemCount: model.getPhotosCount,
-                            itemBuilder: _buildImage,
+                            itemBuilder: (context, index) => CacheImage(
+                                  model.getPhoto(index),
+                                ),
                             autoplay: true,
                             autoplayDelay: 6000,
                             duration: 750,
@@ -213,17 +215,6 @@ class SpacexHomeTab extends StatelessWidget {
                       ),
             ),
           ]),
-    );
-  }
-
-  Widget _buildImage(BuildContext context, int index) {
-    return ScopedModelDescendant<SpacexHomeModel>(
-      builder: (context, child, model) => CachedNetworkImage(
-            imageUrl: model.getPhoto(index),
-            errorWidget: const Icon(Icons.error),
-            fadeInDuration: Duration(milliseconds: 100),
-            fit: BoxFit.cover,
-          ),
     );
   }
 }

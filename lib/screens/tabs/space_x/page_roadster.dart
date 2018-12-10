@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
@@ -7,6 +6,7 @@ import 'package:sliver_fab/sliver_fab.dart';
 
 import '../../../models/rockets/info_roadster.dart';
 import '../../../util/colors.dart';
+import '../../../widgets/cache_image.dart';
 import '../../../widgets/card_page.dart';
 import '../../../widgets/row_item.dart';
 import '../../../widgets/separator.dart';
@@ -59,7 +59,14 @@ class RoadsterPage extends StatelessWidget {
                     title: Text(_roadster.name),
                     background: Swiper(
                       itemCount: _roadster.getPhotosCount,
-                      itemBuilder: _buildImage,
+                      itemBuilder: (_, index) {
+                        final CacheImage photo = CacheImage(
+                          _roadster.getPhoto(index),
+                        );
+                        return index == 0
+                            ? Hero(tag: _roadster.id, child: photo)
+                            : photo;
+                      },
                       autoplay: true,
                       autoplayDelay: 6000,
                       duration: 750,
@@ -230,16 +237,5 @@ class RoadsterPage extends StatelessWidget {
         ),
       ]),
     );
-  }
-
-  Widget _buildImage(BuildContext context, int index) {
-    final CachedNetworkImage photo = CachedNetworkImage(
-      imageUrl: _roadster.getPhoto(index),
-      errorWidget: const Icon(Icons.error),
-      fadeInDuration: Duration(milliseconds: 100),
-      fit: BoxFit.cover,
-    );
-
-    return index == 0 ? Hero(tag: _roadster.id, child: photo) : photo;
   }
 }

@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
@@ -9,6 +8,7 @@ import 'package:scoped_model/scoped_model.dart';
 import '../../../models/rockets/spacex_company.dart';
 import '../../../util/colors.dart';
 import '../../../widgets/achievement_cell.dart';
+import '../../../widgets/cache_image.dart';
 import '../../../widgets/row_item.dart';
 import '../../../widgets/separator.dart';
 
@@ -51,7 +51,9 @@ class SpacexCompanyTab extends StatelessWidget {
                         ? NativeLoadingIndicator(center: true)
                         : Swiper(
                             itemCount: model.getPhotosCount,
-                            itemBuilder: _buildImage,
+                            itemBuilder: (_, index) => CacheImage(
+                                  model.getPhoto(index),
+                                ),
                             autoplay: true,
                             autoplayDelay: 6000,
                             duration: 750,
@@ -188,17 +190,6 @@ class SpacexCompanyTab extends StatelessWidget {
           ],
         );
       },
-    );
-  }
-
-  Widget _buildImage(BuildContext context, int index) {
-    return ScopedModelDescendant<SpacexCompanyModel>(
-      builder: (context, child, model) => CachedNetworkImage(
-            imageUrl: model.getPhoto(index),
-            errorWidget: const Icon(Icons.error),
-            fadeInDuration: Duration(milliseconds: 100),
-            fit: BoxFit.cover,
-          ),
     );
   }
 }
