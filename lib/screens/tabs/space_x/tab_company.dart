@@ -63,6 +63,7 @@ class SpacexCompanyTab extends StatelessWidget {
                           ),
                   ),
                 ),
+                //TODO revisar esto
               ]..addAll(
                   model.isLoading
                       ? <Widget>[

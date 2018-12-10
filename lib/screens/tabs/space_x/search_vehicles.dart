@@ -34,11 +34,11 @@ searchVehicles(BuildContext context, List list) {
             onSelect: (dynamic vehicle) => Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (_) => (vehicle.type == 'rocket')
+                    builder: (_) => vehicle.type == 'rocket'
                         ? RocketPage(vehicle)
-                        : (vehicle.type == 'capsule')
+                        : vehicle.type == 'capsule'
                             ? CapsulePage(vehicle)
-                            : (vehicle.type == 'ship')
+                            : vehicle.type == 'ship'
                                 ? ShipPage(vehicle)
                                 : RoadsterPage(vehicle),
                   ),

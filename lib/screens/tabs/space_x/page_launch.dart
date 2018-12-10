@@ -53,13 +53,14 @@ class LaunchPage extends StatelessWidget {
                   : FloatingActionButton(
                       child: const Icon(Icons.event),
                       backgroundColor:
-                          !_launch.tentativeTime ? accentColor : Colors.grey,
+                          _launch.tentativeTime ? Colors.grey : accentColor,
                       tooltip: FlutterI18n.translate(
                         context,
                         'spacex.other.tooltip.add_event',
                       ),
-                      onPressed: !_launch.tentativeTime
-                          ? () => Add2Calendar.addEvent2Cal(Event(
+                      onPressed: _launch.tentativeTime
+                          ? null
+                          : () => Add2Calendar.addEvent2Cal(Event(
                                 title: _launch.name,
                                 description: _launch.details,
                                 location: _launch.launchpadName,
@@ -67,8 +68,7 @@ class LaunchPage extends StatelessWidget {
                                 endDate: _launch.launchDate.add(
                                   Duration(minutes: 30),
                                 ),
-                              ))
-                          : null,
+                              )),
                     ),
               slivers: <Widget>[
                 SliverAppBar(
@@ -78,26 +78,18 @@ class LaunchPage extends StatelessWidget {
                   actions: <Widget>[
                     PopupMenuButton<String>(
                       itemBuilder: (_) => _launch
-                          .getEllipsis(context)
+                          .getMenu(context)
                           .map(
                             (url) => PopupMenuItem(
                                   value: url,
                                   child: Text(url),
-                                  enabled:
-                                      _launch.links[_launch.getEllipsisIndex(
-                                            context,
-                                            url,
-                                          )] !=
-                                          null,
+                                  enabled: _launch.isUrlEnabled(context, url),
                                 ),
                           )
                           .toList(),
-                      onSelected: (url) async =>
+                      onSelected: (name) async =>
                           await FlutterWebBrowser.openWebPage(
-                            url: _launch.links[_launch.getEllipsisIndex(
-                              context,
-                              url,
-                            )],
+                            url: _launch.getUrl(context, name),
                             androidToolbarColor: primaryColor,
                           ),
                     ),

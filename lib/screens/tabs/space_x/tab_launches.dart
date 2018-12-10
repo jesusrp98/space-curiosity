@@ -93,24 +93,22 @@ class LaunchesTab extends StatelessWidget {
     return ScopedModelDescendant<LaunchesModel>(
       builder: (context, child, model) {
         final Launch launch = model.getItem(index);
-        return Column(
-          children: <Widget>[
-            ListCell(
-              leading: HeroImage.list(
-                url: launch.getImageUrl,
-                tag: launch.getNumber,
-              ),
-              title: launch.name,
-              subtitle: launch.getLaunchDate,
-              trailing: MissionNumber(launch.getNumber),
-              onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (_) => LaunchPage(launch)),
-                  ),
+        return Column(children: <Widget>[
+          ListCell(
+            leading: HeroImage.list(
+              url: launch.getImageUrl,
+              tag: launch.getNumber,
             ),
-            Separator.divider(height: 0.0, indent: 96.0)
-          ],
-        );
+            title: launch.name,
+            subtitle: launch.getLaunchDate,
+            trailing: MissionNumber(launch.getNumber),
+            onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => LaunchPage(launch)),
+                ),
+          ),
+          Separator.divider(height: 0.0, indent: 96.0)
+        ]);
       },
     );
   }

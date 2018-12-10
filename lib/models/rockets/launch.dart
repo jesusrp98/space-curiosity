@@ -173,13 +173,17 @@ class Launch {
       ? FlutterI18n.translate(context, 'spacex.other.unknown')
       : DateFormat.yMMMMd().format(staticFireDate);
 
-  List<String> getEllipsis(context) => <String>[
+  List<String> getMenu(context) => <String>[
         FlutterI18n.translate(context, 'spacex.launch.menu.reddit'),
         FlutterI18n.translate(context, 'spacex.launch.menu.press_kit'),
         FlutterI18n.translate(context, 'spacex.launch.menu.article')
       ];
 
-  int getEllipsisIndex(context, url) => getEllipsis(context).indexOf(url) + 1;
+  int getMenuIndex(context, url) => getMenu(context).indexOf(url) + 1;
+
+  bool isUrlEnabled(context, url) => links[getMenuIndex(context, url)] != null;
+
+  String getUrl(context, name) => links[getMenuIndex(context, name)];
 }
 
 /// FAILURE DETAILS MODEL

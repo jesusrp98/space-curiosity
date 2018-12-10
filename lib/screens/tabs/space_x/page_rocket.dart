@@ -207,18 +207,15 @@ class RocketPage extends StatelessWidget {
     List payloadWeights,
     PayloadWeight payloadWeight,
   ) {
-    return Column(
-      children: <Widget>[
-        RowItem.textRow(
-          payloadWeight.name,
-          payloadWeight.getMass,
-        ),
-      ]..add(
-          payloadWeight != payloadWeights.last
-              ? Separator.spacer()
-              : Separator.none(),
-        ),
-    );
+    return Column(children: <Widget>[
+      RowItem.textRow(
+        payloadWeight.name,
+        payloadWeight.getMass,
+      ),
+      payloadWeight != payloadWeights.last
+          ? Separator.spacer()
+          : Separator.none(),
+    ]);
   }
 
   Widget _firstStage(BuildContext context) {
