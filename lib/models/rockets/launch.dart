@@ -166,9 +166,6 @@ class Launch {
     }
   }
 
-  String get getUtcLaunchDate =>
-      DateFormat.yMMMMd().addPattern('Hm', '  ·  ').format(launchDate.toUtc());
-
   String getStaticFireDate(context) => staticFireDate == null
       ? FlutterI18n.translate(context, 'spacex.other.unknown')
       : DateFormat.yMMMMd().format(staticFireDate);

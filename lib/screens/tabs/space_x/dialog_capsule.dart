@@ -99,7 +99,7 @@ class CapsuleDialog extends StatelessWidget {
                   context,
                   'spacex.dialog.vehicle.splashings',
                 ),
-                model.capsule.getLandings,
+                model.capsule.getSplashings,
               ),
               Separator.divider(),
               model.capsule.hasMissions

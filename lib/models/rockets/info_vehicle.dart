@@ -38,14 +38,11 @@ class VehiclesModel extends QuerryModel {
     items.addAll(
       rocketsJson.map((rocket) => RocketInfo.fromJson(rocket)).toList(),
     );
-    items.addAll(
-      shipsJson.map((rocket) => ShipInfo.fromJson(rocket)).toList(),
-    );
+    items.addAll(shipsJson.map((ship) => ShipInfo.fromJson(ship)).toList());
 
     // Add one photo per vehicle & shuffle them
     if (photos.isEmpty) {
-      List<int> randomList = List<int>.generate(getItemCount, (index) => index);
-      randomList
+      List<int>.generate(getItemCount, (index) => index)
           .sublist(0, 5)
           .forEach((index) => photos.add(getItem(index).getRandomPhoto));
       photos.shuffle();
@@ -82,15 +79,15 @@ abstract class Vehicle {
 
   String subtitle(context);
 
-  String get getProfilePhoto => (hasImages) ? photos[0] : Url.defaultImage;
+  bool get hasImages => photos.isNotEmpty;
+
+  String getPhoto(index) => photos[index];
+
+  String get getProfilePhoto => hasImages ? getPhoto(0) : Url.defaultImage;
 
   int get getPhotosCount => photos.length;
 
   String get getRandomPhoto => photos[Random().nextInt(getPhotosCount)];
-
-  String getPhoto(index) => photos[index];
-
-  bool get hasImages => photos.isNotEmpty;
 
   String get getHeight => '${NumberFormat.decimalPattern().format(height)} m';
 

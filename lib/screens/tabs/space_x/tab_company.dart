@@ -26,17 +26,16 @@ class SpacexCompanyTab extends StatelessWidget {
                   pinned: true,
                   actions: <Widget>[
                     PopupMenuButton<String>(
-                      itemBuilder: (context) => model
-                          .getEllipsis(context)
-                          .map((text) => PopupMenuItem(
-                                value: text,
-                                child: Text(text),
+                      itemBuilder: (context) => model.company
+                          .getMenu(context)
+                          .map((url) => PopupMenuItem(
+                                value: url,
+                                child: Text(url),
                               ))
                           .toList(),
-                      onSelected: (option) async =>
+                      onSelected: (name) async =>
                           await FlutterWebBrowser.openWebPage(
-                            url: model.company
-                                .links[model.getEllipsisIndex(context, option)],
+                            url: model.company.getUrl(context, name),
                             androidToolbarColor: primaryColor,
                           ),
                     ),

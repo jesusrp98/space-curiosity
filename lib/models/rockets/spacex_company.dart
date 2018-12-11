@@ -39,14 +39,6 @@ class SpacexCompanyModel extends QuerryModel {
   }
 
   Company get company => _company;
-
-  List<String> getEllipsis(context) => <String>[
-        FlutterI18n.translate(context, 'spacex.company.menu.website'),
-        FlutterI18n.translate(context, 'spacex.company.menu.twitter'),
-        FlutterI18n.translate(context, 'spacex.company.menu.flickr')
-      ];
-
-  int getEllipsisIndex(context, url) => getEllipsis(context).indexOf(url);
 }
 
 class Company {
@@ -95,10 +87,7 @@ class Company {
   String getFounderDate(context) => FlutterI18n.translate(
         context,
         'spacex.company.founded',
-        {
-          'founded': founded.toString(),
-          'founder': founder,
-        },
+        {'founded': founded.toString(), 'founder': founder},
       );
 
   String get getValuation =>
@@ -107,6 +96,16 @@ class Company {
   String get getLocation => '$city, $state';
 
   String get getEmployees => NumberFormat.decimalPattern().format(employees);
+
+  List<String> getMenu(context) => <String>[
+        FlutterI18n.translate(context, 'spacex.company.menu.website'),
+        FlutterI18n.translate(context, 'spacex.company.menu.twitter'),
+        FlutterI18n.translate(context, 'spacex.company.menu.flickr')
+      ];
+
+  int getMenuIndex(context, url) => getMenu(context).indexOf(url);
+
+  String getUrl(context, name) => links[getMenuIndex(context, name)];
 }
 
 /// SPACEX'S ACHIEVMENT MODEL

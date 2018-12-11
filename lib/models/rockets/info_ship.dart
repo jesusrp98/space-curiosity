@@ -82,16 +82,14 @@ class ShipInfo extends Vehicle {
         {'date': firstFlight.year.toString()},
       );
 
-  bool get hasUrl => url != null;
-
   String getModel(context) =>
       model ?? FlutterI18n.translate(context, 'spacex.other.unknown');
-
-  bool get hasExtras => isLandable || canCatch;
 
   bool get isLandable => attemptedLandings != null;
 
   bool get canCatch => attemptedCatches != null;
+
+  bool get hasExtras => isLandable || canCatch;
 
   bool get hasSeveralRoles => roles.length > 1;
 

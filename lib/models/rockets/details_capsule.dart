@@ -81,5 +81,5 @@ class CapsuleDetails extends VehicleDetails {
         'spacex.dialog.vehicle.no_description_capsule',
       );
 
-  String get getLandings => landings.toString();
+  String get getSplashings => landings.toString();
 }
