@@ -423,7 +423,7 @@ packages:
       name: scoped_model
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.3.0"
+    version: "1.0.1"
   share:
     dependency: "direct main"
     description:
@@ -638,7 +638,7 @@ packages:
       name: webfeed
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.4.0"
+    version: "0.4.1"
   xml:
     dependency: transitive
     description:
