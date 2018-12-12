@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:space_news/util/colors.dart';
+import 'package:space_news/widgets/separator.dart';
 
 class AchievementCell extends StatelessWidget {
   final String title, subtitle, date, url;
@@ -17,8 +18,10 @@ class AchievementCell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      contentPadding:
-          const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+      contentPadding: const EdgeInsets.symmetric(
+        vertical: 8.0,
+        horizontal: 16.0,
+      ),
       title: Row(
         children: <Widget>[
           CircleAvatar(
@@ -32,7 +35,7 @@ class AchievementCell extends StatelessWidget {
                   .copyWith(color: Colors.black),
             ),
           ),
-          Container(width: 16.0),
+          Separator.spacer(width: 16.0),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -45,6 +48,7 @@ class AchievementCell extends StatelessWidget {
                     color: primaryText,
                   ),
                 ),
+                Separator.spacer(height: 4.0),
                 Text(
                   date,
                   style: Theme.of(context).textTheme.subhead.copyWith(
@@ -58,7 +62,7 @@ class AchievementCell extends StatelessWidget {
       ),
       subtitle: Column(
         children: <Widget>[
-          Container(height: 8.0),
+          Separator.spacer(height: 8.0),
           Text(
             subtitle,
             textAlign: TextAlign.justify,
