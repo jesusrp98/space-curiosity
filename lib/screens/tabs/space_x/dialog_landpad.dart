@@ -8,6 +8,7 @@ import 'package:scoped_model/scoped_model.dart';
 
 import '../../../models/rockets/landpad.dart';
 import '../../../util/colors.dart';
+import '../../../util/url.dart';
 import '../../../widgets/row_item.dart';
 import '../../../widgets/separator.dart';
 
@@ -51,9 +52,7 @@ class LandpadDialog extends StatelessWidget {
                           ),
                           layers: <LayerOptions>[
                             TileLayerOptions(
-                              urlTemplate:
-                                  //TODO add this url to Url
-                                  'https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png',
+                              urlTemplate: Url.mapView,
                               subdomains: ['a', 'b', 'c', 'd'],
                               backgroundColor: primaryColor,
                             ),
