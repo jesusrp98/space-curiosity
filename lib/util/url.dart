@@ -1,7 +1,7 @@
 import 'keys.dart';
 
-/// URL CLASS
-/// It has all urls used in the app as static const strings
+/// URL FILE
+/// It has all urls used in the app as static const strings.
 class Url {
   //Base urls
   static const String spacexBaseUrl = 'https://api.spacexdata.com/v3';

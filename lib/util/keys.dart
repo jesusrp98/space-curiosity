@@ -1,3 +1,5 @@
+/// KEYS FILE
+/// It has all keys used around the app.
 const String testDevice = 'YOUR_DEVICE_ID';
 const String iosAdmobAppID = 'ca-app-pub-7837488287280985~4079769179';
 const String androidAdmobAppID = "ca-app-pub-7837488287280985~7248645342";
