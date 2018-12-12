@@ -97,11 +97,13 @@ class SpacexCompanyTab extends StatelessWidget {
                   children: <Widget>[
                     Text(
                       model.company.fullName,
+                      textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.subhead,
                     ),
-                    Separator.spacer(height: 8.0),
+                    Separator.spacer(),
                     Text(
                       model.company.getFounderDate(context),
+                      textAlign: TextAlign.center,
                       style: Theme.of(context)
                           .textTheme
                           .subhead
@@ -125,11 +127,12 @@ class SpacexCompanyTab extends StatelessWidget {
                     ),
                     Separator.spacer(),
                     RowItem.textRow(
-                        FlutterI18n.translate(
-                          context,
-                          'spacex.company.tab.coo',
-                        ),
-                        model.company.coo),
+                      FlutterI18n.translate(
+                        context,
+                        'spacex.company.tab.coo',
+                      ),
+                      model.company.coo,
+                    ),
                     Separator.spacer(),
                     RowItem.textRow(
                       FlutterI18n.translate(

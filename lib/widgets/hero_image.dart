@@ -1,5 +1,6 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+
+import 'cache_image.dart';
 
 /// HERO IMAGE
 /// Class used into building hero images & their specific hero pages.
@@ -19,15 +20,7 @@ class HeroImage extends StatelessWidget {
       height: size,
       child: InkWell(
         onTap: onTap,
-        child: Hero(
-          tag: tag,
-          child: CachedNetworkImage(
-            imageUrl: url,
-            fit: BoxFit.cover,
-            errorWidget: const Icon(Icons.error),
-            fadeInDuration: Duration(milliseconds: 100),
-          ),
-        ),
+        child: Hero(tag: tag, child: CacheImage(url)),
       ),
     );
   }

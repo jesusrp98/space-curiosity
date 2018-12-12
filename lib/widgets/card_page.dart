@@ -19,11 +19,11 @@ class CardPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Container(
-              alignment: Alignment.center,
+            Padding(
               padding: const EdgeInsets.only(bottom: 24.0),
               child: Text(
                 title.toUpperCase(),
+                textAlign: TextAlign.center,
                 style: Theme.of(context)
                     .textTheme
                     .title

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../util/colors.dart';
+import 'separator.dart';
 
 /// LIST CELL CLASS
 /// Widget used in vehicle & launch lists to display items
@@ -20,8 +21,10 @@ class ListCell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      contentPadding:
-          const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+      contentPadding: const EdgeInsets.symmetric(
+        vertical: 8.0,
+        horizontal: 16.0,
+      ),
       leading: leading,
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -30,7 +33,7 @@ class ListCell extends StatelessWidget {
             title,
             style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
           ),
-          Container(height: 6.0),
+          Separator.spacer(height: 8.0),
         ],
       ),
       subtitle: Text(subtitle,
