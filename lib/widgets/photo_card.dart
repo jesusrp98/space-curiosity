@@ -7,6 +7,8 @@ import '../util/colors.dart';
 import 'cache_image.dart';
 import 'separator.dart';
 
+/// PHOTO CARD WIDGET
+/// Widget used to display a NASA APOD photo.
 class PhotoCard extends StatelessWidget {
   final NasaImage image;
 

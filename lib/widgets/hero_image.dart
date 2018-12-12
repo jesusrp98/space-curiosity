@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'cache_image.dart';
 
-/// HERO IMAGE
-/// Class used into building hero images & their specific hero pages.
+/// HERO IMAGE WIDGET
+/// Auxiliary widget with builds a cached hero image.
 class HeroImage extends StatelessWidget {
   static const num _smallSize = 64.0, _bigSize = 100.0;
 

@@ -4,9 +4,8 @@ import 'package:scoped_model/scoped_model.dart';
 
 import '../util/colors.dart';
 
-/// ROW ITEM CLASS
-/// Class to build a stretched widget to display information in a
-/// Card Page widget.
+/// ROW ITEM WIDGET
+/// Stretched widget to display information in a 'Card Page' widget.
 /// Contains a title and a description widget, which can be an icon or a text.
 class RowItem extends StatelessWidget {
   final String title;

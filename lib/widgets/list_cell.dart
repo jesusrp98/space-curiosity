@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../util/colors.dart';
 import 'separator.dart';
 
-/// LIST CELL CLASS
-/// Widget used in vehicle & launch lists to display items
+/// LIST CELL WIDGET
+/// Widget used in vehicle & launch lists to display items.
 class ListCell extends StatelessWidget {
   final Widget leading, trailing;
   final String title, subtitle;
@@ -47,7 +47,7 @@ class ListCell extends StatelessWidget {
   }
 }
 
-/// MISSION NUMBER CLASS
+/// MISSION NUMBER WIDGET
 /// Trailing widget which displays the number of a specific mission.
 class MissionNumber extends StatelessWidget {
   final String missionNumber;

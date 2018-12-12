@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 
 import '../util/colors.dart';
 
+/// CACHE IMAGE WIDGET
+/// Auxiliary widget to display a cached image.
+/// It has its own 'error' widget.
 class CacheImage extends StatelessWidget {
   final String url;
 

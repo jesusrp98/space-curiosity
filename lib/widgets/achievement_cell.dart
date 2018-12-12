@@ -4,6 +4,8 @@ import 'package:flutter_web_browser/flutter_web_browser.dart';
 import '../util/colors.dart';
 import 'separator.dart';
 
+/// ACHIEVEMENT CELL WIDGET
+/// Widget used in SpaceX's achievement list, under the 'Home Screen'.
 class AchievementCell extends StatelessWidget {
   final String title, subtitle, date, url;
   final int index;
