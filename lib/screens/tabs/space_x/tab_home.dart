@@ -22,6 +22,9 @@ import 'dialog_core.dart';
 import 'dialog_launchpad.dart';
 import 'page_launch.dart';
 
+/// HOME TAB VIEW
+/// This tab holds main information about the next launch.
+/// It has a countdown widget.
 class SpacexHomeTab extends StatelessWidget {
   Future<Null> _onRefresh(SpacexHomeModel model) {
     Completer<Null> completer = Completer<Null>();

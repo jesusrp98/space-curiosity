@@ -12,6 +12,9 @@ import '../../../widgets/cache_image.dart';
 import '../../../widgets/row_item.dart';
 import '../../../widgets/separator.dart';
 
+/// COMPANY TAB VIEW
+/// This tab holds information about SpaceX-as-a-company,
+/// such as various numbers & achievements.
 class SpacexCompanyTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

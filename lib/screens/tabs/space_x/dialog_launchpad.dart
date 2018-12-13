@@ -12,6 +12,9 @@ import '../../../util/url.dart';
 import '../../../widgets/row_item.dart';
 import '../../../widgets/separator.dart';
 
+/// LAUNCHPAD DIALOG VIEW
+/// This view displays information about a specific launchpad,
+/// where rockets get rocketed to the sky...
 class LaunchpadDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

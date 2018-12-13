@@ -12,6 +12,9 @@ import '../../../util/url.dart';
 import '../../../widgets/row_item.dart';
 import '../../../widgets/separator.dart';
 
+/// LANDPAD DIALOG VIEW
+/// This view displays information about a specific landpad,
+/// where rockets now land.
 class LandpadDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

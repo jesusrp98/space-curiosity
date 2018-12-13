@@ -16,6 +16,9 @@ import '../../../widgets/separator.dart';
 import 'page_launch.dart';
 import 'search_launches.dart';
 
+/// LAUNCHES TAB VIEW
+/// This tab holds information a specific type of launches,
+/// upcoming or latest, defined by the model.
 class LaunchesTab extends StatelessWidget {
   final int title;
 

@@ -10,8 +10,8 @@ import '../../../widgets/card_page.dart';
 import '../../../widgets/row_item.dart';
 import '../../../widgets/separator.dart';
 
-/// CAPSULE PAGE CLASS
-/// This class represent a capsule page. It displays CapsuleInfo's specs.
+/// CAPSULE PAGE VIEW
+/// This view all information about a Dragon capsule model. It displays CapsuleInfo's specs.
 class CapsulePage extends StatelessWidget {
   final CapsuleInfo _capsule;
 

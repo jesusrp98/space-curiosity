@@ -19,6 +19,9 @@ import 'page_rocket.dart';
 import 'page_ship.dart';
 import 'search_vehicles.dart';
 
+/// VEHICLES TAB VIEW
+/// This tab holds information about all kind of SpaceX's vehicles,
+/// such as rockets, capsules, Tesla Roadster & ships.
 class VehiclesTab extends StatelessWidget {
   Future<Null> _onRefresh(VehiclesModel model) {
     Completer<Null> completer = Completer<Null>();

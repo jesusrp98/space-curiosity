@@ -9,8 +9,8 @@ import '../../../widgets/card_page.dart';
 import '../../../widgets/row_item.dart';
 import '../../../widgets/separator.dart';
 
-/// SHIP PAGE CLASS
-/// This class represent a ship page. It displays Ship's specs.
+/// SHIP PAGE VIEW
+/// This view all information about a specific ship. It displays Ship's specs.
 class ShipPage extends StatelessWidget {
   final ShipInfo _ship;
 

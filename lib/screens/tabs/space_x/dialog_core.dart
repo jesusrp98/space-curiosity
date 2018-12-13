@@ -12,6 +12,9 @@ import '../../../widgets/cache_image.dart';
 import '../../../widgets/row_item.dart';
 import '../../../widgets/separator.dart';
 
+/// CORE DIALOG VIEW
+/// This view displays information about a specific core,
+/// used in a mission.
 class CoreDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

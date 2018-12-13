@@ -9,6 +9,8 @@ import 'page_roadster.dart';
 import 'page_rocket.dart';
 import 'page_ship.dart';
 
+/// SEARCH VEHICLES METHOD
+/// Auxiliary method which helps filter vehicles by its name
 searchVehicles(BuildContext context, List list) {
   return MaterialPageRoute<Vehicle>(
     builder: (context) => Material(

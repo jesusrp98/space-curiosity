@@ -12,6 +12,9 @@ import '../../../widgets/cache_image.dart';
 import '../../../widgets/row_item.dart';
 import '../../../widgets/separator.dart';
 
+/// CAPSULE DIALOG VIEW
+/// This view displays information about a specific capsule,
+/// used in a NASA mission.
 class CapsuleDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

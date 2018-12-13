@@ -11,7 +11,7 @@ import '../../../widgets/card_page.dart';
 import '../../../widgets/row_item.dart';
 import '../../../widgets/separator.dart';
 
-/// ROADSTER PAGE CLASS
+/// ROADSTER PAGE VIEW
 /// Displays live information about Elon Musk's Tesla Roadster.
 class RoadsterPage extends StatelessWidget {
   final RoadsterInfo _roadster;

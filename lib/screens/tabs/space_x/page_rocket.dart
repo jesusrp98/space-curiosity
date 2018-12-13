@@ -10,8 +10,8 @@ import '../../../widgets/card_page.dart';
 import '../../../widgets/row_item.dart';
 import '../../../widgets/separator.dart';
 
-/// ROCKET PAGE CLASS
-/// This class represent a rocket page. It displays RocketInfo's specs.
+/// ROCKET PAGE VIEW
+/// This view all information about a Falcon rocket model. It displays RocketInfo's specs.
 class RocketPage extends StatelessWidget {
   final RocketInfo _rocket;
 

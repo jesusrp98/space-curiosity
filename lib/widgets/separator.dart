@@ -29,6 +29,6 @@ class Separator extends StatelessWidget {
 
   /// Empty widget
   factory Separator.none() {
-    return Separator(Container());
+    return Separator(SizedBox());
   }
 }

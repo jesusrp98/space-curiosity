@@ -6,6 +6,8 @@ import '../../../models/rockets/launch.dart';
 import '../../../util/colors.dart';
 import 'page_launch.dart';
 
+/// SEARCH LAUNCHES METHOD
+/// Auxiliary method which helps filter launches by its name
 searchLaunches(BuildContext context, List list) {
   return MaterialPageRoute<Launch>(
     builder: (context) => Material(
