@@ -174,7 +174,9 @@ class Stage {
 
   String getEngines(context) => FlutterI18n.translate(
         context,
-        'spacex.vehicle.rocket.stage.engines_number',
+        engines == 1
+            ? 'spacex.vehicle.rocket.stage.engine_number'
+            : 'spacex.vehicle.rocket.stage.engines_number',
         {'number': engines.toString()},
       );
 

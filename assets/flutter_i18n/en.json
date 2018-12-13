@@ -131,8 +131,8 @@
           "body": "{booster} {reused}, {landing}.",
           "body_unknown_landing": "{booster} {reused}.",
           "body_null": "Details about the first stage are yet to be disclosed.",
-          "body_reused": "is reused",
-          "body_new": "is not reused",
+          "body_reused": "will be reused",
+          "body_new": "won't be reused",
           "body_landing": "and it will land on {landingpad}",
           "body_dispended": "and it won't perform a landing"
         },
@@ -140,8 +140,8 @@
           "title": "Dragon capsule",
           "body": "The capsule {reused}.",
           "body_null": "Details about the capsule are yet to be disclosed.",
-          "body_reused": "is reused",
-          "body_new": "is not reused"
+          "body_reused": "will be reused",
+          "body_new": "won't be reused"
         }
       }
     },
@@ -205,6 +205,7 @@
           "stage_second": "Second stage",
           "reusable": "Reusable",
           "engines": "Engines",
+          "engine_number": "{number} engine",
           "engines_number": "{number} engines",
           "fuel_amount": "Fuel amount",
           "fuel_amount_tons": "{tons} tons",
@@ -269,7 +270,7 @@
           "speed": "Current speed"
         },
         "missions": {
-          "title": "MISSIONS",
+          "title": "missions",
           "mission": "Mission #{number}",
           "no_missions": "This boat has not participated in any mission yet."
         }
