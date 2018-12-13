@@ -131,8 +131,8 @@
           "body": "{booster} {reused}, {landing}.",
           "body_unknown_landing": "{booster} {reused}.",
           "body_null": "Details about the first stage are yet to be disclosed.",
-          "body_reused": "will be reused",
-          "body_new": "won't be reused",
+          "body_reused": "is reused",
+          "body_new": "isn't reused",
           "body_landing": "and it will land on {landingpad}",
           "body_dispended": "and it won't perform a landing"
         },
@@ -140,8 +140,8 @@
           "title": "Dragon capsule",
           "body": "The capsule {reused}.",
           "body_null": "Details about the capsule are yet to be disclosed.",
-          "body_reused": "will be reused",
-          "body_new": "won't be reused"
+          "body_reused": "is reused",
+          "body_new": "isn't reused"
         }
       }
     },
