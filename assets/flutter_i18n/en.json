@@ -119,8 +119,8 @@
         "fairings": {
           "title": "Fairings",
           "body": "{reused}, {catched}.",
-          "body_new": "Fairings won't be reused",
-          "body_reused": "Fairings will be reused",
+          "body_new": "Fairings aren't reused",
+          "body_reused": "Fairings are reused",
           "body_catching": "and they will be catched by {ship}",
           "body_dispensed": "and they won't be recovered"
         },
