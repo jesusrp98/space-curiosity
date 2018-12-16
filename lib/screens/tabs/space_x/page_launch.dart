@@ -53,7 +53,7 @@ class LaunchPage extends StatelessWidget {
                   : FloatingActionButton(
                       child: const Icon(Icons.event),
                       backgroundColor:
-                          _launch.tentativeTime ? Colors.grey : accentColor,
+                          _launch.tentativeTime ? disabledFab : accentColor,
                       tooltip: FlutterI18n.translate(
                         context,
                         'spacex.other.tooltip.add_event',

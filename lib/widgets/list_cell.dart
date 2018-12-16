@@ -33,7 +33,7 @@ class ListCell extends StatelessWidget {
             title,
             style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
           ),
-          Separator.spacer(height: 8.0),
+          Separator.spacer(height: 6.0),
         ],
       ),
       subtitle: Text(subtitle,
