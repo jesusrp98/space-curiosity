@@ -36,44 +36,45 @@ class SpacexHomeTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScopedModelDescendant<SpacexHomeModel>(
       builder: (context, child, model) => Scaffold(
-            key: PageStorageKey('spacex_home'),
             body: RefreshIndicator(
               onRefresh: () => _onRefresh(model),
-              child: CustomScrollView(slivers: <Widget>[
-                SliverAppBar(
-                  expandedHeight: MediaQuery.of(context).size.height * 0.3,
-                  floating: false,
-                  pinned: true,
-                  flexibleSpace: FlexibleSpaceBar(
-                    centerTitle: true,
-                    title: Text(FlutterI18n.translate(
-                      context,
-                      'spacex.home.title',
-                    )),
-                    background: model.isLoading
-                        ? NativeLoadingIndicator(center: true)
-                        : Swiper(
-                            itemCount: model.getPhotosCount,
-                            itemBuilder: (context, index) => CacheImage(
-                                  model.getPhoto(index),
-                                ),
-                            autoplay: true,
-                            autoplayDelay: 6000,
-                            duration: 750,
-                            onTap: (index) async =>
-                                await FlutterWebBrowser.openWebPage(
-                                  url: model.getPhoto(index),
-                                  androidToolbarColor: primaryColor,
-                                ),
-                          ),
-                  ),
-                ),
-                model.isLoading
-                    ? SliverFillRemaining(
-                        child: NativeLoadingIndicator(center: true),
-                      )
-                    : SliverToBoxAdapter(child: _buildBody())
-              ]),
+              child: CustomScrollView(
+                  key: PageStorageKey('spacex_home'),
+                  slivers: <Widget>[
+                    SliverAppBar(
+                      expandedHeight: MediaQuery.of(context).size.height * 0.3,
+                      floating: false,
+                      pinned: true,
+                      flexibleSpace: FlexibleSpaceBar(
+                        centerTitle: true,
+                        title: Text(FlutterI18n.translate(
+                          context,
+                          'spacex.home.title',
+                        )),
+                        background: model.isLoading
+                            ? NativeLoadingIndicator(center: true)
+                            : Swiper(
+                                itemCount: model.getPhotosCount,
+                                itemBuilder: (context, index) => CacheImage(
+                                      model.getPhoto(index),
+                                    ),
+                                autoplay: true,
+                                autoplayDelay: 6000,
+                                duration: 750,
+                                onTap: (index) async =>
+                                    await FlutterWebBrowser.openWebPage(
+                                      url: model.getPhoto(index),
+                                      androidToolbarColor: primaryColor,
+                                    ),
+                              ),
+                      ),
+                    ),
+                    model.isLoading
+                        ? SliverFillRemaining(
+                            child: NativeLoadingIndicator(center: true),
+                          )
+                        : SliverToBoxAdapter(child: _buildBody())
+                  ]),
             ),
           ),
     );

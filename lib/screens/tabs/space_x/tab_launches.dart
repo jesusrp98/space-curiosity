@@ -34,51 +34,52 @@ class LaunchesTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScopedModelDescendant<LaunchesModel>(
       builder: (context, child, model) => Scaffold(
-            key: PageStorageKey('spacex_launches_$title'),
             body: RefreshIndicator(
               onRefresh: () => _onRefresh(model),
-              child: CustomScrollView(slivers: <Widget>[
-                SliverAppBar(
-                  expandedHeight: MediaQuery.of(context).size.height * 0.3,
-                  floating: false,
-                  pinned: true,
-                  flexibleSpace: FlexibleSpaceBar(
-                    centerTitle: true,
-                    title: Text(FlutterI18n.translate(
-                      context,
-                      title == 0
-                          ? 'spacex.upcoming.title'
-                          : 'spacex.latest.title',
-                    )),
-                    background: model.isLoading
-                        ? NativeLoadingIndicator(center: true)
-                        : Swiper(
-                            itemCount: model.getPhotosCount,
-                            itemBuilder: (_, index) => CacheImage(
-                                  model.getPhoto(index),
-                                ),
-                            autoplay: true,
-                            autoplayDelay: 6000,
-                            duration: 750,
-                            onTap: (index) async =>
-                                await FlutterWebBrowser.openWebPage(
-                                  url: model.getPhoto(index),
-                                  androidToolbarColor: primaryColor,
-                                ),
-                          ),
-                  ),
-                ),
-                model.isLoading
-                    ? SliverFillRemaining(
-                        child: NativeLoadingIndicator(center: true),
-                      )
-                    : SliverList(
-                        delegate: SliverChildBuilderDelegate(
-                          _buildLaunch,
-                          childCount: model.getItemCount,
-                        ),
+              child: CustomScrollView(
+                  key: PageStorageKey('spacex_launches_$title'),
+                  slivers: <Widget>[
+                    SliverAppBar(
+                      expandedHeight: MediaQuery.of(context).size.height * 0.3,
+                      floating: false,
+                      pinned: true,
+                      flexibleSpace: FlexibleSpaceBar(
+                        centerTitle: true,
+                        title: Text(FlutterI18n.translate(
+                          context,
+                          title == 0
+                              ? 'spacex.upcoming.title'
+                              : 'spacex.latest.title',
+                        )),
+                        background: model.isLoading
+                            ? NativeLoadingIndicator(center: true)
+                            : Swiper(
+                                itemCount: model.getPhotosCount,
+                                itemBuilder: (_, index) => CacheImage(
+                                      model.getPhoto(index),
+                                    ),
+                                autoplay: true,
+                                autoplayDelay: 6000,
+                                duration: 750,
+                                onTap: (index) async =>
+                                    await FlutterWebBrowser.openWebPage(
+                                      url: model.getPhoto(index),
+                                      androidToolbarColor: primaryColor,
+                                    ),
+                              ),
                       ),
-              ]),
+                    ),
+                    model.isLoading
+                        ? SliverFillRemaining(
+                            child: NativeLoadingIndicator(center: true),
+                          )
+                        : SliverList(
+                            delegate: SliverChildBuilderDelegate(
+                              _buildLaunch,
+                              childCount: model.getItemCount,
+                            ),
+                          ),
+                  ]),
             ),
             floatingActionButton: FloatingActionButton(
               child: const Icon(Icons.search),

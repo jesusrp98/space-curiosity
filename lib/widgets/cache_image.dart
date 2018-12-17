@@ -17,7 +17,7 @@ class CacheImage extends StatelessWidget {
       imageUrl: url,
       errorWidget: Icon(
         Icons.cancel,
-        size: MediaQuery.of(context).size.height / 16,
+        size: 32.0,
         color: secondaryText,
       ),
       fadeInDuration: Duration(milliseconds: 100),
