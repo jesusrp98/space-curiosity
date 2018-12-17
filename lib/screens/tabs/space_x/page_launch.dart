@@ -237,7 +237,7 @@ class LaunchPage extends StatelessWidget {
                 Separator.spacer(),
                 Text(
                   _launch.failureDetails.getReason,
-                  textAlign: TextAlign.center,
+                  textAlign: TextAlign.justify,
                   style: Theme.of(context)
                       .textTheme
                       .subhead
