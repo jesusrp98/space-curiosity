@@ -16,7 +16,7 @@ class IssModel extends QuerryModel {
 
   @override
   Future loadData() async {
-    clearLists();
+    clearItems();
     response = await http.get(Url.issLocation);
     items.add(IssLocation.fromJson(json.decode(response.body)));
 
@@ -34,7 +34,7 @@ class IssModel extends QuerryModel {
     response = await http.get(Url.issAstronauts);
     items.add(IssAstronauts.fromJson(json.decode(response.body)));
 
-    loadingState(false);
+    setLoading(false);
   }
 
   IssLocation get issLocation => getItem(0);

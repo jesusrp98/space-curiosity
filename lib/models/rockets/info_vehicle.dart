@@ -7,17 +7,17 @@ import 'package:intl/intl.dart';
 
 import '../../util/url.dart';
 import '../querry_model.dart';
-import 'capsule_info.dart';
-import 'roadster.dart';
-import 'rocket_info.dart';
-import 'ship_info.dart';
+import 'info_capsule.dart';
+import 'info_roadster.dart';
+import 'info_rocket.dart';
+import 'info_ship.dart';
 
-/// VEHICLE CLASS
-/// Abstract class that represents a real vehicle used by SpaceX. It can be
-/// a rocket or a capsule, because they have similar base characteristics.
+/// VEHICLES MODEL
+/// Model which storages information from all kind of vehicles.
 class VehiclesModel extends QuerryModel {
   @override
   Future loadData() async {
+    // Get items by http call
     final rocketsResponse = await http.get(Url.rocketList);
     final capsulesResponse = await http.get(Url.capsuleList);
     final roadsterResponse = await http.get(Url.roadsterPage);
@@ -26,27 +26,36 @@ class VehiclesModel extends QuerryModel {
     List rocketsJson = json.decode(rocketsResponse.body);
     List capsulesJson = json.decode(capsulesResponse.body);
     List shipsJson = json.decode(shipsResponse.body);
-    clearLists();
 
-    items.add(Roadster.fromJson(json.decode(roadsterResponse.body)));
-    items.addAll(
-        capsulesJson.map((capsule) => CapsuleInfo.fromJson(capsule)).toList());
-    items.addAll(
-        rocketsJson.map((rocket) => RocketInfo.fromJson(rocket)).toList());
-    items.addAll(shipsJson.map((rocket) => ShipInfo.fromJson(rocket)).toList());
+    // Clear old data
+    clearItems();
 
+    // Add parsed items
+    items.add(RoadsterInfo.fromJson(json.decode(roadsterResponse.body)));
+    items.addAll(
+      capsulesJson.map((capsule) => CapsuleInfo.fromJson(capsule)).toList(),
+    );
+    items.addAll(
+      rocketsJson.map((rocket) => RocketInfo.fromJson(rocket)).toList(),
+    );
+    items.addAll(shipsJson.map((ship) => ShipInfo.fromJson(ship)).toList());
+
+    // Add one photo per vehicle & shuffle them
     if (photos.isEmpty) {
-      List<int> randomList = List<int>.generate(getSize, (index) => index);
-      randomList
+      List<int>.generate(getItemCount, (index) => index)
           .sublist(0, 5)
           .forEach((index) => photos.add(getItem(index).getRandomPhoto));
       photos.shuffle();
     }
 
-    loadingState(false);
+    // Finished loading data
+    setLoading(false);
   }
 }
 
+/// VEHICLE MODEL
+/// Details about a specific SpaceX vehicle.
+/// Vehicles are considered Roadster, Dragons & Falcons, and ships.
 abstract class Vehicle {
   final String id, name, type, description, url;
   final num height, diameter, mass;
@@ -70,15 +79,15 @@ abstract class Vehicle {
 
   String subtitle(context);
 
-  String get getProfilePhoto => (hasImages) ? photos[0] : Url.defaultImage;
+  bool get hasImages => photos.isNotEmpty;
+
+  String getPhoto(index) => photos[index];
+
+  String get getProfilePhoto => hasImages ? getPhoto(0) : Url.defaultImage;
 
   int get getPhotosCount => photos.length;
 
   String get getRandomPhoto => photos[Random().nextInt(getPhotosCount)];
-
-  String getPhoto(index) => photos[index];
-
-  bool get hasImages => photos.isNotEmpty;
 
   String get getHeight => '${NumberFormat.decimalPattern().format(height)} m';
 

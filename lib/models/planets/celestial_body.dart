@@ -19,7 +19,7 @@ class PlanetsModel extends QuerryModel {
         .map((document) => CelestialBody.fromJson(document))
         .toList());
 
-    loadingState(false);
+    setLoading(false);
   }
 }
 

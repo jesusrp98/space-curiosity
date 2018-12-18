@@ -5,27 +5,34 @@ import 'package:http/http.dart' as http;
 
 import '../../util/url.dart';
 import '../querry_model.dart';
-import 'vehicle_details.dart';
+import 'details_vehicle.dart';
+import 'mission_item.dart';
 
-/// CAPSULE DETAILS CLASS
-/// This class represents a real capsule used in a NASA mission,
-/// with all its details.
+/// CAPSULE DETAILS MODEL
+/// Details about a specific capsule used in a CRS mission.
 class CapsuleModel extends QuerryModel {
+  // Capsule serial: C0000
   final String id;
 
   CapsuleModel(this.id);
 
   @override
   Future loadData() async {
+    // Get item by http call
     response = await http.get(Url.capsuleDialog + id);
-    clearLists();
 
+    // Clear old data
+    clearItems();
+
+    // Add parsed item
     items.add(CapsuleDetails.fromJson(json.decode(response.body)));
 
+    // Add photos & shuffle them
     photos.addAll(Url.spacexCapsuleDialog);
     photos.shuffle();
 
-    loadingState(false);
+    // Finished loading data
+    setLoading(false);
   }
 
   CapsuleDetails get capsule => items[0];
@@ -56,9 +63,11 @@ class CapsuleDetails extends VehicleDetails {
       serial: json['capsule_serial'],
       status: json['status'],
       details: json['details'],
-      firstLaunched: DateTime.parse(json['original_launch']).toLocal(),
+      firstLaunched: json['original_launch'] != null
+          ? DateTime.parse(json['original_launch'])
+          : null,
       missions: json['missions']
-          .map((mission) => DetailsMission.fromJson(mission))
+          .map((mission) => MissionItem.fromJson(mission))
           .toList(),
       name: json['type'],
       landings: json['landings'],
@@ -72,5 +81,5 @@ class CapsuleDetails extends VehicleDetails {
         'spacex.dialog.vehicle.no_description_capsule',
       );
 
-  String get getLandings => landings.toString();
+  String get getSplashings => landings.toString();
 }

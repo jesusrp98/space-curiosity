@@ -1,7 +1,7 @@
 import 'keys.dart';
 
-/// URL CLASS
-/// It has all urls used in the app as static const strings
+/// URL FILE
+/// It has all urls used in the app as static const strings.
 class Url {
   //Base urls
   static const String spacexBaseUrl = 'https://api.spacexdata.com/v3';
@@ -78,6 +78,9 @@ class Url {
 
   static const String defaultImage =
       'https://firebasestorage.googleapis.com/v0/b/cherry-3ca39.appspot.com/o/rocket.png?alt=media&token=66f2dde6-e6ff-4f64-a4a4-9fab6dbe90c5';
+
+  static const String mapView =
+      'https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png';
 
   // About page
   static const String authorReddit = 'https://www.reddit.com/user/jesusrp98';

@@ -1,12 +1,10 @@
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:intl/intl.dart';
 
-import 'rocket_stage.dart';
-import 'vehicle.dart';
+import 'info_vehicle.dart';
 
-/// ROCKET INFO CLASS
-/// This class represents a model of a rocket, like Falcon 9 or BFR, with
-/// all its specifications in place.
+/// ROCKET INFO MODEL
+/// General information about a Falcon rocket.
 class RocketInfo extends Vehicle {
   final num stages,
       launchCost,
@@ -16,8 +14,8 @@ class RocketInfo extends Vehicle {
       engineThrustToWeight;
   final List<PayloadWeight> payloadWeights;
   final String engine, fuel, oxidizer;
-  final FirstStage firstStage;
-  final SecondStage secondStage;
+  final Stage firstStage, secondStage;
+  final List<double> fairingDimensions;
 
   RocketInfo({
     id,
@@ -43,6 +41,7 @@ class RocketInfo extends Vehicle {
     this.oxidizer,
     this.firstStage,
     this.secondStage,
+    this.fairingDimensions,
   }) : super(
           id: id,
           name: name,
@@ -82,8 +81,14 @@ class RocketInfo extends Vehicle {
       engine: json['engines']['type'] + ' ' + json['engines']['version'],
       fuel: json['engines']['propellant_2'],
       oxidizer: json['engines']['propellant_1'],
-      firstStage: FirstStage.fromJson(json['first_stage']),
-      secondStage: SecondStage.fromJson(json['second_stage']),
+      firstStage: Stage.fromJson(json['first_stage']),
+      secondStage: Stage.fromJson(json['second_stage']),
+      fairingDimensions: [
+        json['second_stage']['payloads']['composite_fairing']['height']
+            ['meters'],
+        json['second_stage']['payloads']['composite_fairing']['diameter']
+            ['meters'],
+      ],
     );
   }
 
@@ -98,7 +103,7 @@ class RocketInfo extends Vehicle {
   String get getLaunchCost =>
       NumberFormat.currency(symbol: "\$", decimalDigits: 0).format(launchCost);
 
-  String getSuccessRate(context) => (DateTime.now().isAfter(firstFlight))
+  String getSuccessRate(context) => DateTime.now().isAfter(firstFlight)
       ? NumberFormat.percentPattern().format(successRate / 100)
       : FlutterI18n.translate(context, 'spacex.other.no_data');
 
@@ -118,8 +123,18 @@ class RocketInfo extends Vehicle {
 
   String get getOxidizer =>
       '${oxidizer[0].toUpperCase()}${oxidizer.substring(1)}';
+
+  String fairingHeight(context) => fairingDimensions[0] == null
+      ? FlutterI18n.translate(context, 'spacex.other.unknown')
+      : '${NumberFormat.decimalPattern().format(fairingDimensions[0])} m';
+
+  String fairingDiameter(context) => fairingDimensions[1] == null
+      ? FlutterI18n.translate(context, 'spacex.other.unknown')
+      : '${NumberFormat.decimalPattern().format(fairingDimensions[1])} m';
 }
 
+/// PAYLOAD WEIGHT MODEL
+/// Auxiliary model to storage specific orbit & payload capability.
 class PayloadWeight {
   final String name;
   final int mass;
@@ -131,4 +146,49 @@ class PayloadWeight {
   }
 
   String get getMass => '${NumberFormat.decimalPattern().format(mass)} kg';
+}
+
+/// STAGE MODEL
+/// General information about a specific stage of a Falcon rocket.
+class Stage {
+  final bool reusable;
+  final num engines, fuelAmount, thrustSea, thrustVacuum;
+
+  Stage({
+    this.reusable,
+    this.engines,
+    this.fuelAmount,
+    this.thrustSea,
+    this.thrustVacuum,
+  });
+
+  factory Stage.fromJson(Map<String, dynamic> json) {
+    return Stage(
+      reusable: json['reusable'],
+      engines: json['engines'],
+      fuelAmount: json['fuel_amount_tons'],
+      thrustSea: (json['thrust_sea_level'] ?? json['thrust'])['kN'],
+      thrustVacuum: (json['thrust_vacuum'] ?? json['thrust'])['kN'],
+    );
+  }
+
+  String getEngines(context) => FlutterI18n.translate(
+        context,
+        engines == 1
+            ? 'spacex.vehicle.rocket.stage.engine_number'
+            : 'spacex.vehicle.rocket.stage.engines_number',
+        {'number': engines.toString()},
+      );
+
+  String getFuelAmount(context) => FlutterI18n.translate(
+        context,
+        'spacex.vehicle.rocket.stage.fuel_amount_tons',
+        {'tons': NumberFormat.decimalPattern().format(fuelAmount)},
+      );
+
+  String get getThrustSea =>
+      '${NumberFormat.decimalPattern().format(thrustSea)} kN';
+
+  String get getThrustVacuum =>
+      '${NumberFormat.decimalPattern().format(thrustVacuum)} kN';
 }
