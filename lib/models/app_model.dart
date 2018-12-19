@@ -100,5 +100,6 @@ class AppModel extends Model {
       theme = Themes.dark;
       prefs.setString('theme', 'dark');
     }
+    notifyListeners();
   }
 }

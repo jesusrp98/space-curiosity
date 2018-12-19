@@ -133,6 +133,8 @@ PODS:
   - image_downloader (0.0.1):
     - Flutter
   - leveldb-library (1.20)
+  - location (0.0.1):
+    - Flutter
   - nanopb (0.3.8):
     - nanopb/decode (= 0.3.8)
     - nanopb/encode (= 0.3.8)
@@ -154,6 +156,7 @@ DEPENDENCIES:
   - Flutter (from `.symlinks/flutter/ios`)
   - flutter_web_browser (from `.symlinks/plugins/flutter_web_browser/ios`)
   - image_downloader (from `.symlinks/plugins/image_downloader/ios`)
+  - location (from `.symlinks/plugins/location/ios`)
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
   - share (from `.symlinks/plugins/share/ios`)
   - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
@@ -196,6 +199,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/flutter_web_browser/ios"
   image_downloader:
     :path: ".symlinks/plugins/image_downloader/ios"
+  location:
+    :path: ".symlinks/plugins/location/ios"
   path_provider:
     :path: ".symlinks/plugins/path_provider/ios"
   share:
@@ -229,6 +234,7 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 0c4baf0a73acd0041bf9f71ea018deedab5ea84e
   image_downloader: 59b0e3638f0d35234555bb0605791df26b92962b
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
+  location: 26c90953ad5916331d0d1d913898779910416487
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   path_provider: 09407919825bfe3c2deae39453b7a5b44f467873
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5

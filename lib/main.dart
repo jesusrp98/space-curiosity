@@ -39,6 +39,7 @@ class MyApp extends StatelessWidget {
                   '/planets': (_) => SolarSystemScreen(),
                   '/iss': (_) => IssScreen(),
                   '/info': (_) => AboutScreen(),
+                  '/about': (_) => AboutScreen(),
                   AddEditPlanetPage.routeName: (_) =>
                       AddEditPlanetPage(null, type: BodyType.planet),
                   '/settings': (_) => SettingsPage(),

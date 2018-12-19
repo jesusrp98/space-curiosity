@@ -23,6 +23,10 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
+        // leading: IconButton(
+        //   icon: Icon(Icons.settings),
+        //   onPressed: () => Navigator.pushNamed(context, "/settings"),
+        // ),
         title: Text(
           FlutterI18n.translate(context, 'app.title'),
           style: TextStyle(fontWeight: FontWeight.bold),
@@ -38,7 +42,7 @@ class HomeScreen extends StatelessWidget {
                     ))
                 .toList(),
             onSelected: (string) => openPage(context, _menu[string]),
-          )
+          ),
         ],
         centerTitle: true,
       ),
@@ -167,8 +171,9 @@ class HomeScreen extends StatelessWidget {
   }
 
   openPage(BuildContext context, String route) {
-    Navigator.pop(context);
-    Navigator.of(context).pushNamed(route);
+    // Navigator.pop(context);
+    // Navigator.of(context).pushNamed(route);
+    Navigator.pushNamed(context, route);
   }
 }
 
@@ -217,7 +222,7 @@ class _ContentPageState extends State<ContentPage> {
           : Swiper(
               itemBuilder: (_, index) => PhotoCard(model.getItem(index)),
               scrollDirection: Axis.vertical,
-              itemCount: model.getItemCount,
+              itemCount: model?.getItemCount ?? 0,
               autoplay: true,
               autoplayDelay: 6000,
               duration: 750,

@@ -17,8 +17,6 @@ class _SettingsPageState extends State<SettingsPage> {
 
   @override
   void initState() {
-    // _darkTheme = Theme.of(context).brightness == Brightness.light;
-    // _darkTheme = widget.model.theme == Themes.dark;
     var _model = ScopedModel.of<AppModel>(context);
     var _theme = _model?.theme ?? Themes.dark;
     if (_theme == Themes.light) {
