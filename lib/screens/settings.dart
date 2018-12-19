@@ -75,7 +75,9 @@ class _SettingsPageState extends State<SettingsPage> {
                       value: _darkTheme,
                       onChanged: (bool value) => _changeTheme(context,
                           model: model,
-                          theme: value ? Themes.dark : Themes.light),
+                          theme: value
+                              ? _trueBlack ? Themes.black : Themes.dark
+                              : Themes.light),
                     ),
                   ),
                   _darkTheme
