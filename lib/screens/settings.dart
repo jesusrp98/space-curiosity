@@ -56,7 +56,7 @@ class _SettingsPageState extends State<SettingsPage> {
       prefs.setString("theme", "light");
       setState(() {
         _darkTheme = false;
-        _trueBlack = false;
+        // _trueBlack = false;
       });
     }
     model.themeData = model.theme;
