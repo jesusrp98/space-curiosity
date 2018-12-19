@@ -7,37 +7,38 @@ import 'package:intl/intl.dart';
 import '../../util/url.dart';
 import '../querry_model.dart';
 
+/// SPACEX-AS-A-COMPAMY MODEL
+/// General information about SpaceX's company data.
+/// Used in the 'Company' tab, under the SpaceX screen.
 class SpacexCompanyModel extends QuerryModel {
   Company _company;
 
   @override
   Future loadData() async {
+    // Get items by http call
     final companyResponse = await http.get(Url.spacexCompany);
     response = await http.get(Url.spacexAchievements);
-    clearLists();
 
+    // Clear old data
+    clearItems();
+
+    // Added parsed item
     snapshot = json.decode(response.body);
-    items.addAll(snapshot
-        .map((achievement) => Achievement.fromJson(achievement))
-        .toList());
+    items.addAll(
+      snapshot.map((achievement) => Achievement.fromJson(achievement)).toList(),
+    );
 
     _company = Company.fromJson(json.decode(companyResponse.body));
 
+    // Add photos & shuffle them
     photos.addAll(Url.spacexCompanyScreen);
     photos.shuffle();
 
-    loadingState(false);
+    // Finished loading data
+    setLoading(false);
   }
 
   Company get company => _company;
-
-  List<String> getEllipsis(context) => <String>[
-        FlutterI18n.translate(context, 'spacex.company.menu.website'),
-        FlutterI18n.translate(context, 'spacex.company.menu.twitter'),
-        FlutterI18n.translate(context, 'spacex.company.menu.flickr')
-      ];
-
-  int getEllipsisIndex(context, url) => getEllipsis(context).indexOf(url);
 }
 
 class Company {
@@ -86,10 +87,7 @@ class Company {
   String getFounderDate(context) => FlutterI18n.translate(
         context,
         'spacex.company.founded',
-        {
-          'founded': founded.toString(),
-          'founder': founder,
-        },
+        {'founded': founded.toString(), 'founder': founder},
       );
 
   String get getValuation =>
@@ -98,8 +96,20 @@ class Company {
   String get getLocation => '$city, $state';
 
   String get getEmployees => NumberFormat.decimalPattern().format(employees);
+
+  List<String> getMenu(context) => <String>[
+        FlutterI18n.translate(context, 'spacex.company.menu.website'),
+        FlutterI18n.translate(context, 'spacex.company.menu.twitter'),
+        FlutterI18n.translate(context, 'spacex.company.menu.flickr')
+      ];
+
+  int getMenuIndex(context, url) => getMenu(context).indexOf(url);
+
+  String getUrl(context, name) => links[getMenuIndex(context, name)];
 }
 
+/// SPACEX'S ACHIEVMENT MODEL
+/// Auxiliary model to storage specific SpaceX's achievments.
 class Achievement {
   final String name, details, url;
   final DateTime date;

@@ -8,21 +8,31 @@ import '../../util/url.dart';
 import '../querry_model.dart';
 import 'launch.dart';
 
+/// SPACEX HOME TAB MODEL
+/// Storages essencial data from the next scheduled launch.
+/// Used in the 'Home' tab, under the SpaceX screen.
 class SpacexHomeModel extends QuerryModel {
   Launch launch;
 
   @override
   Future loadData() async {
+    // Get item by http call
     final response = await http.get(Url.nextLaunch);
+
+    // Clear old data
     items.clear();
 
+    // Add parsed item
+    launch = Launch.fromJson(json.decode(response.body));
+
+    // Add photos & shuffle them
     if (photos.isEmpty) {
       photos.addAll(Url.spacexHomeScreen);
       photos.shuffle();
     }
-    launch = Launch.fromJson(json.decode(response.body));
 
-    loadingState(false);
+    // Finished loading data
+    setLoading(false);
   }
 
   String vehicle(context) => FlutterI18n.translate(
@@ -81,11 +91,11 @@ class SpacexHomeModel extends QuerryModel {
         {
           'reused': FlutterI18n.translate(
             context,
-            launch.rocket.fairing.reused
+            launch.rocket.fairing.reused != null && launch.rocket.fairing.reused
                 ? 'spacex.home.tab.fairings.body_reused'
                 : 'spacex.home.tab.fairings.body_new',
           ),
-          'catched': launch.rocket.fairing.recoveryAttempt != null ||
+          'catched': launch.rocket.fairing.recoveryAttempt != null &&
                   launch.rocket.fairing.recoveryAttempt == true
               ? FlutterI18n.translate(
                   context,
@@ -109,33 +119,53 @@ class SpacexHomeModel extends QuerryModel {
 
     if (launch.rocket.firstStage[0].id == null) {
       aux = FlutterI18n.translate(
-          context, 'spacex.home.tab.first_stage.body_null');
+        context,
+        'spacex.home.tab.first_stage.body_null',
+      );
     } else {
       for (int i = 0; i < launch.rocket.firstStage.length; ++i)
-        aux += FlutterI18n.translate(
-              context,
-              'spacex.home.tab.first_stage.body',
-              {
-                'booster': cores[i],
-                'reused': FlutterI18n.translate(
+        aux += launch.rocket.firstStage[i].landingIntent != null
+            ? FlutterI18n.translate(
+                context,
+                'spacex.home.tab.first_stage.body',
+                {
+                  'booster': cores[i],
+                  'reused': FlutterI18n.translate(
+                    context,
+                    launch.rocket.firstStage[i].reused
+                        ? 'spacex.home.tab.first_stage.body_reused'
+                        : 'spacex.home.tab.first_stage.body_new',
+                  ),
+                  'landing': launch.rocket.firstStage[i].landingIntent
+                      ? FlutterI18n.translate(
+                          context,
+                          'spacex.home.tab.first_stage.body_landing',
+                          {
+                            'landingpad':
+                                launch.rocket.firstStage[i].landingZone
+                          },
+                        )
+                      : FlutterI18n.translate(
+                          context,
+                          'spacex.home.tab.first_stage.body_dispended',
+                        )
+                },
+              )
+            : FlutterI18n.translate(
                   context,
-                  launch.rocket.firstStage[i].reused
-                      ? 'spacex.home.tab.first_stage.body_reused'
-                      : 'spacex.home.tab.first_stage.body_new',
-                ),
-                'landing': launch.rocket.firstStage[i].landingIntent
-                    ? FlutterI18n.translate(
-                        context,
-                        'spacex.home.tab.first_stage.body_landing',
-                        {'landingpad': launch.rocket.firstStage[i].landingZone},
-                      )
-                    : FlutterI18n.translate(
-                        context,
-                        'spacex.home.tab.first_stage.body_dispended',
-                      )
-              },
-            ) +
-            (i + 1 == launch.rocket.firstStage.length ? '' : '\n');
+                  'spacex.home.tab.first_stage.body_unknown_landing',
+                  {
+                    'booster': cores[i],
+                    'reused': FlutterI18n.translate(
+                      context,
+                      launch.rocket.firstStage[i].reused != null &&
+                              launch.rocket.firstStage[i].reused
+                          ? 'spacex.home.tab.first_stage.body_reused'
+                          : 'spacex.home.tab.first_stage.body_new',
+                    )
+                  },
+                ) +
+                (i + 1 == launch.rocket.firstStage.length ? '' : '\n');
     }
 
     return aux;
@@ -144,58 +174,25 @@ class SpacexHomeModel extends QuerryModel {
   String capsule(context) =>
       launch.rocket.secondStage.payloads[0].capsuleSerial == null
           ? FlutterI18n.translate(context, 'spacex.home.tab.capsule.body_null')
-          : FlutterI18n.translate(context, 'spacex.home.tab.capsule.body', {
-              'reused': launch.rocket.secondStage.payloads[0].reused
-                  ? FlutterI18n.translate(
-                      context,
-                      'spacex.home.tab.capsule.body_reused',
-                    )
-                  : FlutterI18n.translate(
-                      context,
-                      'spacex.home.tab.capsule.body_new',
-                    )
-            });
+          : FlutterI18n.translate(
+              context,
+              'spacex.home.tab.capsule.body',
+              {
+                'reused': launch.rocket.secondStage.payloads[0].reused
+                    ? FlutterI18n.translate(
+                        context,
+                        'spacex.home.tab.capsule.body_reused',
+                      )
+                    : FlutterI18n.translate(
+                        context,
+                        'spacex.home.tab.capsule.body_new',
+                      )
+              },
+            );
 }
 
-class Countdown extends AnimatedWidget {
-  final Animation<int> animation;
-  final DateTime launchDate;
-  final String name;
-
-  Countdown({Key key, this.animation, this.launchDate, this.name})
-      : super(key: key, listenable: animation);
-
-  @override
-  build(BuildContext context) {
-    return Text(
-      launchDate.isAfter(DateTime.now())
-          ? getTimer(launchDate.difference(DateTime.now()), '-')
-          : getTimer(DateTime.now().difference(launchDate), '+'),
-      style: Theme.of(context)
-          .textTheme
-          .headline
-          .copyWith(fontFamily: 'RobotoMono'),
-    );
-  }
-
-  String getTimer(Duration d, String symbol) =>
-      'T' +
-      symbol +
-      d.inDays.toString().padLeft(2, '0') +
-      'd:' +
-      (d.inHours - d.inDays * Duration.hoursPerDay).toString().padLeft(2, '0') +
-      'h:' +
-      (d.inMinutes -
-              d.inDays * Duration.minutesPerDay -
-              (d.inHours - d.inDays * Duration.hoursPerDay) *
-                  Duration.minutesPerHour)
-          .toString()
-          .padLeft(2, '0') +
-      'm:' +
-      (d.inSeconds % 60).toString().padLeft(2, '0') +
-      's';
-}
-
+/// COUNTDOWN WIDGET
+/// Stateful widget used to display a countdown to the next launch.
 class LaunchCountdown extends StatefulWidget {
   final SpacexHomeModel model;
 
@@ -229,11 +226,61 @@ class _LaunchCountdownState extends State<LaunchCountdown>
   @override
   Widget build(BuildContext context) {
     return Countdown(
-      launchDate: widget.model.launch.launchDate,
       animation: StepTween(
         begin: widget.model.launch.launchDate.millisecondsSinceEpoch,
         end: DateTime.now().millisecondsSinceEpoch,
       ).animate(_controller),
+      launchDate: widget.model.launch.launchDate,
+      name: widget.model.launch.name,
     );
   }
+}
+
+class Countdown extends AnimatedWidget {
+  final Animation<int> animation;
+  final DateTime launchDate;
+  final String name;
+
+  Countdown({
+    Key key,
+    this.animation,
+    this.launchDate,
+    this.name,
+  }) : super(key: key, listenable: animation);
+
+  @override
+  build(BuildContext context) {
+    return Text(
+      launchDate.isAfter(DateTime.now())
+          ? getTimer(launchDate.difference(DateTime.now()))
+          : getLive(context),
+      textAlign: TextAlign.center,
+      style: Theme.of(context)
+          .textTheme
+          .headline
+          .copyWith(fontFamily: 'RobotoMono'),
+    );
+  }
+
+  String getTimer(Duration d) =>
+      'T-' +
+      d.inDays.toString().padLeft(2, '0') +
+      'd:' +
+      (d.inHours - d.inDays * Duration.hoursPerDay).toString().padLeft(2, '0') +
+      'h:' +
+      (d.inMinutes -
+              d.inDays * Duration.minutesPerDay -
+              (d.inHours - d.inDays * Duration.hoursPerDay) *
+                  Duration.minutesPerHour)
+          .toString()
+          .padLeft(2, '0') +
+      'm:' +
+      (d.inSeconds % 60).toString().padLeft(2, '0') +
+      's';
+
+  String getLive(context) => FlutterI18n.translate(
+        context,
+        'spacex.home.tab.live_mission',
+        {'mission': name},
+      );
 }

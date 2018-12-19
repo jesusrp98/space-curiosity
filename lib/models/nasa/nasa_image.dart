@@ -18,7 +18,7 @@ class NasaImagesModel extends QuerryModel {
       items.addAll(snapshot.map((image) => NasaImage.fromJson(image)).toList());
     } catch (e) {}
 
-    loadingState(false);
+    setLoading(false);
   }
 }
 

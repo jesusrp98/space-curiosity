@@ -2,12 +2,12 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:intl/intl.dart';
 
 import '../../util/url.dart';
-import 'vehicle.dart';
+import 'info_vehicle.dart';
 
-/// ROADSTER CLASS
-/// This class contains all information available from Elon Musk's Tesla
-/// Roadster, sent to space in the Falcon Heavy Test Flight.
-class Roadster extends Vehicle {
+/// ROADSTER MODEL
+/// Details about Elon Musk's Tesla Roadster launched on top of a Falcon Heavy
+/// at February 6, 2018. Currently orbiting the Sun, between Earth & Mars.
+class RoadsterInfo extends Vehicle {
   final String orbit, video;
   final num apoapsis,
       periapsis,
@@ -18,7 +18,7 @@ class Roadster extends Vehicle {
       earthDistance,
       marsDistance;
 
-  Roadster({
+  RoadsterInfo({
     description,
     url,
     mass,
@@ -40,16 +40,13 @@ class Roadster extends Vehicle {
           type: 'roadster',
           description: description,
           url: url,
-          height: 1.127,
-          diameter: 1.873,
           mass: mass,
-          active: true,
           firstFlight: firstFlight,
           photos: photos,
         );
 
-  factory Roadster.fromJson(Map<String, dynamic> json) {
-    return Roadster(
+  factory RoadsterInfo.fromJson(Map<String, dynamic> json) {
+    return RoadsterInfo(
       description: json['details'],
       url: json['wikipedia'],
       mass: json['launch_mass_kg'],

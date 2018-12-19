@@ -5,27 +5,34 @@ import 'package:http/http.dart' as http;
 
 import '../../util/url.dart';
 import '../querry_model.dart';
-import 'vehicle_details.dart';
+import 'details_vehicle.dart';
+import 'mission_item.dart';
 
-///CORE DETAILS CLASS
-/// This class represents a single core used in a SpaceX mission,
-/// with all its details.
+/// CORE DETAILS MODEL
+/// Details about a specific core or booster used in a specific mission.
 class CoreModel extends QuerryModel {
+  // Core serial: B0000
   final String id;
 
   CoreModel(this.id);
 
   @override
   Future loadData() async {
+    // Get item by http call
     response = await http.get(Url.coreDialog + id);
-    clearLists();
 
+    // Clear old data
+    clearItems();
+
+    // Add parsed item
     items.add(CoreDetails.fromJson(json.decode(response.body)));
 
+    // Add photos & shuffle them
     photos.addAll(Url.spacexCoreDialog);
     photos.shuffle();
 
-    loadingState(false);
+    // Finished loading data
+    setLoading(false);
   }
 
   CoreDetails get core => items[0];
@@ -58,9 +65,11 @@ class CoreDetails extends VehicleDetails {
       serial: json['core_serial'],
       status: json['status'],
       details: json['details'],
-      firstLaunched: DateTime.parse(json['original_launch']).toLocal(),
+      firstLaunched: json['original_launch'] != null
+          ? DateTime.parse(json['original_launch'])
+          : null,
       missions: json['missions']
-          .map((mission) => DetailsMission.fromJson(mission))
+          .map((mission) => MissionItem.fromJson(mission))
           .toList(),
       block: json['block'],
       rtlsLandings: json['rtls_landings'],

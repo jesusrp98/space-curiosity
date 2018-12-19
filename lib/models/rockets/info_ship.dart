@@ -1,12 +1,11 @@
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:intl/intl.dart';
 
-import 'vehicle.dart';
-import 'vehicle_details.dart';
+import 'info_vehicle.dart';
+import 'mission_item.dart';
 
-/// SHIP INFO CLASS
-/// This class represents a real ship used in a SpaceX mission,
-/// with all its details.
+/// SHIP INFO MODEL
+/// General information about a ship used by SpaceX.
 class ShipInfo extends Vehicle {
   final String model, use, homePort, status;
   final List roles, missions;
@@ -20,11 +19,10 @@ class ShipInfo extends Vehicle {
   ShipInfo({
     id,
     name,
+    url,
+    mass,
     active,
     firstFlight,
-    mass,
-    description,
-    url,
     photos,
     this.model,
     this.use,
@@ -42,11 +40,10 @@ class ShipInfo extends Vehicle {
           id: id,
           name: name,
           type: 'ship',
+          url: url,
+          mass: mass,
           active: active,
           firstFlight: firstFlight,
-          mass: mass,
-          description: 'No description',
-          url: url,
           photos: photos,
         );
 
@@ -54,16 +51,16 @@ class ShipInfo extends Vehicle {
     return ShipInfo(
       id: json['ship_id'],
       name: json['ship_name'],
+      url: json['url'],
+      mass: json['weight_kg'],
       active: json['active'],
       firstFlight: DateTime(json['year_built']),
       photos: [json['image']],
-      mass: json['weight_kg'],
-      url: json['url'],
       model: json['ship_model'],
       use: json['ship_type'],
       roles: json['roles'],
       missions: json['missions']
-          .map((mission) => DetailsMission.fromJson(mission))
+          .map((mission) => MissionItem.fromJson(mission))
           .toList(),
       homePort: json['home_port'],
       status: json['status'],
@@ -85,16 +82,14 @@ class ShipInfo extends Vehicle {
         {'date': firstFlight.year.toString()},
       );
 
-  bool get hasUrl => url != null;
-
   String getModel(context) =>
       model ?? FlutterI18n.translate(context, 'spacex.other.unknown');
-
-  bool get hasExtras => isLandable || canCatch;
 
   bool get isLandable => attemptedLandings != null;
 
   bool get canCatch => attemptedCatches != null;
+
+  bool get hasExtras => isLandable || canCatch;
 
   bool get hasSeveralRoles => roles.length > 1;
 
@@ -115,9 +110,7 @@ class ShipInfo extends Vehicle {
 
   String getCoordinates(context) => coordinates.isNotEmpty
       ? FlutterI18n.translate(context, 'spacex.other.unknown')
-      : (coordinates[0].toStringAsPrecision(5) +
-          ',  ' +
-          coordinates[1].toStringAsPrecision(5));
+      : '${coordinates[0].toStringAsPrecision(5)},  ${coordinates[1].toStringAsPrecision(5)}';
 
   String get getSuccessfulLandings => '$successfulLandings/$attemptedLandings';
 

@@ -2,6 +2,41 @@
   "app": {
     "title": "Curiosidad Espacial"
   },
+  "home": {
+    "menu": {
+      "settings": "Ajustes",
+      "about": "Información"
+    },
+    "page": {
+      "fab": "Menú principal",
+      "menu": {
+        "spacex": {
+          "title": "SpaceX",
+          "body": "Una historia de halcones y dragones"
+        },
+        "news": {
+          "title": "Últimas noticias",
+          "body": "Titulares espaciales de todo el mundo"
+        },
+        "planets": {
+          "title": "Explorador del Sistema Solar",
+          "body": "Explora cada centímetro de nuestro vecindario"
+        },
+        "iss": {
+          "title": "Estación Espacial Internacional",
+          "body": "El laboratorio flotante más grande del mundo"
+        },
+        "weight": {
+          "title": "Calculador de peso",
+          "body": "¿Cuánto pesarías en Marte?"
+        },
+        "mars": {
+          "title": "Catálogo marciano",
+          "body": "Todo sobre el planeta rojo y sus habitantes"
+        }
+      }
+    }
+  },
   "nasa": {
     "no_copyright": "Sin copyright",
     "share": "Compartir",
@@ -14,6 +49,7 @@
       "icon": "Inicio",
       "tab": {
         "no_countdown": "¡{mission} próximamente!",
+        "live_mission": "¡{mission} está ahora en vivo!",
         "mission": {
           "title": "Lanzado por {rocket}",
           "body": "Llevará a {payloads}",
@@ -36,7 +72,7 @@
           "title": "Cofia protectora",
           "body": "{reused}, {catched}.",
           "body_new": "La cofia no es reutilizada",
-          "body_reused": "La cofia es reciclada",
+          "body_reused": "La cofia es reutilizada",
           "body_catching": "y será capturada por {ship}",
           "body_dispensed": "y no se procederá a su captura"
         },
@@ -45,6 +81,7 @@
           "booster": "El propulsor",
           "side_core": "El propulsor lateral",
           "body": "{booster} {reused}, {landing}.",
+          "body_unknown_landing": "{booster} {reused}.",
           "body_null": "No se conocen todavía los detalles sobre la primera fase.",
           "body_reused": "es reutilizado",
           "body_new": "no es reutilizado",
@@ -120,6 +157,7 @@
           "stage_second": "Segunda etapa",
           "reusable": "Reutilizable",
           "engines": "Motores",
+          "engine_number": "{number} motor",
           "engines_number": "{number} motores",
           "fuel_amount": "Combustible",
           "fuel_amount_tons": "{tons} toneladas",
@@ -170,7 +208,7 @@
           "home_port": "Puerto base",
           "built_date": "Fecha de construcción",
           "landings_successful": "Aterrizajes exitosos",
-          "catches_successful": "Capturas exitosos"
+          "catches_successful": "Capturas exitosas"
         },
         "specifications": {
           "title": "especificaciones",
@@ -184,7 +222,7 @@
           "speed": "Velocidad actual"
         },
         "missions": {
-          "title": "MISIONES",
+          "title": "misiones",
           "mission": "Misión n°{number}",
           "no_missions": "Esta embarcación todavía no ha participado en ninguna misión."
         }
@@ -211,7 +249,7 @@
           "core": {
             "serial": "Número de serie",
             "model": "Modelo",
-            "reused": "Reusado",
+            "reused": "Reutilizado",
             "landing_zone": "Zona de aterrizaje",
             "landing_success": "Aterrizaje exitoso",
             "landing_attempt": "Intento de aterrizaje"
@@ -221,7 +259,7 @@
           "title": "carga",
           "name": "Nombre",
           "capsule_serial": "Número de serie",
-          "capsule_reused": "Reusada",
+          "capsule_reused": "Reutilizada",
           "manufacturer": "Fabricante",
           "customer": "Cliente",
           "nationality": "Nacionalidad",
@@ -231,7 +269,7 @@
             "model": "Modelo de la segunda etapa"
           },
           "fairings": {
-            "reused": "Cofia reusada",
+            "reused": "Cofia reutilizada",
             "recovery_attempt": "Intento de caputra",
             "recovery_success": "Caputra con éxito",
             "recovery_ship": "Barco asignado"
@@ -257,9 +295,9 @@
         "flickr": "Página de Flickr"
       },
       "tab": {
-        "ceo": "CEO",
-        "cto": "CTO",
-        "coo": "COO",
+        "ceo": "Director general",
+        "cto": "Director técnico",
+        "coo": "Director de operaciones",
         "valuation": "Valor",
         "location": "Sede",
         "employees": "Empleados"
@@ -283,7 +321,7 @@
       "pad": {
         "status": "Estado",
         "location": "Localidad",
-        "state": "Estado",
+        "state": "Región",
         "coordinates": "Coordenadas",
         "landing_type": "Tipo de aterrizaje",
         "launches_successful": "Lanzamientos exitosos",

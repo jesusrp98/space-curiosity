@@ -4,22 +4,23 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import '../../../models/querry_model.dart';
+import '../../../models/rockets/info_vehicle.dart';
 import '../../../models/rockets/launch.dart';
 import '../../../models/rockets/spacex_company.dart';
 import '../../../models/rockets/spacex_home.dart';
-import '../../../models/rockets/vehicle.dart';
 import 'tab_company.dart';
 import 'tab_home.dart';
 import 'tab_launches.dart';
 import 'tab_vehicles.dart';
 
+/// SPACEX MAIN SCREEN
+/// This view holds all tabs & its models: home, vehicles, upcoming & latest launches, & company tabs.
 class SpacexScreen extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _SpacexTabScreen();
 }
 
 class _SpacexTabScreen extends State<SpacexScreen> {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   int _currentIndex = 0;
 
   static final List<QuerryModel> modelTab = [
@@ -62,7 +63,6 @@ class _SpacexTabScreen extends State<SpacexScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey,
       body: _tabs[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,

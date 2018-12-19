@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 
-import '../../../models/rockets/ship_info.dart';
+import '../../../models/rockets/info_ship.dart';
 import '../../../util/colors.dart';
 import '../../../widgets/card_page.dart';
 import '../../../widgets/row_item.dart';
+import '../../../widgets/separator.dart';
 
-/// SHIP PAGE CLASS
-/// This class represent a ship page. It displays Ship's specs.
+/// SHIP PAGE VIEW
+/// This view all information about a specific ship. It displays Ship's specs.
 class ShipPage extends StatelessWidget {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final ShipInfo _ship;
 
   ShipPage(this._ship);
@@ -19,231 +19,219 @@ class ShipPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey,
-      body: CustomScrollView(
-        slivers: <Widget>[
-          SliverAppBar(
-            expandedHeight: MediaQuery.of(context).size.height * 0.3,
-            floating: false,
-            pinned: true,
-            actions: <Widget>[
-              IconButton(
-                icon: const Icon(Icons.public),
-                onPressed: () => FlutterWebBrowser.openWebPage(
-                    url: _ship.url, androidToolbarColor: primaryColor),
-                tooltip: FlutterI18n.translate(
-                  context,
-                  'spacex.other.menu.marine_traffic',
-                ),
-              )
-            ],
-            flexibleSpace: FlexibleSpaceBar(
-              centerTitle: true,
-              title: Text(_ship.name),
-              background: InkWell(
-                onTap: () => FlutterWebBrowser.openWebPage(
-                      url: _ship.getProfilePhoto,
-                      androidToolbarColor: primaryColor,
-                    ),
-                child: Hero(
-                  tag: _ship.id,
-                  child: CachedNetworkImage(
-                    imageUrl: _ship.getProfilePhoto,
-                    errorWidget: const Icon(Icons.error),
-                    fadeInDuration: Duration(milliseconds: 100),
-                    fit: BoxFit.cover,
+      body: CustomScrollView(slivers: <Widget>[
+        SliverAppBar(
+          expandedHeight: MediaQuery.of(context).size.height * 0.3,
+          floating: false,
+          pinned: true,
+          actions: <Widget>[
+            IconButton(
+              icon: const Icon(Icons.public),
+              onPressed: () async => await FlutterWebBrowser.openWebPage(
+                    url: _ship.url,
+                    androidToolbarColor: primaryColor,
                   ),
+              tooltip: FlutterI18n.translate(
+                context,
+                'spacex.other.menu.marine_traffic',
+              ),
+            )
+          ],
+          flexibleSpace: FlexibleSpaceBar(
+            centerTitle: true,
+            title: Text(_ship.name),
+            background: InkWell(
+              onTap: () async => await FlutterWebBrowser.openWebPage(
+                    url: _ship.getProfilePhoto,
+                    androidToolbarColor: primaryColor,
+                  ),
+              child: Hero(
+                tag: _ship.id,
+                child: CachedNetworkImage(
+                  imageUrl: _ship.getProfilePhoto,
+                  errorWidget: const Icon(Icons.error),
+                  fadeInDuration: Duration(milliseconds: 100),
+                  fit: BoxFit.cover,
                 ),
               ),
             ),
           ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: EdgeInsets.all(16.0),
-              child: Column(children: <Widget>[
-                _shipCard(context),
-                const SizedBox(height: 8.0),
-                _specsCard(context),
-                const SizedBox(height: 8.0),
-                _missionsCard(context),
-              ]),
-            ),
+        ),
+        SliverToBoxAdapter(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(children: <Widget>[
+              _shipCard(context),
+              Separator.cardSpacer(),
+              _specsCard(context),
+              Separator.cardSpacer(),
+              _missionsCard(context),
+            ]),
           ),
-        ],
-      ),
+        ),
+      ]),
     );
   }
 
-  Widget _shipCard(context) {
+  Widget _shipCard(BuildContext context) {
     return CardPage(
       title: FlutterI18n.translate(
         context,
         'spacex.vehicle.ship.description.title',
       ),
-      body: Column(
-        children: <Widget>[
-          RowItem.textRow(
-              FlutterI18n.translate(
-                context,
-                'spacex.vehicle.ship.description.home_port',
-              ),
-              _ship.homePort),
-          const SizedBox(height: 12.0),
-          RowItem.textRow(
-              FlutterI18n.translate(
-                context,
-                'spacex.vehicle.ship.description.built_date',
-              ),
-              _ship.getBuiltFullDate),
-          _ship.hasExtras
-              ? Column(
-                  children: <Widget>[
-                    const Divider(height: 24.0),
-                    _ship.isLandable
-                        ? RowItem.textRow(
-                            FlutterI18n.translate(
-                              context,
-                              'spacex.vehicle.ship.description.landings_successful',
-                            ),
-                            _ship.getSuccessfulLandings,
-                          )
-                        : RowItem.textRow(
-                            FlutterI18n.translate(
-                              context,
-                              'spacex.vehicle.ship.description.catches_successful',
-                            ),
-                            _ship.getSuccessfulCatches,
-                          ),
-                  ],
-                )
-              : Container()
-        ],
-      ),
+      body: Column(children: <Widget>[
+        RowItem.textRow(
+            FlutterI18n.translate(
+              context,
+              'spacex.vehicle.ship.description.home_port',
+            ),
+            _ship.homePort),
+        Separator.spacer(),
+        RowItem.textRow(
+            FlutterI18n.translate(
+              context,
+              'spacex.vehicle.ship.description.built_date',
+            ),
+            _ship.getBuiltFullDate),
+        _ship.hasExtras
+            ? Column(children: <Widget>[
+                Separator.divider(),
+                _ship.isLandable
+                    ? RowItem.textRow(
+                        FlutterI18n.translate(
+                          context,
+                          'spacex.vehicle.ship.description.landings_successful',
+                        ),
+                        _ship.getSuccessfulLandings,
+                      )
+                    : RowItem.textRow(
+                        FlutterI18n.translate(
+                          context,
+                          'spacex.vehicle.ship.description.catches_successful',
+                        ),
+                        _ship.getSuccessfulCatches,
+                      ),
+              ])
+            : Separator.none()
+      ]),
     );
   }
 
-  Widget _specsCard(context) {
+  Widget _specsCard(BuildContext context) {
     return CardPage(
       title: FlutterI18n.translate(
         context,
         'spacex.vehicle.ship.specifications.title',
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          RowItem.textRow(
-            FlutterI18n.translate(
-              context,
-              'spacex.vehicle.ship.specifications.feature',
-            ),
-            _ship.use,
+      body: Column(children: <Widget>[
+        RowItem.textRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.vehicle.ship.specifications.feature',
           ),
-          const SizedBox(height: 12.0),
-          RowItem.textRow(
-            FlutterI18n.translate(
-              context,
-              'spacex.vehicle.ship.specifications.model',
-            ),
-            _ship.getModel(context),
+          _ship.use,
+        ),
+        Separator.spacer(),
+        RowItem.textRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.vehicle.ship.specifications.model',
           ),
-          const Divider(height: 24.0),
-          RowItem.textRow(
-            FlutterI18n.translate(
-              context,
-              'spacex.vehicle.ship.specifications.role_primary',
-            ),
-            _ship.primaryRole,
+          _ship.getModel(context),
+        ),
+        Separator.divider(),
+        RowItem.textRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.vehicle.ship.specifications.role_primary',
           ),
-          (_ship.hasSeveralRoles)
-              ? Column(
-                  children: <Widget>[
-                    const SizedBox(height: 12.0),
-                    RowItem.textRow(
-                      FlutterI18n.translate(
-                        context,
-                        'spacex.vehicle.ship.specifications.role_secondary',
-                      ),
-                      _ship.secondaryRole,
-                    ),
-                    const SizedBox(height: 12.0),
-                  ],
-                )
-              : const SizedBox(height: 12.0),
-          RowItem.textRow(
-            FlutterI18n.translate(
-              context,
-              'spacex.vehicle.ship.specifications.status',
-            ),
-            _ship.getStatus(context),
+          _ship.primaryRole,
+        ),
+        Separator.spacer(),
+        _ship.hasSeveralRoles
+            ? Column(children: <Widget>[
+                RowItem.textRow(
+                  FlutterI18n.translate(
+                    context,
+                    'spacex.vehicle.ship.specifications.role_secondary',
+                  ),
+                  _ship.secondaryRole,
+                ),
+                Separator.spacer(),
+              ])
+            : Separator.none(),
+        RowItem.textRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.vehicle.ship.specifications.status',
           ),
-          const SizedBox(height: 12.0),
-          RowItem.textRow(
-            FlutterI18n.translate(
-              context,
-              'spacex.vehicle.ship.specifications.coordinates',
-            ),
-            _ship.getCoordinates(context),
+          _ship.getStatus(context),
+        ),
+        Separator.spacer(),
+        RowItem.textRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.vehicle.ship.specifications.coordinates',
           ),
-          const Divider(height: 24.0),
-          RowItem.textRow(
-            FlutterI18n.translate(
-              context,
-              'spacex.vehicle.ship.specifications.mass',
-            ),
-            _ship.getMass(context),
+          _ship.getCoordinates(context),
+        ),
+        Separator.divider(),
+        RowItem.textRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.vehicle.ship.specifications.mass',
           ),
-          const SizedBox(height: 12.0),
-          RowItem.textRow(
-            FlutterI18n.translate(
-              context,
-              'spacex.vehicle.ship.specifications.speed',
-            ),
-            _ship.getSpeed(context),
+          _ship.getMass(context),
+        ),
+        Separator.spacer(),
+        RowItem.textRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.vehicle.ship.specifications.speed',
           ),
-        ],
-      ),
+          _ship.getSpeed(context),
+        ),
+      ]),
     );
   }
 
-  Widget _missionsCard(context) {
+  Widget _missionsCard(BuildContext context) {
     return CardPage(
       title: FlutterI18n.translate(
         context,
         'spacex.vehicle.ship.missions.title',
       ),
-      body: Column(
-        children: _ship.hasMissions
-            ? _ship.missions
-                .map(
-                  (mission) => _getMission(context, _ship.missions, mission),
-                )
-                .toList()
-            : <Widget>[
-                Text(
-                  FlutterI18n.translate(
-                    context,
-                    'spacex.vehicle.ship.missions.no_missions',
-                  ),
-                  style: TextStyle(fontSize: 15.0, color: secondaryText),
-                ),
-              ],
-      ),
+      body: _ship.hasMissions
+          ? Column(
+              children: _ship.missions
+                  .map((mission) => _getMission(
+                        context,
+                        _ship.missions,
+                        mission,
+                      ))
+                  .toList(),
+            )
+          : Text(
+              FlutterI18n.translate(
+                context,
+                'spacex.vehicle.ship.missions.no_missions',
+              ),
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 15.0, color: secondaryText),
+            ),
     );
   }
 
   Column _getMission(BuildContext context, List missions, mission) {
-    return Column(
-      children: <Widget>[
-        RowItem.textRow(
-            FlutterI18n.translate(
-              context,
-              'spacex.vehicle.ship.missions.mission',
-              {'number': mission.id.toString()},
-            ),
-            mission.name),
-      ]..add(
-          mission != missions.last ? const SizedBox(height: 12.0) : Container(),
-        ),
-    );
+    return Column(children: <Widget>[
+      RowItem.textRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.vehicle.ship.missions.mission',
+            {'number': mission.id.toString()},
+          ),
+          mission.name),
+      mission != missions.last ? Separator.spacer() : Separator.none()
+    ]);
   }
 }

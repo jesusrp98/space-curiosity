@@ -1,7 +1,9 @@
+import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:intl/intl.dart';
 
-/// VEHICLE DETAILS CLASS
-/// Represents a general vehicle, such a capsule or a core, used in any mission.
+/// VEHICLE DETAILS MODEL
+/// Details about a specific SpaceX vehicle, used in a specific mission.
+/// Vehicles are considered capsules & cores.
 abstract class VehicleDetails {
   final String serial, status, details;
   final DateTime firstLaunched;
@@ -19,19 +21,11 @@ abstract class VehicleDetails {
 
   String getDetails(context);
 
-  String get getFirstLaunched => DateFormat.yMMMMd().format(firstLaunched);
+  String getFirstLaunched(context) => firstLaunched != null
+      ? DateFormat.yMMMMd().format(firstLaunched)
+      : FlutterI18n.translate(context, 'spacex.other.unknown');
 
   String get getLaunches => missions.length.toString();
 
   bool get hasMissions => missions.isNotEmpty;
-}
-
-class DetailsMission {
-  final String name;
-  final int id;
-
-  DetailsMission(this.name, this.id);
-
-  factory DetailsMission.fromJson(Map<String, dynamic> json) =>
-      DetailsMission(json['name'], json['flight']);
 }

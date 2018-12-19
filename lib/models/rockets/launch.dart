@@ -9,9 +9,11 @@ import '../../util/url.dart';
 import '../querry_model.dart';
 import 'rocket.dart';
 
-/// LAUNCH CLASS
-/// This class represent a single mission with all its details, like rocket,
-/// launchpad, links...
+/// LAUNCHES MODEL
+/// Model which storages information about
+/// past or futures launches, depending on [type].
+///   [type] == 0 => Upcoming launches
+///   [type] == 1 => Latest launches
 class LaunchesModel extends QuerryModel {
   final int type;
 
@@ -19,12 +21,17 @@ class LaunchesModel extends QuerryModel {
 
   @override
   Future loadData() async {
+    // Get item by http call & parse it
     response = await http.get(type == 0 ? Url.upcomingList : Url.launchesList);
     snapshot = json.decode(response.body);
-    clearLists();
 
+    // Clear old data
+    clearItems();
+
+    // Add parsed items
     items.addAll(snapshot.map((launch) => Launch.fromJson(launch)).toList());
 
+    // Add photos & shuffle them
     if (photos.isEmpty) {
       if (getItem(0).photos.isEmpty)
         photos.addAll(Url.spacexUpcomingScreen);
@@ -33,10 +40,14 @@ class LaunchesModel extends QuerryModel {
       photos.shuffle();
     }
 
-    loadingState(false);
+    // Finished loading data
+    setLoading(false);
   }
 }
 
+/// LAUNCH MODEL
+/// Details about a specific launch, performed by a Falcon rocket,
+/// including launch & landing pads, rocket & payload information...
 class Launch {
   final int number;
   final String name,
@@ -47,7 +58,7 @@ class Launch {
       tentativePrecision;
   final List links, photos;
   final DateTime launchDate, staticFireDate;
-  final bool launchSuccess, upcoming, tentativeTime;
+  final bool launchSuccess, tentativeTime;
   final Rocket rocket;
   final FailureDetails failureDetails;
 
@@ -64,7 +75,6 @@ class Launch {
     this.launchDate,
     this.staticFireDate,
     this.launchSuccess,
-    this.upcoming,
     this.tentativeTime,
     this.rocket,
     this.failureDetails,
@@ -89,7 +99,6 @@ class Launch {
       launchDate: DateTime.parse(json['launch_date_utc']).toLocal(),
       staticFireDate: setStaticFireDate(json['static_fire_date_utc']),
       launchSuccess: json['launch_success'],
-      upcoming: json['upcoming'],
       tentativeTime: json['is_tentative'],
       rocket: Rocket.fromJson(json['rocket']),
       failureDetails: setFailureDetails(json['launch_failure_details']),
@@ -112,7 +121,7 @@ class Launch {
     }
   }
 
-  String get getProfilePhoto => (hasImages) ? photos[0] : Url.defaultImage;
+  String get getProfilePhoto => hasImages ? photos[0] : Url.defaultImage;
 
   String getPhoto(index) =>
       hasImages ? photos[index] : Url.spacexUpcomingScreen[index];
@@ -157,22 +166,25 @@ class Launch {
     }
   }
 
-  String get getUtcLaunchDate =>
-      DateFormat.yMMMMd().addPattern('Hm', '  ·  ').format(launchDate.toUtc());
-
   String getStaticFireDate(context) => staticFireDate == null
       ? FlutterI18n.translate(context, 'spacex.other.unknown')
       : DateFormat.yMMMMd().format(staticFireDate);
 
-  List<String> getEllipsis(context) => <String>[
+  List<String> getMenu(context) => <String>[
         FlutterI18n.translate(context, 'spacex.launch.menu.reddit'),
         FlutterI18n.translate(context, 'spacex.launch.menu.press_kit'),
         FlutterI18n.translate(context, 'spacex.launch.menu.article')
       ];
 
-  int getEllipsisIndex(context, url) => getEllipsis(context).indexOf(url) + 1;
+  int getMenuIndex(context, url) => getMenu(context).indexOf(url) + 1;
+
+  bool isUrlEnabled(context, url) => links[getMenuIndex(context, url)] != null;
+
+  String getUrl(context, name) => links[getMenuIndex(context, name)];
 }
 
+/// FAILURE DETAILS MODEL
+/// Auxiliar model to storage details about a launch failure
 class FailureDetails {
   final num time, altitude;
   final String reason;

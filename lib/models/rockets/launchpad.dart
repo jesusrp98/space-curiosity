@@ -5,9 +5,10 @@ import 'package:http/http.dart' as http;
 import '../../util/url.dart';
 import '../querry_model.dart';
 
-/// LAUNCHPAD CLASS
-/// This class represents a real launchpad used in a SpaceX mission,
-/// with all its details.
+/// LAUNCHPAD MODEL
+/// Details about a specific launchpad, where rockets are launched from.
+/// Launchpad [id] : ccafs_slc_40
+/// Launchpad [name]: Cape Canaveral Air Force Station Space Launch Complex 40
 class LaunchpadModel extends QuerryModel {
   final String id, name;
 
@@ -15,12 +16,17 @@ class LaunchpadModel extends QuerryModel {
 
   @override
   Future loadData() async {
+    // Get item by http call
     response = await http.get(Url.launchpadDialog + id);
-    clearLists();
 
+    // Clear old data
+    clearItems();
+
+    // Add parsed item
     items.add(Launchpad.fromJson(json.decode(response.body)));
 
-    loadingState(false);
+    // Finished loading data
+    setLoading(false);
   }
 
   Launchpad get launchpad => items[0];
@@ -29,7 +35,6 @@ class LaunchpadModel extends QuerryModel {
 class Launchpad {
   final String name, status, location, state, details, url;
   final List<double> coordinates;
-  final List vehicles;
   final int attemptedLaunches, successfulLaunches;
 
   Launchpad({
@@ -40,7 +45,6 @@ class Launchpad {
     this.details,
     this.url,
     this.coordinates,
-    this.vehicles,
     this.attemptedLaunches,
     this.successfulLaunches,
   });
@@ -57,7 +61,6 @@ class Launchpad {
         json['location']['latitude'],
         json['location']['longitude'],
       ],
-      vehicles: json['vehicles_launched'],
       attemptedLaunches: json['attempted_launches'],
       successfulLaunches: json['successful_launches'],
     );
