@@ -125,7 +125,7 @@ class CapsuleDialog extends StatelessWidget {
                 style: Theme.of(context)
                     .textTheme
                     .subhead
-                    .copyWith(color: secondaryText),
+                    .copyWith(color: Theme.of(context).textTheme.caption.color),
               ),
             ]),
           ),

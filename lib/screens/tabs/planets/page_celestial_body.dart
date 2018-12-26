@@ -92,13 +92,13 @@ class CelestialBodyPage extends StatelessWidget {
       subtitle1: Text(
         celestialBody.getPopulation,
         style: Theme.of(context).textTheme.subhead.copyWith(
-              color: secondaryText,
+              color: Theme.of(context).textTheme.caption.color,
             ),
       ),
       subtitle2: Text(
         "I'm a subtitle!",
         style: Theme.of(context).textTheme.subhead.copyWith(
-              color: secondaryText,
+              color: Theme.of(context).textTheme.caption.color,
             ),
       ),
       details: celestialBody.description,

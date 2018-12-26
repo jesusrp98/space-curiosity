@@ -147,7 +147,7 @@ class LaunchPage extends StatelessWidget {
       subtitle1: Text(
         _launch.getLaunchDate,
         style: Theme.of(context).textTheme.subhead.copyWith(
-              color: secondaryText,
+              color: Theme.of(context).textTheme.caption.color,
             ),
       ),
       subtitle2: InkWell(
@@ -168,7 +168,7 @@ class LaunchPage extends StatelessWidget {
           _launch.launchpadName,
           style: Theme.of(context).textTheme.subhead.copyWith(
                 decoration: TextDecoration.underline,
-                color: secondaryText,
+                color: Theme.of(context).textTheme.caption.color,
               ),
         ),
       ),
@@ -238,10 +238,9 @@ class LaunchPage extends StatelessWidget {
                 Text(
                   _launch.failureDetails.getReason,
                   textAlign: TextAlign.justify,
-                  style: Theme.of(context)
-                      .textTheme
-                      .subhead
-                      .copyWith(color: secondaryText),
+                  style: Theme.of(context).textTheme.subhead.copyWith(
+                        color: Theme.of(context).textTheme.caption.color,
+                      ),
                 ),
               ])
             : Separator.none(),

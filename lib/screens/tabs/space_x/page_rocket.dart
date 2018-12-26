@@ -121,7 +121,10 @@ class RocketPage extends StatelessWidget {
         Text(
           _rocket.description,
           textAlign: TextAlign.justify,
-          style: TextStyle(fontSize: 15.0, color: secondaryText),
+          style: TextStyle(
+            fontSize: 15.0,
+            color: Theme.of(context).textTheme.caption.color,
+          ),
         )
       ]),
     );

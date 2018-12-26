@@ -61,10 +61,10 @@ class NasaImagePage extends StatelessWidget {
                           Container(width: 8.0),
                           Text(
                             image.getCopyright(context),
-                            style: Theme.of(context)
-                                .textTheme
-                                .subhead
-                                .copyWith(color: secondaryText),
+                            style: Theme.of(context).textTheme.subhead.copyWith(
+                                  color:
+                                      Theme.of(context).textTheme.caption.color,
+                                ),
                           ),
                         ],
                       ),
@@ -72,10 +72,10 @@ class NasaImagePage extends StatelessWidget {
                         children: <Widget>[
                           Text(
                             image.getDate,
-                            style: Theme.of(context)
-                                .textTheme
-                                .subhead
-                                .copyWith(color: secondaryText),
+                            style: Theme.of(context).textTheme.subhead.copyWith(
+                                  color:
+                                      Theme.of(context).textTheme.caption.color,
+                                ),
                           ),
                           Container(width: 8.0),
                           Icon(Icons.calendar_today, size: 32.0),
@@ -87,10 +87,9 @@ class NasaImagePage extends StatelessWidget {
                   Text(
                     image.description,
                     textAlign: TextAlign.justify,
-                    style: Theme.of(context)
-                        .textTheme
-                        .subhead
-                        .copyWith(color: secondaryText),
+                    style: Theme.of(context).textTheme.subhead.copyWith(
+                          color: Theme.of(context).textTheme.caption.color,
+                        ),
                   ),
                   Divider(height: 32.0),
                   Row(
@@ -146,7 +145,7 @@ class OptionButton extends StatelessWidget {
               style: Theme.of(context)
                   .textTheme
                   .subhead
-                  .copyWith(color: secondaryText),
+                  .copyWith(color: Theme.of(context).textTheme.caption.color),
             ),
           ],
         ),

@@ -217,7 +217,10 @@ class ShipPage extends StatelessWidget {
                 'spacex.vehicle.ship.missions.no_missions',
               ),
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 15.0, color: secondaryText),
+              style: TextStyle(
+                fontSize: 15.0,
+                color: Theme.of(context).textTheme.caption.color,
+              ),
             ),
     );
   }

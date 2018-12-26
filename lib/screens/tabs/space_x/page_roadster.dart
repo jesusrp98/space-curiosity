@@ -93,10 +93,9 @@ class RoadsterPage extends StatelessWidget {
                           context,
                           'spacex.vehicle.roadster.data_updated',
                         ),
-                        style: Theme.of(context)
-                            .textTheme
-                            .subhead
-                            .copyWith(color: secondaryText),
+                        style: Theme.of(context).textTheme.subhead.copyWith(
+                              color: Theme.of(context).textTheme.caption.color,
+                            ),
                       )
                     ]),
                   ),
@@ -133,7 +132,10 @@ class RoadsterPage extends StatelessWidget {
         Text(
           _roadster.description,
           textAlign: TextAlign.justify,
-          style: TextStyle(fontSize: 15.0, color: secondaryText),
+          style: TextStyle(
+            fontSize: 15.0,
+            color: Theme.of(context).textTheme.caption.color,
+          ),
         )
       ]),
     );

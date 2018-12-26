@@ -109,7 +109,10 @@ class IssTimesTab extends StatelessWidget {
                                   Icon(
                                     Icons.sentiment_dissatisfied,
                                     size: 100.0,
-                                    color: secondaryText,
+                                    color: Theme.of(context)
+                                        .textTheme
+                                        .caption
+                                        .color,
                                   ),
                                   Container(height: 16.0),
                                   Text(
@@ -117,10 +120,7 @@ class IssTimesTab extends StatelessWidget {
                                       context,
                                       'iss.times.tab.location_error',
                                     ),
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .title
-                                        .copyWith(color: primaryText),
+                                    style: Theme.of(context).textTheme.title,
                                   )
                                 ],
                               ),
@@ -147,7 +147,7 @@ class IssTimesTab extends StatelessWidget {
                 icon: Icon(
                   Icons.event,
                   size: 27.0,
-                  color: lateralText,
+                  color: Theme.of(context).textTheme.caption.color,
                 ),
                 tooltip: FlutterI18n.translate(
                   context,

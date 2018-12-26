@@ -21,10 +21,7 @@ class RowItem extends StatelessWidget {
         children: <Widget>[
           Text(
             title,
-            style: Theme.of(context)
-                .textTheme
-                .subhead
-                .copyWith(color: primaryText),
+            style: Theme.of(context).textTheme.subhead,
           ),
           description
         ],
@@ -85,7 +82,8 @@ class RowItem extends StatelessWidget {
       description,
       style: TextStyle(
         fontSize: 17.0,
-        color: secondaryText,
+        // TODO FIX THIS
+        color: Color(0xFFF44336),
         decoration: clickable ? TextDecoration.underline : TextDecoration.none,
       ),
     );

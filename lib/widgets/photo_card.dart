@@ -51,10 +51,9 @@ class PhotoCard extends StatelessWidget {
                 Separator.spacer(height: 8.0),
                 Text(
                   image.getDate,
-                  style: Theme.of(context)
-                      .textTheme
-                      .title
-                      .copyWith(color: secondaryText),
+                  style: Theme.of(context).textTheme.title.copyWith(
+                        color: Theme.of(context).textTheme.caption.color,
+                      ),
                 ),
               ]),
             )

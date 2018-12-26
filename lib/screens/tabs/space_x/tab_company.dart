@@ -107,10 +107,9 @@ class SpacexCompanyTab extends StatelessWidget {
                     Text(
                       model.company.getFounderDate(context),
                       textAlign: TextAlign.center,
-                      style: Theme.of(context)
-                          .textTheme
-                          .subhead
-                          .copyWith(color: secondaryText),
+                      style: Theme.of(context).textTheme.subhead.copyWith(
+                            color: Theme.of(context).textTheme.caption.color,
+                          ),
                     ),
                     Separator.spacer(),
                     RowItem.textRow(
@@ -164,10 +163,9 @@ class SpacexCompanyTab extends StatelessWidget {
                     Text(
                       model.company.details,
                       textAlign: TextAlign.justify,
-                      style: Theme.of(context)
-                          .textTheme
-                          .subhead
-                          .copyWith(color: secondaryText),
+                      style: Theme.of(context).textTheme.subhead.copyWith(
+                            color: Theme.of(context).textTheme.caption.color,
+                          ),
                     ),
                   ],
                 ),

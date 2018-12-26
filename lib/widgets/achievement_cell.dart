@@ -28,11 +28,13 @@ class AchievementCell extends StatelessWidget {
       title: Row(children: <Widget>[
         CircleAvatar(
           radius: 25.0,
-          backgroundColor: Colors.white,
+          backgroundColor: Theme.of(context).textTheme.subhead.color,
           child: Text(
             '#$index',
-            style:
-                Theme.of(context).textTheme.title.copyWith(color: Colors.black),
+            // TODO FIX THIS
+            style: Theme.of(context).textTheme.title.copyWith(
+                  color: Colors.white,
+                ),
           ),
         ),
         Separator.spacer(width: 16.0),
@@ -45,16 +47,10 @@ class AchievementCell extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 18.0,
                   fontWeight: FontWeight.bold,
-                  color: primaryText,
                 ),
               ),
               Separator.spacer(height: 4.0),
-              Text(
-                date,
-                style: Theme.of(context).textTheme.subhead.copyWith(
-                      color: primaryText,
-                    ),
-              ),
+              Text(date, style: Theme.of(context).textTheme.subhead),
             ],
           ),
         )
@@ -67,7 +63,7 @@ class AchievementCell extends StatelessWidget {
           style: Theme.of(context)
               .textTheme
               .subhead
-              .copyWith(color: secondaryText),
+              .copyWith(color: Theme.of(context).textTheme.caption.color),
         ),
       ]),
       onTap: () async => await FlutterWebBrowser.openWebPage(
