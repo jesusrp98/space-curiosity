@@ -20,16 +20,15 @@ class AppModel extends Model {
     }
   }
 
-  ThemeData _themeData = new ThemeData(
+  ThemeData _themeData = ThemeData(
     brightness: Brightness.dark,
     fontFamily: 'ProductSans',
-    primaryColor: primaryColor,
-    accentColor: accentColor,
-    canvasColor: backgroundColor,
-    cardColor: cardColor,
-    dialogBackgroundColor: cardColor,
-    dividerColor: dividerColor,
-    highlightColor: highlightColor,
+    primaryColor: darkPrimaryColor,
+    accentColor: darkAccentColor,
+    canvasColor: darkBackgroundColor,
+    scaffoldBackgroundColor: darkBackgroundColor,
+    cardColor: darkCardColor,
+    dividerColor: darkDividerColor,
   );
 
   get themeData => _themeData;
@@ -40,40 +39,33 @@ class AppModel extends Model {
         _themeData = ThemeData.light().copyWith(
           brightness: Brightness.light,
           // fontFamily: 'ProductSans',
-          primaryColor: Colors.blue,
-          accentColor: accentColor,
-          canvasColor: Colors.white,
-          // cardColor: cardColor,
-          dialogBackgroundColor: cardColor,
-          dividerColor: dividerColor,
-          highlightColor: highlightColor,
+          primaryColor: lightPrimaryColor,
+          accentColor: lightAccentColor,
+          dividerColor: lightDividerColor,
         );
         break;
       case Themes.dark:
         _themeData = ThemeData.dark().copyWith(
           brightness: Brightness.dark,
           // fontFamily: 'ProductSans',
-          primaryColor: primaryColor,
-          accentColor: accentColor,
-          canvasColor: backgroundColor,
-          cardColor: cardColor,
-          dialogBackgroundColor: cardColor,
-          dividerColor: dividerColor,
-          highlightColor: highlightColor,
+          primaryColor: darkPrimaryColor,
+          accentColor: darkAccentColor,
+          canvasColor: darkBackgroundColor,
+          scaffoldBackgroundColor: darkBackgroundColor,
+          cardColor: darkCardColor,
+          dividerColor: darkDividerColor,
         );
         break;
       case Themes.black:
         _themeData = ThemeData.dark().copyWith(
-          scaffoldBackgroundColor: Colors.black,
           brightness: Brightness.dark,
           // fontFamily: 'ProductSans',
-          primaryColor: primaryColor,
-          accentColor: accentColor,
-          canvasColor: Colors.black,
-          cardColor: Colors.black,
-          dialogBackgroundColor: Colors.black,
-          dividerColor: dividerColor,
-          highlightColor: highlightColor,
+          primaryColor: blackPrimaryColor,
+          accentColor: blackAccentColor,
+          canvasColor: blackBackgroundColor,
+          scaffoldBackgroundColor: blackBackgroundColor,
+          cardColor: blackCardColor,
+          dividerColor: blackDividerColor,
         );
         break;
       default:

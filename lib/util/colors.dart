@@ -36,3 +36,22 @@ const locationPin = const Color(0xFFD32F2F);
 
 // Used for disabled fabs, GO AWAY!
 const disabledFab = const Color(0xFF757575);
+
+/// LIGHT THEME
+const lightPrimaryColor = const Color(0xFF151515);
+const lightAccentColor = const Color(0xFFFFBC02D);
+const lightDividerColor = const Color(0xFF151515);
+
+/// DARK THEME
+const darkPrimaryColor = const Color(0xFF151515);
+const darkAccentColor = const Color(0xFFFFBC02D);
+const darkBackgroundColor = const Color(0xFF212121);
+const darkCardColor = const Color(0xFF2C2C2C);
+const darkDividerColor = const Color(0xFF616161);
+
+/// BLACK THEME
+const blackPrimaryColor = const Color(0xFF151515);
+const blackAccentColor = const Color(0xFFFFBC02D);
+const blackBackgroundColor = const Color(0xFF000000);
+const blackCardColor = const Color(0xFF1A1A1A);
+const blackDividerColor = const Color(0xFF616161);
