@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 
-import '../util/colors.dart';
 import 'separator.dart';
 
 /// ACHIEVEMENT CELL WIDGET
@@ -31,9 +30,10 @@ class AchievementCell extends StatelessWidget {
           backgroundColor: Theme.of(context).textTheme.subhead.color,
           child: Text(
             '#$index',
-            // TODO FIX THIS
             style: Theme.of(context).textTheme.title.copyWith(
-                  color: Colors.white,
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? Colors.black
+                      : Colors.white,
                 ),
           ),
         ),
@@ -68,7 +68,7 @@ class AchievementCell extends StatelessWidget {
       ]),
       onTap: () async => await FlutterWebBrowser.openWebPage(
             url: url,
-            androidToolbarColor: primaryColor,
+            androidToolbarColor: Theme.of(context).primaryColor,
           ),
     );
   }
