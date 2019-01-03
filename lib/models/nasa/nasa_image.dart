@@ -46,8 +46,8 @@ class NasaImage {
     );
   }
 
+  // TODO revisar esto
   String get getDate {
-    // print('Date: $date');
     if (date == null) return DateTime.now().millisecondsSinceEpoch.toString();
     try {
       return DateFormat.yMMMMd('en_US').format(date);

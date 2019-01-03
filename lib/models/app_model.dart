@@ -1,14 +1,13 @@
-import 'package:scoped_model/scoped_model.dart';
-import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
-import '../util/colors.dart';
+import 'package:scoped_model/scoped_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../util/colors.dart';
 
 enum Themes { light, dark, black }
 
 class AppModel extends Model {
   Themes _currentTheme = Themes.dark;
-  Brightness defaultBrigthness = Brightness.dark;
 
   get theme => _currentTheme;
 
@@ -74,7 +73,8 @@ class AppModel extends Model {
   }
 
   Future loadTheme() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
     try {
       var _savedTheme = prefs.getString("theme");
 
