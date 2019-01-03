@@ -30,7 +30,7 @@ class LaunchpadDialog extends StatelessWidget {
                     icon: const Icon(Icons.public),
                     onPressed: () async => await FlutterWebBrowser.openWebPage(
                           url: model.launchpad.url,
-                          androidToolbarColor: primaryColor,
+                          androidToolbarColor: Theme.of(context).primaryColor,
                         ),
                     tooltip: FlutterI18n.translate(
                       context,
@@ -57,7 +57,7 @@ class LaunchpadDialog extends StatelessWidget {
                             TileLayerOptions(
                               urlTemplate: Url.mapView,
                               subdomains: ['a', 'b', 'c', 'd'],
-                              backgroundColor: primaryColor,
+                              backgroundColor: Theme.of(context).primaryColor,
                             ),
                             MarkerLayerOptions(markers: [
                               Marker(
@@ -100,6 +100,7 @@ class LaunchpadDialog extends StatelessWidget {
               ),
               Separator.spacer(),
               RowItem.textRow(
+                context,
                 FlutterI18n.translate(
                   context,
                   'spacex.dialog.pad.status',
@@ -108,6 +109,7 @@ class LaunchpadDialog extends StatelessWidget {
               ),
               Separator.spacer(),
               RowItem.textRow(
+                context,
                 FlutterI18n.translate(
                   context,
                   'spacex.dialog.pad.location',
@@ -116,6 +118,7 @@ class LaunchpadDialog extends StatelessWidget {
               ),
               Separator.spacer(),
               RowItem.textRow(
+                context,
                 FlutterI18n.translate(
                   context,
                   'spacex.dialog.pad.state',
@@ -124,6 +127,7 @@ class LaunchpadDialog extends StatelessWidget {
               ),
               Separator.spacer(),
               RowItem.textRow(
+                context,
                 FlutterI18n.translate(
                   context,
                   'spacex.dialog.pad.coordinates',
@@ -132,6 +136,7 @@ class LaunchpadDialog extends StatelessWidget {
               ),
               Separator.spacer(),
               RowItem.textRow(
+                context,
                 FlutterI18n.translate(
                   context,
                   'spacex.dialog.pad.launches_successful',

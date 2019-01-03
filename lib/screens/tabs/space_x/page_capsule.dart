@@ -4,7 +4,6 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 
 import '../../../models/rockets/info_capsule.dart';
-import '../../../util/colors.dart';
 import '../../../widgets/cache_image.dart';
 import '../../../widgets/card_page.dart';
 import '../../../widgets/row_item.dart';
@@ -30,7 +29,7 @@ class CapsulePage extends StatelessWidget {
               icon: const Icon(Icons.public),
               onPressed: () async => await FlutterWebBrowser.openWebPage(
                     url: _capsule.url,
-                    androidToolbarColor: primaryColor,
+                    androidToolbarColor: Theme.of(context).primaryColor,
                   ),
               tooltip: FlutterI18n.translate(
                 context,
@@ -54,7 +53,7 @@ class CapsulePage extends StatelessWidget {
               duration: 750,
               onTap: (index) async => await FlutterWebBrowser.openWebPage(
                     url: _capsule.getPhoto(index),
-                    androidToolbarColor: primaryColor,
+                    androidToolbarColor: Theme.of(context).primaryColor,
                   ),
             ),
           ),
@@ -83,6 +82,7 @@ class CapsulePage extends StatelessWidget {
       ),
       body: Column(children: <Widget>[
         RowItem.textRow(
+          context,
           FlutterI18n.translate(
             context,
             'spacex.vehicle.capsule.description.launch_maiden',
@@ -91,6 +91,7 @@ class CapsulePage extends StatelessWidget {
         ),
         Separator.spacer(),
         RowItem.textRow(
+          context,
           FlutterI18n.translate(
             context,
             'spacex.vehicle.capsule.description.crew_capacity',
@@ -126,6 +127,7 @@ class CapsulePage extends StatelessWidget {
       ),
       body: Column(children: <Widget>[
         RowItem.textRow(
+          context,
           FlutterI18n.translate(
             context,
             'spacex.vehicle.capsule.specifications.payload_launch',
@@ -134,6 +136,7 @@ class CapsulePage extends StatelessWidget {
         ),
         Separator.spacer(),
         RowItem.textRow(
+          context,
           FlutterI18n.translate(
             context,
             'spacex.vehicle.capsule.specifications.payload_return',
@@ -150,6 +153,7 @@ class CapsulePage extends StatelessWidget {
         ),
         Separator.divider(),
         RowItem.textRow(
+          context,
           FlutterI18n.translate(
             context,
             'spacex.vehicle.capsule.specifications.height',
@@ -158,6 +162,7 @@ class CapsulePage extends StatelessWidget {
         ),
         Separator.spacer(),
         RowItem.textRow(
+          context,
           FlutterI18n.translate(
             context,
             'spacex.vehicle.capsule.specifications.diameter',
@@ -166,6 +171,7 @@ class CapsulePage extends StatelessWidget {
         ),
         Separator.spacer(),
         RowItem.textRow(
+          context,
           FlutterI18n.translate(
             context,
             'spacex.vehicle.capsule.specifications.mass',
@@ -184,6 +190,7 @@ class CapsulePage extends StatelessWidget {
       ),
       body: Column(children: <Widget>[
         RowItem.textRow(
+            context,
             FlutterI18n.translate(
               context,
               'spacex.vehicle.capsule.thruster.systems',
@@ -202,6 +209,7 @@ class CapsulePage extends StatelessWidget {
     return Column(children: <Widget>[
       Separator.divider(),
       RowItem.textRow(
+        context,
         FlutterI18n.translate(
           context,
           'spacex.vehicle.capsule.thruster.name',
@@ -210,6 +218,7 @@ class CapsulePage extends StatelessWidget {
       ),
       Separator.spacer(),
       RowItem.textRow(
+        context,
         FlutterI18n.translate(
           context,
           'spacex.vehicle.capsule.thruster.amount',
@@ -218,6 +227,7 @@ class CapsulePage extends StatelessWidget {
       ),
       Separator.spacer(),
       RowItem.textRow(
+        context,
         FlutterI18n.translate(
           context,
           'spacex.vehicle.capsule.thruster.fuel',
@@ -226,6 +236,7 @@ class CapsulePage extends StatelessWidget {
       ),
       Separator.spacer(),
       RowItem.textRow(
+        context,
         FlutterI18n.translate(
           context,
           'spacex.vehicle.capsule.thruster.oxidizer',
@@ -234,6 +245,7 @@ class CapsulePage extends StatelessWidget {
       ),
       Separator.spacer(),
       RowItem.textRow(
+        context,
         FlutterI18n.translate(
           context,
           'spacex.vehicle.capsule.thruster.thrust',

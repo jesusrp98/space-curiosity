@@ -6,7 +6,6 @@ import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import '../../../models/rockets/spacex_company.dart';
-import '../../../util/colors.dart';
 import '../../../widgets/achievement_cell.dart';
 import '../../../widgets/cache_image.dart';
 import '../../../widgets/row_item.dart';
@@ -39,7 +38,7 @@ class SpacexCompanyTab extends StatelessWidget {
                       onSelected: (name) async =>
                           await FlutterWebBrowser.openWebPage(
                             url: model.company.getUrl(context, name),
-                            androidToolbarColor: primaryColor,
+                            androidToolbarColor: Theme.of(context).primaryColor,
                           ),
                     ),
                   ],
@@ -62,7 +61,8 @@ class SpacexCompanyTab extends StatelessWidget {
                             onTap: (index) async =>
                                 await FlutterWebBrowser.openWebPage(
                                   url: model.getPhoto(index),
-                                  androidToolbarColor: primaryColor,
+                                  androidToolbarColor:
+                                      Theme.of(context).primaryColor,
                                 ),
                           ),
                   ),
@@ -113,6 +113,7 @@ class SpacexCompanyTab extends StatelessWidget {
                     ),
                     Separator.spacer(),
                     RowItem.textRow(
+                      context,
                       FlutterI18n.translate(
                         context,
                         'spacex.company.tab.ceo',
@@ -121,6 +122,7 @@ class SpacexCompanyTab extends StatelessWidget {
                     ),
                     Separator.spacer(),
                     RowItem.textRow(
+                      context,
                       FlutterI18n.translate(
                         context,
                         'spacex.company.tab.cto',
@@ -129,6 +131,7 @@ class SpacexCompanyTab extends StatelessWidget {
                     ),
                     Separator.spacer(),
                     RowItem.textRow(
+                      context,
                       FlutterI18n.translate(
                         context,
                         'spacex.company.tab.coo',
@@ -137,6 +140,7 @@ class SpacexCompanyTab extends StatelessWidget {
                     ),
                     Separator.spacer(),
                     RowItem.textRow(
+                      context,
                       FlutterI18n.translate(
                         context,
                         'spacex.company.tab.valuation',
@@ -145,6 +149,7 @@ class SpacexCompanyTab extends StatelessWidget {
                     ),
                     Separator.spacer(),
                     RowItem.textRow(
+                      context,
                       FlutterI18n.translate(
                         context,
                         'spacex.company.tab.location',
@@ -153,6 +158,7 @@ class SpacexCompanyTab extends StatelessWidget {
                     ),
                     Separator.spacer(),
                     RowItem.textRow(
+                      context,
                       FlutterI18n.translate(
                         context,
                         'spacex.company.tab.employees',

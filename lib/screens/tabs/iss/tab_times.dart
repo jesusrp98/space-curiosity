@@ -10,7 +10,6 @@ import 'package:scoped_model/scoped_model.dart';
 
 import '../../../models/iss/iss.dart';
 import '../../../models/iss/pass_time.dart';
-import '../../../util/colors.dart';
 import '../../../widgets/list_cell.dart';
 
 class IssTimesTab extends StatelessWidget {
@@ -52,7 +51,8 @@ class IssTimesTab extends StatelessWidget {
                                   urlTemplate:
                                       'https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png',
                                   subdomains: ['a', 'b', 'c', 'd'],
-                                  backgroundColor: primaryColor,
+                                  backgroundColor:
+                                      Theme.of(context).primaryColor,
                                 ),
                                 MarkerLayerOptions(
                                   markers: [

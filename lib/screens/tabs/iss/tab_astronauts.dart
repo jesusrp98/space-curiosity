@@ -9,7 +9,6 @@ import 'package:scoped_model/scoped_model.dart';
 
 import '../../../models/iss/astronauts.dart';
 import '../../../models/iss/iss.dart';
-import '../../../util/colors.dart';
 import '../../../widgets/list_cell.dart';
 
 class IssAstronautsTab extends StatelessWidget {
@@ -51,7 +50,8 @@ class IssAstronautsTab extends StatelessWidget {
                                   urlTemplate:
                                       'https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png',
                                   subdomains: ['a', 'b', 'c', 'd'],
-                                  backgroundColor: primaryColor,
+                                  backgroundColor:
+                                      Theme.of(context).primaryColor,
                                 ),
                                 MarkerLayerOptions(
                                   markers: [

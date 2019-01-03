@@ -4,7 +4,6 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 
 import '../../../models/rockets/info_ship.dart';
-import '../../../util/colors.dart';
 import '../../../widgets/card_page.dart';
 import '../../../widgets/row_item.dart';
 import '../../../widgets/separator.dart';
@@ -29,7 +28,7 @@ class ShipPage extends StatelessWidget {
               icon: const Icon(Icons.public),
               onPressed: () async => await FlutterWebBrowser.openWebPage(
                     url: _ship.url,
-                    androidToolbarColor: primaryColor,
+                    androidToolbarColor: Theme.of(context).primaryColor,
                   ),
               tooltip: FlutterI18n.translate(
                 context,
@@ -43,7 +42,7 @@ class ShipPage extends StatelessWidget {
             background: InkWell(
               onTap: () async => await FlutterWebBrowser.openWebPage(
                     url: _ship.getProfilePhoto,
-                    androidToolbarColor: primaryColor,
+                    androidToolbarColor: Theme.of(context).primaryColor,
                   ),
               child: Hero(
                 tag: _ship.id,
@@ -81,6 +80,7 @@ class ShipPage extends StatelessWidget {
       ),
       body: Column(children: <Widget>[
         RowItem.textRow(
+            context,
             FlutterI18n.translate(
               context,
               'spacex.vehicle.ship.description.home_port',
@@ -88,6 +88,7 @@ class ShipPage extends StatelessWidget {
             _ship.homePort),
         Separator.spacer(),
         RowItem.textRow(
+            context,
             FlutterI18n.translate(
               context,
               'spacex.vehicle.ship.description.built_date',
@@ -98,6 +99,7 @@ class ShipPage extends StatelessWidget {
                 Separator.divider(),
                 _ship.isLandable
                     ? RowItem.textRow(
+                        context,
                         FlutterI18n.translate(
                           context,
                           'spacex.vehicle.ship.description.landings_successful',
@@ -105,6 +107,7 @@ class ShipPage extends StatelessWidget {
                         _ship.getSuccessfulLandings,
                       )
                     : RowItem.textRow(
+                        context,
                         FlutterI18n.translate(
                           context,
                           'spacex.vehicle.ship.description.catches_successful',
@@ -125,6 +128,7 @@ class ShipPage extends StatelessWidget {
       ),
       body: Column(children: <Widget>[
         RowItem.textRow(
+          context,
           FlutterI18n.translate(
             context,
             'spacex.vehicle.ship.specifications.feature',
@@ -133,6 +137,7 @@ class ShipPage extends StatelessWidget {
         ),
         Separator.spacer(),
         RowItem.textRow(
+          context,
           FlutterI18n.translate(
             context,
             'spacex.vehicle.ship.specifications.model',
@@ -141,6 +146,7 @@ class ShipPage extends StatelessWidget {
         ),
         Separator.divider(),
         RowItem.textRow(
+          context,
           FlutterI18n.translate(
             context,
             'spacex.vehicle.ship.specifications.role_primary',
@@ -151,6 +157,7 @@ class ShipPage extends StatelessWidget {
         _ship.hasSeveralRoles
             ? Column(children: <Widget>[
                 RowItem.textRow(
+                  context,
                   FlutterI18n.translate(
                     context,
                     'spacex.vehicle.ship.specifications.role_secondary',
@@ -161,6 +168,7 @@ class ShipPage extends StatelessWidget {
               ])
             : Separator.none(),
         RowItem.textRow(
+          context,
           FlutterI18n.translate(
             context,
             'spacex.vehicle.ship.specifications.status',
@@ -169,6 +177,7 @@ class ShipPage extends StatelessWidget {
         ),
         Separator.spacer(),
         RowItem.textRow(
+          context,
           FlutterI18n.translate(
             context,
             'spacex.vehicle.ship.specifications.coordinates',
@@ -177,6 +186,7 @@ class ShipPage extends StatelessWidget {
         ),
         Separator.divider(),
         RowItem.textRow(
+          context,
           FlutterI18n.translate(
             context,
             'spacex.vehicle.ship.specifications.mass',
@@ -185,6 +195,7 @@ class ShipPage extends StatelessWidget {
         ),
         Separator.spacer(),
         RowItem.textRow(
+          context,
           FlutterI18n.translate(
             context,
             'spacex.vehicle.ship.specifications.speed',
@@ -228,6 +239,7 @@ class ShipPage extends StatelessWidget {
   Column _getMission(BuildContext context, List missions, mission) {
     return Column(children: <Widget>[
       RowItem.textRow(
+          context,
           FlutterI18n.translate(
             context,
             'spacex.vehicle.ship.missions.mission',

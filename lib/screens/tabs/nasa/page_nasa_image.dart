@@ -7,7 +7,6 @@ import 'package:image_downloader/image_downloader.dart';
 import 'package:share/share.dart';
 
 import '../../../models/nasa/nasa_image.dart';
-import '../../../util/colors.dart';
 
 class NasaImagePage extends StatelessWidget {
   final NasaImage image;
@@ -36,7 +35,7 @@ class NasaImagePage extends StatelessWidget {
                 ),
                 onTap: () => FlutterWebBrowser.openWebPage(
                       url: image.hdurl,
-                      androidToolbarColor: primaryColor,
+                      androidToolbarColor: Theme.of(context).primaryColor,
                     ),
               ),
             ),

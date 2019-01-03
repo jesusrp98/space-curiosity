@@ -13,7 +13,6 @@ import '../../../models/rockets/details_capsule.dart';
 import '../../../models/rockets/details_core.dart';
 import '../../../models/rockets/launchpad.dart';
 import '../../../models/rockets/spacex_home.dart';
-import '../../../util/colors.dart';
 import '../../../widgets/cache_image.dart';
 import '../../../widgets/list_cell.dart';
 import '../../../widgets/separator.dart';
@@ -64,7 +63,8 @@ class SpacexHomeTab extends StatelessWidget {
                                 onTap: (index) async =>
                                     await FlutterWebBrowser.openWebPage(
                                       url: model.getPhoto(index),
-                                      androidToolbarColor: primaryColor,
+                                      androidToolbarColor:
+                                          Theme.of(context).primaryColor,
                                     ),
                               ),
                       ),
