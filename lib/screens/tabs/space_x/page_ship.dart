@@ -1,4 +1,4 @@
-import 'package:cached_network_image/cached_network_image.dart';
+// import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
@@ -7,6 +7,7 @@ import '../../../models/rockets/info_ship.dart';
 import '../../../widgets/card_page.dart';
 import '../../../widgets/row_item.dart';
 import '../../../widgets/separator.dart';
+import '../../../widgets/cache_image.dart';
 
 /// SHIP PAGE VIEW
 /// This view all information about a specific ship. It displays Ship's specs.
@@ -46,12 +47,13 @@ class ShipPage extends StatelessWidget {
                   ),
               child: Hero(
                 tag: _ship.id,
-                child: CachedNetworkImage(
-                  imageUrl: _ship.getProfilePhoto,
-                  errorWidget: const Icon(Icons.error),
-                  fadeInDuration: Duration(milliseconds: 100),
-                  fit: BoxFit.cover,
-                ),
+                // child: CachedNetworkImage(
+                //   imageUrl: _ship.getProfilePhoto,
+                //   errorWidget: const Icon(Icons.error),
+                //   fadeInDuration: Duration(milliseconds: 100),
+                //   fit: BoxFit.cover,
+                // ),
+                child: CacheImage(_ship?.getProfilePhoto),
               ),
             ),
           ),
