@@ -1,4 +1,4 @@
-import 'package:cached_network_image/cached_network_image.dart';
+// import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 /// CACHE IMAGE WIDGET
@@ -11,14 +11,18 @@ class CacheImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CachedNetworkImage(
-      imageUrl: url,
-      errorWidget: Icon(
-        Icons.cancel,
-        size: 32.0,
-        color: Theme.of(context).textTheme.caption.color,
-      ),
-      fadeInDuration: Duration(milliseconds: 100),
+    // return CachedNetworkImage(
+    //   imageUrl: url,
+    //   errorWidget: Icon(
+    //     Icons.cancel,
+    //     size: 32.0,
+    //     color: Theme.of(context).textTheme.caption.color,
+    //   ),
+    //   fadeInDuration: Duration(milliseconds: 100),
+    //   fit: BoxFit.cover,
+    // );
+    return Image.network(
+      url,
       fit: BoxFit.cover,
     );
   }

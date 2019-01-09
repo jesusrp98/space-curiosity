@@ -3,23 +3,69 @@ import 'dart:convert';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../util/url.dart';
 import '../querry_model.dart';
 
 class NasaImagesModel extends QuerryModel {
   @override
   Future loadData() async {
-    response = await http.get(Url.dailyPicture);
-    final moreResponse = await http.get(Url.morePictures);
-    try {
-      snapshot = json.decode(moreResponse.body);
-      items.add(NasaImage.fromJson(json.decode(response.body)));
-      items.addAll(snapshot.map((image) => NasaImage.fromJson(image)).toList());
-    } catch (e) {}
+    var _local = await _loadItemsLocal();
+    if (_local != null && _local.isNotEmpty) {
+      items.addAll(_local);
+    }
+
+    _updateLocal();
 
     setLoading(false);
   }
+}
+
+void _updateLocal() async {
+  try {
+    final response = await http.get(Url.dailyPicture);
+    print(Url.dailyPicture);
+    final moreResponse = await http.get(Url.morePictures);
+    print(Url.morePictures);
+    final snapshot = json.decode(moreResponse.body);
+    List<dynamic> _items = [];
+    _items.add(NasaImage.fromJson(json.decode(response.body)));
+    _items.addAll(snapshot.map((image) => NasaImage.fromJson(image)).toList());
+    _saveItemsLocal(_items);
+  } catch (e) {
+    print(e);
+  }
+}
+
+void _saveItemsLocal(List<NasaImage> items) async {
+  final prefs = await SharedPreferences.getInstance();
+  var _local = await _loadItemsLocal();
+  List<NasaImage> _itemsToSave = _local;
+
+  for (var item in items) {
+    if (!_local.contains(item)) {
+      _itemsToSave.add(item);
+    }
+  }
+
+  prefs.setStringList(
+    'nasa_images',
+    _itemsToSave.map((image) => image.toJson().toString()).toList(),
+  );
+}
+
+Future<List<NasaImage>> _loadItemsLocal() async {
+  final prefs = await SharedPreferences.getInstance();
+  List<NasaImage> _items = [];
+  try {
+    var _localItems = prefs.getStringList('nasa_images');
+    for (var item in _localItems) {
+      _items.add(NasaImage.fromJson(json.decode(item)));
+    }
+  } catch (error) {
+    print(error);
+  }
+  return _items;
 }
 
 class NasaImage {
@@ -45,6 +91,14 @@ class NasaImage {
       date: DateTime.parse(json['date']),
     );
   }
+  Map<String, dynamic> toJson() => {
+        'title': title,
+        'explanation': description,
+        'url': url,
+        'hdurl': hdurl,
+        'copyright': copyright,
+        'date': date,
+      };
 
   // TODO revisar esto
   String get getDate {

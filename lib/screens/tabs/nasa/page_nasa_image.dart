@@ -1,11 +1,11 @@
-import 'package:cached_network_image/cached_network_image.dart';
+// import 'package:cached_network_image/cached_network_image.dart';
 import 'package:clipboard_manager/clipboard_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:image_downloader/image_downloader.dart';
 import 'package:share/share.dart';
-
+import '../../../widgets/cache_image.dart';
 import '../../../models/nasa/nasa_image.dart';
 
 class NasaImagePage extends StatelessWidget {
@@ -26,12 +26,13 @@ class NasaImagePage extends StatelessWidget {
               background: InkWell(
                 child: Hero(
                   tag: image.getDate,
-                  child: CachedNetworkImage(
-                    imageUrl: image.url,
-                    errorWidget: const Icon(Icons.error),
-                    fadeInDuration: Duration(milliseconds: 100),
-                    fit: BoxFit.cover,
-                  ),
+                  // child: CacheImage(
+                  //   imageUrl: image.url,
+                  //   errorWidget: const Icon(Icons.error),
+                  //   fadeInDuration: Duration(milliseconds: 100),
+                  //   fit: BoxFit.cover,
+                  // ),
+                  child: CacheImage(image?.url),
                 ),
                 onTap: () => FlutterWebBrowser.openWebPage(
                       url: image.hdurl,

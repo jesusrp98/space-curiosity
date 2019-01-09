@@ -219,17 +219,30 @@ class _ContentPageState extends State<ContentPage> {
     return ScopedModelDescendant<NasaImagesModel>(
       builder: (context, child, model) => model.isLoading
           ? NativeLoadingIndicator(center: true)
-          : Swiper(
-              itemBuilder: (_, index) => PhotoCard(model.getItem(index)),
-              scrollDirection: Axis.vertical,
-              itemCount: model?.getItemCount ?? 0,
-              autoplay: true,
-              autoplayDelay: 6000,
-              duration: 750,
-              itemWidth: MediaQuery.of(context).size.width,
-              itemHeight: MediaQuery.of(context).size.height * 0.7,
-              layout: SwiperLayout.STACK,
-            ),
+          : model.items == null || model.items.isEmpty
+              ? Center(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text('No Items Found'),
+                    IconButton(
+                      icon: Icon(Icons.refresh),
+                      onPressed: () => model.loadData(),
+                    ),
+                  ],
+                ),)
+              : Swiper(
+                  itemBuilder: (_, index) => PhotoCard(model.getItem(index)),
+                  scrollDirection: Axis.vertical,
+                  itemCount: model?.getItemCount ?? 0,
+                  autoplay: true,
+                  autoplayDelay: 6000,
+                  duration: 750,
+                  itemWidth: MediaQuery.of(context).size.width,
+                  itemHeight: MediaQuery.of(context).size.height * 0.7,
+                  layout: SwiperLayout.STACK,
+                ),
     );
   }
 }
