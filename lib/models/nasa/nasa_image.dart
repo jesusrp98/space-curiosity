@@ -11,6 +11,7 @@ class NasaImagesModel extends QuerryModel {
   @override
   Future loadData() async {
     var _local = await _loadItemsLocal();
+
     if (_local != null && _local.isNotEmpty) {
       items.addAll(_local);
     }
@@ -26,21 +27,22 @@ void _updateLocal() async {
     final response = await http.get(Url.dailyPicture);
     print(Url.dailyPicture);
     final moreResponse = await http.get(Url.morePictures);
+    final List<dynamic> _moreImages = json.decode(moreResponse.body);
     print(Url.morePictures);
-    final snapshot = json.decode(moreResponse.body);
-    List<dynamic> _items = [];
+    List _items = [];
     _items.add(NasaImage.fromJson(json.decode(response.body)));
-    _items.addAll(snapshot.map((image) => NasaImage.fromJson(image)).toList());
+    _items
+        .addAll(_moreImages.map((image) => NasaImage.fromJson(image)).toList());
     _saveItemsLocal(_items);
   } catch (e) {
     print(e);
   }
 }
 
-void _saveItemsLocal(List<NasaImage> items) async {
+void _saveItemsLocal(List items) async {
   final prefs = await SharedPreferences.getInstance();
   var _local = await _loadItemsLocal();
-  List<NasaImage> _itemsToSave = _local;
+  List _itemsToSave = _local;
 
   for (var item in items) {
     if (!_local.contains(item)) {
@@ -48,22 +50,28 @@ void _saveItemsLocal(List<NasaImage> items) async {
     }
   }
 
-  prefs.setStringList(
-    'nasa_images',
-    _itemsToSave.map((image) => image.toJson().toString()).toList(),
-  );
+  try {
+    prefs.setStringList(
+      'nasa_images',
+      _itemsToSave.map((image) => json.encode(image.toJson())).toList(),
+    );
+  } catch (e) {
+    print("Could not update local => $e");
+  }
 }
 
-Future<List<NasaImage>> _loadItemsLocal() async {
+Future<List> _loadItemsLocal() async {
   final prefs = await SharedPreferences.getInstance();
   List<NasaImage> _items = [];
   try {
-    var _localItems = prefs.getStringList('nasa_images');
-    for (var item in _localItems) {
-      _items.add(NasaImage.fromJson(json.decode(item)));
-    }
+    List<String> _localItems = prefs.getStringList('nasa_images');
+    for (String item in _localItems) {
+        _items.add(NasaImage.fromJson(json.decode(item)));
+      print("Items => $item");
+      print(NasaImage.fromJson(json.decode(item)).title);
+    };
   } catch (error) {
-    print(error);
+    print("Error Loading Images from Local $error");
   }
   return _items;
 }
@@ -97,7 +105,7 @@ class NasaImage {
         'url': url,
         'hdurl': hdurl,
         'copyright': copyright,
-        'date': date,
+        'date': date.toString(),
       };
 
   // TODO revisar esto
