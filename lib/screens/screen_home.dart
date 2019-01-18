@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:space_news/screens/tabs/iss/screen_iss.dart';
+import 'package:space_news/widgets/call_error.dart';
 
 import '../models/nasa/nasa_image.dart';
 import '../models/planets/celestial_body.dart';
@@ -220,18 +221,7 @@ class _ContentPageState extends State<ContentPage> {
       builder: (context, child, model) => model.isLoading
           ? NativeLoadingIndicator(center: true)
           : model.items == null || model.items.isEmpty
-              ? Center(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text('No Items Found'),
-                    IconButton(
-                      icon: Icon(Icons.refresh),
-                      onPressed: () => model.loadData(),
-                    ),
-                  ],
-                ),)
+              ? CallError(() => model.loadData())
               : Swiper(
                   itemBuilder: (_, index) => PhotoCard(model.getItem(index)),
                   scrollDirection: Axis.vertical,
