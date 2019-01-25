@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../util/colors.dart';
 import 'separator.dart';
 
 /// LIST CELL WIDGET
@@ -31,16 +30,22 @@ class ListCell extends StatelessWidget {
         children: <Widget>[
           Text(
             title,
-            style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+            style: TextStyle(
+              fontSize: 18.0,
+              color: Theme.of(context).textTheme.subhead.color,
+              fontWeight: FontWeight.bold,
+            ),
           ),
           Separator.spacer(height: 6.0),
         ],
       ),
-      subtitle: Text(subtitle,
-          style: Theme.of(context)
-              .textTheme
-              .subhead
-              .copyWith(color: secondaryText)),
+      subtitle: Text(
+        subtitle,
+        style: Theme.of(context)
+            .textTheme
+            .subhead
+            .copyWith(color: Theme.of(context).textTheme.caption.color),
+      ),
       trailing: trailing,
       onTap: onTap,
     );
@@ -60,7 +65,10 @@ class MissionNumber extends StatelessWidget {
       padding: const EdgeInsets.only(right: 6.0),
       child: Text(
         missionNumber,
-        style: TextStyle(fontSize: 18.0, color: lateralText),
+        style: Theme.of(context)
+            .textTheme
+            .subhead
+            .copyWith(color: Theme.of(context).textTheme.caption.color),
         textAlign: TextAlign.center,
       ),
     );

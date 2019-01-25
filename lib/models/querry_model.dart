@@ -35,9 +35,9 @@ abstract class QuerryModel extends Model {
 
   String getPhoto(index) => _photos[index];
 
-  int get getItemCount => _items.length;
+  int get getItemCount => _items?.length ?? 0;
 
-  int get getPhotosCount => _photos.length;
+  int get getPhotosCount => _photos?.length ?? 0;
 
   bool get isLoading => _loading;
 

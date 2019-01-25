@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:space_news/screens/tabs/iss/screen_iss.dart';
+import 'package:space_news/widgets/call_error.dart';
 
 import '../models/nasa/nasa_image.dart';
 import '../models/planets/celestial_body.dart';
@@ -23,6 +24,10 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
+        // leading: IconButton(
+        //   icon: Icon(Icons.settings),
+        //   onPressed: () => Navigator.pushNamed(context, "/settings"),
+        // ),
         title: Text(
           FlutterI18n.translate(context, 'app.title'),
           style: TextStyle(fontWeight: FontWeight.bold),
@@ -38,7 +43,7 @@ class HomeScreen extends StatelessWidget {
                     ))
                 .toList(),
             onSelected: (string) => openPage(context, _menu[string]),
-          )
+          ),
         ],
         centerTitle: true,
       ),
@@ -214,17 +219,19 @@ class _ContentPageState extends State<ContentPage> {
     return ScopedModelDescendant<NasaImagesModel>(
       builder: (context, child, model) => model.isLoading
           ? NativeLoadingIndicator(center: true)
-          : Swiper(
-              itemBuilder: (_, index) => PhotoCard(model.getItem(index)),
-              scrollDirection: Axis.vertical,
-              itemCount: model.getItemCount,
-              autoplay: true,
-              autoplayDelay: 6000,
-              duration: 750,
-              itemWidth: MediaQuery.of(context).size.width,
-              itemHeight: MediaQuery.of(context).size.height * 0.7,
-              layout: SwiperLayout.STACK,
-            ),
+          : model.items == null || model.items.isEmpty
+              ? CallError(() => model.loadData())
+              : Swiper(
+                  itemBuilder: (_, index) => PhotoCard(model.getItem(index)),
+                  scrollDirection: Axis.vertical,
+                  itemCount: model?.getItemCount ?? 0,
+                  autoplay: true,
+                  autoplayDelay: 6000,
+                  duration: 750,
+                  itemWidth: MediaQuery.of(context).size.width,
+                  itemHeight: MediaQuery.of(context).size.height * 0.7,
+                  layout: SwiperLayout.STACK,
+                ),
     );
   }
 }

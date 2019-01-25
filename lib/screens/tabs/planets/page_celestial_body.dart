@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 
 import '../../../models/planets/celestial_body.dart';
-import '../../../util/colors.dart';
 import '../../../widgets/card_page.dart';
 import '../../../widgets/head_card_page.dart';
 import '../../../widgets/hero_image.dart';
@@ -85,20 +84,20 @@ class CelestialBodyPage extends StatelessWidget {
         tag: celestialBody.id,
         onTap: () => FlutterWebBrowser.openWebPage(
               url: celestialBody.imageUrl,
-              androidToolbarColor: primaryColor,
+              androidToolbarColor: Theme.of(context).primaryColor,
             ),
       ),
       title: celestialBody.name,
       subtitle1: Text(
         celestialBody.getPopulation,
         style: Theme.of(context).textTheme.subhead.copyWith(
-              color: secondaryText,
+              color: Theme.of(context).textTheme.caption.color,
             ),
       ),
       subtitle2: Text(
         "I'm a subtitle!",
         style: Theme.of(context).textTheme.subhead.copyWith(
-              color: secondaryText,
+              color: Theme.of(context).textTheme.caption.color,
             ),
       ),
       details: celestialBody.description,
@@ -110,31 +109,35 @@ class CelestialBodyPage extends StatelessWidget {
       title: 'DETAILS',
       body: Column(
         children: <Widget>[
-          RowItem.textRow('Aphelion', celestialBody.getAphelion),
+          RowItem.textRow(context, 'Aphelion', celestialBody.getAphelion),
           const SizedBox(height: 8.0),
-          RowItem.textRow('Perihelion', celestialBody.getPerihelion),
+          RowItem.textRow(context, 'Perihelion', celestialBody.getPerihelion),
           const SizedBox(height: 8.0),
-          RowItem.textRow('Period', celestialBody.getPeriod),
+          RowItem.textRow(context, 'Period', celestialBody.getPeriod),
           const SizedBox(height: 8.0),
-          RowItem.textRow('Speed', celestialBody.getSpeed),
+          RowItem.textRow(context, 'Speed', celestialBody.getSpeed),
           const SizedBox(height: 8.0),
-          RowItem.textRow('Obliquity', celestialBody.getObliquity),
+          RowItem.textRow(context, 'Obliquity', celestialBody.getObliquity),
           const SizedBox(height: 8.0),
-          RowItem.textRow('Radius', celestialBody.getRadius),
+          RowItem.textRow(context, 'Radius', celestialBody.getRadius),
           const SizedBox(height: 8.0),
-          RowItem.textRow('Volume', celestialBody.getVolume),
+          RowItem.textRow(context, 'Volume', celestialBody.getVolume),
           const SizedBox(height: 8.0),
-          RowItem.textRow('Mass', celestialBody.getMass),
+          RowItem.textRow(context, 'Mass', celestialBody.getMass),
           const SizedBox(height: 8.0),
-          RowItem.textRow('Density', celestialBody.getDensity),
+          RowItem.textRow(context, 'Density', celestialBody.getDensity),
           const SizedBox(height: 8.0),
-          RowItem.textRow('Gravity', celestialBody.getGravity),
+          RowItem.textRow(context, 'Gravity', celestialBody.getGravity),
           const SizedBox(height: 8.0),
-          RowItem.textRow('Escape velocity', celestialBody.getEscapeVelocity),
+          RowItem.textRow(
+            context,
+            'Escape velocity',
+            celestialBody.getEscapeVelocity,
+          ),
           const SizedBox(height: 8.0),
-          RowItem.textRow('Temperature', celestialBody.getTemperature),
+          RowItem.textRow(context, 'Temperature', celestialBody.getTemperature),
           const SizedBox(height: 8.0),
-          RowItem.textRow('Pressure', celestialBody.getPressure),
+          RowItem.textRow(context, 'Pressure', celestialBody.getPressure),
         ],
       ),
     );

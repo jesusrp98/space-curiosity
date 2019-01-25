@@ -3,7 +3,6 @@ import 'package:flutter_web_browser/flutter_web_browser.dart';
 
 import '../models/nasa/nasa_image.dart';
 import '../screens/tabs/nasa/page_nasa_image.dart';
-import '../util/colors.dart';
 import 'cache_image.dart';
 import 'separator.dart';
 
@@ -29,7 +28,7 @@ class PhotoCard extends StatelessWidget {
             ),
         onLongPress: () async => await FlutterWebBrowser.openWebPage(
               url: image.url,
-              androidToolbarColor: primaryColor,
+              androidToolbarColor: Theme.of(context).primaryColor,
             ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -51,10 +50,9 @@ class PhotoCard extends StatelessWidget {
                 Separator.spacer(height: 8.0),
                 Text(
                   image.getDate,
-                  style: Theme.of(context)
-                      .textTheme
-                      .title
-                      .copyWith(color: secondaryText),
+                  style: Theme.of(context).textTheme.title.copyWith(
+                        color: Theme.of(context).textTheme.caption.color,
+                      ),
                 ),
               ]),
             )

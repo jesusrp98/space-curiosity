@@ -28,6 +28,7 @@ class Astronaut {
 
   String description(context) => FlutterI18n.translate(
         context,
-        'iss.astronauts.tab.from', {'place': craft},
+        'iss.astronauts.tab.from',
+        {'place': craft},
       );
 }

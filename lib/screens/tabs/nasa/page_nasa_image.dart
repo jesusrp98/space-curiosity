@@ -1,13 +1,11 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:clipboard_manager/clipboard_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:image_downloader/image_downloader.dart';
 import 'package:share/share.dart';
-
+import '../../../widgets/cache_image.dart';
 import '../../../models/nasa/nasa_image.dart';
-import '../../../util/colors.dart';
 
 class NasaImagePage extends StatelessWidget {
   final NasaImage image;
@@ -27,16 +25,11 @@ class NasaImagePage extends StatelessWidget {
               background: InkWell(
                 child: Hero(
                   tag: image.getDate,
-                  child: CachedNetworkImage(
-                    imageUrl: image.url,
-                    errorWidget: const Icon(Icons.error),
-                    fadeInDuration: Duration(milliseconds: 100),
-                    fit: BoxFit.cover,
-                  ),
+                  child: CacheImage(image?.url),
                 ),
                 onTap: () => FlutterWebBrowser.openWebPage(
                       url: image.hdurl,
-                      androidToolbarColor: primaryColor,
+                      androidToolbarColor: Theme.of(context).primaryColor,
                     ),
               ),
             ),
@@ -61,10 +54,10 @@ class NasaImagePage extends StatelessWidget {
                           Container(width: 8.0),
                           Text(
                             image.getCopyright(context),
-                            style: Theme.of(context)
-                                .textTheme
-                                .subhead
-                                .copyWith(color: secondaryText),
+                            style: Theme.of(context).textTheme.subhead.copyWith(
+                                  color:
+                                      Theme.of(context).textTheme.caption.color,
+                                ),
                           ),
                         ],
                       ),
@@ -72,10 +65,10 @@ class NasaImagePage extends StatelessWidget {
                         children: <Widget>[
                           Text(
                             image.getDate,
-                            style: Theme.of(context)
-                                .textTheme
-                                .subhead
-                                .copyWith(color: secondaryText),
+                            style: Theme.of(context).textTheme.subhead.copyWith(
+                                  color:
+                                      Theme.of(context).textTheme.caption.color,
+                                ),
                           ),
                           Container(width: 8.0),
                           Icon(Icons.calendar_today, size: 32.0),
@@ -87,10 +80,9 @@ class NasaImagePage extends StatelessWidget {
                   Text(
                     image.description,
                     textAlign: TextAlign.justify,
-                    style: Theme.of(context)
-                        .textTheme
-                        .subhead
-                        .copyWith(color: secondaryText),
+                    style: Theme.of(context).textTheme.subhead.copyWith(
+                          color: Theme.of(context).textTheme.caption.color,
+                        ),
                   ),
                   Divider(height: 32.0),
                   Row(
@@ -146,7 +138,7 @@ class OptionButton extends StatelessWidget {
               style: Theme.of(context)
                   .textTheme
                   .subhead
-                  .copyWith(color: secondaryText),
+                  .copyWith(color: Theme.of(context).textTheme.caption.color),
             ),
           ],
         ),
