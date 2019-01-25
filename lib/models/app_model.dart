@@ -35,18 +35,18 @@ class AppModel extends Model {
   set themeData(Themes newTheme) {
     switch (newTheme) {
       case Themes.light:
-        _themeData = ThemeData.light().copyWith(
+        _themeData = ThemeData(
           brightness: Brightness.light,
-          // fontFamily: 'ProductSans',
+          fontFamily: 'ProductSans',
           primaryColor: lightPrimaryColor,
           accentColor: lightAccentColor,
           dividerColor: lightDividerColor,
         );
         break;
       case Themes.dark:
-        _themeData = ThemeData.dark().copyWith(
+        _themeData = ThemeData(
           brightness: Brightness.dark,
-          // fontFamily: 'ProductSans',
+          fontFamily: 'ProductSans',
           primaryColor: darkPrimaryColor,
           accentColor: darkAccentColor,
           canvasColor: darkBackgroundColor,
@@ -56,9 +56,9 @@ class AppModel extends Model {
         );
         break;
       case Themes.black:
-        _themeData = ThemeData.dark().copyWith(
+        _themeData = ThemeData(
           brightness: Brightness.dark,
-          // fontFamily: 'ProductSans',
+          fontFamily: 'ProductSans',
           primaryColor: blackPrimaryColor,
           accentColor: blackAccentColor,
           canvasColor: blackBackgroundColor,

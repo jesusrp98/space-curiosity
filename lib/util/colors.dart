@@ -19,7 +19,7 @@ const darkDividerColor = const Color(0xFF616161);
 const blackPrimaryColor = const Color(0xFF151515);
 const blackAccentColor = const Color(0xFFFFBC02D);
 const blackBackgroundColor = const Color(0xFF000000);
-const blackCardColor = const Color(0xFF1A1A1A);
+const blackCardColor = const Color(0xFF101010);
 const blackDividerColor = const Color(0xFF616161);
 
 /// RowItem's icon colors

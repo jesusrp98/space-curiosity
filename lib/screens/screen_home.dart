@@ -172,9 +172,8 @@ class HomeScreen extends StatelessWidget {
   }
 
   openPage(BuildContext context, String route) {
-    // Navigator.pop(context);
-    // Navigator.of(context).pushNamed(route);
-    Navigator.pushNamed(context, route);
+    Navigator.pop(context);
+    Navigator.of(context).pushNamed(route);
   }
 }
 
