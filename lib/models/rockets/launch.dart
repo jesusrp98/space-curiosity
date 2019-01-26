@@ -49,7 +49,7 @@ class LaunchesModel extends QuerryModel {
 /// Details about a specific launch, performed by a Falcon rocket,
 /// including launch & landing pads, rocket & payload information...
 class Launch {
-  final int number;
+  final int number, launchWindow;
   final String name,
       launchpadId,
       launchpadName,
@@ -64,6 +64,7 @@ class Launch {
 
   Launch({
     this.number,
+    this.launchWindow,
     this.name,
     this.launchpadId,
     this.launchpadName,
@@ -83,6 +84,7 @@ class Launch {
   factory Launch.fromJson(Map<String, dynamic> json) {
     return Launch(
       number: json['flight_number'],
+      launchWindow: json['launch_window'],
       name: json['mission_name'],
       launchpadId: json['launch_site']['site_id'],
       launchpadName: json['launch_site']['site_name'],
@@ -121,6 +123,22 @@ class Launch {
     }
   }
 
+  String getLaunchWindow(context) {
+    if (launchWindow == null)
+      return FlutterI18n.translate(context, 'spacex.other.unknown');
+    else if (launchWindow == 0)
+      return FlutterI18n.translate(
+        context,
+        'spacex.launch.page.rocket.instantaneous_window',
+      );
+    else if (launchWindow < 60)
+      return '${NumberFormat.decimalPattern().format(launchWindow)} s';
+    else if (launchWindow < 3600)
+      return '${NumberFormat.decimalPattern().format(launchWindow / 60)} min';
+    else
+      return '${NumberFormat.decimalPattern().format(launchWindow / 3600)} h';
+  }
+
   String get getProfilePhoto => hasImages ? photos[0] : Url.defaultImage;
 
   String getPhoto(index) =>
@@ -147,24 +165,44 @@ class Launch {
       details ??
       FlutterI18n.translate(context, 'spacex.launch.page.no_description');
 
-  String get getLaunchDate {
+  String getLaunchDate(context) {
     switch (tentativePrecision) {
       case 'hour':
-        return '${DateFormat.yMMMMd().addPattern('Hm', ' · ').format(launchDate)} ${launchDate.timeZoneName}';
-      case 'day':
-        return 'NET ${DateFormat.yMMMMd().format(launchDate)}';
-      case 'month':
-        return 'NET ${DateFormat.yMMMM().format(launchDate)}';
-      case 'quarter':
-        return 'NET ${DateFormat.yQQQ().format(launchDate)}';
-      case 'half':
-        return 'NET H${launchDate.month < 7 ? 1 : 2} ${launchDate.year}';
-      case 'year':
-        return 'NET ${DateFormat.y().format(launchDate)}';
+        return FlutterI18n.translate(
+          context,
+          'spacex.other.date.time',
+          {'date': getTentativeDate, 'hour': getTentativeTime},
+        );
       default:
-        return 'Date error';
+        return FlutterI18n.translate(
+          context,
+          'spacex.other.date.upcoming',
+          {'date': getTentativeDate},
+        );
     }
   }
+
+  String get getTentativeDate {
+    switch (tentativePrecision) {
+      case 'hour':
+        return DateFormat.yMMMMd().format(launchDate);
+      case 'day':
+        return DateFormat.yMMMMd().format(launchDate);
+      case 'month':
+        return DateFormat.yMMMM().format(launchDate);
+      case 'quarter':
+        return DateFormat.yQQQ().format(launchDate);
+      case 'half':
+        return 'H${launchDate.month < 7 ? 1 : 2} ${launchDate.year}';
+      case 'year':
+        return DateFormat.y().format(launchDate);
+      default:
+        return 'date error';
+    }
+  }
+
+  String get getTentativeTime =>
+      '${DateFormat.Hm().format(launchDate)} ${launchDate.timeZoneName}';
 
   String getStaticFireDate(context) => staticFireDate == null
       ? FlutterI18n.translate(context, 'spacex.other.unknown')

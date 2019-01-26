@@ -96,8 +96,7 @@
       "title": "Welcome to SpaceX",
       "icon": "Home",
       "tab": {
-        "no_countdown": "{mission} is coming soon!",
-        "live_mission": "{mission} is now live!",
+        "live_mission": "Watch streaming",
         "mission": {
           "title": "Launched by {rocket}",
           "body": "It will carry {payloads}",
@@ -105,7 +104,8 @@
         },
         "date": {
           "title": "Launch date",
-          "body": "Launch is set to {date}."
+          "body": "Launch is set to {date} at {time}.",
+          "body_upcoming": "Launch is planned for {date}."
         },
         "launchpad": {
           "title": "Launchpad",
@@ -114,6 +114,7 @@
         "static_fire": {
           "title": "Static fire",
           "body": "Static fire is dated to {date}.",
+          "body_done": "Static fire has been completed on {date}.",
           "body_unknown": "Static fire event is not dated yet."
         },
         "fairings": {
@@ -289,6 +290,8 @@
           "name": "Name",
           "model": "Model",
           "static_fire_date": "Static fire",
+          "launch_window": "Launch window",
+          "instantaneous_window": "Instantaneous",
           "launch_success": "Launch success",
           "failure": {
             "time": "Failure time",
@@ -380,6 +383,10 @@
       "unknown": "Unknown",
       "block": "Block {block}",
       "no_data": "No data",
+      "date": {
+        "time": "{date} · {hour}",
+        "upcoming": "NET {date}"
+      },
       "menu": {
         "wikipedia": "Wikipedia page",
         "marine_traffic": "MarineTraffic page"
@@ -389,6 +396,48 @@
         "add_event": "Add event",
         "search": "Search"
       }
+    }
+  },
+  "about": {
+    "version": {
+      "title": "About SpaceX GO!",
+      "body": "v{version} - {status}"
+    },
+    "author": {
+      "title": "Created by Jesús Rodríguez",
+      "body": "You can find me on Reddit"
+    },
+    "review": {
+      "title": "Enjoying the app?",
+      "body": "Leave your experience in the store page"
+    },
+    "email": {
+      "title": "Email me",
+      "body": "Report nasty bugs or request new features"
+    },
+    "more_apps": {
+      "title": "More from Chechu",
+      "body": "Well designed, open-source apps"
+    },
+    "free_software": {
+      "title": "This is free software",
+      "body": "Source code is available on GitHub for everyone"
+    },
+    "flutter": {
+      "title": "Built with Flutter",
+      "body": "Beautiful native apps in record time"
+    },
+    "imperial_units": {
+      "title": "No imperial units?",
+      "body": "Learn more about the 'International System'"
+    },
+    "credits": {
+      "title": "App credits",
+      "body": "Using the open-source r/SpaceX API"
+    },
+    "spacex": {
+      "title": "SpaceX is a private trademark",
+      "body": "This app is not affiliated in any way with SpaceX"
     }
   }
 }

@@ -35,6 +35,15 @@ class Rocket {
   bool get isHeavy => firstStage.length != 1;
 
   bool get hasFairing => fairing != null;
+
+  Core get getSingleCore => firstStage[0];
+
+  bool isSideCore(Core core) {
+    if (id == null || !isHeavy)
+      return false;
+    else
+      return firstStage.indexOf(core) != 0;
+  }
 }
 
 /// CORE CLASS
@@ -174,7 +183,9 @@ class Payload {
       : '${NumberFormat.decimalPattern().format(mass)} kg';
 
   bool get isNasaPayload =>
-      customer == 'NASA (CCtCap)' || customer == 'NASA (CRS)';
+      customer == 'NASA (CCtCap)' ||
+      customer == 'NASA (CRS)' ||
+      customer == 'NASA(COTS)';
 }
 
 /// FAIRING MODEL

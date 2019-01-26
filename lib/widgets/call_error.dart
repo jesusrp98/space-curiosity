@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 /// CALL ERROR WIDGET
 /// Widget displayed when an error occurred presenting API data.
+// TODO finish this
 class CallError extends StatelessWidget {
   final VoidCallback onTap;
 
