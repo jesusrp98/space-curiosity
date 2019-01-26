@@ -7,67 +7,66 @@ import '../util/colors.dart';
 enum Themes { light, dark, black }
 
 class AppModel extends Model {
-  Themes _currentTheme = Themes.dark;
+  static final List<ThemeData> _themes = [
+    ThemeData(
+      brightness: Brightness.light,
+      fontFamily: 'ProductSans',
+      primaryColor: lightPrimaryColor,
+      accentColor: lightAccentColor,
+      dividerColor: lightDividerColor,
+    ),
+    ThemeData(
+      brightness: Brightness.dark,
+      fontFamily: 'ProductSans',
+      primaryColor: darkPrimaryColor,
+      accentColor: darkAccentColor,
+      canvasColor: darkBackgroundColor,
+      scaffoldBackgroundColor: darkBackgroundColor,
+      cardColor: darkCardColor,
+      dividerColor: darkDividerColor,
+    ),
+    ThemeData(
+      brightness: Brightness.dark,
+      fontFamily: 'ProductSans',
+      primaryColor: blackPrimaryColor,
+      accentColor: blackAccentColor,
+      canvasColor: blackBackgroundColor,
+      scaffoldBackgroundColor: blackBackgroundColor,
+      cardColor: blackCardColor,
+      dividerColor: blackDividerColor,
+    )
+  ];
 
-  get theme => _currentTheme;
+  Themes _theme = Themes.dark;
+
+  ThemeData _themeData = _themes[1];
+
+  get theme => _theme;
 
   set theme(Themes newTheme) {
     if (newTheme != null) {
-      _currentTheme = newTheme;
+      _theme = newTheme;
       themeData = newTheme;
       notifyListeners();
     }
   }
-
-  ThemeData _themeData = ThemeData(
-    brightness: Brightness.dark,
-    fontFamily: 'ProductSans',
-    primaryColor: darkPrimaryColor,
-    accentColor: darkAccentColor,
-    canvasColor: darkBackgroundColor,
-    scaffoldBackgroundColor: darkBackgroundColor,
-    cardColor: darkCardColor,
-    dividerColor: darkDividerColor,
-  );
 
   get themeData => _themeData;
 
   set themeData(Themes newTheme) {
     switch (newTheme) {
       case Themes.light:
-        _themeData = ThemeData(
-          brightness: Brightness.light,
-          fontFamily: 'ProductSans',
-          primaryColor: lightPrimaryColor,
-          accentColor: lightAccentColor,
-          dividerColor: lightDividerColor,
-        );
+        _themeData = _themes[0];
         break;
       case Themes.dark:
-        _themeData = ThemeData(
-          brightness: Brightness.dark,
-          fontFamily: 'ProductSans',
-          primaryColor: darkPrimaryColor,
-          accentColor: darkAccentColor,
-          canvasColor: darkBackgroundColor,
-          scaffoldBackgroundColor: darkBackgroundColor,
-          cardColor: darkCardColor,
-          dividerColor: darkDividerColor,
-        );
+        _themeData = _themes[1];
         break;
       case Themes.black:
-        _themeData = ThemeData(
-          brightness: Brightness.dark,
-          fontFamily: 'ProductSans',
-          primaryColor: blackPrimaryColor,
-          accentColor: blackAccentColor,
-          canvasColor: blackBackgroundColor,
-          scaffoldBackgroundColor: blackBackgroundColor,
-          cardColor: blackCardColor,
-          dividerColor: blackDividerColor,
-        );
+        _themeData = _themes[2];
         break;
       default:
+        _themeData = _themes[1];
+        break;
     }
     notifyListeners();
   }
@@ -76,19 +75,15 @@ class AppModel extends Model {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
     try {
-      var _savedTheme = prefs.getString("theme");
+      final String _savedTheme = prefs.getString('theme');
 
-      if (_savedTheme.contains('light')) {
+      if (_savedTheme.contains('light'))
         theme = Themes.light;
-      } else if (_savedTheme.contains('dark')) {
-        theme = Themes.dark;
-      } else if (_savedTheme.contains('black')) {
+      else if (_savedTheme.contains('black'))
         theme = Themes.black;
-      } else {
+      else
         theme = Themes.dark;
-      }
     } catch (e) {
-      print(e);
       theme = Themes.dark;
       prefs.setString('theme', 'dark');
     }
