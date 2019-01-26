@@ -48,8 +48,7 @@
       "title": "Bienvenido a SpaceX",
       "icon": "Inicio",
       "tab": {
-        "no_countdown": "¡{mission} próximamente!",
-        "live_mission": "¡{mission} está ahora en vivo!",
+        "live_mission": "Ver retransmisión",
         "mission": {
           "title": "Lanzado por {rocket}",
           "body": "Llevará a {payloads}",
@@ -57,7 +56,8 @@
         },
         "date": {
           "title": "Fecha de lanzamiento",
-          "body": "El lanzamiento se realizará el {date}."
+          "body": "El lanzamiento se realizará el {date} a las {time}.",
+          "body_upcoming": "El lanzamineto esta previsto para {date}."
         },
         "launchpad": {
           "title": "Plataforma de lanzamiento",
@@ -66,6 +66,7 @@
         "static_fire": {
           "title": "Prueba de ignición",
           "body": "Este evento está fechado para el {date}.",
+          "body_done": "Este evento se completó el {date}.",
           "body_unknown": "Este evento todavía no tiene fecha."
         },
         "fairings": {
@@ -103,7 +104,7 @@
       "subtitle": {
         "first_launched": "Primer lanzamiento en {date}",
         "scheduled_launch": "Programado para {date}",
-        "launched": "Lanzado en {date}",
+        "launched": "Lanzado el {date}",
         "ship_built": "Embarcación construida en {date}"
       },
       "roadster": {
@@ -241,6 +242,8 @@
           "name": "Nombre",
           "model": "Modelo",
           "static_fire_date": "Prueba de ignición",
+          "launch_window": "Ventana de lanzamiento",
+          "instantaneous_window": "Instantáneo",
           "launch_success": "Lanzamiento exitoso",
           "failure": {
             "time": "Tiempo",
@@ -332,6 +335,10 @@
       "unknown": "Desconocido",
       "block": "Bloque {block}",
       "no_data": "No hay datos",
+      "date": {
+        "time": "{date}, {hour}",
+        "upcoming": "Previsto para {date}"
+      },
       "menu": {
         "wikipedia": "Página de Wikipedia",
         "marine_traffic": "Página de MarineTraffic"

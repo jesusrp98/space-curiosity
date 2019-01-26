@@ -96,8 +96,7 @@
       "title": "Welcome to SpaceX",
       "icon": "Home",
       "tab": {
-        "no_countdown": "{mission} is coming soon!",
-        "live_mission": "{mission} is now live!",
+        "live_mission": "Watch streaming",
         "mission": {
           "title": "Launched by {rocket}",
           "body": "It will carry {payloads}",
@@ -105,7 +104,8 @@
         },
         "date": {
           "title": "Launch date",
-          "body": "Launch is set to {date}."
+          "body": "Launch is set to {date} at {time}.",
+          "body_upcoming": "Launch is planned for {date}."
         },
         "launchpad": {
           "title": "Launchpad",
@@ -114,6 +114,7 @@
         "static_fire": {
           "title": "Static fire",
           "body": "Static fire is dated to {date}.",
+          "body_done": "Static fire has been completed on {date}.",
           "body_unknown": "Static fire event is not dated yet."
         },
         "fairings": {
@@ -289,6 +290,8 @@
           "name": "Name",
           "model": "Model",
           "static_fire_date": "Static fire",
+          "launch_window": "Launch window",
+          "instantaneous_window": "Instantaneous",
           "launch_success": "Launch success",
           "failure": {
             "time": "Failure time",
@@ -380,6 +383,10 @@
       "unknown": "Unknown",
       "block": "Block {block}",
       "no_data": "No data",
+      "date": {
+        "time": "{date} · {hour}",
+        "upcoming": "NET {date}"
+      },
       "menu": {
         "wikipedia": "Wikipedia page",
         "marine_traffic": "MarineTraffic page"
