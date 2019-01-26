@@ -25,10 +25,8 @@ class NasaImagesModel extends QuerryModel {
 void _updateLocal() async {
   try {
     final response = await http.get(Url.dailyPicture);
-    print(Url.dailyPicture);
     final moreResponse = await http.get(Url.morePictures);
     final List<dynamic> _moreImages = json.decode(moreResponse.body);
-    print(Url.morePictures);
     List _items = [];
     _items.add(NasaImage.fromJson(json.decode(response.body)));
     _items
@@ -67,8 +65,6 @@ Future<List> _loadItemsLocal() async {
     List<String> _localItems = prefs.getStringList('nasa_images');
     for (String item in _localItems) {
         _items.add(NasaImage.fromJson(json.decode(item)));
-      print("Items => $item");
-      print(NasaImage.fromJson(json.decode(item)).title);
     };
   } catch (error) {
     print("Error Loading Images from Local $error");
