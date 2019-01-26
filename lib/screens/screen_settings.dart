@@ -82,28 +82,22 @@ class _SettingsScreenState extends State<SettingsScreen> {
   void _changeTheme({AppModel model, Themes theme}) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    if (theme == Themes.dark) {
-      model.theme = Themes.dark;
-      prefs.setString('theme', 'dark');
+    prefs.setInt('theme', theme.index);
+    model.theme = theme;
+    if (theme == Themes.dark)
       setState(() {
         _darkTheme = true;
         _oledBlack = false;
       });
-    } else if (theme == Themes.black) {
-      model.theme = Themes.black;
-      prefs.setString('theme', 'black');
+    else if (theme == Themes.black)
       setState(() {
         _darkTheme = true;
         _oledBlack = true;
       });
-    } else {
-      model.theme = Themes.light;
-      prefs.setString('theme', 'light');
+    else
       setState(() {
         _darkTheme = false;
         _oledBlack = false;
       });
-    }
-    model.themeData = model.theme;
   }
 }

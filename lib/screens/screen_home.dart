@@ -4,17 +4,15 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'package:space_news/screens/tabs/iss/screen_iss.dart';
-import 'package:space_news/widgets/call_error.dart';
 
 import '../models/nasa/nasa_image.dart';
-import '../models/planets/celestial_body.dart';
+import '../widgets/call_error.dart';
 import '../widgets/list_cell.dart';
 import '../widgets/photo_card.dart';
+import '../widgets/separator.dart';
 
 class HomeScreen extends StatelessWidget {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  final Map<String, String> _menu = {
+  static final Map<String, String> _menu = {
     'home.menu.about': '/about',
     'home.menu.settings': '/settings'
   };
@@ -22,12 +20,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey,
       appBar: AppBar(
-        // leading: IconButton(
-        //   icon: Icon(Icons.settings),
-        //   onPressed: () => Navigator.pushNamed(context, "/settings"),
-        // ),
         title: Text(
           FlutterI18n.translate(context, 'app.title'),
           style: TextStyle(fontWeight: FontWeight.bold),
@@ -58,16 +51,13 @@ class HomeScreen extends StatelessWidget {
                     children: <Widget>[
                       Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Icon(
-                          Icons.expand_more,
-                          size: 24.0,
-                        ),
+                        child: const Icon(Icons.expand_more, size: 24.0),
                       ),
                       Expanded(
                         child: ListView(
                           children: <Widget>[
                             ListCell(
-                              leading: Icon(
+                              leading: const Icon(
                                 FontAwesomeIcons.rocket,
                                 size: 42,
                               ),
@@ -81,7 +71,7 @@ class HomeScreen extends StatelessWidget {
                               ),
                               onTap: () => openPage(context, '/spacex'),
                             ),
-                            const Divider(height: 0.0, indent: 74.0),
+                            Separator.divider(height: 0.0, indent: 74.0),
                             ListCell(
                               leading: Icon(
                                 Icons.description,
@@ -97,12 +87,9 @@ class HomeScreen extends StatelessWidget {
                               ),
                               onTap: () => openPage(context, '/news'),
                             ),
-                            const Divider(height: 0.0, indent: 74.0),
+                            Separator.divider(height: 0.0, indent: 74.0),
                             ListCell(
-                              leading: Icon(
-                                Icons.public,
-                                size: 42,
-                              ),
+                              leading: const Icon(Icons.public, size: 42),
                               title: FlutterI18n.translate(
                                 context,
                                 'home.page.menu.planets.title',
@@ -113,12 +100,9 @@ class HomeScreen extends StatelessWidget {
                               ),
                               onTap: () => openPage(context, '/planets'),
                             ),
-                            const Divider(height: 0.0, indent: 74.0),
+                            Separator.divider(height: 0.0, indent: 74.0),
                             ListCell(
-                              leading: Icon(
-                                Icons.my_location,
-                                size: 42,
-                              ),
+                              leading: const Icon(Icons.my_location, size: 42),
                               title: FlutterI18n.translate(
                                 context,
                                 'home.page.menu.iss.title',
@@ -129,9 +113,9 @@ class HomeScreen extends StatelessWidget {
                               ),
                               onTap: () => openPage(context, '/iss'),
                             ),
-                            const Divider(height: 0.0, indent: 74.0),
+                            Separator.divider(height: 0.0, indent: 74.0),
                             ListCell(
-                              leading: Icon(
+                              leading: const Icon(
                                 Icons.fitness_center,
                                 size: 42,
                               ),
@@ -145,12 +129,9 @@ class HomeScreen extends StatelessWidget {
                               ),
                               onTap: () => openPage(context, '/weight'),
                             ),
-                            const Divider(height: 0.0, indent: 74.0),
+                            Separator.divider(height: 0.0, indent: 74.0),
                             ListCell(
-                              leading: Icon(
-                                Icons.camera_alt,
-                                size: 42,
-                              ),
+                              leading: const Icon(Icons.camera_alt, size: 42),
                               title: FlutterI18n.translate(
                                 context,
                                 'home.page.menu.mars.title',
@@ -177,26 +158,7 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-class ContentPage extends StatefulWidget {
-  const ContentPage({Key key}) : super(key: key);
-
-  @override
-  _ContentPageState createState() => _ContentPageState();
-}
-
-class _ContentPageState extends State<ContentPage> {
-  NasaImagesModel _nasaModel;
-  PlanetsModel _planetsModel;
-
-  @override
-  void initState() {
-    _nasaModel = NasaImagesModel();
-    _planetsModel = PlanetsModel();
-    _nasaModel.loadData().then((_) => setState(() {}));
-    _planetsModel.loadData().then((_) => setState(() {}));
-    super.initState();
-  }
-
+class ContentPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -206,7 +168,7 @@ class _ContentPageState extends State<ContentPage> {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: ScopedModel<NasaImagesModel>(
-              model: _nasaModel,
+              model: NasaImagesModel()..loadData(),
               child: _buildNasaImage(),
             ),
           ),

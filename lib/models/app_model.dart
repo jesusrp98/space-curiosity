@@ -54,20 +54,7 @@ class AppModel extends Model {
   get themeData => _themeData;
 
   set themeData(Themes newTheme) {
-    switch (newTheme) {
-      case Themes.light:
-        _themeData = _themes[0];
-        break;
-      case Themes.dark:
-        _themeData = _themes[1];
-        break;
-      case Themes.black:
-        _themeData = _themes[2];
-        break;
-      default:
-        _themeData = _themes[1];
-        break;
-    }
+    _themeData = _themes[newTheme.index];
     notifyListeners();
   }
 
@@ -75,17 +62,9 @@ class AppModel extends Model {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
     try {
-      final String _savedTheme = prefs.getString('theme');
-
-      if (_savedTheme.contains('light'))
-        theme = Themes.light;
-      else if (_savedTheme.contains('black'))
-        theme = Themes.black;
-      else
-        theme = Themes.dark;
+      theme = Themes.values[prefs.getInt('theme')];
     } catch (e) {
-      theme = Themes.dark;
-      prefs.setString('theme', 'dark');
+      prefs.setInt('theme', 1);
     }
     notifyListeners();
   }
