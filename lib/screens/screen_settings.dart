@@ -6,7 +6,7 @@ import '../models/app_model.dart';
 import '../widgets/separator.dart';
 
 class SettingsScreen extends StatefulWidget {
-  SettingsScreen();
+  const SettingsScreen({Key key}) : super(key: key);
 
   @override
   _SettingsScreenState createState() => _SettingsScreenState();

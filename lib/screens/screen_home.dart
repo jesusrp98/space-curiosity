@@ -42,7 +42,7 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ))
                 .toList(),
-            onSelected: (string) => openPage(context, _menu[string]),
+            onSelected: (string) => Navigator.pushNamed(context, _menu[string]),
           ),
         ],
         centerTitle: true,
@@ -173,7 +173,7 @@ class HomeScreen extends StatelessWidget {
 
   openPage(BuildContext context, String route) {
     Navigator.pop(context);
-    Navigator.of(context).pushNamed(route);
+    Navigator.pushNamed(context, route);
   }
 }
 
