@@ -83,18 +83,15 @@ class SpacexHomeTab extends StatelessWidget {
   Widget _buildBody() {
     return ScopedModelDescendant<SpacexHomeModel>(
       builder: (context, child, model) => Column(children: <Widget>[
-            Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: model.launch.tentativeTime
-                    ? Text(
-                        FlutterI18n.translate(
-                          context,
-                          'spacex.home.tab.no_countdown',
-                          {'mission': model.launch.name},
-                        ),
-                        style: Theme.of(context).textTheme.headline,
-                      )
-                    : LaunchCountdown(model)),
+            model.launch.tentativeTime
+                ? Separator.none()
+                : Column(children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: LaunchCountdown(model),
+                    ),
+                    Separator.divider(height: 0.0),
+                  ]),
             Separator.divider(height: 0.0),
             ListCell(
               leading: const Icon(Icons.public, size: 42.0),
@@ -106,26 +103,27 @@ class SpacexHomeTab extends StatelessWidget {
                   ),
             ),
             Separator.divider(height: 0.0, indent: 74.0),
-            ListCell(
-              leading: const Icon(Icons.event, size: 42.0),
-              title: FlutterI18n.translate(
-                context,
-                'spacex.home.tab.date.title',
-              ),
-              subtitle: model.launchDate(context),
-              onTap: model.launch.tentativeTime
-                  ? null
-                  : () => Add2Calendar.addEvent2Cal(
-                        Event(
-                          title: model.launch.name,
-                          description: model.launch.details,
-                          location: model.launch.launchpadName,
-                          startDate: model.launch.launchDate,
-                          endDate: model.launch.launchDate.add(
-                            Duration(minutes: 30),
-                          ),
+            AbsorbPointer(
+              absorbing: model.launch.tentativeTime,
+              child: ListCell(
+                leading: const Icon(Icons.event, size: 42.0),
+                title: FlutterI18n.translate(
+                  context,
+                  'spacex.home.tab.date.title',
+                ),
+                subtitle: model.launchDate(context),
+                onTap: () => Add2Calendar.addEvent2Cal(
+                      Event(
+                        title: model.launch.name,
+                        description: model.launch.details,
+                        location: model.launch.launchpadName,
+                        startDate: model.launch.launchDate,
+                        endDate: model.launch.launchDate.add(
+                          Duration(minutes: 30),
                         ),
                       ),
+                    ),
+              ),
             ),
             Separator.divider(height: 0.0, indent: 74.0),
             ListCell(
@@ -168,27 +166,33 @@ class SpacexHomeTab extends StatelessWidget {
                     ),
                     subtitle: model.fairings(context),
                   )
-                : ListCell(
-                    leading: const Icon(Icons.shopping_basket, size: 42.0),
-                    title: FlutterI18n.translate(
-                      context,
-                      'spacex.home.tab.capsule.title',
-                    ),
-                    subtitle: model.capsule(context),
-                    onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => ScopedModel<CapsuleModel>(
-                                  model: CapsuleModel(
-                                    model.launch.rocket.secondStage
-                                        .getPayload(0)
-                                        .capsuleSerial,
-                                  )..loadData(),
-                                  child: CapsuleDialog(),
-                                ),
-                            fullscreenDialog: true,
+                : AbsorbPointer(
+                    absorbing: model.launch.rocket.secondStage
+                            .getPayload(0)
+                            .capsuleSerial ==
+                        null,
+                    child: ListCell(
+                      leading: const Icon(Icons.shopping_basket, size: 42.0),
+                      title: FlutterI18n.translate(
+                        context,
+                        'spacex.home.tab.capsule.title',
+                      ),
+                      subtitle: model.capsule(context),
+                      onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => ScopedModel<CapsuleModel>(
+                                    model: CapsuleModel(
+                                      model.launch.rocket.secondStage
+                                          .getPayload(0)
+                                          .capsuleSerial,
+                                    )..loadData(),
+                                    child: CapsuleDialog(),
+                                  ),
+                              fullscreenDialog: true,
+                            ),
                           ),
-                        ),
+                    ),
                   ),
             Separator.divider(height: 0.0, indent: 74.0),
             ListCell(
