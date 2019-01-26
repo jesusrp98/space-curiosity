@@ -2,9 +2,11 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
+import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:http/http.dart' as http;
 
 import '../../util/url.dart';
+import '../../widgets/separator.dart';
 import '../querry_model.dart';
 import 'launch.dart';
 
@@ -62,11 +64,17 @@ class SpacexHomeModel extends QuerryModel {
     );
   }
 
-  String launchDate(context) => FlutterI18n.translate(
-        context,
-        'spacex.home.tab.date.body',
-        {'date': launch.getLaunchDate},
-      );
+  String launchDate(context) => launch.tentativeTime
+      ? FlutterI18n.translate(
+          context,
+          'spacex.home.tab.date.body_upcoming',
+          {'date': launch.getTentativeDate},
+        )
+      : FlutterI18n.translate(
+          context,
+          'spacex.home.tab.date.body',
+          {'date': launch.getTentativeDate, 'time': launch.getTentativeTime},
+        );
 
   String launchpad(context) => FlutterI18n.translate(
         context,
@@ -81,7 +89,9 @@ class SpacexHomeModel extends QuerryModel {
         )
       : FlutterI18n.translate(
           context,
-          'spacex.home.tab.static_fire.body',
+          launch.staticFireDate.isBefore(DateTime.now())
+              ? 'spacex.home.tab.static_fire.body_done'
+              : 'spacex.home.tab.static_fire.body',
           {'date': launch.getStaticFireDate(context)},
         );
 
@@ -239,27 +249,51 @@ class _LaunchCountdownState extends State<LaunchCountdown>
 class Countdown extends AnimatedWidget {
   final Animation<int> animation;
   final DateTime launchDate;
-  final String name;
+  final String name, url;
 
   Countdown({
     Key key,
     this.animation,
     this.launchDate,
     this.name,
+    this.url,
   }) : super(key: key, listenable: animation);
 
   @override
   build(BuildContext context) {
-    return Text(
-      launchDate.isAfter(DateTime.now())
-          ? getTimer(launchDate.difference(DateTime.now()))
-          : getLive(context),
-      textAlign: TextAlign.center,
-      style: Theme.of(context)
-          .textTheme
-          .headline
-          .copyWith(fontFamily: 'RobotoMono'),
-    );
+    return launchDate.isAfter(DateTime.now())
+        ? Text(
+            getTimer(launchDate.difference(DateTime.now())),
+            textAlign: TextAlign.center,
+            style: Theme.of(context)
+                .textTheme
+                .headline
+                .copyWith(fontFamily: 'RobotoMono'),
+          )
+        : InkWell(
+            onTap: () async => await FlutterWebBrowser.openWebPage(
+                  url: url,
+                  androidToolbarColor: Theme.of(context).primaryColor,
+                ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Icon(Icons.play_arrow, size: 32.0),
+                Separator.spacer(width: 8.0),
+                Text(
+                  FlutterI18n.translate(context, 'spacex.home.tab.live_mission')
+                      .toUpperCase(),
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context)
+                      .textTheme
+                      .headline
+                      .copyWith(fontFamily: 'RobotoMono'),
+                ),
+                Separator.spacer(width: 8.0)
+              ],
+            ),
+          );
   }
 
   String getTimer(Duration d) =>
@@ -277,10 +311,4 @@ class Countdown extends AnimatedWidget {
       'm:' +
       (d.inSeconds % 60).toString().padLeft(2, '0') +
       's';
-
-  String getLive(context) => FlutterI18n.translate(
-        context,
-        'spacex.home.tab.live_mission',
-        {'mission': name},
-      );
 }
