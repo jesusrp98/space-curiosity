@@ -51,11 +51,18 @@ class RowItem extends StatelessWidget {
     String description,
     ScopedModel screen,
   }) {
-    if (description != FlutterI18n.translate(context, 'spacex.other.unknown'))
-      return RowItem(
-        title,
-        InkWell(
-          child: _getText(context, description, true),
+    return RowItem(
+      title,
+      AbsorbPointer(
+        absorbing: description ==
+            FlutterI18n.translate(context, 'spacex.other.unknown'),
+        child: InkWell(
+          child: _getText(
+            context,
+            description,
+            description !=
+                FlutterI18n.translate(context, 'spacex.other.unknown'),
+          ),
           onTap: () => Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -64,9 +71,8 @@ class RowItem extends StatelessWidget {
                 ),
               ),
         ),
-      );
-    else
-      return RowItem(title, _getText(context, description));
+      ),
+    );
   }
 
   /// Return an icon based on the [status] var

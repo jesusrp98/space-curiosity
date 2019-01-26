@@ -8,6 +8,7 @@ class ListCell extends StatelessWidget {
   final Widget leading, trailing;
   final String title, subtitle;
   final VoidCallback onTap;
+  final EdgeInsets contentPadding;
 
   ListCell({
     this.leading,
@@ -15,15 +16,15 @@ class ListCell extends StatelessWidget {
     this.title,
     this.subtitle,
     this.onTap,
+    this.contentPadding = const EdgeInsets.symmetric(
+      vertical: 8.0,
+      horizontal: 16.0,
+    ),
   });
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      contentPadding: const EdgeInsets.symmetric(
-        vertical: 8.0,
-        horizontal: 16.0,
-      ),
       leading: leading,
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -47,6 +48,7 @@ class ListCell extends StatelessWidget {
             .copyWith(color: Theme.of(context).textTheme.caption.color),
       ),
       trailing: trailing,
+      contentPadding: contentPadding,
       onTap: onTap,
     );
   }
