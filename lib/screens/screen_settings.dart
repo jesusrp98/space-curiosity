@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -18,7 +19,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   @override
   void initState() {
-    var _theme = ScopedModel.of<AppModel>(context)?.theme ?? Themes.dark;
+    Themes _theme = ScopedModel.of<AppModel>(context)?.theme ?? Themes.dark;
 
     if (_theme == Themes.light)
       setState(() {
@@ -42,13 +43,25 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Settings'), centerTitle: true),
+      appBar: AppBar(
+        title: Text(FlutterI18n.translate(
+          context,
+          'app.menu.settings',
+        )),
+        centerTitle: true,
+      ),
       body: ScopedModelDescendant<AppModel>(
         builder: (context, child, model) => ListView(
               children: <Widget>[
                 ListTile(
-                  title: Text('Dark theme'),
-                  subtitle: Text('For the lovers of the dark side'),
+                  title: Text(FlutterI18n.translate(
+                    context,
+                    'settings.dark_theme.title',
+                  )),
+                  subtitle: Text(FlutterI18n.translate(
+                    context,
+                    'settings.dark_theme.body',
+                  )),
                   trailing: Switch(
                     activeColor: Theme.of(context).accentColor,
                     value: _darkTheme,
@@ -61,8 +74,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ),
                 ),
                 ListTile(
-                  title: Text('OLED black'),
-                  subtitle: Text('Select this for TRUE blacks'),
+                  title: Text(FlutterI18n.translate(
+                    context,
+                    'settings.oled_black.title',
+                  )),
+                  subtitle: Text(FlutterI18n.translate(
+                    context,
+                    'settings.oled_black.body',
+                  )),
                   trailing: Switch(
                     activeColor: Theme.of(context).accentColor,
                     value: _oledBlack,
