@@ -11,10 +11,9 @@ import 'package:scoped_model/scoped_model.dart';
 import '../../../models/iss/iss.dart';
 import '../../../models/iss/pass_time.dart';
 import '../../../widgets/list_cell.dart';
+import '../../../widgets/separator.dart';
 
 class IssTimesTab extends StatelessWidget {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
   Future<Null> _onRefresh(IssModel model) {
     Completer<Null> completer = Completer<Null>();
     model.refresh().then((_) => completer.complete());
@@ -25,7 +24,6 @@ class IssTimesTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScopedModelDescendant<IssModel>(
       builder: (context, child, model) => Scaffold(
-            key: _scaffoldKey,
             body: RefreshIndicator(
               onRefresh: () => _onRefresh(model),
               child: CustomScrollView(
@@ -36,8 +34,10 @@ class IssTimesTab extends StatelessWidget {
                     pinned: true,
                     flexibleSpace: FlexibleSpaceBar(
                       centerTitle: true,
-                      title: Text(model.passTimesTitle(context)),
-                      background: (model.isLoading)
+                      title: Text(
+                        FlutterI18n.translate(context, 'iss.times.title'),
+                      ),
+                      background: model.isLoading
                           ? NativeLoadingIndicator(center: true)
                           : FlutterMap(
                               options: MapOptions(
@@ -63,7 +63,7 @@ class IssTimesTab extends StatelessWidget {
                                         model.issLocation.coordinates[0],
                                         model.issLocation.coordinates[1],
                                       ),
-                                      builder: (_) => Icon(
+                                      builder: (_) => const Icon(
                                             Icons.location_on,
                                             color: Colors.red,
                                             size: 45.0,
@@ -76,7 +76,7 @@ class IssTimesTab extends StatelessWidget {
                                         model.currentLocation['latitude'],
                                         model.currentLocation['longitude'],
                                       ),
-                                      builder: (_) => Icon(
+                                      builder: (_) => const Icon(
                                             Icons.my_location,
                                             color: Colors.grey,
                                             size: 24.0,
@@ -94,8 +94,6 @@ class IssTimesTab extends StatelessWidget {
                         )
                       : model.currentLocation != null
                           ? SliverList(
-                              key:
-                                  PageStorageKey(model.passTimesTitle(context)),
                               delegate: SliverChildBuilderDelegate(
                                 _buildItem,
                                 childCount: model.issPassTimes.passTimes.length,
@@ -137,37 +135,36 @@ class IssTimesTab extends StatelessWidget {
       builder: (context, child, model) {
         final PassTime passTime = model.issPassTimes.passTimes[index];
 
-        return Column(
-          children: <Widget>[
-            ListCell(
-              leading: Icon(Icons.timer, size: 42.0),
-              title: passTime.getDate,
-              subtitle: passTime.getDuration(context),
-              trailing: IconButton(
-                icon: Icon(
-                  Icons.event,
-                  size: 27.0,
-                  color: Theme.of(context).textTheme.caption.color,
-                ),
-                tooltip: FlutterI18n.translate(
-                  context,
-                  'spacex.other.tooltip.add_event',
-                ),
-                onPressed: () => Add2Calendar.addEvent2Cal(
-                      Event(
-                        title: FlutterI18n.translate(
-                          context,
-                          'iss.times.tab.event',
-                        ),
-                        startDate: passTime.date,
-                        endDate: passTime.date.add(passTime.duration),
-                      ),
-                    ),
+        return Column(children: <Widget>[
+          ListCell(
+            leading: const Icon(Icons.timer, size: 42.0),
+            title: passTime.getDate,
+            subtitle: passTime.getDuration(context),
+            trailing: IconButton(
+              icon: Icon(
+                Icons.event,
+                size: 27.0,
+                color: Theme.of(context).textTheme.caption.color,
               ),
+              tooltip: FlutterI18n.translate(
+                context,
+                'spacex.other.tooltip.add_event',
+              ),
+              onPressed: () => Add2Calendar.addEvent2Cal(Event(
+                    title: FlutterI18n.translate(
+                      context,
+                      'iss.times.tab.event',
+                    ),
+                    // TODO add this parameters
+                    // description: _launch.details,
+                    // location: _launch.launchpadName,
+                    startDate: passTime.date,
+                    endDate: passTime.date.add(passTime.duration),
+                  )),
             ),
-            const Divider(height: 0.0, indent: 74.0)
-          ],
-        );
+          ),
+          Separator.divider(height: 0.0),
+        ]);
       },
     );
   }

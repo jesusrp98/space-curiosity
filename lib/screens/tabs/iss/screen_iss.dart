@@ -13,7 +13,6 @@ class IssScreen extends StatefulWidget {
 }
 
 class _IssScreenState extends State<IssScreen> {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   int _currentIndex = 0;
 
   static final IssModel issModel = IssModel();
@@ -42,7 +41,6 @@ class _IssScreenState extends State<IssScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey,
       body: _tabs[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
@@ -50,31 +48,25 @@ class _IssScreenState extends State<IssScreen> {
         currentIndex: _currentIndex,
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            title: Text(
-              FlutterI18n.translate(
-                context,
-                'iss.home.icon',
-              ),
-            ),
-            icon: Icon(Icons.home),
+            title: Text(FlutterI18n.translate(
+              context,
+              'iss.home.icon',
+            )),
+            icon: const Icon(Icons.home),
           ),
           BottomNavigationBarItem(
-            title: Text(
-              FlutterI18n.translate(
-                context,
-                'iss.times.icon',
-              ),
-            ),
-            icon: Icon(Icons.timer),
+            title: Text(FlutterI18n.translate(
+              context,
+              'iss.times.icon',
+            )),
+            icon: const Icon(Icons.timer),
           ),
           BottomNavigationBarItem(
-            title: Text(
-              FlutterI18n.translate(
-                context,
-                'iss.astronauts.icon',
-              ),
-            ),
-            icon: Icon(Icons.people),
+            title: Text(FlutterI18n.translate(
+              context,
+              'iss.astronauts.icon',
+            )),
+            icon: const Icon(Icons.people),
           ),
         ],
       ),

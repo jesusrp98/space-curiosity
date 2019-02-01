@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:latlong/latlong.dart';
@@ -10,10 +11,9 @@ import 'package:scoped_model/scoped_model.dart';
 import '../../../models/iss/astronauts.dart';
 import '../../../models/iss/iss.dart';
 import '../../../widgets/list_cell.dart';
+import '../../../widgets/separator.dart';
 
 class IssAstronautsTab extends StatelessWidget {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
   Future<Null> _onRefresh(IssModel model) {
     Completer<Null> completer = Completer<Null>();
     model.refresh().then((_) => completer.complete());
@@ -24,7 +24,6 @@ class IssAstronautsTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScopedModelDescendant<IssModel>(
       builder: (context, child, model) => Scaffold(
-            key: _scaffoldKey,
             body: RefreshIndicator(
               onRefresh: () => _onRefresh(model),
               child: CustomScrollView(
@@ -35,8 +34,10 @@ class IssAstronautsTab extends StatelessWidget {
                     pinned: true,
                     flexibleSpace: FlexibleSpaceBar(
                       centerTitle: true,
-                      title: Text(model.astronautsTitle(context)),
-                      background: (model.isLoading)
+                      title: Text(
+                        FlutterI18n.translate(context, 'iss.astronauts.title'),
+                      ),
+                      background: model.isLoading
                           ? NativeLoadingIndicator(center: true)
                           : FlutterMap(
                               options: MapOptions(
@@ -62,7 +63,7 @@ class IssAstronautsTab extends StatelessWidget {
                                         model.issLocation.coordinates[0],
                                         model.issLocation.coordinates[1],
                                       ),
-                                      builder: (_) => Icon(
+                                      builder: (_) => const Icon(
                                             Icons.location_on,
                                             color: Colors.red,
                                             size: 45.0,
@@ -79,7 +80,6 @@ class IssAstronautsTab extends StatelessWidget {
                           child: NativeLoadingIndicator(center: true),
                         )
                       : SliverList(
-                          key: PageStorageKey(model.astronautsTitle(context)),
                           delegate: SliverChildBuilderDelegate(
                             _buildItem,
                             childCount: model.issAstronauts.astronauts.length,
@@ -97,16 +97,14 @@ class IssAstronautsTab extends StatelessWidget {
       builder: (context, child, model) {
         final Astronaut astronaut = model.issAstronauts.astronauts[index];
 
-        return Column(
-          children: <Widget>[
-            ListCell(
-              leading: Icon(FontAwesomeIcons.userAstronaut, size: 42.0),
-              title: astronaut.name,
-              subtitle: astronaut.description(context),
-            ),
-            const Divider(height: 0.0, indent: 74.0)
-          ],
-        );
+        return Column(children: <Widget>[
+          ListCell(
+            leading: const Icon(FontAwesomeIcons.userAstronaut, size: 42.0),
+            title: astronaut.name,
+            subtitle: astronaut.description(context),
+          ),
+          Separator.divider(height: 0.0)
+        ]);
       },
     );
   }

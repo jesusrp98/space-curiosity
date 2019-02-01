@@ -23,7 +23,7 @@ class IssModel extends QuerryModel {
     try {
       currentLocation = await Location().getLocation();
       response = await http.get(
-        '${Url.issPassTimes}?lat=${currentLocation['latitude']}&lon=${currentLocation['longitude']}&n=11',
+        '${Url.issPassTimes}?lat=${currentLocation['latitude']}&lon=${currentLocation['longitude']}&n=10',
       );
       items.add(IssPassTimes.fromJson(json.decode(response.body)));
     } on PlatformException {
@@ -42,8 +42,6 @@ class IssModel extends QuerryModel {
   IssPassTimes get issPassTimes => getItem(1);
 
   IssAstronauts get issAstronauts => getItem(2);
-
-  String homeTitle(context) => FlutterI18n.translate(context, 'iss.home.title');
 
   String launchedTitle(context) => FlutterI18n.translate(
         context,
@@ -86,10 +84,4 @@ class IssModel extends QuerryModel {
         'iss.home.tab.specifications.body',
         {'lenght': '73', 'width': '110', 'mass': '420,000'},
       );
-
-  String passTimesTitle(context) =>
-      FlutterI18n.translate(context, 'iss.times.title');
-
-  String astronautsTitle(context) =>
-      FlutterI18n.translate(context, 'iss.astronauts.title');
 }

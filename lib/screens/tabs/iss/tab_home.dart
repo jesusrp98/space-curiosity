@@ -9,10 +9,9 @@ import 'package:scoped_model/scoped_model.dart';
 
 import '../../../models/iss/iss.dart';
 import '../../../widgets/list_cell.dart';
+import '../../../widgets/separator.dart';
 
 class IssHomeTab extends StatelessWidget {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
   Future<Null> _onRefresh(IssModel model) {
     Completer<Null> completer = Completer<Null>();
     model.refresh().then((_) => completer.complete());
@@ -23,7 +22,6 @@ class IssHomeTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScopedModelDescendant<IssModel>(
       builder: (context, child, model) => Scaffold(
-            key: _scaffoldKey,
             body: RefreshIndicator(
               onRefresh: () => _onRefresh(model),
               child: CustomScrollView(
@@ -34,8 +32,10 @@ class IssHomeTab extends StatelessWidget {
                     pinned: true,
                     flexibleSpace: FlexibleSpaceBar(
                       centerTitle: true,
-                      title: Text(model.homeTitle(context)),
-                      background: (model.isLoading)
+                      title: Text(
+                        FlutterI18n.translate(context, 'iss.home.title'),
+                      ),
+                      background: model.isLoading
                           ? NativeLoadingIndicator(center: true)
                           : FlutterMap(
                               options: MapOptions(
@@ -94,7 +94,7 @@ class IssHomeTab extends StatelessWidget {
                 title: model.launchedTitle(context),
                 subtitle: model.launchedBody(context),
               ),
-              const Divider(height: 0.0, indent: 74.0),
+              Separator.divider(height: 0.0),
               ListCell(
                 leading: const Icon(Icons.public, size: 42.0),
                 title: FlutterI18n.translate(
@@ -103,7 +103,7 @@ class IssHomeTab extends StatelessWidget {
                 ),
                 subtitle: model.altitudeBody(context),
               ),
-              const Divider(height: 0.0, indent: 74.0),
+              Separator.divider(height: 0.0),
               ListCell(
                 leading: const Icon(Icons.update, size: 42.0),
                 title: FlutterI18n.translate(
@@ -112,7 +112,7 @@ class IssHomeTab extends StatelessWidget {
                 ),
                 subtitle: model.orbitBody(context),
               ),
-              const Divider(height: 0.0, indent: 74.0),
+              Separator.divider(height: 0.0),
               ListCell(
                 leading: const Icon(Icons.attach_money, size: 42.0),
                 title: FlutterI18n.translate(
@@ -121,7 +121,7 @@ class IssHomeTab extends StatelessWidget {
                 ),
                 subtitle: model.projectTitle(context),
               ),
-              const Divider(height: 0.0, indent: 74.0),
+              Separator.divider(height: 0.0),
               ListCell(
                 leading: const Icon(Icons.people, size: 42.0),
                 title: FlutterI18n.translate(
@@ -130,7 +130,7 @@ class IssHomeTab extends StatelessWidget {
                 ),
                 subtitle: model.numbersBody(context),
               ),
-              const Divider(height: 0.0, indent: 74.0),
+              Separator.divider(height: 0.0),
               ListCell(
                 leading: const Icon(Icons.straighten, size: 42.0),
                 title: FlutterI18n.translate(
@@ -139,7 +139,7 @@ class IssHomeTab extends StatelessWidget {
                 ),
                 subtitle: model.specificationsBody(context),
               ),
-              const Divider(height: 0.0, indent: 74.0),
+              Separator.divider(height: 0.0),
             ],
           ),
     );
