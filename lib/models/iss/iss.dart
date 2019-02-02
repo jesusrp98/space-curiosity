@@ -16,12 +16,21 @@ class IssModel extends QuerryModel {
 
   @override
   Future loadData() async {
-    clearItems();
+    // Get items by http call & parse them
     response = await http.get(Url.issLocation);
+
+    // Clear old data
+    clearItems();
+    
     items.add(IssLocation.fromJson(json.decode(response.body)));
 
+    // Ask user about location
+    // Parse if permission are granted
     try {
+      // Get user's location
       currentLocation = await Location().getLocation();
+
+      // Get items by http call & parse them
       response = await http.get(
         '${Url.issPassTimes}?lat=${currentLocation['latitude']}&lon=${currentLocation['longitude']}&n=10',
       );
@@ -31,6 +40,7 @@ class IssModel extends QuerryModel {
       items.add(null);
     }
 
+    // Get items by http call & parse them
     response = await http.get(Url.issAstronauts);
     items.add(IssAstronauts.fromJson(json.decode(response.body)));
 
@@ -43,6 +53,7 @@ class IssModel extends QuerryModel {
 
   IssAstronauts get issAstronauts => getItem(2);
 
+  // TODO all this should come from Firebase
   String launchedTitle(context) => FlutterI18n.translate(
         context,
         'iss.home.tab.launched.title',
@@ -84,4 +95,7 @@ class IssModel extends QuerryModel {
         'iss.home.tab.specifications.body',
         {'lenght': '73', 'width': '110', 'mass': '420,000'},
       );
+
+  String get getCurrentLocation =>
+      '${currentLocation['latitude']},  ${currentLocation['longitude']}';
 }

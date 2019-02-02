@@ -24,62 +24,59 @@ class IssHomeTab extends StatelessWidget {
       builder: (context, child, model) => Scaffold(
             body: RefreshIndicator(
               onRefresh: () => _onRefresh(model),
-              child: CustomScrollView(
-                slivers: <Widget>[
-                  SliverAppBar(
-                    expandedHeight: MediaQuery.of(context).size.height * 0.3,
-                    floating: false,
-                    pinned: true,
-                    flexibleSpace: FlexibleSpaceBar(
-                      centerTitle: true,
-                      title: Text(
-                        FlutterI18n.translate(context, 'iss.home.title'),
-                      ),
-                      background: model.isLoading
-                          ? NativeLoadingIndicator(center: true)
-                          : FlutterMap(
-                              options: MapOptions(
-                                center: LatLng(0.0, 0.0),
-                                zoom: 1.0,
-                                minZoom: 1.0,
-                                maxZoom: 5.0,
-                              ),
-                              layers: <LayerOptions>[
-                                TileLayerOptions(
-                                  urlTemplate:
-                                      'https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png',
-                                  subdomains: ['a', 'b', 'c', 'd'],
-                                  backgroundColor:
-                                      Theme.of(context).primaryColor,
-                                ),
-                                MarkerLayerOptions(
-                                  markers: [
-                                    Marker(
-                                      width: 45.0,
-                                      height: 45.0,
-                                      point: LatLng(
-                                        model.issLocation.coordinates[0],
-                                        model.issLocation.coordinates[1],
-                                      ),
-                                      builder: (_) => Icon(
-                                            Icons.location_on,
-                                            color: Colors.red,
-                                            size: 45.0,
-                                          ),
-                                    )
-                                  ],
-                                )
-                              ],
-                            ),
+              child: CustomScrollView(slivers: <Widget>[
+                SliverAppBar(
+                  expandedHeight: MediaQuery.of(context).size.height * 0.3,
+                  floating: false,
+                  pinned: true,
+                  flexibleSpace: FlexibleSpaceBar(
+                    centerTitle: true,
+                    title: Text(
+                      FlutterI18n.translate(context, 'iss.home.title'),
                     ),
+                    background: model.isLoading
+                        ? NativeLoadingIndicator(center: true)
+                        : FlutterMap(
+                            options: MapOptions(
+                              center: LatLng(0.0, 0.0),
+                              zoom: 1.0,
+                              minZoom: 1.0,
+                              maxZoom: 5.0,
+                            ),
+                            layers: <LayerOptions>[
+                              TileLayerOptions(
+                                urlTemplate:
+                                    'https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png',
+                                subdomains: ['a', 'b', 'c', 'd'],
+                                backgroundColor: Theme.of(context).primaryColor,
+                              ),
+                              MarkerLayerOptions(
+                                markers: [
+                                  Marker(
+                                    width: 45.0,
+                                    height: 45.0,
+                                    point: LatLng(
+                                      model.issLocation.coordinates[0],
+                                      model.issLocation.coordinates[1],
+                                    ),
+                                    builder: (_) => const Icon(
+                                          Icons.location_on,
+                                          color: Colors.red,
+                                          size: 45.0,
+                                        ),
+                                  )
+                                ],
+                              )
+                            ],
+                          ),
                   ),
-                  model.isLoading
-                      ? SliverFillRemaining(
-                          child: NativeLoadingIndicator(center: true),
-                        )
-                      : SliverToBoxAdapter(child: _buildBody())
-                ],
-              ),
+                ),
+                model.isLoading
+                    ? SliverFillRemaining(
+                        child: NativeLoadingIndicator(center: true),
+                      )
+                    : SliverToBoxAdapter(child: _buildBody())
+              ]),
             ),
           ),
     );
@@ -94,7 +91,7 @@ class IssHomeTab extends StatelessWidget {
                 title: model.launchedTitle(context),
                 subtitle: model.launchedBody(context),
               ),
-              Separator.divider(height: 0.0),
+              Separator.divider(height: 0.0, indent: 74.0),
               ListCell(
                 leading: const Icon(Icons.public, size: 42.0),
                 title: FlutterI18n.translate(
@@ -103,7 +100,7 @@ class IssHomeTab extends StatelessWidget {
                 ),
                 subtitle: model.altitudeBody(context),
               ),
-              Separator.divider(height: 0.0),
+              Separator.divider(height: 0.0, indent: 74.0),
               ListCell(
                 leading: const Icon(Icons.update, size: 42.0),
                 title: FlutterI18n.translate(
@@ -112,7 +109,7 @@ class IssHomeTab extends StatelessWidget {
                 ),
                 subtitle: model.orbitBody(context),
               ),
-              Separator.divider(height: 0.0),
+              Separator.divider(height: 0.0, indent: 74.0),
               ListCell(
                 leading: const Icon(Icons.attach_money, size: 42.0),
                 title: FlutterI18n.translate(
@@ -121,7 +118,7 @@ class IssHomeTab extends StatelessWidget {
                 ),
                 subtitle: model.projectTitle(context),
               ),
-              Separator.divider(height: 0.0),
+              Separator.divider(height: 0.0, indent: 74.0),
               ListCell(
                 leading: const Icon(Icons.people, size: 42.0),
                 title: FlutterI18n.translate(
@@ -130,7 +127,7 @@ class IssHomeTab extends StatelessWidget {
                 ),
                 subtitle: model.numbersBody(context),
               ),
-              Separator.divider(height: 0.0),
+              Separator.divider(height: 0.0, indent: 74.0),
               ListCell(
                 leading: const Icon(Icons.straighten, size: 42.0),
                 title: FlutterI18n.translate(
@@ -139,7 +136,7 @@ class IssHomeTab extends StatelessWidget {
                 ),
                 subtitle: model.specificationsBody(context),
               ),
-              Separator.divider(height: 0.0),
+              Separator.divider(height: 0.0, indent: 74.0),
             ],
           ),
     );

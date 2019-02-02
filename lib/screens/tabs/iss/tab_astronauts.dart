@@ -26,67 +26,64 @@ class IssAstronautsTab extends StatelessWidget {
       builder: (context, child, model) => Scaffold(
             body: RefreshIndicator(
               onRefresh: () => _onRefresh(model),
-              child: CustomScrollView(
-                slivers: <Widget>[
-                  SliverAppBar(
-                    expandedHeight: MediaQuery.of(context).size.height * 0.3,
-                    floating: false,
-                    pinned: true,
-                    flexibleSpace: FlexibleSpaceBar(
-                      centerTitle: true,
-                      title: Text(
-                        FlutterI18n.translate(context, 'iss.astronauts.title'),
-                      ),
-                      background: model.isLoading
-                          ? NativeLoadingIndicator(center: true)
-                          : FlutterMap(
-                              options: MapOptions(
-                                center: LatLng(0.0, 0.0),
-                                zoom: 1.0,
-                                minZoom: 1.0,
-                                maxZoom: 5.0,
-                              ),
-                              layers: <LayerOptions>[
-                                TileLayerOptions(
-                                  urlTemplate:
-                                      'https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png',
-                                  subdomains: ['a', 'b', 'c', 'd'],
-                                  backgroundColor:
-                                      Theme.of(context).primaryColor,
-                                ),
-                                MarkerLayerOptions(
-                                  markers: [
-                                    Marker(
-                                      width: 45.0,
-                                      height: 45.0,
-                                      point: LatLng(
-                                        model.issLocation.coordinates[0],
-                                        model.issLocation.coordinates[1],
-                                      ),
-                                      builder: (_) => const Icon(
-                                            Icons.location_on,
-                                            color: Colors.red,
-                                            size: 45.0,
-                                          ),
-                                    )
-                                  ],
-                                )
-                              ],
-                            ),
+              child: CustomScrollView(slivers: <Widget>[
+                SliverAppBar(
+                  expandedHeight: MediaQuery.of(context).size.height * 0.3,
+                  floating: false,
+                  pinned: true,
+                  flexibleSpace: FlexibleSpaceBar(
+                    centerTitle: true,
+                    title: Text(
+                      FlutterI18n.translate(context, 'iss.astronauts.title'),
                     ),
-                  ),
-                  model.isLoading
-                      ? SliverFillRemaining(
-                          child: NativeLoadingIndicator(center: true),
-                        )
-                      : SliverList(
-                          delegate: SliverChildBuilderDelegate(
-                            _buildItem,
-                            childCount: model.issAstronauts.astronauts.length,
+                    background: model.isLoading
+                        ? NativeLoadingIndicator(center: true)
+                        : FlutterMap(
+                            options: MapOptions(
+                              center: LatLng(0.0, 0.0),
+                              zoom: 1.0,
+                              minZoom: 1.0,
+                              maxZoom: 5.0,
+                            ),
+                            layers: <LayerOptions>[
+                              TileLayerOptions(
+                                urlTemplate:
+                                    'https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png',
+                                subdomains: ['a', 'b', 'c', 'd'],
+                                backgroundColor: Theme.of(context).primaryColor,
+                              ),
+                              MarkerLayerOptions(
+                                markers: [
+                                  Marker(
+                                    width: 45.0,
+                                    height: 45.0,
+                                    point: LatLng(
+                                      model.issLocation.coordinates[0],
+                                      model.issLocation.coordinates[1],
+                                    ),
+                                    builder: (_) => const Icon(
+                                          Icons.location_on,
+                                          color: Colors.red,
+                                          size: 45.0,
+                                        ),
+                                  )
+                                ],
+                              )
+                            ],
                           ),
+                  ),
+                ),
+                model.isLoading
+                    ? SliverFillRemaining(
+                        child: NativeLoadingIndicator(center: true),
+                      )
+                    : SliverList(
+                        delegate: SliverChildBuilderDelegate(
+                          _buildItem,
+                          childCount: model.issAstronauts.astronauts.length,
                         ),
-                ],
-              ),
+                      ),
+              ]),
             ),
           ),
     );
@@ -96,14 +93,13 @@ class IssAstronautsTab extends StatelessWidget {
     return ScopedModelDescendant<IssModel>(
       builder: (context, child, model) {
         final Astronaut astronaut = model.issAstronauts.astronauts[index];
-
         return Column(children: <Widget>[
           ListCell(
             leading: const Icon(FontAwesomeIcons.userAstronaut, size: 42.0),
             title: astronaut.name,
             subtitle: astronaut.description(context),
           ),
-          Separator.divider(height: 0.0)
+          Separator.divider(height: 0.0, indent: 74.0)
         ]);
       },
     );
