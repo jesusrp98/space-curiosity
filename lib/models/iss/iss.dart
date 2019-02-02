@@ -21,7 +21,7 @@ class IssModel extends QuerryModel {
 
     // Clear old data
     clearItems();
-    
+
     items.add(IssLocation.fromJson(json.decode(response.body)));
 
     // Ask user about location
@@ -32,7 +32,7 @@ class IssModel extends QuerryModel {
 
       // Get items by http call & parse them
       response = await http.get(
-        '${Url.issPassTimes}?lat=${currentLocation['latitude']}&lon=${currentLocation['longitude']}&n=10',
+        '${Url.issPassTimes}?lat=${currentLocation['latitude']}&lon=${currentLocation['longitude']}&n=11',
       );
       items.add(IssPassTimes.fromJson(json.decode(response.body)));
     } on PlatformException {

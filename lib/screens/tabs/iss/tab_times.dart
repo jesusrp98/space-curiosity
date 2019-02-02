@@ -53,7 +53,7 @@ class IssTimesTab extends StatelessWidget {
                                 backgroundColor: Theme.of(context).primaryColor,
                               ),
                               MarkerLayerOptions(
-                                markers: [
+                                markers: <Marker>[
                                   Marker(
                                     width: 45.0,
                                     height: 45.0,
@@ -67,19 +67,25 @@ class IssTimesTab extends StatelessWidget {
                                           size: 45.0,
                                         ),
                                   ),
-                                  Marker(
-                                    width: 24.0,
-                                    height: 24.0,
-                                    point: LatLng(
-                                      model.currentLocation['latitude'],
-                                      model.currentLocation['longitude'],
-                                    ),
-                                    builder: (_) => const Icon(
-                                          Icons.my_location,
-                                          color: Colors.grey,
-                                          size: 24.0,
-                                        ),
-                                  )
+                                  // Empty marker if we don't know location
+                                  model.currentLocation != null
+                                      ? Marker(
+                                          width: 24.0,
+                                          height: 24.0,
+                                          point: LatLng(
+                                            model.currentLocation['latitude'],
+                                            model.currentLocation['longitude'],
+                                          ),
+                                          builder: (_) => const Icon(
+                                                Icons.my_location,
+                                                color: Colors.grey,
+                                                size: 24.0,
+                                              ),
+                                        )
+                                      : Marker(
+                                          point: LatLng(0, 0),
+                                          builder: (_) => Separator.none(),
+                                        )
                                 ],
                               )
                             ],

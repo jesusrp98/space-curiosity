@@ -26,7 +26,7 @@ dependencies:
   flutter_swiper: ^1.1.4
   sliver_fab: ^1.0.0
   clipboard_manager: ^0.0.4
-  image_downloader: ^0.9.1
+  image_downloader: ^0.10.0
   add_2_calendar: ^1.0.2
   flutter_map: ^0.4.0
   share: ^0.6.0

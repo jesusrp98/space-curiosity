@@ -53,7 +53,7 @@ class IssAstronautsTab extends StatelessWidget {
                                 backgroundColor: Theme.of(context).primaryColor,
                               ),
                               MarkerLayerOptions(
-                                markers: [
+                                markers: <Marker>[
                                   Marker(
                                     width: 45.0,
                                     height: 45.0,
