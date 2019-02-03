@@ -58,49 +58,6 @@ print(3);
 
   IssAstronauts get issAstronauts => getItem(2);
 
-  // TODO all this should come from Firebase
-  String launchedTitle(context) => FlutterI18n.translate(
-        context,
-        'iss.home.tab.launched.title',
-        {'year': '1998'},
-      );
-
-  String launchedBody(context) => FlutterI18n.translate(
-        context,
-        'iss.home.tab.launched.body',
-        {'date': '20 November 1998', 'years': 20.toString()},
-      );
-
-  String altitudeBody(context) => FlutterI18n.translate(
-        context,
-        'iss.home.tab.altitude.body',
-        {'height': '400', 'velocity': '7.66'},
-      );
-
-  String orbitBody(context) => FlutterI18n.translate(
-        context,
-        'iss.home.tab.orbit.body',
-        {'period': '93', 'orbits': '16'},
-      );
-
-  String projectTitle(context) => FlutterI18n.translate(
-        context,
-        'iss.home.tab.project.body',
-        {'countries': '16', 'cost': '\$100,000,000'},
-      );
-
-  String numbersBody(context) => FlutterI18n.translate(
-        context,
-        'iss.home.tab.numbers.body',
-        {'days': '6000', 'orbits': '100.000'},
-      );
-
-  String specificationsBody(context) => FlutterI18n.translate(
-        context,
-        'iss.home.tab.specifications.body',
-        {'lenght': '73', 'width': '110', 'mass': '420,000'},
-      );
-
   String get getCurrentLocation =>
       '${currentLocation['latitude']},  ${currentLocation['longitude']}';
 }
