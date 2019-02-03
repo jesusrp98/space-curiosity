@@ -16,9 +16,9 @@ class IssModel extends QuerryModel {
 
   @override
   Future loadData() async {
-    // Get items by http call & parse them
+    // Get it by http call & parse it
     response = await http.get(Url.issLocation);
-
+print(1);
     // Clear old data
     clearItems();
 
@@ -27,23 +27,28 @@ class IssModel extends QuerryModel {
     // Ask user about location
     // Parse if permission are granted
     try {
+print(2.1);      
       // Get user's location
       currentLocation = await Location().getLocation();
-
+print(2.2);
       // Get items by http call & parse them
       response = await http.get(
         '${Url.issPassTimes}?lat=${currentLocation['latitude']}&lon=${currentLocation['longitude']}&n=11',
       );
+print(2.3);
       items.add(IssPassTimes.fromJson(json.decode(response.body)));
+print(2.4);      
     } on PlatformException {
       currentLocation = null;
+print('error');      
       items.add(null);
     }
 
     // Get items by http call & parse them
     response = await http.get(Url.issAstronauts);
     items.add(IssAstronauts.fromJson(json.decode(response.body)));
-
+print(3);
+    // Finished loading data
     setLoading(false);
   }
 
