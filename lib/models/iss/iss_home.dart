@@ -7,12 +7,15 @@ import '../querry_model.dart';
 class IssHomeModel extends QuerryModel {
   @override
   Future loadData() async {
+    // Get items from Firebase
     response = await Firestore.instance.collection('iss').getDocuments();
 
+    // Add parsed items
     items.addAll(response.documents
         .map((document) => IssHome.fromDocument(document))
         .toList());
 
+    // Finished loading data
     setLoading(false);
   }
 

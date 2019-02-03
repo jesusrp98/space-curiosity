@@ -2,17 +2,15 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
-import 'package:flutter_map/flutter_map.dart';
-import 'package:latlong/latlong.dart';
 import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
 
-import '../../../models/iss/iss.dart';
+import '../../../models/iss/iss_home.dart';
 import '../../../widgets/list_cell.dart';
 import '../../../widgets/separator.dart';
 
 class IssHomeTab extends StatelessWidget {
-  Future<Null> _onRefresh(IssModel model) {
+  Future<Null> _onRefresh(IssHomeModel model) {
     Completer<Null> completer = Completer<Null>();
     model.refresh().then((_) => completer.complete());
     return completer.future;
@@ -20,7 +18,7 @@ class IssHomeTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScopedModelDescendant<IssModel>(
+    return ScopedModelDescendant<IssHomeModel>(
       builder: (context, child, model) => Scaffold(
             body: RefreshIndicator(
               onRefresh: () => _onRefresh(model),
@@ -36,39 +34,41 @@ class IssHomeTab extends StatelessWidget {
                     ),
                     background: model.isLoading
                         ? NativeLoadingIndicator(center: true)
-                        : FlutterMap(
-                            options: MapOptions(
-                              center: LatLng(0.0, 0.0),
-                              zoom: 1.0,
-                              minZoom: 1.0,
-                              maxZoom: 5.0,
-                            ),
-                            layers: <LayerOptions>[
-                              TileLayerOptions(
-                                urlTemplate:
-                                    'https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png',
-                                subdomains: ['a', 'b', 'c', 'd'],
-                                backgroundColor: Theme.of(context).primaryColor,
-                              ),
-                              MarkerLayerOptions(
-                                markers: <Marker>[
-                                  Marker(
-                                    width: 45.0,
-                                    height: 45.0,
-                                    point: LatLng(
-                                      model.issLocation.coordinates[0],
-                                      model.issLocation.coordinates[1],
-                                    ),
-                                    builder: (_) => const Icon(
-                                          Icons.location_on,
-                                          color: Colors.red,
-                                          size: 45.0,
-                                        ),
-                                  )
-                                ],
-                              )
-                            ],
-                          ),
+                        // TODO add swiper header
+                        // : FlutterMap(
+                        //     options: MapOptions(
+                        //       center: LatLng(0.0, 0.0),
+                        //       zoom: 1.0,
+                        //       minZoom: 1.0,
+                        //       maxZoom: 5.0,
+                        //     ),
+                        //     layers: <LayerOptions>[
+                        //       TileLayerOptions(
+                        //         urlTemplate:
+                        //             'https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png',
+                        //         subdomains: ['a', 'b', 'c', 'd'],
+                        //         backgroundColor: Theme.of(context).primaryColor,
+                        //       ),
+                        //       MarkerLayerOptions(
+                        //         markers: <Marker>[
+                        //           Marker(
+                        //             width: 45.0,
+                        //             height: 45.0,
+                        //             point: LatLng(
+                        //               model.issLocation.coordinates[0],
+                        //               model.issLocation.coordinates[1],
+                        //             ),
+                        //             builder: (_) => const Icon(
+                        //                   Icons.location_on,
+                        //                   color: Colors.red,
+                        //                   size: 45.0,
+                        //                 ),
+                        //           )
+                        //         ],
+                        //       )
+                        //     ],
+                        //   ),
+                        : Separator.none(),
                   ),
                 ),
                 model.isLoading
@@ -83,7 +83,7 @@ class IssHomeTab extends StatelessWidget {
   }
 
   Widget _buildBody() {
-    return ScopedModelDescendant<IssModel>(
+    return ScopedModelDescendant<IssHomeModel>(
       builder: (context, child, model) => Column(
             children: <Widget>[
               ListCell(

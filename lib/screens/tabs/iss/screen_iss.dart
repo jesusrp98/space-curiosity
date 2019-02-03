@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:scoped_model/scoped_model.dart';
 
-import '../../../models/iss/iss.dart';
+import '../../../models/iss/astronauts.dart';
+import '../../../models/iss/iss_home.dart';
+import '../../../models/iss/pass_time.dart';
+import '../../../models/querry_model.dart';
 import 'tab_astronauts.dart';
 import 'tab_home.dart';
 import 'tab_times.dart';
@@ -15,19 +18,23 @@ class IssScreen extends StatefulWidget {
 class _IssScreenState extends State<IssScreen> {
   int _currentIndex = 0;
 
-  static final IssModel issModel = IssModel();
+  static final List<QuerryModel> _modelTab = [
+    IssHomeModel(),
+    PassTimesModel(),
+    AstronautsModel(),
+  ];
 
-  final List<ScopedModel> _tabs = [
-    ScopedModel<IssModel>(
-      model: issModel,
+  static final List<ScopedModel> _tabs = [
+    ScopedModel<IssHomeModel>(
+      model: _modelTab[0],
       child: IssHomeTab(),
     ),
-    ScopedModel<IssModel>(
-      model: issModel,
+    ScopedModel<PassTimesModel>(
+      model: _modelTab[1],
       child: IssTimesTab(),
     ),
-    ScopedModel<IssModel>(
-      model: issModel,
+    ScopedModel<AstronautsModel>(
+      model: _modelTab[2],
       child: IssAstronautsTab(),
     ),
   ];
@@ -35,7 +42,7 @@ class _IssScreenState extends State<IssScreen> {
   @override
   initState() {
     super.initState();
-    issModel.loadData();
+    _modelTab.forEach((model) => model.loadData());
   }
 
   @override

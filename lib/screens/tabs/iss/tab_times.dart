@@ -8,13 +8,12 @@ import 'package:latlong/latlong.dart';
 import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
 
-import '../../../models/iss/iss.dart';
 import '../../../models/iss/pass_time.dart';
 import '../../../widgets/list_cell.dart';
 import '../../../widgets/separator.dart';
 
 class IssTimesTab extends StatelessWidget {
-  Future<Null> _onRefresh(IssModel model) {
+  Future<Null> _onRefresh(PassTimesModel model) {
     Completer<Null> completer = Completer<Null>();
     model.refresh().then((_) => completer.complete());
     return completer.future;
@@ -22,7 +21,7 @@ class IssTimesTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScopedModelDescendant<IssModel>(
+    return ScopedModelDescendant<PassTimesModel>(
       builder: (context, child, model) => Scaffold(
             body: RefreshIndicator(
               onRefresh: () => _onRefresh(model),
@@ -58,8 +57,12 @@ class IssTimesTab extends StatelessWidget {
                                     width: 45.0,
                                     height: 45.0,
                                     point: LatLng(
-                                      model.issLocation.coordinates[0],
-                                      model.issLocation.coordinates[1],
+                                      double.parse(
+                                        model.issLocation['longitude'],
+                                      ),
+                                      double.parse(
+                                        model.issLocation['latitude'],
+                                      ),
                                     ),
                                     builder: (_) => const Icon(
                                           Icons.location_on,
@@ -68,13 +71,13 @@ class IssTimesTab extends StatelessWidget {
                                         ),
                                   ),
                                   // Empty marker if we don't know location
-                                  model.currentLocation != null
+                                  model.userLocation != null
                                       ? Marker(
                                           width: 24.0,
                                           height: 24.0,
                                           point: LatLng(
-                                            model.currentLocation['latitude'],
-                                            model.currentLocation['longitude'],
+                                            model.userLocation['latitude'],
+                                            model.userLocation['longitude'],
                                           ),
                                           builder: (_) => const Icon(
                                                 Icons.my_location,
@@ -96,11 +99,11 @@ class IssTimesTab extends StatelessWidget {
                     ? SliverFillRemaining(
                         child: NativeLoadingIndicator(center: true),
                       )
-                    : model.currentLocation != null
+                    : model.userLocation != null
                         ? SliverList(
                             delegate: SliverChildBuilderDelegate(
                               _buildItem,
-                              childCount: model.issPassTimes.passTimes.length,
+                              childCount: model.getItemCount,
                             ),
                           )
                         : SliverFillRemaining(
@@ -132,9 +135,9 @@ class IssTimesTab extends StatelessWidget {
   }
 
   Widget _buildItem(BuildContext context, int index) {
-    return ScopedModelDescendant<IssModel>(
+    return ScopedModelDescendant<PassTimesModel>(
       builder: (context, child, model) {
-        final PassTime passTime = model.issPassTimes.passTimes[index];
+        final PassTime passTime = model.getItem(index);
         return Column(children: <Widget>[
           ListCell(
             leading: const Icon(Icons.timer, size: 42.0),
@@ -156,7 +159,7 @@ class IssTimesTab extends StatelessWidget {
                       'iss.times.tab.event',
                     ),
                     description: passTime.getDuration(context),
-                    location: model.getCurrentLocation,
+                    location: model.getUserLocation,
                     startDate: passTime.date,
                     endDate: passTime.date.add(passTime.duration),
                   )),
