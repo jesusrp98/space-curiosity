@@ -71,12 +71,17 @@ class PassTime {
     );
   }
 
-  String get getDate =>
-      DateFormat.yMMMMd().addPattern('Hm', '  ·  ').format(date);
+  String getDate(context) => FlutterI18n.translate(
+        context,
+        'spacex.other.date.time',
+        {'date': DateFormat.yMMMMd().format(date), 'hour': getTime},
+      );
+
+  String get getTime => '${DateFormat.Hm().format(date)} ${date.timeZoneName}';
 
   String getDuration(context) => FlutterI18n.translate(
         context,
         'iss.times.tab.duration',
-        {'time': duration.inSeconds.toString()},
+        {'time': NumberFormat.decimalPattern().format(duration.inSeconds)},
       );
 }

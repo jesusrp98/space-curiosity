@@ -130,11 +130,11 @@ class IssTimesTab extends StatelessWidget {
         return Column(children: <Widget>[
           ListCell(
             leading: const Icon(Icons.timer, size: 42.0),
-            title: passTime.getDate,
+            title: passTime.getDate(context),
             subtitle: passTime.getDuration(context),
             trailing: IconButton(
               icon: Icon(
-                Icons.event,
+                Icons.add,
                 size: 27.0,
                 color: Theme.of(context).textTheme.caption.color,
               ),
