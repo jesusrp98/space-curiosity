@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:http/http.dart' as http;
 
@@ -10,13 +12,15 @@ class AstronautsModel extends QuerryModel {
     // Get items by http call
     response = await http.get(Url.issAstronauts);
 
+    snapshot = json.decode(response.body)['people'];
+
     // Clear old data
     clearItems();
 
     // Add parsed items
-    items.addAll(response.body['people']
-        .map((astronaut) => Astronaut.fromJson(astronaut))
-        .toList());
+    items.addAll(
+      snapshot.map((astronaut) => Astronaut.fromJson(astronaut)).toList(),
+    );
 
     // Finished loading data
     setLoading(false);

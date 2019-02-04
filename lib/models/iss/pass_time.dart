@@ -21,7 +21,7 @@ class PassTimesModel extends QuerryModel {
     // Clear old data
     clearItems();
 
-    _issLocation = Map.from(response.body['iss_position']);
+    _issLocation = Map.from(json.decode(response.body)['iss_position']);
 
     // Ask user about location
     // Parse if permission are granted
@@ -32,9 +32,9 @@ class PassTimesModel extends QuerryModel {
       print(2.2);
       // Get items by http call & parse them
       response = await http.get(
-        '${Url.issPassTimes}?lat=${_userLocation['latitude']}&lon=${_userLocation['longitude']}&n=11',
+        '${Url.issPassTimes}?lat=${_userLocation['latitude']}&lon=${_userLocation['longitude']}&n=10',
       );
-      snapshot = json.decode(response.body);
+      snapshot = json.decode(response.body)['response'];
       print(2.3);
       items.addAll(
         snapshot.map((passTime) => PassTime.fromJson(passTime)).toList(),
@@ -54,7 +54,7 @@ class PassTimesModel extends QuerryModel {
   Map<String, double> get userLocation => _userLocation;
 
   String get getUserLocation =>
-      '${_userLocation[0].toStringAsPrecision(5)},  ${_userLocation[1].toStringAsPrecision(5)}';
+      '${_userLocation['latitude'].toStringAsPrecision(5)},  ${_userLocation['longitude'].toStringAsPrecision(5)}';
 }
 
 class PassTime {

@@ -10,7 +10,7 @@ class IssHomeModel extends QuerryModel {
     // Get items from Firebase
     response = await Firestore.instance.collection('iss').getDocuments();
 
-    // Add parsed items
+    // // Add parsed items
     items.addAll(response.documents
         .map((document) => IssHome.fromDocument(document))
         .toList());
