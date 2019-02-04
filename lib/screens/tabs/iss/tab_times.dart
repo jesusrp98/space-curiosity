@@ -135,7 +135,7 @@ class IssTimesTab extends StatelessWidget {
             trailing: IconButton(
               icon: Icon(
                 Icons.add,
-                size: 27.0,
+                size: 25.0,
                 color: Theme.of(context).textTheme.caption.color,
               ),
               tooltip: FlutterI18n.translate(

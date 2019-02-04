@@ -14,9 +14,11 @@ class IssHomeModel extends QuerryModel {
     clearItems();
 
     // // Add parsed items
-    items.addAll(response.documents
-        .map((document) => IssHome.fromDocument(document))
-        .toList());
+    items.addAll(
+      response.documents
+          .map((document) => IssHome.fromDocument(document))
+          .toList(),
+    );
 
     // Finished loading data
     setLoading(false);

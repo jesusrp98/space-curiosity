@@ -11,7 +11,6 @@ class AstronautsModel extends QuerryModel {
   Future loadData() async {
     // Get items by http call
     response = await http.get(Url.issAstronauts);
-
     snapshot = json.decode(response.body)['people'];
 
     // Clear old data
