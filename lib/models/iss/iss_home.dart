@@ -10,6 +10,9 @@ class IssHomeModel extends QuerryModel {
     // Get items from Firebase
     response = await Firestore.instance.collection('iss').getDocuments();
 
+    // Clear old data
+    clearItems();
+
     // // Add parsed items
     items.addAll(response.documents
         .map((document) => IssHome.fromDocument(document))
@@ -96,7 +99,7 @@ class IssHome {
 
   factory IssHome.fromDocument(DocumentSnapshot document) {
     return IssHome(
-      launchDate: DateTime.parse(document['launch_date']),
+      launchDate: DateTime.parse(document['launch_year']),
       altitude: document['altitude'],
       orbitTime: document['orbit_time'],
       projectCost: document['project_cost'],
@@ -108,9 +111,11 @@ class IssHome {
     );
   }
 
+  int get _daysSinceLaunch => DateTime.now().difference(launchDate).inDays;
+
   String get getLaunchDate => DateFormat.yMMMMd().format(launchDate);
 
-  String get getYearsInOrbit => 'TODO';
+  String get getYearsInOrbit => (_daysSinceLaunch / 356).toStringAsPrecision(2);
 
   String get getAltitude =>
       '${NumberFormat.decimalPattern().format(altitude)} km';
@@ -122,21 +127,24 @@ class IssHome {
       .format((Duration.minutesPerDay / (orbitTime / 60)).round());
 
   String get getProjectCost =>
-      NumberFormat.currency(symbol: '\$', decimalDigits: 0).format(projectCost);
+      NumberFormat.compactSimpleCurrency(decimalDigits: 0).format(projectCost);
 
   String get getLength =>
       '${NumberFormat.decimalPattern().format(length.round())} m';
 
   String get getWidth =>
-      '${NumberFormat.decimalPattern().format(length.round())} m';
+      '${NumberFormat.decimalPattern().format(width.round())} m';
 
   String get getWeight =>
-      '${NumberFormat.decimalPattern().format(length.round())} kg';
+      '${NumberFormat.decimalPattern().format(weight.round())} kg';
 
   String get getSpeed =>
       '${NumberFormat.decimalPattern().format(speed.round())} km/h';
 
-  String get getDaysInOrbit => 'TODO';
+  String get getDaysInOrbit =>
+      NumberFormat.decimalPattern().format(_daysSinceLaunch);
 
-  String get getTotalOrbits => 'TODO';
+  String get getTotalOrbits => NumberFormat.decimalPattern().format(
+        (_daysSinceLaunch * Duration.minutesPerDay / (orbitTime / 60)).round(),
+      );
 }
