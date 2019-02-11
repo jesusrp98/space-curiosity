@@ -38,6 +38,7 @@ dependencies:
   flutter_bloc:
   bloc:
   equatable:
+  url_launcher:
 
   ## Icons
   font_awesome_flutter: ^8.2.0

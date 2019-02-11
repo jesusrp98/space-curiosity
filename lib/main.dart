@@ -13,7 +13,6 @@ import 'ui/iss/screen.dart';
 import 'ui/news/screen.dart';
 import 'ui/planets/details/edit.dart';
 import 'ui/planets/screen.dart';
-import 'ui/post/screen.dart';
 import 'ui/settings.dart';
 import 'ui/space_x/screen.dart';
 
@@ -39,12 +38,11 @@ class MyApp extends StatelessWidget {
               routes: <String, WidgetBuilder>{
                 '/home': (_) => HomeScreen(),
                 '/spacex': (_) => SpacexScreen(),
-                '/news': (_) => NewsScreen(),
+                '/news': (_) => ArticlesScreen(),
                 '/planets': (_) => SolarSystemScreen(),
                 '/iss': (_) => IssScreen(),
                 '/info': (_) => AboutScreen(),
                 '/about': (_) => AboutScreen(),
-                '/posts': (_) => ArticlesScreen(),
                 AddEditPlanetPage.routeName: (_) =>
                     AddEditPlanetPage(null, type: BodyType.planet),
                 '/settings': (_) => SettingsScreen(),

@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:http/http.dart' as http;
 import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:webfeed/domain/rss_feed.dart';
 
 import '../../models/articles/post.dart';
 import '../bloc.dart';
@@ -35,7 +36,7 @@ class PostBloc extends Bloc<PostEvent, PostState> {
           yield posts.isEmpty
               ? currentState.copyWith(hasReachedMax: true)
               : PostLoaded(
-                  posts: currentState.posts + posts,
+                  posts: (currentState.posts + posts)?.toSet()?.toList(),
                   hasReachedMax: false,
                 );
         }
@@ -49,15 +50,19 @@ class PostBloc extends Bloc<PostEvent, PostState> {
       state is PostLoaded && state.hasReachedMax;
 
   Future<List<Post>> _fetchPosts(int startIndex, int limit) async {
-    final response = await httpClient.get(
-        'https://jsonplaceholder.typicode.com/posts?_start=$startIndex&_limit=$limit');
+    final response =
+        await httpClient.get('https://www.nasa.gov/rss/dyn/breaking_news.rss/$startIndex');
+
     if (response.statusCode == 200) {
-      final data = json.decode(response.body) as List;
+      var channel = new RssFeed.parse(response.body);
+      final data = channel?.items;
       return data.map((rawPost) {
         return Post(
-          id: rawPost['id'],
-          title: rawPost['title'],
-          body: rawPost['body'],
+          id: data?.indexOf(rawPost),
+          title: rawPost?.title,
+          body: rawPost?.description,
+          date: rawPost?.pubDate,
+          url: rawPost?.link,
         );
       }).toList();
     } else {
