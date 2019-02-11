@@ -23,40 +23,45 @@ class _ArticlesScreenState extends State<ArticlesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder(
-      bloc: _postBloc,
-      builder: (BuildContext context, PostState state) {
-        if (state is PostUninitialized) {
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-        }
-        if (state is PostError) {
-          return Center(
-            child: Text('failed to fetch posts'),
-          );
-        }
-        if (state is PostLoaded) {
-          if (state.posts.isEmpty) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Space News"),
+      ),
+      body: BlocBuilder(
+        bloc: _postBloc,
+        builder: (BuildContext context, PostState state) {
+          if (state is PostUninitialized) {
             return Center(
-              child: Text('no posts'),
+              child: CircularProgressIndicator(),
             );
           }
-          return ListView.builder(
-            itemBuilder: (BuildContext context, int index) {
-              if (index >= state.posts.length) {
-                return BottomLoader();
-              } else {
-                return PostWidget(post: state.posts[index]);
-              }
-            },
-            itemCount: state.hasReachedMax
-                ? state.posts.length
-                : state.posts.length + 1,
-            controller: _scrollController,
-          );
-        }
-      },
+          if (state is PostError) {
+            return Center(
+              child: Text('failed to fetch posts'),
+            );
+          }
+          if (state is PostLoaded) {
+            if (state.posts.isEmpty) {
+              return Center(
+                child: Text('no posts'),
+              );
+            }
+            return ListView.builder(
+              itemBuilder: (BuildContext context, int index) {
+                if (index >= state.posts.length) {
+                  return BottomLoader();
+                } else {
+                  return PostWidget(post: state.posts[index]);
+                }
+              },
+              itemCount: state.hasReachedMax
+                  ? state.posts.length
+                  : state.posts.length + 1,
+              controller: _scrollController,
+            );
+          }
+        },
+      ),
     );
   }
 
