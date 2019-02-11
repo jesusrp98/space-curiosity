@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:material_search/material_search.dart';
-import 'package:space_news/ui/space_x/details/capsule.dart';
-import 'package:space_news/ui/space_x/details/roadster.dart';
-import 'package:space_news/ui/space_x/details/rocket.dart';
-import 'package:space_news/ui/space_x/details/ship.dart';
 
 import '../../../models/rockets/info_vehicle.dart';
+import '../details/capsule.dart';
+import '../details/roadster.dart';
+import '../details/rocket.dart';
+import '../details/ship.dart';
 
 /// SEARCH VEHICLES METHOD
 /// Auxiliary method which helps filter vehicles by its name

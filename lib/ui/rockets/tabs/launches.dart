@@ -6,14 +6,14 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'package:space_news/ui/general/cache_image.dart';
-import 'package:space_news/ui/general/hero_image.dart';
-import 'package:space_news/ui/general/list_cell.dart';
-import 'package:space_news/ui/general/separator.dart';
-import 'package:space_news/ui/space_x/details/launch.dart';
-import 'package:space_news/ui/space_x/search/launches.dart';
 
 import '../../../models/rockets/launch.dart';
+import '../../general/cache_image.dart';
+import '../../general/hero_image.dart';
+import '../../general/list_cell.dart';
+import '../../general/separator.dart';
+import '../details/launch.dart';
+import '../search/launches.dart';
 
 /// LAUNCHES TAB VIEW
 /// This tab holds information a specific type of launches,
