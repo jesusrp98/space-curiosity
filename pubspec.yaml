@@ -35,6 +35,9 @@ dependencies:
   flutter_i18n: ^0.5.2
   material_search: ^0.2.8
   location: ^1.4.1
+  flutter_bloc:
+  bloc:
+  equatable:
 
   ## Icons
   font_awesome_flutter: ^8.2.0
