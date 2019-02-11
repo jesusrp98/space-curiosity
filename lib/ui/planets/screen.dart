@@ -10,32 +10,41 @@ import 'details/view.dart';
 
 class SolarSystemScreen extends StatelessWidget {
   final PlanetsModel planetModel;
-  SolarSystemScreen({this.planetModel});
+  SolarSystemScreen({@required this.planetModel});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Solar System'), centerTitle: true),
-      body: ScopedModelDescendant<PlanetsModel>(
-        builder: (context, child, model) => model.isLoading
-            ? NativeLoadingIndicator(center: true)
-            : Scrollbar(
-                child: ListView.builder(
-                  key: PageStorageKey('planets'),
-                  itemCount: model.getItemCount,
-                  itemBuilder: _buildItem,
+    return ScopedModel(
+      model: planetModel,
+      child: Scaffold(
+        appBar: AppBar(title: const Text('Solar System'), centerTitle: true),
+        body: ScopedModelDescendant<PlanetsModel>(
+          builder: (context, child, model) {
+            if (model.isLoading) {
+              model.refresh();
+              return NativeLoadingIndicator(center: true);
+            } else {
+              return Scrollbar(
+                  child: ListView.builder(
+                    key: PageStorageKey('planets'),
+                    itemCount: model.getItemCount,
+                    itemBuilder: _buildItem,
+                  ),
+                );
+            }
+          }
+        ),
+        floatingActionButton: FloatingActionButton(
+          child: const Icon(Icons.add),
+          onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) =>
+                      AddEditPlanetPage(null, type: BodyType.planet),
+                  fullscreenDialog: true,
                 ),
               ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.add),
-        onPressed: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (_) => AddEditPlanetPage(null, type: BodyType.planet),
-                fullscreenDialog: true,
-              ),
-            ),
+        ),
       ),
     );
   }

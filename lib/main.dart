@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
                 '/home': (_) => HomeScreen(),
                 '/spacex': (_) => SpacexScreen(),
                 '/news': (_) => ArticlesScreen(),
-                '/planets': (_) => SolarSystemScreen(),
+                '/planets': (_) => SolarSystemScreen(planetModel: PlanetsModel(),),
                 '/iss': (_) => IssScreen(),
                 '/info': (_) => AboutScreen(),
                 '/about': (_) => AboutScreen(),
