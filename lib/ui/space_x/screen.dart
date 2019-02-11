@@ -13,7 +13,6 @@ import 'tabs/home.dart';
 import 'tabs/launches.dart';
 import 'tabs/vehicles.dart';
 
-
 /// SPACEX MAIN SCREEN
 /// This view holds all tabs & its models: home, vehicles, upcoming & latest launches, & company tabs.
 class SpacexScreen extends StatefulWidget {

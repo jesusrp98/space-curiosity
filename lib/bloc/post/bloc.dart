@@ -8,7 +8,6 @@ import 'package:rxdart/rxdart.dart';
 import '../../models/articles/post.dart';
 import '../bloc.dart';
 
-
 class PostBloc extends Bloc<PostEvent, PostState> {
   final http.Client httpClient;
 

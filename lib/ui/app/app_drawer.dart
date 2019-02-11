@@ -97,6 +97,12 @@ class AppDrawer extends StatelessWidget {
             ),
             onTap: () => openPage(context, '/mars'),
           ),
+          ListCell(
+            leading: const Icon(Icons.info, size: 42),
+            title: "Posts",
+            subtitle: "List of Posts",
+            onTap: () => openPage(context, '/posts'),
+          ),
         ],
       ),
     );

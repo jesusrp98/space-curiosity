@@ -6,7 +6,6 @@ import 'package:space_news/ui/general/separator.dart';
 
 import '../models/app_model.dart';
 
-
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({Key key}) : super(key: key);
 

@@ -8,7 +8,6 @@ import 'package:space_news/ui/space_x/details/ship.dart';
 
 import '../../../models/rockets/info_vehicle.dart';
 
-
 /// SEARCH VEHICLES METHOD
 /// Auxiliary method which helps filter vehicles by its name
 searchVehicles(BuildContext context, List list) {

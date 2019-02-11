@@ -11,7 +11,6 @@ import '../../general/cache_image.dart';
 import '../../general/row_item.dart';
 import '../../general/separator.dart';
 
-
 /// CORE DIALOG VIEW
 /// This view displays information about a specific core,
 /// used in a mission.

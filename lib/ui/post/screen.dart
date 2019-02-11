@@ -6,7 +6,6 @@ import '../../bloc/bloc.dart';
 import '../app/bottom_loader.dart';
 import 'item.dart';
 
-
 class ArticlesScreen extends StatefulWidget {
   @override
   _ArticlesScreenState createState() => _ArticlesScreenState();

@@ -18,7 +18,6 @@ import '../details/rocket.dart';
 import '../details/ship.dart';
 import '../search/vehicles.dart';
 
-
 /// VEHICLES TAB VIEW
 /// This tab holds information about all kind of SpaceX's vehicles,
 /// such as rockets, capsules, Tesla Roadster & ships.

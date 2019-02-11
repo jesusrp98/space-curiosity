@@ -15,7 +15,6 @@ import 'package:space_news/ui/space_x/search/launches.dart';
 
 import '../../../models/rockets/launch.dart';
 
-
 /// LAUNCHES TAB VIEW
 /// This tab holds information a specific type of launches,
 /// upcoming or latest, defined by the model.

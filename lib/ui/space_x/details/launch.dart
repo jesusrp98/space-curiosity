@@ -24,7 +24,6 @@ import '../dialog/core.dart';
 import '../dialog/landpad.dart';
 import '../dialog/launchpad.dart';
 
-
 /// LAUNCH PAGE VIEW
 /// This view displays all information about a specific launch.
 class LaunchPage extends StatelessWidget {

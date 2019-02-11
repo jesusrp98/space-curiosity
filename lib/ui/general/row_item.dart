@@ -3,7 +3,6 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:space_news/util/colors.dart';
 
-
 /// ROW ITEM WIDGET
 /// Stretched widget to display information in a 'Card Page' widget.
 /// Contains a title and a description widget, which can be an icon or a text.

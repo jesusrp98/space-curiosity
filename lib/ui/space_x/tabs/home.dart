@@ -21,7 +21,6 @@ import '../dialog/capsule.dart';
 import '../dialog/core.dart';
 import '../dialog/launchpad.dart';
 
-
 /// HOME TAB VIEW
 /// This tab holds main information about the next launch.
 /// It has a countdown widget.

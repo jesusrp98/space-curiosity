@@ -2,7 +2,6 @@ import 'package:equatable/equatable.dart';
 
 import '../../models/articles/post.dart';
 
-
 abstract class PostState extends Equatable {
   PostState([List props = const []]) : super(props);
 }

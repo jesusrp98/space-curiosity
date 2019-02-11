@@ -12,7 +12,6 @@ import 'general/list_cell.dart';
 import 'general/photo_card.dart';
 import 'general/separator.dart';
 
-
 class HomeScreen extends StatelessWidget {
   static final Map<String, String> _menu = {
     'home.menu.about': '/about',
