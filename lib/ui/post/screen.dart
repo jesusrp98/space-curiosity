@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:space_news/bloc/bloc.dart';
-import 'package:space_news/ui/app/bottom_loader.dart';
-import 'package:space_news/ui/post/item.dart';
-import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
+
+import '../../bloc/bloc.dart';
+import '../app/bottom_loader.dart';
+import 'item.dart';
 
 
 class ArticlesScreen extends StatefulWidget {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:space_news/models/models.dart';
+
+import '../../models/models.dart';
 
 
 class PostWidget extends StatelessWidget {

@@ -10,7 +10,7 @@ import 'models/planets/celestial_body.dart';
 import 'ui/about.dart';
 import 'ui/home.dart';
 import 'ui/iss/screen.dart';
-import 'ui/news/screen_news.dart';
+import 'ui/news/screen.dart';
 import 'ui/planets/details/edit.dart';
 import 'ui/planets/screen.dart';
 import 'ui/settings.dart';
