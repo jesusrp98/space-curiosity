@@ -39,6 +39,7 @@ dependencies:
   bloc:
   equatable:
   url_launcher:
+  auto_size_text:
 
   ## Icons
   font_awesome_flutter: ^8.2.0
