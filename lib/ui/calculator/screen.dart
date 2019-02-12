@@ -69,7 +69,7 @@ class _Content extends StatelessWidget {
                 ),
                 ListTile(
                   title: Text(
-                    _calcBloc.currentState.planetWeight.toStringAsFixed(3),
+                    _calcBloc.currentState.planetWeightFormat,
                     style: Theme.of(context).textTheme.display1,
                   ),
                 )

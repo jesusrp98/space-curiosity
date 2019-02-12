@@ -5,7 +5,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import 'bloc/bloc.dart';
-import 'bloc/calculator/bloc.dart';
 import 'bloc/delegate.dart';
 import 'models/app_model.dart';
 import 'models/planets/celestial_body.dart';
