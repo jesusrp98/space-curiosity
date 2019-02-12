@@ -6,12 +6,12 @@ import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:sliver_fab/sliver_fab.dart';
 
-import '../../../models/rockets/details_capsule.dart';
-import '../../../models/rockets/details_core.dart';
-import '../../../models/rockets/landpad.dart';
-import '../../../models/rockets/launch.dart';
-import '../../../models/rockets/launchpad.dart';
-import '../../../models/rockets/rocket.dart';
+import '../../../models/spacex/details_capsule.dart';
+import '../../../models/spacex/details_core.dart';
+import '../../../models/spacex/landpad.dart';
+import '../../../models/spacex/launch.dart';
+import '../../../models/spacex/launchpad.dart';
+import '../../../models/spacex/rocket.dart';
 import '../../../util/colors.dart';
 import '../../general/cache_image.dart';
 import '../../general/card_page.dart';

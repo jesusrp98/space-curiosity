@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 
-import '../../../models/rockets/info_ship.dart';
+import '../../../models/spacex/info_ship.dart';
 import '../../general/cache_image.dart';
 import '../../general/card_page.dart';
 import '../../general/row_item.dart';

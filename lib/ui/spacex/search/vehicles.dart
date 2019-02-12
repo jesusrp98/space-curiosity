@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:material_search/material_search.dart';
 
-import '../../../models/rockets/info_vehicle.dart';
+import '../../../models/spacex/info_vehicle.dart';
 import '../details/capsule.dart';
 import '../details/roadster.dart';
 import '../details/rocket.dart';

@@ -4,7 +4,7 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:sliver_fab/sliver_fab.dart';
 
-import '../../../models/rockets/info_roadster.dart';
+import '../../../models/spacex/info_roadster.dart';
 import '../../general/cache_image.dart';
 import '../../general/card_page.dart';
 import '../../general/row_item.dart';

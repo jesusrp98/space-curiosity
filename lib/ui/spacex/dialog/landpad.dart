@@ -6,7 +6,7 @@ import 'package:latlong/latlong.dart';
 import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
 
-import '../../../models/rockets/landpad.dart';
+import '../../../models/spacex/landpad.dart';
 import '../../../util/colors.dart';
 import '../../../util/url.dart';
 import '../../general/row_item.dart';

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:material_search/material_search.dart';
 
-import '../../../models/rockets/launch.dart';
+import '../../../models/spacex/launch.dart';
 import '../details/launch.dart';
 
 /// SEARCH LAUNCHES METHOD

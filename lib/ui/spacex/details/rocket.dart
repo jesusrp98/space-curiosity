@@ -3,7 +3,7 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 
-import '../../../models/rockets/info_rocket.dart';
+import '../../../models/spacex/info_rocket.dart';
 import '../../general/cache_image.dart';
 import '../../general/card_page.dart';
 import '../../general/row_item.dart';

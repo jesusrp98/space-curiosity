@@ -9,10 +9,10 @@ import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
 
-import '../../../models/rockets/details_capsule.dart';
-import '../../../models/rockets/details_core.dart';
-import '../../../models/rockets/launchpad.dart';
-import '../../../models/rockets/spacex_home.dart';
+import '../../../models/spacex/details_capsule.dart';
+import '../../../models/spacex/details_core.dart';
+import '../../../models/spacex/launchpad.dart';
+import '../../../models/spacex/spacex_home.dart';
 import '../../general/cache_image.dart';
 import '../../general/list_cell.dart';
 import '../../general/separator.dart';
