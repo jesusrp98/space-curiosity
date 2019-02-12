@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n_delegate.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'package:space_news/bloc/bloc.dart';
-import 'package:space_news/ui/calculator/screen.dart';
 
+import 'bloc/bloc.dart';
+import 'bloc/calculator/bloc.dart';
 import 'bloc/delegate.dart';
 import 'models/app_model.dart';
 import 'models/planets/celestial_body.dart';
 import 'ui/about.dart';
+import 'ui/calculator/screen.dart';
 import 'ui/home.dart';
 import 'ui/iss/screen.dart';
 import 'ui/news/screen.dart';
@@ -46,8 +47,7 @@ class MyApp extends StatelessWidget {
                 '/iss': (_) => IssScreen(),
                 '/info': (_) => AboutScreen(),
                 '/about': (_) => AboutScreen(),
-                '/weight': (_) =>
-                    CalculatorScreen(calculatorBloc: CalculatorBloc()),
+                '/weight': (_) => CalculatorScreen(),
                 AddEditPlanetPage.routeName: (_) =>
                     AddEditPlanetPage(null, type: BodyType.planet),
                 '/settings': (_) => SettingsScreen(),
