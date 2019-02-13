@@ -13,7 +13,7 @@ class Calculator extends Equatable {
 
   num get planetWeight => weight * surfaceGravity;
 
-  String get planetWeightFormat => planetWeight.toStringAsFixed(3) + " lbs";
+  String get planetWeightFormat => planetWeight.toStringAsFixed(2) + " lbs";
 
   @override
   String toString() => 'Post { Planet: $planet }';

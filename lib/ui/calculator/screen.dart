@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:space_news/bloc/bloc.dart';
 import 'package:space_news/models/calculator/weight.dart';
+import 'package:flare_flutter/flare_actor.dart';
 
 import '../../bloc/calculator/bloc.dart';
 import '../general/string_picker_tile.dart';
@@ -45,34 +46,117 @@ class _Content extends StatelessWidget {
       body: BlocBuilder(
           bloc: _calcBloc,
           builder: (BuildContext context, Calculator state) {
-            return ListView(
+            return Stack(
               children: <Widget>[
-                StringPickerTile(
-                  initialItem: state.planet,
-                  items: _calcBloc.planets,
-                  title: Text("Select Planet"),
-                  subtitle: Text(state.planet),
-                  onChanged: (int index) {
-                    var _planet = _calcBloc.planets[index];
-                    print("Planet => $_planet");
-                    _calcBloc.dispatch(ChangePlanet(_planet));
-                  },
+                Container(
+                  child: FlareActor("assets/animations/earth.flr",
+                      alignment: Alignment.center,
+                      fit: BoxFit.cover,
+                      animation: "Preview2"),
                 ),
-                ListTile(
-                  title: TextField(
-                    keyboardType:
-                        TextInputType.numberWithOptions(decimal: true),
-                    onChanged: (String value) {
-                      _calcBloc.dispatch(ChangeWeight(num.parse(value)));
-                    },
+                Positioned(
+                  bottom: 150.0,
+                  left: 10.0,
+                  right: 10.0,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Container(
+                        padding: EdgeInsets.only(bottom: 22.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                            IconButton(
+                              icon: Icon(
+                                Icons.remove,
+                                size: 40.0,
+                              ),
+                              onPressed: () {
+                                _calcBloc
+                                    .dispatch(ChangeWeight(state.weight - 5));
+                              },
+                            ),
+                            Container(
+                              padding: EdgeInsets.all(10.0),
+                              child: Text(
+                                state.weight.round().toString() + " lbs",
+                                textAlign: TextAlign.center,
+                                style: Theme.of(context).textTheme.display1,
+                              ),
+                            ),
+                            IconButton(
+                              icon: Icon(
+                                Icons.add,
+                                size: 40.0,
+                              ),
+                              onPressed: () {
+                                _calcBloc
+                                    .dispatch(ChangeWeight(state.weight + 5));
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        height: 100.0,
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
+                          itemCount: _calcBloc.planets.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            final p = _calcBloc.planets[index];
+                            return InkWell(
+                              onTap: () {
+                                _calcBloc.dispatch(ChangePlanet(p));
+                              },
+                              child: SizedBox(
+                                height: 100.0,
+                                width: 100.0,
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: <Widget>[
+                                    Expanded(
+                                      child: Image.network(
+                                        _calcBloc.getPlanetImage(p),
+                                        fit: BoxFit.contain,
+                                      ),
+                                    ),
+                                    Container(
+                                      padding: EdgeInsets.all(3.0),
+                                      child: Text(p),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                ListTile(
-                  title: Text(
-                    _calcBloc.currentState.planetWeightFormat,
-                    style: Theme.of(context).textTheme.display1,
-                  ),
-                )
+                Positioned(
+                    bottom: 75.0,
+                    left: 10.0,
+                    right: 10.0,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                            Text(
+                              _calcBloc.currentState.planetWeightFormat,
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context).textTheme.display1,
+                            ),
+                            Text("Your Weight on ${state.planet}"),
+                          ],
+                        ),
+                      ],
+                    )),
               ],
             );
           }),

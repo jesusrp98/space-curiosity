@@ -40,6 +40,7 @@ dependencies:
   equatable:
   url_launcher:
   auto_size_text:
+  flare_flutter:
 
   ## Icons
   font_awesome_flutter: ^8.2.0
@@ -60,5 +61,6 @@ flutter:
           weight: 700
   assets:
     - assets/flutter_i18n/
+    - assets/animations/
 
   uses-material-design: true
