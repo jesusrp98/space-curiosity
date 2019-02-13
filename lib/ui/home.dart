@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'package:space_news/ui/app/app_drawer.dart';
 
 import '../models/nasa/nasa_image.dart';
+import 'app/app_drawer.dart';
 import 'general/call_error.dart';
-import 'general/list_cell.dart';
 import 'general/photo_card.dart';
-import 'general/separator.dart';
 
 class HomeScreen extends StatelessWidget {
   static final Map<String, String> _menu = {
@@ -31,9 +28,7 @@ class HomeScreen extends StatelessWidget {
             itemBuilder: (_) => _menu.keys
                 .map((string) => PopupMenuItem(
                       value: string,
-                      child: Text(
-                        FlutterI18n.translate(context, string),
-                      ),
+                      child: Text(FlutterI18n.translate(context, string)),
                     ))
                 .toList(),
             onSelected: (string) => Navigator.pushNamed(context, _menu[string]),
@@ -44,11 +39,6 @@ class HomeScreen extends StatelessWidget {
       body: ContentPage(),
       drawer: AppDrawer(),
     );
-  }
-
-  openPage(BuildContext context, String route) {
-    Navigator.pop(context);
-    Navigator.pushNamed(context, route);
   }
 }
 
