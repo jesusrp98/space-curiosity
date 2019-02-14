@@ -118,7 +118,7 @@ class _Content extends StatelessWidget {
                                   mainAxisSize: MainAxisSize.min,
                                   children: <Widget>[
                                     Expanded(
-                                      child: Image.network(
+                                      child: Image.asset(
                                         _calcBloc.getPlanetImage(p),
                                         fit: BoxFit.contain,
                                       ),
