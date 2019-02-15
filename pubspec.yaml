@@ -44,9 +44,9 @@ dependencies:
   url_launcher: ^5.0.1
 
 #  ## AndroidX Issues
-#  image_downloader:
-#    git:
-#      url: https://github.com/AppleEducate/image_downloader
+  # image_downloader:
+  #  git:
+  #    url: https://github.com/AppleEducate/image_downloader
   add_2_calendar:
     git:
       url: https://github.com/AppleEducate/add_2_calendar

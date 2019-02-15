@@ -2,7 +2,7 @@ import 'package:clipboard_manager/clipboard_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 
-//import 'package:image_downloader/image_downloader.dart';
+// import 'package:image_downloader/image_downloader.dart';
 import 'package:share/share.dart';
 import 'package:space_news/util/url.dart';
 
@@ -105,7 +105,7 @@ class NasaImagePage extends StatelessWidget {
                       OptionButton(
                         icon: Icons.get_app,
                         title: FlutterI18n.translate(context, 'nasa.download'),
-//                        onTap: () => ImageDownloader.downloadImage(image.url),
+                        // onTap: () => ImageDownloader.downloadImage(image.url),
                         onTap: null,
                       ),
                     ],
