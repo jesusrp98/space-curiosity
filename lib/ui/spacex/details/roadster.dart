@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:flutter_web_browser/flutter_web_browser.dart';
+ 
 import 'package:sliver_fab/sliver_fab.dart';
+import 'package:space_news/util/url.dart';
 
 import '../../../models/spacex/info_roadster.dart';
 import '../../general/cache_image.dart';
@@ -28,7 +29,7 @@ class RoadsterPage extends StatelessWidget {
                   context,
                   'spacex.other.tooltip.watch_replay',
                 ),
-                onPressed: () async => await FlutterWebBrowser.openWebPage(
+                onPressed: () async => await launchURL(
                       url: _roadster.video,
                       androidToolbarColor: Theme.of(context).primaryColor,
                     ),
@@ -43,7 +44,7 @@ class RoadsterPage extends StatelessWidget {
                     IconButton(
                       icon: const Icon(Icons.public),
                       onPressed: () async =>
-                          await FlutterWebBrowser.openWebPage(
+                          await launchURL(
                             url: _roadster.url,
                             androidToolbarColor: Theme.of(context).primaryColor,
                           ),
@@ -70,7 +71,7 @@ class RoadsterPage extends StatelessWidget {
                       autoplayDelay: 6000,
                       duration: 750,
                       onTap: (index) async =>
-                          await FlutterWebBrowser.openWebPage(
+                          await launchURL(
                             url: _roadster.getPhoto(index),
                             androidToolbarColor: Theme.of(context).primaryColor,
                           ),

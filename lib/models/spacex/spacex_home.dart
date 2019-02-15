@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
-import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:http/http.dart' as http;
 
 import '../../ui/general/separator.dart';
@@ -271,7 +270,7 @@ class Countdown extends AnimatedWidget {
                 .copyWith(fontFamily: 'RobotoMono'),
           )
         : InkWell(
-            onTap: () async => await FlutterWebBrowser.openWebPage(
+            onTap: () async => await launchURL(
                   url: url,
                   androidToolbarColor: Theme.of(context).primaryColor,
                 ),

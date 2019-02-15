@@ -12,7 +12,7 @@ import 'current_location.dart';
 import 'pass_time.dart';
 
 class IssModel extends QuerryModel {
-  Map<String, double> currentLocation;
+  LocationData currentLocation;
 
   @override
   Future loadData() async {
@@ -32,7 +32,7 @@ class IssModel extends QuerryModel {
 
       // Get items by http call & parse them
       response = await http.get(
-        '${Url.issPassTimes}?lat=${currentLocation['latitude']}&lon=${currentLocation['longitude']}&n=11',
+        '${Url.issPassTimes}?lat=${currentLocation.latitude}&lon=${currentLocation.longitude}&n=11',
       );
       items.add(IssPassTimes.fromJson(json.decode(response.body)));
     } on PlatformException {
@@ -97,5 +97,5 @@ class IssModel extends QuerryModel {
       );
 
   String get getCurrentLocation =>
-      '${currentLocation['latitude']},  ${currentLocation['longitude']}';
+      '${currentLocation.latitude},  ${currentLocation.longitude}';
 }

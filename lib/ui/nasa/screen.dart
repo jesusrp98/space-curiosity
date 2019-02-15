@@ -1,9 +1,10 @@
 import 'package:clipboard_manager/clipboard_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
-import 'package:flutter_web_browser/flutter_web_browser.dart';
-import 'package:image_downloader/image_downloader.dart';
+
+//import 'package:image_downloader/image_downloader.dart';
 import 'package:share/share.dart';
+import 'package:space_news/util/url.dart';
 
 import '../../models/nasa/nasa_image.dart';
 import '../general/cache_image.dart';
@@ -28,7 +29,7 @@ class NasaImagePage extends StatelessWidget {
                   tag: image.getDate,
                   child: CacheImage(image?.url),
                 ),
-                onTap: () => FlutterWebBrowser.openWebPage(
+                onTap: () => launchURL(
                       url: image.hdurl,
                       androidToolbarColor: Theme.of(context).primaryColor,
                     ),
@@ -104,7 +105,8 @@ class NasaImagePage extends StatelessWidget {
                       OptionButton(
                         icon: Icons.get_app,
                         title: FlutterI18n.translate(context, 'nasa.download'),
-                        onTap: () => ImageDownloader.downloadImage(image.url),
+//                        onTap: () => ImageDownloader.downloadImage(image.url),
+                        onTap: null,
                       ),
                     ],
                   ),

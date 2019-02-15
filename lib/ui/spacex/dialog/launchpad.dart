@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:flutter_web_browser/flutter_web_browser.dart';
+ 
 import 'package:latlong/latlong.dart';
 import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
@@ -28,7 +28,7 @@ class LaunchpadDialog extends StatelessWidget {
                 actions: <Widget>[
                   IconButton(
                     icon: const Icon(Icons.public),
-                    onPressed: () async => await FlutterWebBrowser.openWebPage(
+                    onPressed: () async => await launchURL(
                           url: model.launchpad.url,
                           androidToolbarColor: Theme.of(context).primaryColor,
                         ),
