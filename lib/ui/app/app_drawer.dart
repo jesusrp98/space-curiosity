@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../general/separator.dart';
+
 class AppDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -9,13 +11,33 @@ class AppDrawer extends StatelessWidget {
       child: ListView(
         children: <Widget>[
           DrawerHeader(
-            child: Text('Space Curiosity'),
+            child: Row(children: <Widget>[
+              FlutterLogo(size: 58),
+              Separator.spacer(width: 16),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Text(
+                    FlutterI18n.translate(context, 'app.title'),
+                    style: Theme.of(context).textTheme.headline,
+                  ),
+                  Separator.spacer(height: 8),
+                  Text(
+                    FlutterI18n.translate(context, 'app.subtitle'),
+                    style: Theme.of(context).textTheme.subhead.copyWith(
+                          color: Theme.of(context).textTheme.caption.color,
+                        ),
+                  ),
+                ],
+              )
+            ]),
           ),
           ListTile(
             leading: const Icon(FontAwesomeIcons.rocket),
             title: Text(FlutterI18n.translate(
               context,
-              'home.page.menu.spacex.title',
+              'home.page.menu.spacex',
             )),
             onTap: () => openPage(context, '/spacex'),
           ),
@@ -23,7 +45,7 @@ class AppDrawer extends StatelessWidget {
             leading: const Icon(Icons.description),
             title: Text(FlutterI18n.translate(
               context,
-              'home.page.menu.news.title',
+              'home.page.menu.news',
             )),
             onTap: () => openPage(context, '/news'),
           ),
@@ -31,7 +53,7 @@ class AppDrawer extends StatelessWidget {
             leading: const Icon(Icons.public),
             title: Text(FlutterI18n.translate(
               context,
-              'home.page.menu.planets.title',
+              'home.page.menu.planets',
             )),
             onTap: () => openPage(context, '/planets'),
           ),
@@ -39,7 +61,7 @@ class AppDrawer extends StatelessWidget {
             leading: const Icon(Icons.my_location),
             title: Text(FlutterI18n.translate(
               context,
-              'home.page.menu.iss.title',
+              'home.page.menu.iss',
             )),
             onTap: () => openPage(context, '/iss'),
           ),
@@ -47,19 +69,35 @@ class AppDrawer extends StatelessWidget {
             leading: const Icon(Icons.fitness_center),
             title: Text(FlutterI18n.translate(
               context,
-              'home.page.menu.weight.title',
+              'home.page.menu.weight',
             )),
             onTap: () => openPage(context, '/weight'),
           ),
-          // Separator.divider(height: 0.0, indent: 74.0),
           // ListTile(
-          //   leading: const Icon(Icons.camera_alt, size: 42),
+          //   leading: const Icon(Icons.camera_alt),
           //   title: Text(FlutterI18n.translate(
           //     context,
           //     'home.page.menu.mars.title',
           //   )),
           //   onTap: () => openPage(context, '/mars'),
           // ),
+          Separator.divider(height: 16),
+          ListTile(
+            leading: const Icon(Icons.settings),
+            title: Text(FlutterI18n.translate(
+              context,
+              'home.menu.settings',
+            )),
+            onTap: () => openPage(context, '/settings'),
+          ),
+          ListTile(
+            leading: const Icon(Icons.info_outline),
+            title: Text(FlutterI18n.translate(
+              context,
+              'home.menu.about',
+            )),
+            onTap: () => openPage(context, '/about'),
+          ),
         ],
       ),
     );
