@@ -20,6 +20,7 @@ dependencies:
   shared_preferences: 0.4.3
 
   ## Widgets
+  add_2_calendar: ^1.2.1
   flutter_map: ^0.4.0
   flutter_swiper: ^1.1.4
   material_search: ^0.2.8
@@ -31,6 +32,7 @@ dependencies:
   equatable: ^0.1.10
   flutter_bloc: ^0.6.0
   flutter_i18n: ^0.5.2
+  # image_downloader: ^0.11.1
   intl: ^0.15.7
   location:
   package_info: ^0.4.0+1
@@ -42,14 +44,6 @@ dependencies:
 
   ## TODO
   url_launcher: ^5.0.1
-
-#  ## AndroidX Issues
-  # image_downloader:
-  #  git:
-  #    url: https://github.com/AppleEducate/image_downloader
-  add_2_calendar:
-    git:
-      url: https://github.com/AppleEducate/add_2_calendar
 
 flutter:
   fonts:
