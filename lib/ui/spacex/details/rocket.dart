@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:space_news/util/url.dart';
- 
+import 'package:flutter_web_browser/flutter_web_browser.dart';
 
 import '../../../models/spacex/info_rocket.dart';
 import '../../general/cache_image.dart';
@@ -28,7 +27,7 @@ class RocketPage extends StatelessWidget {
           actions: <Widget>[
             IconButton(
               icon: const Icon(Icons.public),
-              onPressed: () async => await launchURL(
+              onPressed: () async => await FlutterWebBrowser.openWebPage(
                     url: _rocket.url,
                     androidToolbarColor: Theme.of(context).primaryColor,
                   ),
@@ -50,7 +49,7 @@ class RocketPage extends StatelessWidget {
               autoplay: true,
               autoplayDelay: 6000,
               duration: 750,
-              onTap: (index) async => await launchURL(
+              onTap: (index) async => await FlutterWebBrowser.openWebPage(
                     url: _rocket.getPhoto(index),
                     androidToolbarColor: Theme.of(context).primaryColor,
                   ),

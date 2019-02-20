@@ -3,10 +3,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
- 
+import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'package:space_news/util/url.dart';
 
 import '../../../models/spacex/info_vehicle.dart';
 import '../../general/cache_image.dart';
@@ -59,7 +58,7 @@ class VehiclesTab extends StatelessWidget {
                                 autoplayDelay: 6000,
                                 duration: 750,
                                 onTap: (index) async =>
-                                    await launchURL(
+                                    await FlutterWebBrowser.openWebPage(
                                       url: model.getPhoto(index),
                                       androidToolbarColor:
                                           Theme.of(context).primaryColor,

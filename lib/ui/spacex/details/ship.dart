@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
-import 'package:space_news/util/url.dart';
- 
+import 'package:flutter_web_browser/flutter_web_browser.dart';
 
 import '../../../models/spacex/info_ship.dart';
 import '../../general/cache_image.dart';
@@ -27,7 +26,7 @@ class ShipPage extends StatelessWidget {
           actions: <Widget>[
             IconButton(
               icon: const Icon(Icons.public),
-              onPressed: () async => await launchURL(
+              onPressed: () async => await FlutterWebBrowser.openWebPage(
                     url: _ship.url,
                     androidToolbarColor: Theme.of(context).primaryColor,
                   ),
@@ -41,7 +40,7 @@ class ShipPage extends StatelessWidget {
             centerTitle: true,
             title: Text(_ship.name),
             background: InkWell(
-              onTap: () async => await launchURL(
+              onTap: () async => await FlutterWebBrowser.openWebPage(
                     url: _ship.getProfilePhoto,
                     androidToolbarColor: Theme.of(context).primaryColor,
                   ),
