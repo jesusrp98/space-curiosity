@@ -73,8 +73,8 @@ class IssTimesTab extends StatelessWidget {
                                           width: 24.0,
                                           height: 24.0,
                                           point: LatLng(
-                                            model.currentLocation['latitude'],
-                                            model.currentLocation['longitude'],
+                                            model.currentLocation.latitude,
+                                            model.currentLocation.longitude,
                                           ),
                                           builder: (_) => const Icon(
                                                 Icons.my_location,
