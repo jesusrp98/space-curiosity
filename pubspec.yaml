@@ -11,13 +11,13 @@ dependencies:
     sdk: flutter
 
   ## Online
-  cloud_firestore: ^0.9.0+1
+  cloud_firestore: ^0.9.0+2
   http: ^0.12.0+1
   webfeed: ^0.4.2
 
   ## Offline
-  cached_network_image: ^0.5.1
-  shared_preferences: 0.4.3
+  cached_network_image: ^0.6.0+1
+  shared_preferences: ^0.5.1+1
 
   ## Widgets
   add_2_calendar: ^1.2.1
@@ -30,11 +30,11 @@ dependencies:
   ## Tools
   clipboard_manager: ^0.0.4
   equatable: ^0.1.10
-  flutter_bloc: ^0.6.0
+  flutter_bloc: ^0.6.2
   flutter_i18n: ^0.5.2
-  # image_downloader: ^0.11.1
+  image_downloader: ^0.11.1
   intl: ^0.15.7
-  location:
+  location: ^2.0.0
   package_info: ^0.4.0+1
   scoped_model: ^1.0.1
   share: ^0.6.0+1
