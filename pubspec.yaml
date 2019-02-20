@@ -11,40 +11,40 @@ dependencies:
     sdk: flutter
 
   ## Online
-  cloud_firestore: 0.8.1
-  flutter_web_browser: ^0.10.0
-  http: ^0.12.0+1
-  webfeed: ^0.4.2
+  cloud_firestore:
+  flutter_web_browser:
+  http:
+  webfeed:
   
   ## Offline
-  cached_network_image: ^0.5.1
-  shared_preferences: 0.4.3
+  cached_network_image:
+  shared_preferences:
 
   ## Widgets
-  add_2_calendar: ^1.2.1
-  flutter_map: ^0.4.0
-  flutter_swiper: ^1.1.4
-  material_search: ^0.2.8
-  native_widgets: ^0.1.1+1 #
-  sliver_fab: ^1.0.0
+  add_2_calendar:
+  flutter_map:
+  flutter_swiper:
+  material_search:
+  native_widgets:
+  sliver_fab:
 
   ## Tools
-  clipboard_manager: ^0.0.4
-  equatable: ^0.1.10
-  flutter_bloc: ^0.5.4
-  flutter_i18n: ^0.5.2
-  image_downloader: ^0.11.1
-  intl: ^0.15.7
-  location: 1.4.1 #
-  package_info: ^0.4.0+1
-  scoped_model: ^1.0.1
-  share: ^0.6.0+1  
+  clipboard_manager:
+  equatable:
+  flutter_bloc: 
+  flutter_i18n:
+  image_downloader:
+  intl:
+  location:
+  package_info:
+  scoped_model:
+  share:
 
   ## Icons
-  font_awesome_flutter: ^8.4.0
+  font_awesome_flutter: 
 
   ## TODO
-  url_launcher: ^5.0.1
+  url_launcher: 
 
 flutter:
   fonts:
