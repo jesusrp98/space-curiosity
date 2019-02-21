@@ -64,8 +64,9 @@ Future<List> _loadItemsLocal() async {
   try {
     List<String> _localItems = prefs.getStringList('nasa_images');
     for (String item in _localItems) {
-        _items.add(NasaImage.fromJson(json.decode(item)));
-    };
+      _items.add(NasaImage.fromJson(json.decode(item)));
+    }
+    ;
   } catch (error) {
     print("Error Loading Images from Local $error");
   }
