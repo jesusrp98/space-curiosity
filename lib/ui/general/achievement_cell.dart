@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:space_news/util/url.dart';
- 
+import 'package:flutter_web_browser/flutter_web_browser.dart';
 
 import 'separator.dart';
 
@@ -67,7 +66,7 @@ class AchievementCell extends StatelessWidget {
               .copyWith(color: Theme.of(context).textTheme.caption.color),
         ),
       ]),
-      onTap: () async => await launchURL(
+      onTap: () async => await FlutterWebBrowser.openWebPage(
             url: url,
             androidToolbarColor: Theme.of(context).primaryColor,
           ),

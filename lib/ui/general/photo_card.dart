@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:space_news/util/url.dart';
- 
+import 'package:flutter_web_browser/flutter_web_browser.dart';
 
 import '../../models/nasa/nasa_image.dart';
 import '../nasa/screen.dart';
@@ -27,7 +26,7 @@ class PhotoCard extends StatelessWidget {
                 builder: (_) => NasaImagePage(image),
               ),
             ),
-        onLongPress: () async => await launchURL(
+        onLongPress: () async => await FlutterWebBrowser.openWebPage(
               url: image.url,
               androidToolbarColor: Theme.of(context).primaryColor,
             ),

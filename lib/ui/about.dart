@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
+import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:package_info/package_info.dart';
 
 import '../util/url.dart';
@@ -68,7 +69,7 @@ class _AboutScreenState extends State<AboutScreen> {
               context,
               'about.author.body',
             ),
-            onTap: () async => await launchURL(
+            onTap: () async => await FlutterWebBrowser.openWebPage(
                   url: Url.authorReddit,
                   androidToolbarColor: Theme.of(context).primaryColor,
                 ),
@@ -84,7 +85,7 @@ class _AboutScreenState extends State<AboutScreen> {
               context,
               'about.review.body',
             ),
-            onTap: () async => await launchURL(
+            onTap: () async => await FlutterWebBrowser.openWebPage(
                   url: Url.storePage,
                   androidToolbarColor: Theme.of(context).primaryColor,
                 ),
@@ -100,7 +101,7 @@ class _AboutScreenState extends State<AboutScreen> {
               context,
               'about.email.body',
             ),
-            onTap: () async => await launchURL(
+            onTap: () async => await FlutterWebBrowser.openWebPage(
                   url: Url.email,
                   androidToolbarColor: Theme.of(context).primaryColor,
                 ),
@@ -116,7 +117,7 @@ class _AboutScreenState extends State<AboutScreen> {
               context,
               'about.more_apps.body',
             ),
-            onTap: () async => await launchURL(
+            onTap: () async => await FlutterWebBrowser.openWebPage(
                   url: Url.authorStore,
                   androidToolbarColor: Theme.of(context).primaryColor,
                 ),
@@ -132,7 +133,7 @@ class _AboutScreenState extends State<AboutScreen> {
               context,
               'about.free_software.body',
             ),
-            onTap: () async => await launchURL(
+            onTap: () async => await FlutterWebBrowser.openWebPage(
                   url: Url.cherryGithub,
                   androidToolbarColor: Theme.of(context).primaryColor,
                 ),
@@ -148,7 +149,7 @@ class _AboutScreenState extends State<AboutScreen> {
               context,
               'about.flutter.body',
             ),
-            onTap: () async => await launchURL(
+            onTap: () async => await FlutterWebBrowser.openWebPage(
                   url: Url.flutterPage,
                   androidToolbarColor: Theme.of(context).primaryColor,
                 ),
@@ -164,7 +165,7 @@ class _AboutScreenState extends State<AboutScreen> {
               context,
               'about.imperial_units.body',
             ),
-            onTap: () async => await launchURL(
+            onTap: () async => await FlutterWebBrowser.openWebPage(
                   url: Url.internationalSystem,
                   androidToolbarColor: Theme.of(context).primaryColor,
                 ),
@@ -180,7 +181,7 @@ class _AboutScreenState extends State<AboutScreen> {
               context,
               'about.credits.body',
             ),
-            onTap: () async => await launchURL(
+            onTap: () async => await FlutterWebBrowser.openWebPage(
                   url: Url.spacexGithub,
                   androidToolbarColor: Theme.of(context).primaryColor,
                 ),
@@ -196,7 +197,7 @@ class _AboutScreenState extends State<AboutScreen> {
               context,
               'about.spacex.body',
             ),
-            onTap: () async => await launchURL(
+            onTap: () async => await FlutterWebBrowser.openWebPage(
                   url: Url.spacexPage,
                   androidToolbarColor: Theme.of(context).primaryColor,
                 ),

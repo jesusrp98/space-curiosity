@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:space_news/util/url.dart';
+import 'package:flutter_web_browser/flutter_web_browser.dart';
 
 import '../../../models/planets/celestial_body.dart';
 import '../../general/card_page.dart';
@@ -82,7 +82,7 @@ class CelestialBodyPage extends StatelessWidget {
       image: HeroImage.card(
         url: celestialBody.imageUrl,
         tag: celestialBody.id,
-        onTap: () => launchURL(
+        onTap: () async => await FlutterWebBrowser.openWebPage(
               url: celestialBody.imageUrl,
               androidToolbarColor: Theme.of(context).primaryColor,
             ),

@@ -1,6 +1,4 @@
 import 'keys.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:flutter/material.dart';
 
 /// URL FILE
 /// It has all urls used in the app as static const strings.
@@ -108,20 +106,4 @@ class Url {
   static const String issLocation = '$issBaseUrl/iss-now.json';
   static const String issPassTimes = '$issBaseUrl/iss-pass.json';
   static const String issAstronauts = '$issBaseUrl/astros.json';
-}
-
-launchURL({
-  @required String url,
-  bool forceSafariVC = true,
-  bool forceWebView = true,
-  Color androidToolbarColor,
-}) async {
-  try {
-    if (await canLaunch(url)) {
-      await launch(url,
-          forceSafariVC: forceSafariVC, forceWebView: forceWebView);
-    }
-  } catch (e) {
-    print(e);
-  }
 }
