@@ -4,18 +4,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
-import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import '../../../models/spacex/info_vehicle.dart';
 import '../../general/cache_image.dart';
 import '../../general/hero_image.dart';
 import '../../general/list_cell.dart';
+import '../../general/loading_indicator.dart';
 import '../../general/separator.dart';
-import '../details/capsule.dart';
-import '../details/roadster.dart';
-import '../details/rocket.dart';
-import '../details/ship.dart';
+import '../pages/dragon.dart';
+import '../pages/roadster.dart';
+import '../pages/rocket.dart';
+import '../pages/ship.dart';
 import '../search/vehicles.dart';
 
 /// VEHICLES TAB VIEW
@@ -48,7 +48,7 @@ class VehiclesTab extends StatelessWidget {
                           'spacex.vehicle.title',
                         )),
                         background: model.isLoading
-                            ? NativeLoadingIndicator(center: true)
+                            ? LoadingIndicator()
                             : Swiper(
                                 itemCount: model.getPhotosCount,
                                 itemBuilder: (_, index) => CacheImage(
@@ -67,9 +67,7 @@ class VehiclesTab extends StatelessWidget {
                       ),
                     ),
                     model.isLoading
-                        ? SliverFillRemaining(
-                            child: NativeLoadingIndicator(center: true),
-                          )
+                        ? SliverFillRemaining(child: LoadingIndicator())
                         : SliverList(
                             delegate: SliverChildBuilderDelegate(
                               _buildVehicle,
@@ -110,7 +108,7 @@ class VehiclesTab extends StatelessWidget {
                     builder: (_) => vehicle.type == 'rocket'
                         ? RocketPage(vehicle)
                         : vehicle.type == 'capsule'
-                            ? CapsulePage(vehicle)
+                            ? DragonPage(vehicle)
                             : vehicle.type == 'ship'
                                 ? ShipPage(vehicle)
                                 : RoadsterPage(vehicle),

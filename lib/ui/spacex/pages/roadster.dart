@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
+import 'package:share/share.dart';
 import 'package:sliver_fab/sliver_fab.dart';
 
 import '../../../models/spacex/info_roadster.dart';
+import '../../../util/menu.dart';
+import '../../../util/url.dart';
 import '../../general/cache_image.dart';
 import '../../general/card_page.dart';
 import '../../general/row_item.dart';
@@ -41,17 +44,39 @@ class RoadsterPage extends StatelessWidget {
                   pinned: true,
                   actions: <Widget>[
                     IconButton(
-                      icon: const Icon(Icons.public),
-                      onPressed: () async =>
+                      icon: const Icon(Icons.share),
+                      onPressed: () => Share.share(
+                            FlutterI18n.translate(
+                              context,
+                              'spacex.other.share.roadster',
+                              {
+                                'date': _roadster.getLaunchDate(context),
+                                'speed': _roadster.getSpeed,
+                                'earth_distance': _roadster.getEarthDistance,
+                                'details': Url.shareDetails
+                              },
+                            ),
+                          ),
+                      tooltip: FlutterI18n.translate(
+                        context,
+                        'spacex.other.menu.share',
+                      ),
+                    ),
+                    PopupMenuButton<String>(
+                      itemBuilder: (_) => Menu.wikipedia
+                          .map((string) => PopupMenuItem(
+                                value: string,
+                                child: Text(
+                                  FlutterI18n.translate(context, string),
+                                ),
+                              ))
+                          .toList(),
+                      onSelected: (_) async =>
                           await FlutterWebBrowser.openWebPage(
                             url: _roadster.url,
                             androidToolbarColor: Theme.of(context).primaryColor,
                           ),
-                      tooltip: FlutterI18n.translate(
-                        context,
-                        'spacex.other.menu.wikipedia',
-                      ),
-                    )
+                    ),
                   ],
                   flexibleSpace: FlexibleSpaceBar(
                     centerTitle: true,

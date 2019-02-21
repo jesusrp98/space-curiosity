@@ -2,19 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
+import 'package:share/share.dart';
 
 import '../../../models/spacex/info_capsule.dart';
+import '../../../util/menu.dart';
+import '../../../util/url.dart';
 import '../../general/cache_image.dart';
 import '../../general/card_page.dart';
 import '../../general/row_item.dart';
 import '../../general/separator.dart';
 
-/// CAPSULE PAGE VIEW
+/// DRAGON PAGE VIEW
 /// This view all information about a Dragon capsule model. It displays CapsuleInfo's specs.
-class CapsulePage extends StatelessWidget {
+class DragonPage extends StatelessWidget {
   final CapsuleInfo _capsule;
 
-  CapsulePage(this._capsule);
+  DragonPage(this._capsule);
 
   @override
   Widget build(BuildContext context) {
@@ -26,16 +29,46 @@ class CapsulePage extends StatelessWidget {
           pinned: true,
           actions: <Widget>[
             IconButton(
-              icon: const Icon(Icons.public),
-              onPressed: () async => await FlutterWebBrowser.openWebPage(
-                    url: _capsule.url,
-                    androidToolbarColor: Theme.of(context).primaryColor,
+              icon: const Icon(Icons.share),
+              onPressed: () => Share.share(
+                    FlutterI18n.translate(
+                      context,
+                      'spacex.other.share.capsule.body',
+                      {
+                        'name': _capsule.name,
+                        'launch_payload': _capsule.getLaunchMass,
+                        'return_payload': _capsule.getReturnMass,
+                        'people': _capsule.isCrewEnabled
+                            ? FlutterI18n.translate(
+                                context,
+                                'spacex.other.share.capsule.people',
+                                {'people': _capsule.crew.toString()},
+                              )
+                            : FlutterI18n.translate(
+                                context,
+                                'spacex.other.share.capsule.no_people',
+                              ),
+                        'details': Url.shareDetails
+                      },
+                    ),
                   ),
               tooltip: FlutterI18n.translate(
                 context,
-                'spacex.other.menu.wikipedia',
+                'spacex.other.menu.share',
               ),
-            )
+            ),
+            PopupMenuButton<String>(
+              itemBuilder: (_) => Menu.wikipedia
+                  .map((string) => PopupMenuItem(
+                        value: string,
+                        child: Text(FlutterI18n.translate(context, string)),
+                      ))
+                  .toList(),
+              onSelected: (_) async => await FlutterWebBrowser.openWebPage(
+                    url: _capsule.url,
+                    androidToolbarColor: Theme.of(context).primaryColor,
+                  ),
+            ),
           ],
           flexibleSpace: FlexibleSpaceBar(
             centerTitle: true,
