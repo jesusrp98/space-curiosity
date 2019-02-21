@@ -4,6 +4,7 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:scoped_model/scoped_model.dart';
+import 'package:share/share.dart';
 import 'package:sliver_fab/sliver_fab.dart';
 
 import '../../../models/spacex/details_capsule.dart';
@@ -12,17 +13,19 @@ import '../../../models/spacex/landpad.dart';
 import '../../../models/spacex/launch.dart';
 import '../../../models/spacex/launchpad.dart';
 import '../../../models/spacex/rocket.dart';
-import '../../../util/colors.dart';
+import '../../../util/menu.dart';
+import '../../../util/url.dart';
 import '../../general/cache_image.dart';
 import '../../general/card_page.dart';
 import '../../general/head_card_page.dart';
 import '../../general/hero_image.dart';
+import '../../general/row_expand.dart';
 import '../../general/row_item.dart';
 import '../../general/separator.dart';
-import '../dialog/capsule.dart';
-import '../dialog/core.dart';
-import '../dialog/landpad.dart';
-import '../dialog/launchpad.dart';
+import 'capsule.dart';
+import 'core.dart';
+import 'landpad.dart';
+import 'launchpad.dart';
 
 /// LAUNCH PAGE VIEW
 /// This view displays all information about a specific launch.
@@ -50,27 +53,26 @@ class LaunchPage extends StatelessWidget {
                             androidToolbarColor: Theme.of(context).primaryColor,
                           ),
                     )
-                  : AbsorbPointer(
-                      absorbing: _launch.tentativeTime,
-                      child: FloatingActionButton(
-                        child: const Icon(Icons.event),
-                        backgroundColor: _launch.tentativeTime
-                            ? disabledFab
-                            : Theme.of(context).accentColor,
-                        tooltip: FlutterI18n.translate(
-                          context,
-                          'spacex.other.tooltip.add_event',
-                        ),
-                        onPressed: () => Add2Calendar.addEvent2Cal(Event(
-                              title: _launch.name,
-                              description: _launch.details,
-                              location: _launch.launchpadName,
-                              startDate: _launch.launchDate,
-                              endDate: _launch.launchDate.add(
-                                Duration(minutes: 30),
-                              ),
-                            )),
+                  : FloatingActionButton(
+                      child: const Icon(Icons.event),
+                      backgroundColor: Theme.of(context).accentColor,
+                      tooltip: FlutterI18n.translate(
+                        context,
+                        'spacex.other.tooltip.add_event',
                       ),
+                      onPressed: () => Add2Calendar.addEvent2Cal(Event(
+                            title: _launch.name,
+                            description: _launch.details ??
+                                FlutterI18n.translate(
+                                  context,
+                                  'spacex.launch.page.no_description',
+                                ),
+                            location: _launch.launchpadName,
+                            startDate: _launch.launchDate,
+                            endDate: _launch.launchDate.add(
+                              Duration(minutes: 30),
+                            ),
+                          )),
                     ),
               slivers: <Widget>[
                 SliverAppBar(
@@ -78,16 +80,38 @@ class LaunchPage extends StatelessWidget {
                   floating: false,
                   pinned: true,
                   actions: <Widget>[
+                    IconButton(
+                      icon: const Icon(Icons.share),
+                      onPressed: () => Share.share(
+                            FlutterI18n.translate(
+                              context,
+                              _launch.launchDate.isAfter(DateTime.now())
+                                  ? 'spacex.other.share.launch.future'
+                                  : 'spacex.other.share.launch.past',
+                              {
+                                'number': _launch.number.toString(),
+                                'name': _launch.name,
+                                'launchpad': _launch.launchpadName,
+                                'date': _launch.getTentativeDate,
+                                'details': Url.shareDetails
+                              },
+                            ),
+                          ),
+                      tooltip: FlutterI18n.translate(
+                        context,
+                        'spacex.other.menu.share',
+                      ),
+                    ),
                     PopupMenuButton<String>(
-                      itemBuilder: (_) => _launch
-                          .getMenu(context)
-                          .map(
-                            (url) => PopupMenuItem(
-                                  value: url,
-                                  child: Text(url),
-                                  enabled: _launch.isUrlEnabled(context, url),
-                                ),
-                          )
+                      itemBuilder: (_) => Menu.launch
+                          .map((url) => PopupMenuItem(
+                                value: url,
+                                child: Text(FlutterI18n.translate(
+                                  context,
+                                  url,
+                                )),
+                                enabled: _launch.isUrlEnabled(context, url),
+                              ))
                           .toList(),
                       onSelected: (name) async =>
                           await FlutterWebBrowser.openWebPage(
@@ -98,7 +122,19 @@ class LaunchPage extends StatelessWidget {
                   ],
                   flexibleSpace: FlexibleSpaceBar(
                     centerTitle: true,
-                    title: Text(_launch.name),
+                    // Using title clipping, because Flutter doesn't do this automatically.
+                    // Open issue: [https://github.com/flutter/flutter/issues/14227]
+                    title: ConstrainedBox(
+                      child: Text(
+                        _launch.name,
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.center,
+                        maxLines: 1,
+                      ),
+                      constraints: BoxConstraints(
+                        maxWidth: MediaQuery.of(context).size.width * 0.6,
+                      ),
+                    ),
                     background: Swiper(
                       itemCount: _launch.getPhotosCount,
                       itemBuilder: (_, index) => CacheImage(
@@ -162,7 +198,7 @@ class LaunchPage extends StatelessWidget {
                         _launch.launchpadId,
                         _launch.launchpadName,
                       )..loadData(),
-                      child: LaunchpadDialog(),
+                      child: LaunchpadPage(),
                     ),
                 fullscreenDialog: true,
               ),
@@ -382,7 +418,7 @@ class LaunchPage extends StatelessWidget {
                 description: core.getLandingZone(context),
                 screen: ScopedModel<LandpadModel>(
                   model: LandpadModel(core.landingZone)..loadData(),
-                  child: LandpadDialog(),
+                  child: LandpadPage(),
                 ),
               ),
               Separator.spacer(),
@@ -401,6 +437,24 @@ class LaunchPage extends StatelessWidget {
               ),
               core.landingIntent,
             ),
+      RowExpand(Column(children: <Widget>[
+        Separator.spacer(),
+        RowItem.iconRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.launch.page.rocket.core.landing_legs',
+          ),
+          core.legs,
+        ),
+        Separator.spacer(),
+        RowItem.iconRow(
+          FlutterI18n.translate(
+            context,
+            'spacex.launch.page.rocket.core.gridfins',
+          ),
+          core.gridfins,
+        ),
+      ])),
     ]);
   }
 
@@ -427,7 +481,7 @@ class LaunchPage extends StatelessWidget {
                 description: payload.getCapsuleSerial(context),
                 screen: ScopedModel<CapsuleModel>(
                   model: CapsuleModel(payload.capsuleSerial)..loadData(),
-                  child: CapsuleDialog(),
+                  child: CapsulePage(),
                 ),
               ),
               Separator.spacer(),
@@ -485,6 +539,53 @@ class LaunchPage extends StatelessWidget {
         ),
         payload.getOrbit(context),
       ),
+      RowExpand(Column(children: <Widget>[
+        Separator.spacer(),
+        RowItem.textRow(
+          context,
+          FlutterI18n.translate(
+            context,
+            'spacex.launch.page.payload.regime',
+          ),
+          payload.getRegime(context),
+        ),
+        Separator.spacer(),
+        RowItem.textRow(
+          context,
+          FlutterI18n.translate(
+            context,
+            'spacex.launch.page.payload.periapsis',
+          ),
+          payload.getPeriapsis(context),
+        ),
+        Separator.spacer(),
+        RowItem.textRow(
+          context,
+          FlutterI18n.translate(
+            context,
+            'spacex.launch.page.payload.apoapsis',
+          ),
+          payload.getApoapsis(context),
+        ),
+        Separator.spacer(),
+        RowItem.textRow(
+          context,
+          FlutterI18n.translate(
+            context,
+            'spacex.launch.page.payload.inclination',
+          ),
+          payload.getInclination(context),
+        ),
+        Separator.spacer(),
+        RowItem.textRow(
+          context,
+          FlutterI18n.translate(
+            context,
+            'spacex.launch.page.payload.period',
+          ),
+          payload.getPeriod(context),
+        ),
+      ]))
     ]);
   }
 }

@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 
 import '../../util/url.dart';
-import '../querry_model.dart';
+import '../query_model.dart';
 import 'info_capsule.dart';
 import 'info_roadster.dart';
 import 'info_rocket.dart';
@@ -14,7 +14,7 @@ import 'info_ship.dart';
 
 /// VEHICLES MODEL
 /// Model which storages information from all kind of vehicles.
-class VehiclesModel extends QuerryModel {
+class VehiclesModel extends QueryModel {
   @override
   Future loadData() async {
     // Get items by http call

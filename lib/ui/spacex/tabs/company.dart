@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
-import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import '../../../models/spacex/spacex_company.dart';
 import '../../general/achievement_cell.dart';
 import '../../general/cache_image.dart';
+import '../../general/loading_indicator.dart';
 import '../../general/row_item.dart';
 import '../../general/separator.dart';
 
 /// COMPANY TAB VIEW
 /// This tab holds information about SpaceX-as-a-company,
 /// such as various numbers & achievements.
-class SpacexCompanyTab extends StatelessWidget {
+class CompanyTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScopedModelDescendant<SpacexCompanyModel>(
@@ -49,7 +49,7 @@ class SpacexCompanyTab extends StatelessWidget {
                       'spacex.company.title',
                     )),
                     background: model.isLoading
-                        ? NativeLoadingIndicator(center: true)
+                        ? LoadingIndicator()
                         : Swiper(
                             itemCount: model.getPhotosCount,
                             itemBuilder: (_, index) => CacheImage(
@@ -70,11 +70,7 @@ class SpacexCompanyTab extends StatelessWidget {
                 //TODO revisar esto
               ]..addAll(
                   model.isLoading
-                      ? <Widget>[
-                          SliverFillRemaining(
-                            child: NativeLoadingIndicator(center: true),
-                          )
-                        ]
+                      ? <Widget>[SliverFillRemaining(child: LoadingIndicator())]
                       : <Widget>[
                           SliverToBoxAdapter(child: _buildBody()),
                           SliverList(
@@ -190,8 +186,8 @@ class SpacexCompanyTab extends StatelessWidget {
           children: <Widget>[
             AchievementCell(
               title: achievement.name,
-              subtitle: achievement.details,
-              date: achievement.getDate,
+              subtitle: achievement.getDate,
+              body: achievement.details,
               url: achievement.url,
               index: index + 1,
             ),

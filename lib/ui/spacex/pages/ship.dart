@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
+import 'package:share/share.dart';
 
 import '../../../models/spacex/info_ship.dart';
+import '../../../util/menu.dart';
+import '../../../util/url.dart';
 import '../../general/cache_image.dart';
 import '../../general/card_page.dart';
 import '../../general/row_item.dart';
@@ -25,16 +28,47 @@ class ShipPage extends StatelessWidget {
           pinned: true,
           actions: <Widget>[
             IconButton(
-              icon: const Icon(Icons.public),
-              onPressed: () async => await FlutterWebBrowser.openWebPage(
-                    url: _ship.url,
-                    androidToolbarColor: Theme.of(context).primaryColor,
+              icon: const Icon(Icons.share),
+              onPressed: () => Share.share(
+                    FlutterI18n.translate(
+                      context,
+                      'spacex.other.share.ship.body',
+                      {
+                        'date': _ship.getBuiltFullDate,
+                        'name': _ship.name,
+                        'role': _ship.primaryRole,
+                        'port': _ship.homePort,
+                        'missions': _ship.hasMissions
+                            ? FlutterI18n.translate(
+                                context,
+                                'spacex.other.share.ship.missions',
+                                {'missions': _ship.missions.length.toString()},
+                              )
+                            : FlutterI18n.translate(
+                                context,
+                                'spacex.other.share.ship.any_missions',
+                              ),
+                        'details': Url.shareDetails
+                      },
+                    ),
                   ),
               tooltip: FlutterI18n.translate(
                 context,
-                'spacex.other.menu.marine_traffic',
+                'spacex.other.menu.share',
               ),
-            )
+            ),
+            PopupMenuButton<String>(
+              itemBuilder: (_) => Menu.ship
+                  .map((string) => PopupMenuItem(
+                        value: string,
+                        child: Text(FlutterI18n.translate(context, string)),
+                      ))
+                  .toList(),
+              onSelected: (_) async => await FlutterWebBrowser.openWebPage(
+                    url: _ship.url,
+                    androidToolbarColor: Theme.of(context).primaryColor,
+                  ),
+            ),
           ],
           flexibleSpace: FlexibleSpaceBar(
             centerTitle: true,

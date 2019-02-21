@@ -4,13 +4,13 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:http/http.dart' as http;
 
 import '../../util/url.dart';
-import '../querry_model.dart';
+import '../query_model.dart';
 import 'details_vehicle.dart';
 import 'mission_item.dart';
 
 /// CORE DETAILS MODEL
 /// Details about a specific core or booster used in a specific mission.
-class CoreModel extends QuerryModel {
+class CoreModel extends QueryModel {
   // Core serial: B0000
   final String id;
 

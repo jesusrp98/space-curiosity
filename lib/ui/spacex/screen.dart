@@ -3,7 +3,7 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:scoped_model/scoped_model.dart';
 
-import '../../models/models.dart';
+import '../../models/query_model.dart';
 import '../../models/spacex/info_vehicle.dart';
 import '../../models/spacex/launch.dart';
 import '../../models/spacex/spacex_company.dart';
@@ -13,17 +13,17 @@ import 'tabs/home.dart';
 import 'tabs/launches.dart';
 import 'tabs/vehicles.dart';
 
-/// SPACEX MAIN SCREEN
+/// SPACEX SCREEN
 /// This view holds all tabs & its models: home, vehicles, upcoming & latest launches, & company tabs.
-class SpacexScreen extends StatefulWidget {
+class SpaceXScreen extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => _SpacexTabScreen();
+  State<StatefulWidget> createState() => _SpaceXScreenState();
 }
 
-class _SpacexTabScreen extends State<SpacexScreen> {
+class _SpaceXScreenState extends State<SpaceXScreen> {
   int _currentIndex = 0;
 
-  static final List<QuerryModel> modelTab = [
+  static final List<QueryModel> _modelTab = [
     SpacexHomeModel(),
     VehiclesModel(),
     LaunchesModel(0),
@@ -31,33 +31,33 @@ class _SpacexTabScreen extends State<SpacexScreen> {
     SpacexCompanyModel(),
   ];
 
-  final List<ScopedModel> _tabs = [
+  static final List<ScopedModel> _tabs = [
     ScopedModel<SpacexHomeModel>(
-      model: modelTab[0],
-      child: SpacexHomeTab(),
+      model: _modelTab[0],
+      child: HomeTab(),
     ),
     ScopedModel<VehiclesModel>(
-      model: modelTab[1],
+      model: _modelTab[1],
       child: VehiclesTab(),
     ),
     ScopedModel<LaunchesModel>(
-      model: modelTab[2],
+      model: _modelTab[2],
       child: LaunchesTab(0),
     ),
     ScopedModel<LaunchesModel>(
-      model: modelTab[3],
+      model: _modelTab[3],
       child: LaunchesTab(1),
     ),
     ScopedModel<SpacexCompanyModel>(
-      model: modelTab[4],
-      child: SpacexCompanyTab(),
+      model: _modelTab[4],
+      child: CompanyTab(),
     ),
   ];
 
   @override
   initState() {
     super.initState();
-    modelTab.forEach((model) => model.loadData());
+    _modelTab.forEach((model) => model.loadData());
   }
 
   @override
@@ -74,35 +74,35 @@ class _SpacexTabScreen extends State<SpacexScreen> {
               context,
               'spacex.home.icon',
             )),
-            icon: Icon(Icons.home),
+            icon: const Icon(Icons.home),
           ),
           BottomNavigationBarItem(
             title: Text(FlutterI18n.translate(
               context,
               'spacex.vehicle.icon',
             )),
-            icon: Icon(FontAwesomeIcons.rocket),
+            icon: const Icon(FontAwesomeIcons.rocket),
           ),
           BottomNavigationBarItem(
             title: Text(FlutterI18n.translate(
               context,
               'spacex.upcoming.icon',
             )),
-            icon: Icon(Icons.access_time),
+            icon: const Icon(Icons.access_time),
           ),
           BottomNavigationBarItem(
             title: Text(FlutterI18n.translate(
               context,
               'spacex.latest.icon',
             )),
-            icon: Icon(Icons.library_books),
+            icon: const Icon(Icons.library_books),
           ),
           BottomNavigationBarItem(
             title: Text(FlutterI18n.translate(
               context,
               'spacex.company.icon',
             )),
-            icon: Icon(Icons.location_city),
+            icon: const Icon(Icons.location_city),
           ),
         ],
       ),

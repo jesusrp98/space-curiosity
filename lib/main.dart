@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
               debugShowCheckedModeBanner: false,
               routes: <String, WidgetBuilder>{
                 '/home': (_) => HomeScreen(),
-                '/spacex': (_) => SpacexScreen(),
+                '/spacex': (_) => SpaceXScreen(),
                 '/news': (_) => ArticlesScreen(),
                 '/planets': (_) => SolarSystemScreen(planetModel: PlanetsModel(),),
                 '/iss': (_) => IssScreen(),
