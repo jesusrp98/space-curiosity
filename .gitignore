@@ -19,6 +19,10 @@
 # Visual Studio Code related
 .vscode/
 
+# Eclipse related
+**/android/.project
+**/android/.settings
+
 # Flutter/Dart/Pub related
 **/doc/api/
 .dart_tool/
