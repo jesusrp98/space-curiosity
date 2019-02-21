@@ -2,10 +2,10 @@ import 'dart:async';
 
 import 'package:scoped_model/scoped_model.dart';
 
-/// QUERRY MODEL
+/// QUERY MODEL
 /// General model used to help retrieve, parse & storage
 /// information from a public API
-abstract class QuerryModel extends Model {
+abstract class QueryModel extends Model {
   List _items = List();
   List _photos = List();
 
@@ -15,7 +15,6 @@ abstract class QuerryModel extends Model {
   bool _loading = true;
 
   Future refresh() async {
-    clearItems();
     await loadData();
     notifyListeners();
   }
@@ -35,9 +34,9 @@ abstract class QuerryModel extends Model {
 
   String getPhoto(index) => _photos[index];
 
-  int get getItemCount => _items?.length ?? 0;
+  int get getItemCount => _items.length;
 
-  int get getPhotosCount => _photos?.length ?? 0;
+  int get getPhotosCount => _photos.length;
 
   bool get isLoading => _loading;
 
