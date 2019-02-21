@@ -2,10 +2,9 @@ import 'package:add_2_calendar/add_2_calendar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
- 
+import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:sliver_fab/sliver_fab.dart';
-import 'package:space_news/util/url.dart';
 
 import '../../../models/spacex/details_capsule.dart';
 import '../../../models/spacex/details_core.dart';
@@ -46,7 +45,7 @@ class LaunchPage extends StatelessWidget {
                         'spacex.other.tooltip.watch_replay',
                       ),
                       onPressed: () async =>
-                          await launchURL(
+                          await FlutterWebBrowser.openWebPage(
                             url: _launch.getVideo,
                             androidToolbarColor: Theme.of(context).primaryColor,
                           ),
@@ -91,7 +90,7 @@ class LaunchPage extends StatelessWidget {
                           )
                           .toList(),
                       onSelected: (name) async =>
-                          await launchURL(
+                          await FlutterWebBrowser.openWebPage(
                             url: _launch.getUrl(context, name),
                             androidToolbarColor: Theme.of(context).primaryColor,
                           ),
@@ -109,7 +108,7 @@ class LaunchPage extends StatelessWidget {
                       autoplayDelay: 6000,
                       duration: 750,
                       onTap: (index) async =>
-                          await launchURL(
+                          await FlutterWebBrowser.openWebPage(
                             url: _launch.getPhoto(index),
                             androidToolbarColor: Theme.of(context).primaryColor,
                           ),
@@ -141,7 +140,7 @@ class LaunchPage extends StatelessWidget {
         child: HeroImage.card(
           url: _launch.getImageUrl,
           tag: _launch.getNumber,
-          onTap: () async => await launchURL(
+          onTap: () async => await FlutterWebBrowser.openWebPage(
                 url: _launch.getImageUrl,
                 androidToolbarColor: Theme.of(context).primaryColor,
               ),

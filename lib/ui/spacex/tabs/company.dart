@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
- 
+import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'package:space_news/util/url.dart';
 
 import '../../../models/spacex/spacex_company.dart';
 import '../../general/achievement_cell.dart';
@@ -37,7 +36,7 @@ class SpacexCompanyTab extends StatelessWidget {
                               ))
                           .toList(),
                       onSelected: (name) async =>
-                          await launchURL(
+                          await FlutterWebBrowser.openWebPage(
                             url: model.company.getUrl(context, name),
                             androidToolbarColor: Theme.of(context).primaryColor,
                           ),
@@ -60,7 +59,7 @@ class SpacexCompanyTab extends StatelessWidget {
                             autoplayDelay: 6000,
                             duration: 750,
                             onTap: (index) async =>
-                                await launchURL(
+                                await FlutterWebBrowser.openWebPage(
                                   url: model.getPhoto(index),
                                   androidToolbarColor:
                                       Theme.of(context).primaryColor,
