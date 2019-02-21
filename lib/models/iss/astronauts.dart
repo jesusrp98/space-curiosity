@@ -4,9 +4,9 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:http/http.dart' as http;
 
 import '../../util/url.dart';
-import '../querry_model.dart';
+import '../query_model.dart';
 
-class AstronautsModel extends QuerryModel {
+class AstronautsModel extends QueryModel {
   @override
   Future loadData() async {
     // Get items by http call

@@ -2,9 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:intl/intl.dart';
 
-import '../querry_model.dart';
+import '../query_model.dart';
 
-class IssHomeModel extends QuerryModel {
+class IssHomeModel extends QueryModel {
   @override
   Future loadData() async {
     // Get items from Firebase

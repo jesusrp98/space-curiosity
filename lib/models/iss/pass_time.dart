@@ -7,11 +7,11 @@ import 'package:intl/intl.dart';
 import 'package:location/location.dart';
 
 import '../../util/url.dart';
-import '../querry_model.dart';
+import '../query_model.dart';
 
-class PassTimesModel extends QuerryModel {
+class PassTimesModel extends QueryModel {
   Map<String, String> _issLocation;
-  Map<String, double> _userLocation;
+  LocationData _userLocation;
 
   @override
   Future loadData() async {
@@ -32,7 +32,7 @@ class PassTimesModel extends QuerryModel {
       print(2.2);
       // Get items by http call & parse them
       response = await http.get(
-        '${Url.issPassTimes}?lat=${_userLocation['latitude']}&lon=${_userLocation['longitude']}&n=10',
+        '${Url.issPassTimes}?lat=${_userLocation.latitude}&lon=${_userLocation.longitude}&n=10',
       );
       snapshot = json.decode(response.body)['response'];
       print(2.3);
@@ -51,10 +51,10 @@ class PassTimesModel extends QuerryModel {
 
   Map<String, String> get issLocation => _issLocation;
 
-  Map<String, double> get userLocation => _userLocation;
+  LocationData get userLocation => _userLocation;
 
   String get getUserLocation =>
-      '${_userLocation['latitude'].toStringAsPrecision(5)},  ${_userLocation['longitude'].toStringAsPrecision(5)}';
+      '${userLocation.latitude.toStringAsPrecision(5)},  ${userLocation.longitude.toStringAsPrecision(5)}';
 }
 
 class PassTime {
