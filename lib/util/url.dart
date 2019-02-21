@@ -82,6 +82,9 @@ class Url {
   static const String mapView =
       'https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png';
 
+  // Share details message
+  static const String shareDetails = '#spaceCuriosity $storePage';
+
   // About page
   static const String authorReddit = 'https://www.reddit.com/user/jesusrp98';
   static const String authorStore =
