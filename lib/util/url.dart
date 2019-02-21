@@ -112,8 +112,8 @@ class Url {
 
 launchURL({
   @required String url,
-  bool forceSafariVC = false,
-  bool forceWebView = false,
+  bool forceSafariVC = true,
+  bool forceWebView = true,
   Color androidToolbarColor,
 }) async {
   try {
