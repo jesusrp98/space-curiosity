@@ -1,3 +1,5 @@
+/// PHOTOS FILE
+/// Here lays all photos' URL, used around the app
 class IssPhotos {
   static const List<String> iss = [
     'https://farm1.staticflickr.com/439/19732870479_c8cdae069c_c.jpg',
