@@ -5,6 +5,8 @@ import 'package:intl/intl.dart';
 import '../../util/photos.dart';
 import '../query_model.dart';
 
+/// ISS HOME MODEL
+/// Shows main details about the ISS project, including dimensions, cost...
 class IssHomeModel extends QueryModel {
   @override
   Future loadData() async {

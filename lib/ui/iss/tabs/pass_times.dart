@@ -10,7 +10,9 @@ import '../../../models/iss/pass_time.dart';
 import '../../general/list_cell.dart';
 import '../../general/separator.dart';
 
-class IssTimesTab extends StatelessWidget {
+/// PASS TIMES TAB
+/// This view holds a list with next ISS pass times & durations.
+class PassTimesTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScopedModelDescendant<PassTimesModel>(

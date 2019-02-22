@@ -7,6 +7,8 @@ import '../../util/photos.dart';
 import '../../util/url.dart';
 import '../query_model.dart';
 
+/// ASTRONAUT MODEL
+/// Represents an astronaut in the outter space, including his/her name & spacecraft.
 class AstronautsModel extends QueryModel {
   @override
   Future loadData() async {

@@ -10,7 +10,9 @@ import '../../general/cache_image.dart';
 import '../../general/list_cell.dart';
 import '../../general/separator.dart';
 
-class IssHomeTab extends StatelessWidget {
+/// ISS HOME TAB
+/// This view holds basic information about ISS from the IssHomeModel.
+class HomeTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScopedModelDescendant<IssHomeModel>(

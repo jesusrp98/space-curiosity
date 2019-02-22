@@ -8,8 +8,10 @@ import '../../models/iss/pass_time.dart';
 import '../../models/query_model.dart';
 import 'tabs/astronauts.dart';
 import 'tabs/home.dart';
-import 'tabs/times.dart';
+import 'tabs/pass_times.dart';
 
+/// ISS SCREEN
+/// This view holds all tabs & its models: home, pass times & current astronauts.
 class IssScreen extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _IssScreenState();
@@ -27,15 +29,15 @@ class _IssScreenState extends State<IssScreen> {
   static final List<ScopedModel> _tabs = [
     ScopedModel<IssHomeModel>(
       model: _modelTab[0],
-      child: IssHomeTab(),
+      child: HomeTab(),
     ),
     ScopedModel<PassTimesModel>(
       model: _modelTab[1],
-      child: IssTimesTab(),
+      child: PassTimesTab(),
     ),
     ScopedModel<AstronautsModel>(
       model: _modelTab[2],
-      child: IssAstronautsTab(),
+      child: AstronautsTab(),
     ),
   ];
 

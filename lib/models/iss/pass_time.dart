@@ -9,6 +9,8 @@ import 'package:location/location.dart';
 import '../../util/url.dart';
 import '../query_model.dart';
 
+/// ISS PASS TIME MODEL
+/// When & by how long ISS will pass in your geographic location.
 class PassTimesModel extends QueryModel {
   Map<String, String> _issLocation;
   LocationData _userLocation;

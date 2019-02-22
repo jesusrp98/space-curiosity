@@ -11,7 +11,9 @@ import '../../general/cache_image.dart';
 import '../../general/list_cell.dart';
 import '../../general/separator.dart';
 
-class IssAstronautsTab extends StatelessWidget {
+/// ASTRONAUTS TAB
+/// This view holds a list with all current astronauts living in space.
+class AstronautsTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScopedModelDescendant<AstronautsModel>(
