@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:http/http.dart' as http;
 
+import '../../util/photos.dart';
 import '../../util/url.dart';
 import '../query_model.dart';
 
@@ -20,6 +21,12 @@ class AstronautsModel extends QueryModel {
     items.addAll(
       snapshot.map((astronaut) => Astronaut.fromJson(astronaut)).toList(),
     );
+
+    // Add photos & shuffle them
+    if (photos.isEmpty) {
+      photos.addAll(IssPhotos.astronauts);
+      photos.shuffle();
+    }
 
     // Finished loading data
     setLoading(false);

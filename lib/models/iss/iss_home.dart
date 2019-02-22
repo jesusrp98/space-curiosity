@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:intl/intl.dart';
 
+import '../../util/photos.dart';
 import '../query_model.dart';
 
 class IssHomeModel extends QueryModel {
@@ -19,6 +20,12 @@ class IssHomeModel extends QueryModel {
           .map((document) => IssHome.fromDocument(document))
           .toList(),
     );
+
+    // Add photos & shuffle them
+    if (photos.isEmpty) {
+      photos.addAll(IssPhotos.iss);
+      photos.shuffle();
+    }
 
     // Finished loading data
     setLoading(false);
