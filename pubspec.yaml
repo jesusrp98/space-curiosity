@@ -9,6 +9,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  auto_size_text: ^1.0.0
+  flare_flutter: ^1.2.3
 
   ## Online
   cloud_firestore: ^0.9.0+2

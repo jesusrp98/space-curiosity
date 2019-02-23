@@ -19,40 +19,8 @@ class CalculatorBloc extends Bloc<CalcEvent, Calculator> {
         "Jupiter",
         "Saturn",
         "Uranus",
-        "Neptune",
+        "Neptune"
       ];
-
-  String getPlanetImage(String value, {bool network = false}) {
-    if (network) {
-      if (value == "Earth")
-        return "https://vignette.wikia.nocookie.net/thesolarsystem6361/images/7/74/Earth_spacepedia.png/revision/latest?cb=20180301164134";
-      if (value == "Mercury")
-        return "https://images-na.ssl-images-amazon.com/images/I/81JR1oDI76L.png";
-      if (value == "Venus")
-        return "https://www.solarsystemscope.com/spacepedia/images/handbook/renders/venus.png";
-      if (value == "Mars")
-        return "https://pngimg.com/uploads/mars_planet/mars_planet_PNG23.png";
-      if (value == "Jupiter")
-        return "https://images-na.ssl-images-amazon.com/images/I/81JR1oDI76L.png";
-      if (value == "Saturn")
-        return "https://images-na.ssl-images-amazon.com/images/I/81JR1oDI76L.png";
-      if (value == "Uranus")
-        return "https://images-na.ssl-images-amazon.com/images/I/81JR1oDI76L.png";
-      if (value == "Neptune")
-        return "https://images-na.ssl-images-amazon.com/images/I/81JR1oDI76L.png";
-      return "";
-    }
-    if (value == "Earth") return "assets/images/earth.png";
-    if (value == "Mercury") return "assets/images/mercury.png";
-    if (value == "Venus") return "assets/images/earth.png";
-    if (value == "Mars") return "assets/images/mars.png";
-    if (value == "Jupiter") return "assets/images/earth.png";
-    if (value == "Saturn") return "assets/images/earth.png";
-    if (value == "Uranus") return "assets/images/earth.png";
-    if (value == "Neptune") return "assets/images/neptune.png";
-    if (value == "Moon") return "assets/images/moon.png";
-    return "";
-  }
 
   @override
   Stream<Calculator> mapEventToState(

@@ -31,7 +31,12 @@ class CalculatorScreenState extends State<CalculatorScreen> {
   }
 }
 
-class _Content extends StatelessWidget {
+class _Content extends StatefulWidget {
+  @override
+  __ContentState createState() => __ContentState();
+}
+
+class __ContentState extends State<_Content> {
   @override
   Widget build(BuildContext context) {
     final CalculatorBloc _calcBloc = BlocProvider.of<CalculatorBloc>(context);
@@ -48,11 +53,22 @@ class _Content extends StatelessWidget {
           builder: (BuildContext context, Calculator state) {
             return Stack(
               children: <Widget>[
-                Container(
-                  child: FlareActor("assets/animations/earth.flr",
-                      alignment: Alignment.center,
-                      fit: BoxFit.cover,
-                      animation: "Preview2"),
+                Positioned(
+                  bottom: 0.0,
+                  top: 0.0,
+                  left: 0.0,
+                  right: 0.0,
+                  child: Container(
+                    child: FlareActor(
+                      "assets/animations/planets.flr",
+                      alignment: Alignment.topCenter,
+                      fit: BoxFit.contain,
+                      animation: state.planet,
+                      callback: (string) {
+                        debugPrint(string);
+                      },
+                    ),
+                  ),
                 ),
                 Positioned(
                   bottom: 150.0,
@@ -69,13 +85,11 @@ class _Content extends StatelessWidget {
                           mainAxisSize: MainAxisSize.min,
                           children: <Widget>[
                             IconButton(
-                              icon: Icon(
-                                Icons.remove,
-                                size: 40.0,
-                              ),
+                              icon: Icon(Icons.remove, size: 40.0),
                               onPressed: () {
-                                _calcBloc
-                                    .dispatch(ChangeWeight(state.weight - 5));
+                                _calcBloc.dispatch(
+                                  ChangeWeight(state.weight - 5),
+                                );
                               },
                             ),
                             Container(
@@ -87,13 +101,11 @@ class _Content extends StatelessWidget {
                               ),
                             ),
                             IconButton(
-                              icon: Icon(
-                                Icons.add,
-                                size: 40.0,
-                              ),
+                              icon: Icon(Icons.add, size: 40.0),
                               onPressed: () {
-                                _calcBloc
-                                    .dispatch(ChangeWeight(state.weight + 5));
+                                _calcBloc.dispatch(
+                                  ChangeWeight(state.weight + 5),
+                                );
                               },
                             ),
                           ],
@@ -118,15 +130,19 @@ class _Content extends StatelessWidget {
                                   mainAxisSize: MainAxisSize.min,
                                   children: <Widget>[
                                     Expanded(
-                                      child: Image.asset(
-                                        _calcBloc.getPlanetImage(p),
+                                      child: FlareActor(
+                                        "assets/animations/planets.flr",
+                                        alignment: Alignment.topCenter,
                                         fit: BoxFit.contain,
+                                        animation: p,
+                                        callback: (string) {
+                                          debugPrint(string);
+                                        },
                                       ),
                                     ),
                                     Container(
-                                      padding: EdgeInsets.all(3.0),
-                                      child: Text(p),
-                                    ),
+                                        padding: EdgeInsets.all(3.0),
+                                        child: Text(p)),
                                   ],
                                 ),
                               ),
