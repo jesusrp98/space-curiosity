@@ -5,9 +5,9 @@ import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../util/url.dart';
-import '../querry_model.dart';
+import '../query_model.dart';
 
-class NasaImagesModel extends QuerryModel {
+class NasaImagesModel extends QueryModel {
   @override
   Future loadData() async {
     var _local = await _loadItemsLocal();

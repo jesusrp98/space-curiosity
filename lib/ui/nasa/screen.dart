@@ -28,7 +28,7 @@ class NasaImagePage extends StatelessWidget {
                   tag: image.getDate,
                   child: CacheImage(image?.url),
                 ),
-                onTap: () => FlutterWebBrowser.openWebPage(
+                onTap: () async => await FlutterWebBrowser.openWebPage(
                       url: image.hdurl,
                       androidToolbarColor: Theme.of(context).primaryColor,
                     ),

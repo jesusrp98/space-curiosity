@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_web_browser/flutter_web_browser.dart';
 
 import '../../models/models.dart';
 
@@ -15,14 +15,10 @@ class PostWidget extends StatelessWidget {
         isThreeLine: true,
         title: Text(post.title),
         subtitle: Text(post.body + "\n\n" + post.date),
-        onTap: () {
-          launch(
-            post.url,
-            forceSafariVC: true,
-            forceWebView: true,
-            statusBarBrightness: Theme.of(context).brightness,
-          );
-        },
+        onTap: () async => await FlutterWebBrowser.openWebPage(
+              url: post.url,
+              androidToolbarColor: Theme.of(context).brightness,
+            ),
       ),
     );
   }

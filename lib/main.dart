@@ -16,7 +16,7 @@ import 'ui/news/screen.dart';
 import 'ui/planets/details/edit.dart';
 import 'ui/planets/screen.dart';
 import 'ui/settings.dart';
-import 'ui/space_x/screen.dart';
+import 'ui/spacex/screen.dart';
 
 final AppModel model = AppModel();
 
@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
               debugShowCheckedModeBanner: false,
               routes: <String, WidgetBuilder>{
                 '/home': (_) => HomeScreen(),
-                '/spacex': (_) => SpacexScreen(),
+                '/spacex': (_) => SpaceXScreen(),
                 '/news': (_) => ArticlesScreen(),
                 '/planets': (_) =>
                     SolarSystemScreen(planetModel: PlanetsModel()),

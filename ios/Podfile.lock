@@ -76,6 +76,9 @@ PODS:
   - Flutter (1.0.0)
   - flutter_web_browser (0.0.1):
     - Flutter
+  - FMDB (2.7.5):
+    - FMDB/standard (= 2.7.5)
+  - FMDB/standard (2.7.5)
   - GoogleAppMeasurement (5.2.0):
     - GoogleUtilities/AppDelegateSwizzler (~> 5.2)
     - GoogleUtilities/MethodSwizzler (~> 5.2)
@@ -149,8 +152,9 @@ PODS:
     - Flutter
   - shared_preferences (0.0.1):
     - Flutter
-  - url_launcher (0.0.1):
+  - sqflite (0.0.1):
     - Flutter
+    - FMDB (~> 2.7.2)
 
 DEPENDENCIES:
   - add_2_calendar (from `.symlinks/plugins/add_2_calendar/ios`)
@@ -165,7 +169,7 @@ DEPENDENCIES:
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
   - share (from `.symlinks/plugins/share/ios`)
   - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
-  - url_launcher (from `.symlinks/plugins/url_launcher/ios`)
+  - sqflite (from `.symlinks/plugins/sqflite/ios`)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -178,6 +182,7 @@ SPEC REPOS:
     - FirebaseDatabase
     - FirebaseFirestore
     - FirebaseInstanceID
+    - FMDB
     - GoogleAppMeasurement
     - GoogleUtilities
     - gRPC
@@ -215,14 +220,14 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/share/ios"
   shared_preferences:
     :path: ".symlinks/plugins/shared_preferences/ios"
-  url_launcher:
-    :path: ".symlinks/plugins/url_launcher/ios"
+  sqflite:
+    :path: ".symlinks/plugins/sqflite/ios"
 
 SPEC CHECKSUMS:
   add_2_calendar: da1cb32f7bda3252f01c732f49e6ec72983b50fa
   BoringSSL: e10f92a27043805c01071fe815a5cd98ae8212e7
   clipboard_manager: a6f1e56e1abb10def5bd6a83e86183086bdcfd01
-  cloud_firestore: a2d49d9c7219fce31033eb1a2ee953d7733c91d6
+  cloud_firestore: 980813a98d8beb5c321b589845fabf6c4c5bd571
   Firebase: 383fa29aca93e371cab776b48a5c66544d3c2003
   firebase_core: c96aa8b2fcf7f5167d32f22034f502f9304952b8
   FirebaseAnalytics: 831f1f127f4a75698e9875a87bf7e2668730d953
@@ -234,6 +239,7 @@ SPEC CHECKSUMS:
   FirebaseInstanceID: 78ba376fcd5b94c001f9999b2cbd3d1f1e56e78d
   Flutter: 9d0fac939486c9aba2809b7982dfdbb47a7b0296
   flutter_web_browser: 6a716fdf08f528f7c527eeae1fef13680172bb81
+  FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   GoogleAppMeasurement: 2b3a023a61239c8d002e6e4fcf4abce8eddce0e0
   GoogleUtilities: 760ccb53b7c7f40f9c02d8c241f76f841a7a6162
   gRPC: 9d4c549f37c7cef22478634bac7a0405b6e3dbfb
@@ -251,7 +257,7 @@ SPEC CHECKSUMS:
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
   share: 222b5dcc8031238af9d7de91149df65bad1aef75
   shared_preferences: 5a1d487c427ee18fcd3ea1f2a131569481834b53
-  url_launcher: 92b89c1029a0373879933c21642958c874539095
+  sqflite: d1612813fa7db7c667bed9f1d1b508deffc56999
 
 PODFILE CHECKSUM: 8c385bd0135977bc39adfc355e443a54346c6d08
 

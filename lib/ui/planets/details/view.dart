@@ -82,7 +82,7 @@ class CelestialBodyPage extends StatelessWidget {
       image: HeroImage.card(
         url: celestialBody.imageUrl,
         tag: celestialBody.id,
-        onTap: () => FlutterWebBrowser.openWebPage(
+        onTap: () async => await FlutterWebBrowser.openWebPage(
               url: celestialBody.imageUrl,
               androidToolbarColor: Theme.of(context).primaryColor,
             ),

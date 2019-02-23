@@ -33,7 +33,6 @@ class ListCell extends StatelessWidget {
             title,
             style: TextStyle(
               fontSize: 18.0,
-              color: Theme.of(context).textTheme.subhead.color,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -70,7 +69,7 @@ class MissionNumber extends StatelessWidget {
         style: Theme.of(context)
             .textTheme
             .subhead
-            .copyWith(color: Theme.of(context).textTheme.caption.color),
+            .copyWith(fontSize: 18.0, color: Theme.of(context).textTheme.caption.color),
         textAlign: TextAlign.center,
       ),
     );
