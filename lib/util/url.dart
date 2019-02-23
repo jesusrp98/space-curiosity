@@ -3,7 +3,7 @@ import 'keys.dart';
 /// URL FILE
 /// It has all urls used in the app as static const strings.
 class Url {
-  //Base urls
+  //Base URLs
   static const String spacexBaseUrl = 'https://api.spacexdata.com/v3';
   static const String nasaBaseUrl = 'https://api.nasa.gov/planetary/apod';
   static const String issBaseUrl = 'http://api.open-notify.org';
@@ -16,16 +16,13 @@ class Url {
   static const String launchesList = '$spacexBaseUrl/launches/past?order=desc';
   static const String shipsList = '$spacexBaseUrl/ships?active=true';
 
+  // Upcoming launch for Home screen
   static const String nextLaunch = '$spacexBaseUrl/launches/next';
 
+  // FH maiden launch
   static const String roadsterVideo = 'https://youtu.be/wbSwFU6tY1c';
 
   // Details dialogs
-  static const List<String> detailsPage = [
-    '$spacexBaseUrl/launchpads/',
-    '$spacexBaseUrl/cores/',
-    '$spacexBaseUrl/capsules/',
-  ];
   static const String coreDialog = '$spacexBaseUrl/cores/';
   static const String capsuleDialog = '$spacexBaseUrl/capsules/';
   static const String launchpadDialog = '$spacexBaseUrl/launchpads/';
@@ -100,12 +97,12 @@ class Url {
   static const String spacexPage = 'https://www.spacex.com/';
   static const String flutterPage = 'https://flutter.io/';
 
-  // Nasa images
+  // NASA APOD service
   static const String dailyPicture = '$nasaBaseUrl?api_key=$nasaApiKey';
   static const String morePictures =
       '$nasaBaseUrl?api_key=$nasaApiKey&count=10';
 
-  // ISS stuff
+  // ISS URLs
   static const String issLocation = '$issBaseUrl/iss-now.json';
   static const String issPassTimes = '$issBaseUrl/iss-pass.json';
   static const String issAstronauts = '$issBaseUrl/astros.json';
