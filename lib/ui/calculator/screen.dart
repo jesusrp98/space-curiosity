@@ -55,7 +55,7 @@ class __ContentState extends State<_Content> {
               children: <Widget>[
                 Positioned(
                   bottom: 0.0,
-                  top: 0.0,
+                  top: 20.0,
                   left: 0.0,
                   right: 0.0,
                   child: Container(
