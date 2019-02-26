@@ -35,6 +35,10 @@ subprojects {
                     && !details.requested.name.contains('androidx') ) {
                 details.useVersion "1.0.1"
             }
+            if (details.requested.group == 'androidx.legacy'
+                    && !details.requested.name.contains('androidx') ) {
+                details.useVersion "1.0.0"
+            }
         }
     }
 }

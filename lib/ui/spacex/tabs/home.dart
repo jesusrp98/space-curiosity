@@ -1,12 +1,10 @@
 import 'dart:async';
-import 'dart:math';
 
 import 'package:add_2_calendar/add_2_calendar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
-import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import '../../../models/spacex/details_capsule.dart';
@@ -15,16 +13,17 @@ import '../../../models/spacex/launchpad.dart';
 import '../../../models/spacex/spacex_home.dart';
 import '../../general/cache_image.dart';
 import '../../general/list_cell.dart';
+import '../../general/loading_indicator.dart';
 import '../../general/separator.dart';
-import '../details/launch.dart';
-import '../dialog/capsule.dart';
-import '../dialog/core.dart';
-import '../dialog/launchpad.dart';
+import '../pages/capsule.dart';
+import '../pages/core.dart';
+import '../pages/launch.dart';
+import '../pages/launchpad.dart';
 
 /// HOME TAB VIEW
 /// This tab holds main information about the next launch.
 /// It has a countdown widget.
-class SpacexHomeTab extends StatelessWidget {
+class HomeTab extends StatelessWidget {
   Future<Null> _onRefresh(SpacexHomeModel model) {
     Completer<Null> completer = Completer<Null>();
     model.refresh().then((_) => completer.complete());
@@ -51,7 +50,7 @@ class SpacexHomeTab extends StatelessWidget {
                           'spacex.home.title',
                         )),
                         background: model.isLoading
-                            ? NativeLoadingIndicator(center: true)
+                            ? LoadingIndicator()
                             : Swiper(
                                 itemCount: model.getPhotosCount,
                                 itemBuilder: (context, index) => CacheImage(
@@ -70,9 +69,7 @@ class SpacexHomeTab extends StatelessWidget {
                       ),
                     ),
                     model.isLoading
-                        ? SliverFillRemaining(
-                            child: NativeLoadingIndicator(center: true),
-                          )
+                        ? SliverFillRemaining(child: LoadingIndicator())
                         : SliverToBoxAdapter(child: _buildBody())
                   ]),
             ),
@@ -88,11 +85,10 @@ class SpacexHomeTab extends StatelessWidget {
                 : Column(children: <Widget>[
                     Padding(
                       padding: const EdgeInsets.all(16.0),
-                      child: LaunchCountdown(model),
+                      child: LaunchCountdown(model.launch),
                     ),
                     Separator.divider(height: 0.0),
                   ]),
-            Separator.divider(height: 0.0),
             ListCell(
               leading: const Icon(Icons.public, size: 42.0),
               title: model.vehicle(context),
@@ -115,7 +111,11 @@ class SpacexHomeTab extends StatelessWidget {
                 onTap: () => Add2Calendar.addEvent2Cal(
                       Event(
                         title: model.launch.name,
-                        description: model.launch.details,
+                        description: model.launch.details ??
+                            FlutterI18n.translate(
+                              context,
+                              'spacex.launch.page.no_description',
+                            ),
                         location: model.launch.launchpadName,
                         startDate: model.launch.launchDate,
                         endDate: model.launch.launchDate.add(
@@ -141,7 +141,7 @@ class SpacexHomeTab extends StatelessWidget {
                               model.launch.launchpadId,
                               model.launch.launchpadName,
                             )..loadData(),
-                            child: LaunchpadDialog(),
+                            child: LaunchpadPage(),
                           ),
                       fullscreenDialog: true,
                     ),
@@ -187,7 +187,7 @@ class SpacexHomeTab extends StatelessWidget {
                                           .getPayload(0)
                                           .capsuleSerial,
                                     )..loadData(),
-                                    child: CapsuleDialog(),
+                                    child: CapsulePage(),
                                   ),
                               fullscreenDialog: true,
                             ),
@@ -195,34 +195,82 @@ class SpacexHomeTab extends StatelessWidget {
                     ),
                   ),
             Separator.divider(height: 0.0, indent: 74.0),
-            ListCell(
-              leading: const Icon(Icons.autorenew, size: 42.0),
-              title: FlutterI18n.translate(
-                context,
-                'spacex.home.tab.first_stage.title',
-              ),
-              subtitle: model.landings(context),
-              onTap: model.launch.rocket.firstStage[0].id == null
-                  ? null
-                  : () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => ScopedModel<CoreModel>(
-                                model: CoreModel(
-                                  model
-                                      .launch
-                                      .rocket
-                                      .firstStage[Random().nextInt(model
-                                          .launch.rocket.firstStage.length)]
-                                      .id,
-                                )..loadData(),
-                                child: CoreDialog(),
+            AbsorbPointer(
+              absorbing: model.launch.rocket.isFirstStageNull,
+              child: ListCell(
+                leading: const Icon(Icons.autorenew, size: 42.0),
+                title: FlutterI18n.translate(
+                  context,
+                  'spacex.home.tab.first_stage.title',
+                ),
+                subtitle: model.firstStage(context),
+                onTap: () => model.launch.rocket.isHeavy
+                    ? showDialog(
+                        context: context,
+                        builder: (context) => SimpleDialog(
+                              title: Text(
+                                FlutterI18n.translate(
+                                  context,
+                                  'spacex.home.tab.first_stage.heavy_dialog.title',
+                                ),
+                                style: TextStyle(
+                                  fontSize: 18.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                textAlign: TextAlign.center,
                               ),
-                          fullscreenDialog: true,
-                        ),
+                              children: model.launch.rocket.firstStage
+                                  .map((core) => AbsorbPointer(
+                                        absorbing: core.id == null,
+                                        child: ListCell(
+                                          title: core.id != null
+                                              ? FlutterI18n.translate(
+                                                  context,
+                                                  'spacex.dialog.vehicle.title_core',
+                                                  {'serial': core.id},
+                                                )
+                                              : FlutterI18n.translate(
+                                                  context,
+                                                  'spacex.home.tab.first_stage.heavy_dialog.core_null_title',
+                                                ),
+                                          subtitle: model.core(context, core),
+                                          onTap: () => openCorePage(
+                                                context,
+                                                core.id,
+                                              ),
+                                          contentPadding:
+                                              const EdgeInsets.symmetric(
+                                            vertical: 8.0,
+                                            horizontal: 24.0,
+                                          ),
+                                        ),
+                                      ))
+                                  .toList(),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(16.0),
+                              ),
+                            ),
+                      )
+                    : openCorePage(
+                        context,
+                        model.launch.rocket.getSingleCore.id,
                       ),
-            ),
+              ),
+            )
           ]),
+    );
+  }
+
+  openCorePage(BuildContext context, String id) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => ScopedModel<CoreModel>(
+              model: CoreModel(id)..loadData(),
+              child: CoreDialog(),
+            ),
+        fullscreenDialog: true,
+      ),
     );
   }
 }

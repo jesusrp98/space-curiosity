@@ -3,7 +3,7 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:material_search/material_search.dart';
 
 import '../../../models/spacex/launch.dart';
-import '../details/launch.dart';
+import '../pages/launch.dart';
 
 /// SEARCH LAUNCHES METHOD
 /// Auxiliary method which helps filter launches by its name

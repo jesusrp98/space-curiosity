@@ -3,10 +3,10 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:material_search/material_search.dart';
 
 import '../../../models/spacex/info_vehicle.dart';
-import '../details/capsule.dart';
-import '../details/roadster.dart';
-import '../details/rocket.dart';
-import '../details/ship.dart';
+import '../pages/dragon.dart';
+import '../pages/roadster.dart';
+import '../pages/rocket.dart';
+import '../pages/ship.dart';
 
 /// SEARCH VEHICLES METHOD
 /// Auxiliary method which helps filter vehicles by its name
@@ -38,7 +38,7 @@ searchVehicles(BuildContext context, List list) {
                     builder: (_) => vehicle.type == 'rocket'
                         ? RocketPage(vehicle)
                         : vehicle.type == 'capsule'
-                            ? CapsulePage(vehicle)
+                            ? DragonPage(vehicle)
                             : vehicle.type == 'ship'
                                 ? ShipPage(vehicle)
                                 : RoadsterPage(vehicle),

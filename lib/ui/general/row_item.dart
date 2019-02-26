@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'package:space_news/util/colors.dart';
+
+import '../../util/colors.dart';
 
 /// ROW ITEM WIDGET
 /// Stretched widget to display information in a 'Card Page' widget.
@@ -55,7 +56,7 @@ class RowItem extends StatelessWidget {
       AbsorbPointer(
         absorbing: description ==
             FlutterI18n.translate(context, 'spacex.other.unknown'),
-        child: InkWell(
+        child: InkResponse(
           child: _getText(
             context,
             description,

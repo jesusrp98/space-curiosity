@@ -3,22 +3,23 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:latlong/latlong.dart';
-import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
 
-import '../../../models/spacex/landpad.dart';
+import '../../../models/spacex/launchpad.dart';
 import '../../../util/colors.dart';
+import '../../../util/menu.dart';
 import '../../../util/url.dart';
+import '../../general/loading_indicator.dart';
 import '../../general/row_item.dart';
 import '../../general/separator.dart';
 
-/// LANDPAD DIALOG VIEW
-/// This view displays information about a specific landpad,
-/// where rockets now land.
-class LandpadDialog extends StatelessWidget {
+/// LAUNCHPAD PAGE VIEW
+/// This view displays information about a specific launchpad,
+/// where rockets get rocketed to the sky...
+class LaunchpadPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ScopedModelDescendant<LandpadModel>(
+    return ScopedModelDescendant<LaunchpadModel>(
       builder: (context, child, model) => Scaffold(
             body: CustomScrollView(slivers: <Widget>[
               SliverAppBar(
@@ -26,28 +27,32 @@ class LandpadDialog extends StatelessWidget {
                 floating: false,
                 pinned: true,
                 actions: <Widget>[
-                  IconButton(
-                    icon: const Icon(Icons.public),
-                    onPressed: () async => await FlutterWebBrowser.openWebPage(
-                          url: model.landpad.url,
+                  PopupMenuButton<String>(
+                    itemBuilder: (_) => Menu.wikipedia
+                        .map((string) => PopupMenuItem(
+                              value: string,
+                              child: Text(
+                                FlutterI18n.translate(context, string),
+                              ),
+                            ))
+                        .toList(),
+                    onSelected: (_) async =>
+                        await FlutterWebBrowser.openWebPage(
+                          url: model.launchpad.url,
                           androidToolbarColor: Theme.of(context).primaryColor,
                         ),
-                    tooltip: FlutterI18n.translate(
-                      context,
-                      'spacex.other.menu.wikipedia',
-                    ),
                   ),
                 ],
                 flexibleSpace: FlexibleSpaceBar(
                   centerTitle: true,
-                  title: Text(model.id),
+                  title: Text(model.name),
                   background: model.isLoading
-                      ? NativeLoadingIndicator(center: true)
+                      ? LoadingIndicator()
                       : FlutterMap(
                           options: MapOptions(
                             center: LatLng(
-                              model.landpad.coordinates[0],
-                              model.landpad.coordinates[1],
+                              model.launchpad.coordinates[0],
+                              model.launchpad.coordinates[1],
                             ),
                             zoom: 6.0,
                             minZoom: 5.0,
@@ -64,8 +69,8 @@ class LandpadDialog extends StatelessWidget {
                                 width: 45.0,
                                 height: 45.0,
                                 point: LatLng(
-                                  model.landpad.coordinates[0],
-                                  model.landpad.coordinates[1],
+                                  model.launchpad.coordinates[0],
+                                  model.launchpad.coordinates[1],
                                 ),
                                 builder: (_) => const Icon(
                                       Icons.location_on,
@@ -79,9 +84,7 @@ class LandpadDialog extends StatelessWidget {
                 ),
               ),
               model.isLoading
-                  ? SliverFillRemaining(
-                      child: NativeLoadingIndicator(center: true),
-                    )
+                  ? SliverFillRemaining(child: LoadingIndicator())
                   : SliverToBoxAdapter(child: _buildBody())
             ]),
           ),
@@ -89,12 +92,12 @@ class LandpadDialog extends StatelessWidget {
   }
 
   Widget _buildBody() {
-    return ScopedModelDescendant<LandpadModel>(
+    return ScopedModelDescendant<LaunchpadModel>(
       builder: (context, child, model) => Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(children: <Widget>[
               Text(
-                model.landpad.name,
+                model.launchpad.name,
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.title,
               ),
@@ -105,7 +108,7 @@ class LandpadDialog extends StatelessWidget {
                   context,
                   'spacex.dialog.pad.status',
                 ),
-                model.landpad.getStatus,
+                model.launchpad.getStatus,
               ),
               Separator.spacer(),
               RowItem.textRow(
@@ -114,7 +117,7 @@ class LandpadDialog extends StatelessWidget {
                   context,
                   'spacex.dialog.pad.location',
                 ),
-                model.landpad.location,
+                model.launchpad.location,
               ),
               Separator.spacer(),
               RowItem.textRow(
@@ -123,7 +126,7 @@ class LandpadDialog extends StatelessWidget {
                   context,
                   'spacex.dialog.pad.state',
                 ),
-                model.landpad.state,
+                model.launchpad.state,
               ),
               Separator.spacer(),
               RowItem.textRow(
@@ -132,29 +135,20 @@ class LandpadDialog extends StatelessWidget {
                   context,
                   'spacex.dialog.pad.coordinates',
                 ),
-                model.landpad.getCoordinates,
+                model.launchpad.getCoordinates,
               ),
               Separator.spacer(),
               RowItem.textRow(
                 context,
                 FlutterI18n.translate(
                   context,
-                  'spacex.dialog.pad.landing_type',
+                  'spacex.dialog.pad.launches_successful',
                 ),
-                model.landpad.type,
-              ),
-              Separator.spacer(),
-              RowItem.textRow(
-                context,
-                FlutterI18n.translate(
-                  context,
-                  'spacex.dialog.pad.landings_successful',
-                ),
-                model.landpad.getSuccessfulLandings,
+                model.launchpad.getSuccessfulLaunches,
               ),
               Separator.divider(),
               Text(
-                model.landpad.details,
+                model.launchpad.details,
                 textAlign: TextAlign.justify,
                 style: Theme.of(context)
                     .textTheme

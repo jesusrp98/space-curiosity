@@ -6,12 +6,12 @@ import 'package:http/http.dart' as http;
 import 'package:location/location.dart';
 
 import '../../util/url.dart';
-import '../querry_model.dart';
+import '../query_model.dart';
 import 'astronauts.dart';
 import 'current_location.dart';
 import 'pass_time.dart';
 
-class IssModel extends QuerryModel {
+class IssModel extends QueryModel {
   LocationData currentLocation;
 
   @override
