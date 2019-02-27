@@ -88,13 +88,9 @@ class Url {
       'https://play.google.com/store/apps/developer?id=Chechu';
   static const String storePage =
       'https://play.google.com/store/apps/details?id=com.chechu.cherry';
-  static const String cherryGithub = 'https://github.com/jesusrp98/spacex-go';
+  static const String githubPage = 'https://github.com/jesusrp98/space-curiosity';
   static const String email =
       'mailto:jesusillorp98@gmail.com?subject=Email%20about%20SpaceX%20GO!';
-  static const String spacexGithub = 'https://github.com/r-spacex/SpaceX-API';
-  static const String internationalSystem =
-      'https://en.wikipedia.org/wiki/International_System_of_Units';
-  static const String spacexPage = 'https://www.spacex.com/';
   static const String flutterPage = 'https://flutter.io/';
 
   // NASA APOD service
