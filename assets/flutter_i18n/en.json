@@ -50,7 +50,7 @@
       "tab": {
         "launched": {
           "title": "Launched in {year}",
-          "body": "Launched in {date}, that's {years} years ago."
+          "body": "Launched in {date}, {years} years ago."
         },
         "altitude": {
           "title": "Altitude",

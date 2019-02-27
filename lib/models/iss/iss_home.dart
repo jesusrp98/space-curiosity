@@ -150,7 +150,7 @@ class IssHome {
       '${NumberFormat.decimalPattern().format(weight.round())} kg';
 
   String get getSpeed =>
-      '${NumberFormat.decimalPattern().format(speed.round())} km/h';
+      '${NumberFormat.decimalPattern().format(speed.round())} km/s';
 
   String get getDaysInOrbit =>
       NumberFormat.decimalPattern().format(_daysSinceLaunch);
