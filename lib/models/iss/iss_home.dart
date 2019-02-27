@@ -16,7 +16,7 @@ class IssHomeModel extends QueryModel {
     // Clear old data
     clearItems();
 
-    // // Add parsed items
+    // Add parsed items
     items.addAll(
       response.documents
           .map((document) => IssHome.fromDocument(document))
