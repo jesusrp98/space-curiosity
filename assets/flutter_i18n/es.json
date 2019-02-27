@@ -43,6 +43,54 @@
     "copy_link": "Copiar enlace",
     "download": "Descargar"
   },
+  "iss": {
+    "home": {
+      "title": "Estación Espacial",
+      "icon": "Inicio",
+      "tab": {
+        "launched": {
+          "title": "Lanzada en {year}",
+          "body": "Lanzada en el año {date}, hace ya {years} años."
+        },
+        "altitude": {
+          "title": "Altitud",
+          "body": "La 'ISS' orbita a {height} sobre la superficie, a {velocity}."
+        },
+        "orbit": {
+          "title": "Periodo orbital",
+          "body": "Tarda {period} minutos en recorrer el planeta, realizando {orbits} órbitas al día."
+        },
+        "project": {
+          "title": "Coste total",
+          "body": "Unos {countries} países participan en este proyecto, que costó {cost}."
+        },
+        "numbers": {
+          "title": "Cifras generales",
+          "body": "Ha sido ocupada {days} días de forma ininterrumpida, realizando {orbits} órbitas."
+        },
+        "specifications": {
+          "title": "Especificaciones",
+          "body": "Mide {length} de alto y {width} de ancho, pesando unos {mass}."
+        }
+      }
+    },
+    "times": {
+      "title": "Pasadas",
+      "icon": "Tiempo de pasadas",
+      "tab": {
+        "duration": "Durará unos {time} segundos",
+        "event": "Estacion Espacial Internacional",
+        "location_error": "Permisos denegados"
+      }
+    },
+    "astronauts": {
+      "title": "Astronautas",
+      "icon": "Astronautas",
+      "tab": {
+        "from": "Abordo de {place}"
+      }
+    }
+  },
   "spacex": {
     "home": {
       "title": "Bienvenido a SpaceX GO!",

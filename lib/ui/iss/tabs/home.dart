@@ -1,93 +1,67 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
-import 'package:flutter_map/flutter_map.dart';
-import 'package:latlong/latlong.dart';
+import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
 
-import '../../../models/iss/iss.dart';
+import '../../../models/iss/iss_home.dart';
+import '../../general/cache_image.dart';
 import '../../general/list_cell.dart';
 import '../../general/separator.dart';
 
-class IssHomeTab extends StatelessWidget {
-  Future<Null> _onRefresh(IssModel model) {
-    Completer<Null> completer = Completer<Null>();
-    model.refresh().then((_) => completer.complete());
-    return completer.future;
-  }
-
+/// ISS HOME TAB
+/// This view holds basic information about ISS from the IssHomeModel.
+class HomeTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ScopedModelDescendant<IssModel>(
+    return ScopedModelDescendant<IssHomeModel>(
       builder: (context, child, model) => Scaffold(
-            body: RefreshIndicator(
-              onRefresh: () => _onRefresh(model),
-              child: CustomScrollView(slivers: <Widget>[
-                SliverAppBar(
-                  expandedHeight: MediaQuery.of(context).size.height * 0.3,
-                  floating: false,
-                  pinned: true,
-                  flexibleSpace: FlexibleSpaceBar(
-                    centerTitle: true,
-                    title: Text(
-                      FlutterI18n.translate(context, 'iss.home.title'),
-                    ),
-                    background: model.isLoading
-                        ? NativeLoadingIndicator(center: true)
-                        : FlutterMap(
-                            options: MapOptions(
-                              center: LatLng(0.0, 0.0),
-                              zoom: 1.0,
-                              minZoom: 1.0,
-                              maxZoom: 5.0,
-                            ),
-                            layers: <LayerOptions>[
-                              TileLayerOptions(
-                                urlTemplate:
-                                    'https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png',
-                                subdomains: ['a', 'b', 'c', 'd'],
-                                backgroundColor: Theme.of(context).primaryColor,
-                              ),
-                              MarkerLayerOptions(
-                                markers: <Marker>[
-                                  Marker(
-                                    width: 45.0,
-                                    height: 45.0,
-                                    point: LatLng(
-                                      model.issLocation.coordinates[0],
-                                      model.issLocation.coordinates[1],
-                                    ),
-                                    builder: (_) => const Icon(
-                                          Icons.location_on,
-                                          color: Colors.red,
-                                          size: 45.0,
-                                        ),
-                                  )
-                                ],
-                              )
-                            ],
-                          ),
+            body: CustomScrollView(slivers: <Widget>[
+              SliverAppBar(
+                expandedHeight: MediaQuery.of(context).size.height * 0.3,
+                floating: false,
+                pinned: true,
+                flexibleSpace: FlexibleSpaceBar(
+                  centerTitle: true,
+                  title: Text(
+                    FlutterI18n.translate(context, 'iss.home.title'),
                   ),
+                  background: model.isLoading
+                      ? NativeLoadingIndicator(center: true)
+                      : Swiper(
+                          itemCount: model.getPhotosCount,
+                          itemBuilder: (context, index) => CacheImage(
+                                model.getPhoto(index),
+                              ),
+                          autoplay: true,
+                          autoplayDelay: 6000,
+                          duration: 750,
+                          onTap: (index) async =>
+                              await FlutterWebBrowser.openWebPage(
+                                url: model.getPhoto(index),
+                                androidToolbarColor:
+                                    Theme.of(context).primaryColor,
+                              ),
+                        ),
                 ),
-                model.isLoading
-                    ? SliverFillRemaining(
-                        child: NativeLoadingIndicator(center: true),
-                      )
-                    : SliverToBoxAdapter(child: _buildBody())
-              ]),
-            ),
+              ),
+              model.isLoading
+                  ? SliverFillRemaining(
+                      child: NativeLoadingIndicator(center: true),
+                    )
+                  : SliverToBoxAdapter(child: _buildBody())
+            ]),
           ),
     );
   }
 
   Widget _buildBody() {
-    return ScopedModelDescendant<IssModel>(
+    return ScopedModelDescendant<IssHomeModel>(
       builder: (context, child, model) => Column(
             children: <Widget>[
               ListCell(
-                leading: const Icon(Icons.flight_takeoff, size: 42.0),
+                leading: const Icon(Icons.calendar_today, size: 42.0),
                 title: model.launchedTitle(context),
                 subtitle: model.launchedBody(context),
               ),

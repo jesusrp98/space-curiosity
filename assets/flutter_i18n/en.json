@@ -45,16 +45,16 @@
   },
   "iss": {
     "home": {
-      "title": "ISS",
+      "title": "Space Station",
       "icon": "Home",
       "tab": {
         "launched": {
           "title": "Launched in {year}",
-          "body": "Launched in {date}, that's {years} ago."
+          "body": "Launched in {date}, {years} years ago."
         },
         "altitude": {
           "title": "Altitude",
-          "body": "ISS is orbiting at {height} km above us, at {velocity} km/s."
+          "body": "ISS is orbiting at {height} above us, at {velocity}."
         },
         "orbit": {
           "title": "Orbital period",
@@ -62,15 +62,15 @@
         },
         "project": {
           "title": "Project cost",
-          "body": "Over {countries} countries collaborated in this project, which costed them over {cost}."
+          "body": "Over {countries} countries collaborated in this project, which costed over {cost}."
         },
         "numbers": {
           "title": "Overall numbers",
-          "body": "It has been occupied for more than {days}, orbiting {orbits} times the Earth."
+          "body": "It has been occupied for {days} days, orbiting {orbits} times the Earth."
         },
         "specifications": {
           "title": "Specifications",
-          "body": "ISS is {lenght} m long and {width} m wide, weighing over {mass} kg."
+          "body": "ISS is {length} long and {width} wide, weighing over {mass}."
         }
       }
     },
@@ -87,7 +87,7 @@
       "title": "Current astronauts",
       "icon": "Astronauts",
       "tab": {
-        "from": "Aboard the {place}"
+        "from": "Aboard {place}"
       }
     }
   },
