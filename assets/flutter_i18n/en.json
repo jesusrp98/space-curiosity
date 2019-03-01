@@ -74,6 +74,26 @@
       }
     }
   },
+  "planets": {
+    "planets": {
+      "mercury": "Mercury",
+      "venus": "Venus",
+      "earth": "The Earth",
+      "mars": "Mars",
+      "jupiter": "Jupiter",
+      "saturn": "Saturn",
+      "uranus": "Uranus",
+      "neptune": "Netpute"
+    }
+  },
+  "weight": {
+    "title": "Weight calculator",
+    "units": {
+      "kg": "kg",
+      "lb": "lb"
+    },
+    "your_weight": "Your weight on {planet}"
+  },
   "spacex": {
     "home": {
       "title": "Welcome to SpaceX GO!",
