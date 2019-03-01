@@ -15,8 +15,8 @@ class IssHomeModel extends QueryModel {
 
     // Clear old data
     clearItems();
-
-    // // Add parsed items
+    
+    // Add parsed items
     items.addAll(
       response.documents
           .map((document) => IssHome.fromDocument(document))
@@ -150,7 +150,7 @@ class IssHome {
       '${NumberFormat.decimalPattern().format(weight.round())} kg';
 
   String get getSpeed =>
-      '${NumberFormat.decimalPattern().format(speed.round())} km/h';
+      '${NumberFormat.decimalPattern().format(speed.round())} km/s';
 
   String get getDaysInOrbit =>
       NumberFormat.decimalPattern().format(_daysSinceLaunch);

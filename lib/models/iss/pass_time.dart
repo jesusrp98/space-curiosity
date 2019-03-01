@@ -28,23 +28,18 @@ class PassTimesModel extends QueryModel {
     // Ask user about location
     // Parse if permission are granted
     try {
-      print(2.1);
       // Get user's location
       _userLocation = await Location().getLocation();
-      print(2.2);
       // Get items by http call & parse them
       response = await http.get(
         '${Url.issPassTimes}?lat=${_userLocation.latitude}&lon=${_userLocation.longitude}&n=10',
       );
       snapshot = json.decode(response.body)['response'];
-      print(2.3);
       items.addAll(
         snapshot.map((passTime) => PassTime.fromJson(passTime)).toList(),
       );
-      print(2.4);
     } on PlatformException {
       _userLocation = null;
-      print('error');
     }
 
     // Finished loading data
