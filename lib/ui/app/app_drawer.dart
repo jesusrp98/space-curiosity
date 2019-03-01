@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../general/list_cell.dart';
 import '../general/separator.dart';
 
 class AppDrawer extends StatelessWidget {
@@ -11,91 +10,93 @@ class AppDrawer extends StatelessWidget {
     return Drawer(
       child: ListView(
         children: <Widget>[
-          ListCell(
-            leading: const Icon(
-              FontAwesomeIcons.rocket,
-              size: 42,
-            ),
-            title: FlutterI18n.translate(
+          DrawerHeader(
+            child: Row(children: <Widget>[
+              FlutterLogo(size: 58),
+              Separator.spacer(width: 16),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Text(
+                    FlutterI18n.translate(context, 'app.title'),
+                    style: Theme.of(context).textTheme.headline,
+                  ),
+                  Separator.spacer(height: 8),
+                  Text(
+                    FlutterI18n.translate(context, 'app.subtitle'),
+                    style: Theme.of(context).textTheme.subhead.copyWith(
+                          color: Theme.of(context).textTheme.caption.color,
+                        ),
+                  ),
+                ],
+              )
+            ]),
+          ),
+          ListTile(
+            leading: const Icon(FontAwesomeIcons.rocket),
+            title: Text(FlutterI18n.translate(
               context,
-              'home.page.menu.spacex.title',
-            ),
-            subtitle: FlutterI18n.translate(
-              context,
-              'home.page.menu.spacex.body',
-            ),
+              'home.page.menu.spacex',
+            )),
             onTap: () => openPage(context, '/spacex'),
           ),
-          Separator.divider(height: 0.0, indent: 74.0),
-          ListCell(
-            leading: Icon(
-              Icons.description,
-              size: 42,
-            ),
-            title: FlutterI18n.translate(
+          ListTile(
+            leading: const Icon(Icons.description),
+            title: Text(FlutterI18n.translate(
               context,
-              'home.page.menu.news.title',
-            ),
-            subtitle: FlutterI18n.translate(
-              context,
-              'home.page.menu.news.body',
-            ),
+              'home.page.menu.news',
+            )),
             onTap: () => openPage(context, '/news'),
           ),
-          Separator.divider(height: 0.0, indent: 74.0),
-          ListCell(
-            leading: const Icon(Icons.public, size: 42),
-            title: FlutterI18n.translate(
+          ListTile(
+            leading: const Icon(Icons.public),
+            title: Text(FlutterI18n.translate(
               context,
-              'home.page.menu.planets.title',
-            ),
-            subtitle: FlutterI18n.translate(
-              context,
-              'home.page.menu.planets.body',
-            ),
+              'home.page.menu.planets',
+            )),
             onTap: () => openPage(context, '/planets'),
           ),
-          Separator.divider(height: 0.0, indent: 74.0),
-          ListCell(
-            leading: const Icon(Icons.my_location, size: 42),
-            title: FlutterI18n.translate(
+          ListTile(
+            leading: const Icon(Icons.my_location),
+            title: Text(FlutterI18n.translate(
               context,
-              'home.page.menu.iss.title',
-            ),
-            subtitle: FlutterI18n.translate(
-              context,
-              'home.page.menu.iss.body',
-            ),
+              'home.page.menu.iss',
+            )),
             onTap: () => openPage(context, '/iss'),
           ),
-          Separator.divider(height: 0.0, indent: 74.0),
-          ListCell(
-            leading: const Icon(
-              Icons.fitness_center,
-              size: 42,
-            ),
-            title: FlutterI18n.translate(
+          ListTile(
+            leading: const Icon(Icons.fitness_center),
+            title: Text(FlutterI18n.translate(
               context,
-              'home.page.menu.weight.title',
-            ),
-            subtitle: FlutterI18n.translate(
-              context,
-              'home.page.menu.weight.body',
-            ),
+              'home.page.menu.weight',
+            )),
             onTap: () => openPage(context, '/weight'),
           ),
-          Separator.divider(height: 0.0, indent: 74.0),
-          ListCell(
-            leading: const Icon(Icons.camera_alt, size: 42),
-            title: FlutterI18n.translate(
+          // ListTile(
+          //   leading: const Icon(Icons.camera_alt),
+          //   title: Text(FlutterI18n.translate(
+          //     context,
+          //     'home.page.menu.mars.title',
+          //   )),
+          //   onTap: () => openPage(context, '/mars'),
+          // ),
+          Separator.divider(height: 16),
+          ListTile(
+            leading: const Icon(Icons.settings),
+            title: Text(FlutterI18n.translate(
               context,
-              'home.page.menu.mars.title',
-            ),
-            subtitle: FlutterI18n.translate(
+              'home.menu.settings',
+            )),
+            onTap: () => openPage(context, '/settings'),
+          ),
+          ListTile(
+            leading: const Icon(Icons.info_outline),
+            title: Text(FlutterI18n.translate(
               context,
-              'home.page.menu.mars.body',
-            ),
-            onTap: () => openPage(context, '/mars'),
+              'home.menu.about',
+            )),
+            onTap: () => openPage(context, '/about'),
           ),
         ],
       ),

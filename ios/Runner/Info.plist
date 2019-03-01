@@ -36,6 +36,8 @@
 	<string>Used to Download Images</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Used to Download Images</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Needed for ISS Module</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>arm64</string>

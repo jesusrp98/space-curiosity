@@ -44,7 +44,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       appBar: AppBar(
         title: Text(FlutterI18n.translate(
           context,
-          'app.menu.settings',
+          'home.menu.settings',
         )),
         centerTitle: true,
       ),

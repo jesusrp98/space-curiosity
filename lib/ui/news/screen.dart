@@ -25,7 +25,7 @@ class _ArticlesScreenState extends State<ArticlesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Space News"),
+        title: Text("Space News", style: TextStyle(fontWeight: FontWeight.bold),),
       ),
       body: BlocBuilder(
         bloc: _postBloc,
