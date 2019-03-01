@@ -50,14 +50,6 @@ class AppDrawer extends StatelessWidget {
             onTap: () => openPage(context, '/news'),
           ),
           ListTile(
-            leading: const Icon(Icons.public),
-            title: Text(FlutterI18n.translate(
-              context,
-              'home.page.menu.planets',
-            )),
-            onTap: () => openPage(context, '/planets'),
-          ),
-          ListTile(
             leading: const Icon(Icons.my_location),
             title: Text(FlutterI18n.translate(
               context,
@@ -73,14 +65,6 @@ class AppDrawer extends StatelessWidget {
             )),
             onTap: () => openPage(context, '/weight'),
           ),
-          // ListTile(
-          //   leading: const Icon(Icons.camera_alt),
-          //   title: Text(FlutterI18n.translate(
-          //     context,
-          //     'home.page.menu.mars.title',
-          //   )),
-          //   onTap: () => openPage(context, '/mars'),
-          // ),
           Separator.divider(height: 16),
           ListTile(
             leading: const Icon(Icons.settings),
