@@ -1,11 +1,10 @@
+import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:space_news/bloc/bloc.dart';
-import 'package:space_news/models/calculator/weight.dart';
-import 'package:flare_flutter/flare_actor.dart';
 
+import '../../bloc/bloc.dart';
 import '../../bloc/calculator/bloc.dart';
-import '../general/string_picker_tile.dart';
+import '../../models/calculator/weight.dart';
 
 class CalculatorScreen extends StatefulWidget {
   @override
@@ -37,6 +36,7 @@ class _Content extends StatefulWidget {
 }
 
 class __ContentState extends State<_Content> {
+  bool _showKg = false;
   @override
   Widget build(BuildContext context) {
     final CalculatorBloc _calcBloc = BlocProvider.of<CalculatorBloc>(context);
@@ -47,6 +47,17 @@ class __ContentState extends State<_Content> {
           "Calculator",
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
+        actions: <Widget>[
+          FlatButton.icon(
+            icon: Icon(Icons.swap_horiz),
+            label: _showKg ? Text("lbs") : Text("kg"),
+            onPressed: () {
+              setState(() {
+                _showKg = !_showKg;
+              });
+            },
+          )
+        ],
       ),
       body: BlocBuilder(
           bloc: _calcBloc,
@@ -95,7 +106,7 @@ class __ContentState extends State<_Content> {
                             Container(
                               padding: EdgeInsets.all(10.0),
                               child: Text(
-                                state.weight.round().toString() + " lbs",
+                                _currentWeight(state),
                                 textAlign: TextAlign.center,
                                 style: Theme.of(context).textTheme.display1,
                               ),
@@ -164,7 +175,7 @@ class __ContentState extends State<_Content> {
                           mainAxisSize: MainAxisSize.min,
                           children: <Widget>[
                             Text(
-                              _calcBloc.currentState.planetWeightFormat,
+                              _planetWeight(_calcBloc),
                               textAlign: TextAlign.center,
                               style: Theme.of(context).textTheme.display1,
                             ),
@@ -177,5 +188,15 @@ class __ContentState extends State<_Content> {
             );
           }),
     );
+  }
+
+  String _currentWeight(Calculator state) {
+    if (_showKg) return (state.weight / 2.2046).round().toString() + " kg";
+    return state.weight.round().toString() + " lbs";
+  }
+
+  String _planetWeight(CalculatorBloc bloc) {
+    if (_showKg) return bloc.currentState.planetWeightFormatKg;
+    return bloc.currentState.planetWeightFormatLbs;
   }
 }
