@@ -1,13 +1,14 @@
 import 'package:bloc/bloc.dart';
-import 'package:space_news/bloc/bloc.dart';
-import 'package:space_news/bloc/calculator/event.dart';
-import 'package:space_news/models/calculator/weight.dart';
 
-class CalculatorBloc extends Bloc<CalcEvent, Calculator> {
+import '../../models/calculator/planet.dart';
+import '../bloc.dart';
+import 'event.dart';
+
+class CalculatorBloc extends Bloc<CalcEvent, Planet> {
   @override
-  Calculator get initialState => Calculator(
+  Planet get initialState => Planet(
+        name: "Earth",
         weight: 150.0,
-        planet: "Earth",
         surfaceGravity: 1.0,
       );
 
@@ -23,18 +24,17 @@ class CalculatorBloc extends Bloc<CalcEvent, Calculator> {
       ];
 
   @override
-  Stream<Calculator> mapEventToState(
-      Calculator currentState, CalcEvent event) async* {
+  Stream<Planet> mapEventToState(Planet currentState, CalcEvent event) async* {
     if (event is ChangePlanet) {
-      var _state = Calculator(
-        planet: event.planet,
+      var _state = Planet(
+        name: event.planet,
         weight: currentState.weight,
         surfaceGravity: getSurfaceGravity(event.planet),
       );
       yield _state;
     } else if (event is ChangeWeight) {
-      var _state = Calculator(
-        planet: currentState.planet,
+      var _state = Planet(
+        name: currentState.name,
         weight: event.weight,
         surfaceGravity: currentState.surfaceGravity,
       );
