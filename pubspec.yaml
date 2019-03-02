@@ -9,6 +9,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  auto_size_text: ^1.0.0
+  flare_flutter: ^1.2.3
 
   ## Online
   cloud_firestore: ^0.9.0+2
@@ -41,7 +43,7 @@ dependencies:
   share: ^0.6.0+1
 
   ## Icons
-  font_awesome_flutter: 
+  font_awesome_flutter:
 
 flutter:
   fonts:
@@ -59,5 +61,7 @@ flutter:
           weight: 700
   assets:
     - assets/flutter_i18n/
+    - assets/animations/
+    - assets/images/
 
   uses-material-design: true

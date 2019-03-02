@@ -1,6 +1,7 @@
 {
   "app": {
-    "title": "Space Curiosity"
+    "title": "Space Curiosity",
+    "subtitle": "This a subtitle!"
   },
   "home": {
     "menu": {
@@ -10,30 +11,12 @@
     "page": {
       "fab": "Main menu",
       "menu": {
-        "spacex": {
-          "title": "SpaceX tracker",
-          "body": "A falcons & dragons history"
-        },
-        "news": {
-          "title": "Latest news",
-          "body": "Space headlines from around the globe"
-        },
-        "planets": {
-          "title": "Solar System explorer",
-          "body": "Explore every inch of our neighborhood"
-        },
-        "iss": {
-          "title": "International Space Station",
-          "body": "World's largest floating laboratory"
-        },
-        "weight": {
-          "title": "Weight calculator",
-          "body": "How much would you weight in Mars?"
-        },
-        "mars": {
-          "title": "Martian catalogue",
-          "body": "All about the red planet & its inhabitants"
-        }
+        "spacex": "SpaceX GO!",
+        "news": "Latest news",
+        "planets": "Solar System",
+        "iss": "International Space Station",
+        "weight": "Weight calculator",
+        "mars": "Martian catalogue"
       }
     }
   },

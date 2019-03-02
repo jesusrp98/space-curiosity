@@ -40,7 +40,7 @@ class _AboutScreenState extends State<AboutScreen> {
       appBar: AppBar(
         title: Text(FlutterI18n.translate(
           context,
-          'app.menu.about',
+          'home.menu.about',
         )),
         centerTitle: true,
       ),
