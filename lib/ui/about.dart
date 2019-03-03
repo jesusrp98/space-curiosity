@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
@@ -17,11 +19,12 @@ class AboutScreen extends StatefulWidget {
 
 class _AboutScreenState extends State<AboutScreen> {
   static final List<Map<String, String>> _translators = [
-    // {'name': 'Max Coremans', 'language': 'Nederlands'},
     {'name': 'Jesús Rodríguez', 'language': 'English'},
-    // {'name': '/u/OuterSpaceCitizen', 'language': 'Portugues'},
     {'name': 'Jesús Rodríguez', 'language': 'Español'},
   ];
+
+  final Map<String, String> _platformLinks =
+      (Platform.isIOS ? Url.iosLinks : Url.androidLinks);
 
   PackageInfo _packageInfo = PackageInfo(
     appName: 'Unknown',
@@ -51,7 +54,7 @@ class _AboutScreenState extends State<AboutScreen> {
         )),
         centerTitle: true,
       ),
-       body: Scrollbar(
+      body: Scrollbar(
         child: ListView(children: <Widget>[
           ListCell(
             leading: const Icon(Icons.info_outline, size: 42.0),
@@ -77,7 +80,7 @@ class _AboutScreenState extends State<AboutScreen> {
               'about.author.body',
             ),
             onTap: () async => await FlutterWebBrowser.openWebPage(
-                  url: Url.authorReddit,
+                  url: _platformLinks['reddit'],
                   androidToolbarColor: Theme.of(context).primaryColor,
                 ),
           ),
@@ -93,7 +96,7 @@ class _AboutScreenState extends State<AboutScreen> {
               'about.review.body',
             ),
             onTap: () async => await FlutterWebBrowser.openWebPage(
-                  url: Url.storePage,
+                  url: _platformLinks['store'],
                   androidToolbarColor: Theme.of(context).primaryColor,
                 ),
           ),
@@ -125,7 +128,7 @@ class _AboutScreenState extends State<AboutScreen> {
               'about.more_apps.body',
             ),
             onTap: () async => await FlutterWebBrowser.openWebPage(
-                  url: Url.authorStore,
+                  url: _platformLinks['author'],
                   androidToolbarColor: Theme.of(context).primaryColor,
                 ),
           ),

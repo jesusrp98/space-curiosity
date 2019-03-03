@@ -80,15 +80,22 @@ class Url {
       'https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png';
 
   // Share details message
-  static const String shareDetails = '#spaceCuriosity $storePage';
+  static const String shareDetails = '#spaceCuriosity';
 
   // About page
-  static const String authorReddit = 'https://www.reddit.com/user/jesusrp98';
-  static const String authorStore =
-      'https://play.google.com/store/apps/developer?id=Chechu';
-  static const String storePage =
-      'https://play.google.com/store/apps/details?id=com.chechu.cherry';
-  static const String githubPage = 'https://github.com/jesusrp98/space-curiosity';
+  static const Map<String, String> iosLinks = {
+    'reddit': 'https://www.reddit.com/user/SoundDr',
+    'author': 'TODO',
+    'store': 'TODO',
+  };
+  static const Map<String, String> androidLinks = {
+    'reddit': 'https://www.reddit.com/user/jesusrp98',
+    'author': 'https://play.google.com/store/apps/developer?id=Chechu',
+    'store': 'https://play.google.com/store/apps/details?id=com.chechu.cherry',
+  };
+
+  static const String githubPage =
+      'https://github.com/jesusrp98/space-curiosity';
   static const String email =
       'mailto:jesusillorp98@gmail.com?subject=Email%20about%20SpaceX%20GO!';
   static const String flutterPage = 'https://flutter.io/';
