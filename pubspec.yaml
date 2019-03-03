@@ -61,6 +61,5 @@ flutter:
   assets:
     - assets/flutter_i18n/
     - assets/animations/
-    - assets/images/
 
   uses-material-design: true
