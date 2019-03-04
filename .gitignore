@@ -76,3 +76,4 @@ build/
 *.lock
 *.ipa
 ios/Runner.ipa
+*.ipa
