@@ -48,8 +48,8 @@ class PostBloc extends Bloc<PostEvent, PostState> {
       state is PostLoaded && state.hasReachedMax;
 
   Future<List<Post>> _fetchPosts(int startIndex, int limit) async {
-    final response =
-        await httpClient.get('https://www.nasa.gov/rss/dyn/breaking_news.rss/$startIndex');
+    final response = await httpClient
+        .get('https://www.nasa.gov/rss/dyn/breaking_news.rss/$startIndex');
 
     if (response.statusCode == 200) {
       var channel = new RssFeed.parse(response.body);

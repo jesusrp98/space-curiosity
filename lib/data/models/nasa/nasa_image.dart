@@ -1,76 +1,75 @@
-import 'dart:convert';
-
-import 'package:flutter_i18n/flutter_i18n.dart';
-import 'package:http/http.dart' as http;
-import 'package:intl/intl.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:space_news/data/classes/nasa/image.dart';
-
-import '../../../util/url.dart';
+import '../../classes/abstract/persit_data.dart';
+import '../../classes/nasa/list.dart';
+import '../../repositories/nasa/images.dart';
+import '../../repositories/persistence_repository.dart';
 import '../models.dart';
 
-class NasaImagesModel extends QueryModel {
+class NasaImagesModel extends QueryModel implements PersistData {
   @override
   Future loadData() async {
-    var _local = await _loadItemsLocal();
-
-    if (_local != null && _local.isNotEmpty) {
-      items.addAll(_local);
+    await loadFromDisk();
+    try {
+      items.addAll(_module.images);
+    } catch (e) {
+      print("Error Loading Images: $e");
+      items.addAll(await NasaImageRepo().images);
     }
-
-    _updateLocal();
-
     setLoading(false);
+
+    _module.images = await NasaImageRepo().images;
+    saveToDisk();
   }
-}
 
-void _updateLocal() async {
-  try {
-    final response = await http.get(Url.dailyPicture);
-    final moreResponse = await http.get(Url.morePictures);
-    final List<dynamic> _moreImages = json.decode(moreResponse.body);
-    List _items = [];
-    _items.add(NasaImage.fromJson(json.decode(response.body)));
-    _items
-        .addAll(_moreImages.map((image) => NasaImage.fromJson(image)).toList());
-    _saveItemsLocal(_items);
-  } catch (e) {
-    print(e);
-  }
-}
+  NasaImages _module = NasaImages(images: []);
 
-void _saveItemsLocal(List items) async {
-  final prefs = await SharedPreferences.getInstance();
-  var _local = await _loadItemsLocal();
-  List _itemsToSave = _local;
+  @override
+  bool loaded = false;
 
-  for (var item in items) {
-    if (!_local.contains(item)) {
-      _itemsToSave.add(item);
+  @override
+  bool loading = false;
+
+  @override
+  Future loadFromDisk() async {
+    if (!loading) {
+      print("Loading $module from Disk");
+      loading = true;
+      notifyListeners();
+
+      NasaImages _savedModule;
+      try {
+        _savedModule = await storage.loadNasaImagesState();
+      } catch (e) {
+        print("Error Loading State => $e");
+      }
+      if (_savedModule == null) {
+        _module.images = await NasaImageRepo().images;
+      } else {
+        _module = _savedModule;
+        _fetching = false;
+      }
+
+      loading = false;
+      loaded = true;
+      notifyListeners();
     }
   }
 
-  try {
-    prefs.setStringList(
-      'nasa_images',
-      _itemsToSave.map((image) => json.encode(image.toJson())).toList(),
-    );
-  } catch (e) {
-    print("Could not update local => $e");
-  }
-}
+  bool _fetching = false;
 
-Future<List> _loadItemsLocal() async {
-  final prefs = await SharedPreferences.getInstance();
-  List<NasaImage> _items = [];
-  try {
-    List<String> _localItems = prefs.getStringList('nasa_images');
-    for (String item in _localItems) {
-      _items.add(NasaImage.fromJson(json.decode(item)));
+  @override
+  String get module => "leads".toLowerCase().trim();
+
+  @override
+  void saveToDisk() async {
+    print("Saving $module to Disk");
+    try {
+      storage.saveNasaImagesState(_module);
+    } catch (e) {
+      print("Error Saving State => $e");
     }
-    ;
-  } catch (error) {
-    print("Error Loading Images from Local $error");
   }
-  return _items;
+
+  @override
+  PersistenceRepository get storage =>
+      PersistenceRepository(fileStorage: FileStorage(module));
 }

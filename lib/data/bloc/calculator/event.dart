@@ -19,5 +19,3 @@ class ChangeWeight extends CalcEvent {
   @override
   String toString() => 'Change Weight => $weight';
 }
-
-
