@@ -30,14 +30,16 @@ class NewsRepo {
     // }
 
     final response = await httpClient.get('https://www.space.com/feeds/all');
+    print("Result:${response.statusCode} => ${response?.body}");
 
-    if (response.statusCode == 200) {
+    try {
       return RssFeed.parse(response.body)
           .items
           .map((item) => Post.fromRss(item))
           .toList();
-    } else {
-      throw Exception('error fetching posts');
+    } catch (e) {
+      print("Error Parsing XML: $e");
+      return [];
     }
   }
 }

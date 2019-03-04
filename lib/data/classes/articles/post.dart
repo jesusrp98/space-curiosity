@@ -23,15 +23,14 @@ class Post extends Equatable {
 
   factory Post.fromRss(RssItem item) {
     return Post(
-      title: item.title,
-      author: item.author,
-      url: item.link,
-      photo: item.enclosure.url,
+      title: item?.title ?? "",
+      author: item?.author ?? "",
+      url: item?.link ?? "",
+      photo: item?.enclosure?.url ?? "",
     );
   }
 
-  factory Post.fromJson(Map<String, dynamic> json) =>
-      _$PostFromJson(json);
+  factory Post.fromJson(Map<String, dynamic> json) => _$PostFromJson(json);
 
   Map<String, dynamic> toJson() => _$PostToJson(this);
 }
