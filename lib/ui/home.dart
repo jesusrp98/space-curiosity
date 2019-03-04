@@ -4,7 +4,7 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
 
-import '../models/nasa/nasa_image.dart';
+import '../data/models/nasa/nasa_image.dart';
 import 'app/app_drawer.dart';
 import 'general/call_error.dart';
 import 'general/photo_card.dart';

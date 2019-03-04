@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:http/http.dart' as http;
 
-import '../../util/url.dart';
+import '../../../util/url.dart';
 import '../query_model.dart';
 import 'details_vehicle.dart';
 import 'mission_item.dart';

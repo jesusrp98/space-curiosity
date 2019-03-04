@@ -1,7 +1,8 @@
 import 'package:bloc/bloc.dart';
-import 'package:space_news/bloc/bloc.dart';
-import 'package:space_news/bloc/calculator/event.dart';
-import 'package:space_news/models/calculator/weight.dart';
+
+import '../../../data/bloc/bloc.dart';
+import '../../../data/bloc/calculator/event.dart';
+import '../../../data/models/calculator/weight.dart';
 
 class CalculatorBloc extends Bloc<CalcEvent, Calculator> {
   @override

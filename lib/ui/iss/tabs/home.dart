@@ -5,7 +5,7 @@ import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
 
-import '../../../models/iss/iss_home.dart';
+import '../../../data/models/iss/iss_home.dart';
 import '../../general/cache_image.dart';
 import '../../general/list_cell.dart';
 import '../../general/separator.dart';

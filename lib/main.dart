@@ -6,9 +6,9 @@ import 'package:scoped_model/scoped_model.dart';
 import 'package:persist_theme/persist_theme.dart';
 import 'package:space_news/util/colors.dart';
 
-import 'bloc/bloc.dart';
-import 'bloc/delegate.dart';
-import 'models/planets/celestial_body.dart';
+import 'data/bloc/bloc.dart';
+import 'data/bloc/delegate.dart';
+import 'data/models/planets/celestial_body.dart';
 import 'ui/about.dart';
 import 'ui/calculator/screen.dart';
 import 'ui/home.dart';

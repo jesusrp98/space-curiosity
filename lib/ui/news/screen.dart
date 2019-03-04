@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
 
-import '../../bloc/bloc.dart';
+import '../../data/bloc/bloc.dart';
 import '../app/bottom_loader.dart';
 import 'item.dart';
 

@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
-import '../../util/url.dart';
+import '../../../util/url.dart';
 import '../query_model.dart';
 
 /// LANDPAD MODEL

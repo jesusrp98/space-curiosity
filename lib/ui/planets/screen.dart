@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
 
-import '../../models/planets/celestial_body.dart';
+import '../../data/models/planets/celestial_body.dart';
 import '../general/hero_image.dart';
 import '../general/list_cell.dart';
 import 'details/edit.dart';

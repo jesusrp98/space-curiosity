@@ -6,7 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
 
-import '../../../models/iss/astronauts.dart';
+import '../../../data/models/iss/astronauts.dart';
 import '../../general/cache_image.dart';
 import '../../general/list_cell.dart';
 import '../../general/separator.dart';

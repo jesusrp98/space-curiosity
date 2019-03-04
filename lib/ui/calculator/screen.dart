@@ -2,9 +2,9 @@ import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../bloc/bloc.dart';
-import '../../bloc/calculator/bloc.dart';
-import '../../models/calculator/weight.dart';
+import '../../data/bloc/bloc.dart';
+import '../../data/bloc/calculator/bloc.dart';
+import '../../data/models/calculator/weight.dart';
 
 class CalculatorScreen extends StatefulWidget {
   @override

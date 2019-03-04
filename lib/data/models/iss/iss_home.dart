@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:intl/intl.dart';
 
-import '../../util/photos.dart';
+import '../../../util/photos.dart';
 import '../query_model.dart';
 
 /// ISS HOME MODEL

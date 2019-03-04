@@ -5,8 +5,8 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 
-import '../../util/menu.dart';
-import '../../util/url.dart';
+import '../../../util/menu.dart';
+import '../../../util/url.dart';
 import '../query_model.dart';
 import 'rocket.dart';
 

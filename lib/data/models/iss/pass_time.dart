@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:location/location.dart';
 
-import '../../util/url.dart';
+import '../../../util/url.dart';
 import '../query_model.dart';
 
 /// ISS PASS TIME MODEL

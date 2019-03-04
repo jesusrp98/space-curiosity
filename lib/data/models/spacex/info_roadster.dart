@@ -1,7 +1,7 @@
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:intl/intl.dart';
 
-import '../../util/url.dart';
+import '../../../util/url.dart';
 import 'info_vehicle.dart';
 
 /// ROADSTER MODEL

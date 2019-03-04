@@ -4,10 +4,10 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:image_downloader/image_downloader.dart';
 import 'package:share/share.dart';
-import 'package:space_news/ui/general/separator.dart';
 
-import '../../models/nasa/nasa_image.dart';
+import '../../data/models/nasa/nasa_image.dart';
 import '../general/cache_image.dart';
+import '../general/separator.dart';
 
 class NasaImagePage extends StatelessWidget {
   final NasaImage image;
