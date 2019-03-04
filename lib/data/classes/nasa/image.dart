@@ -1,6 +1,10 @@
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:intl/intl.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+part 'image.g.dart';
+
+@JsonSerializable()
 class NasaImage {
   final String title, description, url, hdurl, copyright;
   final DateTime date;
@@ -13,25 +17,6 @@ class NasaImage {
     this.copyright,
     this.date,
   });
-
-  factory NasaImage.fromJson(Map<String, dynamic> json) {
-    return NasaImage(
-      title: json['title'] ?? 'No Name Found',
-      description: json['explanation'],
-      url: json['url'],
-      hdurl: json['hdurl'],
-      copyright: json['copyright'],
-      date: DateTime.parse(json['date']),
-    );
-  }
-  Map<String, dynamic> toJson() => {
-        'title': title,
-        'explanation': description,
-        'url': url,
-        'hdurl': hdurl,
-        'copyright': copyright,
-        'date': date.toString(),
-      };
 
   // TODO revisar esto
   String get getDate {
@@ -49,4 +34,9 @@ class NasaImage {
 
   String share(context) =>
       '$title\n\n$description\n\n${getCopyright(context)} · $getDate\n\n$hdurl';
+
+  factory NasaImage.fromJson(Map<String, dynamic> json) =>
+      _$NasaImageFromJson(json);
+
+  Map<String, dynamic> toJson() => _$NasaImageToJson(this);
 }
