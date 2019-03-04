@@ -205,6 +205,7 @@ class _AboutScreenState extends State<AboutScreen> {
                   androidToolbarColor: Theme.of(context).primaryColor,
                 ),
           ),
+          Separator.divider(height: 0.0, indent: 74.0),
         ]),
       ),
     );

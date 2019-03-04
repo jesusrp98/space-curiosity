@@ -90,7 +90,7 @@ class Url {
   };
   static const Map<String, String> androidLinks = {
     'reddit': 'https://www.reddit.com/user/jesusrp98',
-    'author': 'https://play.google.com/store/apps/developer?id=Chechu',
+    'author': 'https://play.google.com/store/apps/developer?id=Jes%C3%BAs+Rodr%C3%ADguez+P%C3%A9rez',
     'store': 'https://play.google.com/store/apps/details?id=com.chechu.cherry',
   };
 
