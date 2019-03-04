@@ -49,14 +49,14 @@ class AppDrawer extends StatelessWidget {
             )),
             onTap: () => openPage(context, '/news'),
           ),
-          ListTile(
-            leading: const Icon(Icons.public),
-            title: Text(FlutterI18n.translate(
-              context,
-              'home.page.menu.planets',
-            )),
-            onTap: () => openPage(context, '/planets'),
-          ),
+          // ListTile(
+          //   leading: const Icon(Icons.public),
+          //   title: Text(FlutterI18n.translate(
+          //     context,
+          //     'home.page.menu.planets',
+          //   )),
+          //   onTap: () => openPage(context, '/planets'),
+          // ),
           ListTile(
             leading: const Icon(Icons.my_location),
             title: Text(FlutterI18n.translate(
