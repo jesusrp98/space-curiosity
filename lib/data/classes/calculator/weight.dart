@@ -1,5 +1,9 @@
 import 'package:equatable/equatable.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+part 'weight.g.dart';
+
+@JsonSerializable()
 class Calculator extends Equatable {
   final num weight;
   final num surfaceGravity;
@@ -19,4 +23,9 @@ class Calculator extends Equatable {
 
   @override
   String toString() => 'Post { Planet: $planet }';
+
+  factory Calculator.fromJson(Map<String, dynamic> json) =>
+      _$CalculatorFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CalculatorToJson(this);
 }

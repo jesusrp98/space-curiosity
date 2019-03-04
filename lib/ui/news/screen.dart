@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:http/http.dart' as http;
 
 import '../../data/bloc/bloc.dart';
-import '../app/bottom_loader.dart';
-import 'item.dart';
+import '../../data/models/models.dart';
+import '../general/hero_image.dart';
+import '../general/list_cell.dart';
+import '../general/separator.dart';
 
 class ArticlesScreen extends StatefulWidget {
   @override
@@ -12,12 +15,9 @@ class ArticlesScreen extends StatefulWidget {
 }
 
 class _ArticlesScreenState extends State<ArticlesScreen> {
-  final _scrollController = ScrollController();
   final PostBloc _postBloc = PostBloc(httpClient: http.Client());
-  final _scrollThreshold = 200.0;
 
   _ArticlesScreenState() {
-    _scrollController.addListener(_onScroll);
     _postBloc.dispatch(Fetch());
   }
 
@@ -25,14 +25,12 @@ class _ArticlesScreenState extends State<ArticlesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          "Space News",
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
+        title: Text('Latest news'),
+        centerTitle: true,
       ),
       body: BlocBuilder(
         bloc: _postBloc,
-        builder: (BuildContext context, PostState state) {
+        builder: (context, state) {
           if (state is PostUninitialized) {
             return Center(
               child: CircularProgressIndicator(),
@@ -49,18 +47,25 @@ class _ArticlesScreenState extends State<ArticlesScreen> {
                 child: Text('no posts'),
               );
             }
-            return ListView.builder(
-              itemBuilder: (BuildContext context, int index) {
-                if (index >= state.posts.length) {
-                  return BottomLoader();
-                } else {
-                  return PostWidget(post: state.posts[index]);
-                }
+            return ListView.separated(
+              itemCount: state.posts.length,
+              itemBuilder: (_, index) {
+                final Post post = state.posts[index];
+                return ListCell(
+                  leading: HeroImage.list(
+                    url: post.photo,
+                    tag: index.toString(),
+                  ),
+                  title: post.getTitle,
+                  subtitle: post.author,
+                  onTap: () async => await FlutterWebBrowser.openWebPage(
+                        url: post.url,
+                        androidToolbarColor: Theme.of(context).primaryColor,
+                      ),
+                );
               },
-              itemCount: state.hasReachedMax
-                  ? state.posts.length
-                  : state.posts.length + 1,
-              controller: _scrollController,
+              separatorBuilder: (_, index) =>
+                  Separator.divider(height: 0, indent: 96),
             );
           }
         },
@@ -72,13 +77,5 @@ class _ArticlesScreenState extends State<ArticlesScreen> {
   void dispose() {
     _postBloc.dispose();
     super.dispose();
-  }
-
-  void _onScroll() {
-    final maxScroll = _scrollController.position.maxScrollExtent;
-    final currentScroll = _scrollController.position.pixels;
-    if (maxScroll - currentScroll <= _scrollThreshold) {
-      _postBloc.dispatch(Fetch());
-    }
   }
 }
