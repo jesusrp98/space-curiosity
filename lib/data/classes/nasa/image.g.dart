@@ -9,7 +9,7 @@ part of 'image.dart';
 NasaImage _$NasaImageFromJson(Map<String, dynamic> json) {
   return NasaImage(
       title: json['title'] as String,
-      description: json['description'] as String,
+      description: json['explanation'] as String,
       url: json['url'] as String,
       hdurl: json['hdurl'] as String,
       copyright: json['copyright'] as String,
@@ -19,9 +19,9 @@ NasaImage _$NasaImageFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> _$NasaImageToJson(NasaImage instance) => <String, dynamic>{
       'title': instance.title,
-      'description': instance.description,
       'url': instance.url,
       'hdurl': instance.hdurl,
       'copyright': instance.copyright,
-      'date': instance.date?.toIso8601String()
+      'date': instance.date?.toIso8601String(),
+      'explanation': instance.description
     };

@@ -106,7 +106,7 @@ class NasaImagePage extends StatelessWidget {
                   Separator.spacer(height: 16),
                   // TODO add text expander
                   Text(
-                    image.description,
+                    image?.description ?? "",
                     textAlign: TextAlign.justify,
                     style: TextStyle(
                       color: Theme.of(context).textTheme.caption.color,

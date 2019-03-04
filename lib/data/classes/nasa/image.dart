@@ -6,8 +6,12 @@ part 'image.g.dart';
 
 @JsonSerializable()
 class NasaImage {
-  final String title, description, url, hdurl, copyright;
+  final String title, url, hdurl, copyright;
+
   final DateTime date;
+
+  @JsonKey(name: "explanation", nullable: true)
+  final String description;
 
   NasaImage({
     this.title,

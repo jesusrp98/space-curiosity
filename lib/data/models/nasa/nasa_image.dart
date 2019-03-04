@@ -60,7 +60,7 @@ class NasaImagesModel extends QueryModel implements PersistData {
   bool get fetching => _fetching;
 
   @override
-  String get module => "leads".toLowerCase().trim();
+  String get module => "nasa_images".toLowerCase().trim();
 
   @override
   void saveToDisk() async {

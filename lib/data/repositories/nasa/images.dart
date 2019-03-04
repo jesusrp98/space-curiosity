@@ -15,7 +15,9 @@ class NasaImageRepo {
     List<NasaImage> _items = [];
     try {
       final response = await httpClient.get(Url.dailyPicture);
+      print("1 => ${response.body}");
       final moreResponse = await httpClient.get(Url.morePictures);
+      print("2 => ${moreResponse.body}");
       final List<dynamic> _moreImages = json.decode(moreResponse.body);
 
       _items.add(
