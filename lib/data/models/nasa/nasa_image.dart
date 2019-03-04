@@ -2,6 +2,7 @@ import '../../classes/abstract/persit_data.dart';
 import '../../classes/nasa/list.dart';
 import '../../repositories/nasa/images.dart';
 import '../../repositories/persistence_repository.dart';
+import 'package:http/http.dart' as http;
 import '../models.dart';
 
 class NasaImagesModel extends QueryModel implements PersistData {
@@ -12,11 +13,11 @@ class NasaImagesModel extends QueryModel implements PersistData {
       items.addAll(_module.images);
     } catch (e) {
       print("Error Loading Images: $e");
-      items.addAll(await NasaImageRepo().images);
+      items.addAll(await NasaImageRepo(httpClient: http.Client()).images);
     }
     setLoading(false);
 
-    _module.images = await NasaImageRepo().images;
+    _module.images = await NasaImageRepo(httpClient: http.Client()).images;
     saveToDisk();
   }
 
@@ -42,7 +43,7 @@ class NasaImagesModel extends QueryModel implements PersistData {
         print("Error Loading State => $e");
       }
       if (_savedModule == null) {
-        _module.images = await NasaImageRepo().images;
+        _module.images = await NasaImageRepo(httpClient: http.Client()).images;
       } else {
         _module = _savedModule;
         _fetching = false;
