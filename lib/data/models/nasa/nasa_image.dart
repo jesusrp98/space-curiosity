@@ -4,9 +4,10 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:space_news/data/classes/nasa/image.dart';
 
 import '../../../util/url.dart';
-import '../query_model.dart';
+import '../models.dart';
 
 class NasaImagesModel extends QueryModel {
   @override
@@ -72,54 +73,4 @@ Future<List> _loadItemsLocal() async {
     print("Error Loading Images from Local $error");
   }
   return _items;
-}
-
-class NasaImage {
-  final String title, description, url, hdurl, copyright;
-  final DateTime date;
-
-  NasaImage({
-    this.title,
-    this.description,
-    this.url,
-    this.hdurl,
-    this.copyright,
-    this.date,
-  });
-
-  factory NasaImage.fromJson(Map<String, dynamic> json) {
-    return NasaImage(
-      title: json['title'] ?? 'No Name Found',
-      description: json['explanation'],
-      url: json['url'],
-      hdurl: json['hdurl'],
-      copyright: json['copyright'],
-      date: DateTime.parse(json['date']),
-    );
-  }
-  Map<String, dynamic> toJson() => {
-        'title': title,
-        'explanation': description,
-        'url': url,
-        'hdurl': hdurl,
-        'copyright': copyright,
-        'date': date.toString(),
-      };
-
-  // TODO revisar esto
-  String get getDate {
-    if (date == null) return DateTime.now().millisecondsSinceEpoch.toString();
-    try {
-      return DateFormat.yMMMMd('en_US').format(date);
-    } catch (e) {
-      print(e);
-      return '';
-    }
-  }
-
-  String getCopyright(context) =>
-      copyright ?? FlutterI18n.translate(context, 'nasa.no_copyright');
-
-  String share(context) =>
-      '$title\n\n$description\n\n${getCopyright(context)} · $getDate\n\n$hdurl';
 }

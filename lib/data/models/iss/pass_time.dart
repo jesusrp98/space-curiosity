@@ -7,7 +7,7 @@ import 'package:intl/intl.dart';
 import 'package:location/location.dart';
 
 import '../../../util/url.dart';
-import '../query_model.dart';
+import '../models.dart';
 
 /// ISS PASS TIME MODEL
 /// When & by how long ISS will pass in your geographic location.

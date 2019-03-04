@@ -1,2 +1,2 @@
-export './articles/post.dart';
-export './query_model.dart';
+export './../classes/articles/post.dart';
+export './../classes/abstract/query_model.dart';

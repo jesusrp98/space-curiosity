@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 import '../../../util/url.dart';
-import '../query_model.dart';
+import '../models.dart';
 
 /// LAUNCHPAD MODEL
 /// Details about a specific launchpad, where rockets are launched from.

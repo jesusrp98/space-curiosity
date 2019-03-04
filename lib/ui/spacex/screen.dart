@@ -3,7 +3,7 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:scoped_model/scoped_model.dart';
 
-import '../../data/models/query_model.dart';
+import '../../data/models/models.dart';
 import '../../data/models/spacex/info_vehicle.dart';
 import '../../data/models/spacex/launch.dart';
 import '../../data/models/spacex/spacex_company.dart';

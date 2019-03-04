@@ -3,7 +3,7 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:intl/intl.dart';
 
 import '../../../util/photos.dart';
-import '../query_model.dart';
+import '../models.dart';
 
 /// ISS HOME MODEL
 /// Shows main details about the ISS project, including dimensions, cost...

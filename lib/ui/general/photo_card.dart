@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 
-import '../../data/models/nasa/nasa_image.dart';
+import '../../data/classes/nasa/image.dart';
 import '../nasa/screen.dart';
 import 'cache_image.dart';
 import 'separator.dart';

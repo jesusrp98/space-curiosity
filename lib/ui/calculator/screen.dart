@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../data/bloc/bloc.dart';
 import '../../data/bloc/calculator/bloc.dart';
-import '../../data/models/calculator/weight.dart';
+import '../../data/classes/calculator/weight.dart';
 
 class CalculatorScreen extends StatefulWidget {
   @override

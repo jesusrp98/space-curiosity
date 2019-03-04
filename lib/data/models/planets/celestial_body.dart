@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
 import 'package:scoped_model/scoped_model.dart';
 
-import '../query_model.dart';
+import '../models.dart';
 
 enum BodyType { planet, celestialBody }
 

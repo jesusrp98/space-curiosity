@@ -5,7 +5,7 @@ import 'package:scoped_model/scoped_model.dart';
 import '../../data/models/iss/astronauts.dart';
 import '../../data/models/iss/iss_home.dart';
 import '../../data/models/iss/pass_time.dart';
-import '../../data/models/query_model.dart';
+import '../../data/models/models.dart';
 import 'tabs/astronauts.dart';
 import 'tabs/home.dart';
 import 'tabs/pass_times.dart';

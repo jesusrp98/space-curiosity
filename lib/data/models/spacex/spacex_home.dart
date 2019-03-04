@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 
 import '../../../ui/general/separator.dart';
 import '../../../util/url.dart';
-import '../query_model.dart';
+import '../models.dart';
 import 'launch.dart';
 import 'rocket.dart';
 

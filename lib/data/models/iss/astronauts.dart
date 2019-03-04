@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 
 import '../../../util/photos.dart';
 import '../../../util/url.dart';
-import '../query_model.dart';
+import '../models.dart';
 
 /// ASTRONAUT MODEL
 /// Represents an astronaut in the outter space, including his/her name & spacecraft.

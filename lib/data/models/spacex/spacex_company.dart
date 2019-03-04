@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 
 import '../../../util/url.dart';
-import '../query_model.dart';
+import '../models.dart';
 
 /// SPACEX-AS-A-COMPAMY MODEL
 /// General information about SpaceX's company data.

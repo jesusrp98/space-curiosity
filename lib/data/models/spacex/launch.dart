@@ -7,7 +7,7 @@ import 'package:intl/intl.dart';
 
 import '../../../util/menu.dart';
 import '../../../util/url.dart';
-import '../query_model.dart';
+import '../models.dart';
 import 'rocket.dart';
 
 /// LAUNCHES MODEL

@@ -5,7 +5,7 @@ import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:image_downloader/image_downloader.dart';
 import 'package:share/share.dart';
 
-import '../../data/models/nasa/nasa_image.dart';
+import '../../data/classes/nasa/image.dart';
 import '../general/cache_image.dart';
 import '../general/separator.dart';
 

@@ -4,7 +4,7 @@ import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:webfeed/domain/rss_feed.dart';
 
-import '../../models/articles/post.dart';
+import '../../classes/articles/post.dart';
 import '../bloc.dart';
 
 class PostBloc extends Bloc<PostEvent, PostState> {

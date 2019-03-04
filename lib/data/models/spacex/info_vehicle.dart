@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 
 import '../../../util/url.dart';
-import '../query_model.dart';
+import '../models.dart';
 import 'info_capsule.dart';
 import 'info_roadster.dart';
 import 'info_rocket.dart';

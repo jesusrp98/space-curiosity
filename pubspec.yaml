@@ -41,6 +41,7 @@ dependencies:
   package_info: ^0.4.0+1
   scoped_model: ^1.0.1
   share: ^0.6.0+1
+  recase:
 
   ## Icons
   font_awesome_flutter: ^8.4.0
