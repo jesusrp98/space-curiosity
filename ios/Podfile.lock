@@ -224,12 +224,12 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/sqflite/ios"
 
 SPEC CHECKSUMS:
-  add_2_calendar: e24e5a4b9c9fa9a801d48b9cd13e384cad27089d
+  add_2_calendar: 0e897dd29cd57c22ffea74454a66ffe1123bc45a
   BoringSSL: e10f92a27043805c01071fe815a5cd98ae8212e7
-  clipboard_manager: f4800834e62cc26b1cc4e0a92a35cd452dd8b827
-  cloud_firestore: cd6e849ecb8ab43e5a7a5f1f169304ca65436c03
+  clipboard_manager: a6f1e56e1abb10def5bd6a83e86183086bdcfd01
+  cloud_firestore: 980813a98d8beb5c321b589845fabf6c4c5bd571
   Firebase: 383fa29aca93e371cab776b48a5c66544d3c2003
-  firebase_core: ce5006bb48508ee4e71e0f429a3f519bb8ee2961
+  firebase_core: c96aa8b2fcf7f5167d32f22034f502f9304952b8
   FirebaseAnalytics: 831f1f127f4a75698e9875a87bf7e2668730d953
   FirebaseAuth: 504b198ceb3472dca5c65bb95544ea44cfc9439e
   FirebaseAuthInterop: 0ffa57668be100582bb7643d4fcb7615496c41fc
@@ -237,8 +237,8 @@ SPEC CHECKSUMS:
   FirebaseDatabase: e2bcbc106adc4b11a2da3ec2eb63c0c4a44f2f54
   FirebaseFirestore: eaf0b6244e9463e2429fe216666b641e4dec606b
   FirebaseInstanceID: 78ba376fcd5b94c001f9999b2cbd3d1f1e56e78d
-  Flutter: 58dd7d1b27887414a370fcccb9e645c08ffd7a6a
-  flutter_web_browser: ce28a681222b9f336dbb02cd3b1f885dc007f73c
+  Flutter: 9d0fac939486c9aba2809b7982dfdbb47a7b0296
+  flutter_web_browser: 6a716fdf08f528f7c527eeae1fef13680172bb81
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   GoogleAppMeasurement: 2b3a023a61239c8d002e6e4fcf4abce8eddce0e0
   GoogleUtilities: 760ccb53b7c7f40f9c02d8c241f76f841a7a6162
@@ -248,17 +248,17 @@ SPEC CHECKSUMS:
   gRPC-ProtoRPC: 76f6053639a842e1fb45fa82aa598bf3f4d9f66f
   gRPC-RxLibrary: 3c305f32155024b116b780f389323c73a28197e6
   GTMSessionFetcher: 0c4baf0a73acd0041bf9f71ea018deedab5ea84e
-  image_downloader: e5e747da37f5270b2d549747fcef9d276224d7b1
+  image_downloader: 59b0e3638f0d35234555bb0605791df26b92962b
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
-  location: 3a2eed4dd2fab25e7b7baf2a9efefe82b512d740
+  location: 26c90953ad5916331d0d1d913898779910416487
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
-  package_info: 78cabb3c322943c55d39676f4a5bfc748c01d055
-  path_provider: f96fff6166a8867510d2c25fdcc346327cc4b259
+  package_info: d7c98b64f60add4c2908b9d94d82a45d3c8827ad
+  path_provider: 09407919825bfe3c2deae39453b7a5b44f467873
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
-  share: 7d22fe8baedfe93aefd864bf0b73f29711fbb0a3
-  shared_preferences: 1feebfa37bb57264736e16865e7ffae7fc99b523
-  sqflite: ff1d9da63c06588cc8d1faf7256d741f16989d5a
+  share: 222b5dcc8031238af9d7de91149df65bad1aef75
+  shared_preferences: 5a1d487c427ee18fcd3ea1f2a131569481834b53
+  sqflite: d1612813fa7db7c667bed9f1d1b508deffc56999
 
 PODFILE CHECKSUM: 8c385bd0135977bc39adfc355e443a54346c6d08
 
-COCOAPODS: 1.6.0
+COCOAPODS: 1.5.3
