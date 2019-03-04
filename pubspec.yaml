@@ -28,6 +28,7 @@ dependencies:
   material_search: ^0.2.8
   native_widgets: ^0.1.1+1
   sliver_fab: ^1.0.0
+  persist_theme: ^0.0.3+6
 
   ## Tools
   clipboard_manager: ^0.0.4
