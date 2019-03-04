@@ -13,6 +13,8 @@ class CacheImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return CachedNetworkImage(
       imageUrl: url,
+      height: double.infinity,
+      width: double.infinity,
       errorWidget: (context, url, error) => Icon(
             Icons.cancel,
             size: 32.0,
