@@ -27,8 +27,8 @@ dependencies:
   flutter_swiper: ^1.1.4
   material_search: ^0.2.8
   native_widgets: ^0.1.1+1
-  sliver_fab: ^1.0.0
   persist_theme: ^0.0.3+6
+  sliver_fab: ^1.0.0
 
   ## Tools
   clipboard_manager: ^0.0.4
@@ -39,9 +39,9 @@ dependencies:
   intl: ^0.15.7
   location: ^2.0.0
   package_info: ^0.4.0+1
+  recase: ^2.0.1
   scoped_model: ^1.0.1
   share: ^0.6.0+1
-  recase:
 
   ## Icons
   font_awesome_flutter: ^8.4.0

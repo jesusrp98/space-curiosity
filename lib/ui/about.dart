@@ -71,7 +71,6 @@ class _AboutScreenState extends State<AboutScreen> {
             ),
             onTap: () async => await FlutterWebBrowser.openWebPage(
                   url: Url.authorReddit,
-                  androidToolbarColor: Theme.of(context).primaryColor,
                 ),
           ),
           Separator.divider(height: 0.0, indent: 74.0),

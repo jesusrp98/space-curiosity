@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
-import 'package:persist_theme/data/models/theme_model.dart';
 import 'package:persist_theme/persist_theme.dart';
-import 'package:scoped_model/scoped_model.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:space_news/ui/general/separator.dart';
+
+import 'general/separator.dart';
 
 class SettingsScreen extends StatelessWidget {
   @override

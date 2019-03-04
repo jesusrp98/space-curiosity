@@ -2,9 +2,8 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n_delegate.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:scoped_model/scoped_model.dart';
 import 'package:persist_theme/persist_theme.dart';
-import 'package:space_news/util/colors.dart';
+import 'package:scoped_model/scoped_model.dart';
 
 import 'data/bloc/bloc.dart';
 import 'data/bloc/delegate.dart';
@@ -18,6 +17,7 @@ import 'ui/planets/details/edit.dart';
 import 'ui/planets/screen.dart';
 import 'ui/settings.dart';
 import 'ui/spacex/screen.dart';
+import 'util/colors.dart';
 
 final ThemeModel _theme = ThemeModel(
   type: ThemeType.dark,
