@@ -4,7 +4,7 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:scoped_model/scoped_model.dart';
 
-import '../../../models/spacex/spacex_company.dart';
+import '../../../data/models/spacex/spacex_company.dart';
 import '../../general/achievement_cell.dart';
 import '../../general/cache_image.dart';
 import '../../general/loading_indicator.dart';

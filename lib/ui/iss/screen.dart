@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:scoped_model/scoped_model.dart';
 
-import '../../models/iss/astronauts.dart';
-import '../../models/iss/iss_home.dart';
-import '../../models/iss/pass_time.dart';
-import '../../models/query_model.dart';
+import '../../data/models/iss/astronauts.dart';
+import '../../data/models/iss/iss_home.dart';
+import '../../data/models/iss/pass_time.dart';
+import '../../data/models/models.dart';
 import 'tabs/astronauts.dart';
 import 'tabs/home.dart';
 import 'tabs/pass_times.dart';

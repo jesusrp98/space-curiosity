@@ -66,10 +66,8 @@ class MissionNumber extends StatelessWidget {
       padding: const EdgeInsets.only(right: 6.0),
       child: Text(
         missionNumber,
-        style: Theme.of(context)
-            .textTheme
-            .subhead
-            .copyWith(fontSize: 18.0, color: Theme.of(context).textTheme.caption.color),
+        style: Theme.of(context).textTheme.subhead.copyWith(
+            fontSize: 18.0, color: Theme.of(context).textTheme.caption.color),
         textAlign: TextAlign.center,
       ),
     );
