@@ -22,15 +22,11 @@ class NasaImage {
     this.date,
   });
 
-  // TODO revisar esto
   String get getDate {
-    if (date == null) return DateTime.now().millisecondsSinceEpoch.toString();
-    try {
-      return DateFormat.yMMMMd('en_US').format(date);
-    } catch (e) {
-      print(e);
-      return '';
-    }
+    if (date == null)
+      return DateFormat.yMMMMd().format(date);
+    else
+      return 'Date error';
   }
 
   String getCopyright(context) =>
