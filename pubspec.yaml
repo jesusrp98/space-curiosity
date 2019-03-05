@@ -69,5 +69,6 @@ flutter:
   assets:
     - assets/flutter_i18n/
     - assets/animations/
+    - assets/icons/android/
 
   uses-material-design: true
