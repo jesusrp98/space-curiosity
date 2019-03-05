@@ -91,7 +91,7 @@ class Url {
   static const String githubPage =
       'https://github.com/jesusrp98/space-curiosity';
   static const String email =
-      'mailto:jesusillorp98@gmail.com?subject=Email%20about%20SpaceX%20GO!';
+      'mailto:space.curiosity.app@gmail.com?subject=About%20SpaceX%20GO!';
   static const String flutterPage = 'https://flutter.io/';
 
   // NASA APOD service
