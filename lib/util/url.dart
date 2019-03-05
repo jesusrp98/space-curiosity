@@ -83,16 +83,10 @@ class Url {
   static const String shareDetails = '#spaceCuriosity';
 
   // About page
-  static const Map<String, String> iosLinks = {
-    'reddit': 'https://www.reddit.com/user/SoundDr',
-    'author': 'TODO',
-    'store': 'TODO',
-  };
-  static const Map<String, String> androidLinks = {
-    'reddit': 'https://www.reddit.com/user/jesusrp98',
-    'author': 'https://play.google.com/store/apps/developer?id=Jes%C3%BAs+Rodr%C3%ADguez+P%C3%A9rez',
-    'store': 'https://play.google.com/store/apps/details?id=com.chechu.cherry',
-  };
+  static const List<String> authorsReddit = [
+    'https://www.reddit.com/user/SoundDr',
+    'https://www.reddit.com/user/jesusrp98'
+  ];
 
   static const String githubPage =
       'https://github.com/jesusrp98/space-curiosity';

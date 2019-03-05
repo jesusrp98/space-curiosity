@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
@@ -22,9 +22,6 @@ class _AboutScreenState extends State<AboutScreen> {
     {'name': 'Jesús Rodríguez', 'language': 'English'},
     {'name': 'Jesús Rodríguez', 'language': 'Español'},
   ];
-
-  final Map<String, String> _platformLinks =
-      (Platform.isIOS ? Url.iosLinks : Url.androidLinks);
 
   PackageInfo _packageInfo = PackageInfo(
     appName: 'Unknown',
@@ -80,7 +77,7 @@ class _AboutScreenState extends State<AboutScreen> {
               'about.author.body',
             ),
             onTap: () async => await FlutterWebBrowser.openWebPage(
-                  url: _platformLinks['reddit'],
+                  url: Url.authorsReddit[Random().nextInt(2)],
                   androidToolbarColor: Theme.of(context).primaryColor,
                 ),
           ),
@@ -95,10 +92,10 @@ class _AboutScreenState extends State<AboutScreen> {
               context,
               'about.review.body',
             ),
-            onTap: () async => await FlutterWebBrowser.openWebPage(
-                  url: _platformLinks['store'],
-                  androidToolbarColor: Theme.of(context).primaryColor,
-                ),
+            // onTap: () async => await FlutterWebBrowser.openWebPage(
+            //       url: _platformLinks['store'],
+            //       androidToolbarColor: Theme.of(context).primaryColor,
+            //     ),
           ),
           Separator.divider(height: 0.0, indent: 74.0),
           ListCell(
@@ -113,22 +110,6 @@ class _AboutScreenState extends State<AboutScreen> {
             ),
             onTap: () async => await FlutterWebBrowser.openWebPage(
                   url: Url.email,
-                  androidToolbarColor: Theme.of(context).primaryColor,
-                ),
-          ),
-          Separator.divider(height: 0.0, indent: 74.0),
-          ListCell(
-            leading: const Icon(Icons.apps, size: 42.0),
-            title: FlutterI18n.translate(
-              context,
-              'about.more_apps.title',
-            ),
-            subtitle: FlutterI18n.translate(
-              context,
-              'about.more_apps.body',
-            ),
-            onTap: () async => await FlutterWebBrowser.openWebPage(
-                  url: _platformLinks['author'],
                   androidToolbarColor: Theme.of(context).primaryColor,
                 ),
           ),
@@ -205,7 +186,7 @@ class _AboutScreenState extends State<AboutScreen> {
                   androidToolbarColor: Theme.of(context).primaryColor,
                 ),
           ),
-          Separator.divider(height: 0.0, indent: 74.0),
+          Separator.divider(height: 0.0),
         ]),
       ),
     );
