@@ -15,7 +15,7 @@ class ArticlesScreen extends StatefulWidget {
 }
 
 class _ArticlesScreenState extends State<ArticlesScreen> {
-  final PostBloc _postBloc = PostBloc(httpClient: http.Client());
+  final PostBloc _postBloc = PostBloc(http.Client());
 
   _ArticlesScreenState() {
     _postBloc.dispatch(Fetch());
