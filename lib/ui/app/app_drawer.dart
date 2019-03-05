@@ -15,7 +15,7 @@ class AppDrawer extends StatelessWidget {
               SizedBox(
                 height: 64,
                 width: 64,
-                child: Image.asset('assets/icons/android/playstore-icon.png', ),
+                child: Image.asset('assets/icons/android/playstore-icon.png'),
               ),
               Separator.spacer(width: 16),
               Column(
