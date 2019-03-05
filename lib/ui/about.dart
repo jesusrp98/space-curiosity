@@ -123,6 +123,22 @@ class _AboutScreenState extends State<AboutScreen> {
           ),
           Separator.divider(height: 0.0, indent: 74.0),
           ListCell(
+            leading: const Icon(Icons.apps, size: 42.0),
+            title: FlutterI18n.translate(
+              context,
+              'about.more_apps_rody.title',
+            ),
+            subtitle: FlutterI18n.translate(
+              context,
+              'about.more_apps_rody.body',
+            ),
+            onTap: () async => await FlutterWebBrowser.openWebPage(
+                  url: Url.rodyiOSApps,
+                  androidToolbarColor: Theme.of(context).primaryColor,
+                ),
+          ),
+          Separator.divider(height: 0.0, indent: 74.0),
+          ListCell(
             leading: const Icon(Icons.people_outline, size: 42.0),
             title: FlutterI18n.translate(
               context,

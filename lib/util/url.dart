@@ -84,13 +84,17 @@ class Url {
 
   // About page
   static const String authorReddit = 'https://www.reddit.com/user/jesusrp98';
+  static const String authorRedditRody = 'https://www.reddit.com/user/SoundDr';
   static const String authorStore =
       'https://play.google.com/store/apps/developer?id=Chechu';
   static const String storePage =
       'https://play.google.com/store/apps/details?id=com.chechu.cherry';
-  static const String cherryGithub = 'https://github.com/jesusrp98/spacex-go';
+  static const String rodyiOSApps =
+      "https://itunes.apple.com/us/developer/rody-davis/id1200052810";
+  static const String cherryGithub =
+      'https://github.com/jesusrp98/space-curiosity';
   static const String email =
-      'mailto:jesusillorp98@gmail.com?subject=Email%20about%20SpaceX%20GO!';
+      'mailto:space.curiosity.app@gmail.com?subject=Email%20about%20Space%20Curiosity';
   static const String spacexGithub = 'https://github.com/r-spacex/SpaceX-API';
   static const String internationalSystem =
       'https://en.wikipedia.org/wiki/International_System_of_Units';
