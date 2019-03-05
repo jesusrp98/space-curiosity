@@ -22,12 +22,8 @@ class NasaImage {
     this.date,
   });
 
-  String get getDate {
-    if (date == null)
-      return DateFormat.yMMMMd().format(date);
-    else
-      return 'Date error';
-  }
+  String get getDate =>
+      (date == null) ? 'Date error' : DateFormat.yMMMMd().format(date);
 
   String getCopyright(context) =>
       copyright ?? FlutterI18n.translate(context, 'nasa.no_copyright');
