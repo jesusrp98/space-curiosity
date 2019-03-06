@@ -161,7 +161,7 @@ DEPENDENCIES:
   - clipboard_manager (from `.symlinks/plugins/clipboard_manager/ios`)
   - cloud_firestore (from `.symlinks/plugins/cloud_firestore/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
-  - Flutter (from `.symlinks/flutter/ios`)
+  - Flutter (from `.symlinks/flutter/ios-release`)
   - flutter_web_browser (from `.symlinks/plugins/flutter_web_browser/ios`)
   - image_downloader (from `.symlinks/plugins/image_downloader/ios`)
   - location (from `.symlinks/plugins/location/ios`)
@@ -205,7 +205,7 @@ EXTERNAL SOURCES:
   firebase_core:
     :path: ".symlinks/plugins/firebase_core/ios"
   Flutter:
-    :path: ".symlinks/flutter/ios"
+    :path: ".symlinks/flutter/ios-release"
   flutter_web_browser:
     :path: ".symlinks/plugins/flutter_web_browser/ios"
   image_downloader:
@@ -261,4 +261,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 8c385bd0135977bc39adfc355e443a54346c6d08
 
-COCOAPODS: 1.6.0
+COCOAPODS: 1.6.1
