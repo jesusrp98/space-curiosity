@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:app_review/app_review.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
@@ -92,10 +93,7 @@ class _AboutScreenState extends State<AboutScreen> {
               context,
               'about.review.body',
             ),
-            // onTap: () async => await FlutterWebBrowser.openWebPage(
-            //       url: _platformLinks['store'],
-            //       androidToolbarColor: Theme.of(context).primaryColor,
-            //     ),
+            onTap: () => AppReview.storeListing,
           ),
           Separator.divider(height: 0.0, indent: 74.0),
           ListCell(
