@@ -1,6 +1,7 @@
 {
   "app": {
-    "title": "Curiosidad Espacial"
+    "title": "Curiosidad Espacial",
+    "subtitle": "¡Haz estallar tu curiosidad!"
   },
   "home": {
     "menu": {
@@ -10,30 +11,12 @@
     "page": {
       "fab": "Menú principal",
       "menu": {
-        "spacex": {
-          "title": "SpaceX",
-          "body": "Una historia de halcones y dragones"
-        },
-        "news": {
-          "title": "Últimas noticias",
-          "body": "Titulares espaciales de todo el mundo"
-        },
-        "planets": {
-          "title": "Explorador del Sistema Solar",
-          "body": "Explora cada centímetro de nuestro vecindario"
-        },
-        "iss": {
-          "title": "Estación Espacial Internacional",
-          "body": "El laboratorio flotante más grande del mundo"
-        },
-        "weight": {
-          "title": "Calculador de peso",
-          "body": "¿Cuánto pesarías en Marte?"
-        },
-        "mars": {
-          "title": "Catálogo marciano",
-          "body": "Todo sobre el planeta rojo y sus habitantes"
-        }
+        "spacex": "SpaceX GO!",
+        "news": "Últimas noticias",
+        "planets": "Sistema Solar",
+        "iss": "Estación Espacial Internacional",
+        "weight": "Calculador de peso",
+        "mars": "Catálogo marciano"
       }
     }
   },
@@ -452,6 +435,10 @@
     "translations": {
       "title": "Traducciones",
       "body": "¡Gracias a todos los que han contribuido!"
+    },
+    "more_apps_rody": {
+      "title": "Más de Rody",
+      "body": "Aplicaciones libres bien diseñadas"
     },
     "free_software": {
       "title": "Esto es software libre",

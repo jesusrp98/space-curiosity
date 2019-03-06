@@ -48,7 +48,7 @@ class _AboutScreenState extends State<AboutScreen> {
       appBar: AppBar(
         title: Text(FlutterI18n.translate(
           context,
-          'app.menu.about',
+          'home.menu.about',
         )),
         centerTitle: true,
       ),
@@ -80,6 +80,7 @@ class _AboutScreenState extends State<AboutScreen> {
             onTap: () async => await FlutterWebBrowser.openWebPage(
                   url: Url.authorsReddit[Random().nextInt(2)],
                   androidToolbarColor: Theme.of(context).primaryColor,
+
                 ),
           ),
           Separator.divider(height: 0.0, indent: 74.0),
@@ -150,6 +151,22 @@ class _AboutScreenState extends State<AboutScreen> {
                           borderRadius: BorderRadius.circular(16.0),
                         ),
                       ),
+                ),
+          ),
+          Separator.divider(height: 0.0, indent: 74.0),
+          ListCell(
+            leading: const Icon(Icons.apps, size: 42.0),
+            title: FlutterI18n.translate(
+              context,
+              'about.more_apps_rody.title',
+            ),
+            subtitle: FlutterI18n.translate(
+              context,
+              'about.more_apps_rody.body',
+            ),
+            onTap: () async => await FlutterWebBrowser.openWebPage(
+                  url: Url.rodyiOSApps,
+                  androidToolbarColor: Theme.of(context).primaryColor,
                 ),
           ),
           Separator.divider(height: 0.0, indent: 74.0),

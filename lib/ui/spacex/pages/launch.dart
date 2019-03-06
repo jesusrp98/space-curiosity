@@ -7,12 +7,12 @@ import 'package:scoped_model/scoped_model.dart';
 import 'package:share/share.dart';
 import 'package:sliver_fab/sliver_fab.dart';
 
-import '../../../models/spacex/details_capsule.dart';
-import '../../../models/spacex/details_core.dart';
-import '../../../models/spacex/landpad.dart';
-import '../../../models/spacex/launch.dart';
-import '../../../models/spacex/launchpad.dart';
-import '../../../models/spacex/rocket.dart';
+import '../../../data/models/spacex/details_capsule.dart';
+import '../../../data/models/spacex/details_core.dart';
+import '../../../data/models/spacex/landpad.dart';
+import '../../../data/models/spacex/launch.dart';
+import '../../../data/models/spacex/launchpad.dart';
+import '../../../data/models/spacex/rocket.dart';
 import '../../../util/menu.dart';
 import '../../../util/url.dart';
 import '../../general/cache_image.dart';

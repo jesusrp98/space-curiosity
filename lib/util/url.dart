@@ -93,7 +93,6 @@ class Url {
   static const String email =
       'mailto:space.curiosity.app@gmail.com?subject=About%20Space%20Curiosity';
   static const String flutterPage = 'https://flutter.dev/';
-
   // NASA APOD service
   static const String dailyPicture = '$nasaBaseUrl?api_key=$nasaApiKey';
   static const String morePictures =

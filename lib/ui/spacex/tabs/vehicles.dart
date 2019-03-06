@@ -6,7 +6,7 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:scoped_model/scoped_model.dart';
 
-import '../../../models/spacex/info_vehicle.dart';
+import '../../../data/models/spacex/info_vehicle.dart';
 import '../../general/cache_image.dart';
 import '../../general/hero_image.dart';
 import '../../general/list_cell.dart';

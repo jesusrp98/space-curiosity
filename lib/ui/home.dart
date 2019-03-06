@@ -4,17 +4,12 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
 
-import '../models/nasa/nasa_image.dart';
+import '../data/models/nasa/nasa_image.dart';
 import 'app/app_drawer.dart';
 import 'general/call_error.dart';
 import 'general/photo_card.dart';
 
 class HomeScreen extends StatelessWidget {
-  static final Map<String, String> _menu = {
-    'home.menu.about': '/about',
-    'home.menu.settings': '/settings'
-  };
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,29 +18,11 @@ class HomeScreen extends StatelessWidget {
           FlutterI18n.translate(context, 'app.title'),
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
-        actions: <Widget>[
-          PopupMenuButton<String>(
-            itemBuilder: (_) => _menu.keys
-                .map((string) => PopupMenuItem(
-                      value: string,
-                      child: Text(
-                        FlutterI18n.translate(context, string),
-                      ),
-                    ))
-                .toList(),
-            onSelected: (string) => Navigator.pushNamed(context, _menu[string]),
-          ),
-        ],
         centerTitle: true,
       ),
       body: ContentPage(),
       drawer: AppDrawer(),
     );
-  }
-
-  openPage(BuildContext context, String route) {
-    Navigator.pop(context);
-    Navigator.pushNamed(context, route);
   }
 }
 

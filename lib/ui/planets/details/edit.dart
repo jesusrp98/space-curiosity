@@ -2,7 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'package:space_news/models/planets/celestial_body.dart';
+
+import '../../../data/models/planets/celestial_body.dart';
 
 class AddEditPlanetPage extends StatelessWidget {
   static String routeName = "/add_planet";

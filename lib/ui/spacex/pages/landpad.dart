@@ -5,7 +5,7 @@ import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:latlong/latlong.dart';
 import 'package:scoped_model/scoped_model.dart';
 
-import '../../../models/spacex/landpad.dart';
+import '../../../data/models/spacex/landpad.dart';
 import '../../../util/colors.dart';
 import '../../../util/menu.dart';
 import '../../../util/url.dart';

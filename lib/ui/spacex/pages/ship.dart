@@ -3,7 +3,7 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:share/share.dart';
 
-import '../../../models/spacex/info_ship.dart';
+import '../../../data/models/spacex/info_ship.dart';
 import '../../../util/menu.dart';
 import '../../../util/url.dart';
 import '../../general/cache_image.dart';
