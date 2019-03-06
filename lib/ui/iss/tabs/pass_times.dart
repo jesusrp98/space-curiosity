@@ -6,7 +6,7 @@ import 'package:latlong/latlong.dart';
 import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
 
-import '../../../models/iss/pass_time.dart';
+import '../../../data/models/iss/pass_time.dart';
 import '../../general/list_cell.dart';
 import '../../general/separator.dart';
 

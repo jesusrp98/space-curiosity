@@ -5,11 +5,13 @@ import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:image_downloader/image_downloader.dart';
 import 'package:share/share.dart';
 
-import '../../models/nasa/nasa_image.dart';
+import '../../data/classes/nasa/image.dart';
 import '../general/cache_image.dart';
+import '../general/separator.dart';
 
 class NasaImagePage extends StatelessWidget {
   final NasaImage image;
+
   NasaImagePage(this.image);
 
   @override
@@ -37,7 +39,7 @@ class NasaImagePage extends StatelessWidget {
           ),
           SliverToBoxAdapter(
             child: Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(16),
               child: Column(
                 children: <Widget>[
                   Text(
@@ -45,47 +47,73 @@ class NasaImagePage extends StatelessWidget {
                     style: Theme.of(context).textTheme.headline,
                     textAlign: TextAlign.center,
                   ),
-                  Container(height: 16.0),
+                  Separator.spacer(height: 16),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      Row(
-                        children: <Widget>[
-                          Icon(Icons.copyright, size: 32.0),
-                          Container(width: 8.0),
-                          Text(
-                            image.getCopyright(context),
-                            style: Theme.of(context).textTheme.subhead.copyWith(
-                                  color:
-                                      Theme.of(context).textTheme.caption.color,
-                                ),
-                          ),
-                        ],
+                      Expanded(
+                        flex: 5,
+                        child: Row(children: <Widget>[
+                          const Icon(Icons.copyright, size: 32),
+                          Separator.spacer(width: 8),
+                          Flexible(
+                            child: Text(
+                              image.getCopyright(context),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style:
+                                  Theme.of(context).textTheme.subhead.copyWith(
+                                        color: Theme.of(context)
+                                            .textTheme
+                                            .caption
+                                            .color,
+                                      ),
+                            ),
+                          )
+                        ]),
                       ),
-                      Row(
-                        children: <Widget>[
-                          Text(
-                            image.getDate,
-                            style: Theme.of(context).textTheme.subhead.copyWith(
-                                  color:
-                                      Theme.of(context).textTheme.caption.color,
+                      Expanded(
+                        flex: 5,
+                        child: Align(
+                          alignment: Alignment.centerRight,
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: <Widget>[
+                              Flexible(
+                                child: Text(
+                                  image.getDate,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .subhead
+                                      .copyWith(
+                                        color: Theme.of(context)
+                                            .textTheme
+                                            .caption
+                                            .color,
+                                      ),
                                 ),
+                              ),
+                              Separator.spacer(width: 8),
+                              const Icon(Icons.calendar_today, size: 32),
+                            ],
                           ),
-                          Container(width: 8.0),
-                          Icon(Icons.calendar_today, size: 32.0),
-                        ],
-                      )
+                        ),
+                      ),
                     ],
                   ),
-                  Container(height: 16.0),
+                  Separator.spacer(height: 16),
+                  // TODO add text expander
                   Text(
-                    image.description,
+                    image?.description ?? "",
                     textAlign: TextAlign.justify,
-                    style: Theme.of(context).textTheme.subhead.copyWith(
-                          color: Theme.of(context).textTheme.caption.color,
-                        ),
+                    style: TextStyle(
+                      color: Theme.of(context).textTheme.caption.color,
+                      fontSize: 15,
+                    ),
                   ),
-                  Divider(height: 32.0),
+                  Separator.divider(height: 32),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
@@ -127,24 +155,29 @@ class OptionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      child: Padding(
-        padding: const EdgeInsets.all(6.0),
-        child: Row(
-          children: <Widget>[
-            Icon(icon, size: 32.0),
-            Container(width: 8.0),
-            Text(
-              title,
-              style: Theme.of(context)
-                  .textTheme
-                  .subhead
-                  .copyWith(color: Theme.of(context).textTheme.caption.color),
-            ),
-          ],
+    return Expanded(
+      flex: 1,
+      child: InkWell(
+        child: Padding(
+          padding: const EdgeInsets.all(4),
+          child: Row(
+            children: <Widget>[
+              Icon(icon, size: 32),
+              Separator.spacer(width: 8),
+              Flexible(
+                child: Text(
+                  title,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context).textTheme.subhead.copyWith(
+                      color: Theme.of(context).textTheme.caption.color),
+                ),
+              )
+            ],
+          ),
         ),
+        onTap: onTap,
       ),
-      onTap: onTap,
     );
   }
 }

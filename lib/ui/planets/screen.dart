@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:native_widgets/native_widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
 
-import '../../models/planets/celestial_body.dart';
+import '../../data/models/planets/celestial_body.dart';
 import '../general/hero_image.dart';
 import '../general/list_cell.dart';
 import 'details/edit.dart';
@@ -17,23 +17,28 @@ class SolarSystemScreen extends StatelessWidget {
     return ScopedModel(
       model: planetModel,
       child: Scaffold(
-        appBar: AppBar(title: const Text('Solar System'), centerTitle: true),
-        body: ScopedModelDescendant<PlanetsModel>(
-          builder: (context, child, model) {
-            if (model.isLoading) {
-              model.refresh();
-              return NativeLoadingIndicator(center: true);
-            } else {
-              return Scrollbar(
-                  child: ListView.builder(
-                    key: PageStorageKey('planets'),
-                    itemCount: model.getItemCount,
-                    itemBuilder: _buildItem,
-                  ),
-                );
-            }
-          }
+        appBar: AppBar(
+          title: const Text(
+            'Solar System',
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          centerTitle: true,
         ),
+        body: ScopedModelDescendant<PlanetsModel>(
+            builder: (context, child, model) {
+          if (model.isLoading) {
+            model.refresh();
+            return NativeLoadingIndicator(center: true);
+          } else {
+            return Scrollbar(
+              child: ListView.builder(
+                key: PageStorageKey('planets'),
+                itemCount: model.getItemCount,
+                itemBuilder: _buildItem,
+              ),
+            );
+          }
+        }),
         floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.add),
           onPressed: () => Navigator.push(

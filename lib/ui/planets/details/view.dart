@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 
-import '../../../models/planets/celestial_body.dart';
+import '../../../data/models/planets/celestial_body.dart';
 import '../../general/card_page.dart';
 import '../../general/head_card_page.dart';
 import '../../general/hero_image.dart';
