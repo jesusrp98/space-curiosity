@@ -87,21 +87,11 @@ class Url {
     'https://www.reddit.com/user/SoundDr',
     'https://www.reddit.com/user/jesusrp98'
   ];
-  
-  static const List<String> authorsTwitter = [
-    'https://www.twitter.com/RodyDavis',
-    'https://www.twitter.com/jesusrp98'
-  ];
-  
-  static const List<String> authorsGithub = [
-    'https://github.com/AppleEducate',
-    'https://github.com/jesusrp98'
-  ];
 
   static const String githubPage =
       'https://github.com/jesusrp98/space-curiosity';
   static const String email =
-      'mailto:space.curiosity.app@gmail.com?subject=About%20SpaceX%20Curiosity';
+      'mailto:space.curiosity.app@gmail.com?subject=About%20Space%20Curiosity';
   static const String flutterPage = 'https://flutter.dev/';
 
   // NASA APOD service
