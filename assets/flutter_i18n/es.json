@@ -417,24 +417,24 @@
   },
   "about": {
     "version": {
-      "title": "Sobre SpaceX GO!",
+      "title": "Sobre Curiosidad Espacial",
       "body": "v{version} - {status}"
     },
     "author": {
-      "title": "Creada por Jesús Rodríguez",
-      "body": "Puedes encontrarme en Reddit"
+      "title": "Por Rody Davis y Jesús Rguez.",
+      "body": "Puedes encontrarnos en Reddit"
     },
     "review": {
       "title": "¿Disfrutando de la aplicación?",
       "body": "Deja tu experiencia en la página de la tienda"
     },
     "email": {
-      "title": "Envíame un correo",
+      "title": "Envía un correo",
       "body": "Reporta fallos o solicita nuevas funciones"
     },
-    "more_apps": {
-      "title": "Más de Chechu",
-      "body": "Aplicaciones libres bien diseñadas"
+    "translations": {
+      "title": "Traducciones",
+      "body": "¡Gracias a todos los que han contribuido!"
     },
     "more_apps_rody": {
       "title": "Más de Rody",
@@ -447,18 +447,6 @@
     "flutter": {
       "title": "Construida con Flutter",
       "body": "Aplicaciones nativas en tiempo record"
-    },
-    "imperial_units": {
-      "title": "¿Dónde están las unidades imperiales?",
-      "body": "Aprenda más sobre el 'Sistema Internacional'"
-    },
-    "credits": {
-      "title": "Créditos",
-      "body": "Usando la API gratuita de r/SpaceX"
-    },
-    "spacex": {
-      "title": "SpaceX es una marca registrada",
-      "body": "Esta aplciación no está afiliada con SpaceX"
     }
   },
   "settings": {

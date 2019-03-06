@@ -80,26 +80,29 @@ class Url {
       'https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png';
 
   // Share details message
-  static const String shareDetails = '#spaceCuriosity $storePage';
+  static const String shareDetails = '#spaceCuriosity';
 
   // About page
-  static const String authorReddit = 'https://www.reddit.com/user/jesusrp98';
-  static const String authorRedditRody = 'https://www.reddit.com/user/SoundDr';
-  static const String authorStore =
-      'https://play.google.com/store/apps/developer?id=Chechu';
-  static const String storePage =
-      'https://play.google.com/store/apps/details?id=com.chechu.cherry';
-  static const String rodyiOSApps =
-      "https://itunes.apple.com/us/developer/rody-davis/id1200052810";
-  static const String cherryGithub =
+  static const List<String> authorsReddit = [
+    'https://www.reddit.com/user/SoundDr',
+    'https://www.reddit.com/user/jesusrp98'
+  ];
+  
+  static const List<String> authorsTwitter = [
+    'https://www.twitter.com/RodyDavis',
+    'https://www.twitter.com/jesusrp98'
+  ];
+  
+  static const List<String> authorsGithub = [
+    'https://github.com/AppleEducate',
+    'https://github.com/jesusrp98'
+  ];
+
+  static const String githubPage =
       'https://github.com/jesusrp98/space-curiosity';
   static const String email =
-      'mailto:space.curiosity.app@gmail.com?subject=Email%20about%20Space%20Curiosity';
-  static const String spacexGithub = 'https://github.com/r-spacex/SpaceX-API';
-  static const String internationalSystem =
-      'https://en.wikipedia.org/wiki/International_System_of_Units';
-  static const String spacexPage = 'https://www.spacex.com/';
-  static const String flutterPage = 'https://flutter.io/';
+      'mailto:space.curiosity.app@gmail.com?subject=About%20Space%20Curiosity';
+  static const String flutterPage = 'https://flutter.dev/';
 
   // NASA APOD service
   static const String dailyPicture = '$nasaBaseUrl?api_key=$nasaApiKey';
