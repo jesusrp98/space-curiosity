@@ -17,7 +17,7 @@ dependencies:
   webfeed: ^0.4.2
 
   ## Offline
-  cached_network_image: ^0.6.2
+  # cached_network_image: ^0.6.2
   shared_preferences: ^0.5.1+1
 
   ## Widgets
