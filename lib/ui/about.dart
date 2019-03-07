@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'dart:io';
 
 import 'package:app_review/app_review.dart';
 import 'package:flutter/material.dart';
@@ -35,6 +36,7 @@ class _AboutScreenState extends State<AboutScreen> {
   initState() {
     super.initState();
     _initPackageInfo();
+    if (Platform.isIOS) AppReview.requestReview;
   }
 
   Future<Null> _initPackageInfo() async {
@@ -80,7 +82,6 @@ class _AboutScreenState extends State<AboutScreen> {
             onTap: () async => await FlutterWebBrowser.openWebPage(
                   url: Url.authorsReddit[Random().nextInt(2)],
                   androidToolbarColor: Theme.of(context).primaryColor,
-
                 ),
           ),
           Separator.divider(height: 0.0, indent: 74.0),
@@ -151,22 +152,6 @@ class _AboutScreenState extends State<AboutScreen> {
                           borderRadius: BorderRadius.circular(16.0),
                         ),
                       ),
-                ),
-          ),
-          Separator.divider(height: 0.0, indent: 74.0),
-          ListCell(
-            leading: const Icon(Icons.apps, size: 42.0),
-            title: FlutterI18n.translate(
-              context,
-              'about.more_apps_rody.title',
-            ),
-            subtitle: FlutterI18n.translate(
-              context,
-              'about.more_apps_rody.body',
-            ),
-            onTap: () async => await FlutterWebBrowser.openWebPage(
-                  url: Url.rodyiOSApps,
-                  androidToolbarColor: Theme.of(context).primaryColor,
                 ),
           ),
           Separator.divider(height: 0.0, indent: 74.0),

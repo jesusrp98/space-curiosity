@@ -11,22 +11,22 @@ class CacheImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   try {
+    try {
       return Image.network(
-      url.replaceAll("file://", ""),
-      height: double.infinity,
-      width: double.infinity,
-      // errorWidget: (context, url, error) => Icon(
-      //       Icons.cancel,
-      //       size: 32.0,
-      //       color: Theme.of(context).textTheme.caption.color,
-      //     ),
-      // fadeInDuration: Duration(milliseconds: 100),
-      fit: BoxFit.cover,
-    );
-   } catch (e) {
-     print("Error Loading Image => $e");
-     return Container();
-   }
+        url.replaceAll("file://", ""),
+        height: double.infinity,
+        width: double.infinity,
+        // errorWidget: (context, url, error) => Icon(
+        //       Icons.cancel,
+        //       size: 32.0,
+        //       color: Theme.of(context).textTheme.caption.color,
+        //     ),
+        // fadeInDuration: Duration(milliseconds: 100),
+        fit: BoxFit.cover,
+      );
+    } catch (e) {
+      print("Error Loading Image => $e");
+      return Container();
+    }
   }
 }
