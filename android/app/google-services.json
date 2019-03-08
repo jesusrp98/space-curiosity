@@ -8,9 +8,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:297288234548:android:9871fee4d7ec8e1c",
+        "mobilesdk_app_id": "1:297288234548:android:66b771927af086e2",
         "android_client_info": {
-          "package_name": "com.chechu.spacenews"
+          "package_name": "com.chechu.curiosity"
         }
       },
       "oauth_client": [

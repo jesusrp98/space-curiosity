@@ -1,4 +1,4 @@
-package com.chechu.spacenews
+package com.chechu.curiosity
 
 import android.os.Bundle
 
