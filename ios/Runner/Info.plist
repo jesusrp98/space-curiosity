@@ -21,7 +21,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>25</string>
+	<string>29</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSRequiresIPhoneOS</key>
@@ -30,6 +30,8 @@
 	<string>Adding Launch Events</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Needed for ISS Module</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Used for tracking the ISS to your location</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>Used to Download Images</string>
 	<key>NSPhotoLibraryUsageDescription</key>

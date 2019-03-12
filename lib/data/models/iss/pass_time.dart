@@ -29,7 +29,9 @@ class PassTimesModel extends QueryModel {
     // Parse if permission are granted
     try {
       // Get user's location
+      print("Getting Location...");
       _userLocation = await Location().getLocation();
+      print("Location: ${_userLocation.toString()}");
       // Get items by http call & parse them
       response = await http.get(
         '${Url.issPassTimes}?lat=${_userLocation.latitude}&lon=${_userLocation.longitude}&n=10',
@@ -40,6 +42,7 @@ class PassTimesModel extends QueryModel {
       );
     } on PlatformException {
       _userLocation = null;
+      print("Error getting location");
     }
 
     // Finished loading data
