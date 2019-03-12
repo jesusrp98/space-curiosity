@@ -8,7 +8,7 @@ import '../../data/models/spacex/info_vehicle.dart';
 import '../../data/models/spacex/launch.dart';
 import '../../data/models/spacex/spacex_company.dart';
 import '../../data/models/spacex/spacex_home.dart';
-import '../iss/tabs/home.dart';
+import '../spacex/tabs/home.dart';
 import 'tabs/company.dart';
 import 'tabs/launches.dart';
 import 'tabs/vehicles.dart';

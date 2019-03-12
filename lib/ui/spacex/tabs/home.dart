@@ -9,7 +9,6 @@ import '../../../data/models/spacex/details_capsule.dart';
 import '../../../data/models/spacex/details_core.dart';
 import '../../../data/models/spacex/launchpad.dart';
 import '../../../data/models/spacex/spacex_home.dart';
-import '../../../util/menu.dart';
 import '../../general/dialog_round.dart';
 import '../../general/header_swiper.dart';
 import '../../general/list_cell.dart';
@@ -48,22 +47,6 @@ class HomeTab extends StatelessWidget {
                       header: model.isLoading
                           ? LoadingIndicator()
                           : SwiperHeader(list: model.photos),
-                      actions: <Widget>[
-                        PopupMenuButton<String>(
-                          itemBuilder: (_) => Menu.home.keys
-                              .map((string) => PopupMenuItem(
-                                    value: string,
-                                    child: Text(
-                                      FlutterI18n.translate(context, string),
-                                    ),
-                                  ))
-                              .toList(),
-                          onSelected: (string) => Navigator.pushNamed(
-                                context,
-                                Menu.home[string],
-                              ),
-                        ),
-                      ],
                     ),
                     model.isLoading
                         ? SliverFillRemaining(child: LoadingIndicator())
