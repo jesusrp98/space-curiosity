@@ -4,8 +4,9 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 
+import '../../../util/photos.dart';
 import '../../../util/url.dart';
-import '../models.dart';
+import '../../classes/abstract/query_model.dart';
 
 /// SPACEX-AS-A-COMPAMY MODEL
 /// General information about SpaceX's company data.
@@ -32,7 +33,7 @@ class SpacexCompanyModel extends QueryModel {
 
     // Add photos & shuffle them
     if (photos.isEmpty) {
-      photos.addAll(Url.spacexCompanyScreen);
+      photos.addAll(SpaceXPhotos.spacexCompanyScreen);
       photos.shuffle();
     }
 
@@ -99,15 +100,7 @@ class Company {
 
   String get getEmployees => NumberFormat.decimalPattern().format(employees);
 
-  List<String> getMenu(context) => <String>[
-        FlutterI18n.translate(context, 'spacex.company.menu.website'),
-        FlutterI18n.translate(context, 'spacex.company.menu.twitter'),
-        FlutterI18n.translate(context, 'spacex.company.menu.flickr')
-      ];
-
-  int getMenuIndex(context, url) => getMenu(context).indexOf(url);
-
-  String getUrl(context, name) => links[getMenuIndex(context, name)];
+  String getUrl(int index) => links[index];
 }
 
 /// SPACEX'S ACHIEVMENT MODEL
