@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:share/share.dart';
 
@@ -9,8 +8,11 @@ import '../../../util/menu.dart';
 import '../../../util/url.dart';
 import '../../general/cache_image.dart';
 import '../../general/card_page.dart';
+import '../../general/expand_widget.dart';
+import '../../general/header_swiper.dart';
 import '../../general/row_item.dart';
 import '../../general/separator.dart';
+import '../../general/sliver_bar.dart';
 
 /// ROCKET PAGE VIEW
 /// This view all information about a Falcon rocket model. It displays RocketInfo's specs.
@@ -23,10 +25,15 @@ class RocketPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: CustomScrollView(slivers: <Widget>[
-        SliverAppBar(
-          expandedHeight: MediaQuery.of(context).size.height * 0.3,
-          floating: false,
-          pinned: true,
+        SliverBar(
+          title: Text(_rocket.name),
+          header: SwiperHeader(
+            list: _rocket.photos,
+            builder: (_, index) {
+              final CacheImage photo = CacheImage(_rocket.getPhoto(index));
+              return index == 0 ? Hero(tag: _rocket.id, child: photo) : photo;
+            },
+          ),
           actions: <Widget>[
             IconButton(
               icon: const Icon(Icons.share),
@@ -64,28 +71,10 @@ class RocketPage extends StatelessWidget {
                   ),
             ),
           ],
-          flexibleSpace: FlexibleSpaceBar(
-            centerTitle: true,
-            title: Text(_rocket.name),
-            background: Swiper(
-              itemCount: _rocket.getPhotosCount,
-              itemBuilder: (_, index) {
-                final CacheImage photo = CacheImage(_rocket.getPhoto(index));
-                return index == 0 ? Hero(tag: _rocket.id, child: photo) : photo;
-              },
-              autoplay: true,
-              autoplayDelay: 6000,
-              duration: 750,
-              onTap: (index) async => await FlutterWebBrowser.openWebPage(
-                    url: _rocket.getPhoto(index),
-                    androidToolbarColor: Theme.of(context).primaryColor,
-                  ),
-            ),
-          ),
         ),
         SliverToBoxAdapter(
           child: Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(16),
             child: Column(children: <Widget>[
               _rocketCard(context),
               Separator.cardSpacer(),
@@ -147,12 +136,12 @@ class RocketPage extends StatelessWidget {
           _rocket.active,
         ),
         Separator.divider(),
-        Text(
-          _rocket.description,
-          textAlign: TextAlign.justify,
+        TextExpand(
+          text: _rocket.description,
+          maxLength: 7,
           style: TextStyle(
-            fontSize: 15.0,
             color: Theme.of(context).textTheme.caption.color,
+            fontSize: 15,
           ),
         )
       ]),
