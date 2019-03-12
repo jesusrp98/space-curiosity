@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import '../../../data/models/spacex/details_core.dart';
 import '../../../data/models/spacex/mission_item.dart';
-import '../../general/cache_image.dart';
+import '../../general/expand_widget.dart';
+import '../../general/header_swiper.dart';
 import '../../general/loading_indicator.dart';
 import '../../general/row_item.dart';
 import '../../general/separator.dart';
+import '../../general/sliver_bar.dart';
 
 /// CORE DIALOG VIEW
 /// This view displays information about a specific core,
@@ -20,35 +20,15 @@ class CoreDialog extends StatelessWidget {
     return ScopedModelDescendant<CoreModel>(
       builder: (context, child, model) => Scaffold(
             body: CustomScrollView(slivers: <Widget>[
-              SliverAppBar(
-                expandedHeight: MediaQuery.of(context).size.height * 0.3,
-                floating: false,
-                pinned: true,
-                flexibleSpace: FlexibleSpaceBar(
-                  centerTitle: true,
-                  title: Text(FlutterI18n.translate(
-                    context,
-                    'spacex.dialog.vehicle.title_core',
-                    {'serial': model.id},
-                  )),
-                  background: model.isLoading
-                      ? LoadingIndicator()
-                      : Swiper(
-                          itemCount: model.getPhotosCount,
-                          itemBuilder: (_, index) => CacheImage(
-                                model.getPhoto(index),
-                              ),
-                          autoplay: true,
-                          autoplayDelay: 6000,
-                          duration: 750,
-                          onTap: (index) async =>
-                              await FlutterWebBrowser.openWebPage(
-                                url: model.getPhoto(index),
-                                androidToolbarColor:
-                                    Theme.of(context).primaryColor,
-                              ),
-                        ),
-                ),
+              SliverBar(
+                title: Text(FlutterI18n.translate(
+                  context,
+                  'spacex.dialog.vehicle.title_core',
+                  {'serial': model.id},
+                )),
+                header: model.isLoading
+                    ? LoadingIndicator()
+                    : SwiperHeader(list: model.photos),
               ),
               model.isLoading
                   ? SliverFillRemaining(child: LoadingIndicator())
@@ -61,7 +41,7 @@ class CoreDialog extends StatelessWidget {
   Widget _buildBody() {
     return ScopedModelDescendant<CoreModel>(
       builder: (context, child, model) => Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(16),
             child: Column(children: <Widget>[
               RowItem.textRow(
                 context,
@@ -131,14 +111,14 @@ class CoreDialog extends StatelessWidget {
                       Separator.divider(),
                     ])
                   : Separator.none(),
-              Text(
-                model.core.getDetails(context),
-                textAlign: TextAlign.justify,
-                style: Theme.of(context)
-                    .textTheme
-                    .subhead
-                    .copyWith(color: Theme.of(context).textTheme.caption.color),
-              ),
+              TextExpand(
+                text: model.core.getDetails(context),
+                maxLength: 8,
+                style: TextStyle(
+                  color: Theme.of(context).textTheme.caption.color,
+                  fontSize: 15,
+                ),
+              )
             ]),
           ),
     );

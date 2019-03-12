@@ -1,7 +1,6 @@
 import 'package:add_2_calendar/add_2_calendar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:share/share.dart';
@@ -15,13 +14,14 @@ import '../../../data/models/spacex/launchpad.dart';
 import '../../../data/models/spacex/rocket.dart';
 import '../../../util/menu.dart';
 import '../../../util/url.dart';
-import '../../general/cache_image.dart';
 import '../../general/card_page.dart';
+import '../../general/expand_widget.dart';
 import '../../general/head_card_page.dart';
+import '../../general/header_swiper.dart';
 import '../../general/hero_image.dart';
-import '../../general/row_expand.dart';
 import '../../general/row_item.dart';
 import '../../general/separator.dart';
+import '../../general/sliver_bar.dart';
 import 'capsule.dart';
 import 'core.dart';
 import 'landpad.dart';
@@ -75,10 +75,21 @@ class LaunchPage extends StatelessWidget {
                           )),
                     ),
               slivers: <Widget>[
-                SliverAppBar(
-                  expandedHeight: MediaQuery.of(context).size.height * 0.3,
-                  floating: false,
-                  pinned: true,
+                SliverBar(
+                  // Using title clipping, because Flutter doesn't do this automatically.
+                  // Open issue: [https://github.com/flutter/flutter/issues/14227]
+                  title: ConstrainedBox(
+                    child: Text(
+                      _launch.name,
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.center,
+                      maxLines: 1,
+                    ),
+                    constraints: BoxConstraints(
+                      maxWidth: MediaQuery.of(context).size.width * 0.6,
+                    ),
+                  ),
+                  header: SwiperHeader(list: _launch.photos),
                   actions: <Widget>[
                     IconButton(
                       icon: const Icon(Icons.share),
@@ -120,40 +131,10 @@ class LaunchPage extends StatelessWidget {
                           ),
                     ),
                   ],
-                  flexibleSpace: FlexibleSpaceBar(
-                    centerTitle: true,
-                    // Using title clipping, because Flutter doesn't do this automatically.
-                    // Open issue: [https://github.com/flutter/flutter/issues/14227]
-                    title: ConstrainedBox(
-                      child: Text(
-                        _launch.name,
-                        overflow: TextOverflow.ellipsis,
-                        textAlign: TextAlign.center,
-                        maxLines: 1,
-                      ),
-                      constraints: BoxConstraints(
-                        maxWidth: MediaQuery.of(context).size.width * 0.6,
-                      ),
-                    ),
-                    background: Swiper(
-                      itemCount: _launch.getPhotosCount,
-                      itemBuilder: (_, index) => CacheImage(
-                            _launch.getPhoto(index),
-                          ),
-                      autoplay: true,
-                      autoplayDelay: 6000,
-                      duration: 750,
-                      onTap: (index) async =>
-                          await FlutterWebBrowser.openWebPage(
-                            url: _launch.getPhoto(index),
-                            androidToolbarColor: Theme.of(context).primaryColor,
-                          ),
-                    ),
-                  ),
                 ),
                 SliverToBoxAdapter(
                   child: Padding(
-                    padding: const EdgeInsets.all(16.0),
+                    padding: const EdgeInsets.all(16),
                     child: Column(children: <Widget>[
                       _missionCard(context),
                       Separator.cardSpacer(),
@@ -288,13 +269,14 @@ class LaunchPage extends StatelessWidget {
                   _launch.failureDetails.getAltitude(context),
                 ),
                 Separator.spacer(),
-                Text(
-                  _launch.failureDetails.getReason,
-                  textAlign: TextAlign.justify,
-                  style: Theme.of(context).textTheme.subhead.copyWith(
-                        color: Theme.of(context).textTheme.caption.color,
-                      ),
-                ),
+                TextExpand(
+                  text: _launch.failureDetails.getReason,
+                  maxLength: 5,
+                  style: TextStyle(
+                    color: Theme.of(context).textTheme.caption.color,
+                    fontSize: 15,
+                  ),
+                )
               ])
             : Separator.none(),
         Column(
