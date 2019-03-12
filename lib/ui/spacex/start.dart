@@ -3,17 +3,17 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:scoped_model/scoped_model.dart';
 
-import '../../data/models/models.dart';
+import '../../data/classes/abstract/query_model.dart';
 import '../../data/models/spacex/info_vehicle.dart';
 import '../../data/models/spacex/launch.dart';
 import '../../data/models/spacex/spacex_company.dart';
 import '../../data/models/spacex/spacex_home.dart';
+import '../iss/tabs/home.dart';
 import 'tabs/company.dart';
-import 'tabs/home.dart';
 import 'tabs/launches.dart';
 import 'tabs/vehicles.dart';
 
-/// SPACEX SCREEN
+/// START SCREEN
 /// This view holds all tabs & its models: home, vehicles, upcoming & latest launches, & company tabs.
 class SpaceXScreen extends StatefulWidget {
   @override
@@ -57,6 +57,8 @@ class _SpaceXScreenState extends State<SpaceXScreen> {
   @override
   initState() {
     super.initState();
+
+    // Initializing each tab
     _modelTab.forEach((model) => model.loadData());
   }
 
