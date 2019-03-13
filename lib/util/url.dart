@@ -45,7 +45,7 @@ class Url {
   ];
 
   static const List<String> authorsStore = [
-    'https://play.google.com/store/apps/developer?id=Rhodes+Davis',
+    'https://itunes.apple.com/us/developer/rody-davis/id1200052810',
     'https://play.google.com/store/apps/developer?id=Jes%C3%BAs+Rodr%C3%ADguez+P%C3%A9rez'
   ];
 
