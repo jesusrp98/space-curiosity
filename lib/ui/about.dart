@@ -56,147 +56,145 @@ class _AboutScreenState extends State<AboutScreen> {
         )),
         centerTitle: true,
       ),
-      body: Scrollbar(
-        child: ListView(children: <Widget>[
-          ListCell(
-            leading: const Icon(Icons.info_outline, size: 40),
-            title: FlutterI18n.translate(
-              context,
-              'about.version.title',
-            ),
-            subtitle: FlutterI18n.translate(
-              context,
-              'about.version.body',
-              {'version': _packageInfo.version, 'status': 'beta'},
-            ),
+      body: ListView(children: <Widget>[
+        ListCell(
+          leading: const Icon(Icons.info_outline, size: 40),
+          title: FlutterI18n.translate(
+            context,
+            'about.version.title',
           ),
-          Separator.divider(height: 0, indent: 72),
-          ListCell(
-            leading: const Icon(Icons.person_outline, size: 40),
-            title: FlutterI18n.translate(
-              context,
-              'about.author.title',
-            ),
-            subtitle: FlutterI18n.translate(
-              context,
-              'about.author.body',
-            ),
-            onTap: () async => await FlutterWebBrowser.openWebPage(
-                  url: Url.authorsReddit[Random().nextInt(2)],
-                  androidToolbarColor: Theme.of(context).primaryColor,
-                ),
+          subtitle: FlutterI18n.translate(
+            context,
+            'about.version.body',
+            {'version': _packageInfo.version, 'status': 'beta'},
           ),
-          Separator.divider(height: 0, indent: 72),
-          ListCell(
-            leading: const Icon(Icons.star_border, size: 40),
-            title: FlutterI18n.translate(
-              context,
-              'about.review.title',
-            ),
-            subtitle: FlutterI18n.translate(
-              context,
-              'about.review.body',
-            ),
-            onTap: () => AppReview.storeListing,
+        ),
+        Separator.divider(height: 0, indent: 72),
+        ListCell(
+          leading: const Icon(Icons.person_outline, size: 40),
+          title: FlutterI18n.translate(
+            context,
+            'about.author.title',
           ),
-          Separator.divider(height: 0, indent: 72),
-          ListCell(
-            leading: const Icon(Icons.mail_outline, size: 40),
-            title: FlutterI18n.translate(
-              context,
-              'about.email.title',
-            ),
-            subtitle: FlutterI18n.translate(
-              context,
-              'about.email.body',
-            ),
-            onTap: () async => await FlutterMailer.send(MailOptions(
-                  subject: Url.email['subject'],
-                  recipients: [Url.email['address']],
-                )),
+          subtitle: FlutterI18n.translate(
+            context,
+            'about.author.body',
           ),
-          Separator.divider(height: 0, indent: 72),
-          ListCell(
-            leading: const Icon(Icons.apps, size: 40),
-            title: FlutterI18n.translate(
-              context,
-              'about.more_apps.title',
-            ),
-            subtitle: FlutterI18n.translate(
-              context,
-              'about.more_apps.body',
-            ),
-            onTap: () async => await FlutterWebBrowser.openWebPage(
-                  url: Url.authorsStore[Random().nextInt(2)],
-                  androidToolbarColor: Theme.of(context).primaryColor,
-                ),
+          onTap: () async => await FlutterWebBrowser.openWebPage(
+                url: Url.authorsReddit[Random().nextInt(2)],
+                androidToolbarColor: Theme.of(context).primaryColor,
+              ),
+        ),
+        Separator.divider(height: 0, indent: 72),
+        ListCell(
+          leading: const Icon(Icons.star_border, size: 40),
+          title: FlutterI18n.translate(
+            context,
+            'about.review.title',
           ),
-          Separator.divider(height: 0, indent: 72),
-          ListCell(
-            leading: const Icon(Icons.public, size: 40),
-            title: FlutterI18n.translate(
-              context,
-              'about.translations.title',
-            ),
-            subtitle: FlutterI18n.translate(
-              context,
-              'about.translations.body',
-            ),
-            onTap: () => showDialog(
-                  context: context,
-                  builder: (context) => RoundDialog(
-                        title: FlutterI18n.translate(
-                          context,
-                          'about.translations.title',
-                        ),
-                        children: _translators
-                            .map((translation) => ListCell(
-                                  title: translation['name'],
-                                  subtitle: translation['language'],
-                                  contentPadding: const EdgeInsets.symmetric(
-                                    vertical: 0,
-                                    horizontal: 24,
-                                  ),
-                                ))
-                            .toList(),
+          subtitle: FlutterI18n.translate(
+            context,
+            'about.review.body',
+          ),
+          onTap: () => AppReview.storeListing,
+        ),
+        Separator.divider(height: 0, indent: 72),
+        ListCell(
+          leading: const Icon(Icons.mail_outline, size: 40),
+          title: FlutterI18n.translate(
+            context,
+            'about.email.title',
+          ),
+          subtitle: FlutterI18n.translate(
+            context,
+            'about.email.body',
+          ),
+          onTap: () async => await FlutterMailer.send(MailOptions(
+                subject: Url.email['subject'],
+                recipients: [Url.email['address']],
+              )),
+        ),
+        Separator.divider(height: 0, indent: 72),
+        ListCell(
+          leading: const Icon(Icons.apps, size: 40),
+          title: FlutterI18n.translate(
+            context,
+            'about.more_apps.title',
+          ),
+          subtitle: FlutterI18n.translate(
+            context,
+            'about.more_apps.body',
+          ),
+          onTap: () async => await FlutterWebBrowser.openWebPage(
+                url: Url.authorsStore[Platform.isIOS ? 0 : 1],
+                androidToolbarColor: Theme.of(context).primaryColor,
+              ),
+        ),
+        Separator.divider(height: 0, indent: 72),
+        ListCell(
+          leading: const Icon(Icons.public, size: 40),
+          title: FlutterI18n.translate(
+            context,
+            'about.translations.title',
+          ),
+          subtitle: FlutterI18n.translate(
+            context,
+            'about.translations.body',
+          ),
+          onTap: () => showDialog(
+                context: context,
+                builder: (context) => RoundDialog(
+                      title: FlutterI18n.translate(
+                        context,
+                        'about.translations.title',
                       ),
-                ),
+                      children: _translators
+                          .map((translation) => ListCell(
+                                title: translation['name'],
+                                subtitle: translation['language'],
+                                contentPadding: const EdgeInsets.symmetric(
+                                  vertical: 0,
+                                  horizontal: 24,
+                                ),
+                              ))
+                          .toList(),
+                    ),
+              ),
+        ),
+        Separator.divider(height: 0, indent: 72),
+        ListCell(
+          leading: const Icon(Icons.people_outline, size: 40),
+          title: FlutterI18n.translate(
+            context,
+            'about.free_software.title',
           ),
-          Separator.divider(height: 0, indent: 72),
-          ListCell(
-            leading: const Icon(Icons.people_outline, size: 40),
-            title: FlutterI18n.translate(
-              context,
-              'about.free_software.title',
-            ),
-            subtitle: FlutterI18n.translate(
-              context,
-              'about.free_software.body',
-            ),
-            onTap: () async => await FlutterWebBrowser.openWebPage(
-                  url: Url.githubPage,
-                  androidToolbarColor: Theme.of(context).primaryColor,
-                ),
+          subtitle: FlutterI18n.translate(
+            context,
+            'about.free_software.body',
           ),
-          Separator.divider(height: 0, indent: 72),
-          ListCell(
-            leading: const Icon(Icons.code, size: 40),
-            title: FlutterI18n.translate(
-              context,
-              'about.flutter.title',
-            ),
-            subtitle: FlutterI18n.translate(
-              context,
-              'about.flutter.body',
-            ),
-            onTap: () async => await FlutterWebBrowser.openWebPage(
-                  url: Url.flutterPage,
-                  androidToolbarColor: Theme.of(context).primaryColor,
-                ),
+          onTap: () async => await FlutterWebBrowser.openWebPage(
+                url: Url.githubPage,
+                androidToolbarColor: Theme.of(context).primaryColor,
+              ),
+        ),
+        Separator.divider(height: 0, indent: 72),
+        ListCell(
+          leading: const Icon(Icons.code, size: 40),
+          title: FlutterI18n.translate(
+            context,
+            'about.flutter.title',
           ),
-          Separator.divider(height: 0),
-        ]),
-      ),
+          subtitle: FlutterI18n.translate(
+            context,
+            'about.flutter.body',
+          ),
+          onTap: () async => await FlutterWebBrowser.openWebPage(
+                url: Url.flutterPage,
+                androidToolbarColor: Theme.of(context).primaryColor,
+              ),
+        ),
+        Separator.divider(height: 0),
+      ]),
     );
   }
 }
