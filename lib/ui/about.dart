@@ -1,13 +1,15 @@
-import 'dart:math';
 import 'dart:io';
+import 'dart:math';
 
 import 'package:app_review/app_review.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
+import 'package:flutter_mailer/flutter_mailer.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:package_info/package_info.dart';
 
 import '../util/url.dart';
+import 'general/dialog_round.dart';
 import 'general/list_cell.dart';
 import 'general/separator.dart';
 
@@ -57,7 +59,7 @@ class _AboutScreenState extends State<AboutScreen> {
       body: Scrollbar(
         child: ListView(children: <Widget>[
           ListCell(
-            leading: const Icon(Icons.info_outline, size: 42.0),
+            leading: const Icon(Icons.info_outline, size: 40),
             title: FlutterI18n.translate(
               context,
               'about.version.title',
@@ -68,9 +70,9 @@ class _AboutScreenState extends State<AboutScreen> {
               {'version': _packageInfo.version, 'status': 'beta'},
             ),
           ),
-          Separator.divider(height: 0.0, indent: 74.0),
+          Separator.divider(height: 0, indent: 72),
           ListCell(
-            leading: const Icon(Icons.person_outline, size: 42.0),
+            leading: const Icon(Icons.person_outline, size: 40),
             title: FlutterI18n.translate(
               context,
               'about.author.title',
@@ -84,9 +86,9 @@ class _AboutScreenState extends State<AboutScreen> {
                   androidToolbarColor: Theme.of(context).primaryColor,
                 ),
           ),
-          Separator.divider(height: 0.0, indent: 74.0),
+          Separator.divider(height: 0, indent: 72),
           ListCell(
-            leading: const Icon(Icons.star_border, size: 42.0),
+            leading: const Icon(Icons.star_border, size: 40),
             title: FlutterI18n.translate(
               context,
               'about.review.title',
@@ -97,9 +99,9 @@ class _AboutScreenState extends State<AboutScreen> {
             ),
             onTap: () => AppReview.storeListing,
           ),
-          Separator.divider(height: 0.0, indent: 74.0),
+          Separator.divider(height: 0, indent: 72),
           ListCell(
-            leading: const Icon(Icons.mail_outline, size: 42.0),
+            leading: const Icon(Icons.mail_outline, size: 40),
             title: FlutterI18n.translate(
               context,
               'about.email.title',
@@ -108,14 +110,30 @@ class _AboutScreenState extends State<AboutScreen> {
               context,
               'about.email.body',
             ),
+            onTap: () async => await FlutterMailer.send(MailOptions(
+                  subject: Url.email['subject'],
+                  recipients: [Url.email['address']],
+                )),
+          ),
+          Separator.divider(height: 0, indent: 72),
+          ListCell(
+            leading: const Icon(Icons.apps, size: 40),
+            title: FlutterI18n.translate(
+              context,
+              'about.more_apps.title',
+            ),
+            subtitle: FlutterI18n.translate(
+              context,
+              'about.more_apps.body',
+            ),
             onTap: () async => await FlutterWebBrowser.openWebPage(
-                  url: Url.email,
+                  url: Url.authorsStore[Random().nextInt(2)],
                   androidToolbarColor: Theme.of(context).primaryColor,
                 ),
           ),
-          Separator.divider(height: 0.0, indent: 74.0),
+          Separator.divider(height: 0, indent: 72),
           ListCell(
-            leading: const Icon(Icons.public, size: 42.0),
+            leading: const Icon(Icons.public, size: 40),
             title: FlutterI18n.translate(
               context,
               'about.translations.title',
@@ -126,37 +144,27 @@ class _AboutScreenState extends State<AboutScreen> {
             ),
             onTap: () => showDialog(
                   context: context,
-                  builder: (context) => SimpleDialog(
-                        title: Text(
-                          FlutterI18n.translate(
-                            context,
-                            'about.translations.title',
-                          ).toUpperCase(),
-                          style: TextStyle(
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          textAlign: TextAlign.center,
+                  builder: (context) => RoundDialog(
+                        title: FlutterI18n.translate(
+                          context,
+                          'about.translations.title',
                         ),
                         children: _translators
                             .map((translation) => ListCell(
                                   title: translation['name'],
                                   subtitle: translation['language'],
                                   contentPadding: const EdgeInsets.symmetric(
-                                    vertical: 8.0,
-                                    horizontal: 24.0,
+                                    vertical: 0,
+                                    horizontal: 24,
                                   ),
                                 ))
                             .toList(),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(16.0),
-                        ),
                       ),
                 ),
           ),
-          Separator.divider(height: 0.0, indent: 74.0),
+          Separator.divider(height: 0, indent: 72),
           ListCell(
-            leading: const Icon(Icons.people_outline, size: 42.0),
+            leading: const Icon(Icons.people_outline, size: 40),
             title: FlutterI18n.translate(
               context,
               'about.free_software.title',
@@ -170,9 +178,9 @@ class _AboutScreenState extends State<AboutScreen> {
                   androidToolbarColor: Theme.of(context).primaryColor,
                 ),
           ),
-          Separator.divider(height: 0.0, indent: 74.0),
+          Separator.divider(height: 0, indent: 72),
           ListCell(
-            leading: const Icon(Icons.code, size: 42.0),
+            leading: const Icon(Icons.code, size: 40),
             title: FlutterI18n.translate(
               context,
               'about.flutter.title',
@@ -186,7 +194,7 @@ class _AboutScreenState extends State<AboutScreen> {
                   androidToolbarColor: Theme.of(context).primaryColor,
                 ),
           ),
-          Separator.divider(height: 0.0),
+          Separator.divider(height: 0),
         ]),
       ),
     );
