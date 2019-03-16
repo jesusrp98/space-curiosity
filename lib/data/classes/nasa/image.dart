@@ -23,10 +23,13 @@ class NasaImage {
   });
 
   String get getDate =>
-      (date == null) ? 'Date error' : DateFormat.yMMMMd().format(date);
+      date == null ? 'Date error' : DateFormat.yMMMMd().format(date);
 
   String getCopyright(context) =>
       copyright ?? FlutterI18n.translate(context, 'nasa.no_copyright');
+
+  String getDescription(context) =>
+      description ?? FlutterI18n.translate(context, 'nasa.no_description');
 
   String share(context) =>
       '$title\n\n$description\n\n${getCopyright(context)} · $getDate\n\n$hdurl';
