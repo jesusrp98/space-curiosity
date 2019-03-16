@@ -25,4 +25,8 @@ class Menu {
   static final List<String> ship = [
     'spacex.other.menu.marine_traffic',
   ];
+
+  static final Map<String, String> news = {
+    'news.website': 'https://www.space.com/',
+  };
 }

@@ -7,6 +7,7 @@ import 'separator.dart';
 class ListCell extends StatelessWidget {
   final Widget leading, trailing;
   final String title, subtitle;
+  final int maxTitleLines;
   final VoidCallback onTap;
   final EdgeInsets contentPadding;
 
@@ -15,6 +16,7 @@ class ListCell extends StatelessWidget {
     this.trailing,
     this.title,
     this.subtitle,
+    this.maxTitleLines = 1,
     this.onTap,
     this.contentPadding = const EdgeInsets.symmetric(
       vertical: 6,
@@ -33,7 +35,7 @@ class ListCell extends StatelessWidget {
             title,
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             overflow: TextOverflow.ellipsis,
-            maxLines: 1,
+            maxLines: maxTitleLines,
           ),
           Separator.spacer(height: 7),
         ],
