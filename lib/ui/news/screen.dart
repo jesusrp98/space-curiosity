@@ -73,8 +73,9 @@ class _ArticlesScreenState extends State<ArticlesScreen> {
                   children: <Widget>[
                     ListCell(
                       leading: ClipRRect(
-                        borderRadius:
-                            BorderRadius.all(const Radius.circular(8)),
+                        borderRadius: BorderRadius.all(
+                          const Radius.circular(8),
+                        ),
                         child: HeroImage(
                           url: post.photo,
                           tag: index.toString(),
@@ -83,7 +84,7 @@ class _ArticlesScreenState extends State<ArticlesScreen> {
                       ),
                       title: post.getTitle,
                       subtitle: post.author,
-                      maxTitleLines: 2,
+                      maxTitleLines: 1,
                       onTap: () async => await FlutterWebBrowser.openWebPage(
                             url: post.url,
                             androidToolbarColor: Theme.of(context).primaryColor,
@@ -91,18 +92,22 @@ class _ArticlesScreenState extends State<ArticlesScreen> {
                     ),
                     state.posts.last == post
                         ? Column(children: <Widget>[
-                            Separator.divider(height: 16),
-                            Text(
-                              FlutterI18n.translate(context, 'news.credits'),
-                              style:
-                                  Theme.of(context).textTheme.subhead.copyWith(
-                                        color: Theme.of(context)
-                                            .textTheme
-                                            .caption
-                                            .color,
-                                      ),
+                            Separator.divider(height: 0),
+                            Padding(
+                              padding: const EdgeInsets.all(16),
+                              child: Text(
+                                FlutterI18n.translate(context, 'news.credits'),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .subhead
+                                    .copyWith(
+                                      color: Theme.of(context)
+                                          .textTheme
+                                          .caption
+                                          .color,
+                                    ),
+                              ),
                             ),
-                            Separator.spacer(height: 16),
                           ])
                         : Separator.none()
                   ],
