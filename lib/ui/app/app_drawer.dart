@@ -18,23 +18,25 @@ class AppDrawer extends StatelessWidget {
                 child: Image.asset('assets/icons/android/playstore-icon.png'),
               ),
               Separator.spacer(width: 16),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Text(
-                    FlutterI18n.translate(context, 'app.title'),
-                    style: Theme.of(context).textTheme.headline,
-                  ),
-                  Separator.spacer(height: 8),
-                  Text(
-                    FlutterI18n.translate(context, 'app.subtitle'),
-                    style: Theme.of(context).textTheme.subhead.copyWith(
-                          color: Theme.of(context).textTheme.caption.color,
-                        ),
-                  ),
-                ],
-              )
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Text(
+                      FlutterI18n.translate(context, 'app.title'),
+                      style: Theme.of(context).textTheme.headline,
+                    ),
+                    Separator.spacer(height: 8),
+                    Text(
+                      FlutterI18n.translate(context, 'app.subtitle'),
+                      style: Theme.of(context).textTheme.subhead.copyWith(
+                            color: Theme.of(context).textTheme.caption.color,
+                          ),
+                    ),
+                  ],
+                ),
+              ),
             ]),
           ),
           ListTile(
