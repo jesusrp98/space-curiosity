@@ -447,6 +447,14 @@
     "flutter": {
       "title": "Construida con Flutter",
       "body": "Aplicaciones nativas en tiempo record"
+    },
+    "credits": {
+      "title": "Créditos",
+      "body": "Usando sólo APIs libres"
+    },
+    "copyright": {
+      "title": "Relaciones públicas",
+      "body": "Esta aplicacíon no está asociada a ninguna empresa"
     }
   },
   "settings": {

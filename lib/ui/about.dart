@@ -27,6 +27,12 @@ class _AboutScreenState extends State<AboutScreen> {
     {'name': 'Jesús Rodríguez', 'language': 'Español'},
   ];
 
+  static final List<Map<String, String>> _credits = [
+    {'title': 'r/SpaceX API', 'body': 'Open-source SpaceX API'},
+    {'title': 'NASA APOD', 'body': 'Astronomical Picture Of the Day'},
+    {'title': 'Open Notify', 'body': 'Open APIs From Space'},
+  ];
+
   PackageInfo _packageInfo = PackageInfo(
     appName: 'Unknown',
     packageName: 'Unknown',
@@ -66,7 +72,7 @@ class _AboutScreenState extends State<AboutScreen> {
           subtitle: FlutterI18n.translate(
             context,
             'about.version.body',
-            {'version': _packageInfo.version, 'status': 'beta'},
+            {'version': _packageInfo.version, 'status': 'release'},
           ),
         ),
         Separator.divider(height: 0, indent: 72),
@@ -193,7 +199,50 @@ class _AboutScreenState extends State<AboutScreen> {
                 androidToolbarColor: Theme.of(context).primaryColor,
               ),
         ),
-        Separator.divider(height: 0),
+        Separator.divider(height: 0, indent: 72),
+        ListCell(
+          leading: const Icon(Icons.folder_open, size: 40),
+          title: FlutterI18n.translate(
+            context,
+            'about.credits.title',
+          ),
+          subtitle: FlutterI18n.translate(
+            context,
+            'about.credits.body',
+          ),
+          onTap: () => showDialog(
+                context: context,
+                builder: (context) => RoundDialog(
+                      title: FlutterI18n.translate(
+                        context,
+                        'about.credits.title',
+                      ),
+                      children: _credits
+                          .map((translation) => ListCell(
+                                title: translation['title'],
+                                subtitle: translation['body'],
+                                contentPadding: const EdgeInsets.symmetric(
+                                  vertical: 0,
+                                  horizontal: 24,
+                                ),
+                              ))
+                          .toList(),
+                    ),
+              ),
+        ),
+        Separator.divider(height: 0, indent: 72),
+        ListCell(
+          leading: const Icon(Icons.copyright, size: 40),
+          title: FlutterI18n.translate(
+            context,
+            'about.copyright.title',
+          ),
+          subtitle: FlutterI18n.translate(
+            context,
+            'about.copyright.body',
+          ),
+        ),
+        Separator.divider(height: 0, indent: 72),
       ]),
     );
   }

@@ -447,6 +447,14 @@
     "flutter": {
       "title": "Built with Flutter",
       "body": "Beautiful native apps in record time"
+    },
+    "credits": {
+      "title": "App credits",
+      "body": "Using only open-source free APIs"
+    },
+    "copyright": {
+      "title": "Public relations",
+      "body": "This app is not associated with any private entity"
     }
   },
   "settings": {
