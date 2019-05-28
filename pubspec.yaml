@@ -24,7 +24,11 @@ dependencies:
   ## Widgets
   app_review: ^0.1.0
   add_2_calendar: ^1.2.2
-  flare_flutter: ^1.3.0
+  flare_flutter:
+    git: 
+      url: git://github.com/2d-inc/Flare-Flutter.git
+      ref: dev
+      path: flare_flutter
   flutter_map: ^0.4.0
   flutter_swiper: ^1.1.4
   material_search: ^0.2.8
