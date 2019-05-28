@@ -19,18 +19,18 @@ dependencies:
 
   ## Offline
   # cached_network_image: ^0.6.2
-  shared_preferences: ^0.5.1+1
+  shared_preferences: ^0.5.2+1
 
   ## Widgets
   app_review: ^0.1.0
   add_2_calendar: ^1.2.2
-  flare_flutter:
-    git: 
-      url: git://github.com/2d-inc/Flare-Flutter.git
-      ref: dev
-      path: flare_flutter
-  flutter_map: ^0.4.0
-  flutter_swiper: ^1.1.4
+  flare_flutter: ^1.5.1
+  #   git: 
+  #     url: git://github.com/2d-inc/Flare-Flutter.git
+  #     ref: dev
+  #     path: flare_flutter
+  flutter_map: ^0.5.3+1
+  flutter_swiper: ^1.1.6
   material_search: ^0.2.8
   native_widgets: ^0.1.1+1
   persist_theme: ^0.0.3+6
@@ -41,7 +41,7 @@ dependencies:
   equatable: ^0.2.2
   flutter_bloc: ^0.6.2
   flutter_i18n: ^0.5.2
-  image_downloader: ^0.11.1
+  image_downloader: ^0.15.2
   intl: ^0.15.7
   location: ^2.0.0
   package_info: ^0.4.0+1
@@ -71,7 +71,7 @@ flutter:
         - asset: assets/fonts/ProductSans-Bold.ttf
         - asset: assets/fonts/ProductSans-Italic.ttf
         - asset: assets/fonts/ProductSans-Regular.ttf
-          weight: 700
+          weight: 700 
   assets:
     - assets/flutter_i18n/
     - assets/animations/
