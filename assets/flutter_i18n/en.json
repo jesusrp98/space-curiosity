@@ -441,9 +441,9 @@
       "title": "Translations",
       "body": "Thanks to everyone who contributed!"
     },
-    "more_apps_rody": {
-      "title": "More from Rody",
-      "body": "Apps Design for Mobile First"
+    "more_apps": {
+      "title": "More from this author",
+      "body": "Apps design for mobile first"
     },
     "free_software": {
       "title": "This is free software",
@@ -452,6 +452,14 @@
     "flutter": {
       "title": "Built with Flutter",
       "body": "Beautiful native apps in record time"
+    },
+    "credits": {
+      "title": "App credits",
+      "body": "Using only open-source free APIs"
+    },
+    "copyright": {
+      "title": "Public relations",
+      "body": "This app is not associated with any private entity"
     }
   },
   "settings": {
