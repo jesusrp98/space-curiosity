@@ -16,7 +16,7 @@ import 'ui/news/screen.dart';
 import 'ui/planets/details/edit.dart';
 import 'ui/planets/screen.dart';
 import 'ui/settings.dart';
-import 'ui/spacex/screen.dart';
+import 'ui/spacex/start.dart';
 import 'util/colors.dart';
 
 final ThemeModel _theme = ThemeModel(

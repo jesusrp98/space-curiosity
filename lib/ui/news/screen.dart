@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:http/http.dart' as http;
 
 import '../../data/bloc/bloc.dart';
 import '../../data/models/models.dart';
+import '../../util/menu.dart';
 import '../general/hero_image.dart';
 import '../general/list_cell.dart';
+import '../general/loading_indicator.dart';
 import '../general/separator.dart';
 
 class ArticlesScreen extends StatefulWidget {
@@ -25,16 +28,31 @@ class _ArticlesScreenState extends State<ArticlesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Latest news'),
+        title: Text(FlutterI18n.translate(context, 'home.page.menu.news')),
         centerTitle: true,
+        actions: <Widget>[
+          PopupMenuButton<String>(
+            itemBuilder: (_) => Menu.news.keys
+                .map((url) => PopupMenuItem(
+                      value: url,
+                      child: Text(FlutterI18n.translate(
+                        context,
+                        url,
+                      )),
+                    ))
+                .toList(),
+            onSelected: (name) async => await FlutterWebBrowser.openWebPage(
+                  url: Menu.news[name],
+                  androidToolbarColor: Theme.of(context).primaryColor,
+                ),
+          ),
+        ],
       ),
       body: BlocBuilder(
         bloc: _postBloc,
         builder: (context, state) {
           if (state is PostUninitialized) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
+            return LoadingIndicator();
           }
           if (state is PostError) {
             return Center(
@@ -51,17 +69,48 @@ class _ArticlesScreenState extends State<ArticlesScreen> {
               itemCount: state.posts.length,
               itemBuilder: (_, index) {
                 final Post post = state.posts[index];
-                return ListCell(
-                  leading: HeroImage.list(
-                    url: post.photo,
-                    tag: index.toString(),
-                  ),
-                  title: post.getTitle,
-                  subtitle: post.author,
-                  onTap: () async => await FlutterWebBrowser.openWebPage(
-                        url: post.url,
-                        androidToolbarColor: Theme.of(context).primaryColor,
+                return Column(
+                  children: <Widget>[
+                    ListCell(
+                      leading: ClipRRect(
+                        borderRadius: BorderRadius.all(
+                          const Radius.circular(8),
+                        ),
+                        child: HeroImage(
+                          url: post.photo,
+                          tag: index.toString(),
+                          size: 64.0,
+                        ),
                       ),
+                      title: post.getTitle,
+                      subtitle: post.author,
+                      maxTitleLines: 1,
+                      onTap: () async => await FlutterWebBrowser.openWebPage(
+                            url: post.url,
+                            androidToolbarColor: Theme.of(context).primaryColor,
+                          ),
+                    ),
+                    state.posts.last == post
+                        ? Column(children: <Widget>[
+                            Separator.divider(height: 0),
+                            Padding(
+                              padding: const EdgeInsets.all(16),
+                              child: Text(
+                                FlutterI18n.translate(context, 'news.credits'),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .subhead
+                                    .copyWith(
+                                      color: Theme.of(context)
+                                          .textTheme
+                                          .caption
+                                          .color,
+                                    ),
+                              ),
+                            ),
+                          ])
+                        : Separator.none()
+                  ],
                 );
               },
               separatorBuilder: (_, index) =>

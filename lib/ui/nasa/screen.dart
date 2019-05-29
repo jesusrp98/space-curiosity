@@ -4,9 +4,11 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:image_downloader/image_downloader.dart';
 import 'package:share/share.dart';
+import 'package:space_news/ui/general/sliver_bar.dart';
 
 import '../../data/classes/nasa/image.dart';
 import '../general/cache_image.dart';
+import '../general/expand_widget.dart';
 import '../general/separator.dart';
 
 class NasaImagePage extends StatelessWidget {
@@ -19,22 +21,17 @@ class NasaImagePage extends StatelessWidget {
     return Scaffold(
       body: CustomScrollView(
         slivers: <Widget>[
-          SliverAppBar(
-            expandedHeight: MediaQuery.of(context).size.height * 0.4,
-            pinned: false,
-            floating: false,
-            flexibleSpace: FlexibleSpaceBar(
-              centerTitle: true,
-              background: InkWell(
-                child: Hero(
-                  tag: image.getDate,
-                  child: CacheImage(image?.url),
-                ),
-                onTap: () async => await FlutterWebBrowser.openWebPage(
-                      url: image.hdurl,
-                      androidToolbarColor: Theme.of(context).primaryColor,
-                    ),
+          SliverBar(
+            height: 0.4,
+            header: InkWell(
+              child: Hero(
+                tag: image.getDate,
+                child: CacheImage(image?.url),
               ),
+              onTap: () async => await FlutterWebBrowser.openWebPage(
+                    url: image.hdurl,
+                    androidToolbarColor: Theme.of(context).primaryColor,
+                  ),
             ),
           ),
           SliverToBoxAdapter(
@@ -49,65 +46,22 @@ class NasaImagePage extends StatelessWidget {
                   ),
                   Separator.spacer(height: 16),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: <Widget>[
-                      Expanded(
-                        flex: 5,
-                        child: Row(children: <Widget>[
-                          const Icon(Icons.copyright, size: 32),
-                          Separator.spacer(width: 8),
-                          Flexible(
-                            child: Text(
-                              image.getCopyright(context),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style:
-                                  Theme.of(context).textTheme.subhead.copyWith(
-                                        color: Theme.of(context)
-                                            .textTheme
-                                            .caption
-                                            .color,
-                                      ),
-                            ),
-                          )
-                        ]),
+                      HeaderDetails(
+                        icon: Icons.copyright,
+                        title: image.getCopyright(context),
                       ),
-                      Expanded(
-                        flex: 5,
-                        child: Align(
-                          alignment: Alignment.centerRight,
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: <Widget>[
-                              Flexible(
-                                child: Text(
-                                  image.getDate,
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .subhead
-                                      .copyWith(
-                                        color: Theme.of(context)
-                                            .textTheme
-                                            .caption
-                                            .color,
-                                      ),
-                                ),
-                              ),
-                              Separator.spacer(width: 8),
-                              const Icon(Icons.calendar_today, size: 32),
-                            ],
-                          ),
-                        ),
+                      HeaderDetails(
+                        icon: Icons.calendar_today,
+                        title: image.getDate,
                       ),
                     ],
                   ),
-                  Separator.spacer(height: 16),
-                  // TODO add text expander
-                  Text(
-                    image?.description ?? "",
-                    textAlign: TextAlign.justify,
+                  Separator.divider(height: 24),
+                  TextExpand(
+                    text: image.getDescription(context),
+                    maxLength: 10,
                     style: TextStyle(
                       color: Theme.of(context).textTheme.caption.color,
                       fontSize: 15,
@@ -146,6 +100,36 @@ class NasaImagePage extends StatelessWidget {
   }
 }
 
+class HeaderDetails extends StatelessWidget {
+  final IconData icon;
+  final String title;
+
+  HeaderDetails({this.icon, this.title});
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      flex: 1,
+      child: Column(children: <Widget>[
+        Icon(
+          icon,
+          size: 27,
+          color: Theme.of(context).textTheme.caption.color,
+        ),
+        Separator.spacer(height: 8),
+        Text(
+          title,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: Theme.of(context).textTheme.subhead.copyWith(
+                color: Theme.of(context).textTheme.caption.color,
+              ),
+        ),
+      ]),
+    );
+  }
+}
+
 class OptionButton extends StatelessWidget {
   final IconData icon;
   final String title;
@@ -163,14 +147,16 @@ class OptionButton extends StatelessWidget {
           child: Row(
             children: <Widget>[
               Icon(icon, size: 32),
-              Separator.spacer(width: 8),
               Flexible(
-                child: Text(
-                  title,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: Theme.of(context).textTheme.subhead.copyWith(
-                      color: Theme.of(context).textTheme.caption.color),
+                child: Center(
+                  child: Text(
+                    title,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.subhead.copyWith(
+                        color: Theme.of(context).textTheme.caption.color),
+                  ),
                 ),
               )
             ],

@@ -2,16 +2,15 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import '../../../data/models/spacex/launch.dart';
-import '../../general/cache_image.dart';
+import '../../general/header_swiper.dart';
 import '../../general/hero_image.dart';
 import '../../general/list_cell.dart';
 import '../../general/loading_indicator.dart';
 import '../../general/separator.dart';
+import '../../general/sliver_bar.dart';
 import '../pages/launch.dart';
 import '../search/launches.dart';
 
@@ -38,36 +37,16 @@ class LaunchesTab extends StatelessWidget {
               child: CustomScrollView(
                   key: PageStorageKey('spacex_launches_$title'),
                   slivers: <Widget>[
-                    SliverAppBar(
-                      expandedHeight: MediaQuery.of(context).size.height * 0.3,
-                      floating: false,
-                      pinned: true,
-                      flexibleSpace: FlexibleSpaceBar(
-                        centerTitle: true,
-                        title: Text(FlutterI18n.translate(
-                          context,
-                          title == 0
-                              ? 'spacex.upcoming.title'
-                              : 'spacex.latest.title',
-                        )),
-                        background: model.isLoading
-                            ? LoadingIndicator()
-                            : Swiper(
-                                itemCount: model.getPhotosCount,
-                                itemBuilder: (_, index) => CacheImage(
-                                      model.getPhoto(index),
-                                    ),
-                                autoplay: true,
-                                autoplayDelay: 6000,
-                                duration: 750,
-                                onTap: (index) async =>
-                                    await FlutterWebBrowser.openWebPage(
-                                      url: model.getPhoto(index),
-                                      androidToolbarColor:
-                                          Theme.of(context).primaryColor,
-                                    ),
-                              ),
-                      ),
+                    SliverBar(
+                      title: Text(FlutterI18n.translate(
+                        context,
+                        title == 0
+                            ? 'spacex.upcoming.title'
+                            : 'spacex.latest.title',
+                      )),
+                      header: model.isLoading
+                          ? LoadingIndicator()
+                          : SwiperHeader(list: model.photos),
                     ),
                     model.isLoading
                         ? SliverFillRemaining(child: LoadingIndicator())
@@ -111,7 +90,7 @@ class LaunchesTab extends StatelessWidget {
                   MaterialPageRoute(builder: (_) => LaunchPage(launch)),
                 ),
           ),
-          Separator.divider(height: 0.0, indent: 96.0)
+          Separator.divider(height: 0, indent: 88)
         ]);
       },
     );
