@@ -16,17 +16,28 @@ class RowExpand extends StatefulWidget {
 class _RowExpandState extends State<RowExpand> {
   bool _isHide = true;
 
+  void toggleContent() => setState(() => _isHide = !_isHide);
+
   @override
   Widget build(BuildContext context) {
     return _isHide
-        ? _ExpanderIcon(
+        ? _ExpanderIcon.maximize(
             message: FlutterI18n.translate(
               context,
               'spacex.other.more_details',
             ),
-            onTap: () => setState(() => _isHide = false),
+            onTap: () => toggleContent(),
           )
-        : widget.child;
+        : Column(children: <Widget>[
+            widget.child,
+            _ExpanderIcon.minimize(
+              message: FlutterI18n.translate(
+                context,
+                'spacex.other.more_details',
+              ),
+              onTap: () => toggleContent(),
+            )
+          ]);
   }
 }
 
@@ -38,7 +49,11 @@ class TextExpand extends StatefulWidget {
   final int maxLength;
   final TextStyle style;
 
-  TextExpand({this.text, this.maxLength, this.style});
+  TextExpand({
+    @required this.text,
+    this.maxLength = 5,
+    this.style,
+  });
 
   @override
   _TextExpandState createState() => _TextExpandState();
@@ -46,6 +61,8 @@ class TextExpand extends StatefulWidget {
 
 class _TextExpandState extends State<TextExpand> {
   bool _isShort = true;
+
+  void toggleContent() => setState(() => _isShort = !_isShort);
 
   @override
   Widget build(BuildContext context) {
@@ -55,28 +72,41 @@ class _TextExpandState extends State<TextExpand> {
         textDirection: TextDirection.rtl,
         maxLines: widget.maxLength,
       )..layout(maxWidth: size.maxWidth);
+      final TextStyle textStyle = widget.style ??
+          TextStyle(
+            color: Theme.of(context).textTheme.caption.color,
+            fontSize: 15,
+          );
 
-      return textPainter.didExceedMaxLines && _isShort
+      return textPainter.didExceedMaxLines
           ? Column(children: <Widget>[
               Text(
                 widget.text,
                 textAlign: TextAlign.justify,
                 overflow: TextOverflow.fade,
-                style: widget.style,
-                maxLines: widget.maxLength,
+                style: textStyle,
+                maxLines: _isShort ? widget.maxLength : null,
               ),
-              _ExpanderIcon(
-                message: FlutterI18n.translate(
-                  context,
-                  'spacex.other.more_details',
-                ),
-                onTap: () => setState(() => _isShort = false),
-              )
+              _isShort
+                  ? _ExpanderIcon.maximize(
+                      message: FlutterI18n.translate(
+                        context,
+                        'spacex.other.more_details',
+                      ),
+                      onTap: () => toggleContent(),
+                    )
+                  : _ExpanderIcon.minimize(
+                      message: FlutterI18n.translate(
+                        context,
+                        'spacex.other.more_details',
+                      ),
+                      onTap: () => toggleContent(),
+                    )
             ])
           : Text(
               widget.text,
               textAlign: TextAlign.justify,
-              style: widget.style,
+              style: textStyle,
             );
     });
   }
@@ -85,22 +115,40 @@ class _TextExpandState extends State<TextExpand> {
 /// EXPAND ICON WIDGET
 /// Auxiliary widget with allows user to expand a widget.
 class _ExpanderIcon extends StatelessWidget {
+  final IconData icon;
   final String message;
   final VoidCallback onTap;
 
-  _ExpanderIcon({this.message, this.onTap});
+  _ExpanderIcon({
+    @required this.icon,
+    @required this.message,
+    this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Tooltip(
       message: message,
       child: InkResponse(
-        child: Icon(
-          Icons.expand_more,
-          color: Theme.of(context).textTheme.caption.color,
-        ),
+        child: Icon(icon, color: Theme.of(context).textTheme.caption.color),
         onTap: onTap,
       ),
+    );
+  }
+
+  factory _ExpanderIcon.maximize({String message, VoidCallback onTap}) {
+    return _ExpanderIcon(
+      icon: Icons.expand_more,
+      message: message,
+      onTap: onTap,
+    );
+  }
+
+  factory _ExpanderIcon.minimize({String message, VoidCallback onTap}) {
+    return _ExpanderIcon(
+      icon: Icons.expand_less,
+      message: message,
+      onTap: onTap,
     );
   }
 }

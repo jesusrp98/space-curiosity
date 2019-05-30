@@ -15,6 +15,7 @@ class CardPage extends StatelessWidget {
     return Card(
       elevation: 4,
       shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
           //TODO revisar
           // side: BorderSide(
           //   width: 1,
