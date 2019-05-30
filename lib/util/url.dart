@@ -32,8 +32,11 @@ class Url {
   static const String spacexCompany = '$spacexBaseUrl/info';
   static const String spacexAchievements = '$spacexBaseUrl/history';
 
-  static const String mapView =
-      'https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png';
+  // Map URL
+  static const String lightMap =
+      'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png';
+  static const String darkMap =
+      'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png';
 
   // Share details message
   static const String shareDetails = '#spaceCuriosity';

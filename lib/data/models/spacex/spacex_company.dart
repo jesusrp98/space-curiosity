@@ -1,7 +1,5 @@
-import 'dart:convert';
-
+import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
-import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 
 import '../../../util/photos.dart';
@@ -15,25 +13,25 @@ class SpacexCompanyModel extends QueryModel {
   Company _company;
 
   @override
-  Future loadData() async {
-    // Get items by http call
-    final companyResponse = await http.get(Url.spacexCompany);
-    response = await http.get(Url.spacexAchievements);
-
+  Future loadData([BuildContext context]) async {
     // Clear old data
     clearItems();
 
-    // Added parsed item
-    snapshot = json.decode(response.body);
+    // Fetch & add items
+    List achievements = await fetchData(Url.spacexAchievements);
+
     items.addAll(
-      snapshot.map((achievement) => Achievement.fromJson(achievement)).toList(),
+      achievements
+          .map((achievement) => Achievement.fromJson(achievement))
+          .toList(),
     );
 
-    _company = Company.fromJson(json.decode(companyResponse.body));
+    // Fetch & add item
+    _company = Company.fromJson(await fetchData(Url.spacexCompany));
 
     // Add photos & shuffle them
     if (photos.isEmpty) {
-      photos.addAll(SpaceXPhotos.spacexCompanyScreen);
+      photos.addAll(SpaceXPhotos.company);
       photos.shuffle();
     }
 
@@ -46,7 +44,6 @@ class SpacexCompanyModel extends QueryModel {
 
 class Company {
   final String fullName, name, founder, ceo, cto, coo, city, state, details;
-  final List<String> links;
   final num founded, employees, valuation;
 
   Company({
@@ -58,7 +55,6 @@ class Company {
     this.coo,
     this.city,
     this.state,
-    this.links,
     this.details,
     this.founded,
     this.employees,
@@ -75,11 +71,6 @@ class Company {
       coo: json['coo'],
       city: json['headquarters']['city'],
       state: json['headquarters']['state'],
-      links: [
-        json['links']['website'],
-        json['links']['twitter'],
-        json['links']['flickr'],
-      ],
       details: json['summary'],
       founded: json['founded'],
       employees: json['employees'],
@@ -99,8 +90,6 @@ class Company {
   String get getLocation => '$city, $state';
 
   String get getEmployees => NumberFormat.decimalPattern().format(employees);
-
-  String getUrl(int index) => links[index];
 }
 
 /// SPACEX'S ACHIEVMENT MODEL

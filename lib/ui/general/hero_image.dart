@@ -5,13 +5,18 @@ import 'cache_image.dart';
 /// HERO IMAGE WIDGET
 /// Auxiliary widget with builds a cached hero image.
 class HeroImage extends StatelessWidget {
-  static const num _smallSize = 56.0, _bigSize = 80.0;
+  static const num _smallSize = 49.0, _bigSize = 69.0;
 
   final String url, tag;
   final num size;
   final VoidCallback onTap;
 
-  HeroImage({this.url, this.tag, this.size, this.onTap});
+  HeroImage({
+    @required this.url,
+    @required this.tag,
+    @required this.size,
+    this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +32,7 @@ class HeroImage extends StatelessWidget {
 
   /// Buils a HeroImage sized to fit in a [leading] parameter of a [ListTile] widget
   factory HeroImage.list({String url, String tag}) {
-    return HeroImage(url: url, tag: tag, size: _smallSize, onTap: null);
+    return HeroImage(url: url, tag: tag, size: _smallSize);
   }
 
   /// Buils a HeroImage sized to fit in a [leading] parameter of a [HeadCardPage] widget

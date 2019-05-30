@@ -1,16 +1,15 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
-import 'package:http/http.dart' as http;
+import 'package:row_collection/row_collection.dart';
+import 'package:scoped_model/scoped_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../ui/general/separator.dart';
 import '../../../util/photos.dart';
 import '../../../util/url.dart';
 import '../../classes/abstract/query_model.dart';
 import 'launch.dart';
-import 'rocket.dart';
 
 /// SPACEX HOME TAB MODEL
 /// Storages essencial data from the next scheduled launch.
@@ -19,24 +18,121 @@ class SpacexHomeModel extends QueryModel {
   Launch launch;
 
   @override
-  Future loadData() async {
-    // Get item by http call
-    final response = await http.get(Url.nextLaunch);
-
+  Future loadData([BuildContext context]) async {
     // Clear old data
     items.clear();
 
     // Add parsed item
-    launch = Launch.fromJson(json.decode(response.body));
+    launch = Launch.fromJson(await fetchData(Url.nextLaunch));
+
+    // Adds notifications to queue
+    await initNotifications(context);
 
     // Add photos & shuffle them
     if (photos.isEmpty) {
-      photos.addAll(SpaceXPhotos.spacexHomeScreen);
+      photos.addAll(SpaceXPhotos.home);
       photos.shuffle();
     }
 
     // Finished loading data
     setLoading(false);
+  }
+
+  Future initNotifications(BuildContext context) async {
+    bool updateNotifications;
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    // Checks if is necessary to update scheduled notifications
+    try {
+      updateNotifications =
+          prefs.getString('notifications.launches.upcoming') !=
+              launch.launchDate.toIso8601String();
+    } catch (e) {
+      updateNotifications = true;
+    }
+
+    // Update notifications if necessary
+    if (updateNotifications && !launch.tentativeTime) {
+      // T - 1 day notification
+      await _scheduleNotification(
+        id: 0,
+        context: context,
+        time: FlutterI18n.translate(
+          context,
+          'spacex.notifications.launches.time_tomorrow',
+        ),
+        subtract: Duration(days: 1),
+      );
+
+      // T - 1 hour notification
+      await _scheduleNotification(
+        id: 1,
+        context: context,
+        time: FlutterI18n.translate(
+          context,
+          'spacex.notifications.launches.time_hour',
+        ),
+        subtract: Duration(hours: 1),
+      );
+
+      // T - 30 minutes notification
+      await _scheduleNotification(
+        id: 2,
+        context: context,
+        time: FlutterI18n.translate(
+          context,
+          'spacex.notifications.launches.time_minutes',
+          {'minutes': '30'},
+        ),
+        subtract: Duration(minutes: 30),
+      );
+
+      // Update storaged launch date
+      prefs.setString(
+        'notifications.launches.upcoming',
+        launch.launchDate.toIso8601String(),
+      );
+    } else if (launch.tentativeTime)
+      ScopedModel.of<AppModel>(context).notifications.cancelAll();
+  }
+
+  Future _scheduleNotification({
+    BuildContext context,
+    int id,
+    String time,
+    Duration subtract,
+  }) async {
+    await ScopedModel.of<AppModel>(context).notifications.schedule(
+          id,
+          FlutterI18n.translate(context, 'spacex.notifications.launches.title'),
+          FlutterI18n.translate(
+            context,
+            'spacex.notifications.launches.body',
+            {
+              'rocket': launch.rocket.name,
+              'payload': launch.rocket.secondStage.getPayload(0).id,
+              'orbit': launch.rocket.secondStage.getPayload(0).orbit,
+              'time': time,
+            },
+          ),
+          launch.launchDate.subtract(subtract),
+          NotificationDetails(
+            AndroidNotificationDetails(
+              'channel.launches',
+              FlutterI18n.translate(
+                context,
+                'spacex.notifications.channel.launches.title',
+              ),
+              FlutterI18n.translate(
+                context,
+                'spacex.notifications.channel.launches.description',
+              ),
+              importance: Importance.High,
+              color: Theme.of(context).primaryColor,
+            ),
+            IOSNotificationDetails(),
+          ),
+        );
   }
 
   String vehicle(context) => FlutterI18n.translate(
@@ -53,11 +149,11 @@ class SpacexHomeModel extends QueryModel {
             context,
             'spacex.home.tab.mission.body_payload',
             {
-              'name': launch.rocket.secondStage.payloads[i].id,
-              'orbit': launch.rocket.secondStage.payloads[i].orbit
+              'name': launch.rocket.secondStage.getPayload(i).id,
+              'orbit': launch.rocket.secondStage.getPayload(i).orbit
             },
           ) +
-          (i + 1 == launch.rocket.secondStage.payloads.length ? '.' : ', ');
+          (i + 1 == launch.rocket.secondStage.payloads.length ? '' : ', ');
 
     return FlutterI18n.translate(
       context,
@@ -277,10 +373,7 @@ class Countdown extends AnimatedWidget {
         ? Text(
             getTimer(launchDate.difference(DateTime.now())),
             textAlign: TextAlign.center,
-            style: Theme.of(context)
-                .textTheme
-                .headline
-                .copyWith(fontFamily: 'RobotoMono'),
+            style: TextStyle(fontSize: 22, fontFamily: 'RobotoMono'),
           )
         : InkWell(
             onTap: () async => await FlutterWebBrowser.openWebPage(
@@ -291,18 +384,16 @@ class Countdown extends AnimatedWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                Icon(Icons.play_arrow, size: 32.0),
-                Separator.spacer(width: 8.0),
+                Icon(Icons.play_arrow, size: 30),
+                Separator.smallSpacer(),
                 Text(
-                  FlutterI18n.translate(context, 'spacex.home.tab.live_mission')
-                      .toUpperCase(),
+                  FlutterI18n.translate(
+                    context,
+                    'spacex.home.tab.live_mission',
+                  ).toUpperCase(),
                   textAlign: TextAlign.center,
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline
-                      .copyWith(fontFamily: 'RobotoMono'),
+                  style: TextStyle(fontSize: 22, fontFamily: 'RobotoMono'),
                 ),
-                Separator.spacer(width: 8.0)
               ],
             ),
           );

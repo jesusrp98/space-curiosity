@@ -1,7 +1,5 @@
-import 'dart:convert';
-
+import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
-import 'package:http/http.dart' as http;
 
 import '../../../util/photos.dart';
 import '../../../util/url.dart';
@@ -18,19 +16,20 @@ class CapsuleModel extends QueryModel {
   CapsuleModel(this.id);
 
   @override
-  Future loadData() async {
-    // Get item by http call
-    response = await http.get(Url.capsuleDialog + id);
+  Future loadData([BuildContext context]) async {
+    if (id != null) {
+      // Clear old data
+      clearItems();
 
-    // Clear old data
-    clearItems();
+      // Fetch & add item
+      items.add(
+        CapsuleDetails.fromJson(await fetchData(Url.capsuleDialog + id)),
+      );
 
-    // Add parsed item
-    items.add(CapsuleDetails.fromJson(json.decode(response.body)));
-
-    // Add photos & shuffle them
-    photos.addAll(SpaceXPhotos.spacexCapsuleDialog);
-    photos.shuffle();
+      // Add photos & shuffle them
+      photos.addAll(SpaceXPhotos.dragons);
+      photos.shuffle();
+    }
 
     // Finished loading data
     setLoading(false);

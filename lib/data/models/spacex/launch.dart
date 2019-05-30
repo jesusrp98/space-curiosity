@@ -1,11 +1,7 @@
-import 'dart:convert';
-import 'dart:math';
-
+import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
-import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 
-import '../../../util/menu.dart';
 import '../../../util/photos.dart';
 import '../../../util/url.dart';
 import '../../classes/abstract/query_model.dart';
@@ -22,23 +18,23 @@ class LaunchesModel extends QueryModel {
   LaunchesModel(this.type);
 
   @override
-  Future loadData() async {
-    // Get item by http call
-    response = await http.get(type == 0 ? Url.upcomingList : Url.launchesList);
-    snapshot = json.decode(response.body);
-
+  Future loadData([BuildContext context]) async {
     // Clear old data
     clearItems();
 
-    // Add parsed items
-    items.addAll(snapshot.map((launch) => Launch.fromJson(launch)).toList());
+    // Fetch & add items
+    List launches = await fetchData(
+      type == 0 ? Url.upcomingList : Url.launchesList,
+    );
+
+    items.addAll(launches.map((launch) => Launch.fromJson(launch)).toList());
 
     // Add photos & shuffle them
     if (photos.isEmpty) {
       if (getItem(0).photos.isEmpty)
-        photos.addAll(SpaceXPhotos.spacexUpcomingScreen);
+        photos.addAll(SpaceXPhotos.upcoming);
       else
-        photos.addAll(getItem(0).photos.sublist(0, 3));
+        photos.addAll(getItem(0).photos);
       photos.shuffle();
     }
 
@@ -55,7 +51,7 @@ class Launch {
   final String name,
       launchpadId,
       launchpadName,
-      imageUrl,
+      patchUrl,
       details,
       tentativePrecision;
   final List links, photos;
@@ -70,7 +66,7 @@ class Launch {
     this.name,
     this.launchpadId,
     this.launchpadName,
-    this.imageUrl,
+    this.patchUrl,
     this.details,
     this.tentativePrecision,
     this.links,
@@ -90,7 +86,7 @@ class Launch {
       name: json['mission_name'],
       launchpadId: json['launch_site']['site_id'],
       launchpadName: json['launch_site']['site_name'],
-      imageUrl: json['links']['mission_patch_small'],
+      patchUrl: json['links']['mission_patch_small'],
       details: json['details'],
       tentativePrecision: json['tentative_max_precision'],
       links: [
@@ -111,7 +107,7 @@ class Launch {
 
   static List setLaunchPhotos(List list) {
     if (list.isEmpty)
-      return SpaceXPhotos.spacexUpcomingScreen;
+      return SpaceXPhotos.upcoming;
     else
       return list;
   }
@@ -119,7 +115,7 @@ class Launch {
   static DateTime setStaticFireDate(String date) {
     try {
       return DateTime.parse(date).toLocal();
-    } catch (_) {
+    } catch (e) {
       return null;
     }
   }
@@ -127,7 +123,7 @@ class Launch {
   static FailureDetails setFailureDetails(Map<String, dynamic> failureDetails) {
     try {
       return FailureDetails.fromJson(failureDetails);
-    } catch (_) {
+    } catch (e) {
       return null;
     }
   }
@@ -144,28 +140,17 @@ class Launch {
       return '${NumberFormat.decimalPattern().format(launchWindow)} s';
     else if (launchWindow < 3600)
       return '${NumberFormat.decimalPattern().format(launchWindow / 60)} min';
-    else
+    else if (launchWindow % 3600 == 0)
       return '${NumberFormat.decimalPattern().format(launchWindow / 3600)} h';
+    else
+      return '${NumberFormat.decimalPattern().format(launchWindow ~/ 3600)}h ${NumberFormat.decimalPattern().format((launchWindow / 3600 - launchWindow ~/ 3600) * 60)}min';
   }
-
-  String get getProfilePhoto =>
-      hasImages ? photos[0] : SpaceXPhotos.defaultImage;
-
-  String getPhoto(index) =>
-      hasImages ? photos[index] : SpaceXPhotos.spacexUpcomingScreen[index];
-
-  int get getPhotosCount =>
-      hasImages ? photos.length : SpaceXPhotos.spacexUpcomingScreen.length;
-
-  String get getRandomPhoto => photos[Random().nextInt(getPhotosCount)];
-
-  bool get hasImages => photos.isNotEmpty;
 
   String get getNumber => '#${NumberFormat('00').format(number)}';
 
-  String get getImageUrl => imageUrl ?? SpaceXPhotos.defaultImage;
+  String get getPatchUrl => patchUrl ?? SpaceXPhotos.defaultPatch;
 
-  bool get hasImage => imageUrl != null;
+  bool get hasPatch => patchUrl != null;
 
   bool get hasVideo => links[0] != null;
 
@@ -241,8 +226,21 @@ class FailureDetails {
     );
   }
 
-  String get getTime =>
-      'T${time.isNegative ? '-' : '+'}${NumberFormat.decimalPattern().format(time.abs())} s';
+  String get getTime {
+    String auxString = 'T${time.isNegative ? '-' : '+'}';
+    final int auxTime = time.abs();
+
+    if (auxTime < 60)
+      auxString += '${NumberFormat.decimalPattern().format(auxTime)} s';
+    else if (auxTime < 3600)
+      auxString +=
+          '${NumberFormat.decimalPattern().format(auxTime ~/ 60)}min ${NumberFormat.decimalPattern().format(auxTime - (auxTime ~/ 60 * 60))}s';
+    else
+      auxString +=
+          '${NumberFormat.decimalPattern().format(auxTime ~/ 3600)}h ${NumberFormat.decimalPattern().format((auxTime / 3600 - auxTime ~/ 3600) * 60)}min';
+
+    return auxString;
+  }
 
   String getAltitude(context) => altitude == null
       ? FlutterI18n.translate(context, 'spacex.other.unknown')
