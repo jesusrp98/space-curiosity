@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:image_downloader/image_downloader.dart';
+import 'package:row_collection/row_collection.dart';
 import 'package:share/share.dart';
 
 import '../../data/classes/nasa/image.dart';
 import '../general/cache_image.dart';
-import '../general/separator.dart';
 
 class NasaImagePage extends StatelessWidget {
   final NasaImage image;
@@ -16,6 +16,7 @@ class NasaImagePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //TODO revisar
     return Scaffold(
       body: CustomScrollView(
         slivers: <Widget>[
@@ -55,7 +56,7 @@ class NasaImagePage extends StatelessWidget {
                         flex: 5,
                         child: Row(children: <Widget>[
                           const Icon(Icons.copyright, size: 32),
-                          Separator.spacer(width: 8),
+                          Separator.spacer(space: 8),
                           Flexible(
                             child: Text(
                               image.getCopyright(context),
@@ -95,7 +96,7 @@ class NasaImagePage extends StatelessWidget {
                                       ),
                                 ),
                               ),
-                              Separator.spacer(width: 8),
+                              Separator.spacer(space: 8),
                               const Icon(Icons.calendar_today, size: 32),
                             ],
                           ),
@@ -103,7 +104,7 @@ class NasaImagePage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Separator.spacer(height: 16),
+                  Separator.spacer(space: 16),
                   // TODO add text expander
                   Text(
                     image?.description ?? "",
@@ -113,7 +114,7 @@ class NasaImagePage extends StatelessWidget {
                       fontSize: 15,
                     ),
                   ),
-                  Separator.divider(height: 32),
+                  Separator.thickDivider(height: 32),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
@@ -163,7 +164,7 @@ class OptionButton extends StatelessWidget {
           child: Row(
             children: <Widget>[
               Icon(icon, size: 32),
-              Separator.spacer(width: 8),
+              Separator.spacer(space: 8),
               Flexible(
                 child: Text(
                   title,

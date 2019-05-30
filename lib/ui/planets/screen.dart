@@ -69,15 +69,16 @@ class SolarSystemScreen extends StatelessWidget {
           ),
           title: moon.name,
           subtitle: moon.description,
-          onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => CelestialBodyPage(
-                        celestialBody: moon,
-                        type: BodyType.celestialBody,
-                      ),
-                ),
-              ),
+          //TODO revisar
+          // onTap: () => Navigator.push(
+          //       context,
+          //       MaterialPageRoute(
+          //         builder: (_) => CelestialBodyPage(
+          //               celestialBody: moon,
+          //               type: BodyType.celestialBody,
+          //             ),
+          //       ),
+          //     ),
         ),
       );
 

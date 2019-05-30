@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
-import '../general/separator.dart';
+import 'package:row_collection/row_collection.dart';
 
 class AppDrawer extends StatelessWidget {
   @override
@@ -17,7 +16,7 @@ class AppDrawer extends StatelessWidget {
                 width: 64,
                 child: Image.asset('assets/icons/android/playstore-icon.png'),
               ),
-              Separator.spacer(width: 16),
+              Separator.spacer(space: 16),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
@@ -26,7 +25,7 @@ class AppDrawer extends StatelessWidget {
                     FlutterI18n.translate(context, 'app.title'),
                     style: Theme.of(context).textTheme.headline,
                   ),
-                  Separator.spacer(height: 8),
+                  Separator.spacer(space: 8),
                   Text(
                     FlutterI18n.translate(context, 'app.subtitle'),
                     style: Theme.of(context).textTheme.subhead.copyWith(
@@ -69,7 +68,8 @@ class AppDrawer extends StatelessWidget {
             )),
             onTap: () => openPage(context, '/weight'),
           ),
-          Separator.divider(height: 16),
+          //TODO revisar
+          //Separator.divider(height: 16),
           ListTile(
             leading: const Icon(Icons.settings),
             title: Text(FlutterI18n.translate(

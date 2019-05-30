@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:http/http.dart' as http;
+import 'package:row_collection/row_collection.dart';
 
 import '../../data/bloc/bloc.dart';
 import '../../data/models/models.dart';
 import '../general/hero_image.dart';
 import '../general/list_cell.dart';
-import '../general/separator.dart';
 
 class ArticlesScreen extends StatefulWidget {
   @override
@@ -64,8 +64,7 @@ class _ArticlesScreenState extends State<ArticlesScreen> {
                       ),
                 );
               },
-              separatorBuilder: (_, index) =>
-                  Separator.divider(height: 0, indent: 96),
+              separatorBuilder: (_, index) => Separator.divider(indent: 96),
             );
           }
         },

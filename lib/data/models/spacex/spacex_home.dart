@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:row_collection/row_collection.dart';
-import 'package:scoped_model/scoped_model.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../util/photos.dart';
 import '../../../util/url.dart';
 import '../../classes/abstract/query_model.dart';
 import 'launch.dart';
+import 'rocket.dart';
 
 /// SPACEX HOME TAB MODEL
 /// Storages essencial data from the next scheduled launch.
@@ -26,7 +24,7 @@ class SpacexHomeModel extends QueryModel {
     launch = Launch.fromJson(await fetchData(Url.nextLaunch));
 
     // Adds notifications to queue
-    await initNotifications(context);
+    // await initNotifications(context);
 
     // Add photos & shuffle them
     if (photos.isEmpty) {
@@ -38,7 +36,8 @@ class SpacexHomeModel extends QueryModel {
     setLoading(false);
   }
 
-  Future initNotifications(BuildContext context) async {
+  //TODO revisar
+  /*Future initNotifications(BuildContext context) async {
     bool updateNotifications;
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -133,7 +132,7 @@ class SpacexHomeModel extends QueryModel {
             IOSNotificationDetails(),
           ),
         );
-  }
+  }*/
 
   String vehicle(context) => FlutterI18n.translate(
         context,

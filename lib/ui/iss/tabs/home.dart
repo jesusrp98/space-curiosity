@@ -3,12 +3,12 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:native_widgets/native_widgets.dart';
+import 'package:row_collection/row_collection.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import '../../../data/models/iss/iss_home.dart';
 import '../../general/cache_image.dart';
 import '../../general/list_cell.dart';
-import '../../general/separator.dart';
 
 /// ISS HOME TAB
 /// This view holds basic information about ISS from the IssHomeModel.
@@ -65,7 +65,7 @@ class HomeTab extends StatelessWidget {
                 title: model.launchedTitle(context),
                 subtitle: model.launchedBody(context),
               ),
-              Separator.divider(height: 0.0, indent: 74.0),
+              Separator.divider(indent: 74.0),
               ListCell(
                 leading: const Icon(Icons.public, size: 42.0),
                 title: FlutterI18n.translate(
@@ -74,7 +74,7 @@ class HomeTab extends StatelessWidget {
                 ),
                 subtitle: model.altitudeBody(context),
               ),
-              Separator.divider(height: 0.0, indent: 74.0),
+              Separator.divider(indent: 74.0),
               ListCell(
                 leading: const Icon(Icons.update, size: 42.0),
                 title: FlutterI18n.translate(
@@ -83,7 +83,7 @@ class HomeTab extends StatelessWidget {
                 ),
                 subtitle: model.orbitBody(context),
               ),
-              Separator.divider(height: 0.0, indent: 74.0),
+              Separator.divider(indent: 74.0),
               ListCell(
                 leading: const Icon(Icons.attach_money, size: 42.0),
                 title: FlutterI18n.translate(
@@ -92,7 +92,7 @@ class HomeTab extends StatelessWidget {
                 ),
                 subtitle: model.projectTitle(context),
               ),
-              Separator.divider(height: 0.0, indent: 74.0),
+              Separator.divider(indent: 74.0),
               ListCell(
                 leading: const Icon(Icons.people, size: 42.0),
                 title: FlutterI18n.translate(
@@ -101,7 +101,7 @@ class HomeTab extends StatelessWidget {
                 ),
                 subtitle: model.numbersBody(context),
               ),
-              Separator.divider(height: 0.0, indent: 74.0),
+              Separator.divider(indent: 74.0),
               ListCell(
                 leading: const Icon(Icons.straighten, size: 42.0),
                 title: FlutterI18n.translate(
@@ -110,7 +110,7 @@ class HomeTab extends StatelessWidget {
                 ),
                 subtitle: model.specificationsBody(context),
               ),
-              Separator.divider(height: 0.0, indent: 74.0),
+              Separator.divider(indent: 74.0),
             ],
           ),
     );

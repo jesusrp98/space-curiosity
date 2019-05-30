@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:scoped_model/scoped_model.dart';
 
@@ -12,8 +13,8 @@ var planetsPath = Firestore.instance.collection('planets');
 
 class PlanetsModel extends QueryModel {
   @override
-  Future loadData() async {
-    response = await planetsPath.getDocuments();
+  Future loadData([BuildContext context]) async {
+    var response = await planetsPath.getDocuments();
 
     items.addAll(response.documents
         .map((document) => CelestialBody.fromJson(document))

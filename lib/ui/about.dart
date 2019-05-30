@@ -7,11 +7,11 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_mailer/flutter_mailer.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:package_info/package_info.dart';
+import 'package:row_collection/row_collection.dart';
 
 import '../util/url.dart';
 import 'general/dialog_round.dart';
 import 'general/list_cell.dart';
-import 'general/separator.dart';
 
 /// ABOUT SCREEN
 /// This view contains a list with useful
@@ -54,6 +54,7 @@ class _AboutScreenState extends State<AboutScreen> {
 
   @override
   Widget build(BuildContext context) {
+    //TODO revisar
     return Scaffold(
       appBar: AppBar(
         title: Text(FlutterI18n.translate(
@@ -75,7 +76,7 @@ class _AboutScreenState extends State<AboutScreen> {
             {'version': _packageInfo.version, 'status': 'release'},
           ),
         ),
-        Separator.divider(height: 0, indent: 72),
+        Separator.divider(indent: 72),
         ListCell(
           leading: const Icon(Icons.person_outline, size: 40),
           title: FlutterI18n.translate(
@@ -91,7 +92,7 @@ class _AboutScreenState extends State<AboutScreen> {
                 androidToolbarColor: Theme.of(context).primaryColor,
               ),
         ),
-        Separator.divider(height: 0, indent: 72),
+        Separator.divider(indent: 72),
         ListCell(
           leading: const Icon(Icons.star_border, size: 40),
           title: FlutterI18n.translate(
@@ -104,7 +105,7 @@ class _AboutScreenState extends State<AboutScreen> {
           ),
           onTap: () => AppReview.storeListing,
         ),
-        Separator.divider(height: 0, indent: 72),
+        Separator.divider(indent: 72),
         ListCell(
           leading: const Icon(Icons.mail_outline, size: 40),
           title: FlutterI18n.translate(
@@ -120,7 +121,7 @@ class _AboutScreenState extends State<AboutScreen> {
                 recipients: [Url.email['address']],
               )),
         ),
-        Separator.divider(height: 0, indent: 72),
+        Separator.divider(indent: 72),
         ListCell(
           leading: const Icon(Icons.apps, size: 40),
           title: FlutterI18n.translate(
@@ -136,7 +137,7 @@ class _AboutScreenState extends State<AboutScreen> {
                 androidToolbarColor: Theme.of(context).primaryColor,
               ),
         ),
-        Separator.divider(height: 0, indent: 72),
+        Separator.divider(indent: 72),
         ListCell(
           leading: const Icon(Icons.public, size: 40),
           title: FlutterI18n.translate(
@@ -167,7 +168,7 @@ class _AboutScreenState extends State<AboutScreen> {
                     ),
               ),
         ),
-        Separator.divider(height: 0, indent: 72),
+        Separator.divider(indent: 72),
         ListCell(
           leading: const Icon(Icons.people_outline, size: 40),
           title: FlutterI18n.translate(
@@ -183,7 +184,7 @@ class _AboutScreenState extends State<AboutScreen> {
                 androidToolbarColor: Theme.of(context).primaryColor,
               ),
         ),
-        Separator.divider(height: 0, indent: 72),
+        Separator.divider(indent: 72),
         ListCell(
           leading: const Icon(Icons.code, size: 40),
           title: FlutterI18n.translate(
@@ -199,7 +200,7 @@ class _AboutScreenState extends State<AboutScreen> {
                 androidToolbarColor: Theme.of(context).primaryColor,
               ),
         ),
-        Separator.divider(height: 0, indent: 72),
+        Separator.divider(indent: 72),
         ListCell(
           leading: const Icon(Icons.folder_open, size: 40),
           title: FlutterI18n.translate(
@@ -230,7 +231,7 @@ class _AboutScreenState extends State<AboutScreen> {
                     ),
               ),
         ),
-        Separator.divider(height: 0, indent: 72),
+        Separator.divider(indent: 72),
         ListCell(
           leading: const Icon(Icons.copyright, size: 40),
           title: FlutterI18n.translate(
@@ -242,7 +243,7 @@ class _AboutScreenState extends State<AboutScreen> {
             'about.copyright.body',
           ),
         ),
-        Separator.divider(height: 0, indent: 72),
+        Separator.divider(indent: 72),
       ]),
     );
   }

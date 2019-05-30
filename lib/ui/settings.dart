@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:persist_theme/persist_theme.dart';
-
-import 'general/separator.dart';
+import 'package:row_collection/row_collection.dart';
 
 class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    //TODO revisar
     return Scaffold(
       appBar: AppBar(
         title: Text(FlutterI18n.translate(
