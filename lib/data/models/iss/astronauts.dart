@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:http/http.dart' as http;
 
@@ -11,10 +12,10 @@ import '../models.dart';
 /// Represents an astronaut in the outter space, including his/her name & spacecraft.
 class AstronautsModel extends QueryModel {
   @override
-  Future loadData() async {
+  Future loadData([BuildContext context]) async {
     // Get items by http call
-    response = await http.get(Url.issAstronauts);
-    snapshot = json.decode(response.body)['people'];
+    var response = await http.get(Url.issAstronauts);
+    var snapshot = json.decode(response.body)['people'];
 
     // Clear old data
     clearItems();

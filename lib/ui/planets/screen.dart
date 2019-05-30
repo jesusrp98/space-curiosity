@@ -126,15 +126,15 @@ class SolarSystemScreen extends StatelessWidget {
                     );
                   },
                 ),
-                onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => CelestialBodyPage(
-                              celestialBody: model.getItem(index),
-                              type: BodyType.planet,
-                            ),
-                      ),
-                    ),
+                // onTap: () => Navigator.push(
+                //       context,
+                //       MaterialPageRoute(
+                //         builder: (context) => CelestialBodyPage(
+                //               celestialBody: model.getItem(index),
+                //               type: BodyType.planet,
+                //             ),
+                //       ),
+                //     ),
               ),
         ),
         const Divider(height: 0.0, indent: 104.0)

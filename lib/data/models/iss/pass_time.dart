@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:http/http.dart' as http;
@@ -16,9 +17,9 @@ class PassTimesModel extends QueryModel {
   LocationData _userLocation;
 
   @override
-  Future loadData() async {
+  Future loadData([BuildContext context]) async {
     // Get item by http call
-    response = await http.get(Url.issLocation);
+    var response = await http.get(Url.issLocation);
 
     // Clear old data
     clearItems();
@@ -36,7 +37,7 @@ class PassTimesModel extends QueryModel {
       response = await http.get(
         '${Url.issPassTimes}?lat=${_userLocation.latitude}&lon=${_userLocation.longitude}&n=10',
       );
-      snapshot = json.decode(response.body)['response'];
+      var snapshot = json.decode(response.body)['response'];
       items.addAll(
         snapshot.map((passTime) => PassTime.fromJson(passTime)).toList(),
       );

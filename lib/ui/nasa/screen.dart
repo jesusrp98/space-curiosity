@@ -48,7 +48,7 @@ class NasaImagePage extends StatelessWidget {
                     style: Theme.of(context).textTheme.headline,
                     textAlign: TextAlign.center,
                   ),
-                  Separator.spacer(height: 16),
+                  Separator.spacer(space: 16),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
