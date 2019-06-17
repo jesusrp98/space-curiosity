@@ -79,7 +79,13 @@
       "title": "Bienvenido a SpaceX",
       "icon": "Inicio",
       "tab": {
-        "live_mission": "Ver retransmisión",
+        "live_mission": "EN VIVO",
+        "counter": {
+          "day": "días",
+          "hour": "horas",
+          "min": "mins",
+          "sec": "segs"
+        },
         "mission": {
           "title": "Lanzado por {rocket}",
           "body": "Llevará a {payloads}",
@@ -307,7 +313,6 @@
           "nationality": "Nacionalidad",
           "mass": "Peso",
           "orbit": "Órbita",
-          "regime": "Régimen",
           "periapsis": "Periapsis",
           "apoapsis": "Apoapsis",
           "inclination": "Inclinación",
@@ -405,6 +410,10 @@
         "watch_replay": "Ver lanzamiento",
         "add_event": "Añadir evento",
         "search": "Buscar"
+      },
+      "loading_error": {
+        "message": "No se han podido cargar los datos.",
+        "reload": "RECARGAR"
       },
       "share": {
         "capsule": {
