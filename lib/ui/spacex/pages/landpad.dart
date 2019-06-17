@@ -5,10 +5,8 @@ import 'package:scoped_model/scoped_model.dart';
 
 import '../../../data/models/spacex/landpad.dart';
 import '../../general/expand_widget.dart';
-import '../../general/header_map.dart';
-import '../../general/loading_indicator.dart';
 import '../../general/row_item.dart';
-import '../../general/sliver_bar.dart';
+import '../../general/scroll_page.dart';
 
 /// LANDPAD PAGE VIEW
 /// This view displays information about a specific landpad,
@@ -18,17 +16,13 @@ class LandpadPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScopedModelDescendant<LandpadModel>(
       builder: (context, child, model) => Scaffold(
-            body: CustomScrollView(slivers: <Widget>[
-              SliverBar(
-                title: model.id,
-                header: model.isLoading
-                    ? LoadingIndicator()
-                    : MapHeader(model.landpad.coordinates),
-              ),
-              model.isLoading
-                  ? SliverFillRemaining(child: LoadingIndicator())
-                  : SliverToBoxAdapter(child: _buildBody())
-            ]),
+            body: ScrollPage<LandpadModel>.map(
+              title: model.id,
+              coordinates: model.landpad.coordinates,
+              children: <Widget>[
+                SliverToBoxAdapter(child: _buildBody()),
+              ],
+            ),
           ),
     );
   }
@@ -84,7 +78,7 @@ class LandpadPage extends StatelessWidget {
               model.landpad.getSuccessfulLandings,
             ),
             Separator.divider(),
-            TextExpand(text: model.landpad.details, maxLength: 8)
+            TextExpand(model.landpad.details)
           ]),
     );
   }

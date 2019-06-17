@@ -4,13 +4,10 @@ import 'package:row_collection/row_collection.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import '../../../data/models/spacex/spacex_company.dart';
-import '../../../util/menu.dart';
 import '../../general/achievement_cell.dart';
-import '../../general/header_swiper.dart';
 import '../../general/header_text.dart';
-import '../../general/loading_indicator.dart';
 import '../../general/row_item.dart';
-import '../../general/sliver_bar.dart';
+import '../../general/scroll_page.dart';
 
 /// COMPANY TAB VIEW
 /// This tab holds information about SpaceX-as-a-company,
@@ -20,42 +17,18 @@ class CompanyTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScopedModelDescendant<SpacexCompanyModel>(
       builder: (context, child, model) => Scaffold(
-            body: CustomScrollView(
-              key: PageStorageKey('spacex_company'),
-              slivers: <Widget>[
-                SliverBar(
-                  title: FlutterI18n.translate(context, 'spacex.company.title'),
-                  header: model.isLoading
-                      ? LoadingIndicator()
-                      : SwiperHeader(list: model.photos),
-                  actions: <Widget>[
-                    PopupMenuButton<String>(
-                      itemBuilder: (context) => Menu.home.keys
-                          .map((string) => PopupMenuItem(
-                                value: string,
-                                child: Text(
-                                  FlutterI18n.translate(context, string),
-                                ),
-                              ))
-                          .toList(),
-                      onSelected: (string) => Navigator.pushNamed(
-                            context,
-                            Menu.home[string],
-                          ),
-                    ),
-                  ],
-                ),
-                if (model.isLoading)
-                  SliverFillRemaining(child: LoadingIndicator())
-                else ...[
-                  SliverToBoxAdapter(child: _buildBody()),
-                  SliverList(
-                    delegate: SliverChildBuilderDelegate(
-                      _buildAchievement,
-                      childCount: model.getItemCount,
-                    ),
+            body: ScrollPage<SpacexCompanyModel>.tab(
+              context: context,
+              photos: model.photos,
+              title: FlutterI18n.translate(context, 'spacex.company.title'),
+              children: <Widget>[
+                SliverToBoxAdapter(child: _buildBody()),
+                SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                    _buildAchievement,
+                    childCount: model.getItemCount,
                   ),
-                ]
+                ),
               ],
             ),
           ),

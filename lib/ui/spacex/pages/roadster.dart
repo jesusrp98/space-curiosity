@@ -14,6 +14,7 @@ import '../../general/expand_widget.dart';
 import '../../general/header_swiper.dart';
 import '../../general/row_item.dart';
 import '../../general/sliver_bar.dart';
+
 /// ROADSTER PAGE VIEW
 /// Displays live information about Elon Musk's Tesla Roadster.
 class RoadsterPage extends StatelessWidget {
@@ -125,7 +126,7 @@ class RoadsterPage extends StatelessWidget {
           'Falcon Heavy',
         ),
         Separator.divider(),
-        TextExpand(text: _roadster.description, maxLength: 7)
+        TextExpand(_roadster.description)
       ]),
     );
   }
