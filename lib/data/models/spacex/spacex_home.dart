@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
-import 'package:flutter_web_browser/flutter_web_browser.dart';
-import 'package:row_collection/row_collection.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../util/photos.dart';
@@ -25,7 +24,7 @@ class SpacexHomeModel extends QueryModel {
       items.add(Launch.fromJson(await fetchData(Url.nextLaunch)));
 
       // Adds notifications to queue
-      await initNotifications(context);
+      // await initNotifications(context);
 
       // Add photos & shuffle them
       if (photos.isEmpty) {
@@ -38,102 +37,102 @@ class SpacexHomeModel extends QueryModel {
 
   Launch get launch => items.isNotEmpty ? getItem(0) : null;
 
-  Future initNotifications(BuildContext context) async {
-    bool updateNotifications;
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
+  // Future initNotifications(BuildContext context) async {
+  //   bool updateNotifications;
+  //   final SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    // Checks if is necessary to update scheduled notifications
-    try {
-      updateNotifications =
-          prefs.getString('notifications.launches.upcoming') !=
-              launch.launchDate.toIso8601String();
-    } catch (e) {
-      updateNotifications = true;
-    }
+  //   // Checks if is necessary to update scheduled notifications
+  //   try {
+  //     updateNotifications =
+  //         prefs.getString('notifications.launches.upcoming') !=
+  //             launch.launchDate.toIso8601String();
+  //   } catch (e) {
+  //     updateNotifications = true;
+  //   }
 
-    // Update notifications if necessary
-    if (updateNotifications && !launch.tentativeTime) {
-      // T - 1 day notification
-      await _scheduleNotification(
-        id: 0,
-        context: context,
-        time: FlutterI18n.translate(
-          context,
-          'spacex.notifications.launches.time_tomorrow',
-        ),
-        subtract: Duration(days: 1),
-      );
+  //   // Update notifications if necessary
+  //   if (updateNotifications && !launch.tentativeTime) {
+  //     // T - 1 day notification
+  //     await _scheduleNotification(
+  //       id: 0,
+  //       context: context,
+  //       time: FlutterI18n.translate(
+  //         context,
+  //         'spacex.notifications.launches.time_tomorrow',
+  //       ),
+  //       subtract: Duration(days: 1),
+  //     );
 
-      // T - 1 hour notification
-      await _scheduleNotification(
-        id: 1,
-        context: context,
-        time: FlutterI18n.translate(
-          context,
-          'spacex.notifications.launches.time_hour',
-        ),
-        subtract: Duration(hours: 1),
-      );
+  //     // T - 1 hour notification
+  //     await _scheduleNotification(
+  //       id: 1,
+  //       context: context,
+  //       time: FlutterI18n.translate(
+  //         context,
+  //         'spacex.notifications.launches.time_hour',
+  //       ),
+  //       subtract: Duration(hours: 1),
+  //     );
 
-      // T - 30 minutes notification
-      await _scheduleNotification(
-        id: 2,
-        context: context,
-        time: FlutterI18n.translate(
-          context,
-          'spacex.notifications.launches.time_minutes',
-          {'minutes': '30'},
-        ),
-        subtract: Duration(minutes: 30),
-      );
+  //     // T - 30 minutes notification
+  //     await _scheduleNotification(
+  //       id: 2,
+  //       context: context,
+  //       time: FlutterI18n.translate(
+  //         context,
+  //         'spacex.notifications.launches.time_minutes',
+  //         {'minutes': '30'},
+  //       ),
+  //       subtract: Duration(minutes: 30),
+  //     );
 
-      // Update storaged launch date
-      prefs.setString(
-        'notifications.launches.upcoming',
-        launch.launchDate.toIso8601String(),
-      );
-    } else if (launch.tentativeTime)
-      ScopedModel.of<AppModel>(context).notifications.cancelAll();
-  }
-
-  Future _scheduleNotification({
-    BuildContext context,
-    int id,
-    String time,
-    Duration subtract,
-  }) async {
-    await ScopedModel.of<AppModel>(context).notifications.schedule(
-          id,
-          FlutterI18n.translate(context, 'spacex.notifications.launches.title'),
-          FlutterI18n.translate(
-            context,
-            'spacex.notifications.launches.body',
-            {
-              'rocket': launch.rocket.name,
-              'payload': launch.rocket.secondStage.getPayload(0).id,
-              'orbit': launch.rocket.secondStage.getPayload(0).orbit,
-              'time': time,
-            },
-          ),
-          launch.launchDate.subtract(subtract),
-          NotificationDetails(
-            AndroidNotificationDetails(
-              'channel.launches',
-              FlutterI18n.translate(
-                context,
-                'spacex.notifications.channel.launches.title',
-              ),
-              FlutterI18n.translate(
-                context,
-                'spacex.notifications.channel.launches.description',
-              ),
-              importance: Importance.High,
-              color: Theme.of(context).primaryColor,
-            ),
-            IOSNotificationDetails(),
-          ),
-        );
-  }
+  //     // Update storaged launch date
+  //     prefs.setString(
+  //       'notifications.launches.upcoming',
+  //       launch.launchDate.toIso8601String(),
+  //     );
+  //   } else if (launch.tentativeTime)
+  //     ScopedModel.of<AppModel>(context).notifications.cancelAll();
+  // }
+  // TODO readd this in the feature
+  // Future _scheduleNotification({
+  //   BuildContext context,
+  //   int id,
+  //   String time,
+  //   Duration subtract,
+  // }) async {
+  //   await ScopedModel.of<AppModel>(context).notifications.schedule(
+  //         id,
+  //         FlutterI18n.translate(context, 'spacex.notifications.launches.title'),
+  //         FlutterI18n.translate(
+  //           context,
+  //           'spacex.notifications.launches.body',
+  //           {
+  //             'rocket': launch.rocket.name,
+  //             'payload': launch.rocket.secondStage.getPayload(0).id,
+  //             'orbit': launch.rocket.secondStage.getPayload(0).orbit,
+  //             'time': time,
+  //           },
+  //         ),
+  //         launch.launchDate.subtract(subtract),
+  //         NotificationDetails(
+  //           AndroidNotificationDetails(
+  //             'channel.launches',
+  //             FlutterI18n.translate(
+  //               context,
+  //               'spacex.notifications.channel.launches.title',
+  //             ),
+  //             FlutterI18n.translate(
+  //               context,
+  //               'spacex.notifications.channel.launches.description',
+  //             ),
+  //             importance: Importance.High,
+  //             color: Theme.of(context).primaryColor,
+  //           ),
+  //           IOSNotificationDetails(),
+  //         ),
+  //       );
+  // }
 
   String vehicle(context) => FlutterI18n.translate(
         context,

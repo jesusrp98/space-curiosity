@@ -14,13 +14,13 @@ var planetsPath = Firestore.instance.collection('planets');
 class PlanetsModel extends QueryModel {
   @override
   Future loadData([BuildContext context]) async {
-    var response = await planetsPath.getDocuments();
+    // var response = await planetsPath.getDocuments();
 
-    items.addAll(response.documents
-        .map((document) => CelestialBody.fromJson(document))
-        .toList());
+    // items.addAll(response.documents
+    //     .map((document) => CelestialBody.fromJson(document))
+    //     .toList());
 
-    setLoading(false);
+    // setLoading(false);
   }
 }
 

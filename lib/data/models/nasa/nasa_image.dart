@@ -17,7 +17,7 @@ class NasaImagesModel extends QueryModel implements PersistData {
       print("Error Loading Images: $e");
       items.addAll(await NasaImageRepo(httpClient: http.Client()).images);
     }
-    setLoading(false);
+     finishLoading();
 
     _module.images = await NasaImageRepo(httpClient: http.Client()).images;
     saveToDisk();

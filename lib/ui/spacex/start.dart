@@ -3,7 +3,6 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:quick_actions/quick_actions.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../data/classes/abstract/query_model.dart';
 import '../../data/models/spacex/info_vehicle.dart';
@@ -82,9 +81,6 @@ class _StartScreenState extends State<SpaceXScreen> {
     });
 
     Future.delayed(Duration.zero, () async {
-      // Show the Patreon's page
-      final SharedPreferences prefs = await SharedPreferences.getInstance();
-
       // Setting app shortcuts
       quickActions.setShortcutItems(<ShortcutItem>[
         ShortcutItem(

@@ -3,7 +3,6 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:scoped_model/scoped_model.dart';
 
-import '../models/app_model.dart';
 import 'cache_image.dart';
 
 /// SWIPER HEADER WIDGET
@@ -21,7 +20,8 @@ class SwiperHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Return the image list, with the desire image quality
-    final List auxList = selectQuality(context);
+    // final List auxList = selectQuality(context);
+    final List auxList = list;
 
     return Swiper(
       itemCount: list.length,
@@ -37,24 +37,25 @@ class SwiperHeader extends StatelessWidget {
     );
   }
 
-  List selectQuality(BuildContext context) {
-    // Reg exps to check if the image URL is from Flickr
-    final RegExp qualityRegEx = RegExp(r'(_[a-z])*\.jpg$');
-    final RegExp flickrRegEx = RegExp(
-      r'^https:\/\/.+\.staticflickr\.com\/[0-9]+\/[0-9]+_.+_.+\.jpg$',
-    );
+  // TODO readd this feature in the future
+  // List selectQuality(BuildContext context) {
+  //   // Reg exps to check if the image URL is from Flickr
+  //   final RegExp qualityRegEx = RegExp(r'(_[a-z])*\.jpg$');
+  //   final RegExp flickrRegEx = RegExp(
+  //     r'^https:\/\/.+\.staticflickr\.com\/[0-9]+\/[0-9]+_.+_.+\.jpg$',
+  //   );
 
-    // Getting the desire image quality tag
-    final int qualityIndex = ImageQuality.values
-        .indexOf(ScopedModel.of<AppModel>(context).imageQuality);
-    final String qualityTag = ['_n', '', '_c'][qualityIndex];
+  //   // Getting the desire image quality tag
+  //   final int qualityIndex = ImageQuality.values
+  //       .indexOf(ScopedModel.of<AppModel>(context).imageQuality);
+  //   final String qualityTag = ['_n', '', '_c'][qualityIndex];
 
-    return list
-        .map(
-          (url) => flickrRegEx.hasMatch(url)
-              ? url.replaceFirst(qualityRegEx, '$qualityTag.jpg')
-              : url,
-        )
-        .toList();
-  }
+  //   return list
+  //       .map(
+  //         (url) => flickrRegEx.hasMatch(url)
+  //             ? url.replaceFirst(qualityRegEx, '$qualityTag.jpg')
+  //             : url,
+  //       )
+  //       .toList();
+  // }
 }

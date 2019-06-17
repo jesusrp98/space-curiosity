@@ -17,9 +17,6 @@ class AstronautsModel extends QueryModel {
     var response = await http.get(Url.issAstronauts);
     var snapshot = json.decode(response.body)['people'];
 
-    // Clear old data
-    clearItems();
-
     // Add parsed items
     items.addAll(
       snapshot.map((astronaut) => Astronaut.fromJson(astronaut)).toList(),
@@ -32,7 +29,7 @@ class AstronautsModel extends QueryModel {
     }
 
     // Finished loading data
-    setLoading(false);
+     finishLoading();
   }
 }
 

@@ -14,9 +14,6 @@ class IssHomeModel extends QueryModel {
     // Get items from Firebase
     var response = await Firestore.instance.collection('iss').getDocuments();
 
-    // Clear old data
-    clearItems();
-
     // Add parsed items
     items.addAll(
       response.documents
@@ -31,7 +28,7 @@ class IssHomeModel extends QueryModel {
     }
 
     // Finished loading data
-    setLoading(false);
+    finishLoading();
   }
 
   IssHome get issHome => getItem(0);

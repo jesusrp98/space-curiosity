@@ -21,9 +21,6 @@ class PassTimesModel extends QueryModel {
     // Get item by http call
     var response = await http.get(Url.issLocation);
 
-    // Clear old data
-    clearItems();
-
     _issLocation = Map.from(json.decode(response.body)['iss_position']);
 
     // Ask user about location
@@ -47,7 +44,7 @@ class PassTimesModel extends QueryModel {
     }
 
     // Finished loading data
-    setLoading(false);
+     finishLoading();
   }
 
   Map<String, String> get issLocation => _issLocation;
