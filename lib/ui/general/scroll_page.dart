@@ -3,11 +3,10 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:latlong/latlong.dart';
+import 'package:provider/provider.dart';
 import 'package:row_collection/row_collection.dart';
-import 'package:scoped_model/scoped_model.dart';
 
 import '../../data/classes/abstract/query_model.dart';
-import '../../util/menu.dart';
 import 'header_map.dart';
 import 'header_swiper.dart';
 import 'sliver_bar.dart';
@@ -140,8 +139,8 @@ class _ScrollPageState<T extends QueryModel> extends State<ScrollPage> {
 
   @override
   Widget build(BuildContext context) {
-    return ScopedModelDescendant<T>(
-      builder: (context, child, model) => RefreshIndicator(
+    return Consumer<T>(
+      builder: (context, model, child) => RefreshIndicator(
             onRefresh: () => _onRefresh(context, model),
             child: CustomScrollView(
               key: PageStorageKey(widget.title),

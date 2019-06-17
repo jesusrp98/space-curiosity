@@ -3,8 +3,8 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:native_widgets/native_widgets.dart';
+import 'package:provider/provider.dart';
 import 'package:row_collection/row_collection.dart';
-import 'package:scoped_model/scoped_model.dart';
 
 import '../../../data/models/iss/iss_home.dart';
 import '../../general/cache_image.dart';
@@ -15,8 +15,8 @@ import '../../general/list_cell.dart';
 class HomeTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ScopedModelDescendant<IssHomeModel>(
-      builder: (context, child, model) => Scaffold(
+    return Consumer<IssHomeModel>(
+      builder: (context, model, child) => Scaffold(
             body: CustomScrollView(slivers: <Widget>[
               SliverAppBar(
                 expandedHeight: MediaQuery.of(context).size.height * 0.3,
@@ -57,8 +57,8 @@ class HomeTab extends StatelessWidget {
   }
 
   Widget _buildBody() {
-    return ScopedModelDescendant<IssHomeModel>(
-      builder: (context, child, model) => Column(
+    return Consumer<IssHomeModel>(
+      builder: (context, model, child) => Column(
             children: <Widget>[
               ListCell(
                 leading: const Icon(Icons.calendar_today, size: 42.0),

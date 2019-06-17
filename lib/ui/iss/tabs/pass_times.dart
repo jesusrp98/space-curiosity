@@ -4,8 +4,8 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong/latlong.dart';
 import 'package:native_widgets/native_widgets.dart';
+import 'package:provider/provider.dart';
 import 'package:row_collection/row_collection.dart';
-import 'package:scoped_model/scoped_model.dart';
 
 import '../../../data/models/iss/pass_time.dart';
 import '../../general/list_cell.dart';
@@ -15,8 +15,8 @@ import '../../general/list_cell.dart';
 class PassTimesTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ScopedModelDescendant<PassTimesModel>(
-      builder: (context, child, model) => Scaffold(
+    return Consumer<PassTimesModel>(
+      builder: (context, model, child) => Scaffold(
             body: CustomScrollView(slivers: <Widget>[
               SliverAppBar(
                 expandedHeight: MediaQuery.of(context).size.height * 0.3,
@@ -126,8 +126,8 @@ class PassTimesTab extends StatelessWidget {
   }
 
   Widget _buildItem(BuildContext context, int index) {
-    return ScopedModelDescendant<PassTimesModel>(
-      builder: (context, child, model) {
+    return Consumer<PassTimesModel>(
+      builder: (context, model, child) {
         final PassTime passTime = model.getItem(index);
         return Column(children: <Widget>[
           ListCell(

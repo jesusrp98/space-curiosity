@@ -4,8 +4,8 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:native_widgets/native_widgets.dart';
+import 'package:provider/provider.dart';
 import 'package:row_collection/row_collection.dart';
-import 'package:scoped_model/scoped_model.dart';
 
 import '../../../data/models/iss/astronauts.dart';
 import '../../general/cache_image.dart';
@@ -16,8 +16,8 @@ import '../../general/list_cell.dart';
 class AstronautsTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ScopedModelDescendant<AstronautsModel>(
-      builder: (context, child, model) => Scaffold(
+    return Consumer<AstronautsModel>(
+      builder: (context, model, child) => Scaffold(
             body: CustomScrollView(slivers: <Widget>[
               SliverAppBar(
                 expandedHeight: MediaQuery.of(context).size.height * 0.3,
@@ -63,8 +63,8 @@ class AstronautsTab extends StatelessWidget {
   }
 
   Widget _buildItem(BuildContext context, int index) {
-    return ScopedModelDescendant<AstronautsModel>(
-      builder: (context, child, model) {
+    return Consumer<AstronautsModel>(
+      builder: (context, model, child) {
         final Astronaut astronaut = model.getItem(index);
         return Column(children: <Widget>[
           ListCell(
