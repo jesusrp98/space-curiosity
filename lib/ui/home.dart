@@ -47,21 +47,28 @@ class ContentPage extends StatelessWidget {
 
   Widget _buildNasaImage() {
     return Consumer<NasaImagesModel>(
-      builder: (context, model, child) => model.isLoading
-          ? NativeLoadingIndicator(center: true)
-          : model.items == null || model.items.isEmpty
-              ? CallError(() => model.loadData())
-              : Swiper(
-                  itemBuilder: (_, index) => PhotoCard(model.getItem(index)),
-                  scrollDirection: Axis.vertical,
-                  itemCount: model?.getItemCount ?? 0,
-                  autoplay: true,
-                  autoplayDelay: 6000,
-                  duration: 750,
-                  itemWidth: MediaQuery.of(context).size.width,
-                  itemHeight: MediaQuery.of(context).size.height * 0.7,
-                  layout: SwiperLayout.STACK,
-                ),
+      builder: (context, model, child) {
+        return model.isLoading
+            ? NativeLoadingIndicator(center: true)
+            : model.items == null || model.items.isEmpty
+                ? CallError(() => model.loadData())
+                : Swiper(
+                    itemBuilder: (_, index) {
+                      try {
+                        return PhotoCard(model.getItem(index));
+                      } catch (e) {}
+                      return Container();
+                    },
+                    scrollDirection: Axis.vertical,
+                    itemCount: model?.getItemCount ?? 0,
+                    autoplay: true,
+                    autoplayDelay: 6000,
+                    duration: 750,
+                    itemWidth: MediaQuery.of(context).size.width,
+                    itemHeight: MediaQuery.of(context).size.height * 0.7,
+                    layout: SwiperLayout.STACK,
+                  );
+      },
     );
   }
 }

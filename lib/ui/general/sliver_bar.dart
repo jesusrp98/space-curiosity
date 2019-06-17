@@ -31,7 +31,7 @@ class SliverBar extends StatelessWidget {
         // Open issue: [https://github.com/flutter/flutter/issues/14227]
         title: ConstrainedBox(
           child: Text(
-            title,
+            title ?? '',
             overflow: TextOverflow.ellipsis,
             textAlign: TextAlign.center,
             maxLines: 1,

@@ -9,7 +9,7 @@ class ThemeModel extends ChangeNotifier {
   static const _darkModeKey = 'dark-mode';
   static const _useSystemModeKey = 'system-mode';
   final _storage = LocalStorage('theme-settings');
-  bool _darkMode = false;
+  bool _darkMode = true;
   bool get darkMode => _darkMode;
   bool get _defaultSystemSetting => Platform.isIOS ? false : true;
   bool _useSystemSetting = true;
@@ -17,7 +17,7 @@ class ThemeModel extends ChangeNotifier {
 
   void init() async {
     await _storage.ready;
-    _darkMode = _storage.getItem(_darkModeKey) ?? false;
+    _darkMode = _storage.getItem(_darkModeKey) ?? true;
     _useSystemSetting = _storage.getItem(_useSystemModeKey) ?? _defaultSystemSetting;
     notifyListeners();
   }
