@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:scoped_model/scoped_model.dart';
 
 import '../models.dart';
 
@@ -24,7 +23,7 @@ class PlanetsModel extends QueryModel {
   }
 }
 
-class CelestialBody extends Model {
+class CelestialBody extends ChangeNotifier {
   Future<List<CelestialBody>> getMoons(String id) async {
     var _snapshot =
         await planetsPath.document(id).collection('moons').getDocuments();

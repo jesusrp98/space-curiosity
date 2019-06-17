@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:native_widgets/native_widgets.dart';
-import 'package:scoped_model/scoped_model.dart';
+import 'package:provider/provider.dart';
 
 import '../data/models/nasa/nasa_image.dart';
 import 'app/app_drawer.dart';
@@ -35,8 +35,8 @@ class ContentPage extends StatelessWidget {
         Expanded(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: ScopedModel<NasaImagesModel>(
-              model: NasaImagesModel()..loadData(),
+            child: ListenableProvider<NasaImagesModel>.value(
+              value: NasaImagesModel()..loadData(),
               child: _buildNasaImage(),
             ),
           ),
@@ -46,8 +46,8 @@ class ContentPage extends StatelessWidget {
   }
 
   Widget _buildNasaImage() {
-    return ScopedModelDescendant<NasaImagesModel>(
-      builder: (context, child, model) => model.isLoading
+    return Consumer<NasaImagesModel>(
+      builder: (context, model, child) => model.isLoading
           ? NativeLoadingIndicator(center: true)
           : model.items == null || model.items.isEmpty
               ? CallError(() => model.loadData())
