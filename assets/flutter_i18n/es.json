@@ -22,9 +22,14 @@
   },
   "nasa": {
     "no_copyright": "Sin copyright",
+    "no_description": "Sin descripción",
     "share": "Compartir",
     "copy_link": "Copiar enlace",
     "download": "Descargar"
+  },
+  "news": {
+    "website": "Visita la web",
+    "credits": "Créditos a Space.com"
   },
   "iss": {
     "home": {
