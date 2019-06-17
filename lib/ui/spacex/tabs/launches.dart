@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
+import 'package:provider/provider.dart';
 import 'package:row_collection/row_collection.dart';
-import 'package:scoped_model/scoped_model.dart';
 
 import '../../../data/models/spacex/launch.dart';
 import '../../general/hero_image.dart';
@@ -20,8 +20,8 @@ class LaunchesTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScopedModelDescendant<LaunchesModel>(
-      builder: (context, child, model) => Scaffold(
+    return Consumer<LaunchesModel>(
+      builder: (context, model, child) => Scaffold(
             body: ScrollPage<LaunchesModel>.tab(
               context: context,
               photos: model.photos,
@@ -53,8 +53,8 @@ class LaunchesTab extends StatelessWidget {
   }
 
   Widget _buildLaunch(BuildContext context, int index) {
-    return ScopedModelDescendant<LaunchesModel>(
-      builder: (context, child, model) {
+    return Consumer<LaunchesModel>(
+      builder: (context, model, child) {
         final Launch launch = model.getItem(index);
         return Column(children: <Widget>[
           ListCell(

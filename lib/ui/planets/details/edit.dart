@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:scoped_model/scoped_model.dart';
+import 'package:provider/provider.dart';
 
 import '../../../data/models/planets/celestial_body.dart';
 
@@ -64,14 +64,14 @@ class AddEditPlanetPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new ScopedModel<CelestialBody>(
-      model: CelestialBody(id: type == BodyType.planet ? planet?.id : null),
+    return ListenableProvider<CelestialBody>.value(
+      value: CelestialBody(id: type == BodyType.planet ? planet?.id : null),
       child: Scaffold(
         appBar: AppBar(
           title: Text(getTitle()),
           actions: <Widget>[
-            ScopedModelDescendant<CelestialBody>(
-              builder: (context, child, model) => IconButton(
+            Consumer<CelestialBody>(
+              builder: (context, model, child) => IconButton(
                     icon: Icon(Icons.delete),
                     onPressed: planet == null
                         ? null
@@ -81,8 +81,8 @@ class AddEditPlanetPage extends StatelessWidget {
                           },
                   ),
             ),
-            ScopedModelDescendant<CelestialBody>(
-              builder: (context, child, model) => IconButton(
+            Consumer<CelestialBody>(
+              builder: (context, model, child) => IconButton(
                     icon: Icon(Icons.save),
                     onPressed: () {
                       final form = formKey.currentState;
@@ -132,8 +132,8 @@ class AddEditPlanetPage extends StatelessWidget {
         ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: ScopedModelDescendant<CelestialBody>(
-            builder: (context, child, model) => Form(
+          child: Consumer<CelestialBody>(
+            builder: (context, model, child) => Form(
                   key: formKey,
                   autovalidate: false,
                   onWillPop: () => Future(() => true),

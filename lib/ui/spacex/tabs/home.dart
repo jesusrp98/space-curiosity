@@ -2,8 +2,8 @@ import 'package:add_2_calendar/add_2_calendar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
+import 'package:provider/provider.dart';
 import 'package:row_collection/row_collection.dart';
-import 'package:scoped_model/scoped_model.dart';
 
 import '../../../data/models/spacex/details_capsule.dart';
 import '../../../data/models/spacex/details_core.dart';
@@ -19,6 +19,7 @@ import '../pages/capsule.dart';
 import '../pages/core.dart';
 import '../pages/launch.dart';
 import '../pages/launchpad.dart';
+
 /// SPACEX HOME TAB
 /// This tab holds main information about the next launch.
 /// It has a countdown widget.
@@ -92,8 +93,8 @@ class _HomeTabState extends State<HomeTab> {
 
   @override
   Widget build(BuildContext context) {
-    return ScopedModelDescendant<SpacexHomeModel>(
-      builder: (context, child, model) => Scaffold(
+    return Consumer<SpacexHomeModel>(
+      builder: (context, model, child) => Scaffold(
             body: ScrollPage<SpacexHomeModel>.home(
               context: context,
               controller: _controller,
@@ -114,8 +115,8 @@ class _HomeTabState extends State<HomeTab> {
   }
 
   Widget _buildBody() {
-    return ScopedModelDescendant<SpacexHomeModel>(
-      builder: (context, child, model) => Column(children: <Widget>[
+    return Consumer<SpacexHomeModel>(
+      builder: (context, model, child) => Column(children: <Widget>[
             ListCell.icon(
               icon: Icons.public,
               trailing: Icon(Icons.chevron_right),
@@ -165,8 +166,9 @@ class _HomeTabState extends State<HomeTab> {
               onTap: () => Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => ScopedModel<LaunchpadModel>(
-                            model: LaunchpadModel(
+                      builder: (context) =>
+                          ListenableProvider<LaunchpadModel>.value(
+                            value: LaunchpadModel(
                               model.launch.launchpadId,
                               model.launch.launchpadName,
                             )..loadData(),
@@ -219,8 +221,9 @@ class _HomeTabState extends State<HomeTab> {
                       onTap: () => Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => ScopedModel<CapsuleModel>(
-                                    model: CapsuleModel(
+                              builder: (context) =>
+                                  ListenableProvider<CapsuleModel>.value(
+                                    value: CapsuleModel(
                                       model.launch.rocket.secondStage
                                           .getPayload(0)
                                           .capsuleSerial,
@@ -303,8 +306,8 @@ class _HomeTabState extends State<HomeTab> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => ScopedModel<CoreModel>(
-              model: CoreModel(id)..loadData(),
+        builder: (context) => ListenableProvider<CoreModel>.value(
+              value: CoreModel(id)..loadData(),
               child: CoreDialog(),
             ),
         fullscreenDialog: true,

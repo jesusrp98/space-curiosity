@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
+import 'package:provider/provider.dart';
 import 'package:row_collection/row_collection.dart';
-import 'package:scoped_model/scoped_model.dart';
 
 import '../../../data/models/spacex/spacex_company.dart';
 import '../../general/achievement_cell.dart';
@@ -15,8 +15,8 @@ import '../../general/scroll_page.dart';
 class CompanyTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ScopedModelDescendant<SpacexCompanyModel>(
-      builder: (context, child, model) => Scaffold(
+    return Consumer<SpacexCompanyModel>(
+      builder: (context, model, child) => Scaffold(
             body: ScrollPage<SpacexCompanyModel>.tab(
               context: context,
               photos: model.photos,
@@ -36,8 +36,8 @@ class CompanyTab extends StatelessWidget {
   }
 
   Widget _buildBody() {
-    return ScopedModelDescendant<SpacexCompanyModel>(
-      builder: (context, child, model) => Column(
+    return Consumer<SpacexCompanyModel>(
+      builder: (context, model, child) => Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               RowLayout(
@@ -118,8 +118,8 @@ class CompanyTab extends StatelessWidget {
   }
 
   Widget _buildAchievement(BuildContext context, int index) {
-    return ScopedModelDescendant<SpacexCompanyModel>(
-      builder: (context, child, model) {
+    return Consumer<SpacexCompanyModel>(
+      builder: (context, model, child) {
         final Achievement achievement = model.getItem(index);
         return Column(
           children: <Widget>[
