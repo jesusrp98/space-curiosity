@@ -75,17 +75,6 @@ class ScrollPage<T extends QueryModel> extends StatefulWidget {
       ),
       children: children,
       controller: controller,
-      actions: <Widget>[
-        PopupMenuButton<String>(
-          itemBuilder: (context) => Menu.home.keys
-              .map((string) => PopupMenuItem(
-                    value: string,
-                    child: Text(FlutterI18n.translate(context, string)),
-                  ))
-              .toList(),
-          onSelected: (text) => Navigator.pushNamed(context, Menu.home[text]),
-        ),
-      ],
     );
   }
 
@@ -101,17 +90,6 @@ class ScrollPage<T extends QueryModel> extends StatefulWidget {
       photos: photos,
       children: children,
       controller: controller,
-      actions: <Widget>[
-        PopupMenuButton<String>(
-          itemBuilder: (context) => Menu.home.keys
-              .map((string) => PopupMenuItem(
-                    value: string,
-                    child: Text(FlutterI18n.translate(context, string)),
-                  ))
-              .toList(),
-          onSelected: (text) => Navigator.pushNamed(context, Menu.home[text]),
-        ),
-      ],
     );
   }
 
