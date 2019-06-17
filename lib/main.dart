@@ -4,6 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:space_news/data/models/theme/theme.dart';
 
+import 'data/models/calculator/calculator.dart';
 import 'data/models/planets/celestial_body.dart';
 import 'ui/about.dart';
 import 'ui/calculator/screen.dart';
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ListenableProvider.value(value: ThemeModel()..init()),
+        ListenableProvider.value(value: CalculatorModel()..init()),
       ],
       child: Consumer<ThemeModel>(
         builder: (context, model, child) => MaterialApp(
