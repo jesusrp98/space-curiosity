@@ -51,7 +51,7 @@ class _ArticlesScreenState extends State<ArticlesScreen> {
         bloc: _postBloc,
         builder: (context, state) {
           if (state is PostUninitialized) {
-            return LoadingIndicator();
+            return CircularProgressIndicator();
           }
           if (state is PostError) {
             return Center(
@@ -83,7 +83,6 @@ class _ArticlesScreenState extends State<ArticlesScreen> {
                       ),
                       title: post.getTitle,
                       subtitle: post.author,
-                      maxTitleLines: 1,
                       onTap: () async => await FlutterWebBrowser.openWebPage(
                             url: post.url,
                             androidToolbarColor: Theme.of(context).primaryColor,
@@ -91,7 +90,7 @@ class _ArticlesScreenState extends State<ArticlesScreen> {
                     ),
                     state.posts.last == post
                         ? Column(children: <Widget>[
-                            Separator.divider(height: 0),
+                            Separator.divider(),
                             Padding(
                               padding: const EdgeInsets.all(16),
                               child: Text(

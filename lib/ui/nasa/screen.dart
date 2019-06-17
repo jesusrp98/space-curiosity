@@ -159,7 +159,7 @@ class HeaderDetails extends StatelessWidget {
           size: 27,
           color: Theme.of(context).textTheme.caption.color,
         ),
-        Separator.spacer(height: 8),
+        Separator.spacer(space: 8),
         Text(
           title,
           maxLines: 1,

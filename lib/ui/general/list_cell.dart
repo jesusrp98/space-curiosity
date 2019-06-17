@@ -6,7 +6,6 @@ import 'package:row_collection/row_collection.dart';
 class ListCell extends StatelessWidget {
   final Widget leading, trailing;
   final String title, subtitle;
-  final int maxTitleLines;
   final VoidCallback onTap;
   final EdgeInsets contentPadding;
 
@@ -49,7 +48,7 @@ class ListCell extends StatelessWidget {
             title,
             style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
             overflow: TextOverflow.ellipsis,
-            maxLines: maxTitleLines,
+            maxLines: 1,
           ),
           Separator.spacer(space: 4),
         ],
