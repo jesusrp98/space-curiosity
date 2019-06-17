@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'separator.dart';
+import 'package:row_collection/row_collection.dart';
 
 /// LIST CELL WIDGET
 /// Widget used in vehicle & launch lists to display items.
@@ -11,18 +10,33 @@ class ListCell extends StatelessWidget {
   final VoidCallback onTap;
   final EdgeInsets contentPadding;
 
-  ListCell({
+  const ListCell({
     this.leading,
     this.trailing,
-    this.title,
-    this.subtitle,
-    this.maxTitleLines = 1,
+    @required this.title,
+    @required this.subtitle,
     this.onTap,
     this.contentPadding = const EdgeInsets.symmetric(
-      vertical: 6,
+      vertical: 2,
       horizontal: 16,
     ),
   });
+
+  factory ListCell.icon({
+    IconData icon,
+    Widget trailing,
+    String title,
+    String subtitle,
+    VoidCallback onTap,
+  }) {
+    return ListCell(
+      leading: Icon(icon, size: 40),
+      trailing: trailing,
+      title: title,
+      subtitle: subtitle,
+      onTap: onTap,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,19 +47,19 @@ class ListCell extends StatelessWidget {
         children: <Widget>[
           Text(
             title,
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
             overflow: TextOverflow.ellipsis,
             maxLines: maxTitleLines,
           ),
-          Separator.spacer(height: 7),
+          Separator.spacer(space: 4),
         ],
       ),
       subtitle: Text(
         subtitle,
-        style: Theme.of(context)
-            .textTheme
-            .subhead
-            .copyWith(color: Theme.of(context).textTheme.caption.color),
+        style: TextStyle(
+          fontSize: 15,
+          color: Theme.of(context).textTheme.caption.color,
+        ),
       ),
       trailing: trailing,
       contentPadding: contentPadding,
@@ -57,18 +71,18 @@ class ListCell extends StatelessWidget {
 /// MISSION NUMBER WIDGET
 /// Trailing widget which displays the number of a specific mission.
 class MissionNumber extends StatelessWidget {
-  final String missionNumber;
+  final String number;
 
-  MissionNumber(this.missionNumber);
+  MissionNumber(this.number);
 
   @override
   Widget build(BuildContext context) {
     return Text(
-      missionNumber,
-      style: Theme.of(context)
-          .textTheme
-          .subhead
-          .copyWith(color: Theme.of(context).textTheme.caption.color),
+      number,
+      style: TextStyle(
+        fontSize: 15,
+        color: Theme.of(context).textTheme.caption.color,
+      ),
       textAlign: TextAlign.end,
     );
   }

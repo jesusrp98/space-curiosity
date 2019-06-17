@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:quick_actions/quick_actions.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import '../../data/classes/abstract/query_model.dart';
@@ -8,8 +9,8 @@ import '../../data/models/spacex/info_vehicle.dart';
 import '../../data/models/spacex/launch.dart';
 import '../../data/models/spacex/spacex_company.dart';
 import '../../data/models/spacex/spacex_home.dart';
-import '../spacex/tabs/home.dart';
 import 'tabs/company.dart';
+import 'tabs/home.dart';
 import 'tabs/launches.dart';
 import 'tabs/vehicles.dart';
 
@@ -17,10 +18,10 @@ import 'tabs/vehicles.dart';
 /// This view holds all tabs & its models: home, vehicles, upcoming & latest launches, & company tabs.
 class SpaceXScreen extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => _SpaceXScreenState();
+  State<StatefulWidget> createState() => _StartScreenState();
 }
 
-class _SpaceXScreenState extends State<SpaceXScreen> {
+class _StartScreenState extends State<SpaceXScreen> {
   int _currentIndex = 0;
 
   static final List<QueryModel> _modelTab = [
@@ -59,7 +60,55 @@ class _SpaceXScreenState extends State<SpaceXScreen> {
     super.initState();
 
     // Initializing each tab
-    _modelTab.forEach((model) => model.loadData());
+    _modelTab.forEach((model) async => await model.loadData(context));
+
+    // Reading app shortcuts input
+    final QuickActions quickActions = const QuickActions();
+    quickActions.initialize((type) {
+      switch (type) {
+        case 'vehicles':
+          setState(() => _currentIndex = 1);
+          break;
+        case 'upcoming':
+          setState(() => _currentIndex = 2);
+          break;
+        case 'latest':
+          setState(() => _currentIndex = 3);
+          break;
+        default:
+          setState(() => _currentIndex = 0);
+      }
+    });
+
+    Future.delayed(Duration.zero, () async {
+      // Setting app shortcuts
+      quickActions.setShortcutItems(<ShortcutItem>[
+        ShortcutItem(
+          type: 'vehicles',
+          localizedTitle: FlutterI18n.translate(
+            context,
+            'spacex.vehicle.icon',
+          ),
+          icon: 'action_vehicle',
+        ),
+        ShortcutItem(
+          type: 'upcoming',
+          localizedTitle: FlutterI18n.translate(
+            context,
+            'spacex.upcoming.icon',
+          ),
+          icon: 'action_upcoming',
+        ),
+        ShortcutItem(
+          type: 'latest',
+          localizedTitle: FlutterI18n.translate(
+            context,
+            'spacex.latest.icon',
+          ),
+          icon: 'action_latest',
+        ),
+      ]);
+    });
   }
 
   @override
@@ -76,35 +125,35 @@ class _SpaceXScreenState extends State<SpaceXScreen> {
               context,
               'spacex.home.icon',
             )),
-            icon: const Icon(Icons.home),
+            icon: Icon(Icons.home),
           ),
           BottomNavigationBarItem(
             title: Text(FlutterI18n.translate(
               context,
               'spacex.vehicle.icon',
             )),
-            icon: const Icon(FontAwesomeIcons.rocket),
+            icon: Icon(FontAwesomeIcons.rocket),
           ),
           BottomNavigationBarItem(
             title: Text(FlutterI18n.translate(
               context,
               'spacex.upcoming.icon',
             )),
-            icon: const Icon(Icons.access_time),
+            icon: Icon(Icons.access_time),
           ),
           BottomNavigationBarItem(
             title: Text(FlutterI18n.translate(
               context,
               'spacex.latest.icon',
             )),
-            icon: const Icon(Icons.library_books),
+            icon: Icon(Icons.library_books),
           ),
           BottomNavigationBarItem(
             title: Text(FlutterI18n.translate(
               context,
               'spacex.company.icon',
             )),
-            icon: const Icon(Icons.location_city),
+            icon: Icon(Icons.location_city),
           ),
         ],
       ),

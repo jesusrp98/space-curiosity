@@ -3,13 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:image_downloader/image_downloader.dart';
+import 'package:row_collection/row_collection.dart';
 import 'package:share/share.dart';
 import 'package:space_news/ui/general/sliver_bar.dart';
 
 import '../../data/classes/nasa/image.dart';
 import '../general/cache_image.dart';
-import '../general/expand_widget.dart';
-import '../general/separator.dart';
 
 class NasaImagePage extends StatelessWidget {
   final NasaImage image;
@@ -18,6 +17,7 @@ class NasaImagePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //TODO revisar
     return Scaffold(
       body: CustomScrollView(
         slivers: <Widget>[
@@ -44,30 +44,73 @@ class NasaImagePage extends StatelessWidget {
                     style: Theme.of(context).textTheme.headline,
                     textAlign: TextAlign.center,
                   ),
-                  Separator.spacer(height: 16),
+                  Separator.spacer(space: 16),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: <Widget>[
-                      HeaderDetails(
-                        icon: Icons.copyright,
-                        title: image.getCopyright(context),
+                      Expanded(
+                        flex: 5,
+                        child: Row(children: <Widget>[
+                          const Icon(Icons.copyright, size: 32),
+                          Separator.spacer(space: 8),
+                          Flexible(
+                            child: Text(
+                              image.getCopyright(context),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style:
+                                  Theme.of(context).textTheme.subhead.copyWith(
+                                        color: Theme.of(context)
+                                            .textTheme
+                                            .caption
+                                            .color,
+                                      ),
+                            ),
+                          )
+                        ]),
                       ),
-                      HeaderDetails(
-                        icon: Icons.calendar_today,
-                        title: image.getDate,
+                      Expanded(
+                        flex: 5,
+                        child: Align(
+                          alignment: Alignment.centerRight,
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: <Widget>[
+                              Flexible(
+                                child: Text(
+                                  image.getDate,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .subhead
+                                      .copyWith(
+                                        color: Theme.of(context)
+                                            .textTheme
+                                            .caption
+                                            .color,
+                                      ),
+                                ),
+                              ),
+                              Separator.spacer(space: 8),
+                              const Icon(Icons.calendar_today, size: 32),
+                            ],
+                          ),
+                        ),
                       ),
                     ],
                   ),
-                  Separator.divider(height: 24),
-                  TextExpand(
-                    text: image.getDescription(context),
-                    maxLength: 10,
+                  Separator.spacer(space: 16),
+                  // TODO add text expander
+                  Text(
+                    image?.description ?? "",
+                    textAlign: TextAlign.justify,
                     style: TextStyle(
                       color: Theme.of(context).textTheme.caption.color,
                       fontSize: 15,
                     ),
                   ),
-                  Separator.divider(height: 32),
+                  Separator.thickDivider(height: 32),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
@@ -147,6 +190,7 @@ class OptionButton extends StatelessWidget {
           child: Row(
             children: <Widget>[
               Icon(icon, size: 32),
+              Separator.spacer(space: 8),
               Flexible(
                 child: Center(
                   child: Text(

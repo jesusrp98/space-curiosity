@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
+import 'package:scoped_model/scoped_model.dart';
 
 import 'cache_image.dart';
 
@@ -11,20 +12,50 @@ class SwiperHeader extends StatelessWidget {
   final List list;
   final IndexedWidgetBuilder builder;
 
-  SwiperHeader({this.list, this.builder});
+  const SwiperHeader({
+    @required this.list,
+    this.builder,
+  });
 
   @override
   Widget build(BuildContext context) {
+    // Return the image list, with the desire image quality
+    // final List auxList = selectQuality(context);
+    final List auxList = list;
+
     return Swiper(
       itemCount: list.length,
-      itemBuilder: builder ?? (_, index) => CacheImage(list[index]),
+      itemBuilder: builder ?? (context, index) => CacheImage(auxList[index]),
+      curve: Curves.easeInOutCubic,
+      autoplayDelay: 5000,
       autoplay: true,
-      autoplayDelay: 6000,
-      duration: 750,
+      duration: 850,
       onTap: (index) async => await FlutterWebBrowser.openWebPage(
-            url: list[index],
+            url: auxList[index],
             androidToolbarColor: Theme.of(context).primaryColor,
           ),
     );
   }
+
+  // TODO readd this feature in the future
+  // List selectQuality(BuildContext context) {
+  //   // Reg exps to check if the image URL is from Flickr
+  //   final RegExp qualityRegEx = RegExp(r'(_[a-z])*\.jpg$');
+  //   final RegExp flickrRegEx = RegExp(
+  //     r'^https:\/\/.+\.staticflickr\.com\/[0-9]+\/[0-9]+_.+_.+\.jpg$',
+  //   );
+
+  //   // Getting the desire image quality tag
+  //   final int qualityIndex = ImageQuality.values
+  //       .indexOf(ScopedModel.of<AppModel>(context).imageQuality);
+  //   final String qualityTag = ['_n', '', '_c'][qualityIndex];
+
+  //   return list
+  //       .map(
+  //         (url) => flickrRegEx.hasMatch(url)
+  //             ? url.replaceFirst(qualityRegEx, '$qualityTag.jpg')
+  //             : url,
+  //       )
+  //       .toList();
+  // }
 }

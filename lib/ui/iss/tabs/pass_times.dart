@@ -4,11 +4,11 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong/latlong.dart';
 import 'package:native_widgets/native_widgets.dart';
+import 'package:row_collection/row_collection.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import '../../../data/models/iss/pass_time.dart';
 import '../../general/list_cell.dart';
-import '../../general/separator.dart';
 
 /// PASS TIMES TAB
 /// This view holds a list with next ISS pass times & durations.
@@ -109,7 +109,7 @@ class PassTimesTab extends StatelessWidget {
                                 color:
                                     Theme.of(context).textTheme.caption.color,
                               ),
-                              Separator.spacer(height: 16.0),
+                              Separator.spacer(space: 16.0),
                               Text(
                                 FlutterI18n.translate(
                                   context,
@@ -156,7 +156,7 @@ class PassTimesTab extends StatelessWidget {
                   )),
             ),
           ),
-          Separator.divider(height: 0.0, indent: 74.0)
+          Separator.divider(indent: 74.0)
         ]);
       },
     );

@@ -1,6 +1,4 @@
-import 'dart:convert';
-
-import 'package:http/http.dart' as http;
+import 'package:flutter/material.dart';
 import 'package:latlong/latlong.dart';
 
 import '../../../util/url.dart';
@@ -16,21 +14,18 @@ class LaunchpadModel extends QueryModel {
   LaunchpadModel(this.id, this.name);
 
   @override
-  Future loadData() async {
-    // Get item by http call
-    response = await http.get(Url.launchpadDialog + id);
+  Future loadData([BuildContext context]) async {
+    if (await connectionFailure())
+      receivedError();
+    else {
+      // Fetch & add item
+      items.add(Launchpad.fromJson(await fetchData(Url.launchpadDialog + id)));
 
-    // Clear old data
-    clearItems();
-
-    // Add parsed item
-    items.add(Launchpad.fromJson(json.decode(response.body)));
-
-    // Finished loading data
-    setLoading(false);
+      finishLoading();
+    }
   }
 
-  Launchpad get launchpad => items[0];
+  Launchpad get launchpad => items.isNotEmpty ? items[0] : null;
 }
 
 class Launchpad {

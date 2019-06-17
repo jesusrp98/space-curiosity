@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 import '../../classes/abstract/persit_data.dart';
@@ -8,7 +9,7 @@ import '../models.dart';
 
 class NasaImagesModel extends QueryModel implements PersistData {
   @override
-  Future loadData() async {
+  Future loadData([BuildContext context]) async {
     await loadFromDisk();
     try {
       items.addAll(_module.images);
@@ -16,7 +17,7 @@ class NasaImagesModel extends QueryModel implements PersistData {
       print("Error Loading Images: $e");
       items.addAll(await NasaImageRepo(httpClient: http.Client()).images);
     }
-    setLoading(false);
+     finishLoading();
 
     _module.images = await NasaImageRepo(httpClient: http.Client()).images;
     saveToDisk();

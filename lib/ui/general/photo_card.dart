@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
+import 'package:row_collection/row_collection.dart';
 
 import '../../data/classes/nasa/image.dart';
 import '../nasa/screen.dart';
 import 'cache_image.dart';
-import 'separator.dart';
 
 /// PHOTO CARD WIDGET
 /// Widget used to display a NASA APOD photo.
@@ -47,7 +47,8 @@ class PhotoCard extends StatelessWidget {
                       .title
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
-                Separator.spacer(height: 8),
+                //TODO revisar
+                Separator.spacer(space: 8),
                 Text(
                   image.getDate,
                   style: Theme.of(context).textTheme.subhead.copyWith(

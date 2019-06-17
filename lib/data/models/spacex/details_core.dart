@@ -1,7 +1,5 @@
-import 'dart:convert';
-
+import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
-import 'package:http/http.dart' as http;
 
 import '../../../util/photos.dart';
 import '../../../util/url.dart';
@@ -18,22 +16,20 @@ class CoreModel extends QueryModel {
   CoreModel(this.id);
 
   @override
-  Future loadData() async {
-    // Get item by http call
-    response = await http.get(Url.coreDialog + id);
+  Future loadData([BuildContext context]) async {
+    if (await connectionFailure())
+      receivedError();
+    else {
+      if (id != null) {
+        // Fetch & add item
+        items.add(CoreDetails.fromJson(await fetchData(Url.coreDialog + id)));
 
-    // Clear old data
-    clearItems();
-
-    // Add parsed item
-    items.add(CoreDetails.fromJson(json.decode(response.body)));
-
-    // Add photos & shuffle them
-    photos.addAll(SpaceXPhotos.spacexCoreDialog);
-    photos.shuffle();
-
-    // Finished loading data
-    setLoading(false);
+        // Add photos & shuffle them
+        photos.addAll(SpaceXPhotos.cores);
+        photos.shuffle();
+      }
+      finishLoading();
+    }
   }
 
   CoreDetails get core => items[0];

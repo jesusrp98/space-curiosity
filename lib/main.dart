@@ -26,17 +26,17 @@ final ThemeModel _theme = ThemeModel(
     fontFamily: 'ProductSans',
     primaryColor: lightPrimaryColor,
     accentColor: lightAccentColor,
-    dividerColor: lightDividerColor,
   ),
   customDarkTheme: ThemeData(
     brightness: Brightness.dark,
     fontFamily: 'ProductSans',
     primaryColor: darkPrimaryColor,
     accentColor: darkAccentColor,
-    canvasColor: darkBackgroundColor,
+    canvasColor: darkCanvasColor,
     scaffoldBackgroundColor: darkBackgroundColor,
     cardColor: darkCardColor,
     dividerColor: darkDividerColor,
+    dialogBackgroundColor: darkCardColor,
   ),
   customBlackTheme: ThemeData(
     brightness: Brightness.dark,
@@ -47,13 +47,13 @@ final ThemeModel _theme = ThemeModel(
     scaffoldBackgroundColor: blackBackgroundColor,
     cardColor: blackCardColor,
     dividerColor: blackDividerColor,
+    dialogBackgroundColor: darkCardColor,
   ),
   customCustomTheme: ThemeData(
     brightness: Brightness.light,
     fontFamily: 'ProductSans',
     primaryColor: lightPrimaryColor,
     accentColor: lightAccentColor,
-    dividerColor: lightDividerColor,
   ),
 );
 
@@ -67,7 +67,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScopedModel<ThemeModel>(
       model: _theme,
-      child: new ScopedModelDescendant<ThemeModel>(
+      child: ScopedModelDescendant<ThemeModel>(
           builder: (context, child, theme) => MaterialApp(
                 title: 'Space Curiosity',
                 theme: theme.theme,
@@ -88,7 +88,10 @@ class MyApp extends StatelessWidget {
                   '/settings': (_) => SettingsScreen(),
                 },
                 localizationsDelegates: [
-                  FlutterI18nDelegate(false, 'en'),
+                  FlutterI18nDelegate(
+                    useCountryCode: false,
+                    fallbackFile: 'en',
+                  ),
                   GlobalMaterialLocalizations.delegate,
                   GlobalWidgetsLocalizations.delegate
                 ],

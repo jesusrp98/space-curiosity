@@ -1,11 +1,9 @@
-import 'dart:convert';
 import 'dart:math';
 
+import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
-import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 
-import '../../../util/photos.dart';
 import '../../../util/url.dart';
 import '../../classes/abstract/query_model.dart';
 import 'info_capsule.dart';
@@ -17,40 +15,34 @@ import 'info_ship.dart';
 /// Model which storages information from all kind of vehicles.
 class VehiclesModel extends QueryModel {
   @override
-  Future loadData() async {
-    // Get items by http call
-    final rocketsResponse = await http.get(Url.rocketList);
-    final capsulesResponse = await http.get(Url.capsuleList);
-    final roadsterResponse = await http.get(Url.roadsterPage);
-    final shipsResponse = await http.get(Url.shipsList);
+  Future loadData([BuildContext context]) async {
+    if (await connectionFailure())
+      receivedError();
+    else {
+      // Fetch & add items
+      List capsules = await fetchData(Url.capsuleList);
+      List rockets = await fetchData(Url.rocketList);
+      List ships = await fetchData(Url.shipsList);
 
-    List rocketsJson = json.decode(rocketsResponse.body);
-    List capsulesJson = json.decode(capsulesResponse.body);
-    List shipsJson = json.decode(shipsResponse.body);
+      items.add(RoadsterInfo.fromJson(await fetchData(Url.roadsterPage)));
+      items.addAll(
+        capsules.map((capsule) => CapsuleInfo.fromJson(capsule)).toList(),
+      );
+      items.addAll(
+        rockets.map((rocket) => RocketInfo.fromJson(rocket)).toList(),
+      );
+      items.addAll(ships.map((ship) => ShipInfo.fromJson(ship)).toList());
 
-    // Clear old data
-    clearItems();
-
-    // Add parsed items
-    items.add(RoadsterInfo.fromJson(json.decode(roadsterResponse.body)));
-    items.addAll(
-      capsulesJson.map((capsule) => CapsuleInfo.fromJson(capsule)).toList(),
-    );
-    items.addAll(
-      rocketsJson.map((rocket) => RocketInfo.fromJson(rocket)).toList(),
-    );
-    items.addAll(shipsJson.map((ship) => ShipInfo.fromJson(ship)).toList());
-
-    // Add one photo per vehicle & shuffle them
-    if (photos.isEmpty) {
-      List<int>.generate(getItemCount, (index) => index)
-          .sublist(0, 5)
-          .forEach((index) => photos.add(getItem(index).getRandomPhoto));
-      photos.shuffle();
+      // Add one photo per vehicle & shuffle them
+      if (photos.isEmpty) {
+        List<int>.generate(7, (index) => index)
+          ..shuffle()
+          ..sublist(0, 5)
+              .forEach((index) => photos.add(getItem(index).getRandomPhoto));
+        photos.shuffle();
+      }
+      finishLoading();
     }
-
-    // Finished loading data
-    setLoading(false);
   }
 }
 
@@ -80,12 +72,9 @@ abstract class Vehicle {
 
   String subtitle(context);
 
-  bool get hasImages => photos.isNotEmpty;
-
   String getPhoto(index) => photos[index];
 
-  String get getProfilePhoto =>
-      hasImages ? getPhoto(0) : SpaceXPhotos.defaultImage;
+  String get getProfilePhoto => getPhoto(0);
 
   int get getPhotosCount => photos.length;
 

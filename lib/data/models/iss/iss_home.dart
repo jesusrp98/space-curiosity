@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:intl/intl.dart';
 
@@ -9,12 +10,9 @@ import '../models.dart';
 /// Shows main details about the ISS project, including dimensions, cost...
 class IssHomeModel extends QueryModel {
   @override
-  Future loadData() async {
+  Future loadData([BuildContext context]) async {
     // Get items from Firebase
-    response = await Firestore.instance.collection('iss').getDocuments();
-
-    // Clear old data
-    clearItems();
+    var response = await Firestore.instance.collection('iss').getDocuments();
 
     // Add parsed items
     items.addAll(
@@ -30,7 +28,7 @@ class IssHomeModel extends QueryModel {
     }
 
     // Finished loading data
-    setLoading(false);
+    finishLoading();
   }
 
   IssHome get issHome => getItem(0);

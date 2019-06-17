@@ -1,16 +1,12 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
+import 'package:row_collection/row_collection.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import '../../../data/models/spacex/info_vehicle.dart';
-import '../../general/header_swiper.dart';
 import '../../general/hero_image.dart';
 import '../../general/list_cell.dart';
-import '../../general/loading_indicator.dart';
-import '../../general/separator.dart';
-import '../../general/sliver_bar.dart';
+import '../../general/scroll_page.dart';
 import '../pages/dragon.dart';
 import '../pages/roadster.dart';
 import '../pages/rocket.dart';
@@ -21,42 +17,25 @@ import '../search/vehicles.dart';
 /// This tab holds information about all kind of SpaceX's vehicles,
 /// such as rockets, capsules, Tesla Roadster & ships.
 class VehiclesTab extends StatelessWidget {
-  Future<Null> _onRefresh(VehiclesModel model) {
-    Completer<Null> completer = Completer<Null>();
-    model.refresh().then((_) => completer.complete());
-    return completer.future;
-  }
-
   @override
   Widget build(BuildContext context) {
     return ScopedModelDescendant<VehiclesModel>(
       builder: (context, child, model) => Scaffold(
-            body: RefreshIndicator(
-              onRefresh: () => _onRefresh(model),
-              child: CustomScrollView(
-                  key: PageStorageKey('spacex_vehicles'),
-                  slivers: <Widget>[
-                    SliverBar(
-                      title: Text(FlutterI18n.translate(
-                        context,
-                        'spacex.vehicle.title',
-                      )),
-                      header: model.isLoading
-                          ? LoadingIndicator()
-                          : SwiperHeader(list: model.photos),
-                    ),
-                    model.isLoading
-                        ? SliverFillRemaining(child: LoadingIndicator())
-                        : SliverList(
-                            delegate: SliverChildBuilderDelegate(
-                              _buildVehicle,
-                              childCount: model.getItemCount,
-                            ),
-                          ),
-                  ]),
+            body: ScrollPage<VehiclesModel>.tab(
+              context: context,
+              photos: model.photos,
+              title: FlutterI18n.translate(context, 'spacex.vehicle.title'),
+              children: <Widget>[
+                SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                    _buildVehicle,
+                    childCount: model.getItemCount,
+                  ),
+                ),
+              ],
             ),
             floatingActionButton: FloatingActionButton(
-              child: const Icon(Icons.search),
+              child: Icon(Icons.search),
               tooltip: FlutterI18n.translate(
                 context,
                 'spacex.other.tooltip.search',
@@ -76,7 +55,7 @@ class VehiclesTab extends StatelessWidget {
         return Column(children: <Widget>[
           ListCell(
             leading: ClipRRect(
-              borderRadius: const BorderRadius.all(const Radius.circular(8)),
+              borderRadius: BorderRadius.all(Radius.circular(8)),
               child: HeroImage.list(
                 url: vehicle.getProfilePhoto,
                 tag: vehicle.id,
@@ -84,10 +63,11 @@ class VehiclesTab extends StatelessWidget {
             ),
             title: vehicle.name,
             subtitle: vehicle.subtitle(context),
+            trailing: Icon(Icons.chevron_right),
             onTap: () => Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (_) => vehicle.type == 'rocket'
+                    builder: (context) => vehicle.type == 'rocket'
                         ? RocketPage(vehicle)
                         : vehicle.type == 'capsule'
                             ? DragonPage(vehicle)
@@ -97,7 +77,7 @@ class VehiclesTab extends StatelessWidget {
                   ),
                 ),
           ),
-          Separator.divider(height: 0, indent: 88)
+          Separator.divider(indent: 81)
         ]);
       },
     );

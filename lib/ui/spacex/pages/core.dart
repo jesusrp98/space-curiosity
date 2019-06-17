@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
+import 'package:row_collection/row_collection.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import '../../../data/models/spacex/details_core.dart';
-import '../../../data/models/spacex/mission_item.dart';
 import '../../general/expand_widget.dart';
-import '../../general/header_swiper.dart';
-import '../../general/loading_indicator.dart';
 import '../../general/row_item.dart';
-import '../../general/separator.dart';
-import '../../general/sliver_bar.dart';
+import '../../general/scroll_page.dart';
 
 /// CORE DIALOG VIEW
 /// This view displays information about a specific core,
@@ -19,123 +16,105 @@ class CoreDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScopedModelDescendant<CoreModel>(
       builder: (context, child, model) => Scaffold(
-            body: CustomScrollView(slivers: <Widget>[
-              SliverBar(
-                title: Text(FlutterI18n.translate(
-                  context,
-                  'spacex.dialog.vehicle.title_core',
-                  {'serial': model.id},
-                )),
-                header: model.isLoading
-                    ? LoadingIndicator()
-                    : SwiperHeader(list: model.photos),
+            body: ScrollPage<CoreModel>.photos(
+              title: FlutterI18n.translate(
+                context,
+                'spacex.dialog.vehicle.title_core',
+                {'serial': model.id},
               ),
-              model.isLoading
-                  ? SliverFillRemaining(child: LoadingIndicator())
-                  : SliverToBoxAdapter(child: _buildBody())
-            ]),
+              photos: model.photos,
+              children: <Widget>[
+                SliverToBoxAdapter(child: _buildBody()),
+              ],
+            ),
           ),
     );
   }
 
   Widget _buildBody() {
     return ScopedModelDescendant<CoreModel>(
-      builder: (context, child, model) => Padding(
-            padding: const EdgeInsets.all(16),
-            child: Column(children: <Widget>[
-              RowItem.textRow(
+      builder: (context, child, model) => RowLayout.body(children: <Widget>[
+            RowText(
+              FlutterI18n.translate(
                 context,
-                FlutterI18n.translate(
-                  context,
-                  'spacex.dialog.vehicle.model',
-                ),
-                model.core.getBlock(context),
+                'spacex.dialog.vehicle.model',
               ),
-              Separator.spacer(),
-              RowItem.textRow(
+              model.core.getBlock(context),
+            ),
+            RowText(
+              FlutterI18n.translate(
                 context,
-                FlutterI18n.translate(
-                  context,
-                  'spacex.dialog.vehicle.status',
-                ),
-                model.core.getStatus,
+                'spacex.dialog.vehicle.status',
               ),
-              Separator.spacer(),
-              RowItem.textRow(
+              model.core.getStatus,
+            ),
+            RowText(
+              FlutterI18n.translate(
                 context,
-                FlutterI18n.translate(
-                  context,
-                  'spacex.dialog.vehicle.first_launched',
-                ),
-                model.core.getFirstLaunched(context),
+                'spacex.dialog.vehicle.first_launched',
               ),
-              Separator.spacer(),
-              RowItem.textRow(
+              model.core.getFirstLaunched(context),
+            ),
+            RowText(
+              FlutterI18n.translate(
                 context,
-                FlutterI18n.translate(
-                  context,
-                  'spacex.dialog.vehicle.launches',
-                ),
-                model.core.getLaunches,
+                'spacex.dialog.vehicle.launches',
               ),
-              Separator.spacer(),
-              RowItem.textRow(
+              model.core.getLaunches,
+            ),
+            RowText(
+              FlutterI18n.translate(
                 context,
-                FlutterI18n.translate(
-                  context,
-                  'spacex.dialog.vehicle.landings_rtls',
-                ),
-                model.core.getRtlsLandings,
+                'spacex.dialog.vehicle.landings_rtls',
               ),
-              Separator.spacer(),
-              RowItem.textRow(
+              model.core.getRtlsLandings,
+            ),
+            RowText(
+              FlutterI18n.translate(
                 context,
-                FlutterI18n.translate(
-                  context,
-                  'spacex.dialog.vehicle.landings_asds',
-                ),
-                model.core.getAsdsLandings,
+                'spacex.dialog.vehicle.landings_asds',
               ),
-              Separator.divider(),
-              model.core.hasMissions
-                  ? Column(children: <Widget>[
-                      Column(
-                        children: model.core.missions
-                            .map((mission) => _getMission(
-                                  context,
-                                  model.core.missions,
-                                  mission,
-                                ))
-                            .toList(),
+              model.core.getAsdsLandings,
+            ),
+            Separator.divider(),
+            if (model.core.hasMissions) ...[
+              if (model.core.missions.length > 5) ...[
+                for (var mission in model.core.missions.sublist(0, 5))
+                  RowText(
+                    FlutterI18n.translate(
+                      context,
+                      'spacex.dialog.vehicle.mission',
+                      {'number': mission.id.toString()},
+                    ),
+                    mission.name,
+                  ),
+                RowExpand(RowLayout(
+                  children: <Widget>[
+                    for (var mission in model.core.missions.sublist(5))
+                      RowText(
+                        FlutterI18n.translate(
+                          context,
+                          'spacex.dialog.vehicle.mission',
+                          {'number': mission.id.toString()},
+                        ),
+                        mission.name,
                       ),
-                      Separator.divider(),
-                    ])
-                  : Separator.none(),
-              TextExpand(
-                text: model.core.getDetails(context),
-                maxLength: 8,
-                style: TextStyle(
-                  color: Theme.of(context).textTheme.caption.color,
-                  fontSize: 15,
-                ),
-              )
-            ]),
-          ),
+                  ],
+                ))
+              ] else
+                for (var mission in model.core.missions)
+                  RowText(
+                    FlutterI18n.translate(
+                      context,
+                      'spacex.dialog.vehicle.mission',
+                      {'number': mission.id.toString()},
+                    ),
+                    mission.name,
+                  ),
+              Separator.divider()
+            ],
+            TextExpand(model.core.getDetails(context))
+          ]),
     );
-  }
-
-  Column _getMission(BuildContext context, List missions, MissionItem mission) {
-    return Column(children: <Widget>[
-      RowItem.textRow(
-        context,
-        FlutterI18n.translate(
-          context,
-          'spacex.dialog.vehicle.mission',
-          {'number': mission.id.toString()},
-        ),
-        mission.name,
-      ),
-      mission != missions.last ? Separator.spacer() : Separator.none(),
-    ]);
   }
 }
