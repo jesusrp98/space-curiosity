@@ -38,16 +38,16 @@ class LaunchesTab extends StatelessWidget {
                 ),
               ],
             ),
-            floatingActionButton: FloatingActionButton(
-              child: Icon(Icons.search),
-              tooltip: FlutterI18n.translate(
-                context,
-                'spacex.other.tooltip.search',
-              ),
-              onPressed: () => Navigator.of(context).push(
-                    searchLaunches(context, model.items),
-                  ),
-            ),
+            // floatingActionButton: FloatingActionButton(
+            //   child: Icon(Icons.search),
+            //   tooltip: FlutterI18n.translate(
+            //     context,
+            //     'spacex.other.tooltip.search',
+            //   ),
+            //   onPressed: () => Navigator.of(context).push(
+            //         searchLaunches(context, model.items),
+            //       ),
+            // ),
           ),
     );
   }

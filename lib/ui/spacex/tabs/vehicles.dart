@@ -34,16 +34,16 @@ class VehiclesTab extends StatelessWidget {
                 ),
               ],
             ),
-            floatingActionButton: FloatingActionButton(
-              child: Icon(Icons.search),
-              tooltip: FlutterI18n.translate(
-                context,
-                'spacex.other.tooltip.search',
-              ),
-              onPressed: () => Navigator.of(context).push(
-                    searchVehicles(context, model.items),
-                  ),
-            ),
+            // floatingActionButton: FloatingActionButton(
+            //   child: Icon(Icons.search),
+            //   tooltip: FlutterI18n.translate(
+            //     context,
+            //     'spacex.other.tooltip.search',
+            //   ),
+            //   onPressed: () => Navigator.of(context).push(
+            //         searchVehicles(context, model.items),
+            //       ),
+            // ),
           ),
     );
   }
