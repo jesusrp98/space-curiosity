@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:row_collection/row_collection.dart';
 
-/// LIST CELL WIDGET
 /// Widget used in vehicle & launch lists to display items.
 class ListCell extends StatelessWidget {
   final Widget leading, trailing;
@@ -13,7 +12,7 @@ class ListCell extends StatelessWidget {
     this.leading,
     this.trailing,
     @required this.title,
-    @required this.subtitle,
+    this.subtitle,
     this.onTap,
     this.contentPadding = const EdgeInsets.symmetric(
       vertical: 2,
@@ -21,10 +20,34 @@ class ListCell extends StatelessWidget {
     ),
   });
 
-  factory ListCell.icon({
-    IconData icon,
+  factory ListCell.image({
+    @required BuildContext context,
+    @required String image,
     Widget trailing,
-    String title,
+    @required String title,
+    String subtitle,
+    VoidCallback onTap,
+  }) {
+    return ListCell(
+      leading: Image.asset(
+        image,
+        width: 40,
+        height: 40,
+        color: Theme.of(context).brightness == Brightness.light
+            ? Colors.black45
+            : null,
+      ),
+      trailing: trailing,
+      title: title,
+      subtitle: subtitle,
+      onTap: onTap,
+    );
+  }
+
+  factory ListCell.icon({
+    @required IconData icon,
+    Widget trailing,
+    @required String title,
     String subtitle,
     VoidCallback onTap,
   }) {
@@ -46,20 +69,27 @@ class ListCell extends StatelessWidget {
         children: <Widget>[
           Text(
             title,
-            style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+            style: TextStyle(
+              fontSize: 17,
+              fontFamily: 'ProductSans',
+              fontWeight: FontWeight.bold,
+            ),
             overflow: TextOverflow.ellipsis,
             maxLines: 1,
           ),
-          Separator.spacer(space: 4),
+          if (subtitle != null) Separator.spacer(space: 4),
         ],
       ),
-      subtitle: Text(
-        subtitle,
-        style: TextStyle(
-          fontSize: 15,
-          color: Theme.of(context).textTheme.caption.color,
-        ),
-      ),
+      subtitle: subtitle == null
+          ? null
+          : Text(
+              subtitle,
+              style: TextStyle(
+                fontSize: 15,
+                fontFamily: 'ProductSans',
+                color: Theme.of(context).textTheme.caption.color,
+              ),
+            ),
       trailing: trailing,
       contentPadding: contentPadding,
       onTap: onTap,
@@ -72,7 +102,7 @@ class ListCell extends StatelessWidget {
 class MissionNumber extends StatelessWidget {
   final String number;
 
-  MissionNumber(this.number);
+  const MissionNumber(this.number);
 
   @override
   Widget build(BuildContext context) {
@@ -80,6 +110,7 @@ class MissionNumber extends StatelessWidget {
       number,
       style: TextStyle(
         fontSize: 15,
+        fontFamily: 'ProductSans',
         color: Theme.of(context).textTheme.caption.color,
       ),
       textAlign: TextAlign.end,

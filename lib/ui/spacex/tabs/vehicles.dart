@@ -2,18 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:provider/provider.dart';
 import 'package:row_collection/row_collection.dart';
+import '../pages/index.dart';
 
-import '../../../data/models/spacex/info_vehicle.dart';
-import '../../general/hero_image.dart';
-import '../../general/list_cell.dart';
-import '../../general/scroll_page.dart';
-import '../pages/dragon.dart';
-import '../pages/roadster.dart';
-import '../pages/rocket.dart';
-import '../pages/ship.dart';
-import '../search/vehicles.dart';
+import '../../../data/models/spacex/index.dart';
+import '../../../util/menu.dart';
+import '../../general/index.dart';
 
-/// VEHICLES TAB VIEW
 /// This tab holds information about all kind of SpaceX's vehicles,
 /// such as rockets, capsules, Tesla Roadster & ships.
 class VehiclesTab extends StatelessWidget {
@@ -21,30 +15,71 @@ class VehiclesTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<VehiclesModel>(
       builder: (context, model, child) => Scaffold(
-            body: ScrollPage<VehiclesModel>.tab(
-              context: context,
-              photos: model.photos,
-              title: FlutterI18n.translate(context, 'spacex.vehicle.title'),
-              children: <Widget>[
-                SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                    _buildVehicle,
-                    childCount: model.getItemCount,
-                  ),
-                ),
-              ],
+        body: SliverPage<VehiclesModel>.slide(
+          title: FlutterI18n.translate(context, 'spacex.vehicle.title'),
+          slides: model.photos,
+          popupMenu: Menu.home,
+          body: <Widget>[
+            SliverList(
+              delegate: SliverChildBuilderDelegate(
+                _buildVehicle,
+                childCount: model.getItemCount,
+              ),
             ),
-            // floatingActionButton: FloatingActionButton(
-            //   child: Icon(Icons.search),
-            //   tooltip: FlutterI18n.translate(
-            //     context,
-            //     'spacex.other.tooltip.search',
-            //   ),
-            //   onPressed: () => Navigator.of(context).push(
-            //         searchVehicles(context, model.items),
-            //       ),
-            // ),
+          ],
+        ),
+        floatingActionButton: FloatingActionButton(
+          heroTag: null,
+          tooltip: FlutterI18n.translate(
+            context,
+            'spacex.other.tooltip.search',
           ),
+          onPressed: () => showSearch(
+            context: context,
+            delegate: SearchPage<Vehicle>(
+              items: model.items.cast<Vehicle>(),
+              searchLabel: FlutterI18n.translate(
+                context,
+                'spacex.other.tooltip.search',
+              ),
+              suggestion: BigTip(
+                icon: Icons.search,
+                message: FlutterI18n.translate(
+                  context,
+                  'spacex.search.suggestion.vehicle',
+                ),
+              ),
+              failure: BigTip(
+                icon: Icons.sentiment_dissatisfied,
+                message: FlutterI18n.translate(
+                  context,
+                  'spacex.search.failure',
+                ),
+              ),
+              filter: (vehicle) => [
+                vehicle.name,
+                vehicle.year,
+              ],
+              builder: (vehicle) => Column(
+                children: <Widget>[
+                  ListCell(
+                    title: vehicle.name,
+                    trailing: Icon(Icons.chevron_right),
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => _vehiclePage(vehicle),
+                      ),
+                    ),
+                  ),
+                  Separator.divider(indent: 16)
+                ],
+              ),
+            ),
+          ),
+          child: Icon(Icons.search),
+        ),
+      ),
     );
   }
 
@@ -55,7 +90,7 @@ class VehiclesTab extends StatelessWidget {
         return Column(children: <Widget>[
           ListCell(
             leading: ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(8)),
+              borderRadius: const BorderRadius.all(Radius.circular(8)),
               child: HeroImage.list(
                 url: vehicle.getProfilePhoto,
                 tag: vehicle.id,
@@ -65,21 +100,31 @@ class VehiclesTab extends StatelessWidget {
             subtitle: vehicle.subtitle(context),
             trailing: Icon(Icons.chevron_right),
             onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => vehicle.type == 'rocket'
-                        ? RocketPage(vehicle)
-                        : vehicle.type == 'capsule'
-                            ? DragonPage(vehicle)
-                            : vehicle.type == 'ship'
-                                ? ShipPage(vehicle)
-                                : RoadsterPage(vehicle),
-                  ),
-                ),
+              context,
+              MaterialPageRoute(
+                builder: (context) => _vehiclePage(vehicle),
+              ),
+            ),
           ),
           Separator.divider(indent: 81)
         ]);
       },
     );
+  }
+
+  Widget _vehiclePage(Vehicle vehicle) {
+    switch (vehicle.type) {
+      case 'rocket':
+        return RocketPage(vehicle);
+        break;
+      case 'capsule':
+        return DragonPage(vehicle);
+        break;
+      case 'ship':
+        return ShipPage(vehicle);
+        break;
+      default:
+        return RoadsterPage(vehicle);
+    }
   }
 }

@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:row_collection/row_collection.dart';
 
-import 'expand_widget.dart';
+import 'index.dart';
 
-/// ACHIEVEMENT CELL WIDGET
 /// Widget used in SpaceX's achievement list, under the 'Home Screen'.
 class AchievementCell extends StatelessWidget {
   final String title, subtitle, body, url;
@@ -21,7 +20,7 @@ class AchievementCell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      contentPadding: EdgeInsets.symmetric(
+      contentPadding: const EdgeInsets.symmetric(
         vertical: 6,
         horizontal: 16,
       ),
@@ -33,6 +32,7 @@ class AchievementCell extends StatelessWidget {
             '#$index',
             style: TextStyle(
               fontSize: 17,
+              fontFamily: 'ProductSans',
               fontWeight: FontWeight.bold,
               color: Theme.of(context).brightness == Brightness.dark
                   ? Colors.black
@@ -47,9 +47,19 @@ class AchievementCell extends StatelessWidget {
             children: <Widget>[
               Text(
                 title,
-                style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  fontSize: 17,
+                  fontFamily: 'ProductSans',
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-              Text(subtitle, style: Theme.of(context).textTheme.subhead),
+              Text(
+                subtitle,
+                style: TextStyle(
+                  fontSize: 16,
+                  fontFamily: 'ProductSans',
+                ),
+              ),
             ],
           ),
         )
@@ -58,10 +68,10 @@ class AchievementCell extends StatelessWidget {
         Separator.smallSpacer(),
         TextExpand.small(body),
       ]),
-      onTap: () async => await FlutterWebBrowser.openWebPage(
-            url: url,
-            androidToolbarColor: Theme.of(context).primaryColor,
-          ),
+      onTap: () => FlutterWebBrowser.openWebPage(
+        url: url,
+        androidToolbarColor: Theme.of(context).primaryColor,
+      ),
     );
   }
 }

@@ -4,7 +4,6 @@ import 'package:latlong/latlong.dart';
 import '../../../util/url.dart';
 import '../../classes/abstract/query_model.dart';
 
-/// LANDPAD MODEL
 /// Details about a specific landpad,
 /// where boosters can land after completing its mission.
 class LandpadModel extends QueryModel {
@@ -15,9 +14,7 @@ class LandpadModel extends QueryModel {
 
   @override
   Future loadData([BuildContext context]) async {
-    if (await connectionFailure())
-      receivedError();
-    else {
+    if (await canLoadData()) {
       // Fetch & add item
       items.add(Landpad.fromJson(await fetchData(Url.landingpadDialog + id)));
 
@@ -25,7 +22,7 @@ class LandpadModel extends QueryModel {
     }
   }
 
-  Landpad get landpad => items[0];
+  Landpad get landpad => getItem(0);
 }
 
 class Landpad {
@@ -33,7 +30,7 @@ class Landpad {
   final LatLng coordinates;
   final int attemptedLandings, successfulLandings;
 
-  Landpad({
+  const Landpad({
     this.name,
     this.status,
     this.type,

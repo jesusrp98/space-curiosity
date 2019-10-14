@@ -4,23 +4,12 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:provider/provider.dart';
 import 'package:row_collection/row_collection.dart';
+import 'package:space_news/ui/spacex/pages/index.dart';
+import 'package:space_news/util/menu.dart';
 
-import '../../../data/models/spacex/details_capsule.dart';
-import '../../../data/models/spacex/details_core.dart';
-import '../../../data/models/spacex/launch.dart';
-import '../../../data/models/spacex/launchpad.dart';
-import '../../../data/models/spacex/spacex_home.dart';
-import '../../general/dialog_round.dart';
-import '../../general/launch_countdown.dart';
-import '../../general/list_cell.dart';
-import '../../general/scroll_page.dart';
-import '../../general/sliver_bar.dart';
-import '../pages/capsule.dart';
-import '../pages/core.dart';
-import '../pages/launch.dart';
-import '../pages/launchpad.dart';
+import '../../../data/models/spacex/index.dart';
+import '../../general/index.dart';
 
-/// SPACEX HOME TAB
 /// This tab holds main information about the next launch.
 /// It has a countdown widget.
 class HomeTab extends StatefulWidget {
@@ -40,7 +29,7 @@ class _HomeTabState extends State<HomeTab> {
   }
 
   Widget _headerDetails(BuildContext context, Launch launch) {
-    double _sliverHeight =
+    final double _sliverHeight =
         MediaQuery.of(context).size.height * SliverBar.heightRatio;
 
     // When user scrolls 10% height of the SliverAppBar,
@@ -55,11 +44,10 @@ class _HomeTabState extends State<HomeTab> {
                 ? LaunchCountdown(launch.launchDate)
                 : launch.hasVideo && !launch.isDateTooTentative
                     ? InkWell(
-                        onTap: () async => await FlutterWebBrowser.openWebPage(
-                              url: launch.getVideo,
-                              androidToolbarColor:
-                                  Theme.of(context).primaryColor,
-                            ),
+                        onTap: () => FlutterWebBrowser.openWebPage(
+                          url: launch.getVideo,
+                          androidToolbarColor: Theme.of(context).primaryColor,
+                        ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           mainAxisSize: MainAxisSize.min,
@@ -76,7 +64,7 @@ class _HomeTabState extends State<HomeTab> {
                                 fontFamily: 'RobotoMono',
                                 shadows: <Shadow>[
                                   Shadow(
-                                    offset: Offset(0, 0),
+                                    offset: const Offset(0, 0),
                                     blurRadius: 4,
                                     color: Theme.of(context).primaryColor,
                                   ),
@@ -95,221 +83,222 @@ class _HomeTabState extends State<HomeTab> {
   Widget build(BuildContext context) {
     return Consumer<SpacexHomeModel>(
       builder: (context, model, child) => Scaffold(
-            body: ScrollPage<SpacexHomeModel>.home(
-              context: context,
-              controller: _controller,
-              photos: model.photos,
-              opacity: model.launch?.isDateTooTentative == true &&
-                      MediaQuery.of(context).orientation !=
-                          Orientation.landscape
-                  ? 1.0
-                  : 0.64,
-              counter: _headerDetails(context, model.launch),
-              title: FlutterI18n.translate(context, 'spacex.home.title'),
-              children: <Widget>[
-                SliverToBoxAdapter(child: _buildBody()),
-              ],
-            ),
-          ),
+        body: SliverPage<SpacexHomeModel>.display(
+          controller: _controller,
+          title: FlutterI18n.translate(context, 'spacex.home.title'),
+          opacity: model.launch?.isDateTooTentative == true &&
+                  MediaQuery.of(context).orientation != Orientation.landscape
+              ? 1.0
+              : 0.64,
+          counter: _headerDetails(context, model.launch),
+          slides: model.photos,
+          popupMenu: Menu.home,
+          body: <Widget>[
+            SliverToBoxAdapter(child: _buildBody()),
+          ],
+        ),
+      ),
     );
   }
 
   Widget _buildBody() {
     return Consumer<SpacexHomeModel>(
       builder: (context, model, child) => Column(children: <Widget>[
-            ListCell.icon(
-              icon: Icons.public,
-              trailing: Icon(Icons.chevron_right),
-              title: model.vehicle(context),
-              subtitle: model.payload(context),
-              onTap: () => Navigator.push(
+        ListCell.icon(
+          icon: Icons.public,
+          trailing: Icon(Icons.chevron_right),
+          title: model.vehicle(context),
+          subtitle: model.payload(context),
+          onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => LaunchPage(model.launch),
+            ),
+          ),
+        ),
+        Separator.divider(indent: 72),
+        ListCell.icon(
+          icon: Icons.event,
+          trailing: Icon(Icons.chevron_right),
+          title: FlutterI18n.translate(
+            context,
+            'spacex.home.tab.date.title',
+          ),
+          subtitle: model.launchDate(context),
+          onTap: () => Add2Calendar.addEvent2Cal(
+            Event(
+              title: model.launch.name,
+              description: model.launch.details ??
+                  FlutterI18n.translate(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => LaunchPage(model.launch),
-                    ),
+                    'spacex.launch.page.no_description',
                   ),
-            ),
-            Separator.divider(indent: 72),
-            ListCell.icon(
-              icon: Icons.event,
-              trailing: Icon(Icons.chevron_right),
-              title: FlutterI18n.translate(
-                context,
-                'spacex.home.tab.date.title',
+              location: model.launch.launchpadName,
+              startDate: model.launch.launchDate,
+              endDate: model.launch.launchDate.add(
+                Duration(minutes: 30),
               ),
-              subtitle: model.launchDate(context),
-              onTap: () => Add2Calendar.addEvent2Cal(
-                    Event(
-                      title: model.launch.name,
-                      description: model.launch.details ??
-                          FlutterI18n.translate(
-                            context,
-                            'spacex.launch.page.no_description',
-                          ),
-                      location: model.launch.launchpadName,
-                      startDate: model.launch.launchDate,
-                      endDate: model.launch.launchDate.add(
-                        Duration(minutes: 30),
-                      ),
-                    ),
-                  ),
             ),
-            Separator.divider(indent: 72),
-            ListCell.icon(
-              icon: Icons.location_on,
-              trailing: Icon(Icons.chevron_right),
-              title: FlutterI18n.translate(
-                context,
-                'spacex.home.tab.launchpad.title',
+          ),
+        ),
+        Separator.divider(indent: 72),
+        ListCell.icon(
+          icon: Icons.location_on,
+          trailing: Icon(Icons.chevron_right),
+          title: FlutterI18n.translate(
+            context,
+            'spacex.home.tab.launchpad.title',
+          ),
+          subtitle: model.launchpad(context),
+          onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ChangeNotifierProvider<LaunchpadModel>(
+                builder: (context) => LaunchpadModel(
+                  model.launch.launchpadId,
+                  model.launch.launchpadName,
+                ),
+                child: LaunchpadPage(),
               ),
-              subtitle: model.launchpad(context),
-              onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          ListenableProvider<LaunchpadModel>.value(
-                            value: LaunchpadModel(
-                              model.launch.launchpadId,
-                              model.launch.launchpadName,
-                            )..loadData(),
-                            child: LaunchpadPage(),
-                          ),
-                      fullscreenDialog: true,
-                    ),
-                  ),
+              fullscreenDialog: true,
             ),
-            Separator.divider(indent: 72),
-            ListCell.icon(
-              icon: Icons.timer,
-              title: FlutterI18n.translate(
-                context,
-                'spacex.home.tab.static_fire.title',
-              ),
-              subtitle: model.staticFire(context),
+          ),
+        ),
+        Separator.divider(indent: 72),
+        ListCell.icon(
+          icon: Icons.timer,
+          title: FlutterI18n.translate(
+            context,
+            'spacex.home.tab.static_fire.title',
+          ),
+          subtitle: model.staticFire(context),
+        ),
+        Separator.divider(indent: 72),
+        if (model.launch.rocket.hasFairing)
+          ListCell.icon(
+            icon: Icons.directions_boat,
+            title: FlutterI18n.translate(
+              context,
+              'spacex.home.tab.fairings.title',
             ),
-            Separator.divider(indent: 72),
-            model.launch.rocket.hasFairing
-                ? ListCell.icon(
-                    icon: Icons.directions_boat,
-                    title: FlutterI18n.translate(
-                      context,
-                      'spacex.home.tab.fairings.title',
-                    ),
-                    subtitle: model.fairings(context),
-                  )
-                : AbsorbPointer(
-                    absorbing: model.launch.rocket.secondStage
+            subtitle: model.fairings(context),
+          )
+        else
+          AbsorbPointer(
+            absorbing:
+                model.launch.rocket.secondStage.getPayload(0).capsuleSerial ==
+                    null,
+            child: ListCell.icon(
+              icon: Icons.shopping_basket,
+              trailing: Icon(
+                Icons.chevron_right,
+                color: model.launch.rocket.secondStage
                             .getPayload(0)
                             .capsuleSerial ==
-                        null,
-                    child: ListCell.icon(
-                      icon: Icons.shopping_basket,
-                      trailing: Icon(
-                        Icons.chevron_right,
-                        color: model.launch.rocket.secondStage
-                                    .getPayload(0)
-                                    .capsuleSerial ==
-                                null
-                            ? Theme.of(context).disabledColor
-                            : Theme.of(context).iconTheme.color,
-                      ),
-                      title: FlutterI18n.translate(
-                        context,
-                        'spacex.home.tab.capsule.title',
-                      ),
-                      subtitle: model.capsule(context),
-                      onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  ListenableProvider<CapsuleModel>.value(
-                                    value: CapsuleModel(
-                                      model.launch.rocket.secondStage
-                                          .getPayload(0)
-                                          .capsuleSerial,
-                                    )..loadData(),
-                                    child: CapsulePage(),
-                                  ),
-                              fullscreenDialog: true,
-                            ),
-                          ),
+                        null
+                    ? Theme.of(context).disabledColor
+                    : Theme.of(context).brightness == Brightness.light
+                        ? Colors.black45
+                        : Colors.white,
+              ),
+              title: FlutterI18n.translate(
+                context,
+                'spacex.home.tab.capsule.title',
+              ),
+              subtitle: model.capsule(context),
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ChangeNotifierProvider<CapsuleModel>(
+                    builder: (context) => CapsuleModel(
+                      model.launch.rocket.secondStage
+                          .getPayload(0)
+                          .capsuleSerial,
                     ),
+                    child: CapsulePage(),
                   ),
-            Separator.divider(indent: 72),
-            AbsorbPointer(
-              absorbing: model.launch.rocket.isFirstStageNull,
-              child: ListCell.icon(
-                icon: Icons.autorenew,
-                trailing: Icon(
-                  Icons.chevron_right,
-                  color: model.launch.rocket.isFirstStageNull
-                      ? Theme.of(context).disabledColor
-                      : Theme.of(context).iconTheme.color,
+                  fullscreenDialog: true,
                 ),
-                title: FlutterI18n.translate(
-                  context,
-                  'spacex.home.tab.first_stage.title',
-                ),
-                subtitle: model.firstStage(context),
-                onTap: () => model.launch.rocket.isHeavy
-                    ? showHeavyDialog(context, model)
-                    : openCorePage(
-                        context,
-                        model.launch.rocket.getSingleCore.id,
-                      ),
               ),
             ),
-            Separator.divider(indent: 72)
-          ]),
+          ),
+        Separator.divider(indent: 72),
+        AbsorbPointer(
+          absorbing: model.launch.rocket.isFirstStageNull,
+          child: ListCell.icon(
+            icon: Icons.autorenew,
+            trailing: Icon(
+              Icons.chevron_right,
+              color: model.launch.rocket.isFirstStageNull
+                  ? Theme.of(context).disabledColor
+                  : Theme.of(context).brightness == Brightness.light
+                      ? Colors.black45
+                      : Colors.white,
+            ),
+            title: FlutterI18n.translate(
+              context,
+              'spacex.home.tab.first_stage.title',
+            ),
+            subtitle: model.firstStage(context),
+            onTap: () => model.launch.rocket.isHeavy
+                ? showHeavyDialog(context, model)
+                : openCorePage(
+                    context,
+                    model.launch.rocket.getSingleCore.id,
+                  ),
+          ),
+        ),
+        Separator.divider(indent: 72)
+      ]),
     );
   }
 
-  showHeavyDialog(BuildContext context, SpacexHomeModel model) {
+  void showHeavyDialog(BuildContext context, SpacexHomeModel model) {
     showDialog(
       context: context,
       builder: (context) => RoundDialog(
-            title: FlutterI18n.translate(
-              context,
-              'spacex.home.tab.first_stage.heavy_dialog.title',
-            ),
-            children: model.launch.rocket.firstStage
-                .map((core) => AbsorbPointer(
-                      absorbing: core.id == null,
-                      child: ListCell(
-                        title: core.id != null
-                            ? FlutterI18n.translate(
-                                context,
-                                'spacex.dialog.vehicle.title_core',
-                                {'serial': core.id},
-                              )
-                            : FlutterI18n.translate(
-                                context,
-                                'spacex.home.tab.first_stage.heavy_dialog.core_null_title',
-                              ),
-                        subtitle: model.core(context, core),
-                        onTap: () => openCorePage(
-                              context,
-                              core.id,
-                            ),
-                        contentPadding: EdgeInsets.symmetric(
-                          vertical: 8,
-                          horizontal: 24,
-                        ),
-                      ),
-                    ))
-                .toList(),
-          ),
+        title: FlutterI18n.translate(
+          context,
+          'spacex.home.tab.first_stage.heavy_dialog.title',
+        ),
+        children: model.launch.rocket.firstStage
+            .map((core) => AbsorbPointer(
+                  absorbing: core.id == null,
+                  child: ListCell(
+                    title: core.id != null
+                        ? FlutterI18n.translate(
+                            context,
+                            'spacex.dialog.vehicle.title_core',
+                            {'serial': core.id},
+                          )
+                        : FlutterI18n.translate(
+                            context,
+                            'spacex.home.tab.first_stage.heavy_dialog.core_null_title',
+                          ),
+                    subtitle: model.core(context, core),
+                    onTap: () => openCorePage(
+                      context,
+                      core.id,
+                    ),
+                    contentPadding: const EdgeInsets.symmetric(
+                      vertical: 8,
+                      horizontal: 24,
+                    ),
+                  ),
+                ))
+            .toList(),
+      ),
     );
   }
 
-  openCorePage(BuildContext context, String id) {
+  void openCorePage(BuildContext context, String id) {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => ListenableProvider<CoreModel>.value(
-              value: CoreModel(id)..loadData(),
-              child: CoreDialog(),
-            ),
+        builder: (context) => ChangeNotifierProvider<CoreModel>(
+          builder: (context) => CoreModel(id),
+          child: CoreDialog(),
+        ),
         fullscreenDialog: true,
       ),
     );

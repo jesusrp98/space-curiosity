@@ -2,18 +2,23 @@ import 'package:connectivity/connectivity.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
-/// QUERY MODEL
 /// General model used to help retrieve, parse & storage
 /// information from a public REST API
 enum Status { loading, error, loaded }
 
-abstract class QueryModel extends ChangeNotifier {
-  // Model's status regarding data loading capabilities
-  Status _status = Status.loading;
-
+abstract class QueryModel with ChangeNotifier {
   // Lists of both models info & its photos
-  List items = List();
-  List photos = List();
+  final List items, photos;
+
+  // Model's status regarding data loading capabilities
+  Status _status;
+
+  QueryModel([BuildContext context])
+      : items = [],
+        photos = [] {
+    startLoading();
+    loadData(context);
+  }
 
   // Fetches data & returns it
   Future fetchData(String url, {Map<String, dynamic> parameters}) async {
@@ -27,11 +32,11 @@ abstract class QueryModel extends ChangeNotifier {
   Future loadData([BuildContext context]);
 
   // Reloads model's data
-  Future refreshData() async => await loadData();
+  Future refreshData() => loadData();
 
   // General getters for both lists
-  dynamic getItem(index) => items[index];
-  String getPhoto(index) => photos[index];
+  dynamic getItem(int index) => items.isNotEmpty ? items[index] : null;
+  String getPhoto(int index) => photos.isNotEmpty ? photos[index] : null;
 
   int get getItemCount => items.length;
   int get getPhotosCount => photos.length;
@@ -41,6 +46,10 @@ abstract class QueryModel extends ChangeNotifier {
   bool get loadingFailed => _status == Status.error;
 
   // Methods which update the [_status] variable
+  void startLoading() {
+    _status = Status.loading;
+  }
+
   void finishLoading() {
     _status = Status.loaded;
     notifyListeners();
@@ -52,11 +61,11 @@ abstract class QueryModel extends ChangeNotifier {
   }
 
   // Checks internet connection & sets [_status] variable
-  Future<bool> connectionFailure() async {
-    _status =
-        await Connectivity().checkConnectivity() == ConnectivityResult.none
-            ? Status.error
-            : Status.loading;
-    return !isLoading;
+  Future<bool> canLoadData() async {
+    await Connectivity().checkConnectivity() == ConnectivityResult.none
+        ? receivedError()
+        : startLoading();
+
+    return isLoading;
   }
 }
