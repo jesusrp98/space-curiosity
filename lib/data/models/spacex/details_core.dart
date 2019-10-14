@@ -4,10 +4,8 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import '../../../util/photos.dart';
 import '../../../util/url.dart';
 import '../../classes/abstract/query_model.dart';
-import 'details_vehicle.dart';
-import 'mission_item.dart';
+import 'index.dart';
 
-/// CORE DETAILS MODEL
 /// Details about a specific core or booster used in a specific mission.
 class CoreModel extends QueryModel {
   // Core serial: B0000
@@ -17,9 +15,7 @@ class CoreModel extends QueryModel {
 
   @override
   Future loadData([BuildContext context]) async {
-    if (await connectionFailure())
-      receivedError();
-    else {
+    if (await canLoadData()) {
       if (id != null) {
         // Fetch & add item
         items.add(CoreDetails.fromJson(await fetchData(Url.coreDialog + id)));
@@ -32,13 +28,13 @@ class CoreModel extends QueryModel {
     }
   }
 
-  CoreDetails get core => items[0];
+  CoreDetails get core => getItem(0);
 }
 
 class CoreDetails extends VehicleDetails {
   final int block, rtlsLandings, rtlsAttempts, asdsLandings, asdsAttempts;
 
-  CoreDetails({
+  const CoreDetails({
     serial,
     status,
     details,
@@ -76,14 +72,15 @@ class CoreDetails extends VehicleDetails {
     );
   }
 
-  String getDetails(context) =>
+  @override
+  String getDetails(BuildContext context) =>
       details ??
       FlutterI18n.translate(
         context,
         'spacex.dialog.vehicle.no_description_core',
       );
 
-  String getBlock(context) => block == null
+  String getBlock(BuildContext context) => block == null
       ? FlutterI18n.translate(context, 'spacex.other.unknown')
       : FlutterI18n.translate(
           context,

@@ -203,12 +203,13 @@
           "title": "capacidad"
         },
         "stage": {
-          "stage_first": "Primera etapa",
-          "stage_second": "Segunda etapa",
+          "title": "Etapas",
           "reusable": "Reutilizable",
           "engines": "Motores",
           "engine_number": "{number} motor",
           "engines_number": "{number} motores",
+          "thrust_first_stage": "Potencia primera fase",
+          "thrust_second_stage": "Potencia segunda fase",
           "fuel_amount": "Combustible",
           "fuel_amount_tons": "{tons} toneladas",
           "fairing_height": "Altura de la cofia",
@@ -244,7 +245,6 @@
         },
         "thruster": {
           "title": "propulsores",
-          "systems": "Sistemas de propulsión",
           "model": "Modelo",
           "amount": "Cantidad",
           "fuel": "Combustible",
@@ -396,12 +396,20 @@
         "time_minutes": "en {minutes} minutos"
       }
     },
+    "search": {
+      "suggestion": {
+        "launch": "Filtra por misión, fecha de lanzamiento o vehículo.",
+        "vehicle": "Filtra por nombre o año de debut."
+      },
+      "failure": "No se ha encontrado nada."
+    },
     "other": {
       "unknown": "Desconocido",
       "block": "Bloque {block}",
       "no_data": "No hay datos",
       "more_details": "Más detalles",
       "less_details": "Menos detalles",
+      "all_payload": "MOSTRAR TODA LA CARGA",
       "date": {
         "time": "{date}, {hour}",
         "upcoming": "Previsto para {date}"

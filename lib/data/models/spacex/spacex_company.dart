@@ -6,7 +6,6 @@ import '../../../util/photos.dart';
 import '../../../util/url.dart';
 import '../../classes/abstract/query_model.dart';
 
-/// SPACEX-AS-A-COMPAMY MODEL
 /// General information about SpaceX's company data.
 /// Used in the 'Company' tab, under the SpaceX screen.
 class SpacexCompanyModel extends QueryModel {
@@ -14,11 +13,9 @@ class SpacexCompanyModel extends QueryModel {
 
   @override
   Future loadData([BuildContext context]) async {
-    if (await connectionFailure())
-      receivedError();
-    else {
+    if (await canLoadData()) {
       // Fetch & add items
-      List achievements = await fetchData(Url.spacexAchievements);
+      final List achievements = await fetchData(Url.spacexAchievements);
 
       // Fetch & add item
       _company = Company.fromJson(await fetchData(Url.spacexCompany));
@@ -45,7 +42,7 @@ class Company {
   final String fullName, name, founder, ceo, cto, coo, city, state, details;
   final num founded, employees, valuation;
 
-  Company({
+  const Company({
     this.fullName,
     this.name,
     this.founder,
@@ -77,7 +74,7 @@ class Company {
     );
   }
 
-  String getFounderDate(context) => FlutterI18n.translate(
+  String getFounderDate(BuildContext context) => FlutterI18n.translate(
         context,
         'spacex.company.founded',
         {'founded': founded.toString(), 'founder': founder},

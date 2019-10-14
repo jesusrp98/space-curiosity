@@ -4,20 +4,16 @@ import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:row_collection/row_collection.dart';
 import 'package:share/share.dart';
 
-import '../../../data/models/spacex/info_ship.dart';
+import '../../../data/models/spacex/index.dart';
 import '../../../util/menu.dart';
 import '../../../util/url.dart';
-import '../../general/cache_image.dart';
-import '../../general/card_page.dart';
-import '../../general/row_item.dart';
-import '../../general/sliver_bar.dart';
+import '../../general/index.dart';
 
-/// SHIP PAGE VIEW
 /// This view all information about a specific ship. It displays Ship's specs.
 class ShipPage extends StatelessWidget {
   final ShipInfo _ship;
 
-  ShipPage(this._ship);
+  const ShipPage(this._ship);
 
   @override
   Widget build(BuildContext context) {
@@ -26,41 +22,41 @@ class ShipPage extends StatelessWidget {
         SliverBar(
           title: _ship.name,
           header: InkWell(
+            onTap: () => FlutterWebBrowser.openWebPage(
+              url: _ship.getProfilePhoto,
+              androidToolbarColor: Theme.of(context).primaryColor,
+            ),
             child: Hero(
               tag: _ship.id,
               child: CacheImage(_ship?.getProfilePhoto),
             ),
-            onTap: () async => await FlutterWebBrowser.openWebPage(
-                  url: _ship.getProfilePhoto,
-                  androidToolbarColor: Theme.of(context).primaryColor,
-                ),
           ),
           actions: <Widget>[
             IconButton(
               icon: Icon(Icons.share),
               onPressed: () => Share.share(
-                    FlutterI18n.translate(
-                      context,
-                      'spacex.other.share.ship.body',
-                      {
-                        'date': _ship.getBuiltFullDate,
-                        'name': _ship.name,
-                        'role': _ship.primaryRole,
-                        'port': _ship.homePort,
-                        'missions': _ship.hasMissions
-                            ? FlutterI18n.translate(
-                                context,
-                                'spacex.other.share.ship.missions',
-                                {'missions': _ship.missions.length.toString()},
-                              )
-                            : FlutterI18n.translate(
-                                context,
-                                'spacex.other.share.ship.any_missions',
-                              ),
-                        'details': Url.shareDetails
-                      },
-                    ),
-                  ),
+                FlutterI18n.translate(
+                  context,
+                  'spacex.other.share.ship.body',
+                  {
+                    'date': _ship.getBuiltFullDate,
+                    'name': _ship.name,
+                    'role': _ship.primaryRole,
+                    'port': _ship.homePort,
+                    'missions': _ship.hasMissions
+                        ? FlutterI18n.translate(
+                            context,
+                            'spacex.other.share.ship.missions',
+                            {'missions': _ship.missions.length.toString()},
+                          )
+                        : FlutterI18n.translate(
+                            context,
+                            'spacex.other.share.ship.any_missions',
+                          ),
+                    'details': Url.shareDetails
+                  },
+                ),
+              ),
               tooltip: FlutterI18n.translate(
                 context,
                 'spacex.other.menu.share',
@@ -73,15 +69,15 @@ class ShipPage extends StatelessWidget {
                         child: Text(FlutterI18n.translate(context, string)),
                       ))
                   .toList(),
-              onSelected: (text) async => await FlutterWebBrowser.openWebPage(
-                    url: _ship.url,
-                    androidToolbarColor: Theme.of(context).primaryColor,
-                  ),
+              onSelected: (text) => FlutterWebBrowser.openWebPage(
+                url: _ship.url,
+                androidToolbarColor: Theme.of(context).primaryColor,
+              ),
             ),
           ],
         ),
         SliverToBoxAdapter(
-          child: RowLayout.cardList(cards: <Widget>[
+          child: RowLayout.cards(children: <Widget>[
             _shipCard(context),
             _specsCard(context),
             _missionsCard(context),
@@ -111,35 +107,7 @@ class ShipPage extends StatelessWidget {
           ),
           _ship.getBuiltFullDate,
         ),
-        if (_ship.hasExtras) ...<Widget>[
-          Separator.divider(),
-          _ship.isLandable
-              ? RowText(
-                  FlutterI18n.translate(
-                    context,
-                    'spacex.vehicle.ship.description.landings_successful',
-                  ),
-                  _ship.getSuccessfulLandings,
-                )
-              : RowText(
-                  FlutterI18n.translate(
-                    context,
-                    'spacex.vehicle.ship.description.catches_successful',
-                  ),
-                  _ship.getSuccessfulCatches,
-                ),
-        ]
-      ]),
-    );
-  }
-
-  Widget _specsCard(BuildContext context) {
-    return CardPage.body(
-      title: FlutterI18n.translate(
-        context,
-        'spacex.vehicle.ship.specifications.title',
-      ),
-      body: RowLayout(children: <Widget>[
+        Separator.divider(),
         RowText(
           FlutterI18n.translate(
             context,
@@ -154,7 +122,36 @@ class ShipPage extends StatelessWidget {
           ),
           _ship.getModel(context),
         ),
-        Separator.divider(),
+        if (_ship.hasExtras) ...<Widget>[
+          Separator.divider(),
+          if (_ship.isLandable)
+            RowText(
+              FlutterI18n.translate(
+                context,
+                'spacex.vehicle.ship.description.landings_successful',
+              ),
+              _ship.getSuccessfulLandings,
+            )
+          else
+            RowText(
+              FlutterI18n.translate(
+                context,
+                'spacex.vehicle.ship.description.catches_successful',
+              ),
+              _ship.getSuccessfulCatches,
+            ),
+        ]
+      ]),
+    );
+  }
+
+  Widget _specsCard(BuildContext context) {
+    return CardPage.body(
+      title: FlutterI18n.translate(
+        context,
+        'spacex.vehicle.ship.specifications.title',
+      ),
+      body: RowLayout(children: <Widget>[
         RowText(
           FlutterI18n.translate(
             context,
@@ -210,17 +207,43 @@ class ShipPage extends StatelessWidget {
         'spacex.vehicle.ship.missions.title',
       ),
       body: _ship.hasMissions
-          ? RowLayout(children: <Widget>[
-              for (var mission in _ship.missions)
-                RowText(
-                  FlutterI18n.translate(
-                    context,
-                    'spacex.vehicle.ship.missions.mission',
-                    {'number': mission.id.toString()},
-                  ),
-                  mission.name,
-                ),
-            ])
+          ? RowLayout(
+              children: <Widget>[
+                if (_ship.missions.length > 5) ...[
+                  for (final mission in _ship.missions.sublist(0, 5))
+                    RowText(
+                      FlutterI18n.translate(
+                        context,
+                        'spacex.vehicle.ship.missions.mission',
+                        {'number': mission.id.toString()},
+                      ),
+                      mission.name,
+                    ),
+                  RowExpand(RowLayout(
+                    children: <Widget>[
+                      for (final mission in _ship.missions.sublist(5))
+                        RowText(
+                          FlutterI18n.translate(
+                            context,
+                            'spacex.vehicle.ship.missions.mission',
+                            {'number': mission.id.toString()},
+                          ),
+                          mission.name,
+                        ),
+                    ],
+                  ))
+                ] else
+                  for (final mission in _ship.missions)
+                    RowText(
+                      FlutterI18n.translate(
+                        context,
+                        'spacex.vehicle.ship.missions.mission',
+                        {'number': mission.id.toString()},
+                      ),
+                      mission.name,
+                    ),
+              ],
+            )
           : Text(
               FlutterI18n.translate(
                 context,

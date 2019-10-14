@@ -4,7 +4,6 @@ import 'package:latlong/latlong.dart';
 import '../../../util/url.dart';
 import '../../classes/abstract/query_model.dart';
 
-/// LAUNCHPAD MODEL
 /// Details about a specific launchpad, where rockets are launched from.
 /// Launchpad [id] : ccafs_slc_40
 /// Launchpad [name]: Cape Canaveral Air Force Station Space Launch Complex 40
@@ -15,9 +14,7 @@ class LaunchpadModel extends QueryModel {
 
   @override
   Future loadData([BuildContext context]) async {
-    if (await connectionFailure())
-      receivedError();
-    else {
+    if (await canLoadData()) {
       // Fetch & add item
       items.add(Launchpad.fromJson(await fetchData(Url.launchpadDialog + id)));
 
@@ -25,7 +22,7 @@ class LaunchpadModel extends QueryModel {
     }
   }
 
-  Launchpad get launchpad => items.isNotEmpty ? items[0] : null;
+  Launchpad get launchpad => getItem(0);
 }
 
 class Launchpad {
@@ -33,7 +30,7 @@ class Launchpad {
   final LatLng coordinates;
   final int attemptedLaunches, successfulLaunches;
 
-  Launchpad({
+  const Launchpad({
     this.name,
     this.status,
     this.location,

@@ -4,10 +4,8 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import '../../../util/photos.dart';
 import '../../../util/url.dart';
 import '../../classes/abstract/query_model.dart';
-import 'details_vehicle.dart';
-import 'mission_item.dart';
+import 'index.dart';
 
-/// CAPSULE DETAILS MODEL
 /// Details about a specific capsule used in a CRS mission.
 class CapsuleModel extends QueryModel {
   // Capsule serial: C0000
@@ -17,9 +15,7 @@ class CapsuleModel extends QueryModel {
 
   @override
   Future loadData([BuildContext context]) async {
-    if (await connectionFailure())
-      receivedError();
-    else {
+    if (await canLoadData()) {
       if (id != null) {
         // Fetch & add item
         items.add(
@@ -34,14 +30,14 @@ class CapsuleModel extends QueryModel {
     }
   }
 
-  CapsuleDetails get capsule => items[0];
+  CapsuleDetails get capsule => getItem(0);
 }
 
 class CapsuleDetails extends VehicleDetails {
   final String name;
   final int landings;
 
-  CapsuleDetails({
+  const CapsuleDetails({
     serial,
     status,
     details,
@@ -73,7 +69,8 @@ class CapsuleDetails extends VehicleDetails {
     );
   }
 
-  String getDetails(context) =>
+  @override
+  String getDetails(BuildContext context) =>
       details ??
       FlutterI18n.translate(
         context,

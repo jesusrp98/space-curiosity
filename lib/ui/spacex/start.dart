@@ -3,32 +3,26 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:quick_actions/quick_actions.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../data/models/spacex/info_vehicle.dart';
-import '../../data/models/spacex/launch.dart';
-import '../../data/models/spacex/spacex_company.dart';
-import '../../data/models/spacex/spacex_home.dart';
-import 'tabs/company.dart';
-import 'tabs/home.dart';
-import 'tabs/launches.dart';
-import 'tabs/vehicles.dart';
+import '../../data/models/spacex/index.dart';
+import 'tabs/index.dart';
 
-/// START SCREEN
 /// This view holds all tabs & its models: home, vehicles, upcoming & latest launches, & company tabs.
 class SpaceXScreen extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => _StartScreenState();
+  State<StatefulWidget> createState() => _SpaceXScreenState();
 }
 
-class _StartScreenState extends State<SpaceXScreen> {
+class _SpaceXScreenState extends State<SpaceXScreen> {
   int _currentIndex = 0;
 
   @override
-  initState() {
+  void initState() {
     super.initState();
 
     // Reading app shortcuts input
-    final QuickActions quickActions = const QuickActions();
+    final QuickActions quickActions = QuickActions();
     quickActions.initialize((type) {
       switch (type) {
         case 'vehicles':
@@ -78,34 +72,36 @@ class _StartScreenState extends State<SpaceXScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final List<Widget> _screens = [
-      HomeTab(),
-      VehiclesTab(),
-      LaunchesTab(0),
-      LaunchesTab(1),
-      CompanyTab(),
+    final List<SingleChildCloneableWidget> _models = [
+      ChangeNotifierProvider<SpacexHomeModel>(
+        builder: (context) => SpacexHomeModel(context),
+        child: HomeTab(),
+      ),
+      ChangeNotifierProvider<VehiclesModel>(
+        builder: (context) => VehiclesModel(),
+        child: VehiclesTab(),
+      ),
+      ChangeNotifierProvider<LaunchesModel>(
+        builder: (context) => LaunchesModel(Launches.upcoming),
+        child: const LaunchesTab(Launches.upcoming),
+      ),
+      ChangeNotifierProvider<LaunchesModel>(
+        builder: (context) => LaunchesModel(Launches.latest),
+        child: const LaunchesTab(Launches.latest),
+      ),
+      ChangeNotifierProvider<SpacexCompanyModel>(
+        builder: (context) => SpacexCompanyModel(),
+        child: CompanyTab(),
+      ),
     ];
+
     return MultiProvider(
-      providers: [
-        ListenableProvider.value(value: SpacexHomeModel()..loadData(context)),
-        ListenableProvider.value(value: VehiclesModel()..loadData(context)),
-        ListenableProvider.value(value: LaunchesModel(0)..loadData(context)),
-        ListenableProvider.value(value: LaunchesModel(1)..loadData(context)),
-        ListenableProvider.value(
-            value: SpacexCompanyModel()..loadData(context)),
-      ],
+      providers: _models,
       child: Scaffold(
-        body: Stack(
-          children: <Widget>[
-            for (int i = 0; i < _screens.length; i++) ...[
-              Offstage(
-                offstage: i != _currentIndex,
-                child: _screens[i],
-              ),
-            ],
-          ],
-        ),
+        body: IndexedStack(index: _currentIndex, children: _models),
         bottomNavigationBar: BottomNavigationBar(
+          selectedLabelStyle: TextStyle(fontFamily: 'ProductSans'),
+          unselectedLabelStyle: TextStyle(fontFamily: 'ProductSans'),
           type: BottomNavigationBarType.fixed,
           onTap: (index) => setState(() => _currentIndex = index),
           currentIndex: _currentIndex,

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:row_collection/row_collection.dart';
 
-import 'expand_widget.dart';
+import 'index.dart';
 
-/// CARD PAGE WIDGET
 /// Widget used in details pages, like 'Launch Page' or 'Rocket Page'.
 class CardPage extends StatelessWidget {
   final Widget body;
@@ -13,17 +12,18 @@ class CardPage extends StatelessWidget {
   factory CardPage.header({
     Widget leading,
     Widget subtitle,
-    String title,
-    String details,
+    @required String title,
+    @required String details,
   }) {
     return CardPage(
       RowLayout(children: <Widget>[
         Row(children: <Widget>[
-          leading,
+          if (leading != null) leading,
           Separator.spacer(space: 12),
           Expanded(
-            child: Column(
+            child: RowLayout(
               crossAxisAlignment: CrossAxisAlignment.start,
+              space: 6,
               children: <Widget>[
                 Text(
                   title,
@@ -31,11 +31,11 @@ class CardPage extends StatelessWidget {
                   maxLines: 2,
                   style: TextStyle(
                     fontSize: 17,
+                    fontFamily: 'ProductSans',
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                Separator.spacer(space: 6),
-                subtitle,
+                if (subtitle != null) subtitle,
               ],
             ),
           ),
@@ -46,15 +46,23 @@ class CardPage extends StatelessWidget {
     );
   }
 
-  factory CardPage.body({String title, Widget body}) {
+  factory CardPage.body({
+    String title,
+    @required Widget body,
+  }) {
     return CardPage(
       RowLayout(
         children: <Widget>[
-          Text(
-            title.toUpperCase(),
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
-          ),
+          if (title != null)
+            Text(
+              title.toUpperCase(),
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 17,
+                fontFamily: 'ProductSans',
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           body
         ],
       ),
@@ -67,16 +75,9 @@ class CardPage extends StatelessWidget {
       elevation: 4,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
-        // TODO readd this feature in the future
-        // side: BorderSide(
-        //   width: 1,
-        //   color: ScopedModel.of<AppModel>(context).theme == Themes.black
-        //       ? Theme.of(context).dividerColor
-        //       : Colors.transparent,
-        // ),
       ),
       child: Padding(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         child: body,
       ),
     );

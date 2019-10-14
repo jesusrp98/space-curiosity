@@ -5,13 +5,13 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:row_collection/row_collection.dart';
 
-/// LAUNCH COUNTDOWN WIDGET
 /// Stateful widget used to display a countdown to the next launch.
 class LaunchCountdown extends StatefulWidget {
   final DateTime launchDate;
 
-  LaunchCountdown(this.launchDate);
+  const LaunchCountdown(this.launchDate);
 
+  @override
   State createState() => _LaunchCountdownState();
 }
 
@@ -137,7 +137,7 @@ class Countdown extends AnimatedWidget {
         color: Colors.white,
         shadows: <Shadow>[
           Shadow(
-            offset: Offset(0, 0),
+            offset: const Offset(0, 0),
             blurRadius: 4,
             color: Theme.of(context).primaryColor,
           ),
