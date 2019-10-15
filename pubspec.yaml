@@ -36,7 +36,7 @@ dependencies:
   localstorage: ^2.0.0
   provider: ^3.1.0
   clipboard_manager: ^0.0.4
-  equatable: ^0.2.6
+  equatable: ^0.6.0
   flutter_i18n: ^0.6.4
   image_downloader: ^0.19.1
   location: ^2.3.5

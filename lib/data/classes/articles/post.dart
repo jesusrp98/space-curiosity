@@ -11,7 +11,10 @@ class Post extends Equatable {
     this.photo,
     this.title,
     this.url,
-  }) : super([url, photo, title, photo]);
+  });
+
+  @override
+  List<Object> get props => [url, photo, title, photo];
 
   final String title, author, url, photo;
 

@@ -13,7 +13,10 @@ class Calculator extends Equatable {
     this.weight,
     this.planet,
     this.surfaceGravity,
-  }) : super([weight, surfaceGravity, planet]);
+  });
+
+  @override
+  List<Object> get props => [weight, surfaceGravity, planet];
 
   num get planetWeight => weight * surfaceGravity;
 
