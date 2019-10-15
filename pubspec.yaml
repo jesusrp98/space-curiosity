@@ -41,7 +41,7 @@ dependencies:
   clipboard_manager: ^0.0.4
   equatable: ^0.6.0
   flutter_i18n: ^0.6.4
-  # image_downloader: ^0.19.1
+  image_downloader: ^0.19.1
   location: ^2.3.5
   package_info: ^0.4.0+6
   recase: ^2.0.1
