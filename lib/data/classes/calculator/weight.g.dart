@@ -8,14 +8,15 @@ part of 'weight.dart';
 
 Calculator _$CalculatorFromJson(Map<String, dynamic> json) {
   return Calculator(
-      weight: json['weight'] as num,
-      planet: json['planet'] as String,
-      surfaceGravity: json['surfaceGravity'] as num);
+    weight: json['weight'] as num,
+    planet: json['planet'] as String,
+    surfaceGravity: json['surfaceGravity'] as num,
+  );
 }
 
 Map<String, dynamic> _$CalculatorToJson(Calculator instance) =>
     <String, dynamic>{
       'weight': instance.weight,
       'surfaceGravity': instance.surfaceGravity,
-      'planet': instance.planet
+      'planet': instance.planet,
     };

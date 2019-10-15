@@ -8,13 +8,13 @@ part of 'image.dart';
 
 NasaImage _$NasaImageFromJson(Map<String, dynamic> json) {
   return NasaImage(
-      title: json['title'] as String,
-      description: json['explanation'] as String,
-      url: json['url'] as String,
-      hdurl: json['hdurl'] as String,
-      copyright: json['copyright'] as String,
-      date:
-          json['date'] == null ? null : DateTime.parse(json['date'] as String));
+    title: json['title'] as String,
+    description: json['explanation'] as String,
+    url: json['url'] as String,
+    hdurl: json['hdurl'] as String,
+    copyright: json['copyright'] as String,
+    date: json['date'] == null ? null : DateTime.parse(json['date'] as String),
+  );
 }
 
 Map<String, dynamic> _$NasaImageToJson(NasaImage instance) => <String, dynamic>{
@@ -23,5 +23,5 @@ Map<String, dynamic> _$NasaImageToJson(NasaImage instance) => <String, dynamic>{
       'hdurl': instance.hdurl,
       'copyright': instance.copyright,
       'date': instance.date?.toIso8601String(),
-      'explanation': instance.description
+      'explanation': instance.description,
     };

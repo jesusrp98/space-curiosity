@@ -1,0 +1,10 @@
+CREATE TABLE nasa_images (
+    url TEXT NOT NULL PRIMARY KEY,
+    title TEXT NOT NULL,
+    description TEXT,
+    copyright TEXT,
+    date DATETIME
+);
+
+insertImage: INSERT INTO nasa_images (url, title, date) VALUES (:url, :title, :date);
+allImages: SELECT * FROM nasa_images ORDER BY date DESC;
