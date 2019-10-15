@@ -10,6 +10,10 @@ class CacheImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // return Image.network(
+    //   url,
+    //   fit: BoxFit.cover,
+    // );
     return CachedNetworkImage(
       imageUrl: url,
       errorWidget: (context, url, error) => Icon(

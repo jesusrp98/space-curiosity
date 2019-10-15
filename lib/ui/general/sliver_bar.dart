@@ -32,22 +32,24 @@ class SliverBar extends StatelessWidget {
           constraints: BoxConstraints(
             maxWidth: MediaQuery.of(context).size.width * 0.55,
           ),
-          child: Text(
-            title,
-            overflow: TextOverflow.ellipsis,
-            textAlign: TextAlign.center,
-            maxLines: 1,
-            style: TextStyle(
-              fontFamily: 'ProductSans',
-              shadows: <Shadow>[
-                Shadow(
-                  offset: const Offset(0, 0),
-                  blurRadius: 4,
-                  color: Theme.of(context).primaryColor,
+          child: title == null
+              ? null
+              : Text(
+                  title ?? 'No Title',
+                  overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.center,
+                  maxLines: 1,
+                  style: TextStyle(
+                    fontFamily: 'ProductSans',
+                    shadows: <Shadow>[
+                      Shadow(
+                        offset: const Offset(0, 0),
+                        blurRadius: 4,
+                        color: Theme.of(context).primaryColor,
+                      ),
+                    ],
+                  ),
                 ),
-              ],
-            ),
-          ),
         ),
         background: header,
       ),

@@ -11,14 +11,18 @@ import '../models.dart';
 class NasaImagesModel extends QueryModel {
   Future loadData([BuildContext context]) async {
     try {
-      int retry = 5;
-      while (_images == null && retry != 0) {
-        try {
-          await _refreshImages();
-        } catch (e) {}
-        retry--;
+      _images = await db.allImages().get();
+      if (_images != null && _images.isNotEmpty) {
+        items.addAll(_images);
+        finishLoading();
       }
-      if (_images != null) items.addAll(_images);
+    } catch (e) {}
+    try {
+      await _refreshImages();
+      if (_images != null) {
+        items.clear();
+        items.addAll(_images);
+      }
     } catch (e) {
       print("Error Loading Images: $e");
     }
@@ -36,10 +40,10 @@ class NasaImagesModel extends QueryModel {
     final moreResponse = await http.get(Url.morePictures);
     print("2 => ${moreResponse.body}");
     final List<dynamic> _moreImages = json.decode(moreResponse.body);
-    _moreImages.map((image) => NasaImage.fromJson(image)).toList();
     for (var image in _moreImages) {
       try {
-        await _insertImage(image.body);
+        final _json = json.encode(image);
+        await _insertImage(_json);
       } catch (e) {}
     }
     _images = await db.allImages().get();
@@ -48,12 +52,25 @@ class NasaImagesModel extends QueryModel {
   final db = GetIt.instance.get<Database>();
   Future<void> _insertImage(String source) async {
     final _json = json.decode(source);
-    await db.insertImage(
-      _json['url'],
-      _json['title'],
-      _json['explanation'],
-      _json['copyright'],
-      _json['date'],
-    );
+    try {
+      final _type = _json['media_type'];
+      if (_type == 'image') {
+        final _url = _json['hdurl'] ?? _json['url'];
+        final _title = _json['title'].toString();
+        final _description = _json['explanation'].toString();
+        final _copyright = _json['copyright'].toString();
+        final _date = DateTime.now();
+        print('Image -> $_title : $_url');
+        await db.insertImage(
+          _url,
+          _title ?? 'No Title',
+          _description ?? 'No Description',
+          _copyright ?? 'No Copyright',
+          _date,
+        );
+      }
+    } catch (e) {
+      print('Error -> $e');
+    }
   }
 }

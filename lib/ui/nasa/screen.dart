@@ -2,7 +2,7 @@ import 'package:clipboard_manager/clipboard_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
-import 'package:image_downloader/image_downloader.dart';
+// import 'package:image_downloader/image_downloader.dart';
 import 'package:intl/intl.dart';
 import 'package:row_collection/row_collection.dart';
 import 'package:share/share.dart';
@@ -41,7 +41,7 @@ class NasaImagePage extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   Text(
-                    image.title,
+                    image?.title ?? 'No Title',
                     style: Theme.of(context).textTheme.headline,
                     textAlign: TextAlign.center,
                   ),
@@ -56,7 +56,7 @@ class NasaImagePage extends StatelessWidget {
                           Separator.spacer(space: 8),
                           Flexible(
                             child: Text(
-                              image.copyright,
+                              image?.copyright ?? 'No Copyright',
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style:
@@ -79,7 +79,8 @@ class NasaImagePage extends StatelessWidget {
                             children: <Widget>[
                               Flexible(
                                 child: Text(
-                                  DateFormat.yMMMd().format(image.date),
+                                  DateFormat.yMMMd().format(image.date) ??
+                                      'No Date',
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                   style: Theme.of(context)
@@ -127,11 +128,11 @@ class NasaImagePage extends StatelessWidget {
                           image.url,
                         ),
                       ),
-                      OptionButton(
-                        icon: Icons.get_app,
-                        title: FlutterI18n.translate(context, 'nasa.download'),
-                        onTap: () => ImageDownloader.downloadImage(image.url),
-                      ),
+                      // OptionButton(
+                      //   icon: Icons.get_app,
+                      //   title: FlutterI18n.translate(context, 'nasa.download'),
+                      //   onTap: () => ImageDownloader.downloadImage(image.url),
+                      // ),
                     ],
                   ),
                 ],
@@ -162,7 +163,7 @@ class HeaderDetails extends StatelessWidget {
         ),
         Separator.spacer(space: 8),
         Text(
-          title,
+          title ?? 'No Title',
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
           style: Theme.of(context).textTheme.subhead.copyWith(
@@ -195,7 +196,7 @@ class OptionButton extends StatelessWidget {
               Flexible(
                 child: Center(
                   child: Text(
-                    title,
+                    title ?? 'No Title',
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     textAlign: TextAlign.center,

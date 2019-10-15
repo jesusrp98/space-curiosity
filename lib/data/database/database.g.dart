@@ -290,7 +290,7 @@ abstract class _$Database extends GeneratedDatabase {
   Future<int> insertImage(String url, String title, String description,
       String copyright, DateTime date) {
     return customInsert(
-      'INSERT INTO nasa_images (url, title, description, copyright, date) VALUES (:url, :title, :description, :copyright, :date)',
+      'INSERT OR REPLACE INTO nasa_images (url, title, description, copyright, date) VALUES (:url, :title, :description, :copyright, :date)',
       variables: [
         Variable.withString(url),
         Variable.withString(title),
