@@ -11,6 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
   get_it: ^3.0.1
+  intl: ^0.16.0
 
   ## Online
   cloud_firestore: ^0.12.5+1

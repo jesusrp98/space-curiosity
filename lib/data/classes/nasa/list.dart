@@ -1,18 +1,18 @@
-import 'package:json_annotation/json_annotation.dart';
-import 'package:space_news/data/classes/nasa/image.dart';
+// import 'package:json_annotation/json_annotation.dart';
+// import 'package:space_news/data/classes/nasa/image.dart';
 
-part 'list.g.dart';
+// part 'list.g.dart';
 
-@JsonSerializable()
-class NasaImages {
-  NasaImages({
-    this.images,
-  });
+// @JsonSerializable()
+// class NasaImages {
+//   NasaImages({
+//     this.images,
+//   });
 
-  List<NasaImage> images;
+//   List<NasaImage> images;
 
-  factory NasaImages.fromJson(Map<String, dynamic> json) =>
-      _$NasaImagesFromJson(json);
+//   factory NasaImages.fromJson(Map<String, dynamic> json) =>
+//       _$NasaImagesFromJson(json);
 
-  Map<String, dynamic> toJson() => _$NasaImagesToJson(this);
-}
+//   Map<String, dynamic> toJson() => _$NasaImagesToJson(this);
+// }

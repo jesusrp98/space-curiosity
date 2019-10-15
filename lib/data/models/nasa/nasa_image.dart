@@ -1,80 +1,59 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
 
-import '../../classes/abstract/persit_data.dart';
-import '../../classes/nasa/list.dart';
-import '../../repositories/nasa/images.dart';
-import '../../repositories/persistence_repository.dart';
+import '../../../util/url.dart';
+import '../../database/database.dart';
 import '../models.dart';
 
-class NasaImagesModel extends QueryModel implements PersistData {
-  @override
+class NasaImagesModel extends QueryModel {
   Future loadData([BuildContext context]) async {
-    await loadFromDisk();
     try {
-      items.addAll(_module.images);
+      int retry = 5;
+      while (_images == null && retry != 0) {
+        try {
+          await _refreshImages();
+        } catch (e) {}
+        retry--;
+      }
+      if (_images != null) items.addAll(_images);
     } catch (e) {
       print("Error Loading Images: $e");
-      items.addAll(await NasaImageRepo(httpClient: http.Client()).images);
     }
-     finishLoading();
-
-    _module.images = await NasaImageRepo(httpClient: http.Client()).images;
-    saveToDisk();
+    finishLoading();
   }
 
-  NasaImages _module = NasaImages(images: []);
+  List<NasaImage> _images;
 
-  @override
-  bool loaded = false;
-
-  @override
-  bool loading = false;
-
-  @override
-  Future loadFromDisk() async {
-    if (!loading) {
-      print("Loading $module from Disk");
-      loading = true;
-      notifyListeners();
-
-      NasaImages _savedModule;
-      try {
-        _savedModule = await storage.loadNasaImagesState();
-      } catch (e) {
-        print("Error Loading State => $e");
-      }
-      if (_savedModule == null) {
-        _module.images = await NasaImageRepo(httpClient: http.Client()).images;
-      } else {
-        _module = _savedModule;
-        _fetching = false;
-      }
-
-      loading = false;
-      loaded = true;
-      notifyListeners();
-    }
-  }
-
-  bool _fetching = false;
-
-  bool get fetching => _fetching;
-
-  @override
-  String get module => "nasa_images".toLowerCase().trim();
-
-  @override
-  void saveToDisk() async {
-    print("Saving $module to Disk");
+  Future<void> _refreshImages() async {
+    final response = await http.get(Url.dailyPicture);
+    print("1 => ${response.body}");
     try {
-      storage.saveNasaImagesState(_module);
-    } catch (e) {
-      print("Error Saving State => $e");
+      await _insertImage(response.body);
+    } catch (e) {}
+    final moreResponse = await http.get(Url.morePictures);
+    print("2 => ${moreResponse.body}");
+    final List<dynamic> _moreImages = json.decode(moreResponse.body);
+    _moreImages.map((image) => NasaImage.fromJson(image)).toList();
+    for (var image in _moreImages) {
+      try {
+        await _insertImage(image.body);
+      } catch (e) {}
     }
+    _images = await db.allImages().get();
   }
 
-  @override
-  PersistenceRepository get storage =>
-      PersistenceRepository(fileStorage: FileStorage(module));
+  final db = GetIt.instance.get<Database>();
+  Future<void> _insertImage(String source) async {
+    final _json = json.decode(source);
+    await db.insertImage(
+      _json['url'],
+      _json['title'],
+      _json['explanation'],
+      _json['copyright'],
+      _json['date'],
+    );
+  }
 }

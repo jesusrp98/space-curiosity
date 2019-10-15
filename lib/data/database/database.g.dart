@@ -287,12 +287,15 @@ abstract class _$Database extends GeneratedDatabase {
   _$Database(QueryExecutor e) : super(SqlTypeSystem.defaultInstance, e);
   NasaImages _nasaImages;
   NasaImages get nasaImages => _nasaImages ??= NasaImages(this);
-  Future<int> insertImage(String url, String title, DateTime date) {
+  Future<int> insertImage(String url, String title, String description,
+      String copyright, DateTime date) {
     return customInsert(
-      'INSERT INTO nasa_images (url, title, date) VALUES (:url, :title, :date)',
+      'INSERT INTO nasa_images (url, title, description, copyright, date) VALUES (:url, :title, :description, :copyright, :date)',
       variables: [
         Variable.withString(url),
         Variable.withString(title),
+        Variable.withString(description),
+        Variable.withString(copyright),
         Variable.withDateTime(date)
       ],
       updates: {nasaImages},
@@ -309,7 +312,7 @@ abstract class _$Database extends GeneratedDatabase {
     );
   }
 
-  Selectable<NasaImage> watchAllImages() {
+  Selectable<NasaImage> allImages() {
     return customSelectQuery('SELECT * FROM nasa_images ORDER BY date DESC',
         variables: [], readsFrom: {nasaImages}).map(_rowToNasaImage);
   }

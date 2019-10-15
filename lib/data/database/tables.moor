@@ -6,5 +6,5 @@ CREATE TABLE nasa_images (
     date DATETIME
 );
 
-insertImage: INSERT INTO nasa_images (url, title, date) VALUES (:url, :title, :date);
+insertImage: INSERT INTO nasa_images (url, title, description, copyright, date) VALUES (:url, :title, :description, :copyright, :date);
 allImages: SELECT * FROM nasa_images ORDER BY date DESC;

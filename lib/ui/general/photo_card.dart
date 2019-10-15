@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
+import 'package:intl/intl.dart';
 import 'package:row_collection/row_collection.dart';
 
-import '../../data/classes/nasa/image.dart';
+import '../../data/database/database.dart';
 import '../nasa/screen.dart';
 import 'cache_image.dart';
 
@@ -21,18 +22,18 @@ class PhotoCard extends StatelessWidget {
       clipBehavior: Clip.antiAlias,
       child: InkWell(
         onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute(builder: (_) => NasaImagePage(image)),
-            ),
+          context,
+          MaterialPageRoute(builder: (_) => NasaImagePage(image)),
+        ),
         onLongPress: () async => await FlutterWebBrowser.openWebPage(
-              url: image.url,
-              androidToolbarColor: Theme.of(context).primaryColor,
-            ),
+          url: image.url,
+          androidToolbarColor: Theme.of(context).primaryColor,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Expanded(
-              child: Hero(tag: image.getDate, child: CacheImage(image.url)),
+              child: Hero(tag: image.url, child: CacheImage(image.url)),
             ),
             Padding(
               padding: const EdgeInsets.all(16),
@@ -50,7 +51,7 @@ class PhotoCard extends StatelessWidget {
                 //TODO revisar
                 Separator.spacer(space: 8),
                 Text(
-                  image.getDate,
+                  DateFormat.yMMMd().format(image.date),
                   style: Theme.of(context).textTheme.subhead.copyWith(
                         color: Theme.of(context).textTheme.caption.color,
                       ),

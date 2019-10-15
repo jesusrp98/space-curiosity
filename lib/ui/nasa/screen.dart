@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:image_downloader/image_downloader.dart';
+import 'package:intl/intl.dart';
 import 'package:row_collection/row_collection.dart';
 import 'package:share/share.dart';
-import 'package:space_news/ui/general/sliver_bar.dart';
 
-import '../../data/classes/nasa/image.dart';
+import '../../data/database/database.dart';
 import '../general/cache_image.dart';
+import '../general/sliver_bar.dart';
 
 class NasaImagePage extends StatelessWidget {
   final NasaImage image;
@@ -25,13 +26,13 @@ class NasaImagePage extends StatelessWidget {
             height: 0.4,
             header: InkWell(
               child: Hero(
-                tag: image.getDate,
+                tag: image.url,
                 child: CacheImage(image?.url),
               ),
               onTap: () async => await FlutterWebBrowser.openWebPage(
-                    url: image.hdurl,
-                    androidToolbarColor: Theme.of(context).primaryColor,
-                  ),
+                url: image.url,
+                androidToolbarColor: Theme.of(context).primaryColor,
+              ),
             ),
           ),
           SliverToBoxAdapter(
@@ -55,7 +56,7 @@ class NasaImagePage extends StatelessWidget {
                           Separator.spacer(space: 8),
                           Flexible(
                             child: Text(
-                              image.getCopyright(context),
+                              image.copyright,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style:
@@ -78,7 +79,7 @@ class NasaImagePage extends StatelessWidget {
                             children: <Widget>[
                               Flexible(
                                 child: Text(
-                                  image.getDate,
+                                  DateFormat.yMMMd().format(image.date),
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                   style: Theme.of(context)
@@ -117,14 +118,14 @@ class NasaImagePage extends StatelessWidget {
                       OptionButton(
                         icon: Icons.share,
                         title: FlutterI18n.translate(context, 'nasa.share'),
-                        onTap: () => Share.share(image.share(context)),
+                        onTap: () => Share.share(image.url),
                       ),
                       OptionButton(
                         icon: Icons.link,
                         title: FlutterI18n.translate(context, 'nasa.copy_link'),
                         onTap: () => ClipboardManager.copyToClipBoard(
-                              image.url,
-                            ),
+                          image.url,
+                        ),
                       ),
                       OptionButton(
                         icon: Icons.get_app,
