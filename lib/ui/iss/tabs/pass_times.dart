@@ -67,8 +67,8 @@ class PassTimesTab extends StatelessWidget {
                                     width: 24.0,
                                     height: 24.0,
                                     point: LatLng(
-                                      model.userLocation.latitude,
-                                      model.userLocation.longitude,
+                                      model.userLocation.lat,
+                                      model.userLocation.long,
                                     ),
                                     builder: (_) => const Icon(
                                       Icons.my_location,

@@ -5,7 +5,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
-import 'package:location/location.dart';
+import 'package:space_news/plugins/location/latlng.dart';
+import 'package:space_news/plugins/location/location.dart';
 
 import '../../../util/url.dart';
 import '../models.dart';
@@ -14,7 +15,7 @@ import '../models.dart';
 /// When & by how long ISS will pass in your geographic location.
 class PassTimesModel extends QueryModel {
   Map<String, String> _issLocation;
-  LocationData _userLocation;
+  LatLang _userLocation;
 
   @override
   Future loadData([BuildContext context]) async {
@@ -28,11 +29,11 @@ class PassTimesModel extends QueryModel {
     try {
       // Get user's location
       print("Getting Location...");
-      _userLocation = await Location().getLocation();
+      _userLocation = await LocationUtils.getLocation();
       print("Location: ${_userLocation.toString()}");
       // Get items by http call & parse them
       response = await http.get(
-        '${Url.issPassTimes}?lat=${_userLocation.latitude}&lon=${_userLocation.longitude}&n=10',
+        '${Url.issPassTimes}?lat=${_userLocation.lat}&lon=${_userLocation.long}&n=10',
       );
       var snapshot = json.decode(response.body)['response'];
       items.addAll(
@@ -44,15 +45,15 @@ class PassTimesModel extends QueryModel {
     }
 
     // Finished loading data
-     finishLoading();
+    finishLoading();
   }
 
   Map<String, String> get issLocation => _issLocation;
 
-  LocationData get userLocation => _userLocation;
+  LatLang get userLocation => _userLocation;
 
   String get getUserLocation =>
-      '${userLocation.latitude.toStringAsPrecision(5)},  ${userLocation.longitude.toStringAsPrecision(5)}';
+      '${userLocation.lat.toStringAsPrecision(5)},  ${userLocation.long.toStringAsPrecision(5)}';
 }
 
 class PassTime {
