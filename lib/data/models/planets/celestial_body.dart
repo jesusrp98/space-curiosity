@@ -1,6 +1,7 @@
 import 'dart:async';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fb_firestore/classes/index.dart';
+import 'package:fb_firestore/fb_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -8,26 +9,23 @@ import '../models.dart';
 
 enum BodyType { planet, celestialBody }
 
-var planetsPath = Firestore.instance.collection('planets');
-
 class PlanetsModel extends QueryModel {
   @override
   Future loadData([BuildContext context]) async {
-    // var response = await planetsPath.getDocuments();
+    var response = await FbFirestore.getDocs('planets');
 
-    // items.addAll(response.documents
-    //     .map((document) => CelestialBody.fromJson(document))
-    //     .toList());
+    items.addAll(
+      response.map((document) => CelestialBody.fromJson(document)).toList(),
+    );
 
-    // setLoading(false);
+    finishLoading();
   }
 }
 
 class CelestialBody extends ChangeNotifier {
   Future<List<CelestialBody>> getMoons(String id) async {
-    var _snapshot =
-        await planetsPath.document(id).collection('moons').getDocuments();
-    return _snapshot.documents
+    var _snapshot = await FbFirestore.getDocs('planets/$id/moons');
+    return _snapshot
         .map((document) => CelestialBody.fromJson(document))
         .toList();
   }
@@ -69,38 +67,37 @@ class CelestialBody extends ChangeNotifier {
     this.pressure,
   });
 
-  factory CelestialBody.fromJson(DocumentSnapshot json) {
+  factory CelestialBody.fromJson(FbDocumentSnapshot json) {
+    final data = json.data;
     return CelestialBody(
-      id: json.documentID,
-      imageUrl: json['imageUrl'],
-      name: json['name'],
-      description: json['description'],
-      population: json['population'],
-      aphelion: json['aphelion'],
-      perihelion: json['perihelion'],
-      period: json['period'],
-      speed: json['speed'],
-      obliquity: json['obliquity'],
-      radius: json['radius'],
-      volume: json['volume'],
-      mass: json['mass'],
-      density: json['density'],
-      gravity: json['gravity'],
-      escapeVelocity: json['escapeVelocity'],
-      temperature: json['temperature'],
-      pressure: json['pressure'],
+      id: json.documentId,
+      imageUrl: data['imageUrl'],
+      name: data['name'],
+      description: data['description'],
+      population: data['population'],
+      aphelion: data['aphelion'],
+      perihelion: data['perihelion'],
+      period: data['period'],
+      speed: data['speed'],
+      obliquity: data['obliquity'],
+      radius: data['radius'],
+      volume: data['volume'],
+      mass: data['mass'],
+      density: data['density'],
+      gravity: data['gravity'],
+      escapeVelocity: data['escapeVelocity'],
+      temperature: data['temperature'],
+      pressure: data['pressure'],
     );
   }
 
-  void removePlanet(CelestialBody planet) {
-    final DocumentReference document = planetsPath.document(planet.id);
-    document.delete();
+  void removePlanet(CelestialBody planet) async {
+    await FbFirestore.deleteDoc('planets/${planet.id}');
     notifyListeners();
   }
 
-  void addPlanet(CelestialBody celestialBody) {
-    final DocumentReference document = planetsPath.document();
-    document.setData(<String, dynamic>{
+  void addPlanet(CelestialBody celestialBody) async {
+    FbFirestore.editDoc('planets', <String, dynamic>{
       'imageUrl': celestialBody.imageUrl,
       'name': celestialBody.name,
       'description': celestialBody.description,
@@ -121,10 +118,8 @@ class CelestialBody extends ChangeNotifier {
     notifyListeners();
   }
 
-  void addMoon(String id, CelestialBody celestialBody) {
-    final DocumentReference document =
-        planetsPath.document(id).collection('moons').document();
-    document.setData(<String, dynamic>{
+  void addMoon(String id, CelestialBody celestialBody) async {
+    await FbFirestore.editDoc('planets/$id/moons', <String, dynamic>{
       'imageUrl': celestialBody.imageUrl,
       'name': celestialBody.name,
       'description': celestialBody.description,
@@ -145,55 +140,58 @@ class CelestialBody extends ChangeNotifier {
     notifyListeners();
   }
 
-  void editPlanet(CelestialBody celestialBody) {
-    final DocumentReference document = planetsPath.document(celestialBody.id);
-    document.updateData(<String, dynamic>{
-      'imageUrl': celestialBody.imageUrl,
-      'name': celestialBody.name,
-      'description': celestialBody.description,
-      'aphelion': celestialBody.aphelion,
-      'perihelion': celestialBody.perihelion,
-      'period': celestialBody.period,
-      'speed': celestialBody.speed,
-      'obliquity': celestialBody.obliquity,
-      'radius': celestialBody.radius,
-      'volume': celestialBody.volume,
-      'mass': celestialBody.mass,
-      'density': celestialBody.density,
-      'gravity': celestialBody.gravity,
-      'escapeVelocity': celestialBody.escapeVelocity,
-      'temperature': celestialBody.temperature,
-      'pressure': celestialBody.pressure,
-    });
+  void editPlanet(CelestialBody celestialBody) async {
+    await FbFirestore.editDoc(
+      'planets',
+      <String, dynamic>{
+        'imageUrl': celestialBody.imageUrl,
+        'name': celestialBody.name,
+        'description': celestialBody.description,
+        'aphelion': celestialBody.aphelion,
+        'perihelion': celestialBody.perihelion,
+        'period': celestialBody.period,
+        'speed': celestialBody.speed,
+        'obliquity': celestialBody.obliquity,
+        'radius': celestialBody.radius,
+        'volume': celestialBody.volume,
+        'mass': celestialBody.mass,
+        'density': celestialBody.density,
+        'gravity': celestialBody.gravity,
+        'escapeVelocity': celestialBody.escapeVelocity,
+        'temperature': celestialBody.temperature,
+        'pressure': celestialBody.pressure,
+      },
+      id: celestialBody.id,
+    );
     notifyListeners();
   }
 
-  void editMoon(String id, CelestialBody celestialBody) {
-    final DocumentReference document =
-        planetsPath.document(id).collection('moons').document(celestialBody.id);
-    document.updateData(<String, dynamic>{
-      'imageUrl': celestialBody.imageUrl,
-      'name': celestialBody.name,
-      'description': celestialBody.description,
-      'aphelion': celestialBody.aphelion,
-      'perihelion': celestialBody.perihelion,
-      'period': celestialBody.period,
-      'speed': celestialBody.speed,
-      'obliquity': celestialBody.obliquity,
-      'radius': celestialBody.radius,
-      'volume': celestialBody.volume,
-      'mass': celestialBody.mass,
-      'density': celestialBody.density,
-      'gravity': celestialBody.gravity,
-      'escapeVelocity': celestialBody.escapeVelocity,
-      'temperature': celestialBody.temperature,
-      'pressure': celestialBody.pressure,
-    });
+  void editMoon(String id, CelestialBody celestialBody) async {
+    await FbFirestore.editDoc(
+      'planets/$id/moons',
+      <String, dynamic>{
+        'imageUrl': celestialBody.imageUrl,
+        'name': celestialBody.name,
+        'description': celestialBody.description,
+        'aphelion': celestialBody.aphelion,
+        'perihelion': celestialBody.perihelion,
+        'period': celestialBody.period,
+        'speed': celestialBody.speed,
+        'obliquity': celestialBody.obliquity,
+        'radius': celestialBody.radius,
+        'volume': celestialBody.volume,
+        'mass': celestialBody.mass,
+        'density': celestialBody.density,
+        'gravity': celestialBody.gravity,
+        'escapeVelocity': celestialBody.escapeVelocity,
+        'temperature': celestialBody.temperature,
+        'pressure': celestialBody.pressure,
+      },
+      id: celestialBody.id,
+      update: true,
+    );
     notifyListeners();
   }
-
-  CollectionReference get moonsPath =>
-      planetsPath.document(id).collection('moons');
 
   String get getPopulation =>
       'Population: ${NumberFormat.decimalPattern().format(population)}';

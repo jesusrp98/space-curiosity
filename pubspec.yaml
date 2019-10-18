@@ -13,9 +13,12 @@ dependencies:
   get_it: ^3.0.1
   intl: ^0.16.0
   cached_network_image: ^1.1.1
+  universal_html: ^1.1.6
 
   ## Online
-  cloud_firestore: ^0.12.5+1
+  # cloud_firestore: ^0.12.5+1
+  fb_firestore:
+    git: https://github.com/appleeducate/fb_firestore
   connectivity: ^0.4.4
   dio: ^3.0.1
   flutter_mailer: ^0.4.1+2

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
-import 'package:flutter_web_browser/flutter_web_browser.dart';
+import 'package:space_news/plugins/url_launcher/url_launcher.dart';
 import 'package:row_collection/row_collection.dart';
 import 'package:share/share.dart';
 import 'package:sliver_fab/sliver_fab.dart';
@@ -26,7 +26,7 @@ class RoadsterPage extends StatelessWidget {
             context,
             'spacex.other.tooltip.watch_replay',
           ),
-          onPressed: () => FlutterWebBrowser.openWebPage(
+          onPressed: () => UrlUtils.open(
             url: _roadster.video,
             androidToolbarColor: Theme.of(context).primaryColor,
           ),
@@ -70,7 +70,7 @@ class RoadsterPage extends StatelessWidget {
                           child: Text(FlutterI18n.translate(context, string)),
                         ))
                     .toList(),
-                onSelected: (text) => FlutterWebBrowser.openWebPage(
+                onSelected: (text) => UrlUtils.open(
                   url: _roadster.url,
                   androidToolbarColor: Theme.of(context).primaryColor,
                 ),

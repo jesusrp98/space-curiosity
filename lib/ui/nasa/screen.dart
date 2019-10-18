@@ -1,11 +1,11 @@
 import 'package:clipboard_manager/clipboard_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
-import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:image_downloader/image_downloader.dart';
 import 'package:intl/intl.dart';
 import 'package:row_collection/row_collection.dart';
 import 'package:share/share.dart';
+import 'package:space_news/plugins/url_launcher/url_launcher.dart';
 
 import '../../data/database/database.dart';
 import '../general/cache_image.dart';
@@ -29,7 +29,7 @@ class NasaImagePage extends StatelessWidget {
                 tag: image.url,
                 child: CacheImage(image?.url),
               ),
-              onTap: () async => await FlutterWebBrowser.openWebPage(
+              onTap: () async => await UrlUtils.open(
                 url: image.url,
                 androidToolbarColor: Theme.of(context).primaryColor,
               ),

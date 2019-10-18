@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:flutter_web_browser/flutter_web_browser.dart';
+import 'package:space_news/plugins/url_launcher/url_launcher.dart';
 
 import 'index.dart';
 
@@ -24,7 +24,7 @@ class SwiperHeader extends StatelessWidget {
       autoplayDelay: 5000,
       autoplay: true,
       duration: 850,
-      onTap: (index) => FlutterWebBrowser.openWebPage(
+      onTap: (index) => UrlUtils.open(
         url: list[index],
         androidToolbarColor: Theme.of(context).primaryColor,
       ),

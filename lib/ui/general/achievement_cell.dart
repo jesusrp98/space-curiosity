@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:row_collection/row_collection.dart';
+import 'package:space_news/plugins/url_launcher/url_launcher.dart';
 
 import 'index.dart';
 
@@ -68,7 +68,7 @@ class AchievementCell extends StatelessWidget {
         Separator.smallSpacer(),
         TextExpand.small(body),
       ]),
-      onTap: () => FlutterWebBrowser.openWebPage(
+      onTap: () => UrlUtils.open(
         url: url,
         androidToolbarColor: Theme.of(context).primaryColor,
       ),

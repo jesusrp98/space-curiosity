@@ -1,7 +1,7 @@
 import 'package:add_2_calendar/add_2_calendar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
-import 'package:flutter_web_browser/flutter_web_browser.dart';
+import 'package:space_news/plugins/url_launcher/url_launcher.dart';
 import 'package:provider/provider.dart';
 import 'package:row_collection/row_collection.dart';
 import 'package:share/share.dart';
@@ -34,7 +34,7 @@ class LaunchPage extends StatelessWidget {
                   context,
                   'spacex.other.tooltip.watch_replay',
                 ),
-                onPressed: () => FlutterWebBrowser.openWebPage(
+                onPressed: () => UrlUtils.open(
                   url: _launch.getVideo,
                   androidToolbarColor: Theme.of(context).primaryColor,
                 ),
@@ -97,7 +97,7 @@ class LaunchPage extends StatelessWidget {
                           child: Text(FlutterI18n.translate(context, url)),
                         ))
                     .toList(),
-                onSelected: (name) => FlutterWebBrowser.openWebPage(
+                onSelected: (name) => UrlUtils.open(
                   url: _launch.getUrl(context, name),
                   androidToolbarColor: Theme.of(context).primaryColor,
                 ),
@@ -123,7 +123,7 @@ class LaunchPage extends StatelessWidget {
         child: HeroImage.card(
           url: _launch.getPatchUrl,
           tag: _launch.getNumber,
-          onTap: () => FlutterWebBrowser.openWebPage(
+          onTap: () => UrlUtils.open(
             url: _launch.getPatchUrl,
             androidToolbarColor: Theme.of(context).primaryColor,
           ),

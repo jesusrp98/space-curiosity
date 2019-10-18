@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
-import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:provider/provider.dart';
 import 'package:row_collection/row_collection.dart';
+import 'package:space_news/plugins/url_launcher/url_launcher.dart';
 
 import '../../data/models/models.dart';
 import '../../util/menu.dart';
@@ -27,10 +27,10 @@ class ArticlesScreen extends StatelessWidget {
                       )),
                     ))
                 .toList(),
-            onSelected: (name) async => await FlutterWebBrowser.openWebPage(
-                  url: Menu.news[name],
-                  androidToolbarColor: Theme.of(context).primaryColor,
-                ),
+            onSelected: (name) async => await UrlUtils.open(
+              url: Menu.news[name],
+              androidToolbarColor: Theme.of(context).primaryColor,
+            ),
           ),
         ],
       ),
@@ -69,10 +69,10 @@ class ArticlesScreen extends StatelessWidget {
                     ),
                     title: post.getTitle,
                     subtitle: post.author,
-                    onTap: () async => await FlutterWebBrowser.openWebPage(
-                          url: post.url,
-                          androidToolbarColor: Theme.of(context).primaryColor,
-                        ),
+                    onTap: () async => await UrlUtils.open(
+                      url: post.url,
+                      androidToolbarColor: Theme.of(context).primaryColor,
+                    ),
                   ),
                   model.posts.last == post
                       ? Column(children: <Widget>[

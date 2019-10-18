@@ -1,4 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fb_firestore/classes/snapshot.dart';
+import 'package:fb_firestore/fb_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:intl/intl.dart';
@@ -12,11 +13,11 @@ class IssHomeModel extends QueryModel {
   @override
   Future loadData([BuildContext context]) async {
     // Get items from Firebase
-    var response = await Firestore.instance.collection('iss').getDocuments();
+    var response = await FbFirestore.getDocs('iss');
 
     // Add parsed items
     items.addAll(
-      response.documents
+      response
           .map((document) => IssHome.fromDocument(document))
           .toList(),
     );
@@ -106,17 +107,18 @@ class IssHome {
     this.speed,
   });
 
-  factory IssHome.fromDocument(DocumentSnapshot document) {
+  factory IssHome.fromDocument(FbDocumentSnapshot document) {
+    final data = document.data;
     return IssHome(
-      launchDate: DateTime.parse(document['launch_year']),
-      altitude: document['altitude'],
-      orbitTime: document['orbit_time'],
-      projectCost: document['project_cost'],
-      countries: document['project_countries'],
-      length: document['specs_length'],
-      width: document['specs_width'],
-      weight: document['specs_weight'],
-      speed: document['speed'],
+      launchDate: DateTime.parse(data['launch_year']),
+      altitude: data['altitude'],
+      orbitTime: data['orbit_time'],
+      projectCost: data['project_cost'],
+      countries: data['project_countries'],
+      length: data['specs_length'],
+      width: data['specs_width'],
+      weight: data['specs_weight'],
+      speed: data['speed'],
     );
   }
 

@@ -1,5 +1,5 @@
 // import 'package:flutter/material.dart';
-// import 'package:flutter_web_browser/flutter_web_browser.dart';
+// import 'package:space_news/plugins/url_launcher/url_launcher.dart';
 
 // import '../../../data/models/planets/celestial_body.dart';
 // import '../../general/card_page.dart';
@@ -82,7 +82,7 @@
 //       image: HeroImage.card(
 //         url: celestialBody.imageUrl,
 //         tag: celestialBody.id,
-//         onTap: () async => await FlutterWebBrowser.openWebPage(
+//         onTap: () async => await UrlUtils.open(
 //               url: celestialBody.imageUrl,
 //               androidToolbarColor: Theme.of(context).primaryColor,
 //             ),

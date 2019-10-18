@@ -1,7 +1,7 @@
 import 'package:add_2_calendar/add_2_calendar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
-import 'package:flutter_web_browser/flutter_web_browser.dart';
+import 'package:space_news/plugins/url_launcher/url_launcher.dart';
 import 'package:provider/provider.dart';
 import 'package:row_collection/row_collection.dart';
 import 'package:space_news/ui/spacex/pages/index.dart';
@@ -44,7 +44,7 @@ class _HomeTabState extends State<HomeTab> {
                 ? LaunchCountdown(launch.launchDate)
                 : launch.hasVideo && !launch.isDateTooTentative
                     ? InkWell(
-                        onTap: () => FlutterWebBrowser.openWebPage(
+                        onTap: () => UrlUtils.open(
                           url: launch.getVideo,
                           androidToolbarColor: Theme.of(context).primaryColor,
                         ),

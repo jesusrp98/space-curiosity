@@ -5,7 +5,7 @@ import 'package:app_review/app_review.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_mailer/flutter_mailer.dart';
-import 'package:flutter_web_browser/flutter_web_browser.dart';
+import 'package:space_news/plugins/url_launcher/url_launcher.dart';
 import 'package:package_info/package_info.dart';
 import 'package:row_collection/row_collection.dart';
 
@@ -87,7 +87,7 @@ class _AboutScreenState extends State<AboutScreen> {
             context,
             'about.author.body',
           ),
-          onTap: () async => await FlutterWebBrowser.openWebPage(
+          onTap: () async => await UrlUtils.open(
                 url: Url.authorsReddit[Random().nextInt(2)],
                 androidToolbarColor: Theme.of(context).primaryColor,
               ),
@@ -132,7 +132,7 @@ class _AboutScreenState extends State<AboutScreen> {
             context,
             'about.more_apps.body',
           ),
-          onTap: () async => await FlutterWebBrowser.openWebPage(
+          onTap: () async => await UrlUtils.open(
                 url: Url.authorsStore[Platform.isIOS ? 0 : 1],
                 androidToolbarColor: Theme.of(context).primaryColor,
               ),
@@ -179,7 +179,7 @@ class _AboutScreenState extends State<AboutScreen> {
             context,
             'about.free_software.body',
           ),
-          onTap: () async => await FlutterWebBrowser.openWebPage(
+          onTap: () async => await UrlUtils.open(
                 url: Url.githubPage,
                 androidToolbarColor: Theme.of(context).primaryColor,
               ),
@@ -195,7 +195,7 @@ class _AboutScreenState extends State<AboutScreen> {
             context,
             'about.flutter.body',
           ),
-          onTap: () async => await FlutterWebBrowser.openWebPage(
+          onTap: () async => await UrlUtils.open(
                 url: Url.flutterPage,
                 androidToolbarColor: Theme.of(context).primaryColor,
               ),
