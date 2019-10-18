@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:native_widgets/native_widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:row_collection/row_collection.dart';
 import 'package:space_news/plugins/url_launcher/url_launcher.dart';
@@ -18,47 +17,45 @@ class AstronautsTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<AstronautsModel>(
       builder: (context, model, child) => Scaffold(
-            body: CustomScrollView(slivers: <Widget>[
-              SliverAppBar(
-                expandedHeight: MediaQuery.of(context).size.height * 0.3,
-                floating: false,
-                pinned: true,
-                flexibleSpace: FlexibleSpaceBar(
-                  centerTitle: true,
-                  title: Text(
-                    FlutterI18n.translate(context, 'iss.astronauts.title'),
-                  ),
-                  background: model.isLoading
-                      ? NativeLoadingIndicator(center: true)
-                      : Swiper(
-                          itemCount: model.getPhotosCount,
-                          itemBuilder: (context, index) => CacheImage(
-                                model.getPhoto(index),
-                              ),
-                          autoplay: true,
-                          autoplayDelay: 6000,
-                          duration: 750,
-                          onTap: (index) async =>
-                              await UrlUtils.open(
-                                url: model.getPhoto(index),
-                                androidToolbarColor:
-                                    Theme.of(context).primaryColor,
-                              ),
-                        ),
-                ),
+        body: CustomScrollView(slivers: <Widget>[
+          SliverAppBar(
+            expandedHeight: MediaQuery.of(context).size.height * 0.3,
+            floating: false,
+            pinned: true,
+            flexibleSpace: FlexibleSpaceBar(
+              centerTitle: true,
+              title: Text(
+                FlutterI18n.translate(context, 'iss.astronauts.title'),
               ),
-              model.isLoading
-                  ? SliverFillRemaining(
-                      child: NativeLoadingIndicator(center: true),
-                    )
-                  : SliverList(
-                      delegate: SliverChildBuilderDelegate(
-                        _buildItem,
-                        childCount: model.getItemCount,
+              background: model.isLoading
+                  ? Center(child: CircularProgressIndicator())
+                  : Swiper(
+                      itemCount: model.getPhotosCount,
+                      itemBuilder: (context, index) => CacheImage(
+                        model.getPhoto(index),
+                      ),
+                      autoplay: true,
+                      autoplayDelay: 6000,
+                      duration: 750,
+                      onTap: (index) async => await UrlUtils.open(
+                        url: model.getPhoto(index),
+                        androidToolbarColor: Theme.of(context).primaryColor,
                       ),
                     ),
-            ]),
+            ),
           ),
+          model.isLoading
+              ? SliverFillRemaining(
+                  child: Center(child: CircularProgressIndicator()),
+                )
+              : SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                    _buildItem,
+                    childCount: model.getItemCount,
+                  ),
+                ),
+        ]),
+      ),
     );
   }
 

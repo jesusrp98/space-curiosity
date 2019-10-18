@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:native_widgets/native_widgets.dart';
 import 'package:provider/provider.dart';
 
 import '../data/models/nasa/nasa_image.dart';
@@ -49,7 +48,7 @@ class ContentPage extends StatelessWidget {
     return Consumer<NasaImagesModel>(
       builder: (context, model, child) {
         return model.isLoading
-            ? NativeLoadingIndicator(center: true)
+            ? Center(child: CircularProgressIndicator())
             : model.items == null || model.items.isEmpty
                 ? CallError(() => model.loadData())
                 : Swiper(

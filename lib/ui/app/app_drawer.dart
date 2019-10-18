@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -60,14 +61,15 @@ class AppDrawer extends StatelessWidget {
             )),
             onTap: () => openPage(context, '/iss'),
           ),
-          ListTile(
-            leading: const Icon(Icons.fitness_center),
-            title: Text(FlutterI18n.translate(
-              context,
-              'home.page.menu.weight',
-            )),
-            onTap: () => openPage(context, '/weight'),
-          ),
+          if (!kIsWeb)
+            ListTile(
+              leading: const Icon(Icons.fitness_center),
+              title: Text(FlutterI18n.translate(
+                context,
+                'home.page.menu.weight',
+              )),
+              onTap: () => openPage(context, '/weight'),
+            ),
           //TODO revisar
           //Separator.divider(height: 16),
           ListTile(
