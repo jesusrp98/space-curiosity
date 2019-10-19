@@ -45,3 +45,8 @@ There you go, you can now open & edit the project. Enjoy!
 ## License
 
 This project is licensed under the GNU GPL v3 License - see the [LICENSE.md](LICENSE.md) file for details.
+
+- Deploy: `gcloud builds submit --tag gcr.io/rodydavis/space-news-69376 .`
+- `gcloud builds submit --tag gcr.io/space-news-69376/app:v1`
+- `gcloud builds submit --tag gcr.io/space-news-69376/app:v1 .`
+- `gcloud builds submit --tag gcr.io/space-news-69376/quickstart-image .`   

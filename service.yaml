@@ -1,0 +1,13 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: space_news
+  namespace: default
+spec:
+  template:
+    spec:
+      containers:
+        - image: docker.io/rodydavis/space_news
+          env:
+            - name: TARGET
+              value: "Space Curiosity v1"

@@ -1,14 +1,14 @@
 import 'package:add_2_calendar/add_2_calendar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
-import 'package:space_news/plugins/url_launcher/url_launcher.dart';
 import 'package:provider/provider.dart';
 import 'package:row_collection/row_collection.dart';
-import 'package:space_news/ui/spacex/pages/index.dart';
-import 'package:space_news/util/menu.dart';
 
 import '../../../data/models/spacex/index.dart';
+import '../../../plugins/url_launcher/url_launcher.dart';
+import '../../../util/menu.dart';
 import '../../general/index.dart';
+import '../pages/index.dart';
 
 /// This tab holds main information about the next launch.
 /// It has a countdown widget.

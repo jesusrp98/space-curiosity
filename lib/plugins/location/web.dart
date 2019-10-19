@@ -6,10 +6,12 @@ class LocationUtils {
   LocationUtils._();
 
   static Future<LatLang> getLocation() async {
-    final loc = await html.window.navigator.geolocation.getCurrentPosition();
-    if (loc != null) {
-      return LatLang(loc.coords.latitude, loc.coords.longitude);
-    }
+    try {
+      final loc = await html.window.navigator.geolocation.getCurrentPosition();
+      if (loc != null) {
+        return LatLang(loc.coords.latitude, loc.coords.longitude);
+      }
+    } catch (e) {}
     return null;
   }
 }
